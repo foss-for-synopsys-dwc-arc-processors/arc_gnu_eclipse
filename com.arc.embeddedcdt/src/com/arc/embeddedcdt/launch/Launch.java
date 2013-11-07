@@ -544,7 +544,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					}
 				} catch (MIException e)
 				{
-					killexternaltools();
 					MultiStatus status = new MultiStatus(
 							getPluginID(),
 							ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
@@ -702,7 +701,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	protected void debugSessionEnded()
 	{
 		try {
-			killexternaltools();
 			dsession.terminate();
 		} catch (CDIException e) {
 			// TODO Auto-generated catch block
@@ -814,78 +812,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	    }
 	  }*/
 
-	  public static void killexternaltools()
-	  {
-	    Runtime runtime = Runtime.getRuntime();
-	    String[] commandsfind = { "tasklist", "/nh", "/FI", "\"IMAGENAME", "eq", "putty.exe\"" };
-
-	    Process process = null;
-	    try {
-	      process = runtime.exec(commandsfind);
-	    }
-	    catch (IOException e2) {
-	      e2.printStackTrace();
-	    }
-
-	    BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-	    String line = null;
-	    try {
-	      while ((line = br.readLine()) != null)
-	        if (line.indexOf("putty.exe") != -1) {
-	          String[] commandskill = { "tskill", "putty" };
-	          process = runtime.exec(commandskill);
-	        }
-	    }
-	    catch (IOException e1)
-	    {
-	      e1.printStackTrace();
-	    }
-
-	    String[] commandsfindopenocd = { "tasklist", "/nh", "/FI", "\"IMAGENAME", "eq", "openocd.exe\"" };
-	    try
-	    {
-	      process = runtime.exec(commandsfindopenocd);
-	    }
-	    catch (IOException e) {
-	      e.printStackTrace();
-	    }
-
-	    br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-	    line = null;
-	    try {
-	      while ((line = br.readLine()) != null)
-	        if (line.indexOf("openocd.exe") != -1) {
-	          String[] commandskill = { "tskill", "openocd" };
-	          process = runtime.exec(commandskill);
-	        }
-	    }
-	    catch (IOException e)
-	    {
-	      e.printStackTrace();
-	    }
-	    String[] commandsfindarhling = { "tasklist", "/nh", "/FI", "\"IMAGENAME", "eq", "ash-arc-gdb-server.exe\"" };
-	    try
-	    {
-	      process = runtime.exec(commandsfindarhling);
-	    }
-	    catch (IOException e) {
-	      e.printStackTrace();
-	    }
-
-	    br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-	    line = null;
-	    try {
-	      while ((line = br.readLine()) != null)
-	        if (line.indexOf("ash-arc-gdb-server.exe") != -1) {
-	          String[] commandskill = { "tskill", "ash-arc-gdb-server" };
-	          process = runtime.exec(commandskill);
-	        }
-	    }
-	    catch (IOException e)
-	    {
-	      e.printStackTrace();
-	    }
-	  }
 	  public static void readelf()
 	  {
 		  Runtime runtime = Runtime.getRuntime();
