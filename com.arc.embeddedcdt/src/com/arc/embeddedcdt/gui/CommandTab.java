@@ -1,0 +1,304 @@
+/*******************************************************************************
+ * Copyright (c) 2000, 2004 QNX Software Systems and others.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Common Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/cpl-v10.html
+ * 
+ * Contributors:
+ *     QNX Software Systems - Initial API and implementation
+ *******************************************************************************/
+
+package com.arc.embeddedcdt.gui;
+
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
+import org.eclipse.cdt.launch.ui.CLaunchConfigurationTab;
+import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.browser.IWebBrowser;
+
+import com.arc.embeddedcdt.LaunchConfigurationConstants;
+import com.arc.embeddedcdt.LaunchImages;
+
+
+/**
+ * @author User
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+public class CommandTab extends CLaunchConfigurationTab {
+
+	protected Label fPrgmArgumentsLabelInit;
+	protected  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
+	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
+	protected Label fPrgmArgumentsLabelRun; //this variable is for showing run  command
+	protected Text fPrgmArgumentsTextRun;   //this variable is for getting user's input run command
+	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
+	//protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
+	public static String  fPrgmArgumentsComboInittext; //this variable is for getting user's input initial command
+    static String initcom="";
+   
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
+	 */
+	public void createControl(Composite parent) {
+		Composite comp = new Composite(parent, SWT.NONE);
+		setControl(comp);
+		
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(getControl(), ICDTLaunchHelpContextIds.LAUNCH_CONFIGURATION_DIALOG_ARGUMNETS_TAB);
+		
+		GridLayout topLayout = new GridLayout();
+		comp.setLayout(topLayout);
+
+		createVerticalSpacer(comp, 1);
+		createCommandsComponent(comp, 1);
+	}
+
+
+	protected void createCommandsComponent(Composite comp, int i) {
+		Composite argsComp = new Composite(comp, SWT.NONE);
+		GridLayout projLayout = new GridLayout();
+		projLayout.numColumns = 1;
+		projLayout.marginHeight = 0;
+		projLayout.marginWidth = 0;
+		argsComp.setLayout(projLayout);		
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan = i;
+		argsComp.setLayoutData(gd);
+
+        Link l = new Link(argsComp, SWT.NONE);
+        //l.setText("<a href=\"http://www.baidu.com/\">Help/tips on how to setup GDB init script</a>");
+        l.addSelectionListener(new SelectionListener()
+                {
+
+					public void widgetDefaultSelected(SelectionEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					public void widgetSelected(SelectionEvent e) {
+						IWebBrowser browser;
+						try {
+							browser = PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser();
+							//browser.openURL(new URL("http://www.baidu.com"));
+						} catch (PartInitException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+					}
+        	
+                });
+
+
+
+		
+		fPrgmArgumentsLabelInit = new Label(argsComp, SWT.NONE);
+		fPrgmArgumentsLabelInit.setText("'Initialize' commands"); //$NON-NLS-1$
+	    
+		//yunlu change for debug session preset value begin
+		fPrgmArgumentsComboInit =new Combo(argsComp, SWT.None);
+		fPrgmArgumentsTextInit = new Text(argsComp, SWT.MULTI | SWT.WRAP | SWT.BORDER | SWT.V_SCROLL);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 100;
+		fPrgmArgumentsComboInit.setLayoutData(gd);
+		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
+		fPrgmArgumentsComboInit.add("JTAG via Ashling");
+		//fPrgmArgumentsComboInit.add("nSIM");
+		//fPrgmArgumentsComboInit.add("GNU simulator");
+		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				fPrgmArgumentsComboInittext=combo.getText();
+				if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
+				{
+					
+					if(!initcom.isEmpty()&&initcom.startsWith("set remotetimeout 15")&&!initcom.equalsIgnoreCase("set remotetimeout 15 \ntarget remote :3333 \nload")) 
+						{fPrgmArgumentsTextInit.setText(initcom);}
+						
+					else fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :3333 \nload");
+					 
+				}
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
+				{
+					
+					if(!initcom.isEmpty()&&initcom.startsWith("set arc opella-target arcem")&&!initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
+						{fPrgmArgumentsTextInit.setText(initcom);}
+						
+					else fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :2331 \nload");
+					 
+				}
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
+				{
+					if(!initcom.isEmpty()&&initcom.startsWith("target remote localhost:")&&!initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
+					{fPrgmArgumentsTextInit.setText(initcom);}
+					
+					else fPrgmArgumentsTextInit.setText("target remote localhost:1234 \nload");
+				}
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("GNU simulator"))
+				{
+								
+					fPrgmArgumentsTextInit.setText("target sim \nload");
+				}
+					updateLaunchConfigurationDialog();
+				
+			
+			}
+			});
+		GridData gdebugtext = new GridData(GridData.FILL_HORIZONTAL);
+		
+	    gdebugtext = new GridData(GridData.FILL_HORIZONTAL);
+	    gdebugtext.heightHint = 100;
+		fPrgmArgumentsTextInit.setLayoutData(gdebugtext);
+		fPrgmArgumentsTextInit.addModifyListener(new ModifyListener() {
+		public void modifyText(ModifyEvent evt) {
+			updateLaunchConfigurationDialog();
+			}
+		});
+		
+		//yunlu change for debug session preset value end
+		
+		fPrgmArgumentsLabelRun = new Label(argsComp, SWT.NONE);
+		fPrgmArgumentsLabelRun.setText("'Run' commands"); //$NON-NLS-1$
+		fPrgmArgumentsTextRun = new Text(argsComp, SWT.MULTI | SWT.WRAP | SWT.BORDER | SWT.V_SCROLL);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 100;
+		fPrgmArgumentsTextRun.setLayoutData(gd);
+		fPrgmArgumentsTextRun.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				updateLaunchConfigurationDialog();
+			}
+		});
+		
+
+//		addControlAccessibleListener(fArgumentVariablesButton, fArgumentVariablesButton.getText()); // need to strip the mnemonic from buttons
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 */
+	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, (String) null);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, (String) null);
+		
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
+	 */
+	public void initializeFrom(ILaunchConfiguration configuration) {
+		try {
+			//fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, fPrgmArgumentsComboInit.getItem(0)));//$NON-NLS-1$
+			String status=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,fPrgmArgumentsComboInit.getItem(0));
+			
+			if(status.indexOf("JTAG")==-1&&status.indexOf("nSIM")==-1&&status.indexOf("GNU")==-1)
+			{   
+				if(status.startsWith("set remotetimeout 15"))
+			    {
+					fPrgmArgumentsComboInit.setText("JTAG via OpenOCD");
+			    }
+				else if(status.startsWith("set arc opella-target arcem"))
+			    {
+					fPrgmArgumentsComboInit.setText("JTAG via Ashling");
+			    }
+			    /*else if(status.startsWith("target remote localhost:"))
+			    {
+			
+				fPrgmArgumentsComboInit.setText("nSIM");
+			    }
+			    else if(status.equalsIgnoreCase("target sim \nload"))
+			    {
+				fPrgmArgumentsComboInit.setText("GNU simulator");
+			    }*/
+			}
+			else  fPrgmArgumentsComboInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, fPrgmArgumentsComboInit.getItem(0)));
+			
+			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc")); //$NON-NLS-1$
+			
+			
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 */
+	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,	getAttributeValueFrom(fPrgmArgumentsTextInit));
+		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,getAttributeValueFrom(fPrgmArgumentsTextInit));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,getAttributeValueFrom(fPrgmArgumentsTextInit));
+		initcom=getAttributeValueFrom(fPrgmArgumentsTextInit);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,getAttributeValueFrom(fPrgmArgumentsTextRun));
+	
+	
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
+	 */
+	public String getName() {
+		return "Commands";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getImage()
+	 */
+	public Image getImage() {
+		return LaunchImages.get(LaunchImages.IMG_VIEW_COMMANDS_TAB);
+	}
+
+	/**
+	 * Retuns the string in the text widget, or <code>null</code> if empty.
+	 * 
+	 * @return text or <code>null</code>
+	 */
+	protected String getAttributeValueFrom(Text text) {
+		String content = text.getText().trim();
+		if (content.length() > 0) {
+			return content;
+		}
+		return null;
+	}
+	protected String getAttributeValueFromCombo(Combo combo) {
+	
+		String content = combo.getText().trim();
+		if (content.length() > 0) {
+			return content;
+		}
+		
+		return null;
+	}
+
+
+}

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+  <!--
+      <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Launch PuTTY"
+            visible="true"
+            id="test.actionSet">
+         <action
+               label="Launch PuTTY"
+               icon="icons/putty.jpg"
+               class="test.actions.LaunchPuTTYAction"
+               tooltip="Launch PuTTY"
+               menubarPath="file/new.ext"
+               toolbarPath="org.eclipse.ui.workbench.file/new.ext"
+               id="test.actions.LaunchPuTTYAction">
+         </action>
+      </actionSet>
+   </extension>
+    <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Launch OpenOCD"
+            visible="true"
+            id="test.actionSetopencod">
+         <action
+               label="Launch OpenOCD"
+               icon="icons/openocd.jpg"
+               class="test.actions.LaunchOpenOCDAction"
+               tooltip="Launch OpenOCD"
+               menubarPath="file/new.ext"
+               toolbarPath="org.eclipse.ui.workbench.file/new.ext"
+               id="test.actions.LaunchOpenOCDAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Launch AshlingOpellaXDforARC"
+            visible="true"
+            id="test.actionSetashling">
+         <action
+               label="Launch AshlingOpellaXDforARC"
+               icon="icons/ashlingopella.jpg"
+               class="test.actions.LaunchAshlingopellaAction"
+               tooltip="Launch AshlingOpellaXDforARC"
+               menubarPath="file/new.ext"
+               toolbarPath="org.eclipse.ui.workbench.file/new.ext"
+               id="test.actions.LaunchAshlingopellaAction">
+         </action>
+      </actionSet>
+   </extension>
+   
+   -->
+     <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="ARC GNU Tools Plugin"
+            visible="true"
+            id="ARC GNU Tools Plugin">
+         <menu
+               label="ARC GNU Tools Plugin"
+               id="ARC">
+            <separator
+                  name="Launch AshlingOpellaXDforARC">
+            </separator>
+         </menu>
+         <action
+               label="Launch PuTTY"
+               icon="icons/putty.jpg"
+               class="test.actions.LaunchPuTTYAction"
+               tooltip="Launch PuTTY"
+               menubarPath="ARC/Launch PuTTY"
+               toolbarPath="Launch PuTTY"
+               id="test.actions.LaunchPuTTYAction">
+         </action>
+         <action
+               label="Launch AshlingOpellaXDforARC"
+               icon="icons/ashlingopella.jpg"
+               class="test.actions.LaunchAshlingopellaAction"
+               menubarPath="ARC/Launch AshlingOpellaXDforARC"
+               toolbarPath="Launch AshlingOpellaXDforARC"
+               id="test.actions.LaunchAshlingopellaAction">
+         </action>
+         <action
+               label="Launch OpenOCD"
+               icon="icons/openocd.jpg"
+               class="test.actions.LaunchOpenOCDAction"
+               menubarPath="ARC/Launch OpenOCD"
+               toolbarPath="Launch OpenOCD"
+               id="test.actions.LaunchOpenOCDAction">
+         </action>
+      </actionSet>
+   </extension>
+     <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="com.arc.embeddedcdt.launch.cygwin.CygWinLaunch"
+            public="true"
+            name="ARC Embedded debug (Windows host)"
+            modes="debug"
+            id="com.arc.embeddedcdt.idle"
+
+            sourceLocatorId="com.arc.embeddedcdt.sourceLocatorCygWin"
+            sourcePathComputerId="com.arc.embeddedcdt.sourcePathComputerCygWin"
+            />
+            <!--
+      <launchConfigurationType
+            delegate="com.arc.embeddedcdt.launch.jtag.JTAGLaunch"
+            public="true"
+            name="ARC JTAG debugger (Cygwin)"
+            modes="debug"
+            id="com.arc.embeddedcdt.idleJTAG"
+
+            sourceLocatorId="com.arc.embeddedcdt.sourceLocatorCygWin"
+            sourcePathComputerId="com.arc.embeddedcdt.sourcePathComputerCygWin"
+            />
+      <launchConfigurationType
+            delegate="com.arc.embeddedcdt.launch.jtag.JTAGLaunch"
+            public="true"
+            name="ARC JTAG debugger (native)"
+            modes="debug"
+            id="com.arc.embeddedcdt.idleJTAGNative"
+
+            sourceLocatorId="org.eclipse.cdt.debug.core.sourceLocator"
+            sourcePathComputerId="org.eclipse.cdt.debug.core.sourcePathComputer"
+            />
+            -->
+
+      <launchConfigurationType
+            delegate="com.arc.embeddedcdt.launch.nativeos.NativeLaunch"
+            public="true"
+            name="ARC Embedded debug (Linux host)"
+            modes="debug"
+            id="com.arc.embeddedcdt.idleNative"
+
+            sourceLocatorId="org.eclipse.cdt.debug.core.sourceLocator"
+            sourcePathComputerId="org.eclipse.cdt.debug.core.sourcePathComputer"
+            />
+
+
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+         <!--
+      <launchConfigurationTabGroup
+            type="com.arc.embeddedcdt.idleJTAG"
+            class="com.arc.embeddedcdt.gui.jtag.JTAGLaunchConfigurationTabGroup"
+            id="com.arc.embeddedcdt.TabGroup">
+      </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            type="com.arc.embeddedcdt.idleJTAGNative"
+            class="com.arc.embeddedcdt.gui.jtag.JTAGLaunchConfigurationTabGroup"
+            id="com.arc.embeddedcdt.TabGroup">
+      </launchConfigurationTabGroup>
+            -->
+      <launchConfigurationTabGroup
+            type="com.arc.embeddedcdt.idle"
+            class="com.arc.embeddedcdt.gui.LaunchConfigurationTabGroup"
+            id="com.arc.embeddedcdt.TabGroup">
+      </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            type="com.arc.embeddedcdt.idleNative"
+            class="com.arc.embeddedcdt.gui.LaunchConfigurationTabGroup"
+            id="com.arc.embeddedcdt.TabGroup">
+      </launchConfigurationTabGroup>
+	</extension>
+
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            icon="icons/c_app.gif"
+            configTypeID="com.arc.embeddedcdt.idle"
+            id="com.arc.embeddedcdt.Image">
+      </launchConfigurationTypeImage>
+      <!--
+      <launchConfigurationTypeImage
+            icon="icons/c_app.gif"
+            configTypeID="com.arc.embeddedcdt.idleJTAG"
+            id="com.arc.embeddedcdt.Image">
+      </launchConfigurationTypeImage>
+      -->
+      <launchConfigurationTypeImage
+            icon="icons/c_app.gif"
+            configTypeID="com.arc.embeddedcdt.idleNative"
+            id="com.arc.embeddedcdt.Image">
+      </launchConfigurationTypeImage>
+   </extension>
+   
+   <extension
+         point="org.eclipse.cdt.debug.core.CDebugger">
+      <debugger
+            platform="*"
+            name="Embedded GDB"
+            modes="run"
+            cpu="*"
+            class="com.arc.embeddedcdt.EmbeddedGDBCDIDebugger"
+            id="com.arc.embeddedcdt.EmbeddedCDebugger">
+      </debugger>
+   </extension>
+   <extension
+         point="org.eclipse.cdt.debug.ui.CDebuggerPage">
+      <debuggerPage
+            class="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage"
+            debuggerID="com.arc.embeddedcdt.EmbeddedCDebugger"
+            id="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage">
+      </debuggerPage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourceLocators">
+      <sourceLocator
+            class="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourceLookupDirector"
+            name="ARC Embedded CDT source locator CygWin"
+            id="com.arc.embeddedcdt.sourceLocatorCygWin"/>
+   </extension>
+   <!-- CygWin source path handling -->
+   <extension
+         point="org.eclipse.debug.core.sourceContainerTypes">
+      <sourceContainerType
+            class="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourceContainerType"
+            id="com.arc.embeddedcdt.containerType.cygwin"
+            description="%containerDescription.cygwin"
+            name="%containerName.cygwin"/>
+            />
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.sourceContainerPresentations">
+      <sourceContainerPresentation
+            browserClass="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourceContainerBrowser"
+            containerTypeID="com.arc.embeddedcdt.containerType.cygwin"
+            icon="icons/obj16/mapping_obj.gif"
+            id="com.arc.embeddedcdt.sourceContainerPresentation.cygwin"/>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourcePathComputers">
+      <sourcePathComputer
+            class="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourcePathComputerDelegate"
+            id="com.arc.embeddedcdt.sourcePathComputerCygWin"/>
+   </extension>
+
+
+   <extension
+         point="org.eclipse.cdt.debug.mi.core.commandFactories">
+      <commandFactory
+            class="org.eclipse.cdt.debug.mi.core.command.factories.StandardCommandFactory"
+            debuggerID="com.arc.embeddedcdt.EmbeddedCDebugger"
+            id="org.eclipse.cdt.debug.mi.core.standardCommandFactory"
+            miVersions="mi,mi1,mi2"
+            name="%StandardCommandFactory.name"
+            platforms="*"/>
+	</extension>
+	
+    <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.arc.embeddedcdt.preferences.PrefInitializer">
+      </initializer>
+    </extension>
+</plugin>
+
