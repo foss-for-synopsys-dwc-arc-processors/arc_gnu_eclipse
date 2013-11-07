@@ -694,7 +694,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			ICDIEvent event = events[i];
 			if (event instanceof ICDIDestroyedEvent)
 			{
-             debugSessionEnded();
 			}
 		}
 	}
@@ -702,12 +701,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	/** Convenient spot for subclasses to destroy things belongig to this event */
 	protected void debugSessionEnded()
 	{
-		try {
-			dsession.terminate();
-		} catch (CDIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	/*protected void LaunchOpenocd() {
 	    MessageConsole myConsole = findConsole("OpenOCD");
