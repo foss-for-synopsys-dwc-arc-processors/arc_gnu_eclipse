@@ -55,7 +55,6 @@ public final class EmbeddedCommandFactory extends CommandFactory
 	}
 
 	public MIProcess createMIProcess(String[] args, int launchTimeout, IProgressMonitor monitor) throws IOException {
-		args[0]=com.arc.embeddedcdt.launch.Launch.endian;
 		return new EmbeddedMIProcessAdapter(args, launchTimeout, 
 				monitor, this.launch);
 	}

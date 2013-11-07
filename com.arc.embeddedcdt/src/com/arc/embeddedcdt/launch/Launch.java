@@ -112,8 +112,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			}
 		}
 	}
-	public static String elfread="";//this vaiable is for setting arc-elf32-gdb/arceb-elf32-gdb
-	public static String endian="";
+	//public static String elfread="";//this vaiable is for setting arc-elf32-gdb/arceb-elf32-gdb
+	public static String endian="arc-elf32-gdb";
 	public ICProject myProject;
 	private ICDISession dsession;
 	private ILaunchConfiguration launch_config;
@@ -186,6 +186,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			myProject = project;
 			IBinaryObject exeFile = verifyBinary(project, exePath);
 			//elfread=exeFile.getPath().lastSegment();
+			/* That is not used. Can be removed
 			elfread=exeFile.getPath().getDevice()+"\\";
 			for (int i=0;i<exeFile.getPath().segmentCount()-1;i++)
 			{
@@ -193,6 +194,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			}
 			elfread=elfread+exeFile.getPath().lastSegment();
 			readelf();
+			*/
 			// set the default source locator if required
 			setDefaultSourceLocator(launch, configuration);
 
@@ -812,6 +814,15 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	    }
 	  }*/
 
+	/* Why do we need to do that? Apparently, because we don't know what
+	 * project (LSB or MSB) has compiled this. I think there should be a
+	 * better way to detect endianness, other then using readelf. In worst
+	 * case this should be used: `arc-elf32-readelf -h <exe> | grep -q 'big
+	 * endian'`. If exit code is 0 - then big endian, otherwise little. In
+	 * fact it seems this is used to choose from (arc|arceb)-elf32-gdb, but
+	 * that is not requried, because GDB is agnostic to endianness and
+	 * works with both. So arc- can be used at all times. */
+	/*
 	  public static void readelf()
 	  {
 		  Runtime runtime = Runtime.getRuntime();
@@ -887,6 +898,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			      }).start(); 
     
 	  }
+	*/
 	  /*public  void launchashling()
 	  {
 			String[] commandsfind = { "tasklist", "/nh", "/FI", "\"IMAGENAME", "eq", "ash-arc-gdb-server.exe\"" };
