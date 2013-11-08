@@ -97,43 +97,11 @@
    </extension>
      <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
-      <launchConfigurationType
-            delegate="com.arc.embeddedcdt.launch.cygwin.CygWinLaunch"
-            public="true"
-            name="ARC Embedded debug (Windows host)"
-            modes="debug"
-            id="com.arc.embeddedcdt.idle"
-
-            sourceLocatorId="com.arc.embeddedcdt.sourceLocatorCygWin"
-            sourcePathComputerId="com.arc.embeddedcdt.sourcePathComputerCygWin"
-            />
-            <!--
-      <launchConfigurationType
-            delegate="com.arc.embeddedcdt.launch.jtag.JTAGLaunch"
-            public="true"
-            name="ARC JTAG debugger (Cygwin)"
-            modes="debug"
-            id="com.arc.embeddedcdt.idleJTAG"
-
-            sourceLocatorId="com.arc.embeddedcdt.sourceLocatorCygWin"
-            sourcePathComputerId="com.arc.embeddedcdt.sourcePathComputerCygWin"
-            />
-      <launchConfigurationType
-            delegate="com.arc.embeddedcdt.launch.jtag.JTAGLaunch"
-            public="true"
-            name="ARC JTAG debugger (native)"
-            modes="debug"
-            id="com.arc.embeddedcdt.idleJTAGNative"
-
-            sourceLocatorId="org.eclipse.cdt.debug.core.sourceLocator"
-            sourcePathComputerId="org.eclipse.cdt.debug.core.sourcePathComputer"
-            />
-            -->
 
       <launchConfigurationType
             delegate="com.arc.embeddedcdt.launch.nativeos.NativeLaunch"
             public="true"
-            name="ARC Embedded debug (Linux host)"
+            name="ARC C/C++ application"
             modes="debug"
             id="com.arc.embeddedcdt.idleNative"
 
@@ -209,39 +177,6 @@
             id="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage">
       </debuggerPage>
    </extension>
-   <extension
-         point="org.eclipse.debug.core.sourceLocators">
-      <sourceLocator
-            class="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourceLookupDirector"
-            name="ARC Embedded CDT source locator CygWin"
-            id="com.arc.embeddedcdt.sourceLocatorCygWin"/>
-   </extension>
-   <!-- CygWin source path handling -->
-   <extension
-         point="org.eclipse.debug.core.sourceContainerTypes">
-      <sourceContainerType
-            class="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourceContainerType"
-            id="com.arc.embeddedcdt.containerType.cygwin"
-            description="%containerDescription.cygwin"
-            name="%containerName.cygwin"/>
-            />
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.sourceContainerPresentations">
-      <sourceContainerPresentation
-            browserClass="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourceContainerBrowser"
-            containerTypeID="com.arc.embeddedcdt.containerType.cygwin"
-            icon="icons/obj16/mapping_obj.gif"
-            id="com.arc.embeddedcdt.sourceContainerPresentation.cygwin"/>
-   </extension>
-   <extension
-         point="org.eclipse.debug.core.sourcePathComputers">
-      <sourcePathComputer
-            class="com.arc.embeddedcdt.sourcelookup.cygwin.CygWinSourcePathComputerDelegate"
-            id="com.arc.embeddedcdt.sourcePathComputerCygWin"/>
-   </extension>
-
-
    <extension
          point="org.eclipse.cdt.debug.mi.core.commandFactories">
       <commandFactory
