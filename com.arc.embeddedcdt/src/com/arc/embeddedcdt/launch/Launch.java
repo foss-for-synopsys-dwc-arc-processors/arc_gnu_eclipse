@@ -17,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
@@ -212,6 +214,32 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 					prepareSession();
 
+					// TODO Replace hardcoded line with something more error-proof.
+					if (CommandTab.fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
+					{
+						// TODO Path to Ashling GDB server should be configurable in CommandTab.
+						System.setProperty("Ashling", "C:\\AshlingOpellaXDforARC");
+						String ash_dir = System.getProperty("Ashling");
+						File ash_wd = new java.io.File(ash_dir); 
+						String[] ash_cmd = {
+								ash_dir + java.io.File.separator + "ash-arc-gdb-server.exe",
+								"--jtag-frequency", "8mhz",
+								"--device", "arc",
+								"--arc-reg-file", ash_dir + java.io.File.separator + "arc-opella-em.xml"
+								};
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), "Ashling GDBserver");
+					} else
+					{
+						// Start OpenOCD GDB server
+						// TODO Remove this hardcoded path to relative to Eclipse
+						String[] openocd_cmd = { "openocd.exe", "-f", "C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg","-c","init","-c","halt","-c","\"reset halt\""  };
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
+					}
+
+					// Start PuTTY
+					String[] putty_cmd = { "putty.exe", "-serial", Launch.COMserialport().get(0).toString(), "-sercfg", "115200,8,n,1" };
+					DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
+					
 					if (exeFile!=null)
 					{	
     					dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createDebuggerSession(this, l,exeFile, new SubProgressMonitor(monitor, 8));
@@ -698,10 +726,40 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		}
 	}
 
-	/** Convenient spot for subclasses to destroy things belongig to this event */
+	/** Convenient spot for subclasses to destroy things belonging to this event */
 	protected void debugSessionEnded()
 	{
 	}
+
+	public static List COMserialport()
+	{
+		List<String> list = new ArrayList<String>();
+		try {
+			int i=0;
+			String regedit=null;
+			while((regedit=WinRegistry.readString(
+					WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM",
+					"\\Device\\VCP"+Integer.toString(i))) != null ){
+					list.add(regedit);
+					i++;
+			}
+
+		} catch (IllegalArgumentException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(list.size()<1) {
+			list.add("Please connect to EM Starter Kit");
+		}
+		return list;
+	}
+
 	/*protected void LaunchOpenocd() {
 	    MessageConsole myConsole = findConsole("OpenOCD");
 	    final MessageConsoleStream outopenocd = myConsole.newMessageStream();
