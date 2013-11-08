@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="ARC CDT site" url="http://opensource.arc.com/arccdt">
+      ARC Embedded CDT update site
+   </description>
+   <feature url="features/com.arc.cdt.feature_8.13.1.jar" id="com.arc.cdt.feature" version="8.13.1">
+      <category name="ARCCDT"/>
+   </feature>
+   <category-def name="ARCCDT" label="ARC Embedded CDT"/>
+</site>
