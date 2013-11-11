@@ -22,5 +22,6 @@ public interface LaunchConfigurationConstants {
 	String ATTR_DEBUGGER_COMMANDS_INIT =  LAUNCH_ID + ".debugger_init_commands"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_COMMANDS_RUN =  LAUNCH_ID + ".debugger_run_commands"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_COMMANDS_LAUNCH =  LAUNCH_ID + ".debugger_lauch_commands"; //$NON-NLS-1$
+	String ATTR_DEBUGGER_EXTERNAL_TOOLS =  LAUNCH_ID + ".debugger_external_tools"; //$NON-NLS-1$
 	
 }

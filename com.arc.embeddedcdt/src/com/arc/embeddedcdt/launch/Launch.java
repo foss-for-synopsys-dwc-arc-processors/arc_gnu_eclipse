@@ -215,7 +215,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					prepareSession();
 
 					// TODO Replace hardcoded line with something more error-proof.
-					if ((CommandTab.fPrgmArgumentsComboInittext!=null)&&(CommandTab.fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling")))
+					if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String()).equalsIgnoreCase("JTAG via Ashling"))
 					{
 						// TODO Path to Ashling GDB server should be configurable in CommandTab.
 						System.setProperty("Ashling", "C:\\AshlingOpellaXDforARC");

@@ -232,6 +232,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, (String) null);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
 		
 		
 	}
@@ -285,7 +286,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,getAttributeValueFrom(fPrgmArgumentsTextInit));
 		initcom=getAttributeValueFrom(fPrgmArgumentsTextInit);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,getAttributeValueFrom(fPrgmArgumentsTextRun));
-	
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 	
 		
 	}
@@ -311,6 +312,13 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	protected String getAttributeValueFrom(Text text) {
 		String content = text.getText().trim();
+		if (content.length() > 0) {
+			return content;
+		}
+		return null;
+	}
+	protected String getAttributeValueFromString(String string) {
+		String content = string;
 		if (content.length() > 0) {
 			return content;
 		}
