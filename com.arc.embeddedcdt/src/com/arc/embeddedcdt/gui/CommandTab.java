@@ -42,6 +42,8 @@ import org.eclipse.ui.browser.IWebBrowser;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
+import com.arc.embeddedcdt.launch.Launch;
+import com.arc.embeddedcdt.launch.WinRegistry;
 
 
 /**
@@ -58,9 +60,10 @@ public class CommandTab extends CLaunchConfigurationTab {
 	protected Label fPrgmArgumentsLabelRun; //this variable is for showing run  command
 	protected Text fPrgmArgumentsTextRun;   //this variable is for getting user's input run command
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
-	//protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
-	public static String  fPrgmArgumentsComboInittext; //this variable is for getting user's input initial command
+	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
+	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
     static String initcom="";
+    public static String comport=null;//this variable is for launching the exactly com port chosen by users
    
 
 	/* (non-Javadoc)
@@ -194,6 +197,29 @@ public class CommandTab extends CLaunchConfigurationTab {
 				updateLaunchConfigurationDialog();
 			}
 		});
+		fPrgmArgumentsLabelCom = new Label(argsComp, SWT.NONE);
+		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
+		fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 29;
+		fPrgmArgumentsComCom.setLayoutData(gd);
+		List COM=Launch.COMserialport();
+		for (int ii=0;ii<COM.size();ii++)
+			{
+				fPrgmArgumentsComCom.add((String) COM.get(ii));
+		    }
+
+		
+		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				updateLaunchConfigurationDialog();
+				Combo combo= (Combo)evt.widget;
+				if (combo.getText().lastIndexOf("COM")>0)
+				{
+					comport=combo.getText().substring(combo.getText().lastIndexOf("COM"), combo.getText().length());}
+				}
+		});
+
 		
 
 //		addControlAccessibleListener(fArgumentVariablesButton, fArgumentVariablesButton.getText()); // need to strip the mnemonic from buttons
@@ -241,7 +267,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 			else  fPrgmArgumentsComboInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, fPrgmArgumentsComboInit.getItem(0)));
 			
 			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc")); //$NON-NLS-1$
-			
+			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 			
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block

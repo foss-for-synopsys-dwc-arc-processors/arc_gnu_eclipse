@@ -215,7 +215,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					prepareSession();
 
 					// TODO Replace hardcoded line with something more error-proof.
-					if (CommandTab.fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
+					if ((CommandTab.fPrgmArgumentsComboInittext!=null)&&(CommandTab.fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling")))
 					{
 						// TODO Path to Ashling GDB server should be configurable in CommandTab.
 						System.setProperty("Ashling", "C:\\AshlingOpellaXDforARC");
@@ -237,8 +237,19 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					}
 
 					// Start PuTTY
-					String[] putty_cmd = { "putty.exe", "-serial", Launch.COMserialport().get(0).toString(), "-sercfg", "115200,8,n,1" };
+					String COMport="";
+					if(CommandTab.comport!=null) COMport=CommandTab.comport;
+					else COMport=Launch.COMserialport().get(0).toString();
+					
+					String[] putty_cmd = { "putty.exe", "-serial", COMport, "-sercfg", "115200,8,n,1" };
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
+				
 					
 					if (exeFile!=null)
 					{	
