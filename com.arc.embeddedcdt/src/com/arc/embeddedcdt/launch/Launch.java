@@ -232,7 +232,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					{
 						// Start OpenOCD GDB server
 						// TODO Remove this hardcoded path to relative to Eclipse
-						String[] openocd_cmd = { "openocd.exe", "-f", "C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg","-c","init","-c","halt","-c","\"reset halt\""  };
+						String[] openocd_cmd = { "openocd", "-f", "C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg","-c","init","-c","halt","-c","\"reset halt\""  };
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
 					}
 
@@ -241,7 +241,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					if(CommandTab.comport!=null) COMport=CommandTab.comport;
 					else COMport=Launch.COMserialport().get(0).toString();
 					
-					String[] putty_cmd = { "putty.exe", "-serial", COMport, "-sercfg", "115200,8,n,1" };
+					String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e2) {

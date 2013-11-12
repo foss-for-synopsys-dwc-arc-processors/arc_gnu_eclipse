@@ -208,19 +208,14 @@ public class CommandTab extends CLaunchConfigurationTab {
 			{
 				fPrgmArgumentsComCom.add((String) COM.get(ii));
 		    }
-
-		
 		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
-				updateLaunchConfigurationDialog();
 				Combo combo= (Combo)evt.widget;
-				if (combo.getText().lastIndexOf("COM")>0)
-				{
-					comport=combo.getText().substring(combo.getText().lastIndexOf("COM"), combo.getText().length());}
+				comport=combo.getText();
+				updateLaunchConfigurationDialog();
 				}
+			
 		});
-
-		
 
 //		addControlAccessibleListener(fArgumentVariablesButton, fArgumentVariablesButton.getText()); // need to strip the mnemonic from buttons
 	}
@@ -242,7 +237,6 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			//fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, fPrgmArgumentsComboInit.getItem(0)));//$NON-NLS-1$
 			String status=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,fPrgmArgumentsComboInit.getItem(0));
 			
 			if(status.indexOf("JTAG")==-1&&status.indexOf("nSIM")==-1&&status.indexOf("GNU")==-1)
@@ -287,7 +281,8 @@ public class CommandTab extends CLaunchConfigurationTab {
 		initcom=getAttributeValueFrom(fPrgmArgumentsTextInit);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,getAttributeValueFrom(fPrgmArgumentsTextRun));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
-	
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
+
 		
 	}
 
