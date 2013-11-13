@@ -211,14 +211,19 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				{
 
 					LaunchFrontend l = new LaunchFrontend(launch);
-
+                    String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
+                    String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
 					prepareSession();
 
 					// TODO Replace hardcoded line with something more error-proof.
-					if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String()).equalsIgnoreCase("JTAG via Ashling"))
+					if (extenal_tools.equalsIgnoreCase("JTAG via Ashling"))
 					{
-						// TODO Path to Ashling GDB server should be configurable in CommandTab.
-						System.setProperty("Ashling", "C:\\AshlingOpellaXDforARC");
+						// TODO Path to Ashling GDB server is also configurable in CommandTab.
+						if(extenal_tools_path.equalsIgnoreCase("")) 
+						{
+							extenal_tools_path="C:\\AshlingOpellaXDforARC";
+							}
+						System.setProperty("Ashling", extenal_tools_path);
 						String ash_dir = System.getProperty("Ashling");
 						File ash_wd = new java.io.File(ash_dir); 
 						String[] ash_cmd = {
@@ -231,8 +236,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					} else
 					{
 						// Start OpenOCD GDB server
-						// TODO Remove this hardcoded path to relative to Eclipse
-						String[] openocd_cmd = { "openocd", "-f", "C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg","-c","init","-c","halt","-c","\"reset halt\""  };
+						if(extenal_tools_path.equalsIgnoreCase("")) 
+						{
+							extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+							}
+						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
 					}
 
