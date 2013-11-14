@@ -353,8 +353,15 @@ public class CommandTab extends CLaunchConfigurationTab {
 				fPrgmArgumentsComboInit.setText("GNU simulator");
 			    }*/
 			}
-			else  fPrgmArgumentsComboInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, fPrgmArgumentsComboInit.getItem(0)));
+			else  fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
 			
+			
+			if (fPrgmArgumentsComboInit.getItem(0).equalsIgnoreCase("JTAG via OpenOCD")){
+				fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, new String()));
+			}
+			else if (fPrgmArgumentsComboInit.getItem(0).equalsIgnoreCase("JTAG via Ashling")){
+					fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, new String()));
+				}
 			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc")); //$NON-NLS-1$
 			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, new String())); //$NON-NLS-1$
