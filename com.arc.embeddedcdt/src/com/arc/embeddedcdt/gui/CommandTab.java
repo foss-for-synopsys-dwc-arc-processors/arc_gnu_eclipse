@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import org.eclipse.cdt.core.model.IBinary;
 import org.eclipse.cdt.core.model.ICElement;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
@@ -82,6 +83,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
     static String initcom="";
+    static String runcom="";
     public static String comport=null;//this variable is for launching the exactly com port chosen by users
     protected Button fSearchexternalButton;//this button is for searching the path for external tools
     protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
@@ -227,6 +229,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsTextRun.setLayoutData(gd);
 		fPrgmArgumentsTextRun.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
+				runcom=fPrgmArgumentsTextRun.getText();
 				updateLaunchConfigurationDialog();
 			}
 		});
@@ -354,15 +357,13 @@ public class CommandTab extends CLaunchConfigurationTab {
 			    }*/
 			}
 			else  fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
+					
+			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, new String()));
 			
+			if (runcom.equalsIgnoreCase("")) fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc")); //$NON-NLS-1$
 			
-			if (fPrgmArgumentsComboInit.getItem(0).equalsIgnoreCase("JTAG via OpenOCD")){
-				fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, new String()));
-			}
-			else if (fPrgmArgumentsComboInit.getItem(0).equalsIgnoreCase("JTAG via Ashling")){
-					fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, new String()));
-				}
-			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc")); //$NON-NLS-1$
+			else fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, runcom)); //$NON-NLS-1$
+			//fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, new String()));
 			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, new String())); //$NON-NLS-1$
 			
@@ -380,8 +381,13 @@ public class CommandTab extends CLaunchConfigurationTab {
 		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,	getAttributeValueFrom(fPrgmArgumentsTextInit));
 		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,getAttributeValueFrom(fPrgmArgumentsTextInit));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,getAttributeValueFrom(fPrgmArgumentsTextInit));
-		initcom=getAttributeValueFrom(fPrgmArgumentsTextInit);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,getAttributeValueFrom(fPrgmArgumentsTextRun));
+		if(getAttributeValueFrom(fPrgmArgumentsTextInit)!=null) initcom=getAttributeValueFrom(fPrgmArgumentsTextInit);
+		else configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,"");
+		
+	
+		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,runcom);
+			
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,getAttributeValueFrom(fPrgmArgumentsTextexternal));
