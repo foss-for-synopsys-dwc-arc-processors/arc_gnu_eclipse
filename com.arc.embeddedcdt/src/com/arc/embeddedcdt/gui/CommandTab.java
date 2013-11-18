@@ -361,8 +361,9 @@ public class CommandTab extends CLaunchConfigurationTab {
 			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, new String()));
 			
 			if (runcom.equalsIgnoreCase("")) fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc")); //$NON-NLS-1$
-			
 			else fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, runcom)); //$NON-NLS-1$
+			
+			
 			//fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, new String()));
 			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, new String())); //$NON-NLS-1$
