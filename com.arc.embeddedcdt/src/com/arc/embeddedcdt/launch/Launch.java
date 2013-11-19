@@ -213,10 +213,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					LaunchFrontend l = new LaunchFrontend(launch);
                     String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
+                    String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,new String());
 					prepareSession();
 
 					// TODO Replace hardcoded line with something more error-proof.
-					if (extenal_tools.equalsIgnoreCase("JTAG via Ashling"))
+					if (extenal_tools.equalsIgnoreCase("JTAG via Ashling")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
 						// TODO Path to Ashling GDB server is also configurable in CommandTab.
 						if(extenal_tools_path.equalsIgnoreCase("")) 
@@ -233,7 +234,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								"--arc-reg-file", ash_dir + java.io.File.separator + "arc-opella-em.xml"
 								};
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), "Ashling GDBserver");
-					} else
+					} 
+					else if (extenal_tools.equalsIgnoreCase("JTAG via OpenOCD")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
 						if(extenal_tools_path.equalsIgnoreCase("")) 
@@ -243,7 +245,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
 					}
-
+					else if (extenal_tools.equalsIgnoreCase("nSIM")&&extenal_tools_launch.equalsIgnoreCase("true"))
+					{/*
+						// Start nSIM GDB server
+						if(extenal_tools_path.equalsIgnoreCase("")) 
+						{
+							extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+							}
+						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
+					*/}
+					
 					// Start PuTTY
 					String COMport="";
 					if(CommandTab.comport!=null) COMport=CommandTab.comport;
