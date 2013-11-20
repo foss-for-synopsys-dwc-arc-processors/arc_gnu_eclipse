@@ -66,6 +66,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
@@ -215,7 +216,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
                     String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,new String());
 					prepareSession();
-
+					
+					String eclipsehome= Platform.getInstallLocation().getURL().toString();
+					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
+					
 					// TODO Replace hardcoded line with something more error-proof.
 					if (extenal_tools.equalsIgnoreCase("JTAG via Ashling")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
@@ -238,9 +242,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					else if (extenal_tools.equalsIgnoreCase("JTAG via OpenOCD")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
-						if(extenal_tools_path.equalsIgnoreCase("")) 
+						if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
 						{
-							extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+							//extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+						    extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
 							}
 						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
