@@ -11,13 +11,13 @@
     <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
   </mappings>
   <artifacts size='12'>
-     <artifact classifier='osgi.bundle' id='com.arc.embeddedcdt' version='8.13.1'>
+     <artifact classifier='osgi.bundle' id='com.arc.embeddedcdt' version='1.0.0'>
       <properties size='2'>
         <property name='artifact.size' value='4096'/>
         <property name='download.size' value='772247'/>
       </properties>
     </artifact>
-     <artifact classifier='org.eclipse.update.feature' id='com.arc.cdt.feature' version='8.13.1'>
+     <artifact classifier='org.eclipse.update.feature' id='com.arc.cdt.feature' version='1.0.0'>
       <properties size='2'>
         <property name='download.contentType' value='application/zip'/>
         <property name='download.size' value='11010'/>

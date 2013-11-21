@@ -6,19 +6,20 @@
     <property name='p2.compressed' value='true'/>
   </properties>
   <units size='4'>
-    <unit id='com.arc.cdt.feature.feature.group' version='8.13.1' singleton='false'>
-      <update id='com.arc.cdt.feature.feature.group' range='[0.0.0,8.13.1)' severity='0'/>
+    <unit id='com.arc.cdt.feature.feature.group' version='1.0.0' singleton='false'>
+      <update id='com.arc.cdt.feature.feature.group' range='[0.0.0,1.0.0)' severity='0'/>
       <properties size='7'>
-        <property name='org.eclipse.equinox.p2.name' value='ARC Embedded CDT'/>
-        <property name='org.eclipse.equinox.p2.description' value='ARC Embedded CDT debug plugin'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT'/>
+        <property name='org.eclipse.equinox.p2.description' value='The ARC GNU Toolchain Eclipse Plug-in is an Eclipse CDT Managed Build Extension for the development of managed C/C++ applications for the ARC series of processors.
+'/>
         <property name='org.eclipse.equinox.p2.description.url' value='http://opensource.arc.com/embeddedcdt.html'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Synopsys'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Synopsys, Inc.'/>
         <property name='org.eclipse.equinox.p2.type.group' value='true'/>
-        <property name='df_LT.copyright' value='Yunlu Zhang and other'/>
-        <property name='df_LT.license' value='Synopsys.'/>
+        <property name='df_LT.copyright' value='Copyright © 2013 Synopsys, Inc.  All rights reserved. '/>
+        <property name='df_LT.license' value='The &quot;ARC GNU Toolchain Eclipse Plug-in&quot; is free software.&#xA;Permission is hereby granted, free of charge, to any person obtaining a&#xA;copy of this software and associated documentation files (the&#xA;&quot;Software&quot;), to deal in the Software without restriction, including&#xA;without limitation the rights to use, copy, modify, merge, publish,&#xA;distribute, sublicense, and/or sell copies of the Software, and to&#xA;permit persons to whom the Software is furnished to do so, subject to&#xA;the following conditions:&#xA;&#xA;The above copyright notice and this permission notice shall be included&#xA;in all copies or substantial portions of the Software.&#xA;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS&#xA;OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF&#xA;MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&#xA;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE&#xA;LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION&#xA;OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION&#xA;WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'/>
       </properties>
       <provides size='2'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.group' version='8.13.1'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.group' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
       </provides>
       <requires size='15'>
@@ -35,8 +36,8 @@
         <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.debug.mi.ui' range='0.0.0'/>
         <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.ui' range='0.0.0'/>
         <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.debug.ui' range='0.0.0'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.embeddedcdt' range='[8.13.1,8.13.1]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.jar' range='[8.13.1,8.13.1]'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.embeddedcdt' range='[1.0.0,1.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.jar' range='[1.0.0,1.0.0]'>
           <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -52,16 +53,18 @@
         %copyright
       </copyright>
     </unit>
-     <unit id='com.arc.embeddedcdt' version='8.13.1'>
-      <update id='com.arc.embeddedcdt' range='[0.0.0,8.13.1)' severity='0'/>
+     <unit id='com.arc.embeddedcdt' version='1.0.0'>
+Duu
+D
+      <update id='com.arc.embeddedcdt' range='[0.0.0,1.0.0)' severity='0'/>
       <properties size='3'>
-        <property name='org.eclipse.equinox.p2.name' value='ARC Embedded CDT Plug-in'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT Plug-in'/>
         <property name='org.eclipse.equinox.p2.provider' value='ARC AS'/>
         <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
       </properties>
       <provides size='16'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='com.arc.embeddedcdt' version='8.13.1'/>
-        <provided namespace='osgi.bundle' name='com.arc.embeddedcdt' version='8.13.1'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.arc.embeddedcdt' version='1.0.0'/>
+        <provided namespace='osgi.bundle' name='com.arc.embeddedcdt' version='1.0.0'/>
         <provided namespace='java.package' name='com.arc.embeddedcdt' version='0.0.0'/>
         <provided namespace='java.package' name='com.arc.embeddedcdt.copied' version='0.0.0'/>
         <provided namespace='java.package' name='com.arc.embeddedcdt.gui' version='0.0.0'/>
@@ -94,13 +97,13 @@
         <required namespace='java.package' name='com.ibm.icu.text' range='0.0.0'/>
       </requires>
       <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='com.arc.embeddedcdt' version='8.13.1'/>
+        <artifact classifier='osgi.bundle' id='com.arc.embeddedcdt' version='1.0.0'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
         <instructions size='2'>
           <instruction key='manifest'>
-            Bundle-SymbolicName: com.arc.embeddedcdt; singleton:=true&#xA;Bundle-Version: 8.13.1
+            Bundle-SymbolicName: com.arc.embeddedcdt; singleton:=true&#xA;Bundle-Version:1.0.0 
           </instruction>
           <instruction key='zipped'>
             true
@@ -108,26 +111,25 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='com.arc.cdt.feature.feature.jar' version='8.13.1'>
+    <unit id='com.arc.cdt.feature.feature.jar' version='1.0.0'>
       <properties size='7'>
-        <property name='org.eclipse.equinox.p2.name' value='ARC Embedded CDT'/>
-        <property name='org.eclipse.equinox.p2.description' value='ARC Embedded CDT debug plugin'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT'/>
+        <property name='org.eclipse.equinox.p2.description' value='ARC GNU Toolchain Embedded CDT debug plugin'/>
         <property name='org.eclipse.equinox.p2.description.url' value='http://opensource.arc.com/embeddedcdt.html'/>
-        <property name='org.eclipse.equinox.p2.provider' value='Synopsys'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Synopsys, Inc.'/>
         <property name='org.eclipse.update.feature.plugin' value='com.arc.embeddedcdt'/>
         <property name='df_LT.copyright' value='Yunlu Zhang and other'/>
-        <property name='df_LT.license' value='Synopsys.'/>
       </properties>
       <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.jar' version='8.13.1'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.jar' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='com.arc.cdt.feature' version='8.13.1'/>
+        <provided namespace='org.eclipse.update.feature' name='com.arc.cdt.feature' version='1.0.0'/>
       </provides>
       <filter>
         (org.eclipse.update.install.features=true)
       </filter>
       <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='com.arc.cdt.feature' version='8.13.1'/>
+        <artifact classifier='org.eclipse.update.feature' id='com.arc.cdt.feature' version='1.0.0'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
@@ -137,25 +139,20 @@
           </instruction>
         </instructions>
       </touchpointData>
-      <licenses size='1'>
-        <license uri='%25licenseURL' url='%25licenseURL'>
-          %license
-        </license>
-      </licenses>
       <copyright>
         %copyright
       </copyright>
     </unit>
     <unit id='ARCCDT' version='1.0.0.787Y1cKDAnh'>
       <properties size='2'>
-        <property name='org.eclipse.equinox.p2.name' value='ARC Embedded CDT'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT'/>
         <property name='org.eclipse.equinox.p2.type.category' value='true'/>
       </properties>
       <provides size='1'>
         <provided namespace='org.eclipse.equinox.p2.iu' name='ARCCDT' version='1.0.0.787Y1cKDAnh'/>
       </provides>
       <requires size='1'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.group' range='[8.13.1,8.13.1]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.group' range='[1.0.0,1.0.0]'/>
       </requires>
       <touchpoint id='null' version='0.0.0'/>
     </unit>
