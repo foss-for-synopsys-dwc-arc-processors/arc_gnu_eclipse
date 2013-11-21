@@ -58,6 +58,11 @@
 				<simple name="target" value="$(sourceDir)/$(projectName).c"/>
 				<simple name="replaceable" value="true"/>
 			</element>
+			<element>
+				<simple name="source" value="src/starterkit.h"/>
+				<simple name="target" value="$(sourceDir)/starterkit.h"/>
+				<simple name="replaceable" value="true"/>
+			</element>
 		</complex-array>
 	</process>
 

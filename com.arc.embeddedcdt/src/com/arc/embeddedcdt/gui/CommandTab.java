@@ -7,7 +7,7 @@
  * 
  * Contributors:
  *     QNX Software Systems - Initial API and implementation
- *     Synopsys, Inc. - ARC GNU Toolchain plug-in
+ *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 
 package com.arc.embeddedcdt.gui;
@@ -92,7 +92,7 @@ public class CommandTab extends CLaunchConfigurationTab {
     protected Button fSearchexternalButton;//this button is for searching the path for external tools
     protected Button fLaunchernalButton;//this button is for launching the external tools
     protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
-    static String fLaunchernalButtonboolean="false";
+    static String fLaunchernalButtonboolean="true";
     static String externaltools_enblement="";//this variable is to get external tools current status (Enable/disable)
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -198,7 +198,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 					fPrgmArgumentsTextInit.setText("target sim \nload");
 				}
 				fSearchexternalButton.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length())+" Path");
-				fLaunchernalButton.setText("Enable Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length()));
+				fLaunchernalButton.setText("Disable Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length()));
 				
 				updateLaunchConfigurationDialog();
 				

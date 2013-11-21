@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: ARC Embedded CDT Plug-in
+Bundle-Name: ARC Embedded CDT
 Bundle-SymbolicName: com.arc.embeddedcdt;singleton:=true
 Bundle-Version: 8.13.1
 Bundle-ClassPath: arcembeddedcdt.jar,
@@ -9,7 +9,7 @@ Bundle-ClassPath: arcembeddedcdt.jar,
  lib/commons-logging-1.1.1.jar,
  lib/junit-4.4.jar
 Bundle-Activator: com.arc.embeddedcdt.LaunchPlugin
-Bundle-Vendor: Synopsys
+Bundle-Vendor: Synopsys, Inc
 Bundle-Localization: plugin
 Export-Package: com.arc.embeddedcdt,
  com.arc.embeddedcdt.copied,

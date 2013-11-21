@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     QNX Software Systems - Initial API and implementation
+ *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 
 package com.arc.embeddedcdt.launch;

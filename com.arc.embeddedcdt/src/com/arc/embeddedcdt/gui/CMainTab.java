@@ -8,6 +8,7 @@
  * Contributors:
  *     QNX Software Systems - initial API and implementation
  *     Ken Ryall (Nokia) - bug 178731
+ *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 package com.arc.embeddedcdt.gui;
 
