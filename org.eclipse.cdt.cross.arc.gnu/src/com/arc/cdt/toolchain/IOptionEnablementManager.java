@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- * Synopsys, Inc - Initial implementation 
+ * Synopsys, Inc - Initial implementation
+ * Synopsys, Inc. - ARC GNU Toolchain support 
  *******************************************************************************/
 package com.arc.cdt.toolchain;
 

@@ -7,6 +7,7 @@
  *
  * Contributors:
  * Synopsys, Inc - Initial implementation 
+ * Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 package com.arc.cdt.toolchain;
 

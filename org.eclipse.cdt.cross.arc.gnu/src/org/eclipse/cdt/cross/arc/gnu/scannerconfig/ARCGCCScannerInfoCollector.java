@@ -1,3 +1,13 @@
+/*******************************************************************************
+* This program and the accompanying materials 
+* are made available under the terms of the Common Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/cpl-v10.html
+* 
+* Contributors:
+*     Synopsys, Inc. - ARC GNU Toolchain support
+*******************************************************************************/
+
 package org.eclipse.cdt.cross.arc.gnu.scannerconfig;
 
 import org.eclipse.cdt.make.core.scannerconfig.IScannerInfoCollector3;
@@ -8,8 +18,3 @@ public class ARCGCCScannerInfoCollector extends PerProjectSICollector
   implements IScannerInfoCollector3, IManagedScannerInfoCollector
 {
 }
-
-/* Location:           C:\Users\yunluz\Desktop\plugins\bin\
- * Qualified Name:     org.eclipse.cdt.cross.arm.gnu.scannerconfig.ARMGCCScannerInfoCollector
- * JD-Core Version:    0.6.2
- */

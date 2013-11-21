@@ -11,11 +11,11 @@ Require-Bundle: org.eclipse.cdt.ui;bundle-version="5.0.2",
  org.eclipse.cdt.managedbuilder.ui;bundle-version="5.0.2",
  org.eclipse.cdt.managedbuilder.core,
  org.eclipse.cdt.managedbuilder.core
-Bundle-Vendor: Synopsys Inc.
+Bundle-Vendor: Synopsys, Inc.
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: bin/
-Bundle-Version: 0.0.0.201305160001
-Bundle-Name: GNU ARC C/C++ Development Support
+Bundle-Version: 1.0.0
+Bundle-Name: ARC GNU Toolchain C/C++ Development Support
 Bundle-Activator: org.eclipse.cdt.cross.arc.gnu.ARCPlugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true

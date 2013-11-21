@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     QNX Software Systems - Initial API and implementation
+ *     Synopsys, Inc. - ARC GNU Toolchain plug-in
  *******************************************************************************/
 
 package com.arc.embeddedcdt.gui;
@@ -297,10 +298,13 @@ public class CommandTab extends CLaunchConfigurationTab {
 	        	fLaunchernalButton.setText("Enable Launch"+tools);
 	        	fLaunchernalButtonboolean="false";
 	        	fSearchexternalButton.setEnabled(false);
+	        	fPrgmArgumentsTextexternal.setEnabled(false);
 	        	}
 	        	else {
 	        		fLaunchernalButton.setText("Disable Launch"+tools);
 		        	fLaunchernalButtonboolean="true";
+		        	fSearchexternalButton.setEnabled(true);
+		        	fPrgmArgumentsTextexternal.setEnabled(true);
 	           	}
 	        	updateLaunchConfigurationDialog();
 	        }
@@ -423,7 +427,17 @@ public class CommandTab extends CLaunchConfigurationTab {
 			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,"C:\\AshlingOpellaXDforARC")); 
 			else if	(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("OpenOCD")>-1)
 			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
-			//
+			
+			if(fLaunchernalButton.getText().indexOf("Enable")>-1){
+	        	//fLaunchernalButtonboolean="false";
+	        	fSearchexternalButton.setEnabled(false);
+	        	fPrgmArgumentsTextexternal.setEnabled(false);
+	        	}
+	        	else {
+		        	//fLaunchernalButtonboolean="true";
+		        	fSearchexternalButton.setEnabled(true);
+		        	fPrgmArgumentsTextexternal.setEnabled(true);
+	           	}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,4 +1,14 @@
-   package org.eclipse.cdt.cross.arc.gnu;
+/*******************************************************************************
+* This program and the accompanying materials 
+* are made available under the terms of the Common Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/cpl-v10.html
+* 
+* Contributors:
+*     Synopsys, Inc. - ARC GNU Toolchain support
+*******************************************************************************/
+   
+package org.eclipse.cdt.cross.arc.gnu;
    
    import java.util.ArrayList;
    import java.util.Arrays;
@@ -259,7 +269,3 @@
      }
    }
 
-/* Location:           C:\Users\yunluz\Desktop\plugins\bin\
- * Qualified Name:     org.eclipse.cdt.cross.arm.gnu.ARMManagedCommandLineGenerator
- * JD-Core Version:    0.6.2
- */

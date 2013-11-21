@@ -1,34 +1,41 @@
 /*
  ============================================================================
- Name        : $(baseName).c
- Author      : $(author)
+ Name        : hello.c
+ Author      :
  Version     :
- Copyright   : $(copyright)
+ Copyright   : Your copyright notice
  Description : Hello World in C
  ============================================================================
  */
-
 #include <stdio.h>
+#ifndef __STARTERKIT_H__
+#define  __STARTERKIT_H__
 
 
 
-/*
+// -------------------------------------------------------------------------------
+// Board parameters
+// -------------------------------------------------------------------------------
+#define CPU_CLOCK			30000000
+#define PERIPHERAL_CLOCK	50000000
 
- Print a greeting on standard output and exit.
+#define	REG_FILE_0	0x00000000U
+#define	REG_FILE_1	0x00001000U	// not implemented on this board
+#define	DWC_GPIO_0	0x00002000U
+#define	DWC_GPIO_1	0x00003000U	// not implemented on this board
+#define	DWC_I2C_0	0x00004000U
+#define	DWC_I2C_1	0x00005000U	// not implemented on this board
+#define DWC_SPI_0	0x00006000U	// SPI Master
+#define DWC_SPI_1	0x00007000U	// SPI Slave
+#define	DWC_UART_0	0x00008000U
+#define	DWC_UART_1	0x00009000U
 
- On embedded platforms this might need to enable semi-hosting or similar.
-
- For example, for toolchains derived from GNU Tools for Embedded,
- the following should be added to the linker:
-
- --specs=rdimon.specs -Wl,--start-group -lgcc -lc -lc -lm -lrdimon -Wl,--end-group
-
- */
-
-#ifndef __UART_HAL_H__
-#define __UART_HAL_H__
+#define	DWC_UART_CONSOLE	DWC_UART_1
 
 
+// -------------------------------------------------------------------------------
+//	UART
+// -------------------------------------------------------------------------------
 
 // typedef volatile unsigned int UART_REG;
 // typedef volatile unsigned int * UART_REG_PTR;
@@ -37,6 +44,7 @@
 // -------------------------------------------------------------------------------
 // Register          Offset Size  Memory Access    Description
 // -------------------------------------------------------------------------------
+
 
 #define U_RBR     0   	// 0x00 32 bits R   Reset: 0x0   Receive Buffer Register, reading this register when the DLAB bit is zero; Transmit Holding Register, writing to this register when the DLAB is zero; Divisor Latch (Low), when DLAB bit is one
 #define U_DLL     0  	// 0x00 32 bits R/W Reset: 0x0   AlternateRegister: RBR Receive Buffer Register, reading this register when the DLAB bit is zero; Transmit Holding Register, writing to this register when the DLAB is zero; Divisor Latch (Low), when DLAB bit is one
@@ -108,137 +116,41 @@
 #define U_USR_BUSY  (1<<0)
 
 
-#endif // __UART_HAL_H__
-//*****END uart_hal.h*****
+#define UART_BAUD(baud)	(PERIPHERAL_CLOCK / (baud *16))
+#define UART_BAUD_DLL(baud) (baud & 0xff)
+#define UART_BAUD_DLH(baud) ((baud >> 8)& 0xff)
 
 
-#ifndef __STARTER_H__
-#define __STARTER_H__
+typedef enum uart_baudrate {
+	UART_CFG_BAUDRATE_2400 = UART_BAUD(2400),
+	UART_CFG_BAUDRATE_4800 = UART_BAUD(4800),
+	UART_CFG_BAUDRATE_9600 = UART_BAUD(9600),
+	UART_CFG_BAUDRATE_115200 = UART_BAUD(115200),
+} uart_baudrate_t;
 
-//#include "io_types.h"
+typedef enum uart_data_bits {
+	UART_CFG_DATA_5BITS = 0x0,
+	UART_CFG_DATA_6BITS = 0x1,
+	UART_CFG_DATA_7BITS = 0x2,
+	UART_CFG_DATA_8BITS = 0x3,
+} uart_data_bits_t;
 
-//*****io_types.h*****
-/*************************************************************************/
-/*************************************************************************/
-/**                                                                     **/
-/** Copyright (C) 1989-2013 Synopsys, Inc.                              **/
-/** All Rights Reserved.                                                **/
-/**                                                                     **/
-/** SYNOPSYS CONFIDENTIAL                                               **/
-/**                                                                     **/
-/** This is an unpublished proprietary work of Synopsys, Inc., and is   **/
-/** fully protected under copyright and trade secret laws. You may not  **/
-/** view, use, disclose, copy, or distribute this file or any           **/
-/** information contained herein except pursuant to a valid written     **/
-/** license from Synopsys.                                              **/
-/**                                                                     **/
-/** For more information, contact                                       **/
-/** est-adm@synopsys.com or call (650) 584-1631                         **/
-/**                                                                     **/
-/*************************************************************************/
-/*************************************************************************/
-#ifndef __IO_TYPES_H__
-#define __IO_TYPES_H__
+typedef enum uart_stop {
+	UART_CFG_1STOP = 0x0, UART_CFG_2STOP = 0x1 << 2,
+} uart_stop_t;
 
-typedef volatile unsigned int DWCREG;
-typedef DWCREG * DWCREG_PTR;
+typedef enum uart_parity {
+	UART_CFG_PARITY_NONE = 0x0 << 3,
+	UART_CFG_PARITY_EVEN = 0x3 << 3,
+	UART_CFG_PARITY_ODD = 0x1 << 3,
+} uart_parity_t;
 
-typedef unsigned char DATA_BUF;
-typedef DATA_BUF * DATA_BUF_PTR;
 
-#endif
-//*****END io_types.h*****
 
-//#include "board.h"
-//*****board.h*****
-/*************************************************************************/
-/*************************************************************************/
-/**                                                                     **/
-/** Copyright (C) 1989-2013 Synopsys, Inc.                              **/
-/** All Rights Reserved.                                                **/
-/**                                                                     **/
-/** SYNOPSYS CONFIDENTIAL                                               **/
-/**                                                                     **/
-/** This is an unpublished proprietary work of Synopsys, Inc., and is   **/
-/** fully protected under copyright and trade secret laws. You may not  **/
-/** view, use, disclose, copy, or distribute this file or any           **/
-/** information contained herein except pursuant to a valid written     **/
-/** license from Synopsys.                                              **/
-/**                                                                     **/
-/** For more information, contact                                       **/
-/** est-adm@synopsys.com or call (650) 584-1631                         **/
-/**                                                                     **/
-/*************************************************************************/
-/*************************************************************************/
-#ifndef __BOARD_H__
-#define __BOARD_H__
 
-#if 1
-#define CPU_CLOCK			25000000
-#define PERIPHERAL_CLOCK	25000000
-
-#define	REG_FILE_0	0x00000000U
-#define	REG_FILE_1	0x00001000U	// not implemented on this board
-#define	DWC_GPIO_0	0x00002000U
-#define	DWC_GPIO_1	0x00003000U	// not implemented on this board
-#define	DWC_I2C_0	0x00004000U
-#define	DWC_I2C_1	0x00005000U	// not implemented on this board
-#define DWC_SPI_0	0x00006000U	// SPI Master
-#define DWC_SPI_1	0x00007000U	// SPI Slave
-#define	DWC_UART_0	0x00008000U
-#define	DWC_UART_1	0x00009000U
-
-#define	DWC_UART_CONSOLE	DWC_UART_1
-
-#define		SPI_LINE_0		0
-#define		SPI_LINE_1		1
-#define		SPI_LINE_2		2
-#define		SPI_LINE_SDCARD		3
-#define		SPI_LINE_SPISLAVE	4
-#define		SPI_LINE_SFLASH		5
-
-#define FLASH_SECTOR_SIZE 	0x1000
-
-#define DEFAULT_BAUDRATE 		(13) // 115200 for 25MHz
-#define DEFAULT_LED_MASK	 	(0x1FF)
-
-#endif
-
-#ifdef UART_CONSOLE
-#define 	consoleInit(a) 	uart_consoleInit(a)
-#define 	console(a) 		uart_consoleMsg(a)
-#else
-#define 	consoleInit()
-#define 	console(a) 		printf(a)
-#endif
-
-#endif //__BOARD_H__
-//*****End board.h*****
-
-//	#include "utils.h"
-
-//*****utils.h*****
-/*************************************************************************/
-/*************************************************************************/
-/**                                                                     **/
-/** Copyright (C) 1989-2013 Synopsys, Inc.                              **/
-/** All Rights Reserved.                                                **/
-/**                                                                     **/
-/** SYNOPSYS CONFIDENTIAL                                               **/
-/**                                                                     **/
-/** This is an unpublished proprietary work of Synopsys, Inc., and is   **/
-/** fully protected under copyright and trade secret laws. You may not  **/
-/** view, use, disclose, copy, or distribute this file or any           **/
-/** information contained herein except pursuant to a valid written     **/
-/** license from Synopsys.                                              **/
-/**                                                                     **/
-/** For more information, contact                                       **/
-/** est-adm@synopsys.com or call (650) 584-1631                         **/
-/**                                                                     **/
-/*************************************************************************/
-/*************************************************************************/
-#ifndef __UTILS_H__
-#define __UTILS_H__
+// -------------------------------------------------------------------------------
+// ASM
+// -------------------------------------------------------------------------------
 
 #define  nops( )				\
 	({ 							\
@@ -268,242 +180,39 @@ typedef DATA_BUF * DATA_BUF_PTR;
 #define PERIPHERAL_BASE_ADDRESS		0x20a
 #define PERIPHERAL_BASE 	read_auxreg(PERIPHERAL_BASE_ADDRESS)
 
-#endif //__UTILS_H__
-//*****end util.h*****
 
-//******uart.h*****
-//	#include "uart.h"
-/*************************************************************************/
-/*************************************************************************/
-/**                                                                     **/
-/** Copyright (C) 1989-2013 Synopsys, Inc.                              **/
-/** All Rights Reserved.                                                **/
-/**                                                                     **/
-/** SYNOPSYS CONFIDENTIAL                                               **/
-/**                                                                     **/
-/** This is an unpublished proprietary work of Synopsys, Inc., and is   **/
-/** fully protected under copyright and trade secret laws. You may not  **/
-/** view, use, disclose, copy, or distribute this file or any           **/
-/** information contained herein except pursuant to a valid written     **/
-/** license from Synopsys.                                              **/
-/**                                                                     **/
-/** For more information, contact                                       **/
-/** est-adm@synopsys.com or call (650) 584-1631                         **/
-/**                                                                     **/
-/*************************************************************************/
-/*************************************************************************/
-#ifndef __UART_H__
-#define __UART_H__
+#endif // __STARTERKIT_H__
 
-#define UART_BAUD(baud)	(PERIPHERAL_CLOCK / (baud *16))
+/*
 
-typedef enum uart_baudrate {
-	UART_CFG_BAUDRATE_2400 = UART_BAUD(2400),
-	UART_CFG_BAUDRATE_4800 = UART_BAUD(4800),
-	UART_CFG_BAUDRATE_9600 = UART_BAUD(9600),
-	UART_CFG_BAUDRATE_115200 = UART_BAUD(115200),
-} uart_baudrate_t;
+ Print a greeting on standard output and exit.
 
-typedef enum uart_data_bits {
-	UART_CFG_DATA_5BITS = 0x0,
-	UART_CFG_DATA_6BITS = 0x1,
-	UART_CFG_DATA_7BITS = 0x2,
-	UART_CFG_DATA_8BITS = 0x3,
-} uart_data_bits_t;
+ On embedded platforms this might need to enable semi-hosting or similar.
 
-typedef enum uart_stop {
-	UART_CFG_1STOP = 0x0, UART_CFG_2STOP = 0x1 << 2,
-} uart_stop_t;
+ For example, for toolchains derived from GNU Tools for Embedded,
+ the following should be added to the linker:
 
-typedef enum uart_parity {
-	UART_CFG_PARITY_NONE = 0x0 << 3,
-	UART_CFG_PARITY_EVEN = 0x3 << 3,
-	UART_CFG_PARITY_ODD = 0x1 << 3,
-} uart_parity_t;
+ --specs=rdimon.specs -Wl,--start-group -lgcc -lc -lc -lm -lrdimon -Wl,--end-group
 
-#define MAX_DEBUG_MSG	(1024)
+ */
 
+
+//***************************************************************/
+//	TYPEDEFS, DEFINES, FUNCTION PROTOTYPES
+//***************************************************************/
+typedef volatile unsigned int DWCREG;
+typedef DWCREG * DWCREG_PTR;
+
+// set maximum lenght of debug message
+#define	MAX_DEBUG_MSG	(256)
+
+void uart_print(DWCREG_PTR uartRegs, const char * pBuf);
 void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud,
 		uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity);
-void uart_print(DWCREG_PTR uartRegs, const char * pBuf);
-void uart_printUInt8(DWCREG_PTR uartRegs, unsigned char hex);
-void uart_printHex(DWCREG_PTR uartRegs, unsigned int hex);
-
-void uart_consoleInit();
-void uart_consoleMsg(const char * pBuf);
-void uart_consolePrtHex(unsigned int hex);
-void uart_consolePrtUInt8(unsigned char hex);
-
-#endif // __UART_H__
-#endif //__STARTER_H__
-//******end uart.h*****
-//-----------------------uart.c-----------------------------------------
-#define UART_BAUD_DLL(baud) (baud & 0xff)
-#define UART_BAUD_DLH(baud) ((baud >> 8)& 0xff)
-
-#define  print_nibble(a)    (a <= 9)?(a + 0x30):(a - 10 + 0x41)
 
 
-void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud, uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity) {
-
-  // build uart configuration for U_LCR register
-  unsigned int UCFG = data_bits | stop | parity;
-
-// Setup UART on 115200 8N1
-//.....................................
-// MCR     0x10    32 bits R/W Reset: 0x0   Modem Control Register
-//.....................................
-//     0 0 0 0 0 0 0
-//31:7 6 5 4 3 2 1 0
-// | | | | | | | | +- DTR   (16550) Data Terminal Ready. 0 鈥�dtr_n de-asserted; 1 鈥�dtr_n asserted
-// | | | | | | | +--- RTS   (16550) Request to Send
-// | | | | | | +----- OUT1  0 鈥�out1_n de-asserted, 1 鈥�out1_n asserted
-// | | | | | +------- OUT2  0 鈥�out2_n de-asserted, 1 鈥�out2_n asserted
-// | | | | +--------- LB    LoopBack Bit
-// | | | +----------- AFCE  Auto Flow Control Enable. 0 鈥�disabled, 1 鈥�enabled
-// | | +------------- SIRE  SIR Mode Enable. 0 鈥�disabled, 1 鈥�enabled
-// +++--------------- Reserved
-    uartRegs[U_MCR] = 0; //MCR  0x10
-
-//.....................................
-// FCR     0x8     32 bits R/W Reset: 0x0   AlternateRegister: IIR    FIFO Control Register. This register is only valid when the DW_apb_uart is configured to have FIFO's implemented (FIFO_MODE != NONE). If FIFO's are not implemented, this register does not exist and writing to this register address will have no effect.
-//.....................................
-//     0 0 0 0 0 0 0 1
-//31:8 7:6 5:4 3 2 1 0
-// | | | | | | | | | +- FIFOE   FIFO Enable. This enables/disables the transmit (XMIT) and receive (RCVR) FIFOs. Whenever the value of this bit is changed both the XMIT and RCVR controller portion of FIFOs is reset.
-// | | | | | | | | +--- RFIFOR  RCVR FIFO Reset. This resets the control portion of the receive FIFO and treats the FIFO as empty.
-// | | | | | | | +----- XFIFOR  XMIT FIFO Reset. This resets the control portion of the transmit FIFO and treats the FIFO as empty.
-// | | | | | | +------- DMAM    DMA Mode. 0 鈥�mode 0, 1 鈥�mode 1
-// | | | | +++--------- TET     TX Empty Trigger. Writes have no effect when THRE_MODE_USER = Disabled. 00 鈥�FIFO empty, 01 鈥�2 characters in the FIFO, 10 鈥�FIFO 1/4 full, 11 鈥�FIFO 1/2 full
-// | | +++------------- RCVR    RCVR Trigger. This is used to select the trigger level in the receiver FIFO at which the Received Data Available Interrupt is generated. 00 鈥�1 character in the FIFO, 01 鈥�FIFO 1/4 full, 10 鈥�FIFO 1/2 full, 11 鈥�FIFO 2 less than full
-// +++----------------- Reserved
-    uartRegs[U_FCR] = 0x01; //FCR  0x8
-//----------------------------------------------------------------------------------------------------
-//---   Set up transfer characteristics such as data length, number of stop bits, parity bits, and so on
-//----------------------------------------------------------------------------------------------------
-//.....................................
-// LCR     0xc     32 bits R/W Reset: 0x0   Line Control Register
-//.....................................
-//     1 0 0 0 0 0 1 1 = 0x3
-//31:8 7 6 5 4 3 2 1:0
-// | | | | | | | | +++- DLS          (16550) Data Length Select. 00 鈥�5 bits, 01 鈥�6 bits, 10 鈥�7 bits, 11 鈥�8 bits
-// | | | | | | | +----- STOP         (16550) Number of stop bits. 0 鈥�1 stop bit, 1 鈥�1.5 stop bits when DLS (LCR[1:0]) is 0, else 2 stop bit
-// | | | | | | +------- PEN          (16550) Parity Enable
-// | | | | | +--------- EPS          (16550) Even Parity Select
-// | | | | +----------- Stick Parity (16550) Stick Parity
-// | | | +------------- BC           Break Control Bit. If set to 1, the serial output is forced to the spacing (logic 0) state
-// | | +--------------- DLAB         (16550) Divisor Latch Access Bit. This bit is used to enable reading and writing of the Divisor Latch register (DLL and DLH/LPDLL and LPDLH) to set the baud rate of the UART. This bit must be cleared after initial baud rate setup in order to access other registers
-// +++----------------- Reserved
-
-    uartRegs[U_LCR] = 0x80 | UCFG; //LCR   0xc
-// Set up divisor for required baud rate
-    uartRegs[U_DLL] = UART_BAUD_DLL(baud); //DLL 0x00  div = CPU_clock / 16 * baudrate.
-    uartRegs[U_DLH] = UART_BAUD_DLH(baud);             //DLH 0x4
-
-//.....................................
-// LCR     0xc     32 bits R/W Reset: 0x0   Line Control Register
-//.....................................
-//     0 0 0 0 0 0 1 1 = 0x3
-//31:8 7 6 5 4 3 2 1:0
-// | | | | | | | | +++- DLS          (16550) Data Length Select. 00 鈥�5 bits, 01 鈥�6 bits, 10 鈥�7 bits, 11 鈥�8 bits
-// | | | | | | | +----- STOP         (16550) Number of stop bits. 0 鈥�1 stop bit, 1 鈥�1.5 stop bits when DLS (LCR[1:0]) is 0, else 2 stop bit
-// | | | | | | +------- PEN          (16550) Parity Enable
-// | | | | | +--------- EPS          (16550) Even Parity Select
-// | | | | +----------- Stick Parity (16550) Stick Parity
-// | | | +------------- BC           Break Control Bit. If set to 1, the serial output is forced to the spacing (logic 0) state
-// | | +--------------- DLAB         (16550) Divisor Latch Access Bit. This bit is used to enable reading and writing of the Divisor Latch register (DLL and DLH/LPDLL and LPDLH) to set the baud rate of the UART. This bit must be cleared after initial baud rate setup in order to access other registers
-// +++----------------- Reserved
-    uartRegs[U_LCR] = UCFG; //LCR   0xc
-
-//----------------------------------------------------------------------------------------------------
-//---   setup IER to enable required interrupts
-//----------------------------------------------------------------------------------------------------
-//.....................................
-// IER     0x4     32 bits R/W Reset: 0x0   Interrupt Enable Register: Interrupt Enable Register, when the DLAB bit is zero; Divisor Latch (High), when the DLAB bit is one. Each of the bits used has a different function and will be detailed in the bit field discriptions.
-//.....................................
-//     0     0 0 0 0
-//31:8 7 6:4 3 2 1 0
-// | | | | | | | | +- ERBFI    Enable Received Data Available Interrupt
-// | | | | | | | +--- ETBEI    Enable Transmit Holding Register Empty Interrupt
-// | | | | | | +----- ELSI     Enable Receiver Line Status Interrupt.
-// | | | | | +------- EDSSI    Enable Modem Status Interrupt
-// | | | +++--------- Reserved
-// | | +------------- PTIME    Programmable THRE Interrupt Mode Enable that can be written to only when THRE_MODE_USER = Enabled
-// +++--------------- Reserved
-    uartRegs[U_IER] = 0x0; //IER  0x4
-}
 
 
-// simple debug print
-void uart_print(DWCREG_PTR uartRegs, const char * pBuf) {
-	unsigned int i = MAX_DEBUG_MSG;
-
-    unsigned char byte = *pBuf++;
-    while(byte && i--) {
-
-        // wait if FIFO is full
-        while(!(uartRegs[U_USR] & U_USR_TFNF));
-
-        // transmitt data byte
-        uartRegs[U_THR] = byte;
-        byte = *pBuf++;
-    }
-}
-
-
-void uart_printHex(DWCREG_PTR uart, unsigned int hex)
-{
-  char     strng[10];
-  unsigned int      first, i;
-
-  first = 8;
-  strng[9] = 0x00;
-  i = 8;
-  do
-  {
-     unsigned int nibble_val = (hex >> (32-(4*i)) ) & 0xf;
-     strng[i] = print_nibble( nibble_val );
-     if (nibble_val > 0) {
-       first = i;
-     }
-  }while(--i);
-
-  uart_print(uart, &strng[first]);
-}
-
-void uart_printUInt8 (DWCREG_PTR uartRegs, unsigned char hex)
-{
-  char     strng[4];
-
-  strng[0] = print_nibble((hex >> 4) & 0x0F);
-  strng[1] = print_nibble((hex >> 0) & 0x0F);
-  strng[2] = 0x00;
-
-  uart_print(uartRegs, strng);
-}
-
-
-// initialize console
-void uart_consoleInit(void) {
-    uart_initDevice(  (DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE) , UART_CFG_BAUDRATE_115200, UART_CFG_DATA_8BITS, UART_CFG_1STOP, UART_CFG_PARITY_NONE);
-}
-
-// simple console print
-void uart_consoleMsg(const char * pBuf) {
-    uart_print( (DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE) , pBuf);
-}
-
-void uart_consolePrtHex (unsigned int hex)
-{
-  uart_printHex((DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE), hex);
-}
-
-void uart_consolePrtUInt8 (unsigned char hex)
-{
-  uart_printUInt8((DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE), hex);
-}
-
-//-----------------------END uart.c-----------------------------------------
 //***************************************************************/
 //	MAIN
 //***************************************************************/
@@ -520,5 +229,44 @@ int main(int argc, char *argv[]) {
 	uart_print(uart, "Hello OpenOCD\n\r");
 
 	return 0;
+}
+
+
+void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud, uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity) {
+
+  // build uart configuration for U_LCR register
+  unsigned int UCFG = data_bits | stop | parity;
+
+  // disable UART controller
+  uartRegs[U_MCR] = 0;
+  // enable FIFO in UART controller
+  uartRegs[U_FCR] = 0x01;
+
+  // setup baudrate divisor
+  uartRegs[U_LCR] = 0x80 | UCFG;
+  uartRegs[U_DLL] = UART_BAUD_DLL(baud); //DLL 0x00  div = CPU_clock / 16 * baudrate.
+  uartRegs[U_DLH] = UART_BAUD_DLH(baud); //DLH 0x4
+
+  uartRegs[U_LCR] = (unsigned int) data_bits | stop | parity;
+
+  // disable uart interrupts
+  uartRegs[U_IER] = 0x0;
+}
+
+
+// simple debug print
+void uart_print(DWCREG_PTR uartRegs, const char * pBuf) {
+	unsigned int i = MAX_DEBUG_MSG;
+
+    unsigned char byte = *pBuf++;
+    while(byte && i--) {
+
+        // wait if FIFO is full
+        while(!(uartRegs[U_USR] & U_USR_TFNF));
+
+        // transmit data byte
+        uartRegs[U_THR] = byte;
+        byte = *pBuf++;
+    }
 }
 

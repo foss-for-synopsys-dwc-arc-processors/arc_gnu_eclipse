@@ -1,4 +1,14 @@
- package org.eclipse.cdt.cross.arc.gnu.eb;
+/*******************************************************************************
+* This program and the accompanying materials 
+* are made available under the terms of the Common Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/cpl-v10.html
+* 
+* Contributors:
+*     Synopsys, Inc. - ARC GNU Toolchain support
+*******************************************************************************/
+
+package org.eclipse.cdt.cross.arc.gnu.eb;
 
  public abstract class IsToolChainSupported extends org.eclipse.cdt.cross.arc.gnu.common.IsToolChainSupported
  {
@@ -8,7 +18,3 @@
    }
  }
 
-/* Location:           C:\Users\yunluz\Desktop\plugins\org.eclipse.cdt.cross.arm.gnu_0.5.5.201309281715\plugins\org.eclipse.cdt.cross.arm.gnu_0.5.5.201309281715\bin\
- * Qualified Name:     org.eclipse.cdt.cross.arm.gnu.devkitpro.IsToolChainSupported
- * JD-Core Version:    0.6.0
- */
