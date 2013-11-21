@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.cdt.cross.arc.gnu"
-      label="GNU ARC C/C++ Development Support"
-      version="0.0.0.201305160001"
-      provider-name="%providerName"
-      os="linux,macosx,win32">
+      label="ARC GNU Toolchain C/C++ Development Support"
+      version="1.0.0"
+      provider-name="Synopsys, Inc."
+      os="linux,win32">
 
    <description>
       %description
@@ -18,10 +18,6 @@
       %licence
    </license>
 
-   <url>
-      <update label="%updateSiteName" url="http://gnuarceclipse.sourceforge.net/updates"/>
-      <discovery label="%discoverySiteName" url="http://gnuarceclipse.sourceforge.net/updates"/>
-   </url>
 
    <requires>
       <import plugin="org.eclipse.cdt.managedbuilder.core" version="5.0.0" match="greaterOrEqual"/>
@@ -39,11 +35,9 @@
          id="org.eclipse.cdt.cross.arc.gnu"
          download-size="0"
          install-size="0"
-         version="0.0.0.201305160001"/>
+         version="1.0.0"/>
 <plugin id="com.arc.mw.util" download-size="0" install-size="0" version="8.3.10" unpack="false" /> 
   <plugin id="org.dom4j" download-size="0" install-size="0" version="1.0.0" /> 
-  <plugin id="com.arc.cdt.toolchain.arc4" download-size="0" install-size="0" version="8.4.1" unpack="false" /> 
-  <plugin id="com.arc.cdt.toolchain.arm" download-size="0" install-size="0" version="8.3.14" unpack="false" /> 
   <plugin id="com.arc.seecode.doc.user" download-size="0" install-size="0" version="8.4.0" unpack="false" /> 
   <plugin id="com.arc.cdt.importer" download-size="0" install-size="0" version="8.1.0" unpack="false" /> 
   <plugin id="com.arc.cdt.toolchain.vc" download-size="0" install-size="0" version="8.3.14" unpack="false" /> 

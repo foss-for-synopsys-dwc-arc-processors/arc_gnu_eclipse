@@ -6,20 +6,20 @@
     <property name='p2.compressed' value='true'/>
   </properties>
   <units size='4'>
-    <unit id='org.eclipse.cdt.cross.arc.gnu.feature.group' version='0.0.0.201305160001' singleton='false'>
-      <update id='org.eclipse.cdt.cross.arc.gnu.feature.group' range='[0.0.0,0.0.0.201305160001]' severity='0'/>
+    <unit id='org.eclipse.cdt.cross.arc.gnu.feature.group' version='1.0.0' singleton='false'>
+      <update id='org.eclipse.cdt.cross.arc.gnu.feature.group' range='[0.0.0,1.0.0]' severity='0'/>
       <properties size='8'>
-        <property name='org.eclipse.equinox.p2.name' value='GNU ARC C/C++ Development Support'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain C/C++ Development Support'/>
         <property name='org.eclipse.equinox.p2.description' value='%description'/>
         <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
         <property name='org.eclipse.equinox.p2.type.group' value='true'/>
-        <property name='df_LT.licence' value='The &quot;GNU ARC Eclipse Plug-in&quot; is free software.&#xA;Permission is hereby granted, free of charge, to any person obtaining a&#xA;copy of this software and associated documentation files (the&#xA;&quot;Software&quot;), to deal in the Software without restriction, including&#xA;without limitation the rights to use, copy, modify, merge, publish,&#xA;distribute, sublicense, and/or sell copies of the Software, and to&#xA;permit persons to whom the Software is furnished to do so, subject to&#xA;the following conditions:&#xA;&#xA;The above copyright notice and this permission notice shall be included&#xA;in all copies or substantial portions of the Software.&#xA;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS&#xA;OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF&#xA;MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&#xA;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE&#xA;LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION&#xA;OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION&#xA;WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'/>
-        <property name='df_LT.providerName' value='Synopsys Inc.'/>
-        <property name='df_LT.description' value='The GNU ARC Eclipse Plug-in is an Eclipse CDT Manged Build Extension&#xA;for GNU ARC Toolchains like CodeSourcery G++ Lite, GNUARC, WinARC,&#xA;Yagarto, and supports the development of managed C/C++ applications&#xA;for the ARC series of processors.'/>
-        <property name='df_LT.copyright' value='Copyright © 2009-2010 Synopsys and others.&#xA;Versions pre 0.0.0  Copyright © 2008 Yunluz and others.'/>
+        <property name='df_LT.licence' value='The &quot;ARC GNU Toolchain Eclipse Plug-in&quot; is free software.&#xA;Permission is hereby granted, free of charge, to any person obtaining a&#xA;copy of this software and associated documentation files (the&#xA;&quot;Software&quot;), to deal in the Software without restriction, including&#xA;without limitation the rights to use, copy, modify, merge, publish,&#xA;distribute, sublicense, and/or sell copies of the Software, and to&#xA;permit persons to whom the Software is furnished to do so, subject to&#xA;the following conditions:&#xA;&#xA;The above copyright notice and this permission notice shall be included&#xA;in all copies or substantial portions of the Software.&#xA;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS&#xA;OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF&#xA;MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&#xA;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE&#xA;LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION&#xA;OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION&#xA;WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'/>
+        <property name='df_LT.providerName' value='Synopsys, Inc.'/>
+        <property name='df_LT.description' value='The ARC GNU Toolchain Eclipse Plug-in is an Eclipse CDT Managed Build Extension for the development of managed C/C++ applications for the ARC series of processors.'/>
+        <property name='df_LT.copyright' value='Copyright © 2013 Synopsys, Inc.  All rights reserved.'/>
       </properties>
       <provides size='2'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.group' version='0.0.0.201305160001'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.group' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
       </provides>
       <requires size='11'>
@@ -32,8 +32,8 @@
         <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.jface' range='3.4.0'/>
         <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.ui' range='3.4.0'/>
         <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.ui.console' range='3.3.0'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu' range='[0.0.0.201305160001,0.0.0.201305160001]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.jar' range='[0.0.0.201305160001,0.0.0.201305160001]'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu' range='[1.0.0,1.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.jar' range='[1.0.0,1.0.0]'>
           <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -52,26 +52,26 @@
         %copyright
       </copyright>
     </unit>
-    <unit id='org.eclipse.cdt.cross.arc.gnu.feature.jar' version='0.0.0.201305160001'>
+    <unit id='org.eclipse.cdt.cross.arc.gnu.feature.jar' version='1.0.0'>
       <properties size='7'>
-        <property name='org.eclipse.equinox.p2.name' value='GNU ARC C/C++ Development Support'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain C/C++ Development Support'/>
         <property name='org.eclipse.equinox.p2.description' value='%description'/>
         <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
-        <property name='df_LT.licence' value='The &quot;GNU ARC Eclipse Plug-in&quot; is free software.&#xA;Permission is hereby granted, free of charge, to any person obtaining a&#xA;copy of this software and associated documentation files (the&#xA;&quot;Software&quot;), to deal in the Software without restriction, including&#xA;without limitation the rights to use, copy, modify, merge, publish,&#xA;distribute, sublicense, and/or sell copies of the Software, and to&#xA;permit persons to whom the Software is furnished to do so, subject to&#xA;the following conditions:&#xA;&#xA;The above copyright notice and this permission notice shall be included&#xA;in all copies or substantial portions of the Software.&#xA;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS&#xA;OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF&#xA;MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&#xA;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE&#xA;LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION&#xA;OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION&#xA;WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'/>
+        <property name='df_LT.licence' value='The &quot;ARC GNU Toolchain Eclipse Plug-in&quot; is free software.&#xA;Permission is hereby granted, free of charge, to any person obtaining a&#xA;copy of this software and associated documentation files (the&#xA;&quot;Software&quot;), to deal in the Software without restriction, including&#xA;without limitation the rights to use, copy, modify, merge, publish,&#xA;distribute, sublicense, and/or sell copies of the Software, and to&#xA;permit persons to whom the Software is furnished to do so, subject to&#xA;the following conditions:&#xA;&#xA;The above copyright notice and this permission notice shall be included&#xA;in all copies or substantial portions of the Software.&#xA;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS&#xA;OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF&#xA;MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND&#xA;NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE&#xA;LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION&#xA;OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION&#xA;WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'/>
         <property name='df_LT.providerName' value='SourceForge Project'/>
-        <property name='df_LT.description' value='The GNU ARC Eclipse Plug-in is an Eclipse CDT Manged Build Extension&#xA;for GNU ARC Toolchains like CodeSourcery G++ Lite, GNUARC, WinARC,&#xA;Yagarto, and supports the development of managed C/C++ applications&#xA;for the ARC series of processors.'/>
-        <property name='df_LT.copyright' value='Copyright © 2009-2010 Yunluz and others.&#xA;Version 0.0.0.201305160001 Copyright © 2008 Wilfried Holzke and others.'/>
+        <property name='df_LT.description' value='The ARC GNU Toolchain Eclipse Plug-in is an Eclipse CDT Managed Build Extension for the development of managed C/C++ applications for the ARC series of processors.'/>
+        <property name='df_LT.copyright' value='Copyright © 2013 Synopsys, Inc.  All rights reserved. '/>
       </properties>
       <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.jar' version='0.0.0.201305160001'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.jar' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='org.eclipse.cdt.cross.arc.gnu' version='0.0.0.201305160001'/>
+        <provided namespace='org.eclipse.update.feature' name='org.eclipse.cdt.cross.arc.gnu' version='1.0.0'/>
       </provides>
       <filter>
         (org.eclipse.update.install.features=true)
       </filter>
       <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='org.eclipse.cdt.cross.arc.gnu' version='0.0.0.201305160001'/>
+        <artifact classifier='org.eclipse.update.feature' id='org.eclipse.cdt.cross.arc.gnu' version='1.0.0'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
@@ -90,15 +90,15 @@
         %copyright
       </copyright>
     </unit>
-    <unit id='org.eclipse.cdt.cross.arc.gnu' version='0.0.0.201305160001'>
-      <update id='org.eclipse.cdt.cross.arc.gnu' range='[0.0.0,0.0.0.201305160001]' severity='0'/>
+    <unit id='org.eclipse.cdt.cross.arc.gnu' version='1.0.0'>
+      <update id='org.eclipse.cdt.cross.arc.gnu' range='[1.0.0,1.0.0]' severity='0'/>
       <properties size='2'>
-        <property name='org.eclipse.equinox.p2.name' value='GNU ARC C/C++ Development Support'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain C/C++ Development Support'/>
         <property name='org.eclipse.equinox.p2.provider' value='SourceForge Project'/>
       </properties>
       <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu' version='0.0.0.201305160001'/>
-        <provided namespace='osgi.bundle' name='org.eclipse.cdt.cross.arc.gnu' version='0.0.0.201305160001'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu' version='1.0.0'/>
+        <provided namespace='osgi.bundle' name='org.eclipse.cdt.cross.arc.gnu' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
       </provides>
       <requires size='11'>
@@ -115,13 +115,13 @@
         <required namespace='osgi.bundle' name='org.eclipse.cdt.managedbuilder.ui' range='5.0.2'/>
       </requires>
       <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='org.eclipse.cdt.cross.arc.gnu' version='0.0.0.201305160001'/>
+        <artifact classifier='osgi.bundle' id='org.eclipse.cdt.cross.arc.gnu' version='1.0.0'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
         <instructions size='2'>
           <instruction key='manifest'>
-            Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true&#xA;Bundle-Version: 0.0.0.201305160001
+            Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true&#xA;Bundle-Version:1.0.0 
           </instruction>
           <instruction key='zipped'>
             true
@@ -139,7 +139,7 @@
         <provided namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.gnu' version='1.0.0.07977cLSjGz773573775355A'/>
       </provides>
       <requires size='1'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.group' range='[0.0.0.201305160001,0.0.0.201305160001]'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.cdt.cross.arc.gnu.feature.group' range='[1.0.0,1.0.0]'>
           <filter>
             (|(osgi.os=linux)(osgi.os=macosx)(osgi.os=win32))
           </filter>
