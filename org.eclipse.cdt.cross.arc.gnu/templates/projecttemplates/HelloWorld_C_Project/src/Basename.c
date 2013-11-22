@@ -1,9 +1,9 @@
 /*
  ============================================================================
- Name        : hello.c
- Author      : 
+ Name        : $(baseName).c
+ Author      : $(author)
  Version     :
- Copyright   : Your copyright notice
+ Copyright   : $(copyright)
  Description : Hello World in C
  ============================================================================
  */
@@ -50,9 +50,7 @@ int main(int argc, char *argv[]) {
 	uart_initDevice(uart, UART_CFG_BAUDRATE_115200, UART_CFG_DATA_8BITS,
 			UART_CFG_1STOP, UART_CFG_PARITY_NONE);
 
-	uart_print(uart, "Hello ARC\n\r");
-	uart_print(uart, "Hello EM\n\r");
-	uart_print(uart, "Hello OpenOCD\n\r");
+	uart_print(uart, "$(messagearc)\n\r");
 
 	return 0;
 }
