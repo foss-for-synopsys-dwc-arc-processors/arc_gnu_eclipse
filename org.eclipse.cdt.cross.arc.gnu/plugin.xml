@@ -3,10 +3,13 @@
 <plugin>
     <!---->
     <!--#################################################################################-->
-    <!--# This new version of the plugin was created by Yunlu Zhang                     #-->
-    <!--# Modification-History:                                                         #-->
-    <!--# Name                                         Date                             #-->
-    <!--# Yunlu Zhang(Yunlu.Zhang@synopsys.com)        15.05.2013                       #-->
+    <!--* This program and the accompanying materials                                    -->
+    <!--* are made available under the terms of the Common Public License v1.0           -->
+    <!--* which accompanies this distribution, and is available at                       -->
+    <!--* http://www.eclipse.org/legal/cpl-v10.html                                      -->
+    <!--*                                                                                -->
+    <!--* Contributors:                                                                  -->
+    <!--*     Synopsys, Inc. - ARC GNU Toolchain support                                 -->
     <!--#################################################################################-->
     <!---->
    <extension
@@ -4409,6 +4412,15 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
       </template>
+      <template
+            id="org.eclipse.cdt.build.core.templates.EM4EmptyProject">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
+         </toolChain>
+      </template>
    </extension>
    <extension
          point="org.eclipse.cdt.core.templates">
@@ -4429,6 +4441,18 @@
             id="org.eclipse.cdt.cross.arc.gnu.templates.ARCMakefileHelloWorldCCProject"
             location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.build.makefile.projectType">
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM4_Empty_C_Project"
+            location="templates/projecttemplates/EM4_Empty_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM6_Empty_C_Project"
+            location="templates/projecttemplates/EM6_Empty_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
    </extension>
 
