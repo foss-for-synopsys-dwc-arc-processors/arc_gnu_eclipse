@@ -216,6 +216,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                     String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
                     String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,new String());
+                    String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PUTTY_DEFAULT,new String());
 					prepareSession();
 					
 					String eclipsehome= Platform.getInstallLocation().getURL().toString();
@@ -264,17 +265,22 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					
 					// Start PuTTY
 					String COMport="";
-					if(CommandTab.comport!=null) COMport=CommandTab.comport;
-					else COMport=Launch.COMserialport().get(0).toString();
-					
-					String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
+					if(Putty_launch.equalsIgnoreCase("true"))
+					{
+						if(CommandTab.comport!=null) COMport=CommandTab.comport;
+						else COMport=Launch.COMserialport().get(0).toString();
+						
+						String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
 					}
-					DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
+					
+					
 				
 					
 					if (exeFile!=null)
