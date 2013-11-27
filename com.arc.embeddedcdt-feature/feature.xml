@@ -3,12 +3,12 @@
       id="com.arc.cdt.feature"
       label="ARC GNU Toolchain Embedded CDT"
       version="1.0.0"
-      provider-name="Synopsys, Inc. "
+      provider-name="Synopsys, Inc."
       plugin="com.ARC.embeddedcdt"
       image="logo_emb_full.png">
 
    <description url="">
-      ARC Embedded CDT debug plugin
+      ARC GNU Toolchain Embedded CDT Plugin
    </description>
 
    <copyright>
