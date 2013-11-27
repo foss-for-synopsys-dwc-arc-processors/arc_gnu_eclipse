@@ -815,7 +815,7 @@
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <tool
-            command="arc-elf32-as"
+            command="arc-elf32-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.assembler"
