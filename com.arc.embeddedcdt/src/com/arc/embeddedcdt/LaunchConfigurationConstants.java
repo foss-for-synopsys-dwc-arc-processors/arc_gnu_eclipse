@@ -26,7 +26,7 @@ public interface LaunchConfigurationConstants {
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS =  LAUNCH_ID + ".debugger_external_tools"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_COM_PORT =  LAUNCH_ID + ".debugger_com_port"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH =  LAUNCH_ID + ".debugger_external_tools_path"; //$NON-NLS-1$
-	String ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT = "true";
-	String ATTR_DEBUGGER_COM_PUTTY_DEFAULT = "true";
+	String ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT = LAUNCH_ID + ".debugger_external_tools_default";
+	String ATTR_DEBUGGER_PUTTY_DEFAULT =LAUNCH_ID + ".debugger_putty_default";
 	
 }

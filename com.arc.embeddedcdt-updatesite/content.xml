@@ -12,7 +12,7 @@
         <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT'/>
         <property name='org.eclipse.equinox.p2.description' value='The ARC GNU Toolchain Eclipse Plug-in is an Eclipse CDT Managed Build Extension for the development of managed C/C++ applications for the ARC series of processors.
 '/>
-        <property name='org.eclipse.equinox.p2.description.url' value='http://opensource.arc.com/embeddedcdt.html'/>
+        <property name='org.eclipse.equinox.p2.description.url' value=''/>
         <property name='org.eclipse.equinox.p2.provider' value='Synopsys, Inc.'/>
         <property name='org.eclipse.equinox.p2.type.group' value='true'/>
         <property name='df_LT.copyright' value='Copyright © 2013 Synopsys, Inc.  All rights reserved. '/>
@@ -54,12 +54,10 @@
       </copyright>
     </unit>
      <unit id='com.arc.embeddedcdt' version='1.0.0'>
-Duu
-D
       <update id='com.arc.embeddedcdt' range='[0.0.0,1.0.0)' severity='0'/>
       <properties size='3'>
-        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT Plug-in'/>
-        <property name='org.eclipse.equinox.p2.provider' value='ARC AS'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC Embedded CDT Plug-in'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Synopsys, Inc.'/>
         <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
       </properties>
       <provides size='16'>
@@ -114,8 +112,8 @@ D
     <unit id='com.arc.cdt.feature.feature.jar' version='1.0.0'>
       <properties size='7'>
         <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT'/>
-        <property name='org.eclipse.equinox.p2.description' value='ARC GNU Toolchain Embedded CDT debug plugin'/>
-        <property name='org.eclipse.equinox.p2.description.url' value='http://opensource.arc.com/embeddedcdt.html'/>
+        <property name='org.eclipse.equinox.p2.description' value='ARC Embedded CDT debug plugin'/>
+        <property name='org.eclipse.equinox.p2.description.url' value=''/>
         <property name='org.eclipse.equinox.p2.provider' value='Synopsys, Inc.'/>
         <property name='org.eclipse.update.feature.plugin' value='com.arc.embeddedcdt'/>
         <property name='df_LT.copyright' value='Yunlu Zhang and other'/>
@@ -143,13 +141,13 @@ D
         %copyright
       </copyright>
     </unit>
-    <unit id='ARCCDT' version='1.0.0.787Y1cKDAnh'>
+    <unit id='ARCCDT' version='1.0.0'>
       <properties size='2'>
-        <property name='org.eclipse.equinox.p2.name' value='ARC GNU Toolchain Embedded CDT'/>
+        <property name='org.eclipse.equinox.p2.name' value='ARC Embedded CDT'/>
         <property name='org.eclipse.equinox.p2.type.category' value='true'/>
       </properties>
       <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='ARCCDT' version='1.0.0.787Y1cKDAnh'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='ARCCDT' version='1.0.0'/>
       </provides>
       <requires size='1'>
         <required namespace='org.eclipse.equinox.p2.iu' name='com.arc.cdt.feature.feature.group' range='[1.0.0,1.0.0]'/>
