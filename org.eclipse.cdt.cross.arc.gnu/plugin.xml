@@ -1012,7 +1012,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.c.compiler"
             isAbstract="false"
             name="ARC ELF32 GCC C Compiler"
-            natureFilter="both"
+            natureFilter="cnature"
             outputFlag="-o">
          <supportedProperties>
             <property
