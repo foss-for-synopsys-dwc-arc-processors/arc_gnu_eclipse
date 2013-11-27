@@ -216,7 +216,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                     String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
                     String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,new String());
-                    String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PUTTY_DEFAULT,new String());
+                    String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,new String());
 					prepareSession();
 					
 					String eclipsehome= Platform.getInstallLocation().getURL().toString();
