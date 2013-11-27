@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.arc.cdt.feature"
-      label="ARC Embedded CDT"
-      version="8.13.1"
-      provider-name="ARC"
-      plugin="com.arc.embeddedcdt"
+      label="ARC GNU Toolchain Embedded CDT"
+      version="1.0.0"
+      provider-name="Synopsys, Inc. "
+      plugin="com.ARC.embeddedcdt"
       image="logo_emb_full.png">
 
    <description url="">
@@ -18,12 +18,6 @@
    <license url="%licenseURL">
       %license
    </license>
-
-   <url>
-      <update label="ARC Embedded CDT" url=""/>
-      <discovery label="ARC Embedded CDT home" url=""/>
-   </url>
-
    <requires>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>

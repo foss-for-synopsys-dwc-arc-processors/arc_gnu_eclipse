@@ -1792,7 +1792,7 @@
          </option>
       </tool>
       <tool
-            command="arc-elf32-gcc"
+            command="arc-elf32-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.cpp.linker"
