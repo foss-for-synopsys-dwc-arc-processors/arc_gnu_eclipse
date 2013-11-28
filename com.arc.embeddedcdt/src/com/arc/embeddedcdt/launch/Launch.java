@@ -116,13 +116,22 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			}
 		}
 	}
-	//public static String elfread="";//this vaiable is for setting arc-elf32-gdb/arceb-elf32-gdb
-	public static String endian="arc-elf32-gdb";
+
+	// Process names useful for LaunchTerminator
+	public final static String OPENOCD_PROCESS_LABEL = "OpenOCD";
+	public final static String ASHLING_PROCESS_LABEL = "Ashling GDBserver";
+	public final static String GDB_PROCESS_LABEL = "arc-elf32-gdb";
+
 	public ICProject myProject;
 	private ICDISession dsession;
 	private ILaunchConfiguration launch_config;
 
 	abstract public String getSourcePathSeperator();
+
+	public Launch() {
+		super();
+		DebugPlugin.getDefault().addDebugEventListener(new LaunchTerminator());
+	}
 	
 	/**
 	 * Return the save environment variables in the configuration. The array
@@ -218,7 +227,35 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                     String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,new String());
                     String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,new String());
 					prepareSession();
+
+					// Start GDB first. This is required to ensure that if gdbserver
+					// will fail to start up then GDB will be closed. Eclipse cannot
+					// kill GDB when it is trying to execute script commands.
+					if (exeFile!=null)
+					{
+						dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createDebuggerSession(this, l,exeFile, new SubProgressMonitor(monitor, 8));
+					} else
+					{
+						/* no executable for session*/
+						dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createSession(this, launch, null, new SubProgressMonitor(monitor, 8));
+					}
+
+					dsession.getEventManager().addEventListener(this);
+					patchSession(configuration);
+
+					ICDITarget[] dtargets = dsession.getTargets();
 					
+					/* Do not allow processing of events while we launch as this
+					 * would query the target with e.g. process list before we're
+					 * ready.
+					 */
+					EventManager eventManager = (EventManager) dsession.getEventManager();
+					boolean prevstateAllowEvents = eventManager.isAllowingProcessingEvents();
+					eventManager.allowProcessingEvents(false);
+
+					setupTargets(dtargets);
+
+					// Start gdbserver
 					String eclipsehome= Platform.getInstallLocation().getURL().toString();
 					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
 					
@@ -239,7 +276,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								"--device", "arc",
 								"--arc-reg-file", ash_dir + java.io.File.separator + "arc-opella-em.xml"
 								};
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), "Ashling GDBserver");
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), ASHLING_PROCESS_LABEL);
 					} 
 					else if (extenal_tools.equalsIgnoreCase("JTAG via OpenOCD")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
@@ -250,7 +287,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						    extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
 							}
 						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 					}
 					else if (extenal_tools.equalsIgnoreCase("nSIM")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{/*
@@ -271,44 +308,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						else COMport=Launch.COMserialport().get(0).toString();
 						
 						String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
-						try {
-							Thread.sleep(3000);
-						} catch (InterruptedException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
 					}
-					
-					
-				
-					
-					if (exeFile!=null)
-					{	
-    					dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createDebuggerSession(this, l,exeFile, new SubProgressMonitor(monitor, 8));
-					} else
-					{
-						/* no executable for session*/
-						dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createSession(this, launch, null, new SubProgressMonitor(monitor, 8));
-						
-					}
-					
-					
-
-					dsession.getEventManager().addEventListener(this);
-					patchSession(configuration);
-
-					ICDITarget[] dtargets = dsession.getTargets();
-
-					/* Do not allow processing of events while we launch as this
-					 * would query the target with e.g. process list before we're
-					 * ready.
-					 */
-					EventManager eventManager = (EventManager) dsession.getEventManager();
-					boolean prevstateAllowEvents = eventManager.isAllowingProcessingEvents();
-					eventManager.allowProcessingEvents(false);
-					
-					setupTargets(dtargets);
 					
 					// setFactory(dtargets);
 					try
