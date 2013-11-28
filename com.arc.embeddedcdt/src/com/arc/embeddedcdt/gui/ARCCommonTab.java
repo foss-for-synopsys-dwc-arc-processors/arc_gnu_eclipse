@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 package com.arc.embeddedcdt.gui;
 
