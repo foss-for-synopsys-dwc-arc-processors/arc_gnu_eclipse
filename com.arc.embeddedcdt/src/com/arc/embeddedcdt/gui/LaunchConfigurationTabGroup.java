@@ -19,6 +19,7 @@ import org.eclipse.debug.ui.EnvironmentTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.debug.ui.sourcelookup.SourceLookupTab;
+import org.eclipse.swt.widgets.Button;
 
 /**
  */
@@ -34,8 +35,16 @@ public class LaunchConfigurationTabGroup extends AbstractLaunchConfigurationTabG
 				new CommandTab(),
 				new SourceLookupTab(),
 				new EnvironmentTab(),
-				new CommonTab() 
+				new ARCCommonTab() 
+				//new CommonTab() 
 			};
 			setTabs(tabs);
+			
 	}
+
+	  
+	public void setLaunchConfigurationDialog(ILaunchConfigurationDialog dialog){
+	
+	}
+	 
 }
