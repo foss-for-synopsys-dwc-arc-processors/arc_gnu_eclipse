@@ -580,26 +580,27 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
      * @param configuration the local configuration
      */
     private void updateConsoleOutput(ILaunchConfiguration configuration) {
-        boolean outputToConsole = true;
-        String outputFile = null;
-        boolean append = false;
-        
-        try {
-            outputToConsole = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
-            outputFile = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_FILE, (String)null);
-            append = configuration.getAttribute(IDebugUIConstants.ATTR_APPEND_TO_FILE, false);
-        } catch (CoreException e) {
-        }
-        
-        //fConsoleOutput.setSelection(outputToConsole);
-        fConsoleOutput.setSelection(false);
-        fAppend.setSelection(append);
-        boolean haveOutputFile= outputFile != null;
-        if (haveOutputFile) {
-            fFileText.setText(outputFile);
-        }
-        fFileOutput.setSelection(haveOutputFile);
-        enableOuputCaptureWidgets(haveOutputFile);
+    	 //boolean outputToConsole = true;
+    	 boolean outputToConsole = false;
+         String outputFile = null;
+         boolean append = false;
+         
+         try {
+             //outputToConsole = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
+        	 outputToConsole = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, false);
+             outputFile = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_FILE, (String)null);
+             append = configuration.getAttribute(IDebugUIConstants.ATTR_APPEND_TO_FILE, false);
+         } catch (CoreException e) {
+         }
+         
+         fConsoleOutput.setSelection(outputToConsole);
+         fAppend.setSelection(append);
+         boolean haveOutputFile= outputFile != null;
+         if (haveOutputFile) {
+             fFileText.setText(outputFile);
+         }
+         fFileOutput.setSelection(haveOutputFile);
+         enableOuputCaptureWidgets(haveOutputFile);
     }
 
     /**
@@ -860,9 +861,9 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 		boolean captureOutput = false;
 		if (fConsoleOutput.getSelection()) {
 		    captureOutput = true;
-		    configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, (String)null);
+		    configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
 		} else {
-		    configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, false);
+		    configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, (String)null);
 		}
 		if (fFileOutput.getSelection()) {
 		    captureOutput = true;
