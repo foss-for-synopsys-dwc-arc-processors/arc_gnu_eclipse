@@ -301,6 +301,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					*/}
 					
 					// Start PuTTY
+				
 					String COMport="";
 					if(Putty_launch.equalsIgnoreCase("true"))
 					{
@@ -308,6 +309,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						else COMport=Launch.COMserialport().get(0).toString();
 						
 						String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
+						try {
+							Thread.sleep(3000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
 					}
 					
