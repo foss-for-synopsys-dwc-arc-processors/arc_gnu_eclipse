@@ -79,15 +79,18 @@ import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 public class CommandTab extends CLaunchConfigurationTab {
 
 	protected Label fPrgmArgumentsLabelInit;
-	protected  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
-	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
 	protected Label fPrgmArgumentsLabelRun; //this variable is for showing run  command
 	protected Text fPrgmArgumentsTextRun;   //this variable is for getting user's input run command
+	static String initcom="";//this variable is for saving user's input initial command
+    static String runcom="";//this variable is for saving user's input run command
+    protected static  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
+	/*
+	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
+	
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
-    static String initcom="";//this variable is for saving user's input initial command
-    static String runcom="";//this variable is for saving user's input run command
+    
     static String externalpath="";//this variable is for saving user's external path
 
     public static String comport=null;//this variable is for launching the exactly com port chosen by users
@@ -96,7 +99,7 @@ public class CommandTab extends CLaunchConfigurationTab {
     protected Button fLaunchernalButton;//this button is for launching the external tools
     protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
     static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
-    static String fLaunchputtyboolean="true";//this variable is to get external tools current status (Enable/disable)
+    static String fLaunchputtyboolean="true";//this variable is to get external tools current status (Enable/disable)*/
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -117,7 +120,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	protected void createCommandsComponent(Composite comp, int i) {
 		Composite argsComp = new Composite(comp, SWT.NONE);
 		GridLayout projLayout = new GridLayout();
-		projLayout.numColumns = 3;
+		projLayout.numColumns = 1;
 		projLayout.marginHeight = 0;
 		projLayout.marginWidth = 0;
 		argsComp.setLayout(projLayout);		
@@ -128,9 +131,17 @@ public class CommandTab extends CLaunchConfigurationTab {
 		
 		fPrgmArgumentsLabelInit = new Label(argsComp, SWT.NONE);//1-1 
 		fPrgmArgumentsLabelInit.setText("'Initialize' commands"); //$NON-NLS-1$
-	    
-		fPrgmArgumentsComboInit =new Combo(argsComp, SWT.None);//1-2 and 1-3
 		fPrgmArgumentsTextInit = new Text(argsComp, SWT.MULTI | SWT.WRAP | SWT.BORDER | SWT.V_SCROLL);//2-1
+		fPrgmArgumentsTextInit.setLayoutData(gd);
+		fPrgmArgumentsTextInit.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				if (initcom.equalsIgnoreCase("")){
+			  	initcom=fPrgmArgumentsTextInit.getText();
+				}
+				updateLaunchConfigurationDialog();
+				}
+			});
+		/*fPrgmArgumentsComboInit =new Combo(argsComp, SWT.None);//1-2 and 1-3
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 80;
 		gd.horizontalSpan =2;
@@ -180,28 +191,22 @@ public class CommandTab extends CLaunchConfigurationTab {
 				
 			
 			}
-			});
-		GridData gdebugtext = new GridData(GridData.FILL_HORIZONTAL);
+			});*/
+		//GridData gdebugtext = new GridData(GridData.FILL_HORIZONTAL);
 		
-	    gdebugtext = new GridData();
+	    //gdebugtext = new GridData();
 	    //gdebugtext.heightHint = 60;gdebugtext.widthHint=400;
-	    gdebugtext.horizontalAlignment = GridData.FILL;
+	    //gdebugtext.horizontalAlignment = GridData.FILL;
 	    //gdebugtext.grabExcessHorizontalSpace = true;
-	    gdebugtext.horizontalSpan = 3;//2-1 and 2-2 and 2-3
-		fPrgmArgumentsTextInit.setLayoutData(gdebugtext);
-		fPrgmArgumentsTextInit.addModifyListener(new ModifyListener() {
-		public void modifyText(ModifyEvent evt) {
-			initcom=fPrgmArgumentsTextInit.getText();
-			updateLaunchConfigurationDialog();
-			}
-		});
+	    //gdebugtext.horizontalSpan = 3;//2-1 and 2-2 and 2-3
+		//fPrgmArgumentsTextInit.setLayoutData(gdebugtext);
+		
 		
 		//yunlu change for debug session preset value end
 		
 		gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
 		gd.grabExcessHorizontalSpace = true;
-		gd.horizontalSpan = 3;
 		gd.heightHint = 25;
 		fPrgmArgumentsLabelRun = new Label(argsComp, SWT.NONE);//3-1 and 3-2 and 3-3
 		fPrgmArgumentsLabelRun.setText("'Run' commands"); //$NON-NLS-1$
@@ -216,12 +221,13 @@ public class CommandTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsTextRun.setLayoutData(gd);
 		fPrgmArgumentsTextRun.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
+			
 				runcom=fPrgmArgumentsTextRun.getText();
 				updateLaunchConfigurationDialog();
 			}
 		});
 				
-		fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);//5-2 and 5-3 
+		/*fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);//5-2 and 5-3 
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.heightHint = 25;
 		fPrgmArgumentsComCom.setLayoutData(gd);
@@ -315,7 +321,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	        
 	      });
 		    
-
+         */
 
 //		addControlAccessibleListener(fArgumentVariablesButton, fArgumentVariablesButton.getText()); // need to strip the mnemonic from buttons
 	
@@ -323,7 +329,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	}
 	protected void handleBinarylaunchButtonSelected(){
 	}
-	protected void handleBinaryBrowseButtonSelected() {
+	/*protected void handleBinaryBrowseButtonSelected() {
 		if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
 		{
 			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
@@ -345,7 +351,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 			 
 		}
 	  
-	}
+	}*/
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
@@ -353,9 +359,9 @@ public class CommandTab extends CLaunchConfigurationTab {
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT, (String) null);
+		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
+		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, (String) null);
+		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT, (String) null);
 		
 		
 	}
@@ -365,7 +371,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			String status=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,fPrgmArgumentsComboInit.getItem(0));
+			/*String status=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,fPrgmArgumentsComboInit.getItem(0));
 			
 			if(status.indexOf("JTAG")==-1&&status.indexOf("nSIM")==-1&&status.indexOf("GNU")==-1)
 			{   
@@ -388,15 +394,18 @@ public class CommandTab extends CLaunchConfigurationTab {
 			    {
 				fPrgmArgumentsComboInit.setText("GNU simulator");
 			    }*/
-			}
-			else  fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
+			//}
+			//else  fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
+			if (initcom.equalsIgnoreCase(""))	{
+				fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "set remotetimeout 15 \ntarget remote :3333 \nload"));
 				
-			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "set remotetimeout 15 \ntarget remote :3333 \nload"));
-	
+			}
+			else fPrgmArgumentsTextInit.setText(initcom);
+			
 			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc"));
 	
 			 
-			String externaltools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());//get which external tool is in use
+			/*String externaltools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());//get which external tool is in use
 			 if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("true"))
 			 {
 				 fSearchexternalButton.setText(externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length())+" Path");
@@ -463,7 +472,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 			{
 				fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
 				//fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, externalpath)); //$NON-NLS-1$
-			}
+			}*/
 			
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
@@ -478,7 +487,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,initcom);
     	configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,runcom);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,externalpath);
+		/*configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,externalpath);
 		//try {
 		//	externalpath=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "");
 		//} catch (CoreException e) {
@@ -489,7 +498,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
 		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,getAttributeValueFromString(fLaunchputtyboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,getAttributeValueFromString(fLaunchputtyboolean));*/
 	
 		
 	}
@@ -520,7 +529,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 		}
 		return null;
 	}
-	protected String getAttributeValueFromString(String string) {
+	public static String getAttributeValueFromString(String string) {
 		String content = string;
 		if (content.length() > 0) {
 			return content;

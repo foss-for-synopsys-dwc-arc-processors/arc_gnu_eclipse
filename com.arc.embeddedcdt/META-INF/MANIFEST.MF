@@ -9,7 +9,7 @@ Bundle-ClassPath: arcembeddedcdt.jar,
  lib/commons-logging-1.1.1.jar,
  lib/junit-4.4.jar
 Bundle-Activator: com.arc.embeddedcdt.LaunchPlugin
-Bundle-Vendor: Synopsys, Inc
+Bundle-Vendor: Synopsys, Inc.
 Bundle-Localization: plugin
 Export-Package: com.arc.embeddedcdt,
  com.arc.embeddedcdt.copied,

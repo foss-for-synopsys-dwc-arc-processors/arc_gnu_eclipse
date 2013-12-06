@@ -87,6 +87,7 @@ import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.gui.CommandTab;
+import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 public abstract class Launch extends AbstractCLaunchDelegate implements
@@ -305,7 +306,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					String COMport="";
 					if(Putty_launch.equalsIgnoreCase("true"))
 					{
-						if(CommandTab.comport!=null) COMport=CommandTab.comport;
+						if(RemoteGDBDebuggerPage.comport!=null) COMport=RemoteGDBDebuggerPage.comport;
 						else COMport=Launch.COMserialport().get(0).toString();
 						
 						String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };

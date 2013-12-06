@@ -27,6 +27,7 @@ public class EmbeddedDebuggerTab extends CDebuggerTab {
 			String current) {
 		/* Force the only choice */
 		super.loadDebuggerCombo(debugConfigs, "com.arc.embeddedcdt.EmbeddedCDebugger");
+		super.loadDebuggerCombo(debugConfigs, "com.arc.embeddedcdt.RemoteGDBDebugger");
 	}
 
 	public String getDebugger()

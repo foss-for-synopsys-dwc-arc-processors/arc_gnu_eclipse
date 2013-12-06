@@ -68,11 +68,19 @@
          point="org.eclipse.cdt.debug.core.CDebugger">
       <debugger
             platform="*"
-            name="Embedded GDB"
+            name="ARC Embedded GDB"
             modes="run"
             cpu="*"
             class="com.arc.embeddedcdt.EmbeddedGDBCDIDebugger"
             id="com.arc.embeddedcdt.EmbeddedCDebugger">
+      </debugger>
+      <debugger
+            class="com.arc.embeddedcdt.EmbeddedGDBCDIDebugger"
+            cpu="*"
+            id="com.arc.embeddedcdt.RemoteGDBDebugger"
+            modes="run"
+            name="ARC remote gdb/mi"
+            platform="*">
       </debugger>
    </extension>
    <extension
@@ -81,6 +89,11 @@
             class="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage"
             debuggerID="com.arc.embeddedcdt.EmbeddedCDebugger"
             id="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage">
+      </debuggerPage>
+       <debuggerPage
+            class="com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage"
+            debuggerID="com.arc.embeddedcdt.RemoteGDBDebugger"
+            id="com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage">
       </debuggerPage>
    </extension>
    <extension
