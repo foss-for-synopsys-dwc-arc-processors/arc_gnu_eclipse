@@ -84,22 +84,6 @@ public class CommandTab extends CLaunchConfigurationTab {
 	static String initcom="";//this variable is for saving user's input initial command
     static String runcom="";//this variable is for saving user's input run command
     protected static  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
-	/*
-	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
-	
-	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
-	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
-	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
-    
-    static String externalpath="";//this variable is for saving user's external path
-
-    public static String comport=null;//this variable is for launching the exactly com port chosen by users
-    protected Button fSearchexternalButton;//this button is for searching the path for external tools
-    protected Button fLaunchComButton;//this variable is for launching COM port
-    protected Button fLaunchernalButton;//this button is for launching the external tools
-    protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
-    static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
-    static String fLaunchputtyboolean="true";//this variable is to get external tools current status (Enable/disable)*/
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -135,72 +119,10 @@ public class CommandTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsTextInit.setLayoutData(gd);
 		fPrgmArgumentsTextInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
-				if (initcom.equalsIgnoreCase("")){
-			  	initcom=fPrgmArgumentsTextInit.getText();
-				}
+				initcom=fPrgmArgumentsTextInit.getText();
 				updateLaunchConfigurationDialog();
 				}
 			});
-		/*fPrgmArgumentsComboInit =new Combo(argsComp, SWT.None);//1-2 and 1-3
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 80;
-		gd.horizontalSpan =2;
-		fPrgmArgumentsComboInit.setLayoutData(gd);
-		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
-		fPrgmArgumentsComboInit.add("JTAG via Ashling");
-		//fPrgmArgumentsComboInit.add("nSIM");
-		//fPrgmArgumentsComboInit.add("GNU simulator");
-		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				fPrgmArgumentsComboInittext=combo.getText();
-				if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
-				{
-					fPrgmArgumentsTextexternal.setText(externalpath);
-					if(!initcom.isEmpty()&&initcom.startsWith("set remotetimeout")&&!initcom.equalsIgnoreCase("set remotetimeout 15 \ntarget remote :3333 \nload")) 
-						{fPrgmArgumentsTextInit.setText(initcom);}
-						
-					else fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :3333 \nload");
-					 
-				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
-				{
-					fPrgmArgumentsTextexternal.setText("C:\\AshlingOpellaXDforARC");
-					if(!initcom.isEmpty()&&initcom.startsWith("set arc opella-target arcem")&&!initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
-						{fPrgmArgumentsTextInit.setText(initcom);}
-						
-					else fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :2331 \nload");
-					 
-				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
-				{
-					if(!initcom.isEmpty()&&initcom.startsWith("target remote localhost:")&&!initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
-					{fPrgmArgumentsTextInit.setText(initcom);}
-					
-					else fPrgmArgumentsTextInit.setText("target remote localhost:1234 \nload");
-				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("GNU simulator"))
-				{
-								
-					fPrgmArgumentsTextInit.setText("target sim \nload");
-				}
-				fSearchexternalButton.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length())+" Path");
-				fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length()));
-				
-				updateLaunchConfigurationDialog();
-				
-			
-			}
-			});*/
-		//GridData gdebugtext = new GridData(GridData.FILL_HORIZONTAL);
-		
-	    //gdebugtext = new GridData();
-	    //gdebugtext.heightHint = 60;gdebugtext.widthHint=400;
-	    //gdebugtext.horizontalAlignment = GridData.FILL;
-	    //gdebugtext.grabExcessHorizontalSpace = true;
-	    //gdebugtext.horizontalSpan = 3;//2-1 and 2-2 and 2-3
-		//fPrgmArgumentsTextInit.setLayoutData(gdebugtext);
-		
 		
 		//yunlu change for debug session preset value end
 		
@@ -226,143 +148,19 @@ public class CommandTab extends CLaunchConfigurationTab {
 				updateLaunchConfigurationDialog();
 			}
 		});
-				
-		/*fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;
-		fPrgmArgumentsComCom.setLayoutData(gd);
-		List COM=Launch.COMserialport();
-		for (int ii=0;ii<COM.size();ii++)
-			{
-				fPrgmArgumentsComCom.add((String) COM.get(ii));
-		    }
-		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				comport=combo.getText();
-				updateLaunchConfigurationDialog();
-				}
-			
-		});
-		fPrgmArgumentsLabelCom = new Label(argsComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
-		fLaunchComButton = new Button(argsComp,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchComButton.setSelection(true);
-		gd = new GridData(SWT.BEGINNING);
-		fLaunchComButton.setLayoutData(gd);
-		fLaunchComButton.setText("Launch PuTTY");
-		fLaunchComButton.addSelectionListener(new SelectionListener() {
-	        public void widgetSelected(SelectionEvent event) {
-	        	if(fLaunchComButton.getSelection()==true){
-	        		fLaunchputtyboolean="true";
-	        	    fPrgmArgumentsComCom.setEnabled(true);
-	        	    fPrgmArgumentsLabelCom.setEnabled(true);
-	        	}
-	        	else {
-	        		fLaunchputtyboolean="false";
-		        	fPrgmArgumentsComCom.setEnabled(false);
-		        	fPrgmArgumentsLabelCom.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
 
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
-		
-		fPrgmArgumentsTextexternal=new Text(argsComp, SWT.SINGLE | SWT.BORDER);//6-1
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.widthHint=400;
-
-		fPrgmArgumentsTextexternal.setLayoutData(gd);
-		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				externalpath=fPrgmArgumentsTextexternal.getText();
-				updateLaunchConfigurationDialog();
-			}
-		});
-		fSearchexternalButton = createPushButton(argsComp, "Externaltools Path", null); //$NON-NLS-1$  //6-2
-		gd = new GridData(SWT.BEGINNING);
-		fSearchexternalButton.setLayoutData(gd);
-		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent evt) {
-				handleBinaryBrowseButtonSelected();
-				updateLaunchConfigurationDialog();
-			}
-		});
-	
-		fLaunchernalButton = new Button(argsComp,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchernalButton.setSelection(true);
-		gd = new GridData(SWT.BEGINNING);
-		fLaunchernalButton.setLayoutData(gd);
-	
-		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-
-	        public void widgetSelected(SelectionEvent event) {
-	        	//String tools=fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3,fPrgmArgumentsComboInittext.length());
-	        	//fLaunchernalButton.setText("Launch"+tools);
-	        	//if(fLaunchexternalButtonboolean.equalsIgnoreCase("true")){
-	        	if(fLaunchernalButton.getSelection()==true){
-	        	fLaunchexternalButtonboolean="true";
-	        	fSearchexternalButton.setEnabled(true);
-	        	fPrgmArgumentsTextexternal.setEnabled(true);
-	        	}
-	        	else {
-		        	fLaunchexternalButtonboolean="false";
-		        	fSearchexternalButton.setEnabled(false);
-		        	fPrgmArgumentsTextexternal.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
-
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
-		    
-         */
-
-//		addControlAccessibleListener(fArgumentVariablesButton, fArgumentVariablesButton.getText()); // need to strip the mnemonic from buttons
-	
 
 	}
 	protected void handleBinarylaunchButtonSelected(){
 	}
-	/*protected void handleBinaryBrowseButtonSelected() {
-		if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
-		{
-			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
-			fileDialog.setFileName(fPrgmArgumentsTextexternal.getText());
-			String text= fileDialog.open();
-			if (text != null) {
-				fPrgmArgumentsTextexternal.setText(text);
-			}
-			 
-		}
-		else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
-		{
-			DirectoryDialog directoryDialog = new DirectoryDialog(getShell(), SWT.NONE);
-			directoryDialog.setFilterPath(fPrgmArgumentsTextexternal.getText());
-			String text= directoryDialog.open();
-			if (text != null) {
-				fPrgmArgumentsTextexternal.setText(text);
-			}
-			 
-		}
-	  
-	}*/
+	
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, (String) null);
-		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
-		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, (String) null);
-		//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT, (String) null);
-		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, (String) null);		
 		
 	}
 
@@ -371,109 +169,14 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			/*String status=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,fPrgmArgumentsComboInit.getItem(0));
 			
-			if(status.indexOf("JTAG")==-1&&status.indexOf("nSIM")==-1&&status.indexOf("GNU")==-1)
-			{   
-				if(status.startsWith("set remotetimeout 15"))
-			    {
-					fPrgmArgumentsComboInit.setText("JTAG via OpenOCD");
-					//fSearchexternalButton.setText("Launch OpenOCD");
-			    }
-				else if(status.startsWith("set arc opella-target arcem"))
-			    {
-					fPrgmArgumentsComboInit.setText("JTAG via Ashling");
-					//fSearchexternalButton.setText("Launch Ashling");
-			    }
-			    /*else if(status.startsWith("target remote localhost:"))
-			    {
+			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "set remotetimeout 15 \ntarget remote :3333 \nload"));
 			
-				fPrgmArgumentsComboInit.setText("nSIM");
-			    }
-			    else if(status.equalsIgnoreCase("target sim \nload"))
-			    {
-				fPrgmArgumentsComboInit.setText("GNU simulator");
-			    }*/
-			//}
-			//else  fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
-			if (initcom.equalsIgnoreCase(""))	{
-				fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "set remotetimeout 15 \ntarget remote :3333 \nload"));
-				
-			}
-			else fPrgmArgumentsTextInit.setText(initcom);
 			
 			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc"));
 	
 			 
-			/*String externaltools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());//get which external tool is in use
-			 if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("true"))
-			 {
-				 fSearchexternalButton.setText(externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length())+" Path");
-				 fLaunchernalButton.setSelection(true);//setText("Enable Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));//get current status
-				 fLaunchexternalButtonboolean="true";
-				 fSearchexternalButton.setEnabled(true);
-				 fPrgmArgumentsTextexternal.setEnabled(true);
-				 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));
-				 }
-			 else  if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false")) 
-			 {
-				 fSearchexternalButton.setText(externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length())+" Path");
-				 fLaunchernalButton.setSelection(false);//fLaunchernalButton.setText("Disable Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));//get current status
-				 fLaunchexternalButtonboolean="false";
-				 fSearchexternalButton.setEnabled(false);
-				 fPrgmArgumentsTextexternal.setEnabled(false);
-				 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));
-				
-			 }
-			 else if (externaltools.lastIndexOf("via")<1&&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
-			 {
-				 fSearchexternalButton.setText("OpenOCD Path");
-				 fLaunchernalButton.setSelection(true);
-				 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Enable Launch OpenOCD");
-				 fSearchexternalButton.setEnabled(true);
-				 fPrgmArgumentsTextexternal.setEnabled(true);
-				 fLaunchexternalButtonboolean="true";
-			 }
-			 else if (externaltools.lastIndexOf("via")<1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
-			 {
-				 fSearchexternalButton.setText("OpenOCD Path");
-				 fLaunchernalButton.setSelection(false);
-				 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
-				 fSearchexternalButton.setEnabled(false);
-				 fPrgmArgumentsTextexternal.setEnabled(false);
-				 fLaunchexternalButtonboolean="false";
-			 }
-			
-			 String puttylaunch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT, new String());//get which external tool is in use
-			 if(!puttylaunch.equalsIgnoreCase("false"))
-			 {
-				 fLaunchComButton.setSelection(true);//setText("Enable Launch PuTTY");
-				 fLaunchputtyboolean="true";
-				 fPrgmArgumentsComCom.setEnabled(true);
-		         fPrgmArgumentsLabelCom.setEnabled(true);
-				 }
-			 else if(puttylaunch.equalsIgnoreCase("false")) 
-			 {
-				 fLaunchComButton.setSelection(false);//fLaunchComButton.setText("Disable Launch PuTTY");
-				 fLaunchputtyboolean="false";
-				 fPrgmArgumentsComCom.setEnabled(false);
-		        fPrgmArgumentsLabelCom.setEnabled(false);
-				
-			 }
-			 fLaunchComButton.setText("Launch PuTTY");
-			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-			
-			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
-			if(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("Ashling")>-1)
-			{
-				fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,"C:\\AshlingOpellaXDforARC")); 
-			}
-			else if	(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("OpenOCD")>-1)
-			{
-				fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
-				//fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, externalpath)); //$NON-NLS-1$
-			}*/
-			
+		
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -487,19 +190,6 @@ public class CommandTab extends CLaunchConfigurationTab {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,initcom);
     	configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,runcom);
-		/*configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,externalpath);
-		//try {
-		//	externalpath=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "");
-		//} catch (CoreException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
-		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,getAttributeValueFromString(fLaunchputtyboolean));*/
-	
 		
 	}
 
