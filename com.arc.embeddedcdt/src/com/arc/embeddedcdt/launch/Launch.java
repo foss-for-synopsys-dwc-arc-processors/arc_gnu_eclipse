@@ -315,7 +315,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
+					    if (!launch.isTerminated()) {
+					      DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
+						}
+					
 					}
 					
 					// setFactory(dtargets);
