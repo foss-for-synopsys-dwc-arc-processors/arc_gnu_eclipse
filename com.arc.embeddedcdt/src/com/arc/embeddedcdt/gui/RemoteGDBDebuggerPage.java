@@ -56,6 +56,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	//protected Text fGDBServerCommandText;
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
+	protected static  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	public static String comport=null;//this variable is for launching the exactly com port chosen by users
@@ -250,7 +251,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set remotetimeout")&&!CommandTab.initcom.equalsIgnoreCase("set remotetimeout 15 \ntarget remote :3333 \nload")) 
 						{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 						
-					else CommandTab.fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :3333 \nload");
+					else {
+						CommandTab.fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :3333 \nload");
+						CommandTab.initcom="set remotetimeout 15 \ntarget remote :3333 \nload";
+					}
 					 
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
@@ -259,7 +263,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set arc opella-target arcem")&&!CommandTab.initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
 						{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 						
-					else CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :2331 \nload");
+					else {
+						CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :2331 \nload");
+						CommandTab.initcom="set arc opella-target arcem \ntarget remote :2331 \nload";
+					}
 					 
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
