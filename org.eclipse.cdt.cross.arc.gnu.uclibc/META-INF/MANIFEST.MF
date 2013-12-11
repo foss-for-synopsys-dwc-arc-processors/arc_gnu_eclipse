@@ -13,7 +13,7 @@ Bundle-Name: GNU ARC C/C++ Development Support
 Bundle-Activator: org.eclipse.cdt.cross.arc.gnu.uclibc.ARCPlugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu.uclibc;singleton:=true
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.cdt.cross.arc.gnu.uclibc,
  org.eclipse.cdt.cross.arc.gnu.uclibc.common,
  org.eclipse.cdt.cross.arc.gnu.uclibc.linux,
