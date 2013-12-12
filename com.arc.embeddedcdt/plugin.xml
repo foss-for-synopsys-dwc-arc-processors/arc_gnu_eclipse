@@ -3,20 +3,17 @@
 <plugin>
      <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
-
-      <launchConfigurationType
+           <launchConfigurationType
             delegate="com.arc.embeddedcdt.launch.nativeos.NativeLaunch"
             public="true"
             name="ARC C/C++ application"
-            modes="debug"
+            modes="run,debug"
             id="com.arc.embeddedcdt.idleNative"
-
             sourceLocatorId="org.eclipse.cdt.debug.core.sourceLocator"
             sourcePathComputerId="org.eclipse.cdt.debug.core.sourcePathComputer"
             />
-
-
    </extension>
+   
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
          <!--

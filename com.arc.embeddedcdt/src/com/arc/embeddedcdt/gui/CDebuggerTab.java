@@ -320,6 +320,7 @@ public class CDebuggerTab extends AbstractCDebuggerTab {
 			config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, fStopInMain.getSelection());
 			config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, fStopInMainSymbol.getText());
 			config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_START_MODE, ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
+			
 		}
 		applyAdvancedAttributes(config);
 	}

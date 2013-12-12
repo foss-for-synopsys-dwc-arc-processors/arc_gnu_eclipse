@@ -26,8 +26,10 @@ import java.util.List;
 
 
 
+
 import org.eclipse.cdt.core.model.IBinary;
 import org.eclipse.cdt.core.model.ICElement;
+import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.ui.CLaunchConfigurationTab;
 import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
@@ -174,9 +176,10 @@ public class CommandTab extends CLaunchConfigurationTab {
 			
 			
 			//fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc"));
-	
+			if(ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT){
 			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, CDebuggerTab.fStopInMainSymbol.getText()));
-		
+			}
+			else fPrgmArgumentsTextRun.setText("");
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -190,7 +193,17 @@ public class CommandTab extends CLaunchConfigurationTab {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,initcom);
     	//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,runcom);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, CDebuggerTab.fStopInMainSymbol.getText());
+		try {
+			if(configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,true)){
+				configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, CDebuggerTab.fStopInMainSymbol.getText());
+			}
+			else configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "");
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	/* (non-Javadoc)
