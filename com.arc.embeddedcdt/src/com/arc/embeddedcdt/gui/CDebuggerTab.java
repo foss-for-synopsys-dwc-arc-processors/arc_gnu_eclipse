@@ -9,6 +9,7 @@
  *     QNX Software Systems - Initial API and implementation
  *     Ken Ryall (Nokia) - https://bugs.eclipse.org/bugs/show_bug.cgi?id=118894
  *     IBM Corporation
+ *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 package com.arc.embeddedcdt.gui;
 

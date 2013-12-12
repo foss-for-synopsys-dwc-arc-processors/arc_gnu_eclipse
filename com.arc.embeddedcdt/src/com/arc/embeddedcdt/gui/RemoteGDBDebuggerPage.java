@@ -10,6 +10,7 @@
  * 
  * Referenced GDBDebuggerPage code to write this.
  * Anna Dushistova (Mentor Graphics) - moved to org.eclipse.cdt.launch.remote.tabs
+ * Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 
 package com.arc.embeddedcdt.gui;
