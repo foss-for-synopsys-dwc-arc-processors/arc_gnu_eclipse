@@ -104,11 +104,34 @@
             platforms="*"/>
 	</extension>
 	
-    <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="com.arc.embeddedcdt.preferences.PrefInitializer">
-      </initializer>
-    </extension>
+   <!-- ARC run/debug -->  
+    <extension point="org.eclipse.debug.ui.launchShortcuts">
+    <shortcut
+           class="com.arc.embeddedcdt.LaunchShortcut"
+           icon="icons/c_app.gif"
+           id="com.arc.embeddedcdt.LaunchShortcut"
+           label="ARC C/C++ Application"
+           modes="run, debug">
+       <contextualLaunch>
+           <enablement>
+             <with variable="selection">
+              </with>
+           </enablement>
+           <contextLabel
+                  mode="run"
+                  label="ARC C/C++ Application"/>
+           <contextLabel
+                  mode="debug"
+                  label="ARC C/C++ Application "/>
+           </contextualLaunch>
+         <perspective
+               id="org.eclipse.cdt.ui.CPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.debug.ui.DebugPerspective">
+         </perspective>
+      </shortcut>
+ </extension>
+   
 </plugin>
 

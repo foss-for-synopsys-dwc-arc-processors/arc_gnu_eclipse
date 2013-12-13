@@ -40,7 +40,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.swt,
  org.eclipse.core.variables,
  org.eclipse.ui.ide,
- org.eclipse.ui.views
+ org.eclipse.ui.views,
+ org.eclipse.ui.workbench
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: com.ibm.icu.text,
