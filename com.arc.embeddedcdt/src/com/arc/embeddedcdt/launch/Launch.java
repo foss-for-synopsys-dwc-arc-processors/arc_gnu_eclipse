@@ -12,17 +12,12 @@
 
 package com.arc.embeddedcdt.launch;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import javax.swing.JOptionPane;
 
 import org.eclipse.cdt.core.IAddressFactory;
 import org.eclipse.cdt.core.IBinaryParser.IBinaryObject;
@@ -75,18 +70,11 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleManager;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 
 import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.gui.CommandTab;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
@@ -150,6 +138,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
       return new String[0];
 	}
 
+	@SuppressWarnings("deprecation")
 	public void launch(ILaunchConfiguration configuration, String mode,
 			final ILaunch launch, IProgressMonitor monitor)
 			throws CoreException
@@ -171,10 +160,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		{
 			monitor.worked(1);
 			ICProject project;
-			String name = getProjectName(configuration);
+			String name = org.eclipse.cdt.debug.core.CDebugUtils.getProjectName(configuration);
 			if ((name!=null)&&(name.length()>0))
 			{
-				project = verifyCProject(configuration);
+				project =  org.eclipse.cdt.debug.core.CDebugUtils.verifyCProject(configuration);
 			} else
 			{
 				// normal project
@@ -199,16 +188,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			// Accessed later to set up cwd for GDB
 			myProject = project;
 			IBinaryObject exeFile = verifyBinary(project, exePath);
-			//elfread=exeFile.getPath().lastSegment();
-			/* That is not used. Can be removed
-			elfread=exeFile.getPath().getDevice()+"\\";
-			for (int i=0;i<exeFile.getPath().segmentCount()-1;i++)
-			{
-				elfread=elfread+exeFile.getPath().segment(i).toString()+"\\";
-			}
-			elfread=elfread+exeFile.getPath().lastSegment();
-			readelf();
-			*/
 			// set the default source locator if required
 			setDefaultSourceLocator(launch, configuration);
 
@@ -683,6 +662,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	 */
 	abstract public String fixPath(String line);
 
+	@SuppressWarnings("deprecation")
 	protected IPath verifyProgramPath(ILaunchConfiguration config,
 			ICProject project) throws CoreException
 	{

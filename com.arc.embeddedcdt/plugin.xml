@@ -107,12 +107,12 @@
    <!-- ARC run/debug -->  
     <extension point="org.eclipse.debug.ui.launchShortcuts">
     <shortcut
-           class="com.arc.embeddedcdt.LaunchShortcut"
+           class="com.arc.embeddedcdt.launch.LaunchShortcut"
            icon="icons/c_app.gif"
-           id="com.arc.embeddedcdt.LaunchShortcut"
+           id="com.arc.embeddedcdt.launch.LaunchShortcut"
            label="ARC C/C++ Application"
            modes="run, debug">
-       <contextualLaunch>
+           <contextualLaunch>
            <enablement>
              <with variable="selection">
               </with>
@@ -131,6 +131,9 @@
                id="org.eclipse.debug.ui.DebugPerspective">
          </perspective>
       </shortcut>
+      <configurationType
+              id="com.arc.embeddedcdt.idleNative">
+       </configurationType>
  </extension>
    
 </plugin>
