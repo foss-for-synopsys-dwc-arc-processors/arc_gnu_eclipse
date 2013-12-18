@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.arc.cdt.feature_1.0.0.jar" id="com.arc.cdt.feature" version="1.0.0">
+      <category name="com.arc.cdt"/>
+   </feature>
+   <category-def name="com.arc.cdt" label="ARC GNU Tools Support"/>
+</site>
