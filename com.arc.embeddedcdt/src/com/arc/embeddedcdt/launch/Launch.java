@@ -205,8 +205,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					LaunchFrontend l = new LaunchFrontend(launch);
                     String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
-                    String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,new String());
-                    String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,new String());
+                    String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
+                    String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,"true");
 					prepareSession();
 
 					// Start GDB first. This is required to ensure that if gdbserver
@@ -281,8 +281,15 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
 					*/}
 					
-					// Start PuTTY
+					else if (extenal_tools.equalsIgnoreCase("")&&extenal_tools_launch.equalsIgnoreCase("true"))
+					{ //these codes are for "Debug As ARC C/C++ Application", which will launch Openocd automatically
+						
+						extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+					}
 				
+					
 					String COMport="";
 					if(Putty_launch.equalsIgnoreCase("true"))
 					{
@@ -311,9 +318,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						uploadFile(monitor, configuration);
 
 						monitor.subTask("Running GDB init script");
-						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
-						//executeGDBScript(endian,configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,endian)), monitor);
-						
+						String initcommand =configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String());
+						if(!initcommand.equalsIgnoreCase(""))
+						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
+						else 
+							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
+							
 						monitor.worked(2);
 
 						monitor.subTask("Creating launch target");
