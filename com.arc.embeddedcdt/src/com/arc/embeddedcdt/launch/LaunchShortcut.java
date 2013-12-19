@@ -170,7 +170,8 @@ public class LaunchShortcut implements ILaunchShortcut {
                   wc.setAttribute(
                           ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_START_MODE,
                           ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
-                  wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "arc-elf32-gdb");
+                  wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.RemoteGDBDebugger");
+                  //wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.EmbeddedCDebugger");
                   config = wc.doSave();
           } catch (CoreException ce) {
                   LaunchUIPlugin.log(ce);

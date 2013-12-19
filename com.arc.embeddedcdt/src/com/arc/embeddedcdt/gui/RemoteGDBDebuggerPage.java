@@ -17,7 +17,7 @@ package com.arc.embeddedcdt.gui;
 
 import java.util.List;
 
-import org.eclipse.cdt.debug.mi.core.IMILaunchConfigurationConstants;
+import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
 import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;

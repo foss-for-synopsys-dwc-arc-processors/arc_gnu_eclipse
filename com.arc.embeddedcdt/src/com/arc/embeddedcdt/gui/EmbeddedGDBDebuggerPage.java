@@ -13,7 +13,7 @@ package com.arc.embeddedcdt.gui;
 
 import java.io.File;
 
-import org.eclipse.cdt.debug.mi.core.IMILaunchConfigurationConstants;
+import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import org.eclipse.cdt.debug.mi.internal.ui.MIUIMessages;
 import org.eclipse.cdt.debug.mi.internal.ui.StandardGDBDebuggerPage;
 import org.eclipse.cdt.utils.ui.controls.ControlFactory;

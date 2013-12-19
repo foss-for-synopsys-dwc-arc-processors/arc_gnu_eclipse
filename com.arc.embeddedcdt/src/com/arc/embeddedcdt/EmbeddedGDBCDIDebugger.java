@@ -24,10 +24,11 @@ import java.io.File;
 
 import org.eclipse.cdt.core.IBinaryParser.IBinaryObject;
 import org.eclipse.cdt.debug.core.cdi.ICDISession;
-import org.eclipse.cdt.debug.mi.core.AbstractGDBCDIDebugger;
+import com.arc.embeddedcdt.launch.AbstractGDBCDIDebugger;
 import org.eclipse.cdt.debug.mi.core.MIPlugin;
 import org.eclipse.cdt.debug.mi.core.command.CommandFactory;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -54,7 +55,7 @@ public class EmbeddedGDBCDIDebugger extends AbstractGDBCDIDebugger {
 			throws CoreException {
 		embeddedLaunch=launch2;
 		fLaunch = launch;
-		
+		IPath gdbPath = getGDBPath( launch );
 		ICDISession dsession = null;
 		try {
 			Thread.sleep(1000);

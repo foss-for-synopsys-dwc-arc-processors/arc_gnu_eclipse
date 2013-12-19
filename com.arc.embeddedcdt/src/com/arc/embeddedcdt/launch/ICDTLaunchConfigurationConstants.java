@@ -21,8 +21,8 @@ package com.arc.embeddedcdt.launch;
  */
 public interface ICDTLaunchConfigurationConstants {
 
-	//public static final String CDT_LAUNCH_ID = "org.eclipse.cdt.launch"; //$NON-NLS-1$
-	public static final String CDT_LAUNCH_ID = "com.arc.embeddedcdt.launch.Launch"; //$NON-NLS-1$ yunlu
+	public static final String CDT_LAUNCH_ID = "org.eclipse.cdt.launch"; //$NON-NLS-1$
+
 	/**
 	 * This is the application launch type id.
 	 */
@@ -34,7 +34,7 @@ public interface ICDTLaunchConfigurationConstants {
 	 * @since 7.1
 	 */
 	public static final String ID_LAUNCH_C_REMOTE_APP = "org.eclipse.cdt.launch.remoteApplicationLaunchType"; //$NON-NLS-1$
-	
+	//public static final String ID_LAUNCH_C_REMOTE_APP = "com.arc.embeddedcdt.launch.nativeos.NativeLaunch";
 	/**
      * This is the attach launch type id.
      *
@@ -53,7 +53,7 @@ public interface ICDTLaunchConfigurationConstants {
 	 * Specifies the default launch delegate for a Local Debug session
 	 * @since 7.0
 	 */
-    //public static final String PREFERRED_DEBUG_LOCAL_LAUNCH_DELEGATE = "com.arc.embeddedcdt.launch.Launch"; //$NON-NLS-1$ yunlu
+    //public static final String PREFERRED_DEBUG_LOCAL_LAUNCH_DELEGATE = "org.eclipse.cdt.dsf.gdb.launch.localCLaunch"; //$NON-NLS-1$
     public static final String PREFERRED_DEBUG_LOCAL_LAUNCH_DELEGATE = "com.arc.embeddedcdt.launch.nativeos.NativeLaunch";
     /**
 	 * Specifies the default launch delegate for a Remote Debug session.
@@ -62,8 +62,8 @@ public interface ICDTLaunchConfigurationConstants {
 	 * (which is org.eclipse.cdt.dsf.gdb.launch.remoteCLaunch).
 	 * @since 7.1
 	 */
-    public static final String PREFERRED_DEBUG_REMOTE_LAUNCH_DELEGATE = "org.eclipse.rse.remotecdt.dsf.debug"; //$NON-NLS-1$
-    //public static final String PREFERRED_DEBUG_REMOTE_LAUNCH_DELEGATE = "com.arc.embeddedcdt.launch.nativeos.NativeLaunch";
+    //public static final String PREFERRED_DEBUG_REMOTE_LAUNCH_DELEGATE = "org.eclipse.rse.remotecdt.dsf.debug"; //$NON-NLS-1$
+    public static final String PREFERRED_DEBUG_REMOTE_LAUNCH_DELEGATE = "com.arc.embeddedcdt.launch.nativeos.NativeLaunch";
 
     /**
 	 * Specifies the default launch delegate for an Attach Debug session
@@ -188,7 +188,7 @@ public interface ICDTLaunchConfigurationConstants {
 	 * when launching a C/C++ application for debug.
 	 */
 	public static final String ATTR_DEBUGGER_ID = CDT_LAUNCH_ID + ".DEBUGGER_ID"; //$NON-NLS-1$
-
+	//public static final String ATTR_DEBUGGER_ID = "com.arc.embeddedcdt.RemoteGDBDebugger"; //yunlu
 	/**
 	 * Launch configuration attribute key. The value is the platform string of
 	 * the launch configuration
