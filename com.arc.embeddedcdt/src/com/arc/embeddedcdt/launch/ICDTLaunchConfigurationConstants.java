@@ -293,7 +293,6 @@ public interface ICDTLaunchConfigurationConstants {
 	 * ATTR_DEBUGGER_START_MODE. Startup debugger running the program.
 	 */
 	public static String DEBUGGER_MODE_RUN = "run"; //$NON-NLS-1$
-
 	/**
 	 * Launch configuration attribute value. The key is
 	 * ATTR_DEBUGGER_START_MODE. Startup debugger and attach to running process.

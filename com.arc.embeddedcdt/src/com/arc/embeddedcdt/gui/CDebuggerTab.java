@@ -145,8 +145,8 @@ public class CDebuggerTab extends AbstractCDebuggerTab {
 	final protected boolean fAttachMode;
 
 	protected Button fAdvancedButton;
-	protected Button fStopInMain;
-	protected static Text fStopInMainSymbol;
+	public static Button fStopInMain;
+	public static Text fStopInMainSymbol;
 	protected Button fAttachButton;
 
 	private Map fAdvancedAttributes = new HashMap(5);

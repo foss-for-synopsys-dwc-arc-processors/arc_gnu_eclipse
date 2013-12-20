@@ -34,7 +34,9 @@ import org.eclipse.cdt.debug.core.cdi.event.ICDIDestroyedEvent;
 import org.eclipse.cdt.debug.core.cdi.event.ICDIEvent;
 import org.eclipse.cdt.debug.core.cdi.event.ICDIEventListener;
 import org.eclipse.cdt.debug.core.cdi.model.ICDITarget;
+
 import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
+
 import org.eclipse.cdt.debug.mi.core.MIException;
 import org.eclipse.cdt.debug.mi.core.MIPlugin;
 import org.eclipse.cdt.debug.mi.core.MISession;
@@ -77,6 +79,7 @@ import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.gui.CDebuggerTab;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
@@ -192,7 +195,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			// set the default source locator if required
 			setDefaultSourceLocator(launch, configuration);
 
-			if (mode.equals(ILaunchManager.DEBUG_MODE))
+			if (mode.equals(ILaunchManager.DEBUG_MODE)||mode.equals(ILaunchManager.RUN_MODE))
 			{
 				ICDebugConfiguration debugConfig = getDebugConfig(configuration);
 				dsession = null;
@@ -325,19 +328,36 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
 							
 						monitor.worked(2);
+						if (mode.equals(ILaunchManager.DEBUG_MODE))
+						{
+							monitor.subTask("Creating launch target");
+							createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration);
 
-						monitor.subTask("Creating launch target");
+							monitor.subTask("Query target state");
+							queryTargetState(dtargets);
+
+							// This will make the GDB console frontmost.
+							l.addStragglers();
+							monitor.subTask("Execute GDB Run commands");
+							executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,new String())), monitor);
+								
+						}
 						
-						createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration);
+					    else if (mode.equals(ILaunchManager.RUN_MODE)){
+					    	//monitor.subTask("Creating launch target");
+							//createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration);
 
-						monitor.subTask("Query target state");
-						queryTargetState(dtargets);
+							//monitor.subTask("Query target state");
+							//queryTargetState(dtargets);
 
-						// This will make the GDB console frontmost.
-						l.addStragglers();
-						monitor.subTask("Execute GDB Run commands");
-						executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,new String())), monitor);
-
+							// This will make the GDB console frontmost.
+							l.addStragglers();
+							monitor.subTask("Execute GDB Run commands");
+							
+							executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,"c "), monitor);
+						}
+							
+						
 						eventManager.allowProcessingEvents(prevstateAllowEvents);
 						
 						
