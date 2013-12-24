@@ -145,7 +145,6 @@ public class CommandTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsTextRun.setLayoutData(gd);
 		fPrgmArgumentsTextRun.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
-			
 				runcom=fPrgmArgumentsTextRun.getText();
 				updateLaunchConfigurationDialog();
 			}
@@ -171,15 +170,8 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			
 			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "set remotetimeout 15 \ntarget remote :3333 \nload"));
-			
-			
-			//fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "b main \nc"));
-			if(ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT){
-			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, CDebuggerTab.fStopInMainSymbol.getText()));
-			}
-			else fPrgmArgumentsTextRun.setText("");
+			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, ""));
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -192,18 +184,8 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,initcom);
-    	//configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,runcom);
-		try {
-			if(configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,true)){
-				configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, CDebuggerTab.fStopInMainSymbol.getText());
-			}
-			else configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, "");
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+    	configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,runcom);
+	
 	}
 
 	/* (non-Javadoc)

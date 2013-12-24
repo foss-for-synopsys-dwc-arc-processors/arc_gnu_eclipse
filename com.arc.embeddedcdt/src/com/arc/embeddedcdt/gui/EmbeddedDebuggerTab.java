@@ -29,7 +29,7 @@ import org.eclipse.cdt.debug.ui.ICDebuggerPage;
 import org.eclipse.cdt.launch.LaunchUtils;
 import org.eclipse.cdt.launch.internal.ui.LaunchMessages;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
-
+import org.eclipse.cdt.launch.ui.CDebuggerTab;
 import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
 import org.eclipse.cdt.launch.ui.CDebuggerTab.AdvancedDebuggerOptionsDialog;
 import org.eclipse.core.resources.IProject;

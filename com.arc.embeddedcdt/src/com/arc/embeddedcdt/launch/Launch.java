@@ -79,7 +79,6 @@ import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.gui.CDebuggerTab;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
@@ -115,6 +114,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	public final static String OPENOCD_PROCESS_LABEL = "OpenOCD";
 	public final static String ASHLING_PROCESS_LABEL = "Ashling GDBserver";
 	public final static String GDB_PROCESS_LABEL = "arc-elf32-gdb";
+	public final static String NSIM_PROCESS_LABEL = "nSIM GDBserve";
 
 	public ICProject myProject;
 	private ICDISession dsession;
@@ -274,15 +274,22 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 					}
 					else if (extenal_tools.equalsIgnoreCase("nSIM")&&extenal_tools_launch.equalsIgnoreCase("true"))
-					{/*
+					{
 						// Start nSIM GDB server
 						if(extenal_tools_path.equalsIgnoreCase("")) 
 						{
-							extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
-							}
-						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), "OpenOCD");
-					*/}
+							extenal_tools_path="C:\\Windows\\nSIM_64";
+						}
+						System.setProperty("nSIM", extenal_tools_path);
+						String nsim_dir = System.getProperty("nSIM");
+						File nsim_wd = new java.io.File(nsim_dir); 
+						String[] nsim_cmd = {
+								nsim_dir+ java.io.File.separator + "\\bin\\nsimdrv.exe",
+								"-gdb", "-propsfile",
+								nsim_dir + java.io.File.separator + "\\systemc\\configs\\nsim_av2em11.props"
+								};	
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(nsim_cmd, nsim_wd), NSIM_PROCESS_LABEL);
+					}
 					
 					else if (extenal_tools.equalsIgnoreCase("")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{ //these codes are for "Debug As ARC C/C++ Application", which will launch Openocd automatically
@@ -325,8 +332,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						if(!initcommand.equalsIgnoreCase(""))
 						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
 						else 
-							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
-							
+							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);	
 						monitor.worked(2);
 						if (mode.equals(ILaunchManager.DEBUG_MODE))
 						{
@@ -339,18 +345,16 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							// This will make the GDB console frontmost.
 							l.addStragglers();
 							monitor.subTask("Execute GDB Run commands");
-							executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,new String())), monitor);
+							boolean stop_boolean=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT);
+							String stop_value=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
+							if(stop_boolean)
+								executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,stop_value), monitor);	
+							else
+								executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,new String())), monitor);
 								
 						}
 						
 					    else if (mode.equals(ILaunchManager.RUN_MODE)){
-					    	//monitor.subTask("Creating launch target");
-							//createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration);
-
-							//monitor.subTask("Query target state");
-							//queryTargetState(dtargets);
-
-							// This will make the GDB console frontmost.
 							l.addStragglers();
 							monitor.subTask("Execute GDB Run commands");
 							

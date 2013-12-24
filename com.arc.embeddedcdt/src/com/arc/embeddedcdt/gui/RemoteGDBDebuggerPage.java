@@ -139,7 +139,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));
 			
 		 }
-		 else if (externaltools.lastIndexOf("via")<1&&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
+		 else if (externaltools.lastIndexOf("via")<1
+				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("ture")
+				 &&!externaltools.equalsIgnoreCase("nSIM")
+				 )
 		 {
 			 fSearchexternalButton.setText("OpenOCD Path");
 			 fLaunchernalButton.setSelection(true);
@@ -148,7 +151,29 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsTextexternal.setEnabled(true);
 			 fLaunchexternalButtonboolean="true";
 		 }
-		 else if (externaltools.lastIndexOf("via")<1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
+		 else if (externaltools.lastIndexOf("via")<1
+				 &&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false")
+				 &&!externaltools.equalsIgnoreCase("nSIM"))
+		 {
+			 fSearchexternalButton.setText("OpenOCD Path");
+			 fLaunchernalButton.setSelection(false);
+			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
+			 fSearchexternalButton.setEnabled(false);
+			 fPrgmArgumentsTextexternal.setEnabled(false);
+			 fLaunchexternalButtonboolean="false";
+		 }
+		 else if (externaltools.equalsIgnoreCase("nSIM")
+				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("ture"))
+		 {
+			 fSearchexternalButton.setText("nSIM Path");
+			 fLaunchernalButton.setSelection(true);
+			 fLaunchernalButton.setText("Launch nSIM");//fLaunchernalButton.setText("Enable Launch OpenOCD");
+			 fSearchexternalButton.setEnabled(true);
+			 fPrgmArgumentsTextexternal.setEnabled(true);
+			 fLaunchexternalButtonboolean="true";
+		 }
+		 else if (externaltools.equalsIgnoreCase("nSIM")
+				 &&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
 		 {
 			 fSearchexternalButton.setText("OpenOCD Path");
 			 fLaunchernalButton.setSelection(false);
@@ -272,6 +297,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
+					fPrgmArgumentsTextexternal.setText("C:\\Windows\\nSIM_64");
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("target remote localhost:")&&!CommandTab.initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
 					{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 					
@@ -427,7 +453,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		createGdbserverSettingsTab( tabFolder );
 	}
 	protected void handleBinaryBrowseButtonSelected() {
-		if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")||fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
+		if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
 		{
 			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
 			fileDialog.setFileName(fPrgmArgumentsTextexternal.getText());
@@ -437,7 +463,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 			 
 		}
-		else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
+		else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling")||fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 		{
 			DirectoryDialog directoryDialog = new DirectoryDialog(getShell(), SWT.NONE);
 			directoryDialog.setFilterPath(fPrgmArgumentsTextexternal.getText());
