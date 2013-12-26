@@ -2,7 +2,7 @@
 <feature
       id="com.arc.cdt.feature"
       label="ARC GNU Toolchain Embedded CDT"
-      version="1.0.0"
+      version="1.1.0"
       provider-name="Synopsys, Inc."
       plugin="com.arc.embeddedcdt"
       image="logo_emb_full.png">
@@ -52,13 +52,13 @@ applications for the ARC series of processors.
          id="com.arc.embeddedcdt"
          download-size="0"
          install-size="0"
-         version="1.0.0"/>
+         version="1.1.0"/>
 
    <plugin
          id="org.eclipse.cdt.cross.arc.gnu"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="1.1.0"
          unpack="false"/>
 
 </feature>
