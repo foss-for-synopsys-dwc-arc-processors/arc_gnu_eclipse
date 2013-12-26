@@ -11,6 +11,7 @@ package com.arc.embeddedcdt.launch;
  *     Ken Ryall (Nokia) - bug 118894
  *     Ken Ryall (Nokia) - bug 178731
  *     Alex Collins (Broadcom Corp.) - choose build config automatically
+ *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 
 /**
