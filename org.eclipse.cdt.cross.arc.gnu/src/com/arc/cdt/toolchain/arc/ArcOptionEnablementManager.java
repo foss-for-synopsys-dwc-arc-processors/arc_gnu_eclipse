@@ -13,16 +13,8 @@ package com.arc.cdt.toolchain.arc;
 
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import org.eclipse.cdt.managedbuilder.core.BuildException;
-import org.eclipse.cdt.managedbuilder.core.IOption;
-import org.eclipse.cdt.managedbuilder.core.ITool;
-import org.eclipse.cdt.managedbuilder.core.IToolChain;
 
 import com.arc.cdt.toolchain.AbstractOptionEnablementManager;
 import com.arc.cdt.toolchain.IOptionEnablementManager;

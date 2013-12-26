@@ -8,19 +8,20 @@
 *     Synopsys, Inc. - ARC GNU Toolchain support
 *******************************************************************************/
 
- package org.eclipse.cdt.cross.arc.gnu.scannerconfig;
- 
- import java.util.Iterator;
- import java.util.List;
- import java.util.Map;
- import org.eclipse.cdt.make.core.scannerconfig.IScannerInfoCollector3;
- import org.eclipse.cdt.make.core.scannerconfig.InfoContext;
- import org.eclipse.cdt.make.core.scannerconfig.ScannerInfoTypes;
- import org.eclipse.cdt.make.internal.core.scannerconfig.util.CygpathTranslator;
- import org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector;
- import org.eclipse.cdt.managedbuilder.scannerconfig.IManagedScannerInfoCollector;
- import org.eclipse.core.resources.IProject;
- 
+package org.eclipse.cdt.cross.arc.gnu.scannerconfig;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.cdt.make.core.scannerconfig.IScannerInfoCollector3;
+import org.eclipse.cdt.make.core.scannerconfig.InfoContext;
+import org.eclipse.cdt.make.core.scannerconfig.ScannerInfoTypes;
+import org.eclipse.cdt.make.internal.core.scannerconfig.util.CygpathTranslator;
+import org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector;
+import org.eclipse.cdt.managedbuilder.scannerconfig.IManagedScannerInfoCollector;
+import org.eclipse.core.resources.IProject;
+
  public class ARCGnuWinScannerInfoCollector extends PerProjectSICollector
    implements IScannerInfoCollector3, IManagedScannerInfoCollector
  {

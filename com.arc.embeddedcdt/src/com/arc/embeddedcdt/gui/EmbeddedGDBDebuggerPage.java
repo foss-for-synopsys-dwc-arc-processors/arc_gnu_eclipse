@@ -13,7 +13,6 @@ package com.arc.embeddedcdt.gui;
 
 import java.io.File;
 
-import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import org.eclipse.cdt.debug.mi.internal.ui.MIUIMessages;
 import org.eclipse.cdt.debug.mi.internal.ui.StandardGDBDebuggerPage;
 import org.eclipse.cdt.utils.ui.controls.ControlFactory;
@@ -34,6 +33,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 
 import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import com.arc.embeddedcdt.preferences.PrefConstants;
 
 /**

@@ -9,8 +9,6 @@
 *******************************************************************************/
 package com.arc.embeddedcdt.launch;
 
-import java.io.IOException;
-
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;

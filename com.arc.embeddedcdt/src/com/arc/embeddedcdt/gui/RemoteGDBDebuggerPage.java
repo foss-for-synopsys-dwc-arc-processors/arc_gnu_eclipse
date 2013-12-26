@@ -17,11 +17,9 @@ package com.arc.embeddedcdt.gui;
 
 import java.util.List;
 
-import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
 import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
-import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -42,9 +40,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.PlatformUI;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
+import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import com.arc.embeddedcdt.launch.Launch;
 
 /**

@@ -9,14 +9,14 @@
 *******************************************************************************/
 
 package org.eclipse.cdt.cross.arc.gnu.eb.windows;
- 
- import org.eclipse.cdt.cross.arc.gnu.Tools;
- import org.eclipse.cdt.managedbuilder.core.IConfiguration;
- import org.eclipse.cdt.managedbuilder.envvar.IBuildEnvironmentVariable;
- import org.eclipse.cdt.managedbuilder.envvar.IConfigurationEnvironmentVariableSupplier;
- import org.eclipse.cdt.managedbuilder.envvar.IEnvironmentVariableProvider;
- import org.eclipse.cdt.managedbuilder.internal.envvar.BuildEnvVar;
- 
+
+import org.eclipse.cdt.cross.arc.gnu.Tools;
+import org.eclipse.cdt.managedbuilder.core.IConfiguration;
+import org.eclipse.cdt.managedbuilder.envvar.IBuildEnvironmentVariable;
+import org.eclipse.cdt.managedbuilder.envvar.IConfigurationEnvironmentVariableSupplier;
+import org.eclipse.cdt.managedbuilder.envvar.IEnvironmentVariableProvider;
+import org.eclipse.cdt.managedbuilder.internal.envvar.BuildEnvVar;
+
  public class ConfigurationEnvironmentSupplier
    implements IConfigurationEnvironmentVariableSupplier
  {

@@ -9,18 +9,17 @@
 *******************************************************************************/
 
 package org.eclipse.cdt.cross.arc.gnu;
- 
- import java.io.PrintStream;
- import org.eclipse.core.runtime.ILog;
- import org.eclipse.core.runtime.IStatus;
- import org.eclipse.core.runtime.Plugin;
- import org.eclipse.core.runtime.Status;
- import org.eclipse.ui.console.ConsolePlugin;
- import org.eclipse.ui.console.IConsole;
- import org.eclipse.ui.console.IConsoleManager;
- import org.eclipse.ui.console.MessageConsole;
- import org.osgi.framework.BundleContext;
- 
+
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.MessageConsole;
+import org.osgi.framework.BundleContext;
+
  public class ARCPlugin extends Plugin
  {
    public static final String PLUGIN_ID = "org.eclipse.cdt.cross.arc.gnu";

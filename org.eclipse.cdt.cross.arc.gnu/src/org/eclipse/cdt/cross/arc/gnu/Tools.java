@@ -9,21 +9,21 @@
 *******************************************************************************/
 
 package org.eclipse.cdt.cross.arc.gnu;
- 
- import java.io.BufferedReader;
- import java.io.IOException;
- import java.io.InputStream;
- import java.io.InputStreamReader;
- import java.util.ArrayList;
- import org.eclipse.cdt.core.envvar.IEnvironmentVariable;
- import org.eclipse.cdt.managedbuilder.core.IConfiguration;
- import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
- import org.eclipse.cdt.managedbuilder.envvar.IEnvironmentVariableProvider;
- import org.eclipse.cdt.managedbuilder.gnu.ui.GnuUIPlugin;
- import org.eclipse.cdt.utils.WindowsRegistry;
- import org.eclipse.cdt.utils.spawner.ProcessFactory;
- import org.eclipse.core.runtime.Status;
- 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import org.eclipse.cdt.core.envvar.IEnvironmentVariable;
+import org.eclipse.cdt.managedbuilder.core.IConfiguration;
+import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
+import org.eclipse.cdt.managedbuilder.gnu.ui.GnuUIPlugin;
+import org.eclipse.cdt.utils.WindowsRegistry;
+import org.eclipse.cdt.utils.spawner.ProcessFactory;
+import org.eclipse.core.runtime.Status;
+
  public class Tools
  {
    private static final String PROPERTY_OS_NAME = "os.name";

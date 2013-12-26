@@ -9,14 +9,13 @@
 *******************************************************************************/
 
 package org.eclipse.cdt.cross.arc.gnu.eb.windows;
- 
- import java.io.File;
- import java.io.PrintStream;
 
- import org.eclipse.cdt.cross.arc.gnu.Tools;
- import org.eclipse.cdt.managedbuilder.core.IBuildPathResolver;
- import org.eclipse.cdt.managedbuilder.core.IConfiguration;
- 
+import java.io.File;
+
+import org.eclipse.cdt.cross.arc.gnu.Tools;
+import org.eclipse.cdt.managedbuilder.core.IBuildPathResolver;
+import org.eclipse.cdt.managedbuilder.core.IConfiguration;
+
  public class PathResolver
    implements IBuildPathResolver
  {
