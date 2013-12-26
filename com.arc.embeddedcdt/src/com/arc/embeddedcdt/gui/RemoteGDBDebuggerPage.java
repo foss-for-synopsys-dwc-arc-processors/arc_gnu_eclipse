@@ -70,7 +70,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
     static String runcom="";//this variable is for saving user's input run command
 	static String externalpath="";//this variable is for saving user's external path
-
+	static String portnumber="";//this variable is for saving user's portnumber
 
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchputtyboolean="true";//this variable is to get external tools current status (Enable/disable)
@@ -103,8 +103,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		catch( CoreException e ) {
 		}
 		try {
-			gdbserverPortNumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
-															  IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT );
+			gdbserverPortNumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
+			portnumber =gdbserverPortNumber;
 		}
 		catch( CoreException e ) {
 		}
@@ -165,6 +165,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 else if (externaltools.equalsIgnoreCase("nSIM")
 				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("ture"))
 		 {
+			 fLaunchComButton.setSelection(false);
+			 fLaunchputtyboolean="false";
+			 fPrgmArgumentsComCom.setEnabled(false);
+	        fPrgmArgumentsLabelCom.setEnabled(false);
+	        
 			 fSearchexternalButton.setText("nSIM Path");
 			 fLaunchernalButton.setSelection(true);
 			 fLaunchernalButton.setText("Launch nSIM");//fLaunchernalButton.setText("Enable Launch OpenOCD");
@@ -175,6 +180,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 else if (externaltools.equalsIgnoreCase("nSIM")
 				 &&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
 		 {
+			 fLaunchComButton.setSelection(false);
+			 fLaunchputtyboolean="false";
+			 fPrgmArgumentsComCom.setEnabled(false);
+	         fPrgmArgumentsLabelCom.setEnabled(false);
+	        
+	        
+			 fLaunchComButton.setSelection(false);
 			 fSearchexternalButton.setText("OpenOCD Path");
 			 fLaunchernalButton.setSelection(false);
 			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
@@ -226,7 +238,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		//configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND, str );
 		String str = fGDBServerPortNumberText.getText();
 		str.trim();
+		portnumber=str;
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
+		CommandTab.initcom=CommandTab.initcom.substring(0, CommandTab.initcom.indexOf(":")+1)+str+ "\r\nload";
+	
+		
+		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr.trim();
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
@@ -267,41 +284,55 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
 		fPrgmArgumentsComboInit.add("JTAG via Ashling");
 		fPrgmArgumentsComboInit.add("nSIM");
+		
 		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				fPrgmArgumentsComboInittext = combo.getText();
 				if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
-				{
+				{   if(portnumber.equalsIgnoreCase(""))
+					  fGDBServerPortNumberText.setText("3333");
+				
 					fPrgmArgumentsTextexternal.setText(externalpath);
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set remotetimeout")&&!CommandTab.initcom.equalsIgnoreCase("set remotetimeout 15 \ntarget remote :3333 \nload")) 
 						{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 						
 					else {
-						CommandTab.fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :3333 \nload");
-						CommandTab.initcom="set remotetimeout 15 \ntarget remote :3333 \nload";
+						CommandTab.fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :"+portnumber+" \nload");
+						CommandTab.initcom="set remotetimeout 15 \ntarget remote :"+portnumber+" \nload";
 					}
 					 
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
+					fGDBServerPortNumberText.setText("2331");
 					fPrgmArgumentsTextexternal.setText("C:\\AshlingOpellaXDforARC");
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set arc opella-target arcem")&&!CommandTab.initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
 						{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 						
 					else {
-						CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :2331 \nload");
-						CommandTab.initcom="set arc opella-target arcem \ntarget remote :2331 \nload";
+						CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :"+portnumber+" \nload");
+						CommandTab.initcom="set arc opella-target arcem \ntarget remote :"+portnumber+" \nload";
 					}
 					 
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
+					fGDBServerPortNumberText.setText("1234");
+					
 					fPrgmArgumentsTextexternal.setText("C:\\Windows\\nSIM_64");
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("target remote localhost:")&&!CommandTab.initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
 					{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 					
-					else CommandTab.fPrgmArgumentsTextInit.setText("target remote localhost:1234 \nload");
+					else {
+						CommandTab.fPrgmArgumentsTextInit.setText("target remote localhost:"+portnumber+" \nload");
+						CommandTab.initcom="target remote localhost:"+portnumber+" \nload";
+					}
+					
+					fLaunchComButton.setSelection(false);
+					fLaunchputtyboolean="false";
+					fPrgmArgumentsComCom.setEnabled(false);
+			        fPrgmArgumentsLabelCom.setEnabled(false);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("GNU simulator"))
 				{
@@ -438,6 +469,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 			public void modifyText( ModifyEvent evt ) {
 				updateLaunchConfigurationDialog();
+				portnumber=fGDBServerPortNumberText.getText();
 			}
 		} );
 		
