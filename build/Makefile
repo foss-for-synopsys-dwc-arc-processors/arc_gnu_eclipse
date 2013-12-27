@@ -14,8 +14,15 @@ all: arc_gnu_plugins.zip
 	cd $< && $(ZIP_BIN) -vr - * > ../$@
 
 arc_gnu_plugins: feature_export
-	$(ECLIPSE_HOME)/eclipse -nosplash -data $(ECLIPSE_WORKSPACE) -application org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher -metadataRepository file://$$(readlink -m $@) -artifactRepository file://$$(readlink -m $@) -source $< -publishArtifacts -compress
-	cp ../updatesite/site.xml $@/
+	cp ../updatesite/site.xml $<
+	$(ECLIPSE_HOME)/eclipse -nosplash \
+	    -data $(ECLIPSE_WORKSPACE) \
+	    -application org.eclipse.equinox.p2.publisher.UpdateSitePublisher \
+	    -metadataRepository file://$$(readlink -m $@) \
+	    -artifactRepository file://$$(readlink -m $@) \
+	    -source $<\
+	    -publishArtifacts \
+	    -compress
 
 feature_export: feature_export.xml
 	$(ECLIPSE_HOME)/eclipse -nosplash -application org.eclipse.ant.core.antRunner -f $< -data $(ECLIPSE_WORKSPACE)
