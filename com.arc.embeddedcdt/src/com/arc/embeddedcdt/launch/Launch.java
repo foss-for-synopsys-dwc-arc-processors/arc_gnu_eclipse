@@ -12,10 +12,13 @@
 
 package com.arc.embeddedcdt.launch;
 
+import gnu.io.CommPortIdentifier;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -69,6 +72,8 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
@@ -204,7 +209,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                     String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
                     String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
-                    String Putty_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PUTTY_DEFAULT,"true");
+                    String Terminal_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
 					prepareSession();
 
 					// Start GDB first. This is required to ensure that if gdbserver
@@ -296,12 +301,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				
 					
 					String COMport="";
-					if(Putty_launch.equalsIgnoreCase("true"))
+					if(Terminal_launch.equalsIgnoreCase("true"))
 					{
-						if(RemoteGDBDebuggerPage.comport!=null) COMport=RemoteGDBDebuggerPage.comport;
+						/*if(RemoteGDBDebuggerPage.comport!=null) COMport=RemoteGDBDebuggerPage.comport;
 						else COMport=Launch.COMserialport().get(0).toString();
 						
-						String[] putty_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
+						String[] Terminal_cmd = { "putty", "-serial", COMport, "-sercfg", "115200,8,n,1" };
 						try {
 							Thread.sleep(3000);
 						} catch (InterruptedException e) {
@@ -309,8 +314,14 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							e.printStackTrace();
 						}
 					    if (!launch.isTerminated()) {
-					      DebugPlugin.newProcess(launch, DebugPlugin.exec(putty_cmd, null), "PuTTY");
-						}
+					      DebugPlugin.newProcess(launch, DebugPlugin.exec(Terminal_cmd, null), "Terminal");
+						}*/
+						try {
+						    PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
+					    } catch (PartInitException e) {
+					        // TODO Auto-generated catch block
+						    e.printStackTrace();
+					    }
 					
 					}
 					
@@ -801,21 +812,24 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		List<String> list = new ArrayList<String>();
 		try {
 			int i=0;
-			String regedit=null;
+			Enumeration portIdEnum= CommPortIdentifier.getPortIdentifiers();
+			while (portIdEnum.hasMoreElements()) {
+				CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
+				String strName = identifier.getName();
+				int nPortType = identifier.getPortType();
+
+				if (nPortType == CommPortIdentifier.PORT_SERIAL)
+					list.add(strName);
+			}
+			/*String regedit=null;
 			while((regedit=WinRegistry.readString(
 					WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM",
 					"\\Device\\VCP"+Integer.toString(i))) != null ){
 					list.add(regedit);
 					i++;
-			}
+			}*/
 
 		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
