@@ -114,7 +114,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	public final static String OPENOCD_PROCESS_LABEL = "OpenOCD";
 	public final static String ASHLING_PROCESS_LABEL = "Ashling GDBserver";
 	public final static String GDB_PROCESS_LABEL = "arc-elf32-gdb";
-	public final static String NSIM_PROCESS_LABEL = "nSIM GDBserve";
+	public final static String NSIM_PROCESS_LABEL = "nSIM GDBserver";
 
 	public ICProject myProject;
 	private ICDISession dsession;
@@ -265,38 +265,76 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					else if (extenal_tools.equalsIgnoreCase("JTAG via OpenOCD")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
-						if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
-						{
-							//extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
-						    extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+						
+							if(RemoteGDBDebuggerPage.isWindowsOS()){
+								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
+								{
+									//extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+						            extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+							    }
+								String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
+								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 							}
-						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+							else {
+								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
+								{
+								    //openocd  -f /usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg -c init -c halt -c reset halt
+								     //extenal_tools_path=eclipsehome+"../share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
+								    extenal_tools_path="/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
+								}
+								String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","reset halt"  };
+								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+							}
 					}
 					else if (extenal_tools.equalsIgnoreCase("nSIM")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start nSIM GDB server
-						if(extenal_tools_path.equalsIgnoreCase("")) 
-						{
-							extenal_tools_path="C:\\Windows\\nSIM_64";
-						}
-						System.setProperty("nSIM", extenal_tools_path);
-						String nsim_dir = System.getProperty("nSIM");
-						File nsim_wd = new java.io.File(nsim_dir); 
-						String[] nsim_cmd = {
-								nsim_dir+ java.io.File.separator + "\\bin\\nsimdrv.exe",
+						
+						if(RemoteGDBDebuggerPage.isWindowsOS()){
+						    if(extenal_tools_path.equalsIgnoreCase("")) 
+						    {
+							    extenal_tools_path="C:\\ARC\\nSIM_64";
+						    }
+						    System.setProperty("nSIM", extenal_tools_path);
+						    String nsim_dir = System.getProperty("nSIM");
+						    String[] nsim_cmd = {nsim_dir+ java.io.File.separator + "\\bin\\nsimdrv",
 								"-gdb", "-propsfile",
 								nsim_dir + java.io.File.separator + "\\systemc\\configs\\nsim_av2em11.props"
 								};	
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(nsim_cmd, nsim_wd), NSIM_PROCESS_LABEL);
+						    File nsim_wd = new java.io.File(nsim_dir); 
+						    DebugPlugin.newProcess(launch, DebugPlugin.exec(nsim_cmd, nsim_wd), NSIM_PROCESS_LABEL);
+						}
+						else {
+							if(extenal_tools_path.equalsIgnoreCase("")) 
+						    {
+							    extenal_tools_path="//opt//ARC//nSIM_64//bin";
+						    }
+						    System.setProperty("nSIM", extenal_tools_path);
+						    String nsim_dir = System.getProperty("nSIM");
+							String[] nsim_cmd = {
+									nsim_dir+ java.io.File.separator + "//bin//nsimdrv",
+									"-gdb", "-propsfile",
+									nsim_dir + java.io.File.separator + "//systemc//configs//nsim_av2em11.props"
+									};	
+						
+						    File nsim_wd = new java.io.File(nsim_dir); 
+						    DebugPlugin.newProcess(launch, DebugPlugin.exec(nsim_cmd, nsim_wd), NSIM_PROCESS_LABEL);
+						}
 					}
 					
 					else if (extenal_tools.equalsIgnoreCase("")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{ //these codes are for "Debug As ARC C/C++ Application", which will launch Openocd automatically
 						
-						extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
-						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+						if(RemoteGDBDebuggerPage.isWindowsOS()){
+							extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+						    String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
+						    DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+						}
+						else {
+							extenal_tools_path="usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
+						    String[] openocd_cmd = {"openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","reset halt"  };
+						    DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+						}
 					}
 				
 					

@@ -23,7 +23,6 @@ Export-Package: com.arc.embeddedcdt,
  org.eclipse.cdt.debug.mi.core.output
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.cdt.launch,
  org.eclipse.cdt.debug.mi.core,
  org.eclipse.debug.ui,
  org.eclipse.cdt.debug.core,
@@ -37,5 +36,4 @@ Require-Bundle: org.eclipse.ui,
  gnu.io.rxtx;bundle-version="2.1.7"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.ibm.icu.text,
- gnu.io
+Import-Package: com.ibm.icu.text

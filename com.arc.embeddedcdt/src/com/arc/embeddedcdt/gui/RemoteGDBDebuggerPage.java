@@ -72,16 +72,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
-	protected Combo fFlowControlCom ;
-	protected Combo fParityCom;
-	protected Combo fStopBitsCom;
-	protected Combo fDataBitsCom;
-	protected Combo fBaudRateCom;
-	protected Label fPrgmArgumentsLabelBaud;
-	protected Label fPrgmArgumentsLabelDataBits;
-	protected Label fPrgmArgumentsLabelStopBits;
-	protected Label fPrgmArgumentsLabelParity;
-	protected Label fPrgmArgumentsLabelFlowControl;
+	
     static String runcom="";//this variable is for saving user's input run command
 	static String externalpath="";//this variable is for saving user's external path
 	static String portnumber="";//this variable is for saving user's portnumber
@@ -269,7 +260,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 	}
-	
+	/* 
+	* @return true---windows 
+	*/
+	public static boolean isWindowsOS(){
+	    boolean isWindowsOS = false;
+	    String osName = System.getProperty("os.name");
+	    if(osName.toLowerCase().indexOf("windows")>-1){
+	      isWindowsOS = true;
+	    }
+	    return isWindowsOS;
+	 }
 	protected void createGdbserverSettingsTab( TabFolder tabFolder ) {
 		TabItem tabItem = new TabItem( tabFolder, SWT.NONE );
 		tabItem.setText( Messages.Gdbserver_Settings_Tab_Name );
@@ -292,7 +293,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		GridData gd = new GridData();
 		label.setLayoutData( gd );
 		gd = new GridData();
-		gd.horizontalSpan =2;
+		gd.horizontalSpan =3;
 		fPrgmArgumentsComboInit =new Combo(subComp, SWT.None);//1-2 and 1-3
 		fPrgmArgumentsComboInit.setLayoutData(gd);
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
@@ -302,12 +303,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
+				boolean isWindows=isWindowsOS(); 
 				fPrgmArgumentsComboInittext = combo.getText();
 				if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
-				{   if(portnumber.equalsIgnoreCase(""))
+				{   //if(portnumber.equalsIgnoreCase(""))
 					  fGDBServerPortNumberText.setText("3333");
 				
-					fPrgmArgumentsTextexternal.setText(externalpath);
+				    if(isWindows){
+					    fPrgmArgumentsTextexternal.setText(externalpath);
+	                }
+	                else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
+				 
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set remotetimeout")&&!CommandTab.initcom.equalsIgnoreCase("set remotetimeout 15 \ntarget remote :3333 \nload")) 
 						{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 						
@@ -333,8 +339,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
 					fGDBServerPortNumberText.setText("1234");
-					
-					fPrgmArgumentsTextexternal.setText("C:\\Windows\\nSIM_64");
+					 
+		             if(isWindows){
+					     fPrgmArgumentsTextexternal.setText("C:\\Windows\\nSIM_64");
+		             }
+		             else fPrgmArgumentsTextexternal.setText("//opt//ARC//nSIM_64//bin");
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("target remote localhost:")&&!CommandTab.initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
 					{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 					
@@ -369,6 +378,25 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			
 			}
 			});
+		fPrgmArgumentsComCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 25;
+		fPrgmArgumentsComCom.setLayoutData(gd);
+		List COM=Launch.COMserialport();
+		for (int ii=0;ii<COM.size();ii++)
+			{
+				fPrgmArgumentsComCom.add((String) COM.get(ii));
+		    }
+		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				comport=combo.getText();
+				updateLaunchConfigurationDialog();
+				}
+			
+		});
+		fPrgmArgumentsLabelCom = new Label(subComp, SWT.NONE);//5-1
+		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
 		fLaunchComButton = new Button(subComp,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(true);
 		gd = new GridData(SWT.BEGINNING);
@@ -412,82 +440,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        }
 	        
 	      });
-		fPrgmArgumentsLabelCom = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
-		fPrgmArgumentsComCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;
-		fPrgmArgumentsComCom.setLayoutData(gd);
-		List COM=Launch.COMserialport();
-		for (int ii=0;ii<COM.size();ii++)
-			{
-				fPrgmArgumentsComCom.add((String) COM.get(ii));
-		    }
-		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				comport=combo.getText();
-				updateLaunchConfigurationDialog();
-				}
-			
-		});
 		
-		
-		fPrgmArgumentsLabelBaud = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelBaud.setText("Baud Rate"); //$NON-NLS-1$		
-		fBaudRateCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		fBaudRateCom.setLayoutData(gd);
-		fBaudRateCom.add("300"); //$NON-NLS-1$
-		fBaudRateCom.add("1200"); //$NON-NLS-1$
-		fBaudRateCom.add("2400"); //$NON-NLS-1$
-		fBaudRateCom.add("4800"); //$NON-NLS-1$
-		fBaudRateCom.add("9600"); //$NON-NLS-1$
-		fBaudRateCom.add("19200"); //$NON-NLS-1$
-		fBaudRateCom.add("38400"); //$NON-NLS-1$
-		fBaudRateCom.add("57600"); //$NON-NLS-1$
-		fBaudRateCom.add("115200"); //$NON-NLS-1$
-		
-		fPrgmArgumentsLabelDataBits = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelDataBits.setText("Data Bits"); //$NON-NLS-1$	
-		fDataBitsCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		fDataBitsCom.setLayoutData(gd);
-		fDataBitsCom.add("5"); //$NON-NLS-1$
-		fDataBitsCom.add("6"); //$NON-NLS-1$
-		fDataBitsCom.add("7"); //$NON-NLS-1$
-		fDataBitsCom.add("8"); //$NON-NLS-1$
-		
-		fPrgmArgumentsLabelStopBits = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelStopBits.setText("Stop Bits"); //$NON-NLS-1$	
-		fStopBitsCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;gd.widthHint=80;
-		fStopBitsCom.setLayoutData(gd);
-		fStopBitsCom.add("1"); //$NON-NLS-1$
-		fStopBitsCom.add("1_5"); //$NON-NLS-1$
-		fStopBitsCom.add("2"); //$NON-NLS-1$
-
-		fPrgmArgumentsLabelParity = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelParity.setText("Parity"); //$NON-NLS-1$	
-		fParityCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;
-		fParityCom.setLayoutData(gd);
-		fParityCom.add("None"); //$NON-NLS-1$
-		fParityCom.add("Even"); //$NON-NLS-1$
-		fParityCom.add("Odd"); //$NON-NLS-1$
-		fParityCom.add("Mark"); //$NON-NLS-1$
-		fParityCom.add("Space"); //$NON-NLS-1$
-
-		fPrgmArgumentsLabelFlowControl = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelFlowControl.setText("Flow Control"); //$NON-NLS-1$	
-		fFlowControlCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;
-		fFlowControlCom.setLayoutData(gd);
-		fFlowControlCom.add("None"); //$NON-NLS-1$
-		fFlowControlCom.add("RTS/CTS"); //$NON-NLS-1$
-		fFlowControlCom.add("Xon/Xoff"); //$NON-NLS-1$
-
 		
 		//-----------------------------------
 		
