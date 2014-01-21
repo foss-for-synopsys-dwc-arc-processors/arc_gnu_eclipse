@@ -343,7 +343,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		             if(isWindows){
 					     fPrgmArgumentsTextexternal.setText("C:\\Windows\\nSIM_64");
 		             }
-		             else fPrgmArgumentsTextexternal.setText("//opt//ARC//nSIM_64//bin");
+		             else fPrgmArgumentsTextexternal.setText("//opt//ARC//nSIM_64");
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("target remote localhost:")&&!CommandTab.initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
 					{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
 					

@@ -307,7 +307,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						else {
 							if(extenal_tools_path.equalsIgnoreCase("")) 
 						    {
-							    extenal_tools_path="//opt//ARC//nSIM_64//bin";
+							    extenal_tools_path="//opt//ARC//nSIM_64";
 						    }
 						    System.setProperty("nSIM", extenal_tools_path);
 						    String nsim_dir = System.getProperty("nSIM");
