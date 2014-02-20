@@ -381,11 +381,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String gdb_init ="";
 						if (!isAshling(configuration))
 						{
-							gdb_init=String.format("target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+							gdb_init=String.format("set remotetimeout 15 \n target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
 						
 						}
 						else 
-							gdb_init=String.format("set arc opella-target arcem target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+							gdb_init=String.format("set arc opella-target arcem \ntarget remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
 						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
 											
 						

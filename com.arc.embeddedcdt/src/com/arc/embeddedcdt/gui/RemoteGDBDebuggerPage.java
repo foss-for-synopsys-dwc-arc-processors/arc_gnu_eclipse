@@ -77,7 +77,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
     static String runcom="";//this variable is for saving user's input run command
 	static String externalpath="";//this variable is for saving user's external path
-	static String portnumber="";//this variable is for saving user's portnumber
 	public static String IPAddress="";//this variable is for saving user's portnumber
 
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
@@ -103,22 +102,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public void initializeFrom( ILaunchConfiguration configuration ) {
 		super.initializeFrom(configuration);
 		String gdbserverCommand = null;
-		String gdbserverPortNumber = null;
 		try {
 			gdbserverCommand = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND,
 														   IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
 		}
 		catch( CoreException e ) {
 		}
-		try {
-			gdbserverPortNumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
-			portnumber =gdbserverPortNumber;
-			fGDBServerIPAddressText.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String()));
-		}
-		catch( CoreException e ) {
-		}
-		//fGDBServerCommandText.setText( gdbserverCommand );
-		fGDBServerPortNumberText.setText( gdbserverPortNumber );
 		
 		fGDBCommandText.setText( "arc-elf32-gdb" );
 		try {
@@ -209,6 +198,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsTextexternal.setEnabled(false);
 			 fLaunchexternalButtonboolean="false";
 		 }
+
+		 // Set host and IP.
+		 try {
+			 String portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,new String() );
+			 fGDBServerPortNumberText.setText( portnumber );
+			 IPAddress=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String());
+			 fGDBServerIPAddressText.setText(IPAddress);
+		 }
+		 catch( CoreException e ) {
+		 }
 		
 		 String Terminallaunch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, new String());//get which external tool is in use
 		 if(!Terminallaunch.equalsIgnoreCase("false"))
@@ -261,11 +260,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		//configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND, str );
 		String str = fGDBServerPortNumberText.getText();
 		str.trim();
-		portnumber=str;
-		IPAddress=fGDBServerIPAddressText.getText();
-		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
 	
-		
+		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
 		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr.trim();
@@ -277,6 +273,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
+		
+		IPAddress=fGDBServerIPAddressText.getText();
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,getAttributeValueFromString(IPAddress));
 	}
 	/* 
@@ -322,55 +320,33 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
-				boolean isWindows=isWindowsOS(); 
+				boolean isWindows=isWindowsOS();
+				String portNumber = fGDBServerPortNumberText.getText();
 				fPrgmArgumentsComboInittext = combo.getText();
-				fGDBServerIPAddressText.setText("localhost");
-				if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
-				{   //if(portnumber.equalsIgnoreCase(""))
-					  fGDBServerPortNumberText.setText("3333");
-				
-				    if(isWindows){
-					    fPrgmArgumentsTextexternal.setText(externalpath);
-	                }
-	                else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
-				 
-					//if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set remotetimeout")&&!CommandTab.initcom.equalsIgnoreCase("set remotetimeout 15 \ntarget remote :3333 \nload")) 
-					//	{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
-						
-					//else {
-					//	CommandTab.fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget "+IPAddress+portnumber+" \nload");
-					//	CommandTab.initcom="set remotetimeout 15 \ntarget "+IPAddress+portnumber+" \nload";
-					//}
+						    
+				if (fPrgmArgumentsComboInittext
+						.equalsIgnoreCase("JTAG via OpenOCD")) {
+					fGDBServerPortNumberText.setText("3333");
+
+					if (isWindows) {
+						fPrgmArgumentsTextexternal.setText(externalpath);
+					} else {
+						fPrgmArgumentsTextexternal
+						.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
+					}
+
 					fPrgmArgumentsComCom.setVisible(true);
-
 					fLaunchComButton.setVisible(true);
-
 					fPrgmArgumentsLabelCom.setVisible(true);
-
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
 					fGDBServerPortNumberText.setText("2331");
 					fPrgmArgumentsTextexternal.setText("C:\\AshlingOpellaXDforARC");
-					//if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set arc opella-target arcem")&&!CommandTab.initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
-					//{
-					//	CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);
-					//	}
-
-					//else {
-					//	CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget "+IPAddress+portnumber+" \nload");
-					//	CommandTab.initcom="set arc opella-target arcem \ntarget "+IPAddress+portnumber+" \nload";
-					//}
-
-					//fPrgmArgumentsComCom.setEnabled(true);
+					
 					fPrgmArgumentsComCom.setVisible(true);
-
-					//fLaunchComButton.setEnabled(true);
-					fLaunchComButton.setVisible(true);
-
-					//fPrgmArgumentsLabelCom.setEnabled(true);		        
+					fLaunchComButton.setVisible(true);		        
 					fPrgmArgumentsLabelCom.setVisible(true);
-
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
@@ -385,13 +361,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fLaunchComButton.setSelection(false);
 					fLaunchTerminalboolean="false";
 
-					//fPrgmArgumentsComCom.setEnabled(false);
 					fPrgmArgumentsComCom.setVisible(false);
-
-					//fLaunchComButton.setEnabled(false);
 					fLaunchComButton.setVisible(false);
-
-					//fPrgmArgumentsLabelCom.setEnabled(false);
 					fPrgmArgumentsLabelCom.setVisible(false);
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
@@ -411,23 +382,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				{
 
 					CommandTab.fPrgmArgumentsTextInit.setText("target sim \nload");
-
 					fPrgmArgumentsComCom.setVisible(true);
-
 					fLaunchComButton.setVisible(true);
-
 					fPrgmArgumentsLabelCom.setVisible(true);
 				}
+
 				if (fPrgmArgumentsComboInittext.lastIndexOf("via")>-1){
 					fSearchexternalLabel.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+4, fPrgmArgumentsComboInittext.length())+" Path:");
 					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+4, fPrgmArgumentsComboInittext.length()));
-				}
-
-				else {
+				} else {
 					fSearchexternalLabel.setText(fPrgmArgumentsComboInittext+" Path:");
 					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext);
 
 				}
+				
 				if(fLaunchComButton.getSelection()==true){
 					fLaunchTerminalboolean="true";
 					fPrgmArgumentsComCom.setEnabled(true);
@@ -491,7 +459,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 			public void modifyText( ModifyEvent evt ) {
 				updateLaunchConfigurationDialog();
-				portnumber=fGDBServerPortNumberText.getText();
+				//portnumber=fGDBServerPortNumberText.getText();
 			}
 		} );
 		
@@ -504,7 +472,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		gd = new GridData();
 		gd.horizontalSpan =4;
 		fGDBServerIPAddressText.setLayoutData( gd );
-		
+		fGDBServerIPAddressText.setText("localhost");
 		fGDBServerIPAddressText.addModifyListener( new ModifyListener() {
 
 			public void modifyText( ModifyEvent evt ) {
