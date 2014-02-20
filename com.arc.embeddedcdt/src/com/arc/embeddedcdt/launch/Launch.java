@@ -368,14 +368,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String initcommand =configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String());
 						if(!initcommand.equalsIgnoreCase(""))
 						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
-						else if (!isnSIM(configuration))
-							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
-						
-						if (isnSIM(configuration)) {
-							String gdb_init = String.format("target remote localhost:%s\nload", configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+						//else if (!isnSIM(configuration))
+						//	executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
+							String gdb_init = String.format("target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
 							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
-						}
-						
+											
 						
 						monitor.worked(2);
 						if (mode.equals(ILaunchManager.DEBUG_MODE))
