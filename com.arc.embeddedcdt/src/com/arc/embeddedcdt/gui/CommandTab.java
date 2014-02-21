@@ -131,7 +131,7 @@ public class CommandTab extends CLaunchConfigurationTab {
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "set remotetimeout 15 \ntarget remote :3333 \nload"));
+			fPrgmArgumentsTextInit.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, ""));
 			fPrgmArgumentsTextRun.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, ""));
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block

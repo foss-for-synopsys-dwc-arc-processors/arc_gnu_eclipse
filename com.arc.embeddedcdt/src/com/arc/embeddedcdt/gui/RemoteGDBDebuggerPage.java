@@ -229,15 +229,23 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 fLaunchComButton.setText("Launch Terminal");
 		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		
-		fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
+		
+		if(isWindowsOS()){
+			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
+		}
+        else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
+		
 		if(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("Ashling")>-1)
 		{
 			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,"C:\\AshlingOpellaXDforARC")); 
 		}
 		else if	(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("OpenOCD")>-1)
 		{
-			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
-			//fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, externalpath)); //$NON-NLS-1$
+			if(isWindowsOS()){
+				fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
+			}
+            else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
+			
 		}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
@@ -344,15 +352,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				{
 					fGDBServerPortNumberText.setText("2331");
 					fPrgmArgumentsTextexternal.setText("C:\\AshlingOpellaXDforARC");
-					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set arc opella-target arcem")&&!CommandTab.initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
-					{
-						CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);
-						}
+					//if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set arc opella-target arcem")&&!CommandTab.initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
+					//{
+					//	CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);
+					//	}
 
-					else {
-						CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget "+IPAddress+portnumber+" \nload");
-						CommandTab.initcom="set arc opella-target arcem \ntarget "+IPAddress+portnumber+" \nload";
-					}
+					//else {
+					//	CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget "+IPAddress+portnumber+" \nload");
+					//	CommandTab.initcom="set arc opella-target arcem \ntarget "+IPAddress+portnumber+" \nload";
+					//}
 
 					//fPrgmArgumentsComCom.setEnabled(true);
 					fPrgmArgumentsComCom.setVisible(true);

@@ -151,6 +151,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		return external_tools.equalsIgnoreCase("nSIM");
 	}
 	
+	private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
+		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
+		return external_tools.equalsIgnoreCase("JTAG via Ashling");
+	}
+	
+
+	
 	@SuppressWarnings("deprecation")
 	public void launch(ILaunchConfiguration configuration, String mode,
 			final ILaunch launch, IProgressMonitor monitor)
@@ -370,8 +377,16 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
 						//else if (!isnSIM(configuration))
 						//	executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
-							String gdb_init = String.format("target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
-							executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
+						
+						String gdb_init ="";
+						if (!isAshling(configuration))
+						{
+							gdb_init=String.format("target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+						
+						}
+						else 
+							gdb_init=String.format("set arc opella-target arcem target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
 											
 						
 						monitor.worked(2);
