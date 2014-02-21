@@ -320,20 +320,36 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						CommandTab.fPrgmArgumentsTextInit.setText("set remotetimeout 15 \ntarget remote :"+portnumber+" \nload");
 						CommandTab.initcom="set remotetimeout 15 \ntarget remote :"+portnumber+" \nload";
 					}
-					 
+					fPrgmArgumentsComCom.setVisible(true);
+
+					fLaunchComButton.setVisible(true);
+
+					fPrgmArgumentsLabelCom.setVisible(true);
+
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
 					fGDBServerPortNumberText.setText("2331");
 					fPrgmArgumentsTextexternal.setText("C:\\AshlingOpellaXDforARC");
 					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("set arc opella-target arcem")&&!CommandTab.initcom.equalsIgnoreCase("set arc opella-target arcem \ntarget remote :2331 \nload")) 
-						{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
-						
+					{
+						CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);
+						}
+
 					else {
 						CommandTab.fPrgmArgumentsTextInit.setText("set arc opella-target arcem \ntarget remote :"+portnumber+" \nload");
 						CommandTab.initcom="set arc opella-target arcem \ntarget remote :"+portnumber+" \nload";
 					}
-					 
+
+					//fPrgmArgumentsComCom.setEnabled(true);
+					fPrgmArgumentsComCom.setVisible(true);
+
+					//fLaunchComButton.setEnabled(true);
+					fLaunchComButton.setVisible(true);
+
+					//fPrgmArgumentsLabelCom.setEnabled(true);		        
+					fPrgmArgumentsLabelCom.setVisible(true);
+
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
@@ -344,95 +360,87 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							+ "bin" + java.io.File.separator + "nsimdrv");
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
-					
+
 					fLaunchComButton.setSelection(false);
 					fLaunchTerminalboolean="false";
-					fPrgmArgumentsComCom.setEnabled(false);
-			        fPrgmArgumentsLabelCom.setEnabled(false);
+
+					//fPrgmArgumentsComCom.setEnabled(false);
+					fPrgmArgumentsComCom.setVisible(false);
+
+					//fLaunchComButton.setEnabled(false);
+					fLaunchComButton.setVisible(false);
+
+					//fPrgmArgumentsLabelCom.setEnabled(false);
+					fPrgmArgumentsLabelCom.setVisible(false);
+					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
+
+					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
+
+					if (page != null) {
+						IViewReference[] viewReferences = page.getViewReferences();
+						for (IViewReference ivr : viewReferences) {
+							if (ivr.getId().equalsIgnoreCase(viewId)
+									|| ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
+								page.hideView(ivr);
+							}
+						}
+					}
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("GNU simulator"))
 				{
-								
+
 					CommandTab.fPrgmArgumentsTextInit.setText("target sim \nload");
+
+					fPrgmArgumentsComCom.setVisible(true);
+
+					fLaunchComButton.setVisible(true);
+
+					fPrgmArgumentsLabelCom.setVisible(true);
 				}
 				if (fPrgmArgumentsComboInittext.lastIndexOf("via")>-1){
 					fSearchexternalButton.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length())+" Path");
 					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length()));
 				}
-				
+
 				else {
 					fSearchexternalButton.setText(fPrgmArgumentsComboInittext+" Path");
 					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext);
-				
+
 				}
-				
-				updateLaunchConfigurationDialog();
-				
-			
-			}
-			});
-		fPrgmArgumentsComCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;
-		fPrgmArgumentsComCom.setLayoutData(gd);
-		List COM=Launch.COMserialport();
-		for (int ii=0;ii<COM.size();ii++)
-			{
-				fPrgmArgumentsComCom.add((String) COM.get(ii));
-		    }
-		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				comport=combo.getText();
-				updateLaunchConfigurationDialog();
+				if(fLaunchComButton.getSelection()==true){
+					fLaunchTerminalboolean="true";
+					fPrgmArgumentsComCom.setEnabled(true);
+					fPrgmArgumentsLabelCom.setEnabled(true);
+					try {
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
+					} catch (PartInitException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			
-		});
-		fPrgmArgumentsLabelCom = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
-		fLaunchComButton = new Button(subComp,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchComButton.setSelection(true);
-		gd = new GridData(SWT.BEGINNING);
-		fLaunchComButton.setLayoutData(gd);
-		fLaunchComButton.setText("Launch Terminal");
-		fLaunchComButton.addSelectionListener(new SelectionListener() {
-	        public void widgetSelected(SelectionEvent event) {
-	        	if(fLaunchComButton.getSelection()==true){
-	        		fLaunchTerminalboolean="true";
-	        	    fPrgmArgumentsComCom.setEnabled(true);
-	        	    fPrgmArgumentsLabelCom.setEnabled(true);
-	        	    try {
-					    PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
-				    } catch (PartInitException e) {
-				        // TODO Auto-generated catch block
-					    e.printStackTrace();
-				    }
-	        	}
-	        	else {
-	        		IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
+				else {
+					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
 					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
 
 					if (page != null) {
-				        IViewReference[] viewReferences = page.getViewReferences();
-				        for (IViewReference ivr : viewReferences) {
-				            if (ivr.getId().equalsIgnoreCase(viewId)
-				                    || ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
-				                page.hideView(ivr);
-				            }
-				        }
-				    }
-	        		fLaunchTerminalboolean="false";
-		        	fPrgmArgumentsComCom.setEnabled(false);
-		        	fPrgmArgumentsLabelCom.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
+						IViewReference[] viewReferences = page.getViewReferences();
+						for (IViewReference ivr : viewReferences) {
+							if (ivr.getId().equalsIgnoreCase(viewId)
+									|| ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
+								page.hideView(ivr);
+							}
+						}
+					}
+					fLaunchTerminalboolean="false";
+					fPrgmArgumentsComCom.setEnabled(false);
+					fPrgmArgumentsLabelCom.setEnabled(false);
+				}
+				updateLaunchConfigurationDialog();
 
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
+			
+			}
+			});
 		
 		
 		//-----------------------------------
@@ -513,6 +521,68 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 		} );
 		
+		fPrgmArgumentsComCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 25;
+		fPrgmArgumentsComCom.setLayoutData(gd);
+		List COM=Launch.COMserialport();
+		for (int ii=0;ii<COM.size();ii++)
+			{
+				fPrgmArgumentsComCom.add((String) COM.get(ii));
+		    }
+		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				comport=combo.getText();
+				updateLaunchConfigurationDialog();
+				}
+			
+		});
+		fPrgmArgumentsLabelCom = new Label(subComp, SWT.NONE);//5-1
+		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
+		fLaunchComButton = new Button(subComp,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchComButton.setSelection(true);
+		gd = new GridData(SWT.BEGINNING);
+		fLaunchComButton.setLayoutData(gd);
+		fLaunchComButton.setText("Launch Terminal");
+		fLaunchComButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+	        	if(fLaunchComButton.getSelection()==true){
+	        		fLaunchTerminalboolean="true";
+	        	    fPrgmArgumentsComCom.setEnabled(true);
+	        	    fPrgmArgumentsLabelCom.setEnabled(true);
+	        	    try {
+					    PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
+				    } catch (PartInitException e) {
+				        // TODO Auto-generated catch block
+					    e.printStackTrace();
+				    }
+	        	}
+	        	else {
+	        		IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
+
+					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
+
+					if (page != null) {
+				        IViewReference[] viewReferences = page.getViewReferences();
+				        for (IViewReference ivr : viewReferences) {
+				            if (ivr.getId().equalsIgnoreCase(viewId)
+				                    || ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
+				                page.hideView(ivr);
+				            }
+				        }
+				    }
+	        		fLaunchTerminalboolean="false";
+		        	fPrgmArgumentsComCom.setEnabled(false);
+		        	fPrgmArgumentsLabelCom.setEnabled(false);
+	           	}
+	        	updateLaunchConfigurationDialog();
+	        }
+
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
 		
 	}
 

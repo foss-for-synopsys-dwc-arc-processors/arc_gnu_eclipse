@@ -389,13 +389,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							// This will make the GDB console frontmost.
 							l.addStragglers();
 							monitor.subTask("Execute GDB Run commands");
-							boolean stop_boolean=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT);
+							/*boolean stop_boolean=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT);
 							String stop_value=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
 							if(stop_boolean)
 								executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,stop_value), monitor);	
 							else
 								executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,new String())), monitor);
-								
+							*/	
 						}
 						
 					    else if (mode.equals(ILaunchManager.RUN_MODE)){
