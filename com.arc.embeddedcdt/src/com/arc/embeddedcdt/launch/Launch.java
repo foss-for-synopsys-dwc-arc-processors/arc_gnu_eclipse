@@ -72,6 +72,16 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.tm.internal.terminal.connector.TerminalConnector;
+import org.eclipse.tm.internal.terminal.provisional.api.provider.TerminalConnectorImpl;
+import org.eclipse.tm.internal.terminal.serial.SerialConnector;
+import org.eclipse.tm.internal.terminal.serial.SerialSettings;
+import org.eclipse.tm.internal.terminal.view.TerminalView;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
@@ -156,6 +166,56 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		return external_tools.equalsIgnoreCase("JTAG via Ashling");
 	}
 	
+	private void startTerminal() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+
+        if (workbench.getDisplay().getThread() != Thread.currentThread()){
+            // Note that we do the work asynchronously so that we don't lock this thread. It is used
+            // to launch the debugger engine.
+            workbench.getDisplay().asyncExec(new Runnable(){
+                @Override
+                public void run () {
+                	startTerminal();
+                }});
+            return;
+        }
+		
+		// Assertion: we're in the UI thread.
+		final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+
+		class MyClass extends SerialConnector {
+			public MyClass(SerialSettings settings) { super(settings); }
+			@Override
+			public void initialize() { }
+		}
+
+		TerminalConnector.Factory factory = new TerminalConnector.Factory() {
+			public TerminalConnectorImpl makeConnector() throws Exception {
+				SerialSettings mySettings = new SerialSettings();
+				mySettings.setBaudRate("115200");
+				mySettings.setDataBits("7");
+				mySettings.setFlowControl("1");
+				mySettings.setParity("N");
+				mySettings.setSerialPort(RemoteGDBDebuggerPage.comport);
+				mySettings.setStopBits("1");
+				return new MyClass(mySettings);
+			}
+		};
+
+		TerminalConnector c1 = new TerminalConnector(factory, "connector-id",
+				"ARC GNU IDE", false /* is hidden */);
+
+		TerminalView viewPart;
+		try {
+			viewPart = (TerminalView) (activePage.showView(
+					"org.eclipse.tm.terminal.view.TerminalView", null,
+					IWorkbenchPage.VIEW_ACTIVATE));
+			viewPart.newTerminal(c1);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void launch(ILaunchConfiguration configuration, String mode,
 			final ILaunch launch, IProgressMonitor monitor)
@@ -209,6 +269,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			// set the default source locator if required
 			setDefaultSourceLocator(launch, configuration);
 
+			String terminal_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
+			if (terminal_launch.equalsIgnoreCase("true"))
+				startTerminal();
+			
 			if (mode.equals(ILaunchManager.DEBUG_MODE)||mode.equals(ILaunchManager.RUN_MODE))
 			{
 				ICDebugConfiguration debugConfig = getDebugConfig(configuration);
@@ -223,8 +287,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                     String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
                     String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
-                    String Terminal_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
-					prepareSession();
+                    prepareSession();
 
 					// Start GDB first. This is required to ensure that if gdbserver
 					// will fail to start up then GDB will be closed. Eclipse cannot

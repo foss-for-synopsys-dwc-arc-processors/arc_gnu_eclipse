@@ -202,9 +202,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 // Set host and IP.
 		 try {
 			 String portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,new String() );
-			 fGDBServerPortNumberText.setText( portnumber );
+			 if(portnumber.equalsIgnoreCase("")){
+				 portnumber="3333"; 
+			 }
+     		 fGDBServerPortNumberText.setText( portnumber );
 			 IPAddress=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String());
+			 if(IPAddress.equalsIgnoreCase("")){
+				 IPAddress="localhost"; 
+			 }
 			 fGDBServerIPAddressText.setText(IPAddress);
+			 
+			 String comserial=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+			 if(!comserial.equalsIgnoreCase("")){
+				 fPrgmArgumentsComCom.setText(comserial); 
+			 }
 		 }
 		 catch( CoreException e ) {
 		 }
@@ -268,7 +279,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,externalpath);
-			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
 		
@@ -321,7 +332,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				boolean isWindows=isWindowsOS();
-				String portNumber = fGDBServerPortNumberText.getText();
+				fGDBServerPortNumberText.getText();
+				//fGDBServerIPAddressText.setText("localhost");
 				fPrgmArgumentsComboInittext = combo.getText();
 						    
 				if (fPrgmArgumentsComboInittext
@@ -329,7 +341,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fGDBServerPortNumberText.setText("3333");
 
 					if (isWindows) {
-						fPrgmArgumentsTextexternal.setText(externalpath);
+						fPrgmArgumentsTextexternal.setText("${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
 					} else {
 						fPrgmArgumentsTextexternal
 						.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
@@ -400,30 +412,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fLaunchTerminalboolean="true";
 					fPrgmArgumentsComCom.setEnabled(true);
 					fPrgmArgumentsLabelCom.setEnabled(true);
-					try {
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
-					} catch (PartInitException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				else {
-					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
-
-					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
-
-					if (page != null) {
-						IViewReference[] viewReferences = page.getViewReferences();
-						for (IViewReference ivr : viewReferences) {
-							if (ivr.getId().equalsIgnoreCase(viewId)
-									|| ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
-								page.hideView(ivr);
-							}
-						}
-					}
-					fLaunchTerminalboolean="false";
-					fPrgmArgumentsComCom.setEnabled(false);
-					fPrgmArgumentsLabelCom.setEnabled(false);
 				}
 				updateLaunchConfigurationDialog();
 
@@ -573,27 +561,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        		fLaunchTerminalboolean="true";
 	        	    fPrgmArgumentsComCom.setEnabled(true);
 	        	    fPrgmArgumentsLabelCom.setEnabled(true);
-	        	    try {
-					    PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
-				    } catch (PartInitException e) {
-				        // TODO Auto-generated catch block
-					    e.printStackTrace();
-				    }
 	        	}
 	        	else {
-	        		IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
-
-					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
-
-					if (page != null) {
-				        IViewReference[] viewReferences = page.getViewReferences();
-				        for (IViewReference ivr : viewReferences) {
-				            if (ivr.getId().equalsIgnoreCase(viewId)
-				                    || ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
-				                page.hideView(ivr);
-				            }
-				        }
-				    }
 	        		fLaunchTerminalboolean="false";
 		        	fPrgmArgumentsComCom.setEnabled(false);
 		        	fPrgmArgumentsLabelCom.setEnabled(false);
