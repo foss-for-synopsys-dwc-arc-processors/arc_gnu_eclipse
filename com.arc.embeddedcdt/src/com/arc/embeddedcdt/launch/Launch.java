@@ -157,8 +157,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	}
 	
 
-	
-	@SuppressWarnings("deprecation")
 	public void launch(ILaunchConfiguration configuration, String mode,
 			final ILaunch launch, IProgressMonitor monitor)
 			throws CoreException
@@ -285,8 +283,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							if(RemoteGDBDebuggerPage.isWindowsOS()){
 								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
 								{
-									//extenal_tools_path="C:\\ARC48\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
-						            extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
+									extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
 							    }
 								String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
 								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
@@ -294,8 +291,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 							else {
 								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
 								{
-								    //openocd  -f /usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg -c init -c halt -c reset halt
-								     //extenal_tools_path=eclipsehome+"../share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
 								    extenal_tools_path="/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
 								}
 								String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","reset halt"  };
@@ -337,33 +332,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						}
 					}
 				
-					
-					String COMport="";
-					if(Terminal_launch.equalsIgnoreCase("true"))
-					{
-						/*
-						 * if(RemoteGDBDebuggerPage.comport!=null)
-						 * COMport=RemoteGDBDebuggerPage.comport; else
-						 * COMport=Launch.COMserialport().get(0).toString();
-						 * 
-						 * String[] Terminal_cmd = { "putty", "-serial",
-						 * COMport, "-sercfg", "115200,8,n,1" }; try {
-						 * Thread.sleep(3000); } catch (InterruptedException e)
-						 * { // TODO Auto-generated catch block
-						 * e.printStackTrace(); } if (!launch.isTerminated()) {
-						 * DebugPlugin.newProcess(launch,
-						 * DebugPlugin.exec(Terminal_cmd, null), "Terminal"); }
-						 */
-						// try {
-						// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.tm.terminal.view.TerminalView");
-						// } catch (PartInitException e) {
-						// TODO Auto-generated catch block
-						// e.printStackTrace();
-						// }
-					
-					}
-					
-					// setFactory(dtargets);
 					try
 					{
 						monitor.subTask("Running .gdbinit");
@@ -375,8 +343,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String initcommand =configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String());
 						if(!initcommand.equalsIgnoreCase(""))
 						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
-						//else if (!isnSIM(configuration))
-						//	executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	"set remotetimeout 15 \ntarget remote :3333 \nload"), monitor);
 						
 						String gdb_init ="";
 						if (!isAshling(configuration))
@@ -400,14 +366,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 							// This will make the GDB console frontmost.
 							l.addStragglers();
-							monitor.subTask("Execute GDB Run commands");
-							/*boolean stop_boolean=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT);
-							String stop_value=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
-							if(stop_boolean)
-								executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,stop_value), monitor);	
-							else
-								executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,new String())), monitor);
-							*/	
+							monitor.subTask("Execute GDB Run commands");	
 						}
 						
 					    else if (mode.equals(ILaunchManager.RUN_MODE)){
@@ -861,7 +820,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	{
 		List<String> list = new ArrayList<String>();
 		try {
-			int i=0;
 			Enumeration portIdEnum= CommPortIdentifier.getPortIdentifiers();
 			while (portIdEnum.hasMoreElements()) {
 				CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
@@ -871,13 +829,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				if (nPortType == CommPortIdentifier.PORT_SERIAL)
 					list.add(strName);
 			}
-			/*String regedit=null;
-			while((regedit=WinRegistry.readString(
-					WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM",
-					"\\Device\\VCP"+Integer.toString(i))) != null ){
-					list.add(regedit);
-					i++;
-			}*/
 
 		} catch (IllegalArgumentException e1) {
 			// TODO Auto-generated catch block
