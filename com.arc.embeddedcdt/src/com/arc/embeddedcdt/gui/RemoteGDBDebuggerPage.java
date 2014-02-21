@@ -64,8 +64,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected static  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
+	protected Text fGDBServerIPAddressText;
 	public static String comport=null;//this variable is for launching the exactly com port chosen by users
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
+	protected Label fSearchexternalLabel;
 	protected Button fLaunchComButton;//this variable is for launching COM port
 	protected Button fLaunchernalButton;//this button is for launching the external tools
 	protected Button fLaunchterminallButton;//this button is for launching the external tools
@@ -76,6 +78,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     static String runcom="";//this variable is for saving user's input run command
 	static String externalpath="";//this variable is for saving user's external path
 	static String portnumber="";//this variable is for saving user's portnumber
+	static String IPAddress="";//this variable is for saving user's portnumber
 
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
@@ -127,21 +130,23 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		 if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("true"))
 		 {
-			 fSearchexternalButton.setText(externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length())+" Path");
+			 fSearchexternalLabel.setText(externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length())+" Path:");
 			 fLaunchernalButton.setSelection(true);//setText("Enable Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));//get current status
 			 fLaunchexternalButtonboolean="true";
+			 fSearchexternalLabel.setEnabled(true);
 			 fSearchexternalButton.setEnabled(true);
 			 fPrgmArgumentsTextexternal.setEnabled(true);
-			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));
+			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length()));
 			 }
 		 else  if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false")) 
 		 {
-			 fSearchexternalButton.setText(externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length())+" Path");
+			 fSearchexternalLabel.setText(externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length())+" Path:");
 			 fLaunchernalButton.setSelection(false);//fLaunchernalButton.setText("Disable Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));//get current status
 			 fLaunchexternalButtonboolean="false";
+			 fSearchexternalLabel.setEnabled(false);
 			 fSearchexternalButton.setEnabled(false);
 			 fPrgmArgumentsTextexternal.setEnabled(false);
-			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));
+			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length()));
 			
 		 }
 		 else if (externaltools.lastIndexOf("via")<1
@@ -149,9 +154,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				 &&!externaltools.equalsIgnoreCase("nSIM")
 				 )
 		 {
-			 fSearchexternalButton.setText("OpenOCD Path");
+			 fSearchexternalLabel.setText("OpenOCD Path:");
 			 fLaunchernalButton.setSelection(true);
 			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Enable Launch OpenOCD");
+			 fSearchexternalLabel.setEnabled(true);
 			 fSearchexternalButton.setEnabled(true);
 			 fPrgmArgumentsTextexternal.setEnabled(true);
 			 fLaunchexternalButtonboolean="true";
@@ -160,9 +166,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				 &&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false")
 				 &&!externaltools.equalsIgnoreCase("nSIM"))
 		 {
-			 fSearchexternalButton.setText("OpenOCD Path");
+			 fSearchexternalLabel.setText("OpenOCD Path:");
 			 fLaunchernalButton.setSelection(false);
 			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
+			 fSearchexternalLabel.setEnabled(false);
 			 fSearchexternalButton.setEnabled(false);
 			 fPrgmArgumentsTextexternal.setEnabled(false);
 			 fLaunchexternalButtonboolean="false";
@@ -175,9 +182,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsComCom.setEnabled(false);
 	        fPrgmArgumentsLabelCom.setEnabled(false);
 	        
-			 fSearchexternalButton.setText("nSIM Path");
+	         fSearchexternalLabel.setText("nSIM Path:");
 			 fLaunchernalButton.setSelection(true);
 			 fLaunchernalButton.setText("Launch nSIM");//fLaunchernalButton.setText("Enable Launch OpenOCD");
+			 fSearchexternalLabel.setEnabled(true);
 			 fSearchexternalButton.setEnabled(true);
 			 fPrgmArgumentsTextexternal.setEnabled(true);
 			 fLaunchexternalButtonboolean="true";
@@ -192,10 +200,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        
 	        
 			 fLaunchComButton.setSelection(false);
-			 fSearchexternalButton.setText("OpenOCD Path");
+			 fSearchexternalLabel.setText("OpenOCD Path:");
 			 fLaunchernalButton.setSelection(false);
 			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
-			 fSearchexternalButton.setEnabled(false);
+			 fSearchexternalLabel.setEnabled(false);
 			 fPrgmArgumentsTextexternal.setEnabled(false);
 			 fLaunchexternalButtonboolean="false";
 		 }
@@ -282,17 +290,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		tabItem.setControl( comp );
 		
 		Composite subComp = new Composite(comp, SWT.NULL);
-		subComp.setLayout(new GridLayout(4, true));
+		subComp.setLayout(new GridLayout(5, true));
 		subComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		((GridLayout)subComp.getLayout()).makeColumnsEqualWidth = false;
 		subComp.setFont( tabFolder.getFont() );
 		
 		Label label = new Label(subComp, SWT.LEFT);		
-		label.setText("ARC GDB Server");
+		label.setText("ARC GDB Server:");
 		GridData gd = new GridData();
 		label.setLayoutData( gd );
 		gd = new GridData();
-		gd.horizontalSpan =3;
+		gd.horizontalSpan =4;
 		fPrgmArgumentsComboInit =new Combo(subComp, SWT.None);//1-2 and 1-3
 		fPrgmArgumentsComboInit.setLayoutData(gd);
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
@@ -398,12 +406,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fPrgmArgumentsLabelCom.setVisible(true);
 				}
 				if (fPrgmArgumentsComboInittext.lastIndexOf("via")>-1){
-					fSearchexternalButton.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length())+" Path");
-					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+3, fPrgmArgumentsComboInittext.length()));
+					fSearchexternalLabel.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+4, fPrgmArgumentsComboInittext.length())+" Path:");
+					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+4, fPrgmArgumentsComboInittext.length()));
 				}
 
 				else {
-					fSearchexternalButton.setText(fPrgmArgumentsComboInittext+" Path");
+					fSearchexternalLabel.setText(fPrgmArgumentsComboInittext+" Path:");
 					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext);
 
 				}
@@ -446,6 +454,56 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		//-----------------------------------
 		
 		
+		
+		//fGDBServerCommandText = new Text(subComp, SWT.SINGLE | SWT.BORDER);
+		//GridData data = new GridData();
+		//fGDBServerCommandText.setLayoutData(data);
+		//fGDBServerCommandText.addModifyListener( new ModifyListener() {
+
+		//	public void modifyText( ModifyEvent evt ) {
+		//		updateLaunchConfigurationDialog();
+		//	}
+		//} );
+		label = new Label(subComp, SWT.LEFT);
+		label.setText(Messages.Port_number_textfield_label);
+		gd = new GridData();
+		gd.horizontalSpan =1;
+		label.setLayoutData( gd );
+		
+		fGDBServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		gd = new GridData();
+		gd.horizontalSpan =4;
+		fGDBServerPortNumberText.setLayoutData(gd);
+		fGDBServerPortNumberText.addModifyListener( new ModifyListener() {
+
+			public void modifyText( ModifyEvent evt ) {
+				updateLaunchConfigurationDialog();
+				portnumber=fGDBServerPortNumberText.getText();
+			}
+		} );
+		
+		label = new Label(subComp, SWT.LEFT);
+		label.setText("Host Address:");
+		gd = new GridData();
+		gd.horizontalSpan =1;
+		label.setLayoutData( gd );
+		fGDBServerIPAddressText = new Text(subComp, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		gd = new GridData();
+		gd.horizontalSpan =4;
+		fGDBServerIPAddressText.setLayoutData( gd );
+		fGDBServerIPAddressText.addModifyListener( new ModifyListener() {
+
+			public void modifyText( ModifyEvent evt ) {
+				updateLaunchConfigurationDialog();
+				IPAddress=fGDBServerIPAddressText.getText();
+			}
+		} );
+		
+		fSearchexternalLabel=new Label(subComp, SWT.LEFT);
+		fSearchexternalLabel.setText("Path");
+		gd = new GridData();
+		fSearchexternalLabel.setLayoutData(gd);
+			
 		fPrgmArgumentsTextexternal=new Text(subComp, SWT.SINGLE | SWT.BORDER);//6-1
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint=400;
@@ -457,7 +515,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				updateLaunchConfigurationDialog();
 			}
 		});
-		fSearchexternalButton = createPushButton(subComp, "Externaltools Path", null); //$NON-NLS-1$  //6-2
+		
+		fSearchexternalButton = createPushButton(subComp, "Browse", null); //$NON-NLS-1$  //6-2
 		gd = new GridData(SWT.BEGINNING);
 		fSearchexternalButton.setLayoutData(gd);
 		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
@@ -481,11 +540,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        	if(fLaunchernalButton.getSelection()==true){
 	        	fLaunchexternalButtonboolean="true";
 	        	fSearchexternalButton.setEnabled(true);
+	        	fSearchexternalLabel.setEnabled(true);
 	        	fPrgmArgumentsTextexternal.setEnabled(true);
 	        	}
 	        	else {
 		        	fLaunchexternalButtonboolean="false";
 		        	fSearchexternalButton.setEnabled(false);
+		        	fSearchexternalLabel.setEnabled(false);
 		        	fPrgmArgumentsTextexternal.setEnabled(false);
 	           	}
 	        	updateLaunchConfigurationDialog();
@@ -495,35 +556,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        }
 	        
 	      });
-		//fGDBServerCommandText = new Text(subComp, SWT.SINGLE | SWT.BORDER);
-		//GridData data = new GridData();
-		//fGDBServerCommandText.setLayoutData(data);
-		//fGDBServerCommandText.addModifyListener( new ModifyListener() {
-
-		//	public void modifyText( ModifyEvent evt ) {
-		//		updateLaunchConfigurationDialog();
-		//	}
-		//} );
-		label = new Label(subComp, SWT.LEFT);
-		label.setText(Messages.Port_number_textfield_label);
-		gd = new GridData();
-		gd.horizontalSpan =3;
-		label.setLayoutData( gd );
 		
-		fGDBServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER);
-		GridData data = new GridData();
-		fGDBServerPortNumberText.setLayoutData(data);
-		fGDBServerPortNumberText.addModifyListener( new ModifyListener() {
-
-			public void modifyText( ModifyEvent evt ) {
-				updateLaunchConfigurationDialog();
-				portnumber=fGDBServerPortNumberText.getText();
-			}
-		} );
 		
+		fPrgmArgumentsLabelCom = new Label(subComp, SWT.NONE);//5-1
+		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
+		gd = new GridData(SWT.BEGINNING);
+		fPrgmArgumentsLabelCom.setLayoutData(gd);
 		fPrgmArgumentsComCom =new Combo(subComp, SWT.None);//5-2 and 5-3 
 		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.heightHint = 25;
+		gd.horizontalSpan =3;
 		fPrgmArgumentsComCom.setLayoutData(gd);
 		List COM=Launch.COMserialport();
 		for (int ii=0;ii<COM.size();ii++)
@@ -538,10 +579,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				}
 			
 		});
-		fPrgmArgumentsLabelCom = new Label(subComp, SWT.NONE);//5-1
-		fPrgmArgumentsLabelCom.setText("COM  Ports"); //$NON-NLS-1$
+		
 		fLaunchComButton = new Button(subComp,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(true);
+	
 		gd = new GridData(SWT.BEGINNING);
 		fLaunchComButton.setLayoutData(gd);
 		fLaunchComButton.setText("Launch Terminal");
