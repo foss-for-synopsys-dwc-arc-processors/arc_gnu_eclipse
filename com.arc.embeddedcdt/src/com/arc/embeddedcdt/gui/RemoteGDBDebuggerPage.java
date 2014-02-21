@@ -245,7 +245,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		str.trim();
 		portnumber=str;
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
-		CommandTab.initcom=CommandTab.initcom.substring(0, CommandTab.initcom.indexOf(":")+1)+str+ "\r\nload";
 	
 		
 		
@@ -339,18 +338,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
 					fGDBServerPortNumberText.setText("1234");
-					 
-		             if(isWindows){
-					     fPrgmArgumentsTextexternal.setText("C:\\Windows\\nSIM_64");
-		             }
-		             else fPrgmArgumentsTextexternal.setText("//opt//ARC//nSIM_64");
-					if(!CommandTab.initcom.isEmpty()&&CommandTab.initcom.startsWith("target remote localhost:")&&!CommandTab.initcom.equalsIgnoreCase("target remote localhost:1234 \r\nload")) 
-					{CommandTab.fPrgmArgumentsTextInit.setText(CommandTab.initcom);}
-					
-					else {
-						CommandTab.fPrgmArgumentsTextInit.setText("target remote localhost:"+portnumber+" \nload");
-						CommandTab.initcom="target remote localhost:"+portnumber+" \nload";
-					}
+					fPrgmArgumentsTextexternal.setText(System
+							.getenv("NSIM_HOME")
+							+ java.io.File.separator
+							+ "bin" + java.io.File.separator + "nsimdrv");
+					if (!CommandTab.initcom.isEmpty())
+						CommandTab.initcom="";
 					
 					fLaunchComButton.setSelection(false);
 					fLaunchTerminalboolean="false";
