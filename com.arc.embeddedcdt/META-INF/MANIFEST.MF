@@ -34,9 +34,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.cdt.launch;bundle-version="7.1.0",
  gnu.io.rxtx;bundle-version="2.1.7",
- org.eclipse.tm.terminal;bundle-version="3.2.100",
- org.eclipse.tm.terminal.serial;bundle-version="2.1.300",
- org.eclipse.tm.terminal.view;bundle-version="2.4.100"
+ org.eclipse.tm.terminal,
+ org.eclipse.tm.terminal.serial,
+ org.eclipse.tm.terminal.view
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.ibm.icu.text

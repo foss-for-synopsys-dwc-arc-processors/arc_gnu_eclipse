@@ -212,10 +212,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 }
 			 fGDBServerIPAddressText.setText(IPAddress);
 			 
-			 String comserial=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
-			 if(!comserial.equalsIgnoreCase("")){
-				 fPrgmArgumentsComCom.setText(comserial); 
+			 comport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+			 
+			 if(!comport.equalsIgnoreCase(""))
+			 {
+				 int privious=fPrgmArgumentsComCom.indexOf(comport);
+				 if(privious>-1)
+				     fPrgmArgumentsComCom.remove(privious);
+				 fPrgmArgumentsComCom.add(comport, 0);
 			 }
+			 
+			
 		 }
 		 catch( CoreException e ) {
 		 }
@@ -537,9 +544,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComCom.setLayoutData(gd);
 		List COM=Launch.COMserialport();
 		for (int ii=0;ii<COM.size();ii++)
-			{
-				fPrgmArgumentsComCom.add((String) COM.get(ii));
-		    }
+		{
+			    String currentcom=(String) COM.get(ii);
+		    	fPrgmArgumentsComCom.add(currentcom);
+        }
 		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
