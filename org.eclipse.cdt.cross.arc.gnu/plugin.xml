@@ -629,6 +629,11 @@
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2em"
                   name="ARCv2EM">
             </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=ARCv2HS"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
+                  name="ARCv2HS">
+            </enumeratedOptionValue>
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4406,6 +4411,102 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
+      <template
+            id="org.eclipse.cdt.build.core.templates.ARCHelloWorldCCProject">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcery.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcery.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcery.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.yagarto.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.yagarto.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.summon.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.summon.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.summon.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.embedded.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.embedded.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.embedded.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
+         </toolChain>
+      </template>
    </extension>
    <extension
          point="org.eclipse.cdt.core.templates">
@@ -4418,15 +4519,34 @@
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM4_Empty_C_Project"
-            location="templates/projecttemplates/EM4_Empty_Project/template.xml"
+            location="$nl$/templates/projecttemplates/EM4_Empty_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM6_Empty_C_Project"
-            location="templates/projecttemplates/EM6_Empty_Project/template.xml"
+            location="$nl$/templates/projecttemplates/EM6_Empty_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
+            <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM4_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/EM4_Empty_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM6_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/EM6_Empty_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_CPP_Project"
+            location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+
    </extension>
 
 </plugin>
