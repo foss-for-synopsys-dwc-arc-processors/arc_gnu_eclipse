@@ -28,7 +28,7 @@ package org.eclipse.cdt.cross.arc.gnu;
      private static final String OPTION_SUFIX_DIVIDE = ".option.target.divide";                    //yunluz add for core divide
      private static final String OPTION_SUFIX_NORMALIZE = ".option.target.normalize";              //yunluz add for core normalize
      private static final String OPTION_SUFIX_SWAP = ".option.target.swap";                 //yunluz add for core swap
-     private static final String OPTION_SUFIX_SPFP_COMFP = ".option.target.spfp_compact";                 //yunluz add for core sSpfp_compact
+     private static final String OPTION_SUFIX_SPFP_COMFP = ".option.target.spfp";                 //yunluz add for core sSpfp
      private static final String OPTION_SUFIX_EA = ".option.target.ea";                 //yunluz add for core ea
      private static final String OPTION_SUFIX_THUMB = ".option.target.thumb";
      private static final String OPTION_SUFIX_THUMB_INTERWORK = ".option.target.thumbinterwork";
@@ -77,7 +77,7 @@ package org.eclipse.cdt.cross.arc.gnu;
        String sDivide = null;         //yunluz add for divide
        String sNormalize = null;      //yunluz add for normalize
        String sSwap = null;           //yunluz add for swap
-       String sSpfp_compact = null;           //yunluz add for spfp_compact
+       String sSpfp = null;           //yunluz add for spfp
        String sEa = null;           //yunluz add for ea
        String sThumb = null;
    
@@ -182,8 +182,8 @@ package org.eclipse.cdt.cross.arc.gnu;
              (sID.indexOf(".option.target.barrelshifter.") > 0)) {       //yunluz add for barrelshifter
              if (bVal)                                                   //yunluz add for barrelshifter
                sBarrelshifter = sCommand;                                //yunluz add for barrelshifter
-           } else if ((sID.endsWith(".option.target.codedensity")&&sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")) ||    //yunluz add for codedensity
-             (sID.indexOf(".option.target.codedensity.") > 0)&&sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")) {         //yunluz add for codedensity
+           } else if ((sID.endsWith(".option.target.codedensity")&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))) ||    //yunluz add for codedensity
+             (sID.indexOf(".option.target.codedensity.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))) {         //yunluz add for codedensity
               if (bVal)                                                  //yunluz add for codedensity
               sCodedensity = sCommand;                                   //yunluz add for codedensity
            } else if ((sID.endsWith(".option.target.divide")) ||         //yunluz add for divide
@@ -194,14 +194,14 @@ package org.eclipse.cdt.cross.arc.gnu;
             (sID.indexOf(".option.target.normalize.") > 0)) {            //yunluz add for normalize
              if (bVal)                                                   //yunluz add for normalize
              sNormalize = sCommand;                                      //yunluz add for normalize
-           } else if ((sID.endsWith(".option.target.swap")&&sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")) ||           //yunluz add for swap
-             (sID.indexOf(".option.target.swap.") > 0)&&sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")) {                //yunluz add for swap
+           } else if ((sID.endsWith(".option.target.swap")&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))) ||           //yunluz add for swap
+             (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))) {                //yunluz add for swap
              if (bVal)                                                   //yunluz add for swap
               sSwap = sCommand;                                          //yunluz add for swap
-           } else if ((sID.endsWith(".option.target.spfp_compact")) ||           //yunluz add for spfp_compact 
-              (sID.indexOf(".option.target.spfp_compact.") > 0)) {               //yunluz add for spfp_compact
-              if (bVal)                                                   //yunluz add for spfp_compact
-              sSpfp_compact = sCommand;                                          //yunluz add for ea
+           } else if ((sID.endsWith(".option.target.spfp")) ||           //yunluz add for spfp 
+              (sID.indexOf(".option.target.spfp.") > 0)) {               //yunluz add for spfp
+              if (bVal)                                                   //yunluz add for spfp
+              sSpfp = sCommand;                                          //yunluz add for ea
            } else if ((sID.endsWith(".option.target.ea")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //yunluz add for ea
                    (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //yunluz add for ea
                    if (bVal)                                                   //yunluz add for ea
@@ -258,8 +258,8 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((sSwap != null) && (sSwap.length() > 0)) {                 //yunluz add for swap
            oList.add(sSwap);                                         //yunluz add for swap     
            }
-       if ((sSpfp_compact != null) && (sSpfp_compact.length() > 0)) {                 //yunluz add for Spfp_compact
-           oList.add(sSpfp_compact);                                         //yunluz add for Spfp_compact     
+       if ((sSpfp != null) && (sSpfp.length() > 0)) {                 //yunluz add for Spfp_compact
+           oList.add(sSpfp);                                         //yunluz add for Spfp_compact     
            }  
        if ((sEa != null) && (sEa.length() > 0)) {                 //yunluz add for Spfp
            oList.add(sEa);                                         //yunluz add for Spfp     

@@ -46,7 +46,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     /**
      * The names of options that are disabled for ARCv2EM
      */
-   private static Set<String> DISABLED_FOR_ARCV2 = new HashSet<String>(Arrays.asList(ARCV2EM_DISABLED));
+   private static Set<String> DISABLED_FOR_ARCV2EM = new HashSet<String>(Arrays.asList(ARCV2EM_DISABLED));
    
     /**
      * The names of options that are disabled for ARC700
@@ -56,20 +56,28 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
             "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
-     };
+    };
     private static String ARC6_DISABLED[] = {
 	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
- };
+    };
+    private static String ARCV2HS_DISABLED[] = {
+	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp",//yunlu add for windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp",//yunlu add for linux_swap
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//yunlu add for ea   
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
+    };
     
     private static Set<String> DISABLED_FOR_ARC7 = new HashSet<String>(Arrays.asList(ARC7_DISABLED));
     private static Set<String> DISABLED_FOR_ARC6 = new HashSet<String>(Arrays.asList(ARC6_DISABLED));
+    private static Set<String> DISABLED_FOR_ARCV2HS = new HashSet<String>(Arrays.asList(ARCV2HS_DISABLED));
     private static Set<String> ALL_TARGET_DEPENDENT = new HashSet<String>();
     static {
 
         ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARC7);
         ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARC6);
-        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARCV2);
+        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARCV2EM);
+        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARCV2HS);
     }
     
      
@@ -116,12 +124,18 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
       
                  }
                  else if (value.endsWith("option.mcpu.arcv2em")){
-                    disabledSet = DISABLED_FOR_ARCV2;
+                    disabledSet = DISABLED_FOR_ARCV2EM;
                     for (int i=0;i<ARCV2EM_DISABLED.length;i++)  setEnabled(ARCV2EM_DISABLED[i],false);
                     for (int i=0;i<ARC6_DISABLED.length;i++)     setEnabled(ARC6_DISABLED[i],false);
                     processor_control++;
 
                 }
+                 else if (value.endsWith("option.mcpu.arcv2hs")){
+                     disabledSet = DISABLED_FOR_ARCV2HS;
+                     for (int i=0;i<ARCV2HS_DISABLED.length;i++)  setEnabled(ARCV2HS_DISABLED[i],false);
+                     processor_control++;
+
+                 }
             }
            
             // TN: this calls only when target changing 

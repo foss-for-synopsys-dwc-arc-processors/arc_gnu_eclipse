@@ -796,10 +796,10 @@
                valueType="boolean">
          </option>
          <option
-               command="-mspfp-compact"
+               command="-mspfp"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact"
-               name="Compact Single-precision floating point libraries(-mspfp-compact)"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp"
+               name="Compact Single-precision floating point libraries(-mspfp)"
                valueType="boolean">
          </option>
          <option
@@ -2561,16 +2561,18 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap"
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp_compact"
-               name="Compact Single-precision floating point libraries(-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp"
+               name="Compact Single-precision floating point libraries(-mspfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3046,10 +3048,11 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp_compact"
-               name="Compact Single-precision floating point libraries(-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp"
+               name="Compact Single-precision floating point libraries(-mspfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3858,10 +3861,11 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.spfp_compact"
-               name="Compact Single-precision floating point libraries(-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.spfp"
+               name="Compact Single-precision floating point libraries(-mspfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4148,10 +4152,11 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.spfp_compact"
-               name="Compact Single-precision floating point libraries(-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.spfp"
+               name="Compact Single-precision floating point libraries(-mspfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
