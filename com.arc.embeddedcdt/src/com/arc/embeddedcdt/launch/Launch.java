@@ -194,9 +194,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			public TerminalConnectorImpl makeConnector() throws Exception {
 				SerialSettings mySettings = new SerialSettings();
 				mySettings.setBaudRate("115200");
-				mySettings.setDataBits("7");
-				mySettings.setFlowControl("1");
-				mySettings.setParity("N");
+				mySettings.setDataBits("8");
+				mySettings.setFlowControl("XON/XOFF");
+				mySettings.setParity("None");
 				mySettings.setSerialPort(RemoteGDBDebuggerPage.comport);
 				mySettings.setStopBits("1");
 				return new MyClass(mySettings);
