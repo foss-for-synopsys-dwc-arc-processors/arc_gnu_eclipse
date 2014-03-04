@@ -21,7 +21,8 @@ Export-Package: com.arc.embeddedcdt,
  com.arc.embeddedcdt.launch.nativeos,
  com.arc.embeddedcdt.preferences,
  com.arc.embeddedcdt.sourcelookup,
- org.eclipse.cdt.debug.mi.core.output
+ org.eclipse.cdt.debug.mi.core.output,
+ gnu.io
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.cdt.debug.mi.core,
