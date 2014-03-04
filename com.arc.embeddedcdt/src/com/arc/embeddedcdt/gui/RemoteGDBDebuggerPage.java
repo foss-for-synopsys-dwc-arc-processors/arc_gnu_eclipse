@@ -227,7 +227,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 }
 			 fGDBServerIPAddressText.setText(IPAddress);
 			 
+
+				
 			 comport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+			 if (FirstlaunchDialog.value[1] != null) {
+					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
+						comport = FirstlaunchDialog.value[1];
+					}
+
+				}
 			 
 			 if(!comport.equalsIgnoreCase(""))
 			 {
@@ -263,7 +271,26 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		
 		
-		if(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("Ashling")>-1)
+		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+		
+		if (FirstlaunchDialog.value[0] != null) {
+			if (!FirstlaunchDialog.value[0].equalsIgnoreCase("")) {
+				gdbserver = FirstlaunchDialog.value[0];
+			}
+
+		}
+		
+		 if(!gdbserver.equalsIgnoreCase(""))
+		 {
+			 int privious=fPrgmArgumentsComboInit.indexOf(gdbserver);
+			 if(privious>-1)
+				 fPrgmArgumentsComboInit.remove(privious);
+			 fPrgmArgumentsComboInit.add(gdbserver, 0);
+			 fPrgmArgumentsComboInit.select(0);
+		 }
+		
+		
+		if(gdbserver.indexOf("Ashling")>-1)
 		{
 			// Ashling GDB server
 			String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
@@ -274,7 +301,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				)
 			);
 		}
-		else if	(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("OpenOCD")>-1)
+		else if	(gdbserver.indexOf("OpenOCD")>-1)
 		{
 			// OpenOCD
 			if(isWindowsOS()){
@@ -316,7 +343,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,externalpath);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
+		
+		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
 		
@@ -324,6 +352,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		IPAddress=fGDBServerIPAddressText.getText();
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,getAttributeValueFromString(IPAddress));
+		
+		
+		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
+		
 	}
 	/* 
 	* @return true---windows 

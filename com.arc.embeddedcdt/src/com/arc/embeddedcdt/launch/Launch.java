@@ -14,12 +14,16 @@ package com.arc.embeddedcdt.launch;
 
 import gnu.io.CommPortIdentifier;
 
+import com.arc.embeddedcdt.gui.FirstlaunchDialog;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import javax.swing.JOptionPane;
 
 import org.eclipse.cdt.core.IAddressFactory;
 import org.eclipse.cdt.core.IBinaryParser.IBinaryObject;
@@ -72,6 +76,17 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.tm.internal.terminal.connector.TerminalConnector;
 import org.eclipse.tm.internal.terminal.provisional.api.provider.TerminalConnectorImpl;
 import org.eclipse.tm.internal.terminal.serial.SerialConnector;
@@ -150,20 +165,46 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	  }	
       return new String[0];
 	}
-	
+	static String external_tools_firstlaunch;
+	static String gdbserver_port;
 	private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
-		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-		return external_tools.equalsIgnoreCase("JTAG via OpenOCD");
+		return external_tools_firstlaunch.equalsIgnoreCase("JTAG via OpenOCD");
 	}
 	
 	private boolean isnSIM(ILaunchConfiguration configuration) throws CoreException {
-		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-		return external_tools.equalsIgnoreCase("nSIM");
+		
+		return external_tools_firstlaunch.equalsIgnoreCase("nSIM");
 	}
 	
 	private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
-		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-		return external_tools.equalsIgnoreCase("JTAG via Ashling");
+		return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
+	}
+	public static String serialport=null;
+	public void startrunas() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
+
+        if (workbench.getDisplay().getThread() != Thread.currentThread()){
+            // Note that we do the work asynchronously so that we don't lock this thread. It is used
+            // to launch the debugger engine.
+            workbench.getDisplay().asyncExec(new Runnable(){
+                @Override
+                public void run () {
+                	startrunas();
+                }});
+            return;
+        }
+		
+		// Assertion: we're in the UI thread.
+		final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+		IWorkbenchWindow window=activePage.getWorkbenchWindow();
+		if (window != null) {
+			Shell parent = window.getShell();
+			//MessageDialog.openQuestion(parent,	"The first time launch","Need to create Debug configuration for the first launch");
+			FirstlaunchDialog dlg=new FirstlaunchDialog(parent);
+			dlg.open();
+			System.out.println("gdbserver: \""+dlg.value[0]+"\" COM serial port: \""+dlg.value[1]+"\"");
+    	}
 	}
 	
 	private void startTerminal() {
@@ -196,8 +237,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				mySettings.setBaudRate("115200");
 				mySettings.setDataBits("8");
 				mySettings.setFlowControl("XON/XOFF");
-				mySettings.setParity("None");
-				mySettings.setSerialPort(RemoteGDBDebuggerPage.comport);
+				mySettings.setParity("N");
+				mySettings.setSerialPort(serialport);
 				mySettings.setStopBits("1");
 				return new MyClass(mySettings);
 			}
@@ -216,11 +257,60 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	public void launch(ILaunchConfiguration configuration, String mode,
 			final ILaunch launch, IProgressMonitor monitor)
 			throws CoreException
 	{
+		String external_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
+		String external_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
+		String gdbserver_IPAddress=RemoteGDBDebuggerPage.IPAddress;
+		
+		if(gdbserver_IPAddress.equalsIgnoreCase("")||gdbserver_IPAddress==null)
+		{
+			gdbserver_IPAddress="localhost";
+		}
+		
+		if(configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()).equalsIgnoreCase("")){
+			 startrunas();
+			 try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String()).equalsIgnoreCase(""))
+			 {
+				 external_tools_firstlaunch=FirstlaunchDialog.value[0];
+				 if (external_tools.equalsIgnoreCase("")){
+					 external_tools=external_tools_firstlaunch;
+				 }
+				 
+				 if (isAshling(configuration)){
+					 gdbserver_port="2331"; 	 
+				 }
+				 else if (isOpenOCD(configuration)){
+					 gdbserver_port="3333"; 
+				 }
+				 else if (isnSIM(configuration)){
+					 gdbserver_port="1234"; 
+				 }
+				 serialport=FirstlaunchDialog.value[1];
+			 }
+			 else {
+				 gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
+				 serialport=RemoteGDBDebuggerPage.comport;
+			 }
+			 
+			
+      	}
+		else {
+			serialport=RemoteGDBDebuggerPage.comport;
+			gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
+		}
+		
+		
 		launch_config = configuration.getWorkingCopy();
 		
 		if (monitor == null)
@@ -270,8 +360,16 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			setDefaultSourceLocator(launch, configuration);
 
 			String terminal_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
-			if (terminal_launch.equalsIgnoreCase("true"))
-				startTerminal();
+			
+			try {
+				Thread.sleep(10000);
+				if (terminal_launch.equalsIgnoreCase("true"))
+					startTerminal();
+			} catch (InterruptedException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		
 			
 			if (mode.equals(ILaunchManager.DEBUG_MODE)||mode.equals(ILaunchManager.RUN_MODE))
 			{
@@ -284,9 +382,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				{
 
 					LaunchFrontend l = new LaunchFrontend(launch);
-                    String extenal_tools= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
+                    
                     String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
-                    String extenal_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
+                    
                     prepareSession();
 
 					// Start GDB first. This is required to ensure that if gdbserver
@@ -321,7 +419,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
 					
 					// TODO Replace hardcoded line with something more error-proof.
-					if (extenal_tools.equalsIgnoreCase("JTAG via Ashling")&&extenal_tools_launch.equalsIgnoreCase("true"))
+					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// TODO Path to Ashling GDB server is also configurable in CommandTab.
 						if(extenal_tools_path.equalsIgnoreCase("")) 
@@ -343,7 +441,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								};
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), ASHLING_PROCESS_LABEL);
 					} 
-					else if (extenal_tools.equalsIgnoreCase("JTAG via OpenOCD")&&extenal_tools_launch.equalsIgnoreCase("true"))
+					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
 						
@@ -364,7 +462,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 							}
 					}
-					else if (extenal_tools.equalsIgnoreCase("nSIM")&&extenal_tools_launch.equalsIgnoreCase("true"))
+					else if (external_tools.equalsIgnoreCase("nSIM")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start nSIM GDB server
 						System.setProperty("nSIM", extenal_tools_path);
@@ -384,7 +482,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					}
 
 					
-					else if (extenal_tools.equalsIgnoreCase("")&&extenal_tools_launch.equalsIgnoreCase("true"))
+					/*else if (extenal_tools.equalsIgnoreCase("")&&extenal_tools_launch.equalsIgnoreCase("true"))
 					{ //these codes are for "Debug As ARC C/C++ Application", which will launch Openocd automatically
 						
 						if(RemoteGDBDebuggerPage.isWindowsOS()){
@@ -397,7 +495,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						    String[] openocd_cmd = {"openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","reset halt"  };
 						    DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 						}
-					}
+					}*/
 				
 					try
 					{
@@ -412,13 +510,14 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,new String())), monitor);
 						
 						String gdb_init ="";
+						
 						if (!isAshling(configuration))
 						{
-							gdb_init=String.format("set remotetimeout 15 \n target remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+							gdb_init=String.format("set remotetimeout 15 \n target remote %s:%s\nload",gdbserver_IPAddress,gdbserver_port);
 						
 						}
 						else 
-							gdb_init=String.format("set arc opella-target arcem \ntarget remote %s:%s\nload",RemoteGDBDebuggerPage.IPAddress, configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String()));
+							gdb_init=String.format("set arc opella-target arcem \ntarget remote %s:%s\nload",gdbserver_IPAddress, gdbserver_port);
 						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
 											
 						
