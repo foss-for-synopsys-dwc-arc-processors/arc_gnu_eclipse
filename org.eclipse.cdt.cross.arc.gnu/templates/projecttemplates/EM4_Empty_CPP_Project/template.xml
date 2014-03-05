@@ -4,16 +4,6 @@
 		id="ARC_Emptyem4_CPP_Project" label="%Emptyem4.CCtemplate.label" description="%Emptyem4.CCtemplate.description"
 		 help="help.html">
 
-	<property-group id="basics" label="%Emptyem4.basics.label" description="%Emptyem4.basics.description" type="PAGES-ONLY" help="help.html">
-		<property id="author"
-			label="%Emptyem4.author.label"
-			description="%Emptyem4.author.description"
-			type="input"
-			pattern=".*"
-			default=""
-			hidden="false"
-			persist="true"/>
-	</property-group>
 
 	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
 		<simple name="name" value="$(projectName)" />

@@ -4,17 +4,6 @@
 		id="ARC_Emptyem6_CPP_Project" label="%Emptyem6.Ctemplate.label" description="%Emptyem6.Ctemplate.description"
 		 help="help.html">
 
-	<property-group id="basics" label="%Emptyem6.basics.label" description="%Emptyem6.basics.description" type="PAGES-ONLY" help="help.html">
-		<property id="sourceDir"
-				label="%Emptyem6.sourceDir.label"
-				description="%Emptyem6.sourceDir.description"
-				type="input"
-				default="%Emptyem6.sourceDir.default"
-				pattern="[a-zA-Z0-9]+"
-				mandatory="false"
-				persist="true"/>
-	</property-group>
-
 	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
 		<simple name="name" value="$(projectName)" />
 		<simple name="artifactExtension" value="elf" />
