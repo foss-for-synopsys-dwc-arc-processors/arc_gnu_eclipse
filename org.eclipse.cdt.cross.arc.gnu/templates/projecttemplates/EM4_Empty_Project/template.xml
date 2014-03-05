@@ -4,17 +4,6 @@
 		id="ARC_Emptyem4_C_Project" label="%Emptyem4.Ctemplate.label" description="%Emptyem4.Ctemplate.description"
 		 help="help.html">
 
-	<property-group id="basics" label="%Emptyem4.basics.label" description="%Emptyem4.basics.description" type="PAGES-ONLY" help="help.html">
-		<property id="author"
-			label="%Emptyem4.author.label"
-			description="%Emptyem4.author.description"
-			type="input"
-			pattern=".*"
-			default=""
-			hidden="false"
-			persist="true"/>
-	</property-group>
-
 	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
 		<simple name="name" value="$(projectName)" />
 		<simple name="artifactExtension" value="elf" />
