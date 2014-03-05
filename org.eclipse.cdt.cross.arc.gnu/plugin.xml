@@ -634,6 +634,16 @@
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
                   name="ARCv2HS">
             </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mA6"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
+                  name="ARC600">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mA7"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
+                  name="ARC700">
+            </enumeratedOptionValue>
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
