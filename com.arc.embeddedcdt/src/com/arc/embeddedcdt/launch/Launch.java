@@ -446,7 +446,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						// Start OpenOCD GDB server
 						
 							if(RemoteGDBDebuggerPage.isWindowsOS()){
-								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
+								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1||extenal_tools_path.equalsIgnoreCase("")) 
 								{
 									extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
 							    }
@@ -454,7 +454,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 							}
 							else {
-								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1) 
+								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1||extenal_tools_path.equalsIgnoreCase("")) 
 								{
 								    extenal_tools_path="/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
 								}
