@@ -465,6 +465,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					else if (external_tools.equalsIgnoreCase("nSIM")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start nSIM GDB server
+						if (extenal_tools_path.equalsIgnoreCase(""))
+						{
+							extenal_tools_path=System
+									.getenv("NSIM_HOME")
+									+ java.io.File.separator
+									+ "bin" + java.io.File.separator + "nsimdrv";
+						}
 						System.setProperty("nSIM", extenal_tools_path);
 						String nsim_exec = System.getProperty("nSIM");
 						File nsim_wd = (new java.io.File(nsim_exec))
