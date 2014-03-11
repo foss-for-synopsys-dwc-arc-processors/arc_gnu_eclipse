@@ -66,11 +66,31 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp",//yunlu add for linux_swap
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//yunlu add for ea   
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //yunlu add for windows_codedensity
+	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
+    };
+    
+    // default value on ARCV2HS
+    private static String[]  ARCV2HS_DEFAULT = {
+
+        // HS default value to be true
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //yunlu add for windows_codedensity
+	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
+
     };
     
     private static Set<String> DISABLED_FOR_ARC7 = new HashSet<String>(Arrays.asList(ARC7_DISABLED));
     private static Set<String> DISABLED_FOR_ARC6 = new HashSet<String>(Arrays.asList(ARC6_DISABLED));
     private static Set<String> DISABLED_FOR_ARCV2HS = new HashSet<String>(Arrays.asList(ARCV2HS_DISABLED));
+    private static Set<String> DEFAULT_FOR_ARCV2HS = new HashSet<String>(Arrays.asList(ARCV2HS_DEFAULT));
     private static Set<String> ALL_TARGET_DEPENDENT = new HashSet<String>();
     static {
 
@@ -107,7 +127,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
         	
             Set<String> disabledSet = null;
-                  
+            Set<String> defaultSet = null;     
             if (optionId.endsWith(".option.target.processor")) { 
                 String value = (String) mgr.getValue(optionId);
                 System.out.println("com.arc.cdt.toolchain.arc.ArcOptionEnablementManager~~~~~~~~~~~~~~~~~~~~~"+value);
@@ -125,19 +145,33 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                  }
                  else if (value.endsWith("option.mcpu.arcv2em")){
                     disabledSet = DISABLED_FOR_ARCV2EM;
-                    for (int i=0;i<ARCV2EM_DISABLED.length;i++)  setEnabled(ARCV2EM_DISABLED[i],false);
-                    for (int i=0;i<ARC6_DISABLED.length;i++)     setEnabled(ARC6_DISABLED[i],false);
+                    for (int i=0;i<ARCV2EM_DISABLED.length;i++) 
+                    	setEnabled(ARCV2EM_DISABLED[i],false);
+                    //for (int i=0;i<ARC6_DISABLED.length;i++)     setEnabled(ARC6_DISABLED[i],false);
                     processor_control++;
+                    
+                    //for (String option: ARCV2EM_DEFAULT){
+                    //    setOptionValue(option,false);
+                    //}
 
                 }
                  else if (value.endsWith("option.mcpu.arcv2hs")){
                      disabledSet = DISABLED_FOR_ARCV2HS;
-                     for (int i=0;i<ARCV2HS_DISABLED.length;i++)  setEnabled(ARCV2HS_DISABLED[i],false);
+                     defaultSet =  DEFAULT_FOR_ARCV2HS;
+                     for (int i=0;i<ARCV2HS_DISABLED.length;i++) {
+                    	 setEnabled(ARCV2HS_DISABLED[i],false);
+                    	 //setOptionValue(ARCV2HS_DISABLED[i], (i % 2 == 1) ? true : false );
+                     }
+                     //for (String option: disabledSet){
+                     setOptionValue("org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", true);
+                     /*org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity
+                     for (String option: ARCV2HS_DEFAULT){
+                         setOptionValue(option,Boolean.FALSE);
+                     }*/
                      processor_control++;
 
                  }
             }
-           
             // TN: this calls only when target changing 
 			if (disabledSet != null) {
 				// Turn on any option not in the set.
@@ -157,23 +191,11 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 				// TN: move checkMPY after disabledSet running
 			
 			}
+			
+			 
         }
  
-        private boolean handleHirachicalOptsSelection (String srcOpt, String [] destOpts, boolean allowSetEnable){
-        	 Boolean v = (Boolean)getValue(srcOpt);
-        	 if (v != null) {
-                 for (String s: destOpts) {
-                     if (v) 
-                    	 setOptionValue(s,true);
-                     if(allowSetEnable)
-                         setEnabled(s,!v);
-                 }
-                 return v; // could be true or false - true mean srcOpt is selected
-             }
-        	
-             return false;
-        }
-       public void onOptionEnablementChanged (IOptionEnablementManager mgr, String optionID) {
+        public void onOptionEnablementChanged (IOptionEnablementManager mgr, String optionID) {
             // Nothing to do.
 
         }

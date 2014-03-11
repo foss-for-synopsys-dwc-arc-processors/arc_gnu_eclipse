@@ -165,20 +165,6 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         }
         return null;   
     }
-    /*private Object[] getOptionarc(String id){
-        // We cannot cannot create an ID-to-Option map because the IOption object
-        // changes when it becomes dirty!
-        if (mTools == null) return null;
-        for (ITool tool : mTools) {
-            for (IOption option : tool.getOptions()) {
-                if (id.equals(option.getBaseId())){
-                    return new Object[]{tool,option};
-                }
-            }
-        }  
-        return null;  
-    }*/
-
 
     // Made public so that various subclasses can access this method from each other.
     public void setOptionValue (String id, Object value) {
@@ -189,8 +175,8 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         if (target == null) {
             // Don't complain about unknown ID. If someone dynamically changed
             // the project type, there may be old references that no longer apply.
-            //throw new IllegalArgumentException("Unknown option id: " + id);
-            return;
+            throw new IllegalArgumentException("Unknown option id: " + id);
+            //return;
         }
         //NOTE: opt.getHolder() is not necessarily accurate!!
         IHoldsOptions h = (IHoldsOptions)target[0];
@@ -201,6 +187,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
             }
             else if (value instanceof Boolean) {
                 mConfig.setOption(h, opt, ((Boolean) value).booleanValue());
+            	//mConfig.setOption(h, opt, false);
             }
             else
                 throw new IllegalArgumentException("Invalid value to set option " + id + ": " + value);
@@ -208,11 +195,19 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         catch (BuildException e) {
             throw new IllegalArgumentException("Can't set value for " + id, e);
         }
-        catch (ClassCastException e){
-            throw new IllegalArgumentException("Cast exception for " + id, e);
-        }
     }
-
+    
+    public IOption setOption(IHoldsOptions parent, IOption option, boolean value) throws BuildException {
+		// Is there a change?
+		IOption retOpt = option;
+		boolean oldVal = option.getBooleanValue();
+		if (oldVal != value) {
+			//retOpt = parent.getOptionToSet(option, false);
+			retOpt.setValue(value);
+			//NotificationManager.getInstance().optionChanged(this, parent, option, new Boolean(oldVal));
+		}
+		return retOpt;
+	}
     /**
      * Return the set of all options.
      * @return the set of all options.
