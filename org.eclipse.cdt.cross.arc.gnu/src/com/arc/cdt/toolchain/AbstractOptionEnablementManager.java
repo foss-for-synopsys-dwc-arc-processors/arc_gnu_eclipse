@@ -184,10 +184,11 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         try {
             if (value instanceof String) {               
                 mConfig.setOption(h, opt, (String) value);
+                opt.setValue((String) value);
             }
             else if (value instanceof Boolean) {
                 mConfig.setOption(h, opt, ((Boolean) value).booleanValue());
-            	//mConfig.setOption(h, opt, false);
+                opt.setValue(((Boolean) value).booleanValue());
             }
             else
                 throw new IllegalArgumentException("Invalid value to set option " + id + ": " + value);
