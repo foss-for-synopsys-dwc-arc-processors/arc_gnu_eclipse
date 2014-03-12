@@ -69,6 +69,7 @@ public class FirstlaunchDialog extends Dialog {
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
 		fPrgmArgumentsComboInit.add("JTAG via Ashling");
 		fPrgmArgumentsComboInit.add("nSIM");
+		fPrgmArgumentsComboInit.add("Generic gdbserver");
 
 		fPrgmArgumentsLabelCom = new Label(shell, SWT.NULL);
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
@@ -94,7 +95,7 @@ public class FirstlaunchDialog extends Dialog {
 				Combo combo = (Combo) evt.widget;
 				value[0] = combo.getText();
 				String gdbserver = combo.getText();
-				if (gdbserver.equalsIgnoreCase("nSIM")) {
+				if (gdbserver.equalsIgnoreCase("nSIM")||gdbserver.equalsIgnoreCase("Generic gdbserver")) {
 					fFirstlaunchPrgmArgumentsComCom.setVisible(false);
 					fPrgmArgumentsLabelCom.setVisible(false);
 				}

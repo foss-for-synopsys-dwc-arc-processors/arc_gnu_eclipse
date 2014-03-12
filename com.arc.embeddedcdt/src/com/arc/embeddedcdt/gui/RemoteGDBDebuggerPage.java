@@ -397,6 +397,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
 		fPrgmArgumentsComboInit.add("JTAG via Ashling");
 		fPrgmArgumentsComboInit.add("nSIM");
+		fPrgmArgumentsComboInit.add("Generic gdbserver");
 		
 		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
@@ -460,13 +461,31 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						}
 					}
 				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("GNU simulator"))
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("Generic gdbserver"))
 				{
 
-					CommandTab.fPrgmArgumentsTextInit.setText("target sim \nload");
-					fPrgmArgumentsComCom.setVisible(true);
-					fLaunchComButton.setVisible(true);
-					fPrgmArgumentsLabelCom.setVisible(true);
+					fLaunchTerminalboolean="false";
+
+					fPrgmArgumentsComCom.setVisible(false);
+					fLaunchComButton.setVisible(false);
+					fPrgmArgumentsLabelCom.setVisible(false);
+					fSearchexternalButton.setVisible(false);
+					fSearchexternalLabel.setVisible(false);
+					fLaunchernalButton.setVisible(false);
+					fPrgmArgumentsTextexternal.setVisible(false);
+					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
+
+					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
+
+					if (page != null) {
+						IViewReference[] viewReferences = page.getViewReferences();
+						for (IViewReference ivr : viewReferences) {
+							if (ivr.getId().equalsIgnoreCase(viewId)
+									|| ivr.getId().equalsIgnoreCase("more view id if you want to close more than one at a time")) {
+								page.hideView(ivr);
+							}
+						}
+					}
 				}
 
 				if (fPrgmArgumentsComboInittext.lastIndexOf("via")>-1){
