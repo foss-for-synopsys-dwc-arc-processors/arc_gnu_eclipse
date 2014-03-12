@@ -165,7 +165,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	  }	
       return new String[0];
 	}
-	static String external_tools_firstlaunch;
+	static String external_tools_firstlaunch="";
 	static String gdbserver_port;
 	private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
 		return external_tools_firstlaunch.equalsIgnoreCase("JTAG via OpenOCD");

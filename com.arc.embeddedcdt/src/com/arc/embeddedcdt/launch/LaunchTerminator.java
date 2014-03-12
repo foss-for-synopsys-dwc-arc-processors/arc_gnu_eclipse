@@ -20,8 +20,18 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.tm.internal.terminal.connector.TerminalConnector;
+import org.eclipse.tm.internal.terminal.provisional.api.provider.TerminalConnectorImpl;
+import org.eclipse.tm.internal.terminal.serial.SerialConnector;
+import org.eclipse.tm.internal.terminal.serial.SerialSettings;
+import org.eclipse.tm.internal.terminal.view.TerminalView;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.Workbench;
 
 /**
  * Debug event listener to terminate debug sessions when required.
@@ -71,6 +81,20 @@ public class LaunchTerminator implements IDebugEventSetListener {
 						"Child process exited",
 						"Process `" + fProcess.getLabel() + "' required for debugging has exited. Do you want to end debug session?"
 				);
+				IWorkbench workbench = PlatformUI.getWorkbench();
+				final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+
+			
+				TerminalView viewPart;
+				try {
+					viewPart = (TerminalView) (activePage.showView(
+							"org.eclipse.tm.terminal.view.TerminalView", null,
+							IWorkbenchPage.VIEW_ACTIVATE));
+					viewPart.dispose();
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
 			}
 			if (terminate) {
 				DebugPlugin.getDefault().asyncExec(new TerminateRunnable(fLaunch));
