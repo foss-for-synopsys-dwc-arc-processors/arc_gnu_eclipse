@@ -175,8 +175,8 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         if (target == null) {
             // Don't complain about unknown ID. If someone dynamically changed
             // the project type, there may be old references that no longer apply.
-            throw new IllegalArgumentException("Unknown option id: " + id);
-            //return;
+            //throw new IllegalArgumentException("Unknown option id: " + id);
+            return;
         }
         //NOTE: opt.getHolder() is not necessarily accurate!!
         IHoldsOptions h = (IHoldsOptions)target[0];

@@ -147,12 +147,10 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     disabledSet = DISABLED_FOR_ARCV2EM;
                     for (int i=0;i<ARCV2EM_DISABLED.length;i++) 
                     	setEnabled(ARCV2EM_DISABLED[i],false);
-                    //for (int i=0;i<ARC6_DISABLED.length;i++)     setEnabled(ARC6_DISABLED[i],false);
+                    for (int i=0;i<ARCV2HS_DEFAULT.length;i++) {
+                   	 setOptionValue(ARCV2HS_DEFAULT[i],false);
+                    }
                     processor_control++;
-                    
-                    //for (String option: ARCV2EM_DEFAULT){
-                    //    setOptionValue(option,false);
-                    //}
 
                 }
                  else if (value.endsWith("option.mcpu.arcv2hs")){
@@ -160,14 +158,14 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                      defaultSet =  DEFAULT_FOR_ARCV2HS;
                      for (int i=0;i<ARCV2HS_DISABLED.length;i++) {
                     	 setEnabled(ARCV2HS_DISABLED[i],false);
-                    	 //setOptionValue(ARCV2HS_DISABLED[i], (i % 2 == 1) ? true : false );
+                    	
                      }
-                     //for (String option: disabledSet){
-                     setOptionValue("org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", true);
-                     /*org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity
-                     for (String option: ARCV2HS_DEFAULT){
-                         setOptionValue(option,Boolean.FALSE);
-                     }*/
+                     
+                     
+                     for (int i=0;i<ARCV2HS_DEFAULT.length;i++) {
+                    	 setOptionValue(ARCV2HS_DEFAULT[i],true);
+                     }
+           
                      processor_control++;
 
                  }

@@ -2552,7 +2552,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
@@ -2574,7 +2573,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap"
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
@@ -3037,7 +3035,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity"
                name="Code density(-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
@@ -3860,7 +3857,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.codedensity"
                name="Code density(-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity">
@@ -4165,6 +4161,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap"
                name="Swap instruction(-mswap)"
