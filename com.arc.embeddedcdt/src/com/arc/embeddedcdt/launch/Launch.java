@@ -326,13 +326,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						// TODO Path to Ashling GDB server is also configurable in CommandTab.
 						if(extenal_tools_path.equalsIgnoreCase("")) 
 						{
-							extenal_tools_path="C:\\AshlingOpellaXDforARC";
-							}
+							if (RemoteGDBDebuggerPage.isWindowsOS())
+								extenal_tools_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_WINDOWS;
+							else
+								extenal_tools_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
+						}
 						System.setProperty("Ashling", extenal_tools_path);
 						String ash_dir = System.getProperty("Ashling");
-						File ash_wd = new java.io.File(ash_dir); 
+						File ash_wd = new java.io.File(ash_dir);
+						String ashling_exe = "ash-arc-gdb-server" + (RemoteGDBDebuggerPage.isWindowsOS() ? ".exe" : ""); 
 						String[] ash_cmd = {
-								ash_dir + java.io.File.separator + "ash-arc-gdb-server.exe",
+								ash_dir + java.io.File.separator + ashling_exe,
 								"--jtag-frequency", "8mhz",
 								"--device", "arc",
 								"--arc-reg-file", ash_dir + java.io.File.separator + "arc-opella-em.xml"

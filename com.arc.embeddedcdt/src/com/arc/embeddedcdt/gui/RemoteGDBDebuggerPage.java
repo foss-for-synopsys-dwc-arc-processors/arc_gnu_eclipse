@@ -81,6 +81,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
+	
+	// Constants
+	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC";
+	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin";
+	
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -254,7 +259,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		if(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("Ashling")>-1)
 		{
-			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,"C:\\AshlingOpellaXDforARC")); 
+			String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
+			fPrgmArgumentsTextexternal.setText(
+				configuration.getAttribute(
+					LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,
+					defaultValue
+				)
+			);
 		}
 		else if	(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("OpenOCD")>-1)
 		{
@@ -361,7 +372,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
 					fGDBServerPortNumberText.setText("2331");
-					fPrgmArgumentsTextexternal.setText("C:\\AshlingOpellaXDforARC");
+					if (isWindows)
+						fPrgmArgumentsTextexternal.setText(ASHLING_DEFAULT_PATH_WINDOWS);
+					else
+						fPrgmArgumentsTextexternal.setText(ASHLING_DEFAULT_PATH_LINUX);
 					
 					fPrgmArgumentsComCom.setVisible(true);
 					fLaunchComButton.setVisible(true);		        
