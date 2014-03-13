@@ -68,8 +68,8 @@ public class LaunchTerminator implements IDebugEventSetListener {
 				Shell parent = window.getShell();
 				terminate = MessageDialog.openQuestion(
 						parent,
-						"Child process failed",
-						"Process `" + fProcess.getLabel() + "' required for debugging has failed. Do you want to end debug session?"
+						"Child process exited",
+						"Process `" + fProcess.getLabel() + "' required for debugging has exited. Do you want to end debug session?"
 				);
 			}
 			if (terminate) {
