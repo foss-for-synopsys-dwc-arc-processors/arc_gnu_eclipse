@@ -103,6 +103,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 	}
 	
+	/**
+	 * Get default path to nSIM application nsimdrv.
+	 */
+	private String getNsimdrvDefaultPath() {
+		return System
+				.getenv("NSIM_HOME")
+				+ java.io.File.separator
+				+ "bin" + java.io.File.separator + "nsimdrv";
+	}
+
 	@Override
 	public void initializeFrom( ILaunchConfiguration configuration ) {
 		super.initializeFrom(configuration);
@@ -146,7 +156,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			
 		 }
 		 else if (externaltools.lastIndexOf("via")<1
-				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("ture")
+				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("true")
 				 &&!externaltools.equalsIgnoreCase("nSIM")
 				 )
 		 {
@@ -252,13 +262,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		
 		
-		if(isWindowsOS()){
-			fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
-		}
-        else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
 		
 		if(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("Ashling")>-1)
 		{
+			// Ashling GDB server
 			String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
 			fPrgmArgumentsTextexternal.setText(
 				configuration.getAttribute(
@@ -269,12 +276,24 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 		else if	(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).indexOf("OpenOCD")>-1)
 		{
+			// OpenOCD
 			if(isWindowsOS()){
 				fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
 			}
             else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
 			
 		}
+		else
+		{
+			// nSIM and default case
+			fPrgmArgumentsTextexternal.setText(
+				configuration.getAttribute(
+					LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,
+					getNsimdrvDefaultPath()
+				)
+			);
+		}
+
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -384,10 +403,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
 					fGDBServerPortNumberText.setText("1234");
-					fPrgmArgumentsTextexternal.setText(System
-							.getenv("NSIM_HOME")
-							+ java.io.File.separator
-							+ "bin" + java.io.File.separator + "nsimdrv");
+					fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
 
