@@ -42,7 +42,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
             "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64",//yunlu add for ea   
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64",//yunlu add for ea  
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu",
+            //"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu",
     };
     
     
