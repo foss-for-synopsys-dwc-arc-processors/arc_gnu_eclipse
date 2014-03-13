@@ -87,7 +87,8 @@ package org.eclipse.cdt.cross.arc.gnu;
    
        String sSyntaxonly = null;
    
-       String sFloatUnit = null;
+       String sFPU = null;
+       String smpy= null;
    
        String sDebugLevel = null;
    
@@ -147,9 +148,12 @@ package org.eclipse.cdt.cross.arc.gnu;
            else if ((sID.endsWith(".option.warnings.syntax")) ||  //yunluz add for fsyntax-only
              (sID.indexOf(".option.warnings.syntax") > 0))
              sSyntaxonly = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpu.unit")) || 
-             (sID.indexOf(".option.target.fpu.unit.") > 0))
-             sFloatUnit = sEnumCommand;
+           else if ((sID.endsWith(".option.target.fpu.")) || 
+             (sID.indexOf(".option.target.fpu.") > 0))
+             sFPU = sEnumCommand;
+           else if ((sID.endsWith(".option.target.mpy.")) || 
+                   (sID.indexOf(".option.target.mpy.") > 0))
+             smpy = sEnumCommand;
            else if ((sID.endsWith(".option.debugging.level")) || 
              (sID.indexOf(".option.debugging.level.") > 0))
              sDebugLevel = sEnumCommand;
@@ -239,6 +243,7 @@ package org.eclipse.cdt.cross.arc.gnu;
            
            
            
+           
            else if (((sID.endsWith(".option.debugging.gprof")) || 
              (sID.indexOf(".option.debugging.gprof.") > 0)) && 
              (bVal)) {
@@ -262,9 +267,11 @@ package org.eclipse.cdt.cross.arc.gnu;
          oList.add(sProcessorEndiannes);
        if ((sSyntaxonly != null) && (sSyntaxonly.length() > 0)) {
          oList.add(sSyntaxonly);
-       if ((sFloatUnit != null) && (sFloatUnit.length() > 0))
-           oList.add(sFloatUnit);
-         }
+       }
+       if ((sFPU != null) && (sFPU.length() > 0))
+           oList.add(sFPU);
+       if ((smpy != null) && (smpy.length() > 0))
+           oList.add(smpy);
        if ((sDebugLevel != null) && (sDebugLevel.length() > 0)) {
          oList.add(sDebugLevel);
        if ((sDebugFormat != null) && (sDebugFormat.length() > 0))
@@ -313,6 +320,7 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((smdpfp != null) && (smdpfp.length() > 0)) {                
            oList.add(smdpfp);                                             
            } 
+ 
        
        }
      

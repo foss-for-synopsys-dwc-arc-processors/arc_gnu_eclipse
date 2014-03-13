@@ -42,6 +42,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
             "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64",//yunlu add for ea   
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64",//yunlu add for ea  
+            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu",
     };
     
     
@@ -58,6 +59,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
             "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+           
     };
     private static String ARC6_DISABLED[] = {
 	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
@@ -74,12 +76,13 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp",//
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp",//
+
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist",//
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize",//
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp",//
     };
     
     // default value on ARCV2HS
@@ -95,8 +98,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist",//
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize",//
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",//
-
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",
     };
     
     private static Set<String> DISABLED_FOR_ARC7 = new HashSet<String>(Arrays.asList(ARC7_DISABLED));
