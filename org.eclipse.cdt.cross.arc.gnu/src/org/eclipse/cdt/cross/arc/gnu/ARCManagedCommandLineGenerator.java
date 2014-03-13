@@ -98,6 +98,11 @@ package org.eclipse.cdt.cross.arc.gnu;
        String sDebugProf = null;
    
        String sDebugGProf = null;
+       String sshiftassist= null; 
+       String sdivrem = null;
+       String satomic = null;
+       String sll64 = null;
+       String smdpfp= null;
    
        for (int i = 0; i < aoOptions.length; i++)
          {
@@ -206,13 +211,42 @@ package org.eclipse.cdt.cross.arc.gnu;
                    (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //yunluz add for ea
                    if (bVal)                                                   //yunluz add for ea
                    sEa = sCommand;                                          //yunluz add for ea
-           }else if (((sID.endsWith(".option.debugging.gprof")) || 
+           } else if ((sID.endsWith(".option.target.shiftassist")) ||  
+                   (sID.indexOf(".option.target.shiftassist.") > 0)) {       
+               if (bVal)                                                  
+                 sshiftassist = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.divrem")) ||  
+                   (sID.indexOf(".option.target.divrem.") > 0)) {       
+               if (bVal)                                                  
+                 sdivrem = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.atomic")) ||  
+                   (sID.indexOf(".option.target.atomic.") > 0)) {       
+               if (bVal)                                                  
+            	   satomic = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.ll64")) ||  
+                   (sID.indexOf(".option.target.ll64.") > 0)) {       
+               if (bVal)                                                  
+                 sll64 = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.dpfp")) ||  
+                   (sID.indexOf(".option.target.dpfp.") > 0)) {       
+               if (bVal)                                                  
+            	   smdpfp = sCommand;                                
+           } 
+           
+           
+           
+           else if (((sID.endsWith(".option.debugging.gprof")) || 
              (sID.indexOf(".option.debugging.gprof.") > 0)) && 
              (bVal)) {
              sDebugGProf = sCommand;
              }
    
            }
+         
    
          }
    
@@ -258,13 +292,30 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((sSwap != null) && (sSwap.length() > 0)) {                 //yunluz add for swap
            oList.add(sSwap);                                         //yunluz add for swap     
            }
-       if ((sSpfp != null) && (sSpfp.length() > 0)) {                 //yunluz add for Spfp_compact
-           oList.add(sSpfp);                                         //yunluz add for Spfp_compact     
+       if ((sSpfp != null) && (sSpfp.length() > 0)) {                 
+           oList.add(sSpfp);                                            
            }  
-       if ((sEa != null) && (sEa.length() > 0)) {                 //yunluz add for Spfp
-           oList.add(sEa);                                         //yunluz add for Spfp     
+       if ((sEa != null) && (sEa.length() > 0)) {                 
+           oList.add(sEa);                                              
            } 
+       if ((sshiftassist != null) && (sshiftassist.length() > 0)) {           
+           oList.add(sshiftassist);                                         
+           }
+       if ((sdivrem != null) && (sdivrem.length() > 0)) {                
+           oList.add(sdivrem);                                             
+           }
+       if ((satomic != null) && (satomic.length() > 0)) {                
+           oList.add(satomic);                                             
+           }  
+       if ((sll64 != null) && (sll64.length() > 0)) {                
+           oList.add(sll64);                                             
+           } 
+       if ((smdpfp != null) && (smdpfp.length() > 0)) {                
+           oList.add(smdpfp);                                             
+           } 
+       
        }
+     
      return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
      }
    }

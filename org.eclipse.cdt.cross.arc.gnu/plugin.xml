@@ -794,7 +794,7 @@
                command="-mnorm"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               name="Normalize instruction(-mnorm)"
+               name="Bitscan  instruction(-mnorm)"
                valueType="boolean">
          </option>
          <option
@@ -818,6 +818,150 @@
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                name="Extended arithmetic instruction(-mea)"
                valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mshift-assist"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
+               name="Shift assist(-mshift-assist)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mdiv-rem"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.divrem"
+               name="div_rem instruction(-mdiv-rem)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mll64"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64"
+               name="64-bit load/store instructions(-mll64)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-matomic"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
+               name="Support atomic functions(-matomic)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mdpfp"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp"
+               name="Double precisions FPX instructions(-mdpfp)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy"
+               name="Multiply insturctions (-mmpy_option)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="0"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.0"
+                  isDefault="false"
+                  name="0">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="1"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.1"
+                  name="1">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="2"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.2"
+                  isDefault="true"
+                  name="2">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="3"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.3"
+                  name="3">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="4"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.4"
+                  name="4">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="5"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.5"
+                  name="5">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="6"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.6"
+                  name="6">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mmpy_option"
+               defaultValue="2"
+               errorParsers="org.eclipse.cdt.core.GLDErrorParser"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyref"
+               name="Multiply insturctions (-mmpy_option)"
+               valueType="string">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu"
+               name="FPU  (-mfpu)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mfpu=fpus"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
+                  isDefault="true"
+                  name="Single precisions FPU">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_dis"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
+                  name="Single precisions FPU with with DIV/SQRT instructions">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_fma"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_fma"
+                  name="Single precisions FPU with with fused instructions">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_all"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all"
+                  name="Single precisions FPU with all instructions">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud_dis"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_dis"
+                  name="Double precisions FPU with with DIV/SQRT instructions">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud_fma"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_fma"
+                  name="Double precisions FPU with with fused instructions">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud_all"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_all"
+                  name="Double precisions FPU with all instructions">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
+                  isDefault="true"
+                  name="Double precisions FPU">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mfpu="
+               defaultValue="${MCU}"
+               errorParsers="org.eclipse.cdt.core.GLDErrorParser"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuref"
+               name="FPU  (-mfpu)"
+               valueType="string">
          </option>
       </tool>
       <builder
@@ -2592,6 +2736,62 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                valueType="boolean">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize"
+               name="Bitscan  instruction(-mnorm) "
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.divrem"
+               name="div_rem instruction(-mdiv-rem)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divrem">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64"
+               name="64-bit load/store instructions(-mll64)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.atomic"
+               name="Support atomic functions(-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp"
+               name="Double precisions FPX instructions(-mdpfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpy"
+               name="Multiply insturctions"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.mpy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpu"
+               name="FPU"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.fpu">
+         </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -3049,7 +3249,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize"
-               name="Normalize instruction(-mnorm)"
+               name="Bitscan instruction(-mnorm)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
          <option
@@ -3073,6 +3273,57 @@
                name="Extended arithmetic instruction(-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divrem"
+               name="div_rem instruction(-mdiv-rem)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divrem">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64"
+               name="64-bit load/store instructions(-mll64)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.atomic"
+               name="Support atomic functions(-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp"
+               name="Double precisions FPX instructions(-mdpfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpy"
+               name="Multiply insturctions"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.mpy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu"
+               name="FPU"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.fpu">
          </option>
       </toolChain>
       <configuration
@@ -3888,6 +4139,60 @@
                name="Extended arithmetic instruction(-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.normalize"
+               name="Bitscan  instruction(-mnorm) "
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.divrem"
+               name="div_rem instruction(-mdiv-rem)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divrem">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.ll64"
+               name="64-bit load/store instructions(-mll64)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.atomic"
+               name="Support atomic functions(-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.dpfp"
+               name="Double precisions FPX instructions(-mdpfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mpy"
+               name="Multiply insturctions"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.mpy">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.fpu"
+               name="FPU"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.fpu">
+         </option>
       </toolChain>
       <configuration
             cleanCommand="rm -rf"
@@ -4180,6 +4485,60 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ea"
                name="Extended arithmetic instruction(-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize"
+               name="Bitscan  instruction(-mnorm) "
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.divrem"
+               name="div_rem instruction(-mdiv-rem)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divrem">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ll64"
+               name="64-bit load/store instructions(-mll64)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.atomic"
+               name="Support atomic functions(-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.dpfp"
+               name="Double precisions FPX instructions(-mdpfp)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpy"
+               name="Multiply insturctions"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.mpy">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpu"
+               name="FPU"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.fpu">
          </option>
       </toolChain>
       <projectType

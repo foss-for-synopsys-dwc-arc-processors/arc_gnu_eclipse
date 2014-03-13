@@ -40,6 +40,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     	         
             "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//yunlu add for ea   
             "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
+            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64",//yunlu add for ea   
+            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64",//yunlu add for ea  
     };
     
     
@@ -72,6 +74,12 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",//
     };
     
     // default value on ARCV2HS
@@ -84,6 +92,10 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",//
 
     };
     
