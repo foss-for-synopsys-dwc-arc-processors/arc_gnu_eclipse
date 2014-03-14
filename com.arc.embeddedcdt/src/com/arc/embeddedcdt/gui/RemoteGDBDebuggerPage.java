@@ -421,6 +421,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fPrgmArgumentsComCom.setVisible(true);
 					fLaunchComButton.setVisible(true);
 					fPrgmArgumentsLabelCom.setVisible(true);
+					fSearchexternalButton.setVisible(true);
+					fSearchexternalLabel.setVisible(true);
+					fPrgmArgumentsTextexternal.setVisible(true);
+					
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
@@ -433,6 +437,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fPrgmArgumentsComCom.setVisible(true);
 					fLaunchComButton.setVisible(true);		        
 					fPrgmArgumentsLabelCom.setVisible(true);
+					
+					fSearchexternalButton.setVisible(true);
+					fSearchexternalLabel.setVisible(true);
+					fPrgmArgumentsTextexternal.setVisible(true);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
@@ -447,6 +455,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fPrgmArgumentsComCom.setVisible(false);
 					fLaunchComButton.setVisible(false);
 					fPrgmArgumentsLabelCom.setVisible(false);
+					
+					
+					fSearchexternalButton.setVisible(true);
+					fSearchexternalLabel.setVisible(true);
+					fPrgmArgumentsTextexternal.setVisible(true);
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
 					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 

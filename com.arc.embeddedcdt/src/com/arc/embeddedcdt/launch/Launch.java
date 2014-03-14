@@ -387,7 +387,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			
 			try {
 				Thread.sleep(10000);
-				if (terminal_launch.equalsIgnoreCase("true")&&!external_tools.equalsIgnoreCase("nSIM"))
+				if (terminal_launch.equalsIgnoreCase("true")&&!external_tools.equalsIgnoreCase("nSIM")&&!serialport.equalsIgnoreCase("")&&!external_tools.equalsIgnoreCase("Generic gdbserver"))
 					startTerminal();
 			} catch (InterruptedException e2) {
 				// TODO Auto-generated catch block
