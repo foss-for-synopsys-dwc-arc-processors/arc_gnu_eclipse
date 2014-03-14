@@ -76,9 +76,11 @@ public class CommandTab extends CLaunchConfigurationTab {
 		argsComp.setLayoutData(gd);
 
 		
-		fPrgmArgumentsLabelInit = new Label(argsComp, SWT.NONE);//1-1 
+		fPrgmArgumentsLabelInit = new Label(argsComp, SWT.NONE);
 		fPrgmArgumentsLabelInit.setText("'Initialize' commands"); //$NON-NLS-1$
-		fPrgmArgumentsTextInit = new Text(argsComp, SWT.MULTI | SWT.WRAP | SWT.BORDER | SWT.V_SCROLL);//2-1
+		fPrgmArgumentsTextInit = new Text(argsComp, SWT.MULTI | SWT.WRAP | SWT.BORDER | SWT.V_SCROLL);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 100;
 		fPrgmArgumentsTextInit.setLayoutData(gd);
 		fPrgmArgumentsTextInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
@@ -97,12 +99,10 @@ public class CommandTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsLabelRun.setText("'Run' commands"); //$NON-NLS-1$
 		fPrgmArgumentsLabelRun.setLayoutData(gd);
 		fPrgmArgumentsTextRun = new Text(argsComp, SWT.MULTI | SWT.WRAP | SWT.BORDER | SWT.V_SCROLL);//4-1 and 4-2
-		//fPrgmArgumentsTextRun = new Text(argsComp, SWT.NONE);
-		gd = new GridData();
-		gd.horizontalAlignment = GridData.FILL;
-		gd.grabExcessHorizontalSpace = true;
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.heightHint = 100;
+		fPrgmArgumentsTextInit.setLayoutData(gd);
 		gd.horizontalSpan = 3;
-		gd.heightHint = 50;
 		fPrgmArgumentsTextRun.setLayoutData(gd);
 		fPrgmArgumentsTextRun.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
