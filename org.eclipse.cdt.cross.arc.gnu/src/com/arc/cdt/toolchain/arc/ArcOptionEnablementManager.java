@@ -45,6 +45,20 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             //"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu",
     };
     
+    private static String ARCV2EM_INVISIBLED[]= {
+    	"org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpuhs",
+    	"org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyhs",
+    	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem",
+    	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs",
+    };
+    private static String ARCV2HS_INVISIBLED[]= {
+    	"org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpuem",
+    	"org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyem",
+    	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem",
+    	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs",
+    	
+    };
+    
     
     /**
      * The names of options that are disabled for ARCv2EM
@@ -124,7 +138,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 
             public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
             }
-
+            public void onOptionVisiblementChanged (IOptionEnablementManager mgr, String optionId) {
+            }
             public void onOptionEnablementChanged (IOptionEnablementManager mgr, String optionID) {
                 // TODO Auto-generated method stub               
             }});
@@ -162,8 +177,16 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     for (int i=0;i<ARCV2EM_DISABLED.length;i++) 
                     	setEnabled(ARCV2EM_DISABLED[i],false);
                     for (int i=0;i<ARCV2HS_DEFAULT.length;i++) {
-                   	 setOptionValue(ARCV2HS_DEFAULT[i],false);
+                   	    setOptionValue(ARCV2HS_DEFAULT[i],false);
                     }
+                    
+                    for (int i=0;i<ARCV2EM_INVISIBLED.length;i++) 
+                    	setEnabled(ARCV2EM_INVISIBLED[i],false);
+                    for (int i=0;i<ARCV2HS_INVISIBLED.length;i++) 
+                    	setEnabled(ARCV2HS_INVISIBLED[i],true);
+                    
+                    
+                    
                     processor_control++;
 
                 }
@@ -174,12 +197,14 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     	 setEnabled(ARCV2HS_DISABLED[i],false);
                     	
                      }
-                     
-                     
                      for (int i=0;i<ARCV2HS_DEFAULT.length;i++) {
                     	 setOptionValue(ARCV2HS_DEFAULT[i],true);
                      }
-           
+                     for (int i=0;i<ARCV2EM_INVISIBLED.length;i++) 
+                     	setEnabled(ARCV2EM_INVISIBLED[i],true);
+                     for (int i=0;i<ARCV2HS_INVISIBLED.length;i++) 
+                     	setEnabled(ARCV2HS_INVISIBLED[i],false);
+                     
                      processor_control++;
 
                  }

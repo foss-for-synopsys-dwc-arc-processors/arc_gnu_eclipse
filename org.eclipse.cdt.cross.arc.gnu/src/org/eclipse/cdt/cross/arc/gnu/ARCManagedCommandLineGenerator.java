@@ -87,8 +87,10 @@ package org.eclipse.cdt.cross.arc.gnu;
    
        String sSyntaxonly = null;
    
-       String sFPU = null;
-       String smpy= null;
+       String sFPUEM = null;
+       String sFPUHS = null;
+       String smpyhs= null;
+       String smpyem= null;
    
        String sDebugLevel = null;
    
@@ -148,12 +150,18 @@ package org.eclipse.cdt.cross.arc.gnu;
            else if ((sID.endsWith(".option.warnings.syntax")) ||  //yunluz add for fsyntax-only
              (sID.indexOf(".option.warnings.syntax") > 0))
              sSyntaxonly = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpu.")) || 
-             (sID.indexOf(".option.target.fpu.") > 0))
-             sFPU = sEnumCommand;
-           else if ((sID.endsWith(".option.target.mpy.")) || 
-                   (sID.indexOf(".option.target.mpy.") > 0))
-             smpy = sEnumCommand;
+           else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))) || 
+             (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")))
+             sFPUEM = sEnumCommand;
+           else if ((sID.endsWith(".option.target.fpuhs"))&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS")) || 
+                   (sID.indexOf(".option.target.fpuhs.") > 0&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))
+                   sFPUHS = sEnumCommand;
+           else if ((sID.endsWith(".option.target.mpyhs"))&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS")) || 
+                   (sID.indexOf(".option.target.mpyhs") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS")))
+             smpyhs = sEnumCommand;
+           else if ((sID.endsWith(".option.target.mpyem"))&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")) || 
+                   (sID.indexOf(".option.target.mpyem") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")))
+             smpyem = sEnumCommand;
            else if ((sID.endsWith(".option.debugging.level")) || 
              (sID.indexOf(".option.debugging.level.") > 0))
              sDebugLevel = sEnumCommand;
@@ -268,10 +276,14 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((sSyntaxonly != null) && (sSyntaxonly.length() > 0)) {
          oList.add(sSyntaxonly);
        }
-       if ((sFPU != null) && (sFPU.length() > 0))
-           oList.add(sFPU);
-       if ((smpy != null) && (smpy.length() > 0))
-           oList.add(smpy);
+       if ((sFPUEM != null) && (sFPUEM.length() > 0))
+           oList.add(sFPUEM);
+       if ((sFPUHS != null) && (sFPUHS.length() > 0))
+           oList.add(sFPUHS);
+       if ((smpyhs != null) && (smpyhs.length() > 0))
+           oList.add(smpyhs);
+       if ((smpyem != null) && (smpyem.length() > 0))
+           oList.add(smpyem);
        if ((sDebugLevel != null) && (sDebugLevel.length() > 0)) {
          oList.add(sDebugLevel);
        if ((sDebugFormat != null) && (sDebugFormat.length() > 0))
