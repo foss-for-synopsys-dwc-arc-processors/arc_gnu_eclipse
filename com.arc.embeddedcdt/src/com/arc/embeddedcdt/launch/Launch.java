@@ -290,7 +290,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		}
 			
 		
-		String gdbserver_IPAddress=RemoteGDBDebuggerPage.IPAddress;
+		String gdbserver_IPAddress = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "localhost");
 		
 		if(gdbserver_IPAddress.equalsIgnoreCase("")||gdbserver_IPAddress==null)
 		{
