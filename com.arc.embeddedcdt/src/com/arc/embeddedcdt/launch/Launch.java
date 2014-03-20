@@ -386,15 +386,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 			String terminal_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
 			
-			try {
-				Thread.sleep(10000);
-				if (terminal_launch.equalsIgnoreCase("true")&&!external_tools.equalsIgnoreCase("nSIM")&&!serialport.equalsIgnoreCase("")&&!external_tools.equalsIgnoreCase("Generic gdbserver"))
-					startTerminal();
-			} catch (InterruptedException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
+			/* Do we need to connect to serial port? */
+			if (terminal_launch.equalsIgnoreCase("true") && !external_tools.equalsIgnoreCase("nSIM")
+					&& !serialport.equalsIgnoreCase("") && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e2) {
+					// Do nothing.
+					e2.printStackTrace();
+				}
+				startTerminal();
 			}
-		
 			
 			if (mode.equals(ILaunchManager.DEBUG_MODE)||mode.equals(ILaunchManager.RUN_MODE))
 			{
