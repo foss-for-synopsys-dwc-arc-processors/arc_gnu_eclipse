@@ -156,8 +156,9 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
         	
             Set<String> disabledSet = null;
-            Set<String> defaultSet = null;     
-            if (optionId.endsWith(".option.target.processor")) { 
+            Set<String> defaultSet = null; 
+            // `contains()` because sometimes this options has numeric suffix in the end.
+            if (optionId.contains(".option.target.processor")) { 
                 String value = (String) mgr.getValue(optionId);
                 System.out.println("com.arc.cdt.toolchain.arc.ArcOptionEnablementManager~~~~~~~~~~~~~~~~~~~~~"+value);
                  if (value.endsWith("option.mcpu.arc700")) {

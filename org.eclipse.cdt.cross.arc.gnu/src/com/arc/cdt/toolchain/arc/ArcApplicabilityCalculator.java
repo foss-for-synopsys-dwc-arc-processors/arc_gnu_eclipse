@@ -40,13 +40,16 @@ public class ArcApplicabilityCalculator implements IOptionApplicability {
         if (configuration != lastConfig) {
             lastConfig = configuration;
             EMGR.initialize(configuration);
-       }
-        if (option.getBaseId().endsWith(".option.target.processor")) { 
-        	   String value = (String) EMGR.getValue(option.getBaseId());
-        	   System.out.println("toolchain.arc.ArcApplicabilitycalculator~~~~~~~~~~~~~~~~~~~~~~~~~~~"+value);
-      
         }
-       return EMGR.isEnabled(option.getBaseId());
+        
+        // Some options are not in configuration and will not be copied in
+        // `initialize()` (I don't know why). So to ensure consistency, here
+        // we will add them to the manager.
+        if (option.getValue() != EMGR.getValue(option.getId())) {
+        	EMGR.set(option.getId(), option.getValue());
+        }
+        return EMGR.isEnabled(option.getBaseId());
     }
     
 }
+
