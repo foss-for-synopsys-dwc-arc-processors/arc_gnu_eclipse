@@ -85,7 +85,6 @@ public class LaunchTerminator implements IDebugEventSetListener {
 				final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 
-			
 				TerminalView viewPart;
 				try {
 					viewPart = (TerminalView) (activePage.showView(
@@ -108,11 +107,13 @@ public class LaunchTerminator implements IDebugEventSetListener {
 			if ( code == DebugEvent.TERMINATE && (ev.getSource() instanceof IProcess)) {
 				final IProcess p = (IProcess)ev.getSource();
 				final ILaunch launch = p.getLaunch();
+				/* We used to check for p.canTerminate(), but now we don't do
+				   this anymore, so we could close non-processes as well, like
+				   connection to serial port. */ 
 				if (p.isTerminated() &&
 						(p.getLabel() == Launch.OPENOCD_PROCESS_LABEL ||
 						 p.getLabel() == Launch.ASHLING_PROCESS_LABEL ||
-						 p.getLabel().startsWith(Launch.GDB_PROCESS_LABEL) ) &&
-					 launch.canTerminate()) {
+						 p.getLabel().startsWith(Launch.GDB_PROCESS_LABEL) )) {
 					Display.getDefault().asyncExec(new DialogRunnable(launch, p));
 					/* If two processes are already terminated, then user
 					 * will get two dialogs without this return. */
