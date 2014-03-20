@@ -77,7 +77,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
     static String runcom="";//this variable is for saving user's input run command
 	static String externalpath="";//this variable is for saving user's external path
-	public static String IPAddress="";//this variable is for saving user's portnumber
 
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
@@ -221,11 +220,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				 portnumber="3333"; 
 			 }
      		 fGDBServerPortNumberText.setText( portnumber );
-			 IPAddress=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String());
-			 if(IPAddress.equalsIgnoreCase("")){
-				 IPAddress="localhost"; 
+			 String hostname = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String());
+			 if(hostname.equalsIgnoreCase("")){
+				 hostname = "localhost";
 			 }
-			 fGDBServerIPAddressText.setText(IPAddress);
+			 fGDBServerIPAddressText.setText(hostname);
 			 
 
 				
@@ -350,8 +349,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
-		IPAddress=fGDBServerIPAddressText.getText();
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,getAttributeValueFromString(IPAddress));
+		String hostname = fGDBServerIPAddressText.getText();
+		configuration.setAttribute(
+				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
+				getAttributeValueFromString(hostname)
+		);
 		
 		
 		
@@ -566,7 +568,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fGDBServerIPAddressText.addModifyListener( new ModifyListener() {
 
 			public void modifyText( ModifyEvent evt ) {
-				IPAddress=fGDBServerIPAddressText.getText();
 				updateLaunchConfigurationDialog();
 			}
 		} );
