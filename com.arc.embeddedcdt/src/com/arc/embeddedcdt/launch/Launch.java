@@ -268,27 +268,18 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			throws CoreException
 	{
 		ILaunchConfigurationWorkingCopy configuration_copy=configuration.getWorkingCopy();
-		//launch_config=configuration_copy;
 		String external_tools="";
 		String external_tools_launch="";
-		if(launch_config!=null){
-			external_tools=launch_config.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-			external_tools_launch= launch_config.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
-			gdbserver_port=launch_config.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
-			serialport=launch_config.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
-			
-			configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
-			configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
-			configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
-
-		}
-		else {
-			external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-			external_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
-			gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
-			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
-		}
-			
+		
+		// Get requested values
+		external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
+		external_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
+		gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
+		serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+		// Set them to configuration copy
+		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
+		configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
+		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
 		
 		String gdbserver_IPAddress = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "localhost");
