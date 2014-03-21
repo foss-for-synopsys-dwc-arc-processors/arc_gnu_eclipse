@@ -119,8 +119,8 @@ public class FirstlaunchDialog extends Dialog {
 
 		buttonCancel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
-				value[0] = null;
-				value[1] = null;
+				value[0] = "";
+				value[1] = "";
 				shell.dispose();
 			}
 		});

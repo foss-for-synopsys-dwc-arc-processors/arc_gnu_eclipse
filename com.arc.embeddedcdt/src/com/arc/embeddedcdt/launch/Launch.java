@@ -188,9 +188,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		IWorkbench workbench = PlatformUI.getWorkbench();
 
         if (workbench.getDisplay().getThread() != Thread.currentThread()){
-            // Note that we do the work asynchronously so that we don't lock this thread. It is used
-            // to launch the debugger engine.
-            workbench.getDisplay().asyncExec(new Runnable(){
+            // Note that we do the work synchronously so that we can lock this thread when getting null gdbserver value. It is used
+            // to launch Debug As/ Run as pop up window for the first time launching.
+            workbench.getDisplay().syncExec(new Runnable(){
                 @Override
                 public void run () {
                 	startrunas();
@@ -291,32 +291,31 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		
 		if(gdbserver_port.equalsIgnoreCase("")){
 			 startrunas();
-			 try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			 if (serialport.equalsIgnoreCase(""))
 			 {
-				 external_tools_firstlaunch=FirstlaunchDialog.value[0];
-				 if (external_tools.equalsIgnoreCase("")){
-					 external_tools=external_tools_firstlaunch;
-					 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
+				 if(!FirstlaunchDialog.value[0].equalsIgnoreCase("")){
+					 external_tools_firstlaunch=FirstlaunchDialog.value[0];
+					 if (external_tools.equalsIgnoreCase("")){
+						 external_tools=external_tools_firstlaunch;
+						 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
+					 }
+					 
+					 if (isAshling(configuration)){
+						 gdbserver_port="2331"; 
+					 }
+					 else if (isOpenOCD(configuration)){
+						 gdbserver_port="3333"; 
+					 }
+					 else if (isnSIM(configuration)){
+						 gdbserver_port="1234"; 
+					 }
+					 serialport=FirstlaunchDialog.value[1];
+					 configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
+					 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
 				 }
+				 else
+					 return;
 				 
-				 if (isAshling(configuration)){
-					 gdbserver_port="2331"; 
-				 }
-				 else if (isOpenOCD(configuration)){
-					 gdbserver_port="3333"; 
-				 }
-				 else if (isnSIM(configuration)){
-					 gdbserver_port="1234"; 
-				 }
-				 serialport=FirstlaunchDialog.value[1];
-				 configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
-				 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
 			 }
 			 else {
 				 //gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
