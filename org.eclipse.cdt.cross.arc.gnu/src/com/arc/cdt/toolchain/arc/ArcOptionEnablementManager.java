@@ -20,28 +20,16 @@ import com.arc.cdt.toolchain.AbstractOptionEnablementManager;
 import com.arc.cdt.toolchain.IOptionEnablementManager;
 import com.arc.cdt.toolchain.OptionEnablementManager;
 
-
-/**
- * Handles ARCompact options. Determines which is enabled or disabled when things are set. Also ties similar compiler,
- * assembler, and linker options together.
- * @author davidp
- * @currentOwner <a href="mailto:davidp@arc.com">davidp</a>
- * @version $Revision$
- * @lastModified $Date$
- * @lastModifiedBy $Author$
- * @reviewed 0 $Revision:1$
- */
-
 public class ArcOptionEnablementManager extends OptionEnablementManager {
 
        
    
     private static String ARCV2EM_DISABLED[] = {
     	         
-            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//yunlu add for ea   
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
-            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64",//yunlu add for ea   
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64",//yunlu add for ea  
+            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//Customized for ARC GNU ea   
+            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//Customized for ARC GNU ea  
+            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64",//Customized for ARC GNU ea   
+            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64",//Customized for ARC GNU ea  
             //"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu",
     };
     
@@ -69,25 +57,25 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
      * The names of options that are disabled for ARC700
      */
     private static String ARC7_DISABLED[] = {
-    	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //yunlu add for windows_codedensity
-    	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
-            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+    	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity
+    	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
+            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//Customized for ARC GNU windows_swap
+            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
            
     };
     private static String ARC6_DISABLED[] = {
-	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//Customized for ARC GNU windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
     };
     private static String ARCV2HS_DISABLED[] = {
-	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp",//yunlu add for windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp",//yunlu add for linux_swap
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//yunlu add for ea   
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//yunlu add for ea  
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //yunlu add for windows_codedensity
-	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp",//Customized for ARC GNU windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp",//Customized for ARC GNU linux_swap
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//Customized for ARC GNU ea   
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//Customized for ARC GNU ea  
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity
+	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//Customized for ARC GNU windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
 
@@ -103,10 +91,10 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     private static String[]  ARCV2HS_DEFAULT = {
 
         // HS default value to be true
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //yunlu add for windows_codedensity
-	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //yunlu add for linux_codedensity
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//yunlu add for windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//yunlu add for linux_swap
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity
+	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//Customized for ARC GNU windows_swap
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter",//
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist",//
@@ -160,7 +148,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             // `contains()` because sometimes this options has numeric suffix in the end.
             if (optionId.contains(".option.target.processor")) { 
                 String value = (String) mgr.getValue(optionId);
-                System.out.println("com.arc.cdt.toolchain.arc.ArcOptionEnablementManager~~~~~~~~~~~~~~~~~~~~~"+value);
+                //System.out.println("com.arc.cdt.toolchain.arc.ArcOptionEnablementManager~~~~~~~~~~~~~~~~~~~~~"+value);
                  if (value.endsWith("option.mcpu.arc700")) {
                     disabledSet = DISABLED_FOR_ARC7;
                     for (int i=0;i<ARC7_DISABLED.length;i++) 	setEnabled(ARC7_DISABLED[i],false);

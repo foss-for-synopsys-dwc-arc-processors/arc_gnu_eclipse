@@ -31,18 +31,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ISettingsChangeListener;
 import org.eclipse.cdt.managedbuilder.internal.core.NotificationManager;
 import org.eclipse.cdt.managedbuilder.internal.core.SettingsChangeEvent;
 
-
-/**
- * CUSTOMIZATION by ARC
- * <P>
- * A convenient base class for all instance of IOptionEnablementManager
- * @author davidp
- * @currentOwner <a href="mailto:davidp@arc.com">davidp</a>
- * @version $Revision$
- * @lastModified $Date$
- * @lastModifiedBy $Author$
- * @reviewed 0 $Revision:1$
- */
 @SuppressWarnings("restriction")
 public abstract class AbstractOptionEnablementManager implements IOptionEnablementManager, ISettingsChangeListener {
 
@@ -88,7 +76,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                 toolchain = cfg.getToolChain();          
         }
       
-       	   System.out.println("toolchain.OptionEnableManager~~~~~~~~~~~~~~~~~~~~~~~~~~~"+toolchain.getBaseId());
+       	//System.out.println("toolchain.OptionEnableManager~~~~~~~~~~~~~~~~~~~~~~~~~~~"+toolchain.getBaseId());
      
         if ((config != mConfig || toolchain != mLastToolChain) && config instanceof IResourceInfo) {
             initializing = true;
@@ -102,7 +90,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                         set(option.getBaseId(), option.getValue());
                         }
                 }
-            ////yunlu end
+        //These codes are customized for ARC GNU toolchain
             }
             finally {
                 initializing = false;
@@ -129,7 +117,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
             	 if (id.equals(option.getBaseId())){
                      return new Object[]{tool,option};
                  }
-          // Yunlu add for getting arc700/EM latest value begin
+          // These codes are customized for ARC GNU toolchain
             	 else {
              	         Object oParent = tool.getParent();
                 	     while ((oParent != null) && (!(oParent instanceof IToolChain)))
@@ -159,8 +147,6 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                 	     }
                 	    
             	 }
-           
-           //Yunlu add for getting arc700/EM latest value end
             }
         }
         return null;   
@@ -312,24 +298,17 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
             mNestedChangeLevel--;
         }
     }
-
-    /*@Override
-    public void settingsChanged(SettingsChangeEvent event) {
-        IOption option = event.getOption();
-        set(option.getBaseId(),option.getValue());
-    }*/
     @Override
     public void settingsChanged(SettingsChangeEvent event) {
         IOption option = event.getOption();
         // Due to CDT bug option is the original option such that option.getValue() does not
        // necessarily reflect the new value. We must retrieve the modified instance of option
-       // Yunlu add for getting arc700/EM latest value begin
+       // These codes are customized for ARC GNU toolchain
         if(option.getBaseId().endsWith(".option.target.processor"))
         {
         	Object[] optLookup = getOption(option.getBaseId());
             if(optLookup != null) option = (IOption) optLookup[1];
         }
-       // Yunlu add for getting arc700/EM latest value begin
      set(option.getBaseId(),option.getValue());
     }
 

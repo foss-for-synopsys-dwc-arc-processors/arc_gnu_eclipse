@@ -53,7 +53,7 @@ public class OptionEnablementManager extends AbstractOptionEnablementManager {
             // related options.
         	 if (optionId.endsWith(".option.target.processor")) { 
           	   String value = (String) mgr.getValue(optionId);
-          	   System.out.println("toolchain.OptionEnableManager~~~~~~~~~~~~~~~~~~~~~~~~~~~"+value);
+          	   //System.out.println("toolchain.OptionEnableManager~~~~~~~~~~~~~~~~~~~~~~~~~~~"+value);
         
           }
             if (optionId.equals(MAP_OPTION_ID)){

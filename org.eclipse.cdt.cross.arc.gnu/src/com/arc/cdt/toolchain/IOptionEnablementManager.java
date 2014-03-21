@@ -13,26 +13,6 @@ package com.arc.cdt.toolchain;
 
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 
-/**
- * CUSTOMIZATION from ARC
- * <P>
- * An instance of this interface exists per project type. It 
- * manages which options are enabled/disabled as other options
- * are set or cleared.
- * <P>
- * When some options are set, other options may be set implicitly.
- * For example, -p (profiling) option on the compile may also set
- * the corresponding option in the link. This interface manages
- * that.
- * 
- * @author David Pickens
- * @currentOwner <a href="mailto:davidp@arc.com">davidp</a>
- * @version $Revision$
- * @lastModified $Date$
- * @lastModifiedBy $Author$
- * @reviewed 0 $Revision:1$
- */
-
 public interface IOptionEnablementManager {
     interface IObserver {
         /**
