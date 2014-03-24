@@ -847,103 +847,103 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem"
-               name="Multiply EM insturctions (-mmpy_option)"
+               name="Multiply instructions (ARCv2EM)"
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mmpy_option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.0"
                   isDefault="false"
-                  name="0">
+                  name="0 - No multiplier available">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=1"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.1"
-                  name="1">
+                  name="1 - 16x16 multiplier, fully pipelined">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=2"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.2"
                   isDefault="true"
-                  name="2">
+                  name="2 - 32x32 multiplier, fully pipelined (1 stage)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=3"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.3"
-                  name="3">
+                  name="3 - 32x32 multipler, fully pipelined (2 stages)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.5"
-                  name="4">
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.4"
+                  name="4 - 2 16x16 multipliers, blocking, sequential">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=5"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.5"
-                  name="5">
+                  name="5 -16x16 multiplier, blocking, sequential">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=6"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.6"
-                  name="6">
+                  name="6 - 32x4 multipler, blocking, sequential">
             </enumeratedOptionValue>
          </option>
              <option
                    applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                    defaultValue="2"
                    id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs"
-                   name="Multiply HS insturctions (-mmpy_option)"
+                   name="Multiply instructions (ARCv2HS)"
                    valueType="enumerated">
             <enumeratedOptionValue
                   command="-mmpy_option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.0"
                   isDefault="false"
-                  name="0">
+                  name="0 - No multiplier available">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=1"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.1"
-                  name="1">
+                  name="1 - 16x16 multiplier, fully pipelined">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=2"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.2"
                   isDefault="true"
-                  name="2">
+                  name="2 - 32x32 multiplier, fully pipelined (1 stage)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=3"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.3"
-                  name="3">
+                  name="3 - 32x32 multipler, fully pipelined (2 stages)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=4"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.4"
-                  name="4">
+                  name="4 - 2 16x16 multipliers, blocking, sequential">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=5"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.5"
-                  name="5">
+                  name="5 - 16x16 multiplier, blocking, sequential">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=6"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.6"
-                  name="6">
+                  name="6 - 32x4 multipler, blocking, sequential">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=7"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.7"
-                  name="7">
+                  name="7 - short vector instructions (32bits)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=8"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.8"
-                  name="8">
+                  name="8 - double MAC instructions">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy_option=9"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.9"
-                  name="9">
+                  name="9 - 64bit operations">
             </enumeratedOptionValue>
          </option>
         
@@ -1888,22 +1888,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-               command="-Xlinker --gc-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.link.option.gcsections"
-               name="Remove unused sections (-Xlinker --gc-sections)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-               command="-Xlinker --print-gc-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.link.option.printgcsections"
-               name="Print removed sections (-Xlinker --print-gc-sections)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
                command="-s"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.c.link.option.strip"
@@ -2082,22 +2066,6 @@
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.nostdlibs"
                name="No startup or default libs (-nostdlib)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-               command="-Xlinker --gc-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.gcsections"
-               name="Remove unused sections (-Xlinker --gc-sections)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-               command="-Xlinker --print-gc-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.printgcsections"
-               name="Print removed sections (-Xlinker --print-gc-sections)"
                valueType="boolean">
          </option>
          <option
@@ -2589,7 +2557,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.processor"
-               name="Processor"
+               name="Processor (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
@@ -2850,14 +2818,14 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyem"
-               name="Multiply EM insturctions "
+               name="Multiply instructions (ARCv2EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyhs"
-               name="Multiply HS insturctions "
+               name="Multiply instructions (ARCv2HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
          </option>
 
@@ -3140,7 +3108,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor"
-               name="Processor"
+               name="Processor (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
@@ -3401,7 +3369,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem"
-               name="Multiply EM insturctions "
+               name="Multiply instructions (ARCv2EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
          <option
@@ -3409,7 +3377,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs"
-               name="Multiply HS insturctions "
+               name="Multiply instructions (ARCv2HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
          </option>
          <option
@@ -4001,7 +3969,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.processor"
-               name="Processor"
+               name="Processor (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
          </option>
          <option
@@ -4291,13 +4259,13 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mpyem"
-               name="Multiply EM insturctions "
+               name="Multiply instructions (ARCv2EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
                   <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mpyhs"
-               name="Multiply HS insturctions "
+               name="Multiply instructions (ARCv2HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
          </option>
 
@@ -4364,7 +4332,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.processor"
-               name="Processor"
+               name="Processor (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
          </option>
          <option
@@ -4654,13 +4622,13 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpyem"
-               name="Multiply EM insturctions "
+               name="Multiply instructions (ARCv2EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpyhs"
-               name="Multiply HS insturctions "
+               name="Multiply instructions (ARCv2HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
          </option>
          <option
