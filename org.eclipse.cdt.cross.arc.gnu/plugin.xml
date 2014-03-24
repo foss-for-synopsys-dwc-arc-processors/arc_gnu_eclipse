@@ -5032,6 +5032,30 @@
             location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS36_Empty_C_Project"
+            location="$nl$/templates/projecttemplates/HS36_Empty_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_C_Project"
+            location="$nl$/templates/projecttemplates/HS34_Empty_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS36_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/HS36_Empty_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/HS34_Empty_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
 
    </extension>
 
