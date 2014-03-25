@@ -109,8 +109,8 @@ package org.eclipse.cdt.cross.arc.gnu;
        String smspfp= null;
        String smspfp_compact= null;
        String smno_dpfp_lrsr= null;
-             
-       
+       String smdpfp_fast= null;   
+       String smspfp_fast= null;
    
        for (int i = 0; i < aoOptions.length; i++)
          {
@@ -264,6 +264,16 @@ package org.eclipse.cdt.cross.arc.gnu;
                if (bVal)                                                  
             	   smdpfp_compact = sCommand;                                
            } 
+           else if ((sID.endsWith(".option.target.spfp_fast")) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.spfp_fast.") > 0)) {               //Customized for ARC GNU spfp
+                   if (bVal)                                                   //Customized for ARC GNU spfp
+                   smspfp_fast = sCommand;                                          //Customized for ARC GNU 
+           } 
+           else if ((sID.endsWith(".option.target.dpfp_fast")) ||  
+                   (sID.indexOf(".option.target.dpfp_fast.") > 0)) {       
+               if (bVal)                                                  
+            	   smdpfp_fast = sCommand;                                
+           } 
            else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")) ||  
                    (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)) {       
                if (bVal)                                                  
@@ -349,7 +359,12 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((smno_dpfp_lrsr != null) && (smno_dpfp_lrsr.length() > 0)) {                 
            oList.add(smno_dpfp_lrsr);                                            
            }  
-       
+       if ((smspfp_fast != null) && (smspfp_fast.length() > 0)) {                 
+           oList.add(smspfp_fast);                                            
+           } 
+       if ((smdpfp_fast != null) && (smdpfp_fast.length() > 0)) {                 
+           oList.add(smdpfp_fast);                                            
+           }
        
        if ((sEa != null) && (sEa.length() > 0)) {                 
            oList.add(sEa);                                              

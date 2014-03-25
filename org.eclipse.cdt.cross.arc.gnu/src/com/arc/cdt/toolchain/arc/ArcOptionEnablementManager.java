@@ -94,6 +94,11 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.mno-dpfp-lrsr",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.mno-dpfp-lrsr",//
         
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp_fast",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp_fast",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp_fast",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp_fast",//
+        
         
     };
     
