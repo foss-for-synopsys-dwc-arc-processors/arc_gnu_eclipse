@@ -40,9 +40,9 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs",
     };
     private static String ARCV2HS_INVISIBLED[]= {
-    	"org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpuem",
+    	//"org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpuem",
     	"org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyem",
-    	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem",
+    	//"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem",
     	"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs",
     	
     };

@@ -155,9 +155,9 @@ package org.eclipse.cdt.cross.arc.gnu;
            else if ((sID.endsWith(".option.warnings.syntax")) ||  //Customized for ARC GNU fsyntax-only
              (sID.indexOf(".option.warnings.syntax") > 0))
              sSyntaxonly = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))) || 
-             (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")))
-             sFPUEM = sEnumCommand;
+           //else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))) || 
+           //  (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM")))
+           //  sFPUEM = sEnumCommand;
            else if ((sID.endsWith(".option.target.fpuhs"))&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS")) || 
                    (sID.indexOf(".option.target.fpuhs.") > 0&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))
                    sFPUHS = sEnumCommand;
