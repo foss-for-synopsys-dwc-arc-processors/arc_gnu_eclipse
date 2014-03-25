@@ -22,14 +22,14 @@ package org.eclipse.cdt.cross.arc.gnu;
    public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator
    {
      private static final String OPTION_SUFIX_PROCESSOR = ".option.target.processor";
-     private static final String OPTION_SUFIX_CORE = ".option.target.core700";                     //yunluz add for core 700
-     private static final String OPTION_SUFIX_BARRELSHIFTER = ".option.target.barrelshifter";      //yunluz add for core barrelshifter
-     private static final String OPTION_SUFIX_CODEDENSITY = ".option.target.codedensity";          //yunluz add for core codedensity
-     private static final String OPTION_SUFIX_DIVIDE = ".option.target.divide";                    //yunluz add for core divide
-     private static final String OPTION_SUFIX_NORMALIZE = ".option.target.normalize";              //yunluz add for core normalize
-     private static final String OPTION_SUFIX_SWAP = ".option.target.swap";                 //yunluz add for core swap
-     private static final String OPTION_SUFIX_SPFP_COMFP = ".option.target.spfp";                 //yunluz add for core sSpfp
-     private static final String OPTION_SUFIX_EA = ".option.target.ea";                 //yunluz add for core ea
+     private static final String OPTION_SUFIX_CORE = ".option.target.core700";                     //Customized for ARC GNU core 700
+     private static final String OPTION_SUFIX_BARRELSHIFTER = ".option.target.barrelshifter";      //Customized for ARC GNU core barrelshifter
+     private static final String OPTION_SUFIX_CODEDENSITY = ".option.target.codedensity";          //Customized for ARC GNU core codedensity
+     private static final String OPTION_SUFIX_DIVIDE = ".option.target.divide";                    //Customized for ARC GNU core divide
+     private static final String OPTION_SUFIX_NORMALIZE = ".option.target.normalize";              //Customized for ARC GNU core normalize
+     private static final String OPTION_SUFIX_SWAP = ".option.target.swap";                 //Customized for ARC GNU core swap
+     private static final String OPTION_SUFIX_SPFP_COMFP = ".option.target.spfp";                 //Customized for ARC GNU core sSpfp
+     private static final String OPTION_SUFIX_EA = ".option.target.ea";                 //Customized for ARC GNU core ea
      private static final String OPTION_SUFIX_THUMB = ".option.target.thumb";
      private static final String OPTION_SUFIX_THUMB_INTERWORK = ".option.target.thumbinterwork";
      private static final String OPTION_SUFFIX_ENDIANNES = ".option.target.endiannes";
@@ -71,14 +71,13 @@ package org.eclipse.cdt.cross.arc.gnu;
    
        String sProcessor = null;
                 
-       String sCore700 = null;        //yunluz add for core 700
-       String sBarrelshifter = null;  //yunluz add for Barrelshifter
-       String sCodedensity = null;    //yunluz add for codedensity
-       String sDivide = null;         //yunluz add for divide
-       String sNormalize = null;      //yunluz add for normalize
-       String sSwap = null;           //yunluz add for swap
-       String sSpfp = null;           //yunluz add for spfp
-       String sEa = null;           //yunluz add for ea
+       String sCore700 = null;        //Customized for ARC GNU core 700
+       String sBarrelshifter = null;  //Customized for ARC GNU Barrelshifter
+       String sCodedensity = null;    //Customized for ARC GNU codedensity
+       String sDivide = null;         //Customized for ARC GNU divide
+       String sNormalize = null;      //Customized for ARC GNU normalize
+       String sSwap = null;           //Customized for ARC GNU swap
+       String sEa = null;           //Customized for ARC GNU ea
        String sThumb = null;
    
        String sThumbInterwork = null;
@@ -106,6 +105,12 @@ package org.eclipse.cdt.cross.arc.gnu;
        String satomic = null;
        String sll64 = null;
        String smdpfp= null;
+       String smdpfp_compact= null;
+       String smspfp= null;
+       String smspfp_compact= null;
+       String smno_dpfp_lrsr= null;
+             
+       
    
        for (int i = 0; i < aoOptions.length; i++)
          {
@@ -141,13 +146,13 @@ package org.eclipse.cdt.cross.arc.gnu;
            if ((sID.endsWith(".option.target.processor")) || 
              (sID.indexOf(".option.target.processor.") > 0))
              sProcessor = sEnumCommand;
-           else if ((sID.endsWith(".option.target.core700")) ||     //yunluz add for core 700
-             (sID.indexOf(".option.target.core700.") > 0))          //yunluz add for core 700
-             sCore700 = sEnumCommand;                               //yunluz add for core 700
+           else if ((sID.endsWith(".option.target.core700")) ||     //Customized for ARC GNU core 700
+             (sID.indexOf(".option.target.core700.") > 0))          //Customized for ARC GNU core 700
+             sCore700 = sEnumCommand;                               //Customized for ARC GNU core 700
            else if ((sID.endsWith(".option.target.endiannes")) || 
              (sID.indexOf(".option.target.endiannes.") > 0))
              sProcessorEndiannes = sEnumCommand;
-           else if ((sID.endsWith(".option.warnings.syntax")) ||  //yunluz add for fsyntax-only
+           else if ((sID.endsWith(".option.warnings.syntax")) ||  //Customized for ARC GNU fsyntax-only
              (sID.indexOf(".option.warnings.syntax") > 0))
              sSyntaxonly = sEnumCommand;
            else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))) || 
@@ -195,34 +200,30 @@ package org.eclipse.cdt.cross.arc.gnu;
              (sID.indexOf(".option.debugging.prof.") > 0)) {
              if (bVal)
                sDebugProf = sCommand;
-           } else if ((sID.endsWith(".option.target.barrelshifter")) ||  //yunluz add for barrelshifter
-             (sID.indexOf(".option.target.barrelshifter.") > 0)) {       //yunluz add for barrelshifter
-             if (bVal)                                                   //yunluz add for barrelshifter
-               sBarrelshifter = sCommand;                                //yunluz add for barrelshifter
-           } else if ((sID.endsWith(".option.target.codedensity")&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))) ||    //yunluz add for codedensity
-             (sID.indexOf(".option.target.codedensity.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))) {         //yunluz add for codedensity
-              if (bVal)                                                  //yunluz add for codedensity
-              sCodedensity = sCommand;                                   //yunluz add for codedensity
-           } else if ((sID.endsWith(".option.target.divide")) ||         //yunluz add for divide
-             (sID.indexOf(".option.target.divide.") > 0)) {              //yunluz add for divide
-             if (bVal)                                                   //yunluz add for divide
-             sDivide = sCommand;                                         //yunluz add for divide
-           } else if ((sID.endsWith(".option.target.normalize")) ||      //yunluz add for normalize
-            (sID.indexOf(".option.target.normalize.") > 0)) {            //yunluz add for normalize
-             if (bVal)                                                   //yunluz add for normalize
-             sNormalize = sCommand;                                      //yunluz add for normalize
-           } else if ((sID.endsWith(".option.target.swap")&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))) ||           //yunluz add for swap
-             (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))) {                //yunluz add for swap
-             if (bVal)                                                   //yunluz add for swap
-              sSwap = sCommand;                                          //yunluz add for swap
-           } else if ((sID.endsWith(".option.target.spfp")) ||           //yunluz add for spfp 
-              (sID.indexOf(".option.target.spfp.") > 0)) {               //yunluz add for spfp
-              if (bVal)                                                   //yunluz add for spfp
-              sSpfp = sCommand;                                          //yunluz add for ea
-           } else if ((sID.endsWith(".option.target.ea")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //yunluz add for ea
-                   (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //yunluz add for ea
-                   if (bVal)                                                   //yunluz add for ea
-                   sEa = sCommand;                                          //yunluz add for ea
+           } else if ((sID.endsWith(".option.target.barrelshifter")) ||  //Customized for ARC GNU barrelshifter
+             (sID.indexOf(".option.target.barrelshifter.") > 0)) {       //Customized for ARC GNU barrelshifter
+             if (bVal)                                                   //Customized for ARC GNU barrelshifter
+               sBarrelshifter = sCommand;                                //Customized for ARC GNU barrelshifter
+           } else if ((sID.endsWith(".option.target.codedensity")&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))) ||    //Customized for ARC GNU codedensity
+             (sID.indexOf(".option.target.codedensity.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))) {         //Customized for ARC GNU codedensity
+              if (bVal)                                                  //Customized for ARC GNU codedensity
+              sCodedensity = sCommand;                                   //Customized for ARC GNU codedensity
+           } else if ((sID.endsWith(".option.target.divide")) ||         //Customized for ARC GNU divide
+             (sID.indexOf(".option.target.divide.") > 0)) {              //Customized for ARC GNU divide
+             if (bVal)                                                   //Customized for ARC GNU divide
+             sDivide = sCommand;                                         //Customized for ARC GNU divide
+           } else if ((sID.endsWith(".option.target.normalize")) ||      //Customized for ARC GNU normalize
+            (sID.indexOf(".option.target.normalize.") > 0)) {            //Customized for ARC GNU normalize
+             if (bVal)                                                   //Customized for ARC GNU normalize
+             sNormalize = sCommand;                                      //Customized for ARC GNU normalize
+           } else if ((sID.endsWith(".option.target.swap")&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))) ||           //Customized for ARC GNU swap
+             (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=ARCv2EM"))||(sProcessor.equalsIgnoreCase("-mcpu=ARCv2HS"))))) {                //Customized for ARC GNU swap
+             if (bVal)                                                   //Customized for ARC GNU swap
+              sSwap = sCommand;                                          //Customized for ARC GNU swap
+           } else if ((sID.endsWith(".option.target.ea")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //Customized for ARC GNU ea
+                   if (bVal)                                                   //Customized for ARC GNU ea
+                   sEa = sCommand;                                          //Customized for ARC GNU ea
            } else if ((sID.endsWith(".option.target.shiftassist")) ||  
                    (sID.indexOf(".option.target.shiftassist.") > 0)) {       
                if (bVal)                                                  
@@ -243,12 +244,32 @@ package org.eclipse.cdt.cross.arc.gnu;
                if (bVal)                                                  
                  sll64 = sCommand;                                
            } 
+           else if ((sID.endsWith(".option.target.spfp")) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.spfp.") > 0)) {               //Customized for ARC GNU spfp
+                   if (bVal)                                                   //Customized for ARC GNU spfp
+                   smspfp = sCommand;                                          //Customized for ARC GNU 
+           } 
            else if ((sID.endsWith(".option.target.dpfp")) ||  
                    (sID.indexOf(".option.target.dpfp.") > 0)) {       
                if (bVal)                                                  
             	   smdpfp = sCommand;                                
            } 
-           
+           else if ((sID.endsWith(".option.target.spfp_compact")) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.spfp_compact.") > 0)) {               //Customized for ARC GNU spfp
+                   if (bVal)                                                   //Customized for ARC GNU spfp
+                   smspfp_compact = sCommand;                                          //Customized for ARC GNU 
+           } 
+           else if ((sID.endsWith(".option.target.dpfp_compact")) ||  
+                   (sID.indexOf(".option.target.dpfp_compact.") > 0)) {       
+               if (bVal)                                                  
+            	   smdpfp_compact = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")) ||  
+                   (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)) {       
+               if (bVal)                                                  
+            	   smno_dpfp_lrsr = sCommand;                                
+           } 
+   
            
            
            
@@ -296,24 +317,40 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((sDebugGProf != null) && (sDebugGProf.length() > 0)) {
          oList.add(sDebugGProf);
          }
-       if ((sBarrelshifter != null) && (sBarrelshifter.length() > 0)) {//yunluz add for barrelshifter
-         oList.add(sBarrelshifter);                                    //yunluz add for barrelshifter
+       if ((sBarrelshifter != null) && (sBarrelshifter.length() > 0)) {//Customized for ARC GNU barrelshifter
+         oList.add(sBarrelshifter);                                    //Customized for ARC GNU barrelshifter
          }
-       if ((sCodedensity != null) && (sCodedensity.length() > 0)) {    //yunluz add for codedensity
-           oList.add(sCodedensity);                                    //yunluz add for codedensity
+       if ((sCodedensity != null) && (sCodedensity.length() > 0)) {    //Customized for ARC GNU codedensity
+           oList.add(sCodedensity);                                    //Customized for ARC GNU codedensity
            }
-       if ((sDivide != null) && (sDivide.length() > 0)) {              //yunluz add for divide
-           oList.add(sDivide);                                         //yunluz add for divide
+       if ((sDivide != null) && (sDivide.length() > 0)) {              //Customized for ARC GNU divide
+           oList.add(sDivide);                                         //Customized for ARC GNU divide
            }
-       if ((sNormalize != null) && (sNormalize.length() > 0)) {           //yunluz add for normalize
-           oList.add(sNormalize);                                         //yunluz add for normalize
+       if ((sNormalize != null) && (sNormalize.length() > 0)) {           //Customized for ARC GNU normalize
+           oList.add(sNormalize);                                         //Customized for ARC GNU normalize
            }
-       if ((sSwap != null) && (sSwap.length() > 0)) {                 //yunluz add for swap
-           oList.add(sSwap);                                         //yunluz add for swap     
+       if ((sSwap != null) && (sSwap.length() > 0)) {                 //Customized for ARC GNU swap
+           oList.add(sSwap);                                         //Customized for ARC GNU swap     
            }
-       if ((sSpfp != null) && (sSpfp.length() > 0)) {                 
-           oList.add(sSpfp);                                            
+       
+       if ((smspfp != null) && (smspfp.length() > 0)) {                 
+           oList.add(smspfp);                                            
            }  
+       if ((smspfp_compact != null) && (smspfp_compact.length() > 0)) {                 
+           oList.add(smspfp_compact);                                            
+           } 
+       if ((smdpfp != null) && (smdpfp.length() > 0)) {                 
+    	   oList.add(smdpfp);                                            
+           }  
+       if ((smdpfp_compact != null) && (smdpfp_compact.length() > 0)) {                 
+           oList.add(smdpfp_compact);                                            
+           }  
+ 
+       if ((smno_dpfp_lrsr != null) && (smno_dpfp_lrsr.length() > 0)) {                 
+           oList.add(smno_dpfp_lrsr);                                            
+           }  
+       
+       
        if ((sEa != null) && (sEa.length() > 0)) {                 
            oList.add(sEa);                                              
            } 
@@ -328,11 +365,7 @@ package org.eclipse.cdt.cross.arc.gnu;
            }  
        if ((sll64 != null) && (sll64.length() > 0)) {                
            oList.add(sll64);                                             
-           } 
-       if ((smdpfp != null) && (smdpfp.length() > 0)) {                
-           oList.add(smdpfp);                                             
-           } 
- 
+           }  
        
        }
      

@@ -68,8 +68,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
     };
     private static String ARCV2HS_DISABLED[] = {
-	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp",//Customized for ARC GNU windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp",//Customized for ARC GNU linux_swap
+
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//Customized for ARC GNU ea   
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//Customized for ARC GNU ea  
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity
@@ -83,8 +82,19 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist",//
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize",
+        
+	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp_compact",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp_compact",//
         "org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp",//
         "org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp_compact",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp_compact",//
+        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.mno-dpfp-lrsr",//
+        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.mno-dpfp-lrsr",//
+        
+        
     };
     
     // default value on ARCV2HS
