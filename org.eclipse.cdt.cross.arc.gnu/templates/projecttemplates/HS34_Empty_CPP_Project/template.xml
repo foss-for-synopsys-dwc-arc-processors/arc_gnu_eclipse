@@ -53,6 +53,50 @@
 			</element>
 		</complex-array>
 	</process>
+	
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.windows.option.target.processor" />
+                <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs" />
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+	
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor" />
+                <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs" />
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+	
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.processor" />
+                <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs" />
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+	
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.processor" />
+                <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs" />
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
 
 </template>
 
