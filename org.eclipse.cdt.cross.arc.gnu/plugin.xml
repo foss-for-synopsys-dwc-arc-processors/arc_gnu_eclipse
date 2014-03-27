@@ -769,6 +769,13 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mshift-assist"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
+               name="Shift assist(-mshift-assist)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mcode-density"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
                name="Code density(-mcode-density)"
@@ -812,13 +819,6 @@
                valueType="boolean">
          </option>
          -->
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mshift-assist"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               name="Shift assist(-mshift-assist)"
-               valueType="boolean">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mdiv-rem"
@@ -2775,6 +2775,13 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity"
                name="Code density(-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
@@ -2803,13 +2810,6 @@
                valueType="boolean">
          </option>
          -->
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
@@ -3330,6 +3330,13 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity"
                name="Code density(-mcode-density)"
@@ -3366,13 +3373,6 @@
                valueType="boolean">
          </option>
          -->
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
@@ -4230,6 +4230,13 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.codedensity"
                name="Code density(-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity">
@@ -4256,13 +4263,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea">
          </option>
          -->
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
@@ -4597,6 +4597,13 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>         
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity"
                name="Code density(-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity">
@@ -4620,13 +4627,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ea"
                name="Extended arithmetic instruction(-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -5068,6 +5068,12 @@
             id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM6_Empty_C_Project"
             location="$nl$/templates/projecttemplates/EM6_Empty_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_CPP_Project"
+            location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
       </template>
             <template
             filterPattern=".*g\+\+"
@@ -5082,9 +5088,9 @@
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_CPP_Project"
-            location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_C_Project"
+            location="$nl$/templates/projecttemplates/HS34_Empty_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
@@ -5094,9 +5100,9 @@
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_C_Project"
-            location="$nl$/templates/projecttemplates/HS34_Empty_Project/template.xml"
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/HS34_Empty_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
@@ -5105,12 +5111,7 @@
             location="$nl$/templates/projecttemplates/HS36_Empty_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_CPP_Project"
-            location="$nl$/templates/projecttemplates/HS34_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-      </template>
+
 
    </extension>
 
