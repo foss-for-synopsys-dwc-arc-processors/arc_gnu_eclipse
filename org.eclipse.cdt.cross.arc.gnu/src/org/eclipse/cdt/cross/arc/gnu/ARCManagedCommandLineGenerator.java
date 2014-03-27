@@ -101,7 +101,6 @@ package org.eclipse.cdt.cross.arc.gnu;
    
        String sDebugGProf = null;
        String sshiftassist= null; 
-       String sdivrem = null;
        String satomic = null;
        String sll64 = null;
        String smfpi= null;
@@ -227,12 +226,7 @@ package org.eclipse.cdt.cross.arc.gnu;
                    (sID.indexOf(".option.target.shiftassist.") > 0)) {       
                if (bVal)                                                  
                  sshiftassist = sCommand;                                
-           } 
-           else if ((sID.endsWith(".option.target.divrem")) ||  
-                   (sID.indexOf(".option.target.divrem.") > 0)) {       
-               if (bVal)                                                  
-                 sdivrem = sCommand;                                
-           } 
+           }
            else if ((sID.endsWith(".option.target.atomic")) ||  
                    (sID.indexOf(".option.target.atomic.") > 0)) {       
                if (bVal)                                                  
@@ -321,9 +315,6 @@ package org.eclipse.cdt.cross.arc.gnu;
            } 
        if ((sshiftassist != null) && (sshiftassist.length() > 0)) {           
            oList.add(sshiftassist);                                         
-           }
-       if ((sdivrem != null) && (sdivrem.length() > 0)) {                
-           oList.add(sdivrem);                                             
            }
        if ((satomic != null) && (satomic.length() > 0)) {                
            oList.add(satomic);                                             
