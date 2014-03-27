@@ -794,27 +794,6 @@
                name="Swap instruction(-mswap)"
                valueType="boolean">
          </option>
-         <option
-               command="-mspfp"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp"
-               name="Single Precision FPX instructions (-mspfp)"
-               valueType="boolean">
-         </option>
-         <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mspfp-compact"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact"
-            name="Single Precision FPX instructions, tuned for the compact implementation (-mspfp-compact)"
-            valueType="boolean">
-          </option>
-          <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mdpfp-compact"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_compact"
-            name="Double Precision FPX instructions, tuned for the compact implementation (-mdpfp-compact)"
-            valueType="boolean">
-      </option>
 
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -823,6 +802,7 @@
             name="Disable LR and SR instructions from using FPX extension aux registers (-mno-dpfp-lrsr)"
             valueType="boolean">
       </option>
+      <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mea"
@@ -831,6 +811,7 @@
                name="Extended arithmetic instruction(-mea)"
                valueType="boolean">
          </option>
+         -->
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mshift-assist"
@@ -857,13 +838,6 @@
                command="-matomic"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
                name="Support atomic functions(-matomic)"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mdpfp"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp"
-               name="Double precisions FPX instructions(-mdpfp)"
                valueType="boolean">
          </option>
          <option
@@ -1056,17 +1030,41 @@
          </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mdpfp-fast"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_fast"
-            name="Double Precision FPX instructions, tuned for the fast implementation (-mdpfp-fast)"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mspfp-fast"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_fast"
-            name="Single Precision FPX instructions, tuned for the fast implementation (-mspfp-fast)"
-            valueType="boolean">
+            commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi"
+            name="FPI"
+            valueType="enumerated">
+         <enumeratedOptionValue
+               command="-mspfp"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+               isDefault="true"
+               name="Single Precision FPX instructions (-mspfp)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mspfp-fast"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp_fast"
+               name="Single Precision FPX instructions, tuned for the fast implementation (-mspfp-fast)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mspfp-compact"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp_compact"
+               name="Single Precision FPX instructions, tuned for the compact implementation (-mspfp-compact)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mdpfp"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+               name="Double Precision FPX instructions(-mdpfp)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mdpfp-fast"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp_fast"
+               name="Double Precision FPX instructions, tuned for the fast implementation (-mdpfp-fast)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mdpfp-compact"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp_compact"
+               name="Double Precision FPX instructions, tuned for the compact implementation (-mdpfp-compact)">
+         </enumeratedOptionValue>
       </option>
 
       </tool>
@@ -2795,7 +2793,7 @@
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
-        
+        <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
@@ -2804,6 +2802,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                valueType="boolean">
          </option>
+         -->
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
@@ -2872,48 +2871,6 @@
                name="FPU  HS Type"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp"
-               name="Single Precision FPX instructions (-mspfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp_compact"
-               name="Single Precision FPX instructions, tuned for the compact implementation (-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.spfp_fast"
-               name="Single Precision FPX instructions, tuned for the fast implementation (-mspfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_fast">
-         </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp"
-               name="Double precisions FPX instructions(-mdpfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp_compact"
-               name="Double Precision FPX instructions, tuned for the compact implementation (-mdpfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_compact">
-         </option>  
-         <option
-                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.dpfp_fast"
-                name="Double Precision FPX instructions, tuned for the fast implementation (-mdpfp-fast)"
-                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_fast">
-         </option>
  
           <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -2922,6 +2879,15 @@
                name="Disable LR and SR instructions from using FPX extension aux registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
+          <option
+                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpi"
+                isAbstract="false"
+                name="FPI"
+                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+          </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -3390,7 +3356,7 @@
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
-        
+        <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
@@ -3399,6 +3365,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                valueType="boolean">
          </option>
+         -->
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
@@ -3464,54 +3431,21 @@
                name="FPU  HS Type"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp"
-               name="Single Precision FPX instructions (-mspfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
-         </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp_compact"
-               name="Single Precision FPX instructions, tuned for the compact implementation (-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.spfp_fast"
-               name="Single Precision FPX instructions, tuned for the fast implementation (-mspfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_fast">
-         </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp"
-               name="Double precisions FPX instructions(-mdpfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp_compact"
-               name="Double Precision FPX instructions, tuned for the compact implementation (-mdpfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.dpfp_fast"
-               name="Double Precision FPX instructions, tuned for the fast implementation (-mdpfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_fast">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mno-dpfp-lrsr"
                name="Disable LR and SR instructions from using FPX extension aux registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpi"
+               isAbstract="false"
+               name="FPI"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
          </option>
       </toolChain>
       <configuration
@@ -4313,7 +4247,7 @@
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
-        
+        <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
@@ -4321,6 +4255,7 @@
                name="Extended arithmetic instruction(-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea">
          </option>
+         -->
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
@@ -4384,54 +4319,21 @@
                name="FPU  HS Type"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.spfp"
-               name="Single Precision FPX instructions (-mspfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.spfp_compact"
-               name="Single Precision FPX instructions, tuned for the compact implementation (-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.spfp_fast"
-               name="Single Precision FPX instructions, tuned for the fast implementation (-mspfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_fast">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.dpfp"
-               name="Double precisions FPX instructions(-mdpfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.dpfp_compact"
-               name="Double Precision FPX instructions, tuned for the compact implementation (-mdpfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.dpfp_fast"
-               name="Double Precision FPX instructions, tuned for the fast implementation (-mdpfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_fast">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mno-dpfp-lrsr"
                name="Disable LR and SR instructions from using FPX extension aux registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.fpi"
+               isAbstract="false"
+               name="FPI"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
          </option>
       </toolChain>
       <configuration
@@ -4786,51 +4688,18 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.spfp"
-               name="Single Precision FPX instructions (-mspfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.spfp_compact"
-               name="Single Precision FPX instructions, tuned for the compact implementation (-mspfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.spfp_fast"
-               name="Single Precision FPX instructions, tuned for the fast implementation (-mspfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.spfp_fast">
-         </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.dpfp"
-               name="Double precisions FPX instructions(-mdpfp)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.dpfp_compact"
-               name="Double Precision FPX instructions, tuned for the compact implementation (-mdpfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_compact">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.dpfp_fast"
-               name="Double Precision FPX instructions, tuned for the fast implementation (-mdpfp-fast)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.dpfp_fast">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mno-dpfp-lrsr"
                name="Disable LR and SR instructions from using FPX extension aux registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpi"
+               isAbstract="false"
+               name="FPI"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
          </option>
       </toolChain>
       <projectType
