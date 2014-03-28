@@ -7,7 +7,7 @@
 // Board parameters
 // -------------------------------------------------------------------------------
 #define CPU_CLOCK   25000000
-#define PERIPHERAL_CLOCK 25000000
+#define PERIPHERAL_CLOCK 50000000
 
 #define	REG_FILE_0	0x00000000U
 #define	REG_FILE_1	0x00001000U	// not implemented on this board
