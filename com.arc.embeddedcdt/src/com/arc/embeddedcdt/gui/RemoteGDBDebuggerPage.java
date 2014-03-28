@@ -273,7 +273,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 if (fSerialPortAvailable)
 			 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		
-		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*new String()*/);
 		
 		if (FirstlaunchDialog.value[0] != null) {
 			if (!FirstlaunchDialog.value[0].equalsIgnoreCase("")) {
