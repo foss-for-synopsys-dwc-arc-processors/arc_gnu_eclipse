@@ -15,6 +15,7 @@
 
 package com.arc.embeddedcdt.gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
@@ -73,6 +74,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Button fLaunchterminallButton;//this button is for launching the external tools
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
+	private boolean fSerialPortAvailable = true;
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	
     static String runcom="";//this variable is for saving user's input run command
@@ -250,15 +252,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 }
 		
 		 String Terminallaunch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, new String());//get which external tool is in use
-		 if(!Terminallaunch.equalsIgnoreCase("false"))
-		 {
+		 if(!Terminallaunch.equalsIgnoreCase("false")) {
 			 fLaunchComButton.setSelection(true);//setText("Enable Launch Terminal");
 			 fLaunchTerminalboolean="true";
-			 fPrgmArgumentsComCom.setEnabled(true);
-	         fPrgmArgumentsLabelCom.setEnabled(true);
+			 if (fPrgmArgumentsComCom.getItemCount() > 0) {
+				 fPrgmArgumentsComCom.setEnabled(true);
+				 fPrgmArgumentsLabelCom.setEnabled(true);
+			 } else {
+				 fPrgmArgumentsComCom.setEnabled(false);
+				 fPrgmArgumentsLabelCom.setEnabled(false);
 			 }
-		 else if(Terminallaunch.equalsIgnoreCase("false")) 
-		 {
+		} else if(Terminallaunch.equalsIgnoreCase("false")) {
 			 fLaunchComButton.setSelection(false);//fLaunchComButton.setText("Disable Launch Terminal");
 			 fLaunchTerminalboolean="false";
 			 fPrgmArgumentsComCom.setEnabled(false);
@@ -266,9 +270,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			
 		 }
 		 fLaunchComButton.setText("Launch Terminal");
-		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-		
-		
+		 if (fSerialPortAvailable)
+			 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		
 		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
 		
@@ -347,7 +350,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
 		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
+		if (fSerialPortAvailable)
+			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
 		String hostname = fGDBServerIPAddressText.getText();
 		configuration.setAttribute(
@@ -427,6 +431,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fSearchexternalLabel.setVisible(true);
 					fPrgmArgumentsTextexternal.setVisible(true);
 					
+					// Do not enable UI elements if serial port is not available.
+					fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+					fLaunchComButton.setEnabled(fSerialPortAvailable);
+					fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
@@ -436,9 +444,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					else
 						fPrgmArgumentsTextexternal.setText(ASHLING_DEFAULT_PATH_LINUX);
 					
-					fPrgmArgumentsComCom.setVisible(true);
-					fLaunchComButton.setVisible(true);		        
-					fPrgmArgumentsLabelCom.setVisible(true);
+					fPrgmArgumentsComCom.setVisible(fSerialPortAvailable);
+					fLaunchComButton.setVisible(fSerialPortAvailable);
+					fPrgmArgumentsLabelCom.setVisible(fSerialPortAvailable);
 					
 					fSearchexternalButton.setVisible(true);
 					fSearchexternalLabel.setVisible(true);
@@ -514,8 +522,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				
 				if(fLaunchComButton.getSelection()==true){
 					fLaunchTerminalboolean="true";
-					fPrgmArgumentsComCom.setEnabled(true);
-					fPrgmArgumentsLabelCom.setEnabled(true);
+					fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+					fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
 				}
 				updateLaunchConfigurationDialog();
 
@@ -638,20 +646,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan =3;
 		fPrgmArgumentsComCom.setLayoutData(gd);
-		List COM=Launch.COMserialport();
-		for (int ii=0;ii<COM.size();ii++)
-		{
-			    String currentcom=(String) COM.get(ii);
-		    	fPrgmArgumentsComCom.add(currentcom);
-        }
-		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				comport=combo.getText();
-				updateLaunchConfigurationDialog();
-				}
-			
-		});
 		
 		fLaunchComButton = new Button(subComp,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(true);
@@ -663,10 +657,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        public void widgetSelected(SelectionEvent event) {
 	        	if(fLaunchComButton.getSelection()==true){
 	        		fLaunchTerminalboolean="true";
-	        	    fPrgmArgumentsComCom.setEnabled(true);
-	        	    fPrgmArgumentsLabelCom.setEnabled(true);
-	        	}
-	        	else {
+	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
+	        	} else {
 	        		fLaunchTerminalboolean="false";
 		        	fPrgmArgumentsComCom.setEnabled(false);
 		        	fPrgmArgumentsLabelCom.setEnabled(false);
@@ -679,6 +672,36 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        
 	      });
 		
+		// Set serial port list. This call might fail, for example if RxTx
+		// library is not available. In this case let's just disable UI elements.
+		List<String> COM = null;
+		try {
+			COM = Launch.COMserialport();
+		} catch (java.lang.UnsatisfiedLinkError e) {
+			e.printStackTrace();
+		} catch (java.lang.NoClassDefFoundError e) {
+			e.printStackTrace();
+		}
+
+		if (COM != null) {
+			for (int ii=0;ii<COM.size();ii++) {
+				    String currentcom=(String) COM.get(ii);
+				    fPrgmArgumentsComCom.add(currentcom);
+	        }
+		} else {
+			fSerialPortAvailable = false;
+			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+			fLaunchComButton.setEnabled(fSerialPortAvailable);
+		}
+
+		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				comport=combo.getText();
+				updateLaunchConfigurationDialog();
+			}
+		});
+
 	}
 
 	/* (non-Javadoc)

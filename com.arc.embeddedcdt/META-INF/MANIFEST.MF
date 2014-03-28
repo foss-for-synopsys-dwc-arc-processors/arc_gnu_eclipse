@@ -40,7 +40,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.tm.terminal.view
 Bundle-NativeCode: lib/linux/x86/librxtxSerial.so; osname=Linux; processor=x86,
  lib/linux/x86_64/librxtxSerial.so; osname=Linux; processor=x86-64,
- lib/win32/x86/rxtxSerial.dll; osname=Win32; processor=x86
+ lib/win32/x86/rxtxSerial.dll; osname=Win32; processor=x86,
+ *
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.ibm.icu.text
