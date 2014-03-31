@@ -13,7 +13,7 @@
 
 	<process type="org.eclipse.cdt.core.CreateSourceFolder">
 		<simple name="projectName" value="$(projectName)"/>
-		<simple name="path" value="$(sourceDir)"/>
+		<simple name="path" value="src"/>
 	</process>
 
 	<process type="org.eclipse.cdt.core.AddFiles">
@@ -26,7 +26,7 @@
 			</element>
 			<element>
 				<simple name="source" value="src/crt0.S"/>
-				<simple name="target" value="$(sourceDir)/crt0.S"/>
+				<simple name="target" value="src/crt0.S"/>
 				<simple name="replaceable" value="false"/>
 			</element>
 		</complex-array>

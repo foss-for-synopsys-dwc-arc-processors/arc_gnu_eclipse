@@ -843,7 +843,7 @@
                   command="-mmpy-option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.0"
                   isDefault="false"
-                  name="0 - No multiplier available">
+                  name="None">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=1"
@@ -859,7 +859,7 @@
             <enumeratedOptionValue
                   command="-mmpy-option=3"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.3"
-                  name="3 - 32x32 multipler, fully pipelined (2 stages)">
+                  name="3 - 32x32 multiplier, fully pipelined (2 stages)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=4"
@@ -874,7 +874,7 @@
             <enumeratedOptionValue
                   command="-mmpy-option=6"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.6"
-                  name="6 - 32x4 multipler, blocking, sequential">
+                  name="6 - 32x4 multiplier, blocking, sequential">
             </enumeratedOptionValue>
          </option>
              <option
@@ -887,7 +887,7 @@
                   command="-mmpy-option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.0"
                   isDefault="false"
-                  name="0 - No multiplier available">
+                  name="None">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=1"
@@ -903,7 +903,7 @@
             <enumeratedOptionValue
                   command="-mmpy-option=3"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.3"
-                  name="3 - 32x32 multipler, fully pipelined (2 stages)">
+                  name="3 - 32x32 multiplier, fully pipelined (2 stages)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=4"
@@ -918,7 +918,7 @@
             <enumeratedOptionValue
                   command="-mmpy-option=6"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.6"
-                  name="6 - 32x4 multipler, blocking, sequential">
+                  name="6 - 32x4 multiplier, blocking, sequential">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=7"
@@ -1029,9 +1029,13 @@
             name="FPX"
             valueType="enumerated">
          <enumeratedOptionValue
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+               isDefault="true"
+               name="None">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
                command="-mspfp"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
-               isDefault="true"
                name="Single Precision FPX (-mspfp)">
          </enumeratedOptionValue>
          <enumeratedOptionValue
@@ -1042,7 +1046,7 @@
          <enumeratedOptionValue
                command="-mspfp-compact"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp_compact"
-               name="Single Precision FPX, compact(-mspfp-compact)">
+               name="Single Precision FPX, compact (-mspfp-compact)">
          </enumeratedOptionValue>
          <enumeratedOptionValue
                command="-mdpfp"
