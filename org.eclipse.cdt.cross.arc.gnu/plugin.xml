@@ -1071,7 +1071,6 @@
             id="org.eclipse.cdt.cross.arc.gnu.builder"
             isAbstract="false"
             isVariableCaseSensitive="false"
-            name="ARC GNU Make builder"
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <tool
@@ -2542,7 +2541,7 @@
             cleanCommand="rm -rf"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.windows.configuration.base"
-            name="ARC Windows GNU Toolchain (elf32, little-endian) Configuration">
+            name="ARC GNU Toolchain for Windows host Configuration">
       
          <enablement
                attribute="artifactExtension"
@@ -2565,7 +2564,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
                   isAbstract="false"
                   isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.windows.IsToolChainSupported"
-                  name="ARC Windows GNU Toolchain (elf32, little-endian)"
+                  name="ARC GNU Toolchain for Windows host "
                   osList="win32">
          <targetPlatform
                archList="all"
@@ -2580,7 +2579,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder"
+               name="ARC GNU Make builder for Windows hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -3115,7 +3114,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
-            name="ARC Linux GNU Toolchain  (elf32, little-endian)"
+            name="ARC GNU Toolchain for Linux host "
             osList="linux">
          <targetPlatform
                archList="all"
@@ -3130,7 +3129,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
+               name="ARC GNU Make builder for Linux hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -3436,7 +3435,7 @@
       </toolChain>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
-            name="ARC Linux GNU Toolchain (elf32, little-endian) Configuration"
+            name="ARC GNU Toolchain for Linux host Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3952,13 +3951,12 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.builder"
             isAbstract="false"
             isVariableCaseSensitive="false"
-            name="ARC GNU Make builder"
             superClass="org.eclipse.cdt.cross.arc.gnu.builder">
       </builder>
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.windows.configuration.base"
-            name="ARC Windows GNU Toolchain (elf32, big-endian) Configuration"
+            name="ARC GNU Toolchain for Windows host (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3977,7 +3975,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.windows.IsToolChainSupported"
-            name="ARC Windows GNU Toolchain (elf32, big-endian)"
+            name="ARC GNU Toolchain for Windows host (big-endian)"
             osList="win32">
          <targetPlatform
                archList="all"
@@ -3992,7 +3990,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Windows GNU Make builder (eb)"
+               name="ARC GNU Make builder for Windows hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -4319,7 +4317,7 @@
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
-            name="ARC Linux GNU Toolchain (elf32, big-endian) Configuration"
+            name="ARC GNU Toolchain for Linux host (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -4338,7 +4336,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
-            name="ARC Linux GNU Toolchain (elf32, big-endian)"
+            name="ARC GNU Toolchain for Linux host (big-endian)"
             osList="linux">
          <targetPlatform
                archList="all"
@@ -4353,7 +4351,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder (eb)"
+               name="ARC GNU Make builder for Linux hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
