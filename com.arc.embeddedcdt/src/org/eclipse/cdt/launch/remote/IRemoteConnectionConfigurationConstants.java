@@ -41,7 +41,7 @@ public interface IRemoteConnectionConfigurationConstants extends
 	public static final String ATTR_SKIP_DOWNLOAD_TO_TARGET = 
 				DebugPlugin.getUniqueIdentifier() + ".ATTR_SKIP_DOWNLOAD_TO_TARGET"; //$NON-NLS-1$
 
-
+	String ATTR_DEBUGGER_EXTERNAL_TOOLS =  DebugPlugin.getUniqueIdentifier() + ".debugger_external_tools"; //$NON-NLS-1$
 	public static final String ATTR_PRERUN_COMMANDS = DebugPlugin.getUniqueIdentifier() + ".ATTR_PRERUN_CMDS"; //$NON-NLS-1$
 
 }
