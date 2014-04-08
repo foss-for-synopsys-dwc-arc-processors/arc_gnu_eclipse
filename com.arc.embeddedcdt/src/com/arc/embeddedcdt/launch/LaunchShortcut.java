@@ -24,6 +24,7 @@ import org.eclipse.cdt.debug.core.ICDebugConfiguration;
 import org.eclipse.cdt.debug.internal.ui.launch.LaunchMessages;
 import org.eclipse.cdt.launch.AbstractCLaunchDelegate;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
+import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.cdt.ui.CElementLabelProvider;
 import org.eclipse.cdt.utils.Platform;
 import org.eclipse.core.resources.IResource;
@@ -50,8 +51,16 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.TwoPaneElementSelector;
+
+import com.arc.embeddedcdt.LaunchConfigurationConstants;
+import com.arc.embeddedcdt.gui.FirstlaunchDialog;
+import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 
 
 /**
@@ -152,7 +161,32 @@ public class LaunchShortcut implements ILaunchShortcut {
           }
           return configuration;
   }
+	public void startrunas() {
+		IWorkbench workbench = PlatformUI.getWorkbench();
 
+        if (workbench.getDisplay().getThread() != Thread.currentThread()){
+            // Note that we do the work synchronously so that we can lock this thread when getting null gdbserver value. It is used
+            // to launch Debug As/ Run as pop up window for the first time launching.
+            workbench.getDisplay().syncExec(new Runnable(){
+                @Override
+                public void run () {
+                	startrunas();
+                }});
+            return;
+        }
+		
+		// Assertion: we're in the UI thread.
+		final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+		IWorkbenchWindow window=activePage.getWorkbenchWindow();
+		if (window != null) {
+			Shell parent = window.getShell();
+			//MessageDialog.openQuestion(parent,	"The first time launch","Need to create Debug configuration for the first launch");
+			FirstlaunchDialog dlg=new FirstlaunchDialog(parent);
+			dlg.open();
+			System.out.println("gdbserver: \""+dlg.value[0]+"\" COM serial port: \""+dlg.value[1]+"\"");
+    	}
+	}
   /**
    * Method createConfiguration.
    * @param bin
@@ -174,7 +208,31 @@ public class LaunchShortcut implements ILaunchShortcut {
                           ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
                   wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.RemoteGDBDebugger");
                   //wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.EmbeddedCDebugger");
+                  
+                  startrunas();
+                  
+
+    				 if(!FirstlaunchDialog.value[0].equalsIgnoreCase("")){
+    					 String external_tools= FirstlaunchDialog.value[0];
+    				
+    					 String gdbserver_port="";
+    					 
+    					 if (external_tools.equalsIgnoreCase("JTAG via Ashling")){
+    						 gdbserver_port="2331"; 
+    					 }
+    					 else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")){
+    						 gdbserver_port="3333"; 
+    					 }
+    					 else if (external_tools.equalsIgnoreCase("nSIM")){
+    						 gdbserver_port="1234"; 
+    					 }
+  
+    					wc.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
+    					wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,FirstlaunchDialog.value[1]);
+    					wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,FirstlaunchDialog.value[0]);
+                	}	
                   config = wc.doSave();
+
           } catch (CoreException ce) {
                   LaunchUIPlugin.log(ce);
           }

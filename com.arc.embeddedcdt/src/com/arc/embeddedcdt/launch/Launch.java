@@ -189,32 +189,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 	}
 	public static String serialport="";
-	public void startrunas() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
 
-        if (workbench.getDisplay().getThread() != Thread.currentThread()){
-            // Note that we do the work synchronously so that we can lock this thread when getting null gdbserver value. It is used
-            // to launch Debug As/ Run as pop up window for the first time launching.
-            workbench.getDisplay().syncExec(new Runnable(){
-                @Override
-                public void run () {
-                	startrunas();
-                }});
-            return;
-        }
-		
-		// Assertion: we're in the UI thread.
-		final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		IWorkbenchWindow window=activePage.getWorkbenchWindow();
-		if (window != null) {
-			Shell parent = window.getShell();
-			//MessageDialog.openQuestion(parent,	"The first time launch","Need to create Debug configuration for the first launch");
-			FirstlaunchDialog dlg=new FirstlaunchDialog(parent);
-			dlg.open();
-			System.out.println("gdbserver: \""+dlg.value[0]+"\" COM serial port: \""+dlg.value[1]+"\"");
-    	}
-	}
 	
 	private void startTerminal() {
 		IWorkbench workbench = PlatformUI.getWorkbench();
@@ -271,66 +246,26 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			final ILaunch launch, IProgressMonitor monitor)
 			throws CoreException
 	{
-		ILaunchConfigurationWorkingCopy configuration_copy=configuration.getWorkingCopy();
-		
+	
 		
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
 		String external_tools_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
 		serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
 			
-		// Set them to configuration copy
-		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
-		configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
-		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
-
+		if(external_tools.equalsIgnoreCase("")||gdbserver_port.equalsIgnoreCase(""))
+			return;
 		
-		String gdbserver_IPAddress = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "localhost");
+		String gdbserver_IPAddress = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "localhost");
 		
 		if(gdbserver_IPAddress.equalsIgnoreCase("")||gdbserver_IPAddress==null)
 		{
 			gdbserver_IPAddress="localhost";
 		}
 		
-		if(gdbserver_port.equalsIgnoreCase("")){
-			 startrunas();
-			 if (serialport.equalsIgnoreCase(""))
-			 {
-				 if(!FirstlaunchDialog.value[0].equalsIgnoreCase("")){
-					 final String external_tools_firstlaunch = FirstlaunchDialog.value[0];
-					 if (external_tools.equalsIgnoreCase("")){
-						 external_tools=external_tools_firstlaunch;
-						 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
-					 }
-					 
-					 if (isAshling(configuration_copy)){
-						 gdbserver_port="2331"; 
-					 }
-					 else if (isOpenOCD(configuration_copy)){
-						 gdbserver_port="3333"; 
-					 }
-					 else if (isnSIM(configuration_copy)){
-						 gdbserver_port="1234"; 
-					 }
-					 serialport=FirstlaunchDialog.value[1];
-					 configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
-					 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
-				 }
-				 else
-					 return;
-				 
-			 }
-			 else {
-				 //gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
-				 serialport=RemoteGDBDebuggerPage.comport;
-			 }
-			
-      	}
+	
 		
-		
-		//launch_config = configuration.getWorkingCopy();
-		launch_config=configuration_copy;
+		launch_config = configuration.getWorkingCopy();
 		
 		if (monitor == null)
 		{
@@ -509,21 +444,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								NSIM_PROCESS_LABEL);
 					}
 
-					
-					/*else if (extenal_tools.equalsIgnoreCase("")&&extenal_tools_launch.equalsIgnoreCase("true"))
-					{ //these codes are for "Debug As ARC C/C++ Application", which will launch Openocd automatically
-						
-						if(RemoteGDBDebuggerPage.isWindowsOS()){
-							extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
-						    String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-						    DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
-						}
-						else {
-							extenal_tools_path="usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
-						    String[] openocd_cmd = {"openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","reset halt"  };
-						    DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
-						}
-					}*/
 				
 					try
 					{
@@ -539,7 +459,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						
 						String gdb_init ="";
 						
-						if (!isAshling(configuration_copy))
+						if (!isAshling(configuration))
 						{
 							gdb_init=String.format("set remotetimeout 15 \n target remote %s:%s\nload",gdbserver_IPAddress,gdbserver_port);
 						
