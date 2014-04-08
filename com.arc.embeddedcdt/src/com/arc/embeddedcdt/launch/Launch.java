@@ -169,9 +169,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	  }	
       return new String[0];
 	}
-	static String external_tools_firstlaunch="";
-	static String gdbserver_port="";
-	static String external_tools="";
+
 	private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
 		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
 		return external_tools.equalsIgnoreCase("JTAG via OpenOCD");
@@ -269,26 +267,18 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		}
 	}
 	
-	static String last_project="";
 	public void launch(ILaunchConfiguration configuration, String mode,
 			final ILaunch launch, IProgressMonitor monitor)
 			throws CoreException
 	{
-		if(launch_config!=null)
-		    last_project=launch_config.getName();
 		ILaunchConfigurationWorkingCopy configuration_copy=configuration.getWorkingCopy();
 		
 		
-		String external_tools_launch="";
-		
-		// Get requested values
-		if(!last_project.equalsIgnoreCase(configuration_copy.getName())){
-			external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-			external_tools_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
-			gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
-			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
+		String external_tools_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
+		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
+		serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
 			
-		}
 		// Set them to configuration copy
 		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
 		configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
@@ -308,7 +298,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			 if (serialport.equalsIgnoreCase(""))
 			 {
 				 if(!FirstlaunchDialog.value[0].equalsIgnoreCase("")){
-					 external_tools_firstlaunch=FirstlaunchDialog.value[0];
+					 final String external_tools_firstlaunch = FirstlaunchDialog.value[0];
 					 if (external_tools.equalsIgnoreCase("")){
 						 external_tools=external_tools_firstlaunch;
 						 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
