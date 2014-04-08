@@ -172,16 +172,22 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	static String external_tools_firstlaunch="";
 	static String gdbserver_port;
 	private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
-		return external_tools_firstlaunch.equalsIgnoreCase("JTAG via OpenOCD");
+		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+		return external_tools.equalsIgnoreCase("JTAG via OpenOCD");
+		//return external_tools_firstlaunch.equalsIgnoreCase("JTAG via OpenOCD");
 	}
 	
 	private boolean isnSIM(ILaunchConfiguration configuration) throws CoreException {
-		
-		return external_tools_firstlaunch.equalsIgnoreCase("nSIM");
+		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+		return external_tools.equalsIgnoreCase("nSIM");
+		//return external_tools_firstlaunch.equalsIgnoreCase("nSIM");
 	}
 	
 	private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
-		return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
+		//return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
+		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+		return external_tools.equalsIgnoreCase("JTAG via Ashling");
+
 	}
 	public static String serialport=null;
 	public void startrunas() {
@@ -280,6 +286,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
 		configuration_copy.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
 		configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,serialport);
+
 		
 		String gdbserver_IPAddress = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "localhost");
@@ -300,13 +307,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						 configuration_copy.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,external_tools);
 					 }
 					 
-					 if (isAshling(configuration)){
+					 if (isAshling(configuration_copy)){
 						 gdbserver_port="2331"; 
 					 }
-					 else if (isOpenOCD(configuration)){
+					 else if (isOpenOCD(configuration_copy)){
 						 gdbserver_port="3333"; 
 					 }
-					 else if (isnSIM(configuration)){
+					 else if (isnSIM(configuration_copy)){
 						 gdbserver_port="1234"; 
 					 }
 					 serialport=FirstlaunchDialog.value[1];
@@ -535,7 +542,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						
 						String gdb_init ="";
 						
-						if (!isAshling(configuration))
+						if (!isAshling(configuration_copy))
 						{
 							gdb_init=String.format("set remotetimeout 15 \n target remote %s:%s\nload",gdbserver_IPAddress,gdbserver_port);
 						
