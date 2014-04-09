@@ -121,6 +121,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		try {
 			gdbserverCommand = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND,
 														   IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
+			
 		}
 		catch( CoreException e ) {
 		}
@@ -274,13 +275,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		
 		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*new String()*/);
-		
-		if (FirstlaunchDialog.value[0] != null) {
-			if (!FirstlaunchDialog.value[0].equalsIgnoreCase("")) {
-				gdbserver = FirstlaunchDialog.value[0];
-			}
-
-		}
 		
 		 if(!gdbserver.equalsIgnoreCase(""))
 		 {
