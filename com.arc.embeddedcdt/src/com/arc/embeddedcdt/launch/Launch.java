@@ -450,28 +450,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
 											
-						
 						monitor.worked(2);
-						if (mode.equals(ILaunchManager.DEBUG_MODE))
-						{
-							monitor.subTask("Creating launch target");
-							createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration);
-
-							monitor.subTask("Query target state");
-							queryTargetState(dtargets);
-
-							// This will make the GDB console frontmost.
-							l.addStragglers();
-							monitor.subTask("Execute GDB Run commands");	
-						}
-						
-					    else if (mode.equals(ILaunchManager.RUN_MODE)){
-							l.addStragglers();
-							monitor.subTask("Execute GDB Run commands");
-							
-							executeGDBScript("GDB commands",configuration,	dtargets,getExtraCommands(configuration,"c "), monitor);
-						}
-							
+						monitor.subTask("Creating launch target");
+						createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration, mode);
+						monitor.subTask("Query target state");
+						queryTargetState(dtargets);
+						// This will make the GDB console frontmost.
+						l.addStragglers();
 						
 						eventManager.allowProcessingEvents(prevstateAllowEvents);
 						
@@ -517,7 +502,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 	private void createLaunchTarget(final ILaunch launch, ICProject project,
 			IBinaryObject exeFile, ICDebugConfiguration debugConfig,
-			ICDITarget[] dtargets, ILaunchConfiguration configuration)
+			ICDITarget[] dtargets, ILaunchConfiguration configuration, String mode)
 			throws CoreException
 	{
 		boolean appConsole = getAppConsole(configuration);
@@ -536,13 +521,14 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 			boolean stopInMain = configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, false);
 			String stopSymbol = null;
-			if (stopInMain)
+			// Do not stop at symbol (usually it is main) if it is "Run" configuration, not "Debug" one.
+			if (stopInMain && mode.equalsIgnoreCase(ILaunchManager.DEBUG_MODE))
 				stopSymbol = launch.getLaunchConfiguration().getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, 
 						ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
 
 
 			CDIDebugModel.newDebugTarget(launch, project.getProject(),
-					dtargets[i], renderTargetLabel(debugConfig), iprocess,exeFile, true, true, stopSymbol, false);
+					dtargets[i], renderTargetLabel(debugConfig), iprocess,exeFile, true, true, stopSymbol, true);
 		}
 	}
 
