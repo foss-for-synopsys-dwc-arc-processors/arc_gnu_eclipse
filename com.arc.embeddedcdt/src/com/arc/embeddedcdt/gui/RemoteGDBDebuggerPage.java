@@ -15,7 +15,8 @@
 
 package com.arc.embeddedcdt.gui;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
@@ -43,9 +44,6 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.Perspective;
 import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
@@ -107,11 +105,32 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	/**
 	 * Get default path to nSIM application nsimdrv.
 	 */
-	private String getNsimdrvDefaultPath() {
-		return System
-				.getenv("NSIM_HOME")
-				+ java.io.File.separator
-				+ "bin" + java.io.File.separator + "nsimdrv";
+	public static String getNsimdrvDefaultPath() {
+		return System.getenv("NSIM_HOME") + java.io.File.separator
+				+ "bin" + java.io.File.separator +
+				"nsimdrv";
+	}
+	
+	public static String getOpenOCDDefaultPath() {
+		if (isWindowsOS()) {
+			String s = System.getProperty("eclipse.home.location");
+			s = s.substring("file:/".length()).replace("/", "\\");
+			String path = s + java.io.File.separator +
+					".." + java.io.File.separator +
+					"share" + java.io.File.separator +
+					"openocd" + java.io.File.separator +
+					"scripts" + java.io.File.separator +
+					"target" + java.io.File.separator +
+					"snps_starter_kit_arc-em.cfg";
+			try {
+				return Paths.get(path).toRealPath().toString();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "";
+			}
+		} else {
+			return "/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
+		}
 	}
 
 	@Override
@@ -297,17 +316,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				)
 			);
 		}
-		else if	(gdbserver.indexOf("OpenOCD")>-1)
-		{
-			// OpenOCD
-			if(isWindowsOS()){
-				fPrgmArgumentsTextexternal.setText(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, "${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg")); //$NON-NLS-1$
-			}
-            else fPrgmArgumentsTextexternal.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
-			
-		}
-		else
-		{
+		else if	(gdbserver.indexOf("OpenOCD")>-1) {
+			fPrgmArgumentsTextexternal.setText(
+				configuration.getAttribute(
+					LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,
+					getOpenOCDDefaultPath()
+				)
+			);
+		} else {
 			// nSIM and default case
 			fPrgmArgumentsTextexternal.setText(
 				configuration.getAttribute(
@@ -411,13 +427,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						.equalsIgnoreCase("JTAG via OpenOCD")) {
 					fGDBServerPortNumberText.setText("3333");
 
-					if (isWindows) {
-						fPrgmArgumentsTextexternal.setText("${INSTALL_DIR}/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
-					} else {
-						fPrgmArgumentsTextexternal
-						.setText("/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg");
-					}
-
+					fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
 					fPrgmArgumentsComCom.setVisible(true);
 					fLaunchComButton.setVisible(true);
 					fPrgmArgumentsLabelCom.setVisible(true);

@@ -400,33 +400,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
-						
-							if(RemoteGDBDebuggerPage.isWindowsOS()){
-								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1||extenal_tools_path.equalsIgnoreCase("")) 
-								{
-									extenal_tools_path=eclipsehome.replace("/", "\\")+"..\\share\\openocd\\scripts\\target\\snps_starter_kit_arc-em.cfg";
-							    }
-								String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
-							}
-							else {
-								if(extenal_tools_path.indexOf("${INSTALL_DIR}")>-1||extenal_tools_path.equalsIgnoreCase("")) 
-								{
-								    extenal_tools_path="/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
-								}
-								String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","reset halt"  };
-								DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
-							}
+						if(extenal_tools_path.isEmpty()) {
+							extenal_tools_path = RemoteGDBDebuggerPage.getOpenOCDDefaultPath();
+					    }
+						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 					}
 					else if (external_tools.equalsIgnoreCase("nSIM")&&external_tools_launch.equalsIgnoreCase("true"))
 					{						
 						// Start nSIM GDB server
-						if (extenal_tools_path.equalsIgnoreCase(""))
-						{
-							extenal_tools_path=System
-									.getenv("NSIM_HOME")
-									+ java.io.File.separator
-									+ "bin" + java.io.File.separator + "nsimdrv";
+						if (extenal_tools_path.isEmpty()) {
+							extenal_tools_path = RemoteGDBDebuggerPage.getNsimdrvDefaultPath();
 						}
 						System.setProperty("nSIM", extenal_tools_path);
 						String nsim_exec = System.getProperty("nSIM");
