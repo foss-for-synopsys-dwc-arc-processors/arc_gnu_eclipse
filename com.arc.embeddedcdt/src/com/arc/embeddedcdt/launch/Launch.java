@@ -444,12 +444,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String gdb_init ="";
 						
 						if (!isAshling(configuration))
-						{
-							gdb_init=String.format("set remotetimeout 15 \n target remote %s:%s\nload",gdbserver_IPAddress,gdbserver_port);
-						
-						}
+							gdb_init=String.format("target remote %s:%s\nload",gdbserver_IPAddress,gdbserver_port);
 						else 
 							gdb_init=String.format("set arc opella-target arcem \ntarget remote %s:%s\nload",gdbserver_IPAddress, gdbserver_port);
+
 						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
 											
 						
