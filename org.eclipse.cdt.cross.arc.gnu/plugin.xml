@@ -630,11 +630,6 @@
                   isDefault="true"
                   name="ARC EM (-mEM)">
             </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mHS"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mHS)">
-            </enumeratedOptionValue>
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -2540,8 +2535,8 @@
       <configuration
             cleanCommand="rm -rf"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
-            id="org.eclipse.cdt.cross.arc.gnu.windows.configuration.base"
-            name="ARC GNU Toolchain for Windows host Configuration">
+            id="org.eclipse.cdt.cross.arc.gnu.windows.configuration.base.hs"
+            name="ARC GNU Toolchain for HS Windows host Configuration">
       
          <enablement
                attribute="artifactExtension"
@@ -2561,10 +2556,10 @@
             <toolChain
                   archList="all"
                   configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.windows.ConfigurationEnvironmentSupplier"
-                  id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs"
                   isAbstract="false"
                   isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.windows.IsToolChainSupported"
-                  name="ARC GNU Toolchain for Windows host "
+                  name="ARC GNU Toolchain for HS Windows host "
                   osList="win32">
          <targetPlatform
                archList="all"
@@ -2589,22 +2584,20 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.processor"
-               name="Processor (-mcpu)"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.processor.hs"
+               name="ARC HS (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+            <enumeratedOptionValue
+                  command="-mHS"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
+                  name="ARC HS (-mHS)">
+            </enumeratedOptionValue>
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                  id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.endiannes"
                  isAbstract="false"
                  name="Endianness"
                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyem"
-               name="Multiply instructions (ARC EM)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -2624,16 +2617,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpi"
-               isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mno-dpfp-lrsr"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mno-dpfp-lrsr.hs"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
@@ -2643,13 +2627,13 @@
          </optionCategory>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.level"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.level.hs"
                name="Debug level"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.format"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.format.hs"
                name="Debug format"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
             <enablement
@@ -2664,19 +2648,19 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.other"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.other.hs"
                name="Other debugging flags"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.prof"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.prof.hs"
                name="Generate prof information (-p)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.gprof"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.gprof.hs"
                name="Generate gprof information (-pg)">
          </option>
          <optionCategory
@@ -2685,7 +2669,7 @@
          </optionCategory>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.printsize"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.printsize.hs"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
@@ -2803,21 +2787,21 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter.hs"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist.hs"
                name="Shift assist (-mshift-assist)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity.hs"
                name="Code density (-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
                valueType="boolean">
@@ -2825,14 +2809,14 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.divide"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.divide.hs"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap.hs"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
@@ -2849,21 +2833,21 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize.hs"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64.hs"
                name="64-bit load/store instructions (-mll64)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.atomic"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.atomic.hs"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
@@ -4881,6 +4865,301 @@
             </toolChain>
          </configuration>
       </projectType>
+      <configuration
+            cleanCommand="rm -rf"
+            errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
+            id="org.eclipse.cdt.cross.arc.gnu.windows.configuration.base"
+            name="ARC GNU Toolchain for EM Windows host Configuration">
+         <enablement
+               attribute="artifactExtension"
+               extensionAdjustment="false"
+               type="CONTAINER_ATTRIBUTE"
+               value="a">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+            </checkBuildProperty>
+         </enablement>
+      </configuration>
+      <toolChain
+            archList="all"
+            configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.windows.ConfigurationEnvironmentSupplier"
+            id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
+            isAbstract="false"
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.windows.IsToolChainSupported"
+            name="ARC GNU Toolchain for EM Windows host "
+            osList="win32">
+         <targetPlatform
+               archList="all"
+               binaryParser="org.eclipse.cdt.core.GNU_ELF"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.platform.base"
+               isAbstract="false"
+               name="Windows Platform"
+               osList="win32">
+         </targetPlatform>
+         <builder
+               command="make"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base"
+               isAbstract="false"
+               isVariableCaseSensitive="false"
+               name="ARC GNU Make builder for Windows hosts"
+               superClass="org.eclipse.cdt.cross.arc.gnu.builder">
+         </builder>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               name="Target Processor">
+         </optionCategory>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.processor"
+               name="Processor (-mcpu)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.endiannes"
+               isAbstract="false"
+               name="Endianness"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mpyem"
+               name="Multiply instructions (ARC EM)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpi"
+               isAbstract="false"
+               name="FPX"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mno-dpfp-lrsr"
+               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
+               name="Debugging">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.level"
+               name="Debug level"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.format"
+               name="Debug format"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
+            <enablement
+                  type="UI_ENABLEMENT|CMD_USAGE">
+               <not>
+                  <checkOption
+                        optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.level"
+                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
+                  </checkOption>
+               </not>
+            </enablement>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.other"
+               name="Other debugging flags"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.prof"
+               name="Generate prof information (-p)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.debugging.gprof"
+               name="Generate gprof information (-pg)">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.windows.category.addtools"
+               name="Additional Tools">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.addtools"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.printsize"
+               name="Print Size"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
+         </option>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base"
+               isAbstract="false"
+               name="ARC ELF32 GCC Assembler"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+            <inputType
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.assembler.input">
+            </inputType>
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base"
+               isAbstract="false"
+               name="ARC ELF32 GCC C Compiler"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+            <inputType
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
+            </inputType>
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base"
+               isAbstract="false"
+               name="ARC ELF32 GCC C++ Compiler"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+            <inputType
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
+            </inputType>
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base"
+               isAbstract="false"
+               name="ARC ELF32 GCC C Linker"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base"
+               isAbstract="false"
+               name="ARC ELF32 GCC C++ Linker"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.archiver.base"
+               isAbstract="false"
+               name="ARC ELF32 GCC Archiver"
+               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base"
+               isAbstract="false"
+               name="ARC ELF32 GNU Create Flash Image"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.createflash"
+                     value="true">
+               </checkOption>
+               <and>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+                  </checkBuildProperty>
+               </and>
+            </enablement>
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base"
+               isAbstract="false"
+               name="ARC ELF32 GNU Create Listing"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.createlisting"
+                     value="true">
+               </checkOption>
+               <and>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+                  </checkBuildProperty>
+               </and>
+            </enablement>
+         </tool>
+         <tool
+               id="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base"
+               isAbstract="false"
+               name="ARC ELF32 GNU Print Size"
+               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.printsize"
+                     value="true">
+               </checkOption>
+               <and>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+                  </checkBuildProperty>
+               </and>
+            </enablement>
+         </tool>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.barrelshifter"
+               name="Barrel shifter (-mbarrel-shifter)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.shiftassist"
+               name="Shift assist (-mshift-assist)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity"
+               name="Code density (-mcode-density)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.divide"
+               name="Integer divide instructions (-mdiv-rem)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap"
+               name="Swap instruction (-mswap)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.normalize"
+               name="Bitscan instruction (-mnorm) "
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.atomic"
+               name="Atomic functions (-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+         </option>
+      </toolChain>
       
       
       <!-- -->
@@ -4923,6 +5202,12 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
+         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.build.core.templates.ARCHelloWorldCCProject">
@@ -4931,87 +5216,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.sourcery.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.sourcery.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.sourcery.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.yagarto.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.yagarto.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.summon.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.summon.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.summon.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.embedded.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.embedded.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.embedded.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.macosx.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.macosx.toolchain.base">
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
