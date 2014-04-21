@@ -2679,7 +2679,7 @@
                name="ARC ELF32 GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
             <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base.input"
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base.input.hs"
 				  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile"
                   superClass="org.eclipse.cdt.cross.arc.gnu.assembler.input">
             </inputType>
@@ -2690,7 +2690,7 @@
                name="ARC ELF32 GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
             <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base.input"
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base.input.hs"
 				  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile"
                   superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
             </inputType>
@@ -2701,7 +2701,7 @@
                name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
             <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base.input"
+                  id="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base.input.hs"
 				  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile"
                   superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
             </inputType>
@@ -2725,15 +2725,15 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base.hs"
                isAbstract="false"
                name="ARC ELF32 GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
+               superClass="org.eclipse.cdt.cross.arc.gnu.createflash.hs">
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.createflash"
+                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.createflash.hs"
                      value="true">
                </checkOption>
                <and>
@@ -2745,15 +2745,15 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base.hs"
                isAbstract="false"
                name="ARC ELF32 GNU Create Listing"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
+               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting.hs">
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.createlisting"
+                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.createlisting.hs"
                      value="true">
                </checkOption>
                <and>
@@ -2765,15 +2765,15 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base.hs"
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+               superClass="org.eclipse.cdt.cross.arc.gnu.printsize.hs">
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.printsize"
+                     holderId="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.windows.option.addtools.printsize.hs"
                      value="true">
                </checkOption>
                <and>
@@ -5160,6 +5160,257 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
       </toolChain>
+      <tool
+            command="arc-elf32-size"
+            commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
+            id="org.eclipse.cdt.cross.arc.gnu.printsize.hs"
+            name="ARC GNU Print Size (hs)"
+            natureFilter="both">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.hs"
+               name="General"
+               owner="org.eclipse.cdt.cross.arc.gnu.printsize.hs">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.printsize.general.hs"
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.format.hs"
+               name="Size Format"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="--format=berkeley"
+                  id="org.eclipse.cdt.cross.arc.gnu.printsize.general.format.berkeley"
+                  isDefault="true"
+                  name="Berkeley">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="--format=sysv"
+                  id="org.eclipse.cdt.cross.arc.printsize.size.general.format.sysv"
+                  name="SysV">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.printsize.general.hs"
+               command="-x"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.hex.hs"
+               name="Hex"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.printsize.general.hs"
+               command="-t"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.totals.hs"
+               name="Show Totals"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.printsize.general.hs"
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.otherflags.hs"
+               name="Other flags"
+               valueType="string">
+         </option>
+         <outputType
+               buildVariable="SECONDARY_SIZE"
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.output.hs"
+               outputNames="${BuildArtifactFileBaseName}.siz"
+               outputs="siz">
+         </outputType>
+         <inputType
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.input.hs"
+               multipleOfType="true"
+               option="org.eclipse.cdt.cross.arc.gnu.printsize.InFileName"
+               sources="elf">
+         </inputType>
+         <option
+               id="org.eclipse.cdt.cross.arc.gnu.printsize.InFileName.hs"
+               resourceFilter="all"
+               value="${BuildArtifactFileName}"
+               valueType="string">
+         </option>
+      </tool>
+      <tool
+            command="arc-elf32-objcopy"
+            id="org.eclipse.cdt.cross.arc.gnu.createflash.hs"
+            name="ARC GNU Create Flash Image(hs)"
+            natureFilter="both">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.out.hs"
+               name="Output"
+               owner="org.eclipse.cdt.cross.arc.gnu.createflash.hs">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.createflash.out.hs"
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.hs"
+               name="Output file format (-O)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-O ihex"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.ihex"
+                  name="ihex">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O elf32-littlearc"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.elf32-littlearc"
+                  name="elf32-littlearc">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O elf32-bigarc"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.elf32-bigarc"
+                  name="elf32-bigarc">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O elf32-little"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.elf32-little"
+                  name="elf32-little">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O elf32-big"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.elf32-big"
+                  name="elf32-bit">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O srec"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.srec"
+                  name="srec">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O symbolsrec"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.symbolsrec"
+                  name="symbolsrec">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O tekhex"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.tekhex"
+                  name="tekhex">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O binary"
+                  id="org.eclipse.cdt.cross.arc.gnu.createflash.out.choice.binary"
+                  name="binary">
+            </enumeratedOptionValue>
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.section.hs"
+               name="Section"
+               owner="org.eclipse.cdt.cross.arc.gnu.createflash.hs">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.createflash.section.hs"
+               command="-j .text"
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.section.text.hs"
+               isAbstract="false"
+               name="Section: -j .text"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.createflash.section.hs"
+               command="-j .data"
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.section.data.hs"
+               isAbstract="false"
+               name="Section: -j .data"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.createflash.section.hs"
+               command="-j "
+               id="org.eclipse.cdt.cross.arc.gnu.section.other.hs"
+               isAbstract="false"
+               name="Other (-j)"
+               resourceFilter="all"
+               valueType="stringList">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.misc.hs"
+               name="Miscellaneous"
+               owner="org.eclipse.cdt.cross.arc.gnu.createflash.hs">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.createflash.misc.hs"
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.misc.otheropt.hs"
+               name="Other options"
+               valueType="string">
+         </option>
+         <outputType
+               buildVariable="SECONDARY_FLASH"
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.output.hs"
+               outputContentType="org.eclipse.cdt.cross.arc.gnu.content-type.hex"
+               outputNames="${BuildArtifactFileBaseName}.hex"
+               outputs="hex">
+         </outputType>
+         <inputType
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.input"
+               multipleOfType="true"
+               option="org.eclipse.cdt.cross.arc.gnu.createflash.InFileName.hs"
+               sources="elf">
+         </inputType>
+         <option
+               id="org.eclipse.cdt.cross.arc.gnu.createflash.InFileName.hs"
+               resourceFilter="all"
+               value="${BuildArtifactFileName}"
+               valueType="string">
+         </option>
+      </tool>
+      <tool
+            command="arc-elf32-objdump"
+            id="org.eclipse.cdt.cross.arc.gnu.createlisting.hs"
+            name="ARC GNU Create Listing(hs)"
+            natureFilter="both"
+            outputFlag="&gt;">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.createlisting.general.hs"
+               name="General"
+               owner="org.eclipse.cdt.cross.arc.gnu.createlisting.hs">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.createlisting.general.hs"
+               defaultValue="-h -S"
+               id="org.eclipse.cdt.cross.arc.gnu.createlisting.general.otherflags.hs"
+               name="Other flags"
+               valueType="string">
+         </option>
+         <outputType
+               buildVariable="SECONDARY_LIST"
+               id="org.eclipse.cdt.cross.arc.gnu.createlisting.output.hs"
+               outputNames="${BuildArtifactFileBaseName}.lst"
+               outputs="lst">
+         </outputType>
+         <inputType
+               id="org.eclipse.cdt.cross.arc.gnu.createlisting.input.hs"
+               multipleOfType="true"
+               option="org.eclipse.cdt.cross.arc.gnu.createlisting.InFileName"
+               sources="elf">
+         </inputType>
+         <option
+               id="org.eclipse.cdt.cross.arc.gnu.createlisting.InFileName.hs"
+               resourceFilter="all"
+               value="${BuildArtifactFileName}"
+               valueType="string">
+         </option>
+      </tool>
       
       
       <!-- -->
