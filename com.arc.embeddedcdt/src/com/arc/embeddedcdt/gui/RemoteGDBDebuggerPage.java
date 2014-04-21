@@ -106,9 +106,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	 * Get default path to nSIM application nsimdrv.
 	 */
 	public static String getNsimdrvDefaultPath() {
-		return System.getenv("NSIM_HOME") + java.io.File.separator
-				+ "bin" + java.io.File.separator +
-				"nsimdrv";
+	
+		if (isWindowsOS()) {
+			return System.getenv("NSIM_HOME") + java.io.File.separator
+					+ "bin" + java.io.File.separator +
+					"nsimdrv.exe";
+		} else {
+			return System.getenv("NSIM_HOME") + java.io.File.separator
+					+ "bin" + java.io.File.separator +
+					"nsimdrv";
+		}
 	}
 	
 	public static String getOpenOCDDefaultPath() {
@@ -717,7 +724,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		createGdbserverSettingsTab( tabFolder );
 	}
 	protected void handleBinaryBrowseButtonSelected() {
-		if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD"))
+		if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")||fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 		{
 			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
 			fileDialog.setFileName(fPrgmArgumentsTextexternal.getText());
@@ -727,7 +734,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 			 
 		}
-		else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling")||fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
+		else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 		{
 			DirectoryDialog directoryDialog = new DirectoryDialog(getShell(), SWT.NONE);
 			directoryDialog.setFilterPath(fPrgmArgumentsTextexternal.getText());
