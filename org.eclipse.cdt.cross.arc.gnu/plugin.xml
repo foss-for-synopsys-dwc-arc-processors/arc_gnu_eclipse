@@ -2571,11 +2571,11 @@
          </targetPlatform>
          <builder
                command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Windows hosts"
-               superClass="org.eclipse.cdt.cross.arc.gnu.builder">
+               name="ARC GNU Make builder for HS Windows hosts"
+               superClass="org.eclipse.cdt.cross.arc.gnu.builder.hs">
          </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
@@ -4902,7 +4902,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Windows hosts"
+               name="ARC GNU Make builder for EM Windows hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -5411,6 +5411,13 @@
                valueType="string">
          </option>
       </tool>
+      <builder
+            command="make"
+            id="org.eclipse.cdt.cross.arc.gnu.builder.hs"
+            isAbstract="false"
+            isVariableCaseSensitive="false"
+            superClass="org.eclipse.cdt.cross.arc.gnu.builder">
+      </builder>
       
       
       <!-- -->
