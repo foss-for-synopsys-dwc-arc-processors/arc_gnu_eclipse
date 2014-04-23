@@ -2789,14 +2789,16 @@
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.windows.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.windows.option.target.shiftassist"
                name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -2804,7 +2806,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.windows.option.target.codedensity"
                name="Code density (-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
-               valueType="boolean">
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -2818,7 +2820,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.windows.option.target.swap"
                name="Swap instruction (-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
+               value="true">
          </option>
         <!--
          <option
@@ -2835,7 +2838,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3940,7 +3944,7 @@
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.windows.configuration.base"
-            name="ARC GNU Toolchain for Windows host (big-endian) Configuration"
+            name="ARC GNU Toolchain for EM Windows host (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3959,7 +3963,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.windows.IsToolChainSupported"
-            name="ARC GNU Toolchain for Windows host (big-endian)"
+            name="ARC GNU Toolchain for EM Windows host (big-endian)"
             osList="win32">
          <targetPlatform
                archList="all"
@@ -5199,7 +5203,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.hs">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.debug"
@@ -5235,11 +5239,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base">
                </tool>
             </toolChain>
          </configuration>
