@@ -36,6 +36,126 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base">
          </toolChain>
       </template>
+      <template
+            id="org.eclipse.cdt.build.core.templates.ARCHelloWorldCAnsiProject">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
+         </toolChain>
+      </template>
+      <template
+            id="org.eclipse.cdt.build.core.templates.EM4EmptyProject">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
+         </toolChain>
+      </template>
+      <template
+            id="org.eclipse.cdt.build.core.templates.ARCHelloWorldCCProject">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcery.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcery.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcery.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.yagarto.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.yagarto.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.devkitpro.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.summon.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.summon.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.summon.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.embedded.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.embedded.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.embedded.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.sourcerylinux.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64bare.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.lia64linux.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.linux.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.ligehflinux.macosx.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
+         </toolChain>
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
+         </toolChain>
+      </template>
    </extension>
    <extension
          id="ARC_GCC_BuildProperties"
@@ -277,7 +397,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-elf32-gcc">
+               command="arc-linux-uclibc-gcc">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -303,7 +423,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-elf32-g++">
+               command="arc-linux-uclibc-g++">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -323,7 +443,7 @@
       </buildOutputProvider>
       <scannerInfoProvider providerId="specsFile">
          <run
-               command="arc-elf32-gcc"
+               command="arc-linux-uclibc-gcc"
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"/>
          <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser"/>
@@ -390,7 +510,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-elf32-gcc">
+               command="arc-linux-uclibc-gcc">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -416,7 +536,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-elf32-g++">
+               command="arc-linux-uclibc-g++">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -442,7 +562,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-elf32-gcc">
+               command="arc-linux-uclibc-gcc">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -613,25 +733,9 @@
                name="Processor (-mcpu)"
                valueType="enumerated">
             <enumeratedOptionValue
-                  command="-mEM"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arcv2em"
-                  isDefault="true"
-                  name="ARCv2EM">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
                   command="-mA7"
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arc700"
                   name="arc700">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mA6"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arc600"
-                  name="arc600">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=arc601"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arc601"
-                  name="arc601">
             </enumeratedOptionValue>
          </option>
          <option
@@ -784,55 +888,6 @@
                valueType="string">
          </option>
          <option
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core70"
-               name="ARC 700 Core "
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-core1"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700.core1"
-                  isDefault="true"
-                  name="Core1 (-core1)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-core2"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700.core2"
-                  isDefault="false"
-                  name="Core2 (-core2)">
-            </enumeratedOptionValue>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700.core1">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700.core2">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-            <enumeratedOptionValue
-                  command="-core3"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700.core1"
-                  isDefault="false"
-                  name="Core3(-core3)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-core4"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700.core2"
-                  isDefault="false"
-                  name="Core4 (-core4)">
-            </enumeratedOptionValue>
-         </option>
-         <option
                command="-mbarrel-shifter"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
@@ -883,7 +938,7 @@
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <tool
-            command="arc-linux-uclibc-as"
+            command="arc-linux-uclibc-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler"
@@ -2322,7 +2377,7 @@
          </option>
       </tool>
       <tool
-            command="arc-elf32-size"
+            command="arc-linux-uclibc-size"
             commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize"
             name="ARC GNU UcLibc Print Size"
@@ -3107,6 +3162,7 @@
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base"
+               command="arc-linux-uclibc-size"
                isAbstract="false"
                name="ARC Linux UcLibc  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
@@ -3404,6 +3460,45 @@
 
       <!---->
             
+   </extension>
+   <extension
+         point="org.eclipse.cdt.core.templates">
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_C_Project"
+            location="$nl$/templates/projecttemplates/HelloWorld_C_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_CPP_Project"
+            location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_C_Project"
+            location="$nl$/templates/projecttemplates/HS34_Empty_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS36_Empty_C_Project"
+            location="$nl$/templates/projecttemplates/HS36_Empty_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS34_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/HS34_Empty_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HS36_Empty_CPP_Project"
+            location="$nl$/templates/projecttemplates/HS36_Empty_CPP_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+      </template>
    </extension>
 
 </plugin>

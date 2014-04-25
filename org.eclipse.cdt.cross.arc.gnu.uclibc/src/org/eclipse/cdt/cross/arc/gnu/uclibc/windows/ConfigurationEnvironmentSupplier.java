@@ -1,4 +1,4 @@
-/*    */ package org.eclipse.cdt.cross.arc.gnu.uclibc.windows;
+package org.eclipse.cdt.cross.arc.gnu.uclibc.windows;
 /*    */ 
 /*    */ import org.eclipse.cdt.cross.arc.gnu.uclibc.Tools;
 /*    */ import org.eclipse.cdt.managedbuilder.core.IConfiguration;
