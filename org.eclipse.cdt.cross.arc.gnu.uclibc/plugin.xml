@@ -905,7 +905,8 @@
                command="-mdiv-rem"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide"
-               name="Integer divide(-mdiv-rem)">
+               name="Integer divide instructions (-mdiv-rem)"
+               valueType="boolean">
          </option>
          <option
                command="-mswap"
@@ -2850,7 +2851,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.divide"
-               name="Integer divide(-mdiv-rem)"
+               name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
          </option>
          <option
@@ -3341,7 +3342,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.divide"
-               name="Integer divide(-mdiv-rem)"
+               name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
          </option>
          <option
@@ -3619,6 +3620,7 @@
                name="Target Processor">
          </optionCategory>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.processor"
                name="ARC HS (-mcpu)"
@@ -3801,30 +3803,6 @@
             </enablement>
          </tool>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
-               name="Swap instruction(-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
-         </option>
-         <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpyhs"
@@ -3845,6 +3823,34 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter"
+               name="Barrel shifter (-mbarrel-shifter)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity"
+               name="Code density(-mcode-density)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.divide"
+               name="Integer divide instructions (-mdiv-rem)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
+               name="Swap instruction(-mswap)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
