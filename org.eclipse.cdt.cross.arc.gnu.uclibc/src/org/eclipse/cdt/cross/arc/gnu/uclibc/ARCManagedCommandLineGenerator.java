@@ -1,4 +1,14 @@
-   package org.eclipse.cdt.cross.arc.gnu.uclibc;
+/*******************************************************************************
+F* This program and the accompanying materials 
+* are made available under the terms of the Common Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/cpl-v10.html
+* 
+* Contributors:
+*     Synopsys, Inc. - ARC GNU Toolchain support
+*******************************************************************************/
+   
+package org.eclipse.cdt.cross.arc.gnu.uclibc;
    
    import java.util.ArrayList;
    import java.util.Arrays;
@@ -12,19 +22,20 @@
    public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator
    {
      private static final String OPTION_SUFIX_PROCESSOR = ".option.target.processor";
-     private static final String OPTION_SUFIX_CORE = ".option.target.core700";                     //yunluz add for core 700
-     private static final String OPTION_SUFIX_BARRELSHIFTER = ".option.target.barrelshifter";      //yunluz add for core barrelshifter
-     private static final String OPTION_SUFIX_CODEDENSITY = ".option.target.codedensity";          //yunluz add for core codedensity
-     private static final String OPTION_SUFIX_DIVIDE = ".option.target.divide";                    //yunluz add for core divide
-     private static final String OPTION_SUFIX_NORMALIZE = ".option.target.normalize";              //yunluz add for core normalize
-     private static final String OPTION_SUFIX_SWAP = ".option.target.swap";                 //yunluz add for core swap
-     private static final String OPTION_SUFIX_COMFP = ".option.target.comfp";                 //yunluz add for core comfp
+     private static final String OPTION_SUFIX_CORE = ".option.target.core700";                     //Customized for ARC GNU core 700
+     private static final String OPTION_SUFIX_BARRELSHIFTER = ".option.target.barrelshifter";      //Customized for ARC GNU core barrelshifter
+     private static final String OPTION_SUFIX_CODEDENSITY = ".option.target.codedensity";          //Customized for ARC GNU core codedensity
+     private static final String OPTION_SUFIX_DIVIDE = ".option.target.divide";                    //Customized for ARC GNU core divide
+     private static final String OPTION_SUFIX_NORMALIZE = ".option.target.normalize";              //Customized for ARC GNU core normalize
+     private static final String OPTION_SUFIX_SWAP = ".option.target.swap";                 //Customized for ARC GNU core swap
+     private static final String OPTION_SUFIX_SPFP_COMFP = ".option.target.spfp";                 //Customized for ARC GNU core sSpfp
+     private static final String OPTION_SUFIX_EA = ".option.target.ea";                 //Customized for ARC GNU core ea
      private static final String OPTION_SUFIX_THUMB = ".option.target.thumb";
      private static final String OPTION_SUFIX_THUMB_INTERWORK = ".option.target.thumbinterwork";
      private static final String OPTION_SUFFIX_ENDIANNES = ".option.target.endiannes";
-     private static final String OPTION_SUFFIX_FLOAT_ABI = ".option.target.fpu.abi";
+     private static final String OPTION_SUFFIX_FLOAT_ABI = ".option.warnings.syntax";
      private static final String OPTION_SUFFIX_FLOAT_UNIT = ".option.target.fpu.unit";
-     private static final String OPTION_SUFIX_DEBUGGING_LEVEL = ".option.debugging.level";
+     private static final String OPTION_SUFIX_DEBUGGING_LEVEL = ".option.debugging.flevel";
      private static final String OPTION_SUFIX_DEBUGGING_FORMAT = ".option.debugging.format";
      private static final String OPTION_SUFIX_DEBUGGING_OTHER = ".option.debugging.other";
      private static final String OPTION_SUFIX_DEBUGGING_PROF = ".option.debugging.prof";
@@ -33,16 +44,14 @@
    
      public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern)
      {
-     return generateCommandLineInfo(oTool, sCommandName, asFlags, 
-       sOutputFlag, sOutputPrefix, sOutputName, asInputResources, 
-       sCommandLinePattern, false);
+     return generateCommandLineInfo(oTool, sCommandName, asFlags,sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern, false);
      }
    
      public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern, boolean bFlag)
      {
      ArrayList oList = new ArrayList();
-     oList.addAll(
-       Arrays.asList(asFlags));
+     oList.addAll(Arrays.asList(asFlags));
+
    
      Object oParent = oTool.getParent();
      while ((oParent != null) && (!(oParent instanceof IToolChain)))
@@ -62,22 +71,25 @@
    
        String sProcessor = null;
                 
-       String sCore700 = null;        //yunluz add for core 700
-       String sBarrelshifter = null;  //yunluz add for Barrelshifter
-       String sCodedensity = null;    //yunluz add for codedensity
-       String sDivide = null;         //yunluz add for divide
-       String sNormalize = null;      //yunluz add for normalize
-       String sSwap = null;           //yunluz add for swap
-       String sComfp = null;           //yunluz add for comfp
+       String sCore700 = null;        //Customized for ARC GNU core 700
+       String sBarrelshifter = null;  //Customized for ARC GNU Barrelshifter
+       String sCodedensity = null;    //Customized for ARC GNU codedensity
+       String sDivide = null;         //Customized for ARC GNU divide
+       String sNormalize = null;      //Customized for ARC GNU normalize
+       String sSwap = null;           //Customized for ARC GNU swap
+       String sEa = null;           //Customized for ARC GNU ea
        String sThumb = null;
    
        String sThumbInterwork = null;
    
        String sProcessorEndiannes = null;
    
-       String sFloatAbi = null;
+       String sSyntaxonly = null;
    
-       String sFloatUnit = null;
+       String sFPUEM = null;
+       String sFPUHS = null;
+       String smpyhs= null;
+       String smpyem= null;
    
        String sDebugLevel = null;
    
@@ -88,6 +100,12 @@
        String sDebugProf = null;
    
        String sDebugGProf = null;
+       String sshiftassist= null; 
+       String satomic = null;
+       String sll64 = null;
+       String smfpi= null;
+       String smno_dpfp_lrsr= null;
+
    
        for (int i = 0; i < aoOptions.length; i++)
          {
@@ -123,18 +141,30 @@
            if ((sID.endsWith(".option.target.processor")) || 
              (sID.indexOf(".option.target.processor.") > 0))
              sProcessor = sEnumCommand;
-           else if ((sID.endsWith(".option.target.core700")) ||     //yunluz add for core 700
-             (sID.indexOf(".option.target.core700.") > 0))          //yunluz add for core 700
-             sCore700 = sEnumCommand;                               //yunluz add for core 700
+           else if ((sID.endsWith(".option.target.core700")) ||     //Customized for ARC GNU core 700
+             (sID.indexOf(".option.target.core700.") > 0))          //Customized for ARC GNU core 700
+             sCore700 = sEnumCommand;                               //Customized for ARC GNU core 700
            else if ((sID.endsWith(".option.target.endiannes")) || 
              (sID.indexOf(".option.target.endiannes.") > 0))
              sProcessorEndiannes = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpu.abi")) || 
-             (sID.indexOf(".option.target.fpu.abi.") > 0))
-             sFloatAbi = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpu.unit")) || 
-             (sID.indexOf(".option.target.fpu.unit.") > 0))
-             sFloatUnit = sEnumCommand;
+           else if ((sID.endsWith(".option.warnings.syntax")) ||  //Customized for ARC GNU fsyntax-only
+             (sID.indexOf(".option.warnings.syntax") > 0))
+             sSyntaxonly = sEnumCommand;
+           //else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mEM"))) || 
+           //  (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
+           //  sFPUEM = sEnumCommand;
+           else if ((sID.endsWith(".option.target.fpuhs"))&&(sProcessor.equalsIgnoreCase("-mHS")) || 
+                   (sID.indexOf(".option.target.fpuhs.") > 0&&(sProcessor.equalsIgnoreCase("-mHS"))))
+                   sFPUHS = sEnumCommand;
+           else if ((sID.endsWith(".option.target.mpyhs"))&&(sProcessor.equalsIgnoreCase("-mHS")) || 
+                   (sID.indexOf(".option.target.mpyhs") > 0)&&(sProcessor.equalsIgnoreCase("-mHS")))
+             smpyhs = sEnumCommand;
+           else if ((sID.endsWith(".option.target.mpyem"))&&(sProcessor.equalsIgnoreCase("-mEM")) || 
+                   (sID.indexOf(".option.target.mpyem") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
+             smpyem = sEnumCommand;
+           else if ((sID.endsWith(".option.target.fpi")&&sProcessor.equalsIgnoreCase("-mEM")) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.fpi") > 0)&&sProcessor.equalsIgnoreCase("-mEM"))               //Customized for ARC GNU spfp
+             smfpi = sEnumCommand;                                          //Customized for ARC GNU 
            else if ((sID.endsWith(".option.debugging.level")) || 
              (sID.indexOf(".option.debugging.level.") > 0))
              sDebugLevel = sEnumCommand;
@@ -168,37 +198,59 @@
              (sID.indexOf(".option.debugging.prof.") > 0)) {
              if (bVal)
                sDebugProf = sCommand;
-           } else if ((sID.endsWith(".option.target.barrelshifter")) ||  //yunluz add for barrelshifter
-             (sID.indexOf(".option.target.barrelshifter.") > 0)) {       //yunluz add for barrelshifter
-             if (bVal)                                                   //yunluz add for barrelshifter
-               sBarrelshifter = sCommand;                                //yunluz add for barrelshifter
-           } else if ((sID.endsWith(".option.target.codedensity")) ||    //yunluz add for barrelshifter
-             (sID.indexOf(".option.target.codedensity.") > 0)) {         //yunluz add for codedensity
-              if (bVal)                                                  //yunluz add for codedensity
-              sCodedensity = sCommand;                                   //yunluz add for codedensity
-           } else if ((sID.endsWith(".option.target.divide")) ||         //yunluz add for divide
-             (sID.indexOf(".option.target.divide.") > 0)) {              //yunluz add for divide
-             if (bVal)                                                   //yunluz add for divide
-             sDivide = sCommand;                                         //yunluz add for divide
-           } else if ((sID.endsWith(".option.target.normalize")) ||      //yunluz add for divide
-            (sID.indexOf(".option.target.normalize.") > 0)) {            //yunluz add for normalize
-             if (bVal)                                                   //yunluz add for normalize
-             sNormalize = sCommand;                                      //yunluz add for normalize
-           } else if ((sID.endsWith(".option.target.swap")) ||           //yunluz add for divide
-             (sID.indexOf(".option.target.swap.") > 0)) {                //yunluz add for swap
-             if (bVal)                                                   //yunluz add for swap
-              sSwap = sCommand;                                          //yunluz add for swap
-           } else if ((sID.endsWith(".option.target.comfp")) ||           //yunluz add for divide
-              (sID.indexOf(".option.target.comfp.") > 0)) {               //yunluz add for comfp
-              if (bVal)                                                   //yunluz add for comfp
-              sComfp = sCommand;                                          //yunluz add for comfp
-           }else if (((sID.endsWith(".option.debugging.gprof")) || 
+           } else if ((sID.endsWith(".option.target.barrelshifter")) ||  //Customized for ARC GNU barrelshifter
+             (sID.indexOf(".option.target.barrelshifter.") > 0)) {       //Customized for ARC GNU barrelshifter
+             if (bVal)                                                   //Customized for ARC GNU barrelshifter
+               sBarrelshifter = sCommand;                                //Customized for ARC GNU barrelshifter
+           } else if ((sID.endsWith(".option.target.codedensity")&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))) ||    //Customized for ARC GNU codedensity
+             (sID.indexOf(".option.target.codedensity.") > 0)&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {         //Customized for ARC GNU codedensity
+              if (bVal)                                                  //Customized for ARC GNU codedensity
+              sCodedensity = sCommand;                                   //Customized for ARC GNU codedensity
+           } else if ((sID.endsWith(".option.target.divide")) ||         //Customized for ARC GNU divide
+             (sID.indexOf(".option.target.divide.") > 0)) {              //Customized for ARC GNU divide
+             if (bVal)                                                   //Customized for ARC GNU divide
+             sDivide = sCommand;                                         //Customized for ARC GNU divide
+           } else if ((sID.endsWith(".option.target.normalize")) ||      //Customized for ARC GNU normalize
+            (sID.indexOf(".option.target.normalize.") > 0)) {            //Customized for ARC GNU normalize
+             if (bVal)                                                   //Customized for ARC GNU normalize
+             sNormalize = sCommand;                                      //Customized for ARC GNU normalize
+           } else if ((sID.endsWith(".option.target.swap")&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))) ||           //Customized for ARC GNU swap
+             (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {                //Customized for ARC GNU swap
+             if (bVal)                                                   //Customized for ARC GNU swap
+              sSwap = sCommand;                                          //Customized for ARC GNU swap
+           } else if ((sID.endsWith(".option.target.ea")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //Customized for ARC GNU ea
+                   if (bVal)                                                   //Customized for ARC GNU ea
+                   sEa = sCommand;                                          //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.shiftassist")) ||  
+                   (sID.indexOf(".option.target.shiftassist.") > 0)) {       
+               if (bVal)                                                  
+                 sshiftassist = sCommand;                                
+           }
+           else if ((sID.endsWith(".option.target.atomic")) ||  
+                   (sID.indexOf(".option.target.atomic.") > 0)) {       
+               if (bVal)                                                  
+            	   satomic = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.ll64")) ||  
+                   (sID.indexOf(".option.target.ll64.") > 0)) {       
+               if (bVal)                                                  
+                 sll64 = sCommand;                                
+           } 
+           else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")&&sProcessor.equalsIgnoreCase("-mEM")) ||  
+                   (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)&&sProcessor.equalsIgnoreCase("-mEM")) {       
+               if (bVal)                                                  
+            	   smno_dpfp_lrsr = sCommand;                                
+           } 
+         
+           else if (((sID.endsWith(".option.debugging.gprof")) || 
              (sID.indexOf(".option.debugging.gprof.") > 0)) && 
              (bVal)) {
              sDebugGProf = sCommand;
              }
    
            }
+         
    
          }
    
@@ -212,11 +264,17 @@
          oList.add(sThumbInterwork);
        if ((sProcessorEndiannes != null) && (sProcessorEndiannes.length() > 0))
          oList.add(sProcessorEndiannes);
-       if ((sFloatAbi != null) && (sFloatAbi.length() > 0)) {
-         oList.add(sFloatAbi);
-       if ((sFloatUnit != null) && (sFloatUnit.length() > 0))
-           oList.add(sFloatUnit);
-         }
+       if ((sSyntaxonly != null) && (sSyntaxonly.length() > 0)) {
+         oList.add(sSyntaxonly);
+       }
+       if ((sFPUEM != null) && (sFPUEM.length() > 0))
+           oList.add(sFPUEM);
+       if ((sFPUHS != null) && (sFPUHS.length() > 0))
+           oList.add(sFPUHS);
+       if ((smpyhs != null) && (smpyhs.length() > 0))
+           oList.add(smpyhs);
+       if ((smpyem != null) && (smpyem.length() > 0))
+           oList.add(smpyem);
        if ((sDebugLevel != null) && (sDebugLevel.length() > 0)) {
          oList.add(sDebugLevel);
        if ((sDebugFormat != null) && (sDebugFormat.length() > 0))
@@ -229,34 +287,45 @@
        if ((sDebugGProf != null) && (sDebugGProf.length() > 0)) {
          oList.add(sDebugGProf);
          }
-       if ((sBarrelshifter != null) && (sBarrelshifter.length() > 0)) {//yunluz add for barrelshifter
-         oList.add(sBarrelshifter);                                    //yunluz add for barrelshifter
+       if ((sBarrelshifter != null) && (sBarrelshifter.length() > 0)) {//Customized for ARC GNU barrelshifter
+         oList.add(sBarrelshifter);                                    //Customized for ARC GNU barrelshifter
          }
-       if ((sCodedensity != null) && (sCodedensity.length() > 0)) {    //yunluz add for codedensity
-           oList.add(sCodedensity);                                    //yunluz add for codedensity
+       if ((sCodedensity != null) && (sCodedensity.length() > 0)) {    //Customized for ARC GNU codedensity
+           oList.add(sCodedensity);                                    //Customized for ARC GNU codedensity
            }
-       if ((sDivide != null) && (sDivide.length() > 0)) {              //yunluz add for divide
-           oList.add(sDivide);                                         //yunluz add for divide
+       if ((sDivide != null) && (sDivide.length() > 0)) {              //Customized for ARC GNU divide
+           oList.add(sDivide);                                         //Customized for ARC GNU divide
            }
-       if ((sNormalize != null) && (sNormalize.length() > 0)) {           //yunluz add for normalize
-           oList.add(sNormalize);                                         //yunluz add for normalize
+       if ((sNormalize != null) && (sNormalize.length() > 0)) {           //Customized for ARC GNU normalize
+           oList.add(sNormalize);                                         //Customized for ARC GNU normalize
            }
-       if ((sSwap != null) && (sSwap.length() > 0)) {                 //yunluz add for swap
-           oList.add(sSwap);                                         //yunluz add for swap     
+       if ((sSwap != null) && (sSwap.length() > 0)) {                 //Customized for ARC GNU swap
+           oList.add(sSwap);                                         //Customized for ARC GNU swap     
            }
-       if ((sComfp != null) && (sComfp.length() > 0)) {                 //yunluz add for comfp
-           oList.add(sComfp);                                         //yunluz add for comfp     
-           }      
+       
+       if ((smfpi != null) && (smfpi.length() > 0)) {                 
+           oList.add(smfpi);                                            
+           }  
+       if ((smno_dpfp_lrsr != null) && (smno_dpfp_lrsr.length() > 0)) {                 
+           oList.add(smno_dpfp_lrsr);                                            
+           }  
+       
+       if ((sEa != null) && (sEa.length() > 0)) {                 
+           oList.add(sEa);                                              
+           } 
+       if ((sshiftassist != null) && (sshiftassist.length() > 0)) {           
+           oList.add(sshiftassist);                                         
+           }
+       if ((satomic != null) && (satomic.length() > 0)) {                
+           oList.add(satomic);                                             
+           }  
+       if ((sll64 != null) && (sll64.length() > 0)) {                
+           oList.add(sll64);                                             
+           }  
+       
        }
-   
-     return super.generateCommandLineInfo(oTool, sCommandName, 
-       (String[])oList
-       .toArray(new String[0]), sOutputFlag, sOutputPrefix, 
-       sOutputName, asInputResources, sCommandLinePattern);
+     
+     return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
      }
    }
 
-/* Location:           C:\Users\yunluz\Desktop\plugins\bin\
- * Qualified Name:     org.eclipse.cdt.cross.arm.gnu.ARMManagedCommandLineGenerator
- * JD-Core Version:    0.6.2
- */
