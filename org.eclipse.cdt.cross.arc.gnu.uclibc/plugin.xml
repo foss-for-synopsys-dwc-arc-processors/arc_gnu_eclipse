@@ -3829,14 +3829,16 @@
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter">
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity"
                name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity">
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3850,7 +3852,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
                name="Swap instruction(-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
