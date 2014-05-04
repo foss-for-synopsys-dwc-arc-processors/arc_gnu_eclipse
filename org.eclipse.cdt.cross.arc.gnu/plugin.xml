@@ -808,10 +808,10 @@
       <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mea"
+               command="-mEA"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
-               name="Extended arithmetic instruction (-mea)"
+               name="Extended arithmetic instruction (-mEA)"
                valueType="boolean">
          </option>
          -->
@@ -1058,6 +1058,13 @@
                id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp_compact"
                name="Double Precision FPX, compact (-mdpfp-compact)">
          </enumeratedOptionValue>
+      </option>
+      <option
+            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            command="-mEA"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
+            name="Extended Arithmetic Instruction (-mEA)"
+            valueType="boolean">
       </option>
 
       </tool>
@@ -2828,7 +2835,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea"
-               name="Extended arithmetic instruction (-mea)"
+               name="Extended arithmetic instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                valueType="boolean">
          </option>
@@ -3378,7 +3385,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea"
-               name="Extended arithmetic instruction (-mea)"
+               name="Extended arithmetic instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
                valueType="boolean">
          </option>
@@ -4249,7 +4256,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.ea"
-               name="Extended arithmetic instruction (-mea)"
+               name="Extended arithmetic instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea">
          </option>
          -->
@@ -4604,13 +4611,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ea"
-               name="Extended arithmetic instruction (-mea)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -5555,6 +5555,13 @@
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.ea"
+               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
+         </option>
        
       </toolChain>
       <projectType
@@ -5964,6 +5971,13 @@
                id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
         
       </toolChain>
@@ -6856,6 +6870,13 @@
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
+         </option>
         
       </toolChain>
       <configuration
@@ -7288,6 +7309,13 @@
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
 
       </toolChain>
@@ -8096,6 +8124,13 @@
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
+         </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -8628,6 +8663,13 @@
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
       </toolChain>
       

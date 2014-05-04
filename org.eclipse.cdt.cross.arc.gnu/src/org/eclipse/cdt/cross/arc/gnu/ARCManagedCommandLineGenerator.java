@@ -218,8 +218,8 @@ package org.eclipse.cdt.cross.arc.gnu;
              (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {                //Customized for ARC GNU swap
              if (bVal)                                                   //Customized for ARC GNU swap
               sSwap = sCommand;                                          //Customized for ARC GNU swap
-           } else if ((sID.endsWith(".option.target.ea")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //Customized for ARC GNU ea
-                   (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.ea")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.ea.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    sEa = sCommand;                                          //Customized for ARC GNU ea
            } else if ((sID.endsWith(".option.target.shiftassist")) ||  
