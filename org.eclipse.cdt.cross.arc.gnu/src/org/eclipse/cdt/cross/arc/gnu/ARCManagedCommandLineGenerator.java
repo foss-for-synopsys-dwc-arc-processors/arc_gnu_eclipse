@@ -162,10 +162,10 @@ package org.eclipse.cdt.cross.arc.gnu;
            else if ((sID.endsWith(".option.target.mpyem"))&&(sProcessor.equalsIgnoreCase("-mEM")) || 
                    (sID.indexOf(".option.target.mpyem") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
              smpyem = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpi")&&sProcessor.equalsIgnoreCase("-mEM")) ||           //Customized for ARC GNU spfp 
-                   (sID.indexOf(".option.target.fpi") > 0)&&sProcessor.equalsIgnoreCase("-mEM"))               //Customized for ARC GNU spfp
+           else if ((sID.endsWith(".option.target.fpi")&&(sProcessor.equalsIgnoreCase("-mEM")||sProcessor.equalsIgnoreCase("-mA6")||sProcessor.equalsIgnoreCase("-mA7"))) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.fpi") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")||sProcessor.equalsIgnoreCase("-mA6")||sProcessor.equalsIgnoreCase("-mA7")))               //Customized for ARC GNU spfp
              smfpi = sEnumCommand;                                          //Customized for ARC GNU 
-           else if ((sID.endsWith(".option.debugging.level")) || 
+         else if ((sID.endsWith(".option.debugging.level")) || 
              (sID.indexOf(".option.debugging.level.") > 0))
              sDebugLevel = sEnumCommand;
            else if ((sID.endsWith(".option.debugging.format")) || 

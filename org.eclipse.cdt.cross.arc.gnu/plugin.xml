@@ -5512,6 +5512,30 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpi"
+               isAbstract="false"
+               name="FPX"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+            <enumeratedOptionValue
+                  command="-mspfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+                  name="Single Precision FPX (-mspfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+                  name="Double Precision FPX (-mdpfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
@@ -5522,17 +5546,16 @@
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.swap"
                name="Swap instruction (-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
+       
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -5900,27 +5923,49 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.barrelshifter"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpi"
+               isAbstract="false"
+               name="FPX"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+            <enumeratedOptionValue
+                  command="-mspfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+                  name="Single Precision FPX (-mspfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+                  name="Double Precision FPX (-mdpfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.swap"
                name="Swap instruction (-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
+        
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -6769,27 +6814,49 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.barrelshifter"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.option.target.fpi"
+               isAbstract="false"
+               name="FPX"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+            <enumeratedOptionValue
+                  command="-mspfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+                  name="Single Precision FPX (-mspfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+                  name="Double Precision FPX (-mdpfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.swap"
+               id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.option.target.swap"
                name="Swap instruction (-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.normalize"
+               id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
+        
       </toolChain>
       <configuration
             cleanCommand="rm -rf"
@@ -7176,30 +7243,53 @@
                </and>
             </enablement>
          </tool>
+                  <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.fpi"
+               isAbstract="false"
+               name="FPX"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+            <enumeratedOptionValue
+                  command="-mspfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+                  name="Single Precision FPX (-mspfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+                  name="Double Precision FPX (-mdpfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.codedensity"
-               name="Code density (-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.barrelshifter"
+               name="Barrel shifter (-mbarrel-shifter)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
                value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.swap"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.swap"
                name="Swap instruction (-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.normalize"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
+
       </toolChain>
       <configuration
             cleanCommand="rm -rf"
