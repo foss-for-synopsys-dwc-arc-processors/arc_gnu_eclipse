@@ -8753,7 +8753,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
+               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -8792,8 +8793,8 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.lock"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.lock"
                name="Atomic Option (-mlock)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
          </option>
