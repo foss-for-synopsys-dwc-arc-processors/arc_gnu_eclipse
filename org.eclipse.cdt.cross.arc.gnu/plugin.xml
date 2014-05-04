@@ -5520,29 +5520,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.codedensity"
-               name="Code density (-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
@@ -5555,13 +5532,6 @@
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
       </toolChain>
       <projectType
@@ -5934,29 +5904,6 @@
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.codedensity"
-               name="Code density (-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -6637,13 +6584,6 @@
             </enumeratedOptionValue>
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.other.60"
                isAbstract="false"
@@ -6807,7 +6747,7 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.printsize.base"
+               id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.printsize.base"
                isAbstract="false"
                name="ARC Windows GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
@@ -6829,40 +6769,10 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.codedensity"
-               name="Code density (-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -6879,13 +6789,6 @@
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
       </toolChain>
       <configuration
@@ -7091,13 +6994,6 @@
             </enumeratedOptionValue>
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.other.700"
                isAbstract="false"
@@ -7261,7 +7157,7 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.printsize.base"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.printsize.base"
                isAbstract="false"
                name="ARC Windows GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
@@ -7283,40 +7179,10 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.codedensity"
                name="Code density (-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -7333,13 +7199,6 @@
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
       </toolChain>
       <configuration
