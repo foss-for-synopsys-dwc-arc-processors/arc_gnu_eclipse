@@ -1080,6 +1080,13 @@
             name="DSP XY memory (-mxy)"
             valueType="boolean">
       </option>
+      <option
+            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            command="-mlock"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock"
+            name="Atomic Option (-mlock)"
+            valueType="boolean">
+      </option>
 
       </tool>
       <builder
@@ -5587,8 +5594,15 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.xy"
-               name="DSP XY memory"
+               name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.lock"
+               name="Atomic Option (-mlock)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
          </option>
        
       </toolChain>
@@ -6018,7 +6032,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.windows.option.target.xy"
-               name="DSP XY memory"
+               name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
         
@@ -6930,7 +6944,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.windows.option.target.xy"
-               name="DSP XY memory"
+               name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
         
@@ -7384,8 +7398,15 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.xy"
-               name="DSP XY memory"
+               name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.lock"
+               name="Atomic Option (-mlock)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
          </option>
 
       </toolChain>
@@ -8212,7 +8233,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.xy"
-               name="DSP XY memory"
+               name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
       </toolChain>
@@ -8766,8 +8787,15 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.xy"
-               name="DSP XY memory"
+               name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.lock"
+               name="Atomic Option (-mlock)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
          </option>
       </toolChain>
       
