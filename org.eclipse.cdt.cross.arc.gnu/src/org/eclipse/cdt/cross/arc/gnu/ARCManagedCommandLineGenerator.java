@@ -106,7 +106,7 @@ package org.eclipse.cdt.cross.arc.gnu;
        String smfpi= null;
        String smno_dpfp_lrsr= null;
        String smul3216= null;
-   
+       String smxy= null;
        for (int i = 0; i < aoOptions.length; i++)
          {
          IOption oOption = aoOptions[i];
@@ -225,7 +225,11 @@ package org.eclipse.cdt.cross.arc.gnu;
            } else if ((sID.endsWith(".option.target.mul3216")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
                    (sID.indexOf(".option.target.mul3216.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
-                   smul3216 = sCommand;     
+                   smul3216 = sCommand; 
+           } else if ((sID.endsWith(".option.target.xy")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.xy.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
+                   if (bVal)                                                   //Customized for ARC GNU ea
+                   smxy = sCommand; 
            } else if ((sID.endsWith(".option.target.shiftassist")) ||  
                    (sID.indexOf(".option.target.shiftassist.") > 0)) {       
                if (bVal)                                                  
@@ -319,6 +323,9 @@ package org.eclipse.cdt.cross.arc.gnu;
            } 
        if ((smul3216 != null) && (smul3216.length() > 0)) {                 
            oList.add(smul3216);                                              
+           } 
+       if ((smxy != null) && (smxy.length() > 0)) {                 
+           oList.add(smxy);                                              
            } 
        if ((sshiftassist != null) && (sshiftassist.length() > 0)) {           
            oList.add(sshiftassist);                                         
