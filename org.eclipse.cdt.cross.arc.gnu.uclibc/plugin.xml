@@ -1067,6 +1067,76 @@
                name="Shift assist(-mshift-assist)"
                valueType="boolean">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mmul32x16"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mul3216"
+               name="DSP 32x16 MPY (-mmul32x16)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mxy"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.xy"
+               name="DSP XY memory (-mxy)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mlock"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock"
+               name="Atomic Option (-mlock)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.fpi"
+               name="FPX"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mspfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+                  name="Single Precision FPX (-mspfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mspfp-fast"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp_fast"
+                  name="Single Precision FPX, fast (-mspfp-fast)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mspfp-compact"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp_compact"
+                  name="Single Precision FPX, compact (-mspfp-compact)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+                  name="Double Precision FPX (-mdpfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp-fast"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp_fast"
+                  name="Double Precision FPX, fast (-mdpfp-fast)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp-compact"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp_compact"
+                  name="Double Precision FPX, compact (-mdpfp-compact)">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mEA"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               valueType="boolean">
+         </option>
       </tool>
       <builder
             command="make"
@@ -3137,7 +3207,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
+               name="ARC Linux GNU Make builder For ARC700"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
          </builder>
          <optionCategory
@@ -3147,8 +3217,13 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.processor"
-               name="Processor"
+               name="ARC 700 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.processor">
+            <enumeratedOptionValue
+                  command="-mA7"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arc700"
+                  name="ARC 700 (-mA7)">
+            </enumeratedOptionValue>
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
@@ -3331,19 +3406,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
+               value="true">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
@@ -3358,10 +3422,56 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
          </option>
          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.comfp"
-               name="Compact Single-precision floating point libraries(-mdpfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.comfp">
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.fpi"
+               isAbstract="false"
+               name="FPX"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.fpi">
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mspfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
+                  name="Single Precision FPX (-mspfp)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mdpfp"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
+                  name="Double Precision FPX (-mdpfp)">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
+               name="Extended Arithmetic Instruction (-mEA)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mul3216"
+               name="DSP 32x16 MPY (-mmul32x16)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mul3216">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.xy"
+               name="DSP XY memory (-mxy)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.xy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.lock"
+               name="Atomic Option (-mlock)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target..lock">
          </option>
       </toolChain>
       <projectType
@@ -3612,7 +3722,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
+               name="ARC Linux GNU Make builder For HS"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
          </builder>
          <optionCategory
@@ -3633,7 +3743,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
@@ -3908,9 +4018,9 @@
          <configuration
                artifactExtension="elf"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.debug"
                name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.toolchain.debug"
                   isAbstract="false"
@@ -3923,10 +4033,10 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.assembler.debug"
@@ -3973,9 +4083,9 @@
          <configuration
                artifactExtension="elf"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.release"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.release"
                name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.toolchain.release"
                   isAbstract="false"
@@ -3988,10 +4098,10 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.assembler.release"
