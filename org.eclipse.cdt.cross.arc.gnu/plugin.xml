@@ -4359,7 +4359,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.processor"
-               name="Processor (-mcpu)"
+               name="ARC EM (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
          </option>
          <option
@@ -4385,19 +4385,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpyem"
                name="Multiply instructions (ARC EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpyhs"
-               name="Multiply instructions (ARC HS)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpuhs"
-               isAbstract="false"
-               name="FPU HS Type"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4586,8 +4573,8 @@
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.printsize"
+                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.addtools.printsize"
                      value="true">
                </checkOption>
                <and>
@@ -4639,13 +4626,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -9088,15 +9068,15 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.printsize.base"
                isAbstract="false"
                name="ARC Linux GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.printsize"
+                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.addtools.printsize"
                      value="true">
                </checkOption>
                <and>
@@ -9182,7 +9162,7 @@
       </configuration>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.linux.elf"
+            id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.elf"
             isAbstract="true">
          <configuration
                artifactExtension="elf"
