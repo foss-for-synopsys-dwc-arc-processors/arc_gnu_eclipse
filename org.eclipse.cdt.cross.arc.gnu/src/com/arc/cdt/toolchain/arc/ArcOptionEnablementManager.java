@@ -92,23 +92,23 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
      
         
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.ea",//Customized for ARC GNU ea    big-en
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ea",//Customized for ARC GNU ea  big-en
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.ea",//Customized for ARC GNU ea  big-en
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity big-en
-	    "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity big-en
+	    "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity big-en
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.swap",//Customized for ARC GNU windows_swap big-en
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap",//Customized for ARC GNU linux_swap big-en
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.swap",//Customized for ARC GNU linux_swap big-en
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.barrelshifter",//
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.barrelshifter",//
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.barrelshifter",//
 
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.shiftassist",//
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.shiftassist",//
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.shiftassist",//
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.normalize",//
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize",
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.normalize",
         
 	    "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.fpi",//
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpi",//
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.fpi",//
         "org.eclipse.cdt.cross.arc.gnu.hs.eb.windows.option.target.mno-dpfp-lrsr",//
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mno-dpfp-lrsr",//
+        "org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.mno-dpfp-lrsr",//
         
         
     };
