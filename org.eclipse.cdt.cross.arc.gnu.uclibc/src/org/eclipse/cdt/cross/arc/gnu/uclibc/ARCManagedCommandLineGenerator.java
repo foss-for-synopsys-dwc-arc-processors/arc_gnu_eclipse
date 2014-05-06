@@ -105,8 +105,9 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
        String sll64 = null;
        String smfpi= null;
        String smno_dpfp_lrsr= null;
-
-   
+       String smul3216= null;
+       String smxy= null;
+       String smlock= null;
        for (int i = 0; i < aoOptions.length; i++)
          {
          IOption oOption = aoOptions[i];
@@ -162,10 +163,10 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
            else if ((sID.endsWith(".option.target.mpyem"))&&(sProcessor.equalsIgnoreCase("-mEM")) || 
                    (sID.indexOf(".option.target.mpyem") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
              smpyem = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpi")&&sProcessor.equalsIgnoreCase("-mEM")) ||           //Customized for ARC GNU spfp 
-                   (sID.indexOf(".option.target.fpi") > 0)&&sProcessor.equalsIgnoreCase("-mEM"))               //Customized for ARC GNU spfp
+           else if ((sID.endsWith(".option.target.fpi")&&(sProcessor.equalsIgnoreCase("-mEM")||sProcessor.equalsIgnoreCase("-mA6")||sProcessor.equalsIgnoreCase("-mA7"))) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.fpi") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")||sProcessor.equalsIgnoreCase("-mA6")||sProcessor.equalsIgnoreCase("-mA7")))               //Customized for ARC GNU spfp
              smfpi = sEnumCommand;                                          //Customized for ARC GNU 
-           else if ((sID.endsWith(".option.debugging.level")) || 
+         else if ((sID.endsWith(".option.debugging.level")) || 
              (sID.indexOf(".option.debugging.level.") > 0))
              sDebugLevel = sEnumCommand;
            else if ((sID.endsWith(".option.debugging.format")) || 
@@ -218,10 +219,22 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
              (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {                //Customized for ARC GNU swap
              if (bVal)                                                   //Customized for ARC GNU swap
               sSwap = sCommand;                                          //Customized for ARC GNU swap
-           } else if ((sID.endsWith(".option.target.ea")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //Customized for ARC GNU ea
-                   (sID.indexOf(".option.target.ea.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.ea")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.ea.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    sEa = sCommand;                                          //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.mul3216")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.mul3216.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
+                   if (bVal)                                                   //Customized for ARC GNU ea
+                   smul3216 = sCommand; 
+           } else if ((sID.endsWith(".option.target.xy")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.xy.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
+                   if (bVal)                                                   //Customized for ARC GNU ea
+                   smxy = sCommand; 
+           } else if ((sID.endsWith(".option.target.lock")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.lock.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //Customized for ARC GNU ea
+                   if (bVal)                                                   //Customized for ARC GNU ea
+                   smxy = sCommand; 
            } else if ((sID.endsWith(".option.target.shiftassist")) ||  
                    (sID.indexOf(".option.target.shiftassist.") > 0)) {       
                if (bVal)                                                  
@@ -312,6 +325,15 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
        
        if ((sEa != null) && (sEa.length() > 0)) {                 
            oList.add(sEa);                                              
+           } 
+       if ((smul3216 != null) && (smul3216.length() > 0)) {                 
+           oList.add(smul3216);                                              
+           } 
+       if ((smlock != null) && (smlock.length() > 0)) {                 
+           oList.add(smlock);                                              
+           } 
+       if ((smxy != null) && (smxy.length() > 0)) {                 
+           oList.add(smxy);                                              
            } 
        if ((sshiftassist != null) && (sshiftassist.length() > 0)) {           
            oList.add(sshiftassist);                                         

@@ -3472,7 +3472,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.lock"
                name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target..lock">
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock">
          </option>
       </toolChain>
       <projectType
@@ -6554,7 +6554,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.target.lock"
                name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target..lock">
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock">
          </option>
       </toolChain>
       
