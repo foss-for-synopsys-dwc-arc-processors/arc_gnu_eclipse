@@ -85,6 +85,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC";
 	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin";
 	
+	protected Label nSIMpropslabel;
+	public static Text fnSIMpropsText;
+	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
+	public static String nSIMpropsfiles="nsim_av2em11.props";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -273,6 +277,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				 fPrgmArgumentsComCom.add(comport, 0);
 			 }
 			 
+			 String nsimprop = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
+			 if(nsimprop.equalsIgnoreCase("")){
+				 nsimprop = "nsim_av2em11.props";
+			 }
+			 fnSIMpropsText.setText(nsimprop);
+			 
+			 
 			
 		 }
 		 catch( CoreException e ) {
@@ -366,7 +377,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
-		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,fnSIMpropsText.getText());
 		if (fSerialPortAvailable)
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
@@ -446,6 +457,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
 					fLaunchComButton.setEnabled(fSerialPortAvailable);
 					fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
+					
+					fnSIMpropsText.setVisible(false);
+					fnSIMpropslButton.setVisible(false);
+					nSIMpropslabel.setVisible(false);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
@@ -462,6 +477,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fSearchexternalButton.setVisible(true);
 					fSearchexternalLabel.setVisible(true);
 					fPrgmArgumentsTextexternal.setVisible(true);
+					
+					fnSIMpropsText.setVisible(false);
+					fnSIMpropslButton.setVisible(false);
+					nSIMpropslabel.setVisible(false);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
@@ -481,6 +500,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fSearchexternalButton.setVisible(true);
 					fSearchexternalLabel.setVisible(true);
 					fPrgmArgumentsTextexternal.setVisible(true);
+					
+					fnSIMpropsText.setVisible(true);
+					fnSIMpropslButton.setVisible(true);
+					nSIMpropslabel.setVisible(true);
+					
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
 					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
@@ -590,6 +614,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				updateLaunchConfigurationDialog();
 			}
 		} );
+		
+				
 		fSearchexternalLabel=new Label(subComp, SWT.LEFT);
 		fSearchexternalLabel.setText("Path");
 		gd = new GridData();
@@ -713,6 +739,30 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 		});
 
+		nSIMpropslabel = new Label(subComp, SWT.CENTER);
+		nSIMpropslabel.setText("nSIM Props:");
+		gd = new GridData();
+		label.setLayoutData( gd );
+		fnSIMpropsText = new Text(subComp, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		gd = new GridData();
+		fnSIMpropsText.setLayoutData( gd );
+		fnSIMpropsText.setText("nsim_av2em11.props");
+		fnSIMpropsText.addModifyListener( new ModifyListener() {
+
+			public void modifyText( ModifyEvent evt ) {
+				updateLaunchConfigurationDialog();
+			}
+		} );
+		fnSIMpropslButton = createPushButton(subComp, "Browse", null); //$NON-NLS-1$  //6-2
+		gd = new GridData(SWT.BEGINNING);
+		fnSIMpropslButton.setLayoutData(gd);
+		fnSIMpropslButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent evt) {
+				handlepropsBinaryBrowseButtonSelected();
+				updateLaunchConfigurationDialog();
+			}
+		});
+		
 	}
 
 	/* (non-Javadoc)
@@ -744,6 +794,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 			 
 		}
+	}
+	
+	protected void handlepropsBinaryBrowseButtonSelected() {
+			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
+			fileDialog.setFileName(fnSIMpropsText.getText());
+			String text= fileDialog.open();
+			nSIMpropsfiles=fileDialog.getFileName();
+			if (text != null) {
+				fnSIMpropsText.setText(nSIMpropsfiles);
+			}
 	}
 	public static String getAttributeValueFromString(String string) {
 		String content = string;

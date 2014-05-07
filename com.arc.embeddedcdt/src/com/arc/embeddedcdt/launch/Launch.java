@@ -419,9 +419,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String nsimProps = nsim_wd.getParentFile().getPath()
 								+ java.io.File.separator + "systemc"
 								+ java.io.File.separator + "configs"
-								+ java.io.File.separator + "nsim_av2em11.props";
-						// Enable GNU IO Hostlink 
-						String[] nsim_cmd = { nsim_exec, "-gdb", "-on", "nsim_emt", "-propsfile",
+								//+ java.io.File.separator + "nsim_av2em11.props";
+					            + java.io.File.separator + RemoteGDBDebuggerPage.nSIMpropsfiles;
+						String[] nsim_cmd = { nsim_exec, "-gdb", "-propsfile",
 								nsimProps };
 
 						DebugPlugin.newProcess(launch,
