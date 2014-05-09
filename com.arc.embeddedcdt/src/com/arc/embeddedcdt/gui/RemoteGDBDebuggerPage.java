@@ -81,6 +81,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
+	public Boolean createTabitemCOMBool=false;
+	public Boolean createTabitemnSIMBool=false;
+	
+	
 	// Constants
 	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC";
 	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin";
@@ -451,7 +455,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				if (fPrgmArgumentsComboInittext
 						.equalsIgnoreCase("JTAG via OpenOCD")) {
 					fGDBServerPortNumberText.setText("3333");
-
+					subtabFolder.setVisible(true);
 					fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
 					fPrgmArgumentsComCom.setVisible(true);
 					fLaunchComButton.setVisible(true);
@@ -470,11 +474,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					nSIMpropslabel.setVisible(false);
 					
 					
-					subtabFolder.setSelection(0);
+					tabItem2.dispose();
+					if(createTabitemCOMBool==false)
+						 createTabitemCOM();
+					subtabFolder.setSelection(tabItemCOM);
+					createTabitemnSIMBool=false;
 					
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
+					subtabFolder.setVisible(true);
 					fGDBServerPortNumberText.setText("2331");
 					if (isWindows)
 						fPrgmArgumentsTextexternal.setText(ASHLING_DEFAULT_PATH_WINDOWS);
@@ -493,10 +502,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fnSIMpropslButton.setVisible(false);
 					nSIMpropslabel.setVisible(false);
 					
-					subtabFolder.setSelection(0);
+					tabItem2.dispose();
+					if(createTabitemCOMBool==false)
+						 createTabitemCOM();
+					subtabFolder.setSelection(tabItemCOM);
+					createTabitemnSIMBool=false;
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
+					subtabFolder.setVisible(true);
+					
 					fGDBServerPortNumberText.setText("1234");
 					fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
 					if (!CommandTab.initcom.isEmpty())
@@ -532,7 +547,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						}
 					}
 					
-					subtabFolder.setSelection(1);
+					subtabFolder.setSelection(tabItem2);
+					tabItemCOM.dispose();
+					if(createTabitemnSIMBool==false)
+					    createTabitemnSIM();
+					createTabitemCOMBool=false;
+					
+					
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("Generic gdbserver"))
 				{
@@ -698,35 +719,46 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		gd2.horizontalSpan =5;
 		subtabFolder.setLayoutData(gd2);
 		
+        if(createTabitemnSIMBool==false)
+        	createTabitemnSIM();
+        if(createTabitemCOMBool==false)
+        	createTabitemCOM();
 		
+		
+		
+		
+	}
+	
+
+	private void createTabitemCOM() { 
+		createTabitemCOMBool=true;
 		tabItemCOM = new TabItem( subtabFolder, SWT.NONE );
 		tabItemCOM.setText("COM Tab");
 		Composite compCOM = new Composite(subtabFolder, SWT.NULL);
 		compCOM.setLayout(new GridLayout(1, true));
 		compCOM.setLayoutData(new GridData(GridData.FILL_BOTH));
 		((GridLayout)compCOM.getLayout()).makeColumnsEqualWidth = false;
-		compCOM.setFont( tabFolder.getFont() );
+		
 		tabItemCOM.setControl( compCOM );
 		
 		Composite subCompCOM = new Composite(compCOM, SWT.NULL);
 		subCompCOM.setLayout(new GridLayout(5, true));
 		subCompCOM.setLayoutData(new GridData(GridData.FILL_BOTH));
 		((GridLayout)subCompCOM.getLayout()).makeColumnsEqualWidth = false;
-		subCompCOM.setFont( tabFolder.getFont() );
+		
 		fPrgmArgumentsLabelCom = new Label(subCompCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-		gd = new GridData(SWT.BEGINNING);
-		fPrgmArgumentsLabelCom.setLayoutData(gd);
+	
+	
 		fPrgmArgumentsComCom =new Combo(subCompCOM, SWT.None);//5-2 and 5-3 
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan =3;
-		fPrgmArgumentsComCom.setLayoutData(gd);
+		
+		
+		
 		
 		fLaunchComButton = new Button(subCompCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(true);
 	
-		gd = new GridData(SWT.BEGINNING);
-		fLaunchComButton.setLayoutData(gd);
+	
 		fLaunchComButton.setText("Launch Terminal");
 		fLaunchComButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
@@ -768,7 +800,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
 			fLaunchComButton.setEnabled(fSerialPortAvailable);
 		}
-
+		
+		
 		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
@@ -776,30 +809,29 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				updateLaunchConfigurationDialog();
 			}
 		});
-
-		
-		tabItem2 = new TabItem( subtabFolder, SWT.NONE );
+	}
+	private void createTabitemnSIM() { 
+		createTabitemnSIMBool=true;
+		tabItem2 = new TabItem(subtabFolder, SWT.NONE); 
 		tabItem2.setText("nSIM Tab");
 	
 		Composite comp2 = new Composite(subtabFolder, SWT.NULL);
 		comp2.setLayout(new GridLayout(1, true));
 		comp2.setLayoutData(new GridData(GridData.FILL_BOTH));
 		((GridLayout)comp2.getLayout()).makeColumnsEqualWidth = false;
-		comp2.setFont( tabFolder.getFont() );
+	
 		tabItem2.setControl( comp2 );
 		
 		Composite subComp2 = new Composite(comp2, SWT.NULL);
 		subComp2.setLayout(new GridLayout(5, true));
 		subComp2.setLayoutData(new GridData(GridData.FILL_BOTH));
 		((GridLayout)subComp2.getLayout()).makeColumnsEqualWidth = false;
-		subComp2.setFont( tabFolder.getFont() );
 		nSIMpropslabel = new Label(subComp2, SWT.CENTER);
 		nSIMpropslabel.setText("nSIM Props:");
-		gd = new GridData();
-		label.setLayoutData( gd );
+	
 		fnSIMpropsText = new Text(subComp2, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-		gd = new GridData();
-		fnSIMpropsText.setLayoutData( gd );
+		
+	
 		fnSIMpropsText.setText("nsim_av2em11.props");
 		fnSIMpropsText.addModifyListener( new ModifyListener() {
 
@@ -809,19 +841,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		} );
 		
 		fnSIMpropslButton = createPushButton(subComp2, "Browse", null); //$NON-NLS-1$  //6-2
-		gd = new GridData(SWT.BEGINNING);
-		fnSIMpropslButton.setLayoutData(gd);
+		
+	
 		fnSIMpropslButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
 				handlepropsBinaryBrowseButtonSelected();
 				updateLaunchConfigurationDialog();
 			}
 		});
-		
-		
-		
-	}
-
+		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
 	 */
