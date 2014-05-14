@@ -96,6 +96,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
 	public static String nSIMpropsfiles="nsim_av2em11.props";
+	
+	static String externaltools="";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -150,7 +152,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			return "/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
 		}
 	}
-	static String externaltools;
+
 	@Override
 	public void initializeFrom( ILaunchConfiguration configuration ) {
 		super.initializeFrom(configuration);
@@ -297,23 +299,27 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 }
 		
 		 String Terminallaunch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, new String());//get which external tool is in use
-		 if(!Terminallaunch.equalsIgnoreCase("false")) {
-//			 fLaunchComButton.setSelection(true);//setText("Enable Launch Terminal");
-		 fLaunchTerminalboolean="true";
-//			 if (fPrgmArgumentsComCom.getItemCount() > 0) {
-//				 fPrgmArgumentsComCom.setEnabled(true);
-//				 fPrgmArgumentsLabelCom.setEnabled(true);
-//			 } else {
-//				 fPrgmArgumentsComCom.setEnabled(false);
-//				 fPrgmArgumentsLabelCom.setEnabled(false);
-//			 }
-		} else if(Terminallaunch.equalsIgnoreCase("false")) {
-//			 fLaunchComButton.setSelection(false);//fLaunchComButton.setText("Disable Launch Terminal");
-			 fLaunchTerminalboolean="false";
-//			 fPrgmArgumentsComCom.setEnabled(false);
-//	        fPrgmArgumentsLabelCom.setEnabled(false);
-			
-		 }
+
+			if (!groupcom.isDisposed()) {
+				if (!Terminallaunch.equalsIgnoreCase("false")) {
+					fLaunchComButton.setSelection(true);// setText("Enable Launch Terminal");
+					fLaunchTerminalboolean = "true";
+					if (fPrgmArgumentsComCom.getItemCount() > 0) {
+						fPrgmArgumentsComCom.setEnabled(true);
+						fPrgmArgumentsLabelCom.setEnabled(true);
+					} else {
+						fPrgmArgumentsComCom.setEnabled(false);
+						fPrgmArgumentsLabelCom.setEnabled(false);
+					}
+				} else if (Terminallaunch.equalsIgnoreCase("false")) {
+					fLaunchComButton.setSelection(false);// setText("Enable Launch Terminal");
+					fLaunchTerminalboolean = "false";
+					fPrgmArgumentsComCom.setEnabled(false);
+					fPrgmArgumentsLabelCom.setEnabled(false);
+
+				}
+			}
+
 		// fLaunchComButton.setText("Launch Terminal");
 //		 if (fSerialPortAvailable)
 //			 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
