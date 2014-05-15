@@ -449,7 +449,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		label.setLayoutData( gd );
 		gd = new GridData();
 		gd.horizontalSpan =4;
-		fPrgmArgumentsComboInit =new Combo(subComp, SWT.None);//1-2 and 1-3
+		fPrgmArgumentsComboInit =new Combo(subComp, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
 		fPrgmArgumentsComboInit.setLayoutData(gd);
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
 		fPrgmArgumentsComboInit.add("JTAG via Ashling");
