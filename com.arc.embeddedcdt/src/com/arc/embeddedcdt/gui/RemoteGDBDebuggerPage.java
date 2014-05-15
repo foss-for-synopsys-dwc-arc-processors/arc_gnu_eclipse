@@ -493,6 +493,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 //					subtabFolder.setSelection(tabItemCOM);
 					createTabitemnSIMBool=false;
 					
+					if(!groupcom.isVisible())
+						groupcom.setVisible(true);
+					
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
@@ -521,6 +524,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					groupcom.setText("JTAG via Ashling");
 //					subtabFolder.setSelection(tabItemCOM);
 					createTabitemnSIMBool=false;
+					
+					if(!groupcom.isVisible())
+						groupcom.setVisible(true);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
@@ -567,6 +573,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    createTabitemnSIM(subComp);
 					groupnsim.setText("nSIM");
 					createTabitemCOMBool=false;
+					if(!groupnsim.isVisible())
+						groupnsim.setVisible(true);
 					
 					
 				}
