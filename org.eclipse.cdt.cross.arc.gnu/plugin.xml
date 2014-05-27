@@ -5518,6 +5518,11 @@
                isAbstract="false"
                name="FPX"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+			<enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mspfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
@@ -5527,11 +5532,6 @@
                   command="-mdpfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
                   name="Double Precision FPX (-mdpfp)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
-                  isDefault="true"
-                  name="None">
             </enumeratedOptionValue>
          </option>
          <option
@@ -5958,6 +5958,11 @@
                name="FPX"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
             <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
                   command="-mspfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
                   name="Single Precision FPX (-mspfp)">
@@ -5966,11 +5971,6 @@
                   command="-mdpfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
                   name="Double Precision FPX (-mdpfp)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
-                  isDefault="true"
-                  name="None">
             </enumeratedOptionValue>
          </option>
          <option
@@ -6870,6 +6870,11 @@
                name="FPX"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
             <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
                   command="-mspfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
                   name="Single Precision FPX (-mspfp)">
@@ -6878,11 +6883,6 @@
                   command="-mdpfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
                   name="Double Precision FPX (-mdpfp)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
-                  isDefault="true"
-                  name="None">
             </enumeratedOptionValue>
          </option>
          <option
@@ -7323,6 +7323,11 @@
                name="FPX"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
             <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
                   command="-mspfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
                   name="Single Precision FPX (-mspfp)">
@@ -7331,11 +7336,6 @@
                   command="-mdpfp"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
                   name="Double Precision FPX (-mdpfp)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
-                  isDefault="true"
-                  name="None">
             </enumeratedOptionValue>
          </option>
          <option
