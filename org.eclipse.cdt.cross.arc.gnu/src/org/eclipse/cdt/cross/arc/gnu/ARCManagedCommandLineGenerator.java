@@ -348,8 +348,23 @@ package org.eclipse.cdt.cross.arc.gnu;
        if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
        {
     	   oList.add("-mno-norm");
+    	   
+       }
+       if (sProcessor.equalsIgnoreCase("-mA7"))
+       {
+    	   oList.add("-mno-mpy");
+    	   
        }
        
+       if (sProcessor.equalsIgnoreCase("-mHS"))
+       {
+    	   oList.add("-mbarrel-shifter");
+    	   oList.add("-mshift-assist");
+    	   oList.add("-mcode-density");
+    	   oList.add("-mswap");
+    	   oList.add("-mnorm");
+    	   
+       }
        
        }
      
