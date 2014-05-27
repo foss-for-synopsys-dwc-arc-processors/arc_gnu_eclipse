@@ -345,6 +345,12 @@ package org.eclipse.cdt.cross.arc.gnu;
            oList.add(sll64);                                             
            }  
        
+       if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
+       {
+    	   oList.add("-mno-norm");
+       }
+       
+       
        }
      
      return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
