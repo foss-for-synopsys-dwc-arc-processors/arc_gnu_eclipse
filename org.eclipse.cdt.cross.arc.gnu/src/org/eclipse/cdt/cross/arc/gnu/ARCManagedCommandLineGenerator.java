@@ -215,8 +215,8 @@ package org.eclipse.cdt.cross.arc.gnu;
             (sID.indexOf(".option.target.normalize.") > 0)) {            //Customized for ARC GNU normalize
              if (bVal)                                                   //Customized for ARC GNU normalize
              sNormalize = sCommand;                                      //Customized for ARC GNU normalize
-           } else if ((sID.endsWith(".option.target.swap")&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))) ||           //Customized for ARC GNU swap
-             (sID.indexOf(".option.target.swap.") > 0)&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {                //Customized for ARC GNU swap
+           } else if ((sID.endsWith(".option.target.swap")) ||           //Customized for ARC GNU swap
+             (sID.indexOf(".option.target.swap.") > 0)) {                //Customized for ARC GNU swap
              if (bVal)                                                   //Customized for ARC GNU swap
               sSwap = sCommand;                                          //Customized for ARC GNU swap
            } else if ((sID.endsWith(".option.target.ea")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
