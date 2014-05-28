@@ -76,6 +76,7 @@ package org.eclipse.cdt.cross.arc.gnu;
        String sCodedensity = null;    //Customized for ARC GNU codedensity
        String sDivide = null;         //Customized for ARC GNU divide
        String sNormalize = null;      //Customized for ARC GNU normalize
+       String sMPY=null;
        String sSwap = null;           //Customized for ARC GNU swap
        String sEa = null;           //Customized for ARC GNU ea
        String sThumb = null;
@@ -215,6 +216,10 @@ package org.eclipse.cdt.cross.arc.gnu;
             (sID.indexOf(".option.target.normalize.") > 0)) {            //Customized for ARC GNU normalize
              if (bVal)                                                   //Customized for ARC GNU normalize
              sNormalize = sCommand;                                      //Customized for ARC GNU normalize
+           } else if ((sID.endsWith(".option.target.mpy")) ||      //Customized for ARC GNU mpy
+                   (sID.indexOf(".option.target.mpy.") > 0)) {            //Customized for ARC GNU mpy
+                    if (bVal)                                                   //Customized for ARC GNU mpy
+                    sMPY = sCommand;  
            } else if ((sID.endsWith(".option.target.swap")) ||           //Customized for ARC GNU swap
              (sID.indexOf(".option.target.swap.") > 0)) {                //Customized for ARC GNU swap
              if (bVal)                                                   //Customized for ARC GNU swap
@@ -312,6 +317,9 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((sNormalize != null) && (sNormalize.length() > 0)) {           //Customized for ARC GNU normalize
            oList.add(sNormalize);                                         //Customized for ARC GNU normalize
            }
+       if ((sMPY != null) && (sMPY.length() > 0)) {           //Customized for ARC GNU mpy
+           oList.add(sMPY);                                         //Customized for ARC GNU mpy
+           }
        if ((sSwap != null) && (sSwap.length() > 0)) {                 //Customized for ARC GNU swap
            oList.add(sSwap);                                         //Customized for ARC GNU swap     
            }
@@ -345,14 +353,14 @@ package org.eclipse.cdt.cross.arc.gnu;
            oList.add(sll64);                                             
            }  
        
+       if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)<0)
+       {
+    	   oList.add("-mno-mpy");
+    	   
+       }
        if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
        {
     	   oList.add("-mno-norm");
-    	   
-       }
-       if (sProcessor.equalsIgnoreCase("-mA7"))
-       {
-    	   oList.add("-mno-mpy");
     	   
        }
        
