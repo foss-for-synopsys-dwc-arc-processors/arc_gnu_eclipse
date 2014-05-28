@@ -3727,48 +3727,9 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
-               name="Swap instruction(-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize"
-               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3783,14 +3744,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               value="true">
          </option>
       </toolChain>
       <configuration
@@ -4183,48 +4136,9 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
-               name="Swap instruction(-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize"
-               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4239,14 +4153,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.shiftassist"
-               name="Shift assist (-mshift-assist)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.shiftassist"
-               value="true">
          </option>
       </toolChain>
       <configuration

@@ -71,29 +71,29 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     };
     private static String ARCV2HS_DISABLED[] = {
 
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.ea",//Customized for ARC GNU ea   
- 	    "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap",//Customized for ARC GNU windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter",//
-
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.shiftassist",//
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize",
-        
-	    "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.fpi",//
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mno-dpfp-lrsr",      
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.ea",//Customized for ARC GNU ea   
+// 	    "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap",//Customized for ARC GNU windows_swap
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter",//
+//
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.shiftassist",//
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize",
+//        
+//	    "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.fpi",//
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mno-dpfp-lrsr",      
         
     };
     
     // default value on ARCV2HS
     private static String[]  ARCV2HS_DEFAULT = {
 
-        // HS default value to be true
- 	    "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap",//Customized for ARC GNU windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter",//
-
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.shiftassist",//
-        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize",
+//        // HS default value to be true
+// 	    "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap",//Customized for ARC GNU windows_swap
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter",//
+//
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.shiftassist",//
+//        "org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize",
     };
     
     private static Set<String> DISABLED_FOR_ARC7 = new HashSet<String>(Arrays.asList(ARC7_DISABLED));
