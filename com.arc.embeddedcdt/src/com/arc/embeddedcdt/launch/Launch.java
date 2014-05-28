@@ -416,11 +416,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String nsim_exec = System.getProperty("nSIM");
 						File nsim_wd = (new java.io.File(nsim_exec))
 								.getParentFile();
-						String nsimProps = nsim_wd.getParentFile().getPath()
-								+ java.io.File.separator + "systemc"
-								+ java.io.File.separator + "configs"
-								//+ java.io.File.separator + "nsim_av2em11.props";
-					            + java.io.File.separator + RemoteGDBDebuggerPage.nSIMpropsfiles;
+//						String nsimProps = nsim_wd.getParentFile().getPath()
+//								+ java.io.File.separator + "systemc"
+//								+ java.io.File.separator + "configs"
+//								//+ java.io.File.separator + "nsim_av2em11.props";
+//					            + java.io.File.separator + RemoteGDBDebuggerPage.nSIMpropsfiles;
+						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles;
 						String[] nsim_cmd = { nsim_exec, "-gdb", "-propsfile",
 								nsimProps };
 

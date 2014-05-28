@@ -95,7 +95,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Label nSIMpropslabel;
 	public static Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
-	public static String nSIMpropsfiles="nsim_av2em11.props";
+	public static String nSIMpropsfiles=System.getenv("NSIM_HOME")
+			+ java.io.File.separator + "systemc"
+			+ java.io.File.separator + "configs"
+			+ java.io.File.separator +
+
+			"nsim_av2em11.props";;
 	
 	static String externaltools="";
 	@Override
@@ -287,9 +292,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 //			 }
 //			 
 			 nSIMpropsfiles = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
-			 if(nSIMpropsfiles.equalsIgnoreCase("")){
-				 nSIMpropsfiles = "nsim_av2em11.props";
-			 }
+				if (nSIMpropsfiles.equalsIgnoreCase("")) {
+
+					nSIMpropsfiles = System.getenv("NSIM_HOME")
+							+ java.io.File.separator + "systemc"
+							+ java.io.File.separator + "configs"
+							+ java.io.File.separator +
+
+							"nsim_av2em11.props";
+				}
 			 //fnSIMpropsText.setText(nsimprop);
 			 
 			 
@@ -937,9 +948,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
 			fileDialog.setFileName(fnSIMpropsText.getText());
 			String text= fileDialog.open();
-			nSIMpropsfiles=fileDialog.getFileName();
+			//nSIMpropsfiles=fileDialog.getFileName();
 			if (text != null) {
-				fnSIMpropsText.setText(nSIMpropsfiles);
+				fnSIMpropsText.setText(text);
 			}
 	}
 	public static String getAttributeValueFromString(String string) {
