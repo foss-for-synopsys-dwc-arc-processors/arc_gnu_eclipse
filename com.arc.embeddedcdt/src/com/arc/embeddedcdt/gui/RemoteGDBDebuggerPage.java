@@ -102,6 +102,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 			+ java.io.File.separator + "configs"
 			 			+ java.io.File.separator +
 			 			"nsim_av2em11.props";
+	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	
 	public static String externaltools="";
 	public static String externaltools_openocd_path="";
@@ -188,6 +189,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    
 		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
 		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
+			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
 		    
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).equalsIgnoreCase(""))
 		{
@@ -225,14 +227,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					}
 
 				}	 
-			 nSIMpropsfiles = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
-			 if(nSIMpropsfiles.equalsIgnoreCase("")){
-				 nSIMpropsfiles=System.getenv("NSIM_HOME")
-				 			+ java.io.File.separator + "systemc"
-				 			+ java.io.File.separator + "configs"
-				 			+ java.io.File.separator +
-				 			"nsim_av2em11.props";;
-			 }
 			 //fnSIMpropsText.setText(nsimprop);
 			 
 			 
@@ -281,7 +275,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
 		if (fSerialPortAvailable)
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
@@ -416,6 +410,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							fPrgmArgumentsTextexternal.setText(defaultValue);
 						else 
 							fPrgmArgumentsTextexternal.setText(externaltools_ashling_path);
+						
+						 if(!comport_ashling.equalsIgnoreCase(""))
+						 {
+							 int privious=fPrgmArgumentsComCom.indexOf(comport_ashling);
+							 if(privious>-1)
+							     fPrgmArgumentsComCom.remove(privious);
+							 fPrgmArgumentsComCom.add(comport_ashling, 0);
+							 
+							 
+						 }
+						 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 					}
 						 
 					groupcomashling.setText("JTAG via Ashling");
@@ -447,7 +452,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						}
 					}
 					
-//					subtabFolder.setSelection(tabItem2);
 					groupcom.dispose();
 					groupcomashling.dispose();
 					if(createTabitemnSIMBool==false){
@@ -458,7 +462,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
 						
 						else
-						    	fPrgmArgumentsTextexternal.setText(externaltools_nsim_path);
+						     fPrgmArgumentsTextexternal.setText(externaltools_nsim_path);
+					    
+					    if(nSIMpropsfiles_last.equalsIgnoreCase(""))
+					    	fnSIMpropsText.setText(nSIMpropsfiles);
+					    else 
+					    	fnSIMpropsText.setText(nSIMpropsfiles_last);
+					    
 					}
 					groupnsim.setText("nSIM");
 					createTabitemCOMBool=false;
@@ -486,11 +496,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							}
 						}
 					}
-//					subtabFolder.setVisible(false);
+
 					if(!groupcom.isDisposed())
 					      groupcom.setVisible(false);
 					if(!groupnsim.isDisposed())
 					    groupnsim.setVisible(false);
+					if(!groupcomashling.isDisposed())
+						groupcomashling.setVisible(false);
 					
 				}
 
@@ -913,12 +925,14 @@ private void createTabitemCOMAshling(Composite subComp) {
 	
 		fnSIMpropsText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
 		
-	
-		fnSIMpropsText.setText(nSIMpropsfiles);
+	    if(nSIMpropsfiles_last.equalsIgnoreCase(""))
+		    fnSIMpropsText.setText(nSIMpropsfiles);
+	    else 
+	    	fnSIMpropsText.setText(nSIMpropsfiles_last);
 		fnSIMpropsText.addModifyListener( new ModifyListener() {
 
 			public void modifyText( ModifyEvent evt ) {
-				nSIMpropsfiles=fnSIMpropsText.getText();
+				nSIMpropsfiles_last=fnSIMpropsText.getText();
 				updateLaunchConfigurationDialog();
 			}
 		} );
