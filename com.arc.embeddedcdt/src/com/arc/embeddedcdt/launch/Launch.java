@@ -251,7 +251,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
 		String external_tools_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
-		serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+		if(external_tools.indexOf("OpenOCD")>0)
+		     serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
+		else if(external_tools.indexOf("Ashling")>0)
+			 serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
 			
 		if(external_tools.equalsIgnoreCase("")||gdbserver_port.equalsIgnoreCase(""))
 			return;

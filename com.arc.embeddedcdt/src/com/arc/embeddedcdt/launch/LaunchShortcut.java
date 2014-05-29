@@ -219,16 +219,18 @@ public class LaunchShortcut implements ILaunchShortcut {
     					 
     					 if (external_tools.equalsIgnoreCase("JTAG via Ashling")){
     						 gdbserver_port="2331"; 
+    						 wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,FirstlaunchDialog.value[1]);
     					 }
     					 else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")){
     						 gdbserver_port="3333"; 
+    						 wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,FirstlaunchDialog.value[1]);
     					 }
     					 else if (external_tools.equalsIgnoreCase("nSIM")){
     						 gdbserver_port="1234"; 
     					 }
   
     					wc.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
-    					wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,FirstlaunchDialog.value[1]);
+    					
     					wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,FirstlaunchDialog.value[0]);
                 	}	
                   config = wc.doSave();

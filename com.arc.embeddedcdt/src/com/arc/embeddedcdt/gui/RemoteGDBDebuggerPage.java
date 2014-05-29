@@ -67,7 +67,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	protected Text fGDBServerIPAddressText;
-	public static String comport="";//this variable is for launching the exactly com port chosen by users
+	public String comport_openocd="";//this variable is for launching the exactly com port chosen by users
+	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
 	protected Label fSearchexternalLabel;
 	protected Button fLaunchComButton;//this variable is for launching COM port
@@ -184,6 +185,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, new String());
 		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, new String());
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, new String());
+		    
+		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
+		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
+		    
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).equalsIgnoreCase(""))
 		{
 			fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
@@ -206,14 +211,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 
 
 				
-			 comport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, new String());
+			 comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
 			 if (FirstlaunchDialog.value[1] != null) {
 					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-						comport = FirstlaunchDialog.value[1];
+						comport_openocd = FirstlaunchDialog.value[1];
 					}
 
 				}
-			 			 
+			 comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
+			 if (FirstlaunchDialog.value[1] != null) {
+					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
+						comport_ashling = FirstlaunchDialog.value[1];
+					}
+
+				}	 
 			 nSIMpropsfiles = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
 			 if(nSIMpropsfiles.equalsIgnoreCase("")){
 				 nSIMpropsfiles=System.getenv("NSIM_HOME")
@@ -279,10 +290,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
 				getAttributeValueFromString(hostname)
 		);
-		
-		
-		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,getAttributeValueFromString(comport));
+	
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
 		
 	}
 	/* 
@@ -352,7 +362,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					groupcomashling.dispose();
 					
 					if(createTabitemCOMBool==false)
- {
+                    {
 						if (!groupcom.isDisposed())
 							groupcom.dispose();
 
@@ -361,6 +371,19 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
 						else
 							fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
+						
+						 if(!comport_openocd.equalsIgnoreCase(""))
+						 {
+							 int privious=fPrgmArgumentsComCom.indexOf(comport_openocd);
+							 if(privious>-1)
+							     fPrgmArgumentsComCom.remove(privious);
+							 fPrgmArgumentsComCom.add(comport_openocd, 0);
+							 
+							 
+						 }
+						 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+						
+						
 					}
 					groupcom.setText("JTAG via OpenOCD");
 					createTabitemnSIMBool=false;
@@ -396,9 +419,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					}
 						 
 					groupcomashling.setText("JTAG via Ashling");
-
-					
-					if(!groupcomashling.isVisible())
+    				if(!groupcomashling.isVisible())
 						groupcomashling.setVisible(true);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
@@ -658,17 +679,17 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
-				comport=combo.getText();
+				comport_ashling=combo.getText();
 				updateLaunchConfigurationDialog();
 			}
 		});
 		
-		 if(!comport.equalsIgnoreCase(""))
+		 if(!comport_ashling.equalsIgnoreCase(""))
 		 {
-			 int privious=fPrgmArgumentsComCom.indexOf(comport);
+			 int privious=fPrgmArgumentsComCom.indexOf(comport_ashling);
 			 if(privious>-1)
 			     fPrgmArgumentsComCom.remove(privious);
-			 fPrgmArgumentsComCom.add(comport, 0);
+			 fPrgmArgumentsComCom.add(comport_ashling, 0);
 			 
 			 
 		 }
@@ -748,13 +769,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 			
 		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-	
-	
-		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3 
-		
-		
-		
-		
+	    fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3 
 		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(true);
 	
@@ -806,17 +821,17 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
-				comport=combo.getText();
+				comport_openocd=combo.getText();
 				updateLaunchConfigurationDialog();
 			}
 		});
 		
-		 if(!comport.equalsIgnoreCase(""))
+		 if(!comport_openocd.equalsIgnoreCase(""))
 		 {
-			 int privious=fPrgmArgumentsComCom.indexOf(comport);
+			 int privious=fPrgmArgumentsComCom.indexOf(comport_openocd);
 			 if(privious>-1)
 			     fPrgmArgumentsComCom.remove(privious);
-			 fPrgmArgumentsComCom.add(comport, 0);
+			 fPrgmArgumentsComCom.add(comport_openocd, 0);
 			 
 			 
 		 }
