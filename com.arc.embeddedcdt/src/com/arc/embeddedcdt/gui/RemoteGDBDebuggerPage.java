@@ -79,15 +79,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	
     static String runcom="";//this variable is for saving user's input run command
-	static String externalpath="";//this variable is for saving user's external path
-
+	public String external_openocd_path="";//this variable is for saving user's external path
+	public String external_ashling_path="";//this variable is for saving user's external path
+	public String external_nsim_path="";//this variable is for saving user's external path
 	static String fLaunchexternalButtonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	public Boolean createTabitemCOMBool=false;
 	public Boolean createTabitemnSIMBool=false;
 	
-	
+	public Boolean createTabitemCOMAshlingBool=false;
 	// Constants
 	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC";
 	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin";
@@ -96,13 +97,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
 	public static String nSIMpropsfiles=System.getenv("NSIM_HOME")
-			+ java.io.File.separator + "systemc"
-			+ java.io.File.separator + "configs"
-			+ java.io.File.separator +
-
-			"nsim_av2em11.props";;
+			 			+ java.io.File.separator + "systemc"
+			 			+ java.io.File.separator + "configs"
+			 			+ java.io.File.separator +
+			 			"nsim_av2em11.props";
 	
-	static String externaltools="";
+	public static String externaltools="";
+	public static String externaltools_openocd_path="";
+	public static String externaltools_ashling_path="";
+	public static String externaltools_nsim_path="";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -115,7 +118,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
 									IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT );
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH, (String) null);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, (String) null);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, (String) null);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, (String) null);
 		
 	}
@@ -160,6 +165,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	@Override
 	public void initializeFrom( ILaunchConfiguration configuration ) {
+		createTabitemCOMBool=false;
+		createTabitemCOMAshlingBool=false;
+		createTabitemnSIMBool=false;
 		super.initializeFrom(configuration);
 		String gdbserverCommand = null;
 		try {
@@ -172,93 +180,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		fGDBCommandText.setText( "arc-elf32-gdb" );
 		try {
-		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+ 		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
+		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, new String());
+		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, new String());
+		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, new String());
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).equalsIgnoreCase(""))
 		{
 			fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
 		}
 		else fPrgmArgumentsComboInit.setText(externaltools);	
 		
-		
-		 if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("true"))
-		 {
-			 fSearchexternalLabel.setText(externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length())+" Path:");
-//			 fLaunchernalButton.setSelection(true);//setText("Enable Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));//get current status
-			 fLaunchexternalButtonboolean="true";
-//			 fSearchexternalLabel.setEnabled(true);
-//			 fSearchexternalButton.setEnabled(true);
-//			 fPrgmArgumentsTextexternal.setEnabled(true);
-			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length()));
-			 }
-		 else  if(externaltools.lastIndexOf("via")>1&&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false")) 
-		 {
-			 fSearchexternalLabel.setText(externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length())+" Path:");
-//			 fLaunchernalButton.setSelection(false);//fLaunchernalButton.setText("Disable Launch "+externaltools.substring(externaltools.lastIndexOf("via")+3, externaltools.length()));//get current status
-			 fLaunchexternalButtonboolean="false";
-//			 fSearchexternalLabel.setEnabled(false);
-//			 fSearchexternalButton.setEnabled(false);
-//			 fPrgmArgumentsTextexternal.setEnabled(false);
-//			 fLaunchernalButton.setText("Launch "+externaltools.substring(externaltools.lastIndexOf("via")+4, externaltools.length()));
-			
-		 }
-		 else if (externaltools.lastIndexOf("via")<1
-				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("true")
-				 &&!externaltools.equalsIgnoreCase("nSIM")
-				 )
-		 {
-			 fSearchexternalLabel.setText("OpenOCD Path:");
-//			 fLaunchernalButton.setSelection(true);
-//			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Enable Launch OpenOCD");
-//			 fSearchexternalLabel.setEnabled(true);
-//			 fSearchexternalButton.setEnabled(true);
-//			 fPrgmArgumentsTextexternal.setEnabled(true);
-			 fLaunchexternalButtonboolean="true";
-		 }
-		 else if (externaltools.lastIndexOf("via")<1
-				 &&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false")
-				 &&!externaltools.equalsIgnoreCase("nSIM"))
-		 {
-			 fSearchexternalLabel.setText("OpenOCD Path:");
-//			 fLaunchernalButton.setSelection(false);
-//			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
-//			 fSearchexternalLabel.setEnabled(false);
-//			 fSearchexternalButton.setEnabled(false);
-//			 fPrgmArgumentsTextexternal.setEnabled(false);
-			 fLaunchexternalButtonboolean="false";
-		 }
-		 else if (externaltools.equalsIgnoreCase("nSIM")
-				 &&!configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("ture"))
-		 {
-//			 fLaunchComButton.setSelection(false);
-			 fLaunchTerminalboolean="false";
-//			 fPrgmArgumentsComCom.setEnabled(false);
-//	        fPrgmArgumentsLabelCom.setEnabled(false);
-	        
-	         fSearchexternalLabel.setText("nSIM Path:");
-//			 fLaunchernalButton.setSelection(true);
-//			 fLaunchernalButton.setText("Launch nSIM");//fLaunchernalButton.setText("Enable Launch OpenOCD");
-//			 fSearchexternalLabel.setEnabled(true);
-//			 fSearchexternalButton.setEnabled(true);
-//			 fPrgmArgumentsTextexternal.setEnabled(true);
-			 fLaunchexternalButtonboolean="true";
-		 }
-		 else if (externaltools.equalsIgnoreCase("nSIM")
-				 &&configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT, new String()).equalsIgnoreCase("false"))
-		 {
-//			 fLaunchComButton.setSelection(false);
-			 fLaunchTerminalboolean="false";
-//			 fPrgmArgumentsComCom.setEnabled(false);
-//	         fPrgmArgumentsLabelCom.setEnabled(false);
-//	        
-//	        
-//			 fLaunchComButton.setSelection(false);
-			 fSearchexternalLabel.setText("OpenOCD Path:");
-//			 fLaunchernalButton.setSelection(false);
-//			 fLaunchernalButton.setText("Launch OpenOCD");//fLaunchernalButton.setText("Disable Launch OpenOCD");
-//			 fSearchexternalLabel.setEnabled(false);
-//			 fPrgmArgumentsTextexternal.setEnabled(false);
-			 fLaunchexternalButtonboolean="false";
-		 }
 
 		 // Set host and IP.
 		 try {
@@ -282,25 +213,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					}
 
 				}
-			 
-//			 if(!comport.equalsIgnoreCase(""))
-//			 {
-//				 int privious=fPrgmArgumentsComCom.indexOf(comport);
-//				 if(privious>-1)
-//				     fPrgmArgumentsComCom.remove(privious);
-//				 fPrgmArgumentsComCom.add(comport, 0);
-//			 }
-//			 
+			 			 
 			 nSIMpropsfiles = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
-				if (nSIMpropsfiles.equalsIgnoreCase("")) {
-
-					nSIMpropsfiles = System.getenv("NSIM_HOME")
-							+ java.io.File.separator + "systemc"
-							+ java.io.File.separator + "configs"
-							+ java.io.File.separator +
-
-							"nsim_av2em11.props";
-				}
+			 if(nSIMpropsfiles.equalsIgnoreCase("")){
+				 nSIMpropsfiles=System.getenv("NSIM_HOME")
+				 			+ java.io.File.separator + "systemc"
+				 			+ java.io.File.separator + "configs"
+				 			+ java.io.File.separator +
+				 			"nsim_av2em11.props";;
+			 }
 			 //fnSIMpropsText.setText(nsimprop);
 			 
 			 
@@ -311,30 +232,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		 String Terminallaunch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, new String());//get which external tool is in use
 
-			if (!groupcom.isDisposed()) {
-				if (!Terminallaunch.equalsIgnoreCase("false")) {
-					fLaunchComButton.setSelection(true);// setText("Enable Launch Terminal");
-					fLaunchTerminalboolean = "true";
-					if (fPrgmArgumentsComCom.getItemCount() > 0) {
-						fPrgmArgumentsComCom.setEnabled(true);
-						fPrgmArgumentsLabelCom.setEnabled(true);
-					} else {
-						fPrgmArgumentsComCom.setEnabled(false);
-						fPrgmArgumentsLabelCom.setEnabled(false);
-					}
-				} else if (Terminallaunch.equalsIgnoreCase("false")) {
-					fLaunchComButton.setSelection(false);// setText("Enable Launch Terminal");
-					fLaunchTerminalboolean = "false";
-					fPrgmArgumentsComCom.setEnabled(false);
-					fPrgmArgumentsLabelCom.setEnabled(false);
-
-				}
-			}
-
-		// fLaunchComButton.setText("Launch Terminal");
-//		 if (fSerialPortAvailable)
-//			 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-		
 		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*new String()*/);
 		
 		 if(!gdbserver.equalsIgnoreCase(""))
@@ -346,35 +243,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsComboInit.select(0);
 		 }
 		
-		
-		if(gdbserver.indexOf("Ashling")>-1)
-		{
-			// Ashling GDB server
-			String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
-			fPrgmArgumentsTextexternal.setText(
-				configuration.getAttribute(
-					LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,
-					defaultValue
-				)
-			);
-		}
-		else if	(gdbserver.indexOf("OpenOCD")>-1) {
-			fPrgmArgumentsTextexternal.setText(
-				configuration.getAttribute(
-					LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,
-					getOpenOCDDefaultPath()
-				)
-			);
-		} else {
-			// nSIM and default case
-			fPrgmArgumentsTextexternal.setText(
-				configuration.getAttribute(
-					LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,
-					getNsimdrvDefaultPath()
-				)
-			);
-		}
-
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -396,8 +264,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		gdbStr.trim();
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,externalpath);
-		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,external_openocd_path);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,external_ashling_path);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,external_nsim_path);
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,getAttributeValueFromString(fLaunchexternalButtonboolean));
@@ -427,10 +296,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	    }
 	    return isWindowsOS;
 	 }
-	//static TabFolder subtabFolder;
-	//static TabItem tabItemCOM ;
-	//static TabItem tabItem2;
+
 	static Group groupcom;
+	static Group groupcomashling;
 	static Group groupnsim;
 	
 	protected void createGdbserverSettingsTab( TabFolder tabFolder ) {
@@ -478,91 +346,71 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				if (fPrgmArgumentsComboInittext
 						.equalsIgnoreCase("JTAG via OpenOCD")) {
 					fGDBServerPortNumberText.setText("3333");
-					//subtabFolder.setVisible(true);
-					fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
-//					fPrgmArgumentsComCom.setVisible(true);
-//					fLaunchComButton.setVisible(true);
-//					fPrgmArgumentsLabelCom.setVisible(true);
-//					fSearchexternalButton.setVisible(true);
-//					fSearchexternalLabel.setVisible(true);
-//					fPrgmArgumentsTextexternal.setVisible(true);
-					
-					// Do not enable UI elements if serial port is not available.
-//					fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-//					fLaunchComButton.setEnabled(fSerialPortAvailable);
-//					fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
-//					
-//					fnSIMpropsText.setVisible(false);
-//					fnSIMpropslButton.setVisible(false);
-//					nSIMpropslabel.setVisible(false);
 					
 					
 					groupnsim.dispose();
+					groupcomashling.dispose();
+					
 					if(createTabitemCOMBool==false)
-						 createTabitemCOM(subComp);
+ {
+						if (!groupcom.isDisposed())
+							groupcom.dispose();
+
+						createTabitemCOM(subComp);
+						if (externaltools_openocd_path.equalsIgnoreCase(""))
+							fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
+						else
+							fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
+					}
 					groupcom.setText("JTAG via OpenOCD");
-//					subtabFolder.setSelection(tabItemCOM);
 					createTabitemnSIMBool=false;
+					createTabitemCOMAshlingBool=false;
 					
 					if(!groupcom.isVisible())
 						groupcom.setVisible(true);
+					
+					
 					
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
-					//subtabFolder.setVisible(true);
 					fGDBServerPortNumberText.setText("2331");
-					if (isWindows)
-						fPrgmArgumentsTextexternal.setText(ASHLING_DEFAULT_PATH_WINDOWS);
-					else
-						fPrgmArgumentsTextexternal.setText(ASHLING_DEFAULT_PATH_LINUX);
 					
-//					fPrgmArgumentsComCom.setVisible(fSerialPortAvailable);
-//					fLaunchComButton.setVisible(fSerialPortAvailable);
-//					fPrgmArgumentsLabelCom.setVisible(fSerialPortAvailable);
-//					
-//					fSearchexternalButton.setVisible(true);
-//					fSearchexternalLabel.setVisible(true);
-//					fPrgmArgumentsTextexternal.setVisible(true);
-//					
-//					fnSIMpropsText.setVisible(false);
-//					fnSIMpropslButton.setVisible(false);
-//					nSIMpropslabel.setVisible(false);
 					
 					groupnsim.dispose();
-					if(createTabitemCOMBool==false)
-						 createTabitemCOM(subComp);
-					groupcom.setText("JTAG via Ashling");
-//					subtabFolder.setSelection(tabItemCOM);
+					groupcom.dispose();
 					createTabitemnSIMBool=false;
+					createTabitemCOMBool=false;
 					
-					if(!groupcom.isVisible())
-						groupcom.setVisible(true);
+					if(createTabitemCOMAshlingBool==false){
+						if (!groupcomashling.isDisposed())
+							groupcomashling.dispose();
+
+						createTabitemCOMAshling(subComp);
+						String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
+						
+						if(externaltools_ashling_path.equalsIgnoreCase(""))
+							fPrgmArgumentsTextexternal.setText(defaultValue);
+						else 
+							fPrgmArgumentsTextexternal.setText(externaltools_ashling_path);
+					}
+						 
+					groupcomashling.setText("JTAG via Ashling");
+
+					
+					if(!groupcomashling.isVisible())
+						groupcomashling.setVisible(true);
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
-//					subtabFolder.setVisible(true);
 					
 					fGDBServerPortNumberText.setText("1234");
-					fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
+				
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
 
-//					fLaunchComButton.setSelection(false);
 					fLaunchTerminalboolean="false";
 
-//					fPrgmArgumentsComCom.setVisible(false);
-//					fLaunchComButton.setVisible(false);
-//					fPrgmArgumentsLabelCom.setVisible(false);
-//					
-//					
-//					fSearchexternalButton.setVisible(true);
-//					fSearchexternalLabel.setVisible(true);
-//					fPrgmArgumentsTextexternal.setVisible(true);
-//					
-//					fnSIMpropsText.setVisible(true);
-//					fnSIMpropslButton.setVisible(true);
-//					nSIMpropslabel.setVisible(true);
 					
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
@@ -580,10 +428,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					
 //					subtabFolder.setSelection(tabItem2);
 					groupcom.dispose();
-					if(createTabitemnSIMBool==false)
+					groupcomashling.dispose();
+					if(createTabitemnSIMBool==false){
+						if(!groupnsim.isDisposed())
+						    groupnsim.dispose();
 					    createTabitemnSIM(subComp);
+					    if(externaltools_nsim_path.equalsIgnoreCase(""))
+					    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
+						
+						else
+						    	fPrgmArgumentsTextexternal.setText(externaltools_nsim_path);
+					}
 					groupnsim.setText("nSIM");
 					createTabitemCOMBool=false;
+					createTabitemCOMAshlingBool=false;
 					if(!groupnsim.isVisible())
 						groupnsim.setVisible(true);
 					
@@ -594,13 +452,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 					fLaunchTerminalboolean="false";
 
-//					fPrgmArgumentsComCom.setVisible(false);
-//					fLaunchComButton.setVisible(false);
-//					fPrgmArgumentsLabelCom.setVisible(false);
-//					fSearchexternalButton.setVisible(false);
-//					fSearchexternalLabel.setVisible(false);
-//					fLaunchernalButton.setVisible(false);
-//					fPrgmArgumentsTextexternal.setVisible(false);
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
 					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
@@ -622,41 +473,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					
 				}
 
-				if (fPrgmArgumentsComboInittext.lastIndexOf("via")>-1){
-					fSearchexternalLabel.setText(fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+4, fPrgmArgumentsComboInittext.length())+" Path:");
-					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext.substring(fPrgmArgumentsComboInittext.lastIndexOf("via")+4, fPrgmArgumentsComboInittext.length()));
-				} else {
-					fSearchexternalLabel.setText(fPrgmArgumentsComboInittext+" Path:");
-					fLaunchernalButton.setText("Launch "+fPrgmArgumentsComboInittext);
-
-				}
-				
-//				if(fLaunchComButton.getSelection()==true){
-//					fLaunchTerminalboolean="true";
-//					fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-//					fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
-//				}
 				updateLaunchConfigurationDialog();
 
 			
 			}
 			});
-		
-		
-		//-----------------------------------
-		
-		
-		
-		//fGDBServerCommandText = new Text(subComp, SWT.SINGLE | SWT.BORDER);
-		//GridData data = new GridData();
-		//fGDBServerCommandText.setLayoutData(data);
-		//fGDBServerCommandText.addModifyListener( new ModifyListener() {
-
-		//	public void modifyText( ModifyEvent evt ) {
-		//		updateLaunchConfigurationDialog();
-		//	}
-		//} );
-
 		
 		label = new Label(subComp, SWT.LEFT);
 		label.setText(Messages.Port_number_textfield_label);
@@ -694,24 +515,51 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		} );
 		
 				
-		fSearchexternalLabel=new Label(subComp, SWT.LEFT);
-		fSearchexternalLabel.setText("Path");
-		gd = new GridData();
+
+        if(createTabitemnSIMBool==false)
+        	createTabitemnSIM(subComp);
+        if(createTabitemCOMBool==false)
+        	createTabitemCOM(subComp);
+        if(createTabitemCOMAshlingBool==false)
+        	createTabitemCOMAshling(subComp);
+		
+		
+		
+	}
+	
+private void createTabitemCOMAshling(Composite subComp) { 
+	    createTabitemCOMAshlingBool=true;
+		groupcomashling = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
+		Composite compCOM = SWTFactory.createComposite(groupcomashling, 5, 5, GridData.FILL_BOTH);
+		
+	
+		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
+		fSearchexternalLabel.setText("Ashling Path");
+		GridData gd = new GridData();
 		fSearchexternalLabel.setLayoutData(gd);
 			
-		fPrgmArgumentsTextexternal=new Text(subComp, SWT.SINGLE | SWT.BORDER);//6-1
+		fPrgmArgumentsTextexternal=new Text(compCOM, SWT.SINGLE | SWT.BORDER);//6-1
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint=400;
 		gd.horizontalSpan =2;
 		fPrgmArgumentsTextexternal.setLayoutData(gd);
 		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
-				externalpath=fPrgmArgumentsTextexternal.getText();
+				external_ashling_path=fPrgmArgumentsTextexternal.getText();
 				updateLaunchConfigurationDialog();
 			}
 		});
+		String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
 		
-		fSearchexternalButton = createPushButton(subComp, "Browse", null); //$NON-NLS-1$  //6-2
+		if(externaltools_ashling_path.equalsIgnoreCase(""))
+			fPrgmArgumentsTextexternal.setText(defaultValue);
+		else 
+			fPrgmArgumentsTextexternal.setText(externaltools_ashling_path);
+		
+		
+		
+		
+		fSearchexternalButton = createPushButton(compCOM, "Browse", null); //$NON-NLS-1$  //6-2
 		gd = new GridData(SWT.BEGINNING);
 		fSearchexternalButton.setLayoutData(gd);
 		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
@@ -721,7 +569,152 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 		});
 	
-		fLaunchernalButton = new Button(subComp,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchernalButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchernalButton.setSelection(true);
+		gd = new GridData(SWT.BEGINNING);
+		fLaunchernalButton.setLayoutData(gd);
+	
+		fLaunchernalButton.addSelectionListener(new SelectionListener() {
+
+	        public void widgetSelected(SelectionEvent event) {
+	        	if(fLaunchernalButton.getSelection()==true){
+	        	fLaunchexternalButtonboolean="true";
+	        	fSearchexternalButton.setEnabled(true);
+	        	fSearchexternalLabel.setEnabled(true);
+	        	fPrgmArgumentsTextexternal.setEnabled(true);
+	        	}
+	        	else {
+		        	fLaunchexternalButtonboolean="false";
+		        	fSearchexternalButton.setEnabled(false);
+		        	fSearchexternalLabel.setEnabled(false);
+		        	fPrgmArgumentsTextexternal.setEnabled(false);
+	           	}
+	        	updateLaunchConfigurationDialog();
+	        }
+
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
+		
+		
+		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
+		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
+	
+	
+		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3 
+		
+		
+		
+		
+		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchComButton.setSelection(true);
+	
+	
+		fLaunchComButton.setText("Launch Terminal");
+		fLaunchComButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+	        	if(fLaunchComButton.getSelection()==true){
+	        		fLaunchTerminalboolean="true";
+	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
+	        	} else {
+	        		fLaunchTerminalboolean="false";
+		        	fPrgmArgumentsComCom.setEnabled(false);
+		        	fPrgmArgumentsLabelCom.setEnabled(false);
+	           	}
+	        	updateLaunchConfigurationDialog();
+	        }
+
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
+		
+		// Set serial port list. This call might fail, for example if RxTx
+		// library is not available. In this case let's just disable UI elements.
+		List<String> COM = null;
+		try {
+			COM = Launch.COMserialport();
+		} catch (java.lang.UnsatisfiedLinkError e) {
+			e.printStackTrace();
+		} catch (java.lang.NoClassDefFoundError e) {
+			e.printStackTrace();
+		}
+
+		if (COM != null) {
+			for (int ii=0;ii<COM.size();ii++) {
+				    String currentcom=(String) COM.get(ii);
+				    fPrgmArgumentsComCom.add(currentcom);
+	        }
+		} 
+		else {
+			fSerialPortAvailable = false;
+			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+			fLaunchComButton.setEnabled(fSerialPortAvailable);
+		}
+		
+		
+		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				comport=combo.getText();
+				updateLaunchConfigurationDialog();
+			}
+		});
+		
+		 if(!comport.equalsIgnoreCase(""))
+		 {
+			 int privious=fPrgmArgumentsComCom.indexOf(comport);
+			 if(privious>-1)
+			     fPrgmArgumentsComCom.remove(privious);
+			 fPrgmArgumentsComCom.add(comport, 0);
+			 
+			 
+		 }
+		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+		
+	}
+	
+	private void createTabitemCOM(Composite subComp) { 
+		createTabitemCOMBool=true;
+		
+		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
+		Composite compCOM = SWTFactory.createComposite(groupcom, 5, 5, GridData.FILL_BOTH);
+	
+		
+		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
+		fSearchexternalLabel.setText("OpenOCD Path");
+		GridData gd = new GridData();
+		fSearchexternalLabel.setLayoutData(gd);
+			
+		fPrgmArgumentsTextexternal=new Text(compCOM, SWT.SINGLE | SWT.BORDER);//6-1
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.widthHint=400;
+		gd.horizontalSpan =2;
+		fPrgmArgumentsTextexternal.setLayoutData(gd);
+		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				external_openocd_path=fPrgmArgumentsTextexternal.getText();
+				updateLaunchConfigurationDialog();
+			}
+		});
+		if(externaltools_openocd_path.equalsIgnoreCase(""))
+		     fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
+		else  fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
+		
+		
+		fSearchexternalButton = createPushButton(compCOM, "Browse", null); //$NON-NLS-1$  //6-2
+		gd = new GridData(SWT.BEGINNING);
+		fSearchexternalButton.setLayoutData(gd);
+		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent evt) {
+				handleBinaryBrowseButtonSelected();
+				updateLaunchConfigurationDialog();
+			}
+		});
+	
+		fLaunchernalButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchernalButton.setSelection(true);
 		gd = new GridData(SWT.BEGINNING);
 		fLaunchernalButton.setLayoutData(gd);
@@ -752,44 +745,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	        
 	      });
 		
-//		subtabFolder = new TabFolder(subComp, SWT.NONE|SWT.BOTTOM);
-//		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
-//		gd2.horizontalSpan =5;
-//		subtabFolder.setLayoutData(gd2);
-        if(createTabitemnSIMBool==false)
-        	createTabitemnSIM(subComp);
-        if(createTabitemCOMBool==false)
-        	createTabitemCOM(subComp);
-		
-		
-		
-		
-	}
-	
-
-	private void createTabitemCOM(Composite subComp) { 
-		
-		
-		
-		createTabitemCOMBool=true;
-//		tabItemCOM = new TabItem( subtabFolder, SWT.NONE );
-//		tabItemCOM.setText("COM Tab");
-		
-		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
-		Composite compCOM = SWTFactory.createComposite(groupcom, 5, 5, GridData.FILL_BOTH);
-		
-//		Composite compCOM = new Composite(subtabFolder, SWT.NULL);
-//		compCOM.setLayout(new GridLayout(1, true));
-//		compCOM.setLayoutData(new GridData(GridData.FILL_BOTH));
-//		((GridLayout)compCOM.getLayout()).makeColumnsEqualWidth = false;
-		
-//		tabItemCOM.setControl( compCOM );
-		
-//		Composite subCompCOM = new Composite(compCOM, SWT.NULL);
-//		subCompCOM.setLayout(new GridLayout(5, true));
-//		subCompCOM.setLayoutData(new GridData(GridData.FILL_BOTH));
-//		((GridLayout)subCompCOM.getLayout()).makeColumnsEqualWidth = false;
-		
+			
 		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
 	
@@ -869,25 +825,74 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	}
 	private void createTabitemnSIM(Composite subComp) { 
 		createTabitemnSIMBool=true;
-//		tabItem2 = new TabItem(subtabFolder, SWT.NONE); 
-//		tabItem2.setText("nSIM Tab");
-//	
-//		Composite comp2 = new Composite(subtabFolder, SWT.NULL);
-//		comp2.setLayout(new GridLayout(1, true));
-//		comp2.setLayoutData(new GridData(GridData.FILL_BOTH));
-//		((GridLayout)comp2.getLayout()).makeColumnsEqualWidth = false;
-//	
-//		tabItem2.setControl( comp2 );
+
 		groupnsim = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
 		@SuppressWarnings("restriction")
 		Composite compnSIM = SWTFactory.createComposite(groupnsim, 5, 5, GridData.FILL_BOTH);
 		
+		fSearchexternalLabel=new Label(compnSIM, SWT.LEFT);
+		fSearchexternalLabel.setText("nSIM Path");
+		GridData gd = new GridData();
+		fSearchexternalLabel.setLayoutData(gd);
+			
+		fPrgmArgumentsTextexternal=new Text(compnSIM, SWT.SINGLE | SWT.BORDER);//6-1
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.widthHint=400;
+		gd.horizontalSpan =2;
+		fPrgmArgumentsTextexternal.setLayoutData(gd);
+		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				external_nsim_path=fPrgmArgumentsTextexternal.getText();
+				updateLaunchConfigurationDialog();
+			}
+		});
 		
+		if(externaltools_nsim_path.equalsIgnoreCase(""))
+	    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
 		
-//		Composite subComp2 = new Composite(comp2, SWT.NULL);
-//		subComp2.setLayout(new GridLayout(5, true));
-//		subComp2.setLayoutData(new GridData(GridData.FILL_BOTH));
-//		((GridLayout)subComp2.getLayout()).makeColumnsEqualWidth = false;
+		else
+		    	fPrgmArgumentsTextexternal.setText(externaltools_nsim_path);
+		
+		fSearchexternalButton = createPushButton(compnSIM, "Browse", null); //$NON-NLS-1$  //6-2
+		gd = new GridData(SWT.BEGINNING);
+		fSearchexternalButton.setLayoutData(gd);
+		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent evt) {
+				handleBinaryBrowseButtonSelected();
+				updateLaunchConfigurationDialog();
+			}
+		});
+	
+		fLaunchernalButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchernalButton.setSelection(true);
+		gd = new GridData(SWT.BEGINNING);
+		fLaunchernalButton.setLayoutData(gd);
+	
+		fLaunchernalButton.addSelectionListener(new SelectionListener() {
+
+	        public void widgetSelected(SelectionEvent event) {
+
+	        	if(fLaunchernalButton.getSelection()==true){
+	        	fLaunchexternalButtonboolean="true";
+	        	fSearchexternalButton.setEnabled(true);
+	        	fSearchexternalLabel.setEnabled(true);
+	        	fPrgmArgumentsTextexternal.setEnabled(true);
+	        	}
+	        	else {
+		        	fLaunchexternalButtonboolean="false";
+		        	fSearchexternalButton.setEnabled(false);
+		        	fSearchexternalLabel.setEnabled(false);
+		        	fPrgmArgumentsTextexternal.setEnabled(false);
+	           	}
+	        	updateLaunchConfigurationDialog();
+	        }
+
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
+		
+
 		nSIMpropslabel = new Label(compnSIM, SWT.CENTER);
 		nSIMpropslabel.setText("nSIM Props:");
 	
@@ -948,7 +953,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
 			fileDialog.setFileName(fnSIMpropsText.getText());
 			String text= fileDialog.open();
-			//nSIMpropsfiles=fileDialog.getFileName();
 			if (text != null) {
 				fnSIMpropsText.setText(text);
 			}

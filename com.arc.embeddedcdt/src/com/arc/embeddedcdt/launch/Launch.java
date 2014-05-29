@@ -339,7 +339,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 					LaunchFrontend l = new LaunchFrontend(launch);
                     
-                    String extenal_tools_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_PATH,new String());
+                    String extenal_tools_openocd_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,new String());
+                    String extenal_tools_ashling_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,new String());
+                    String extenal_tools_nsim_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,new String());
                     
                     prepareSession();
 
@@ -378,14 +380,14 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// TODO Path to Ashling GDB server is also configurable in CommandTab.
-						if(extenal_tools_path.equalsIgnoreCase("")) 
+						if(extenal_tools_ashling_path.equalsIgnoreCase("")) 
 						{
 							if (RemoteGDBDebuggerPage.isWindowsOS())
-								extenal_tools_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_WINDOWS;
+								extenal_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_WINDOWS;
 							else
-								extenal_tools_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
+								extenal_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
 						}
-						System.setProperty("Ashling", extenal_tools_path);
+						System.setProperty("Ashling", extenal_tools_ashling_path);
 						String ash_dir = System.getProperty("Ashling");
 						File ash_wd = new java.io.File(ash_dir);
 						String ashling_exe = "ash-arc-gdb-server" + (RemoteGDBDebuggerPage.isWindowsOS() ? ".exe" : ""); 
@@ -400,19 +402,19 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_tools_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
-						if(extenal_tools_path.isEmpty()) {
-							extenal_tools_path = RemoteGDBDebuggerPage.getOpenOCDDefaultPath();
+						if(extenal_tools_openocd_path.isEmpty()) {
+							extenal_tools_openocd_path = RemoteGDBDebuggerPage.getOpenOCDDefaultPath();
 					    }
-						String[] openocd_cmd = { "openocd", "-f",extenal_tools_path,"-c","init","-c","halt","-c","\"reset halt\""  };
+						String[] openocd_cmd = { "openocd", "-f",extenal_tools_openocd_path,"-c","init","-c","halt","-c","\"reset halt\""  };
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 					}
 					else if (external_tools.equalsIgnoreCase("nSIM")&&external_tools_launch.equalsIgnoreCase("true"))
 					{						
 						// Start nSIM GDB server
-						if (extenal_tools_path.isEmpty()) {
-							extenal_tools_path = RemoteGDBDebuggerPage.getNsimdrvDefaultPath();
+						if (extenal_tools_nsim_path.isEmpty()) {
+							extenal_tools_nsim_path = RemoteGDBDebuggerPage.getNsimdrvDefaultPath();
 						}
-						System.setProperty("nSIM", extenal_tools_path);
+						System.setProperty("nSIM", extenal_tools_nsim_path);
 						String nsim_exec = System.getProperty("nSIM");
 						File nsim_wd = (new java.io.File(nsim_exec))
 								.getParentFile();
