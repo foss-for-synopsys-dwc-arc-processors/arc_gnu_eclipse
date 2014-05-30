@@ -8291,7 +8291,7 @@
                name="Debug"
                parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.linux.elf.toolchain.debug"
+                  id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.toolchain.debug"
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
