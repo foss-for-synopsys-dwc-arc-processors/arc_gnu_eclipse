@@ -106,6 +106,18 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 			"nsim_av2em11.props";
 	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	
+	
+	protected Label nSIMtcflabel;
+	public static Text fnSIMtcfText;
+	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
+	public static String nSIMtcffiles=System.getenv("NSIM_HOME")
+			 			+ java.io.File.separator + "systemc"
+			 			+ java.io.File.separator + "configs"
+			 			+ java.io.File.separator +
+			 			"nsim_av2em11.props";
+	public static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
+	
+	
 	public static String externaltools="";
 	public static String externaltools_openocd_path="";
 	public static String externaltools_ashling_path="";
@@ -961,12 +973,48 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        
 	      });
 		
+		
+		nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
+		nSIMtcflabel.setText("nSIM TCF:");
+	
+		fnSIMtcfText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.widthHint=400;
+        gd.horizontalSpan=2;
+        fnSIMtcfText.setLayoutData(gd);
+        
+	    if(nSIMtcffiles_last.equalsIgnoreCase(""))
+	    	fnSIMtcfText.setText(nSIMtcffiles);
+	    else 
+	    	fnSIMtcfText.setText(nSIMtcffiles_last);
+	    fnSIMtcfText.addModifyListener( new ModifyListener() {
 
+			public void modifyText( ModifyEvent evt ) {
+				nSIMtcffiles_last=fnSIMtcfText.getText();
+				updateLaunchConfigurationDialog();
+			}
+		} );
+		
+	    fnSIMtcfButton = createPushButton(compnSIM, "Browse", null); //$NON-NLS-1$  //6-2
+	    gd = new GridData(SWT.BEGINNING);
+        gd.horizontalSpan=2;
+        fnSIMtcfButton.setLayoutData(gd);
+	
+	    fnSIMtcfButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent evt) {
+				handletcfBinaryBrowseButtonSelected();
+				updateLaunchConfigurationDialog();
+			}
+		});
+	    
 		nSIMpropslabel = new Label(compnSIM, SWT.CENTER);
 		nSIMpropslabel.setText("nSIM Props:");
 	
 		fnSIMpropsText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-		
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.widthHint=400;
+        gd.horizontalSpan=2;
+        fnSIMpropsText.setLayoutData(gd);
 	    if(nSIMpropsfiles_last.equalsIgnoreCase(""))
 		    fnSIMpropsText.setText(nSIMpropsfiles);
 	    else 
@@ -980,14 +1028,16 @@ private void createTabitemCOMAshling(Composite subComp) {
 		} );
 		
 		fnSIMpropslButton = createPushButton(compnSIM, "Browse", null); //$NON-NLS-1$  //6-2
-		
-	
+		gd = new GridData(SWT.BEGINNING);
+        gd.horizontalSpan=2;
+        fnSIMpropslButton.setLayoutData(gd);
 		fnSIMpropslButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
 				handlepropsBinaryBrowseButtonSelected();
 				updateLaunchConfigurationDialog();
 			}
 		});
+
 		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
@@ -1027,6 +1077,14 @@ private void createTabitemCOMAshling(Composite subComp) {
 			if (text != null) {
 				fnSIMpropsText.setText(text);
 			}
+	}
+	protected void handletcfBinaryBrowseButtonSelected() {
+		FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
+		fileDialog.setFileName(fnSIMtcfText.getText());
+		String text= fileDialog.open();
+		if (text != null) {
+			fnSIMtcfText.setText(text);
+		}
 	}
 	public static String getAttributeValueFromString(String string) {
 		String content = string;
