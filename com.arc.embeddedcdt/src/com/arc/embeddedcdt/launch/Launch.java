@@ -249,7 +249,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	
 		
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,new String());
-		String external_tools_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_DEFAULT,"true");
+		String external_openocd_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT,"true");
+		String external_ashling_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT,"true");
+		String external_nsim_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT,"true");
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, new String());
 		if(external_tools.indexOf("OpenOCD")>0)
 		     serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
@@ -380,7 +382,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
 					
 					// TODO Replace hardcoded line with something more error-proof.
-					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_tools_launch.equalsIgnoreCase("true"))
+					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_ashling_launch.equalsIgnoreCase("true"))
 					{
 						// TODO Path to Ashling GDB server is also configurable in CommandTab.
 						if(extenal_tools_ashling_path.equalsIgnoreCase("")) 
@@ -402,7 +404,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 								};
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), ASHLING_PROCESS_LABEL);
 					} 
-					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_tools_launch.equalsIgnoreCase("true"))
+					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_openocd_launch.equalsIgnoreCase("true"))
 					{
 						// Start OpenOCD GDB server
 						if(extenal_tools_openocd_path.isEmpty()) {
@@ -411,7 +413,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String[] openocd_cmd = { "openocd", "-f",extenal_tools_openocd_path,"-c","init","-c","halt","-c","\"reset halt\""  };
 						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
 					}
-					else if (external_tools.equalsIgnoreCase("nSIM")&&external_tools_launch.equalsIgnoreCase("true"))
+					else if (external_tools.equalsIgnoreCase("nSIM")&&external_nsim_launch.equalsIgnoreCase("true"))
 					{						
 						// Start nSIM GDB server
 						if (extenal_tools_nsim_path.isEmpty()) {
