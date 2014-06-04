@@ -433,21 +433,21 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						
 						if(nsimtcf.equalsIgnoreCase("")&&!nsimProps.equalsIgnoreCase(""))
 						{
-							String[] nsim_cmd = { nsim_exec, "-gdb", "-propsfile",nsimProps };
+							String[] nsim_cmd = { nsim_exec, "-gdb", "-on", "nsim_emt", "-propsfile",nsimProps };
 							DebugPlugin.newProcess(launch,
 									DebugPlugin.exec(nsim_cmd, nsim_wd),
 									NSIM_PROCESS_LABEL);
 						}
 						else if(!nsimtcf.equalsIgnoreCase("")&&nsimProps.equalsIgnoreCase(""))
 						{
-							String[] nsim_cmd = { nsim_exec, "-gdb", "-tcf",nsimtcf };
+							String[] nsim_cmd = { nsim_exec, "-gdb", "-on", "nsim_emt", "-tcf",nsimtcf };
 							DebugPlugin.newProcess(launch,
 									DebugPlugin.exec(nsim_cmd, nsim_wd),
 									NSIM_PROCESS_LABEL);
 						}
 						else if(!nsimtcf.equalsIgnoreCase("")&&!nsimProps.equalsIgnoreCase(""))
 						{
-							String[] nsim_cmd = { nsim_exec, "-gdb", "-tcf",nsimtcf, "-propsfile",nsimProps };
+							String[] nsim_cmd = { nsim_exec, "-gdb", "-on", "nsim_emt", "-tcf",nsimtcf, "-propsfile",nsimProps };
 							DebugPlugin.newProcess(launch,
 									DebugPlugin.exec(nsim_cmd, nsim_wd),
 									NSIM_PROCESS_LABEL);

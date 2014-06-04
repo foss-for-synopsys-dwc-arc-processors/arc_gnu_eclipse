@@ -119,7 +119,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static String externaltools_openocd_path="";
 	public static String externaltools_ashling_path="";
 	public static String externaltools_nsim_path="";
-
+	
+	public static String portnumber="";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -217,10 +218,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		 // Set host and IP.
 		 try {
-			 String portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,new String() );
-			 if(portnumber.equalsIgnoreCase("")){
-				 portnumber="3333"; 
-			 }
+			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,new String() );
+//			 if(portnumber.equalsIgnoreCase("")){
+//				 portnumber="3333"; 
+//			 }
      		 fGDBServerPortNumberText.setText( portnumber );
 			 String hostname = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String());
 			 if(hostname.equalsIgnoreCase("")){
@@ -369,9 +370,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				//fGDBServerIPAddressText.setText("localhost");
 				fPrgmArgumentsComboInittext = combo.getText();
 						    
-				if (fPrgmArgumentsComboInittext
-						.equalsIgnoreCase("JTAG via OpenOCD")) {
-					fGDBServerPortNumberText.setText("3333");
+				if (fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")) {
+					if(!portnumber.equalsIgnoreCase(""))
+						fGDBServerPortNumberText.setText(portnumber);
+					else
+						fGDBServerPortNumberText.setText("3333");
 					
 					
 					groupnsim.dispose();
@@ -423,7 +426,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
-					fGDBServerPortNumberText.setText("2331");
+					if(!portnumber.equalsIgnoreCase(""))
+						fGDBServerPortNumberText.setText(portnumber);
+					else
+						fGDBServerPortNumberText.setText("2331");
 					
 					
 					groupnsim.dispose();
@@ -474,7 +480,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
 					
-					fGDBServerPortNumberText.setText("1234");
+					if(!portnumber.equalsIgnoreCase(""))
+						fGDBServerPortNumberText.setText(portnumber);
+					else
+						fGDBServerPortNumberText.setText("1234");
 				
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
