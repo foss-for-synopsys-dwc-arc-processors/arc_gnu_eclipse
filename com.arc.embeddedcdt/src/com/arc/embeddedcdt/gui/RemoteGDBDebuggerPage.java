@@ -99,11 +99,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Label nSIMpropslabel;
 	public static Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
-	public static String nSIMpropsfiles=System.getenv("NSIM_HOME")
-			 			+ java.io.File.separator + "systemc"
-			 			+ java.io.File.separator + "configs"
-			 			+ java.io.File.separator +
-			 			"nsim_av2em11.props";
+//	public static String nSIMpropsfiles=System.getenv("NSIM_HOME")
+//			 			+ java.io.File.separator + "systemc"
+//			 			+ java.io.File.separator + "configs"
+//			 			+ java.io.File.separator +
+//			 			"nsim_av2em11.props";
+	public static String nSIMpropsfiles="";
 	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	
 	
@@ -205,6 +206,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
 		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
 			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
+			nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, new String());
 		    
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).equalsIgnoreCase(""))
 		{
@@ -295,6 +297,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT,getAttributeValueFromString(fLaunchexternal_nsim_Buttonboolean));
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,nSIMtcffiles_last);
 		if (fSerialPortAvailable)
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
@@ -513,6 +516,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    	
 					    else 
 					    	fnSIMpropsText.setText(nSIMpropsfiles_last);
+					    
+					    if(nSIMtcffiles_last.equalsIgnoreCase(""))
+					    {
+					    	fnSIMtcfText.setText(nSIMtcffiles);
+					    	nSIMtcffiles_last=nSIMtcffiles;
+					    }
+					    	
+					    else 
+					    	fnSIMtcfText.setText(nSIMtcffiles_last);
+					    
 					    
 						if (fLaunchexternal_nsim_Buttonboolean.equalsIgnoreCase("true")) {
 							fLaunchernalButton.setSelection(true);
@@ -984,7 +997,11 @@ private void createTabitemCOMAshling(Composite subComp) {
         fnSIMtcfText.setLayoutData(gd);
         
 	    if(nSIMtcffiles_last.equalsIgnoreCase(""))
+	    {
 	    	fnSIMtcfText.setText(nSIMtcffiles);
+	    	nSIMtcffiles_last=nSIMtcffiles;
+	    	
+	    }
 	    else 
 	    	fnSIMtcfText.setText(nSIMtcffiles_last);
 	    fnSIMtcfText.addModifyListener( new ModifyListener() {

@@ -429,12 +429,30 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 //								//+ java.io.File.separator + "nsim_av2em11.props";
 //					            + java.io.File.separator + RemoteGDBDebuggerPage.nSIMpropsfiles;
 						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles_last;
-						String[] nsim_cmd = { nsim_exec, "-gdb", "-propsfile",
-								nsimProps };
-
-						DebugPlugin.newProcess(launch,
-								DebugPlugin.exec(nsim_cmd, nsim_wd),
-								NSIM_PROCESS_LABEL);
+						String nsimtcf = RemoteGDBDebuggerPage.nSIMtcffiles_last;
+						
+						if(nsimtcf.equalsIgnoreCase("")&&!nsimProps.equalsIgnoreCase(""))
+						{
+							String[] nsim_cmd = { nsim_exec, "-gdb", "-propsfile",nsimProps };
+							DebugPlugin.newProcess(launch,
+									DebugPlugin.exec(nsim_cmd, nsim_wd),
+									NSIM_PROCESS_LABEL);
+						}
+						else if(!nsimtcf.equalsIgnoreCase("")&&nsimProps.equalsIgnoreCase(""))
+						{
+							String[] nsim_cmd = { nsim_exec, "-gdb", "-tcf",nsimtcf };
+							DebugPlugin.newProcess(launch,
+									DebugPlugin.exec(nsim_cmd, nsim_wd),
+									NSIM_PROCESS_LABEL);
+						}
+						else if(!nsimtcf.equalsIgnoreCase("")&&!nsimProps.equalsIgnoreCase(""))
+						{
+							String[] nsim_cmd = { nsim_exec, "-gdb", "-tcf",nsimtcf, "-propsfile",nsimProps };
+							DebugPlugin.newProcess(launch,
+									DebugPlugin.exec(nsim_cmd, nsim_wd),
+									NSIM_PROCESS_LABEL);
+						}
+						
 					}
 
 				
