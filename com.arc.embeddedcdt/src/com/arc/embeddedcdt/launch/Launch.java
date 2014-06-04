@@ -14,16 +14,12 @@ package com.arc.embeddedcdt.launch;
 
 import gnu.io.CommPortIdentifier;
 
-import com.arc.embeddedcdt.gui.FirstlaunchDialog;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import javax.swing.JOptionPane;
 
 import org.eclipse.cdt.core.IAddressFactory;
 import org.eclipse.cdt.core.IBinaryParser.IBinaryObject;
@@ -53,7 +49,6 @@ import org.eclipse.cdt.debug.mi.core.output.MIOOBRecord;
 import org.eclipse.cdt.debug.mi.core.output.MIOutput;
 import org.eclipse.cdt.debug.mi.core.output.MIParser;
 import org.eclipse.cdt.debug.mi.core.output.MITargetStreamOutput;
-import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
 import org.eclipse.cdt.launch.AbstractCLaunchDelegate;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
@@ -75,32 +70,18 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.tm.internal.terminal.connector.TerminalConnector;
 import org.eclipse.tm.internal.terminal.provisional.api.provider.TerminalConnectorImpl;
 import org.eclipse.tm.internal.terminal.serial.SerialConnector;
 import org.eclipse.tm.internal.terminal.serial.SerialSettings;
 import org.eclipse.tm.internal.terminal.view.TerminalView;
-import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
@@ -421,38 +402,31 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						}
 						System.setProperty("nSIM", extenal_tools_nsim_path);
 						String nsim_exec = System.getProperty("nSIM");
-						File nsim_wd = (new java.io.File(nsim_exec))
-								.getParentFile();
-//						String nsimProps = nsim_wd.getParentFile().getPath()
-//								+ java.io.File.separator + "systemc"
-//								+ java.io.File.separator + "configs"
-//								//+ java.io.File.separator + "nsim_av2em11.props";
-//					            + java.io.File.separator + RemoteGDBDebuggerPage.nSIMpropsfiles;
+						File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
 						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles_last;
 						String nsimtcf = RemoteGDBDebuggerPage.nSIMtcffiles_last;
 						
-						if(nsimtcf.equalsIgnoreCase("")&&!nsimProps.equalsIgnoreCase(""))
+						ArrayList<String> nsim_cmd = new ArrayList<String>();
+						nsim_cmd.add(nsim_exec);
+						nsim_cmd.add("-port");
+						nsim_cmd.add(gdbserver_port);
+						nsim_cmd.add("-gdb");
+						nsim_cmd.add("-on");
+						nsim_cmd.add("nsim_emt");
+
+						if(!nsimtcf.equalsIgnoreCase(""))
 						{
-							String[] nsim_cmd = { nsim_exec,"-port",gdbserver_port, "-gdb", "-on", "nsim_emt", "-propsfile",nsimProps };
-							DebugPlugin.newProcess(launch,
-									DebugPlugin.exec(nsim_cmd, nsim_wd),
-									NSIM_PROCESS_LABEL);
+							nsim_cmd.add("-tcf");
+							nsim_cmd.add(nsimtcf);
 						}
-						else if(!nsimtcf.equalsIgnoreCase("")&&nsimProps.equalsIgnoreCase(""))
+
+						if(!nsimProps.equalsIgnoreCase(""))
 						{
-							String[] nsim_cmd = { nsim_exec, "-port",gdbserver_port, "-gdb", "-on", "nsim_emt", "-tcf",nsimtcf };
-							DebugPlugin.newProcess(launch,
-									DebugPlugin.exec(nsim_cmd, nsim_wd),
-									NSIM_PROCESS_LABEL);
+							nsim_cmd.add("-propsfile");
+							nsim_cmd.add(nsimProps);
 						}
-						else if(!nsimtcf.equalsIgnoreCase("")&&!nsimProps.equalsIgnoreCase(""))
-						{
-							String[] nsim_cmd = { nsim_exec, "-port",gdbserver_port, "-gdb", "-on", "nsim_emt", "-tcf",nsimtcf, "-propsfile",nsimProps };
-							DebugPlugin.newProcess(launch,
-									DebugPlugin.exec(nsim_cmd, nsim_wd),
-									NSIM_PROCESS_LABEL);
-						}
-						
+
+						DebugPlugin.newProcess(launch, DebugPlugin.exec(nsim_cmd.toArray(new String[0]), nsim_wd), NSIM_PROCESS_LABEL);
 					}
 
 				
