@@ -532,11 +532,24 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							fSearchexternalButton.setEnabled(true);
 							fSearchexternalLabel.setEnabled(true);
 							fPrgmArgumentsTextexternal.setEnabled(true);
+							nSIMtcflabel.setEnabled(true); 
+				        	fnSIMtcfText.setEnabled(true); 
+				        	fnSIMtcfButton.setEnabled(true);
+				        	nSIMpropslabel.setEnabled(true); 
+				        	fnSIMpropsText.setEnabled(true); 
+				        	fnSIMpropslButton.setEnabled(true);
+
 						} else {
 							fLaunchernalButton.setSelection(false);
 							fSearchexternalButton.setEnabled(false);
 							fSearchexternalLabel.setEnabled(false);
 							fPrgmArgumentsTextexternal.setEnabled(false);
+				        	nSIMtcflabel.setEnabled(false);
+				        	fnSIMtcfText.setEnabled(false);
+				        	fnSIMtcfButton.setEnabled(false);
+				        	nSIMpropslabel.setEnabled(false); 
+				        	fnSIMpropsText.setEnabled(false); 
+				        	fnSIMpropslButton.setEnabled(false);
 						}
 					    
 					}
@@ -962,29 +975,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gd = new GridData(SWT.BEGINNING);
 		fLaunchernalButton.setLayoutData(gd);
 		fLaunchernalButton.setText("Launch nSIM");
-		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-
-	        public void widgetSelected(SelectionEvent event) {
-
-	        	if(fLaunchernalButton.getSelection()==true){
-	        	fLaunchexternal_nsim_Buttonboolean="true";
-	        	fSearchexternalButton.setEnabled(true);
-	        	fSearchexternalLabel.setEnabled(true);
-	        	fPrgmArgumentsTextexternal.setEnabled(true);
-	        	}
-	        	else {
-	        		fLaunchexternal_nsim_Buttonboolean="false";
-		        	fSearchexternalButton.setEnabled(false);
-		        	fSearchexternalLabel.setEnabled(false);
-		        	fPrgmArgumentsTextexternal.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
-
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
+		
 		
 		
 		nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
@@ -1054,7 +1045,43 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		});
+		
+		fLaunchernalButton.addSelectionListener(new SelectionListener() {
 
+	        public void widgetSelected(SelectionEvent event) {
+
+	        	if(fLaunchernalButton.getSelection()==true){
+	        	fLaunchexternal_nsim_Buttonboolean="true";
+	        	fSearchexternalButton.setEnabled(true);
+	        	fSearchexternalLabel.setEnabled(true);
+	        	fPrgmArgumentsTextexternal.setEnabled(true);
+	        	nSIMtcflabel.setEnabled(true); 
+	        	fnSIMtcfText.setEnabled(true); 
+	        	fnSIMtcfButton.setEnabled(true);
+	        	nSIMpropslabel.setEnabled(true); 
+	        	fnSIMpropsText.setEnabled(true); 
+	        	fnSIMpropslButton.setEnabled(true);
+	        	}
+	        	else {
+	        		fLaunchexternal_nsim_Buttonboolean="false";
+		        	fSearchexternalButton.setEnabled(false);
+		        	fSearchexternalLabel.setEnabled(false);
+		        	fPrgmArgumentsTextexternal.setEnabled(false);
+		        	nSIMtcflabel.setEnabled(false);
+		        	fnSIMtcfText.setEnabled(false);
+		        	fnSIMtcfButton.setEnabled(false);
+		        	nSIMpropslabel.setEnabled(false); 
+		        	fnSIMpropsText.setEnabled(false); 
+		        	fnSIMpropslButton.setEnabled(false);
+		        	
+	           	}
+	        	updateLaunchConfigurationDialog();
+	        }
+
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
 		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
