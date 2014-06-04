@@ -428,7 +428,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 //								+ java.io.File.separator + "configs"
 //								//+ java.io.File.separator + "nsim_av2em11.props";
 //					            + java.io.File.separator + RemoteGDBDebuggerPage.nSIMpropsfiles;
-						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles;
+						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles_last;
 						String[] nsim_cmd = { nsim_exec, "-gdb", "-propsfile",
 								nsimProps };
 

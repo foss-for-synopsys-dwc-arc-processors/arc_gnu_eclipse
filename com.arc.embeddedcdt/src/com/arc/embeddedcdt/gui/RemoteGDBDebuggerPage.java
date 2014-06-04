@@ -110,11 +110,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Label nSIMtcflabel;
 	public static Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
-	public static String nSIMtcffiles=System.getenv("NSIM_HOME")
-			 			+ java.io.File.separator + "systemc"
-			 			+ java.io.File.separator + "configs"
-			 			+ java.io.File.separator +
-			 			"nsim_av2em11.props";
+	public static String nSIMtcffiles="";
 	public static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
 	
 	
@@ -510,7 +506,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						     fPrgmArgumentsTextexternal.setText(externaltools_nsim_path);
 					    
 					    if(nSIMpropsfiles_last.equalsIgnoreCase(""))
+					    {
 					    	fnSIMpropsText.setText(nSIMpropsfiles);
+					    	nSIMpropsfiles_last=nSIMpropsfiles;
+					    }
+					    	
 					    else 
 					    	fnSIMpropsText.setText(nSIMpropsfiles_last);
 					    
