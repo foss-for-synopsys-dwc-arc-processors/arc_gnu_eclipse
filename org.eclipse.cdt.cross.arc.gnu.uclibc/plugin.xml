@@ -397,7 +397,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-buildroot-linux-uclibc-gcc">
+               command="arc-linux-gcc">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -423,7 +423,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-buildroot-linux-uclibc-g++">
+               command="arc-linux-g++">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -443,7 +443,7 @@
       </buildOutputProvider>
       <scannerInfoProvider providerId="specsFile">
          <run
-               command="arc-buildroot-linux-uclibc-gcc"
+               command="arc-linux-gcc"
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"/>
          <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser"/>
@@ -510,7 +510,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-buildroot-linux-uclibc-gcc">
+               command="arc-linux-gcc">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -536,7 +536,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-buildroot-linux-uclibc-g++">
+               command="arc-linux-g++">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -562,7 +562,7 @@
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-buildroot-linux-uclibc-gcc">
+               command="arc-linux-gcc">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -1154,7 +1154,7 @@
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <tool
-            command="arc-buildroot-linux-uclibc-gcc"
+            command="arc-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler"
@@ -1353,7 +1353,7 @@
          </outputType>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-gcc"
+            command="arc-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler"
@@ -1639,7 +1639,7 @@
          </outputType>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-g++"
+            command="arc-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler"
@@ -1957,7 +1957,7 @@
          </outputType>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-gcc"
+            command="arc-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker"
@@ -2155,7 +2155,7 @@
          </option>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-ld"
+            command="arc-linux-ld"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker"
@@ -2353,7 +2353,7 @@
          </option>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-ar"
+            command="arc-linux-ar"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.archiver"
             isAbstract="false"
             name="ARC uClibc GCC Archiver"
@@ -2418,7 +2418,7 @@
          </outputType>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc--objcopy"
+            command="arc-linux-objcopy"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash"
             name="ARC GNU uClibc Create Flash Image"
             natureFilter="both">
@@ -2549,7 +2549,7 @@
          </option>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-objdump"
+            command="arc-linux-objdump"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting"
             name="ARC GNU Create Listing"
             natureFilter="both"
@@ -2593,7 +2593,7 @@
          </option>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc-size"
+            command="arc-linux-size"
             commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize"
             name="ARC GNU uClibc Print Size"
@@ -3068,7 +3068,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
          </option>
          <tool
-               command="arc-buildroot-linux-uclibc-gcc"
+               command="arc-linux-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Assembler"
@@ -3080,7 +3080,7 @@
             </inputType>
          </tool>
          <tool
-               command="arc-buildroot-linux-uclibc-gcc"
+               command="arc-linux-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Compiler"
@@ -3092,7 +3092,7 @@
             </inputType>
          </tool>
          <tool
-               command="arc-buildroot-linux-uclibc-g++"
+               command="arc-linux-g++"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Compiler"
@@ -3104,21 +3104,21 @@
             </inputType>
          </tool>
          <tool
-               command="arc-buildroot-linux-uclibc-gcc"
+               command="arc-linux-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </tool>
          <tool
-               command="arc-buildroot-linux-uclibc-ld"
+               command="arc-linux-ld"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
          </tool>
          <tool
-               command="arc-buildroot-linux-uclibc-gcc"
+               command="arc-linux-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Archiver"
@@ -3166,7 +3166,7 @@
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base"
-               command="arc-buildroot-linux-uclibc-size"
+               command="arc-linux-size"
                isAbstract="false"
                name="ARC Linux uClibc  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
@@ -3695,7 +3695,7 @@
             </enablement>
          </tool>
          <tool
-               command="arc-buildroot-linux-uclibc-size"
+               command="arc-linux-size"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base.hs"
                isAbstract="false"
                name="ARC Linux uClibc  Print Size"
@@ -5506,7 +5506,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc--objcopy"
+            command="arceb-buildroot-linux-uclibc-objcopy"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createflash"
             name="ARC GNU uClibc Create Flash Image (eb)"
             natureFilter="both">
