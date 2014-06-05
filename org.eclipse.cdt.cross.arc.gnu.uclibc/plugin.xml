@@ -3068,6 +3068,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
          </option>
          <tool
+               command="arc-buildroot-linux-uclibc-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Assembler"
@@ -3079,6 +3080,7 @@
             </inputType>
          </tool>
          <tool
+               command="arc-buildroot-linux-uclibc-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Compiler"
@@ -3090,6 +3092,7 @@
             </inputType>
          </tool>
          <tool
+               command="arc-buildroot-linux-uclibc-g++"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Compiler"
@@ -3101,18 +3104,21 @@
             </inputType>
          </tool>
          <tool
+               command="arc-buildroot-linux-uclibc-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </tool>
          <tool
+               command="arc-buildroot-linux-uclibc-ld"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
          </tool>
          <tool
+               command="arc-buildroot-linux-uclibc-gcc"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Archiver"
@@ -4008,7 +4014,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
          </option>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.assembler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.assembler">
@@ -4019,7 +4025,7 @@
             </inputType>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.c.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.compiler">
@@ -4030,7 +4036,7 @@
             </inputType>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.cpp.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.compiler">
@@ -4041,25 +4047,25 @@
             </inputType>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.c.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.linker">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.cpp.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.linker">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.archiver.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.createflash.base"
                isAbstract="false"
                name="ARC Linux GNU Create Flash Image"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createflash">
@@ -4079,7 +4085,7 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.createlisting.base"
                isAbstract="false"
                name="ARC Linux GNU Create Listing"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createlisting">
@@ -4181,7 +4187,7 @@
                name="Debug"
                parent="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.configuration.base.hs">
             <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.toolchain.debug"
+                  id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.toolchain.debug"
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
@@ -4197,41 +4203,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.linker.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.linker.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createflash.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createlisting.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base">
-               </tool>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.printsize.debug"
                      isAbstract="false"
@@ -4262,41 +4233,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createflash.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createlisting.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base">
-               </tool>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.printsize.release"
                      isAbstract="false"
@@ -5846,7 +5782,7 @@
                name="Debug"
                parent="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.configuration.base">
             <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.toolchain.debug"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.toolchain.debug"
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
@@ -5862,46 +5798,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.linker.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.linker.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createflash.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createlisting.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -5927,46 +5823,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createflash.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.createlisting.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
       </projectType>
@@ -6074,7 +5930,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
          </option>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.assembler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.assembler">
@@ -6085,7 +5941,7 @@
             </inputType>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.c.compiler.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.compiler">
@@ -6107,7 +5963,7 @@
             </inputType>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.c.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.linker">
