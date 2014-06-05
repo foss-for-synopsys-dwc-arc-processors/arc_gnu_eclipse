@@ -2353,7 +2353,7 @@
          </option>
       </tool>
       <tool
-            command="arc-buildroot-linux-uclibc--ar"
+            command="arc-buildroot-linux-uclibc-ar"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.archiver"
             isAbstract="false"
             name="ARC uClibc GCC Archiver"
@@ -5441,7 +5441,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc--ar"
+            command="arceb-buildroot-linux-uclibc-ar"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver"
             isAbstract="false"
             name="ARC uClibc GCC Archiver (eb)"
@@ -5975,7 +5975,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.linker">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.eb.archiver.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver">
@@ -6241,26 +6241,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -6285,26 +6265,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base">
-               </tool>
             </toolChain>
          </configuration>
       </projectType>
@@ -6334,26 +6294,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -6378,26 +6318,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base">
-               </tool>
             </toolChain>
          </configuration>
       </projectType>
