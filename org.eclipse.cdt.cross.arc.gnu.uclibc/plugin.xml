@@ -2994,7 +2994,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder For ARC700"
+               name="ARC Linux GNU Make builder"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
          </builder>
          <optionCategory
@@ -6343,7 +6343,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.platform.debug"
                      isAbstract="false"
@@ -6387,30 +6387,30 @@
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.toolchain.release"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.release;org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
                </tool>
@@ -6436,35 +6436,35 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.c.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.linker">
                </tool>
@@ -6480,35 +6480,35 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.release"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.archiver.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.hs.linux.sharedlib.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.linker">
                </tool>
@@ -6529,22 +6529,22 @@
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.sharedlib.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.c.linker">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -6558,27 +6558,22 @@
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.toolchain.release"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.release;org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.lib.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.release"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.sharedlib.c.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.c.linker">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -6597,22 +6592,22 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.c.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.c.linker">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -6626,22 +6621,22 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.toolchain.release"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.archiver.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.lib.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.lib.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.release"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.c.linker">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -6848,7 +6843,7 @@
             command="arceb-buildroot-linux-uclibc-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
-            id="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.c.linker"
+            id="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker"
             isAbstract="false"
             name="ARC uClibc GCC C Linker"
             natureFilter="cnature"
