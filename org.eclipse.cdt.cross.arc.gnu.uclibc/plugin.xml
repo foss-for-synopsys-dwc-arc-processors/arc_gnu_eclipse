@@ -6519,7 +6519,7 @@
             isAbstract="false"
             name="ARC uClibc GCC C Linker"
             natureFilter="cnature"
-            outputFlag="-o">
+            outputFlag="-fPIC -shared -o">
          <enablement
                type="ALL">
             <checkBuildProperty
@@ -6724,14 +6724,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.deffile"
                name="DEF file name (-Wl,--output-def=)"
                valueType="string">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
-               command="-shared"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.shared"
-               name="Shared libraries (-shared)"
-               valueType="boolean">
          </option>
       </tool>
       <tool
@@ -6742,7 +6734,7 @@
             isAbstract="false"
             name="ARC uClibc GCC C Linker"
             natureFilter="cnature"
-            outputFlag="-o">
+            outputFlag="-fPIC -shared -o">
          <enablement
                type="ALL">
             <checkBuildProperty
@@ -6947,14 +6939,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.deffile"
                name="DEF file name (-Wl,--output-def=)"
                valueType="string">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
-               command="-shared"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.shared"
-               name="Shared libraries (-shared)"
-               valueType="boolean">
          </option>
       </tool>
       
