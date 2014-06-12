@@ -4153,7 +4153,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.release"
                name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs">
+               parent="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.configuration.base.hs">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.toolchain.release"
                   isAbstract="false"
@@ -6234,7 +6234,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib"
             isAbstract="true">
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.debug"
                name="Debug"
@@ -6278,7 +6278,7 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.release"
                name="Release"
@@ -6327,7 +6327,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib"
             isAbstract="true">
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.debug"
                name="Debug"
@@ -6336,7 +6336,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.c.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.debug"
                      isAbstract="false"
@@ -6349,21 +6349,6 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.linker">
@@ -6371,7 +6356,7 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.release"
                name="Release"
@@ -6380,7 +6365,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.release"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.archiver.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.release"
                      isAbstract="false"
@@ -6392,21 +6377,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.hs.linux.sharedlib.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.release"
                      isAbstract="false"
@@ -6420,7 +6390,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib"
             isAbstract="true">
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.debug"
                name="Debug"
@@ -6449,7 +6419,7 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.release"
                name="Release"
@@ -6483,7 +6453,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib"
             isAbstract="true">
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.debug"
                name="Debug"
@@ -6492,7 +6462,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.cpp.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.platform.debug"
                      isAbstract="false"
@@ -6512,7 +6482,7 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
+               artifactExtension="so"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.release"
                name="Release"
@@ -6561,7 +6531,7 @@
             <property
                   id="org.eclipse.cdt.build.core.buildArtefactType">
                <value
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.SharedLib">
                </value>
             </property>
          </supportedProperties>
@@ -6574,16 +6544,6 @@
                name="General"
                owner="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </optionCategory>
-         <option
-               browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
-               command="-T&quot;${VALUE}&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.scriptfile"
-               isAbstract="false"
-               name="Script file (-T)"
-               resourceFilter="all"
-               valueType="string">
-         </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
                command="-nostartfiles"
@@ -6674,11 +6634,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.mapfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.mapfilename">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.other.cref"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.cref">
          </option>
@@ -6720,7 +6675,8 @@
          <outputType
                buildVariable="EXECUTABLES"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker.output"
-               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
+               outputPrefix="lib">
          </outputType>
          <option
                applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.GprofAppCalculator"
@@ -6736,6 +6692,45 @@
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.debugging.prof"
                name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               name="Shared Library Settings"
+               owner="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
+               command="-static"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.nodeflibs"
+               name="No shared libraries (-static)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.sharedobject"
+               name="Shared object name (-Wl,-soname=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.importlib"
+               name="import Library name (-Wl,--out-imlib=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.deffile"
+               name="DEF file name (-Wl,--output-def=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               command="-shared"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.shared"
+               name="Shared libraries (-shared)"
                valueType="boolean">
          </option>
       </tool>
@@ -6759,7 +6754,7 @@
             <property
                   id="org.eclipse.cdt.build.core.buildArtefactType">
                <value
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.SharedLib">
                </value>
             </property>
          </supportedProperties>
@@ -6772,16 +6767,6 @@
                name="General"
                owner="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </optionCategory>
-         <option
-               browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
-               command="-T&quot;${VALUE}&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.scriptfile"
-               isAbstract="false"
-               name="Script file (-T)"
-               resourceFilter="all"
-               valueType="string">
-         </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
                command="-nostartfiles"
@@ -6872,11 +6857,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.mapfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.mapfilename">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.other.cref"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.cref">
          </option>
@@ -6918,7 +6898,8 @@
          <outputType
                buildVariable="EXECUTABLES"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker.output"
-               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
+               outputPrefix="lib">
          </outputType>
          <option
                applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.GprofAppCalculator"
@@ -6934,6 +6915,45 @@
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.debugging.prof"
                name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               name="Shared Library Settings"
+               owner="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
+               command="-static"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.nodeflibs"
+               name="No shared libraries (-static)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.sharedobject"
+               name="Shared object name (-Wl,-soname=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.importlib"
+               name="import Library name (-Wl,--out-imlib=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.deffile"
+               name="DEF file name (-Wl,--output-def=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.sharedlibset"
+               command="-shared"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.shared"
+               name="Shared libraries (-shared)"
                valueType="boolean">
          </option>
       </tool>
