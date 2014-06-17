@@ -364,15 +364,15 @@ package org.eclipse.cdt.cross.arc.gnu;
     	   
        }
        
-       if (sProcessor.equalsIgnoreCase("-mHS"))
-       {
-    	   oList.add("-mbarrel-shifter");
-    	   oList.add("-mshift-assist");
-    	   oList.add("-mcode-density");
-    	   oList.add("-mswap");
-    	   oList.add("-mnorm");
-    	   
-       }
+//       if (sProcessor.equalsIgnoreCase("-mHS"))
+//       {
+//    	   oList.add("-mbarrel-shifter");
+//    	   oList.add("-mshift-assist");
+//    	   oList.add("-mcode-density");
+//    	   oList.add("-mswap");
+//    	   oList.add("-mnorm");
+//    	   
+//       }
        
        }
      
