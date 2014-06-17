@@ -13,7 +13,6 @@ public class ARCAdditionalToolsManagedOptionValueHandler extends ManagedOptionVa
   public boolean handleValue(IBuildObject configuration, IHoldsOptions holder, IOption option, String extraArgument, int event)
   {
      if (event == 4) {
-       System.out.println("should update window!");
        if ((configuration instanceof FolderInfo))
       {
          FolderInfo oFolderInfo = (FolderInfo)configuration;
