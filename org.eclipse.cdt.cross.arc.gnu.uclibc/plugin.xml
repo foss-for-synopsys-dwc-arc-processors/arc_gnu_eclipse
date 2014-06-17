@@ -874,13 +874,6 @@
                valueType="boolean">
          </option>
          <option
-               command="-Wl,-Map,"
-               defaultValue="${BuildArtifactFileBaseName}.map"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.mapfilename"
-               name="Map Filename"
-               valueType="string">
-         </option>
-         <option
                command="-Wa,"
                defaultValue="-adhlns=&quot;$@.lst&quot;"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.lstfilename"
@@ -1995,16 +1988,6 @@
                owner="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </optionCategory>
          <option
-               browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
-               command="-T&quot;${VALUE}&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.scriptfile"
-               isAbstract="false"
-               name="Script file (-T)"
-               resourceFilter="all"
-               valueType="string">
-         </option>
-         <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
                command="-nostartfiles"
                defaultValue="false"
@@ -2195,16 +2178,6 @@
                name="General"
                owner="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
          </optionCategory>
-         <option
-               browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.general"
-               command="-T&quot;${VALUE}&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.option.scriptfile"
-               isAbstract="false"
-               name="Script file (-T)"
-               resourceFilter="all"
-               valueType="string">
-         </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.general"
                command="-nostartfiles"
@@ -5016,16 +4989,6 @@
                owner="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </optionCategory>
          <option
-               browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
-               command="-T&quot;${VALUE}&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.scriptfile"
-               isAbstract="false"
-               name="Script file (-T)"
-               resourceFilter="all"
-               valueType="string">
-         </option>
-         <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.general"
                command="-nostartfiles"
                defaultValue="false"
@@ -5213,16 +5176,6 @@
                name="General"
                owner="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
          </optionCategory>
-         <option
-               browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.general"
-               command="-T&quot;${VALUE}&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.option.scriptfile"
-               isAbstract="false"
-               name="Script file (-T)"
-               resourceFilter="all"
-               valueType="string">
-         </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.general"
                command="-nostartfiles"
