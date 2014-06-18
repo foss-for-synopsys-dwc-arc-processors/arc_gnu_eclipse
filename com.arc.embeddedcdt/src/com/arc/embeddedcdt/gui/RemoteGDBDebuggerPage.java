@@ -86,6 +86,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	static String fLaunchexternal_openocd_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_ashling_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_nsim_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
+	
+	
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	public Boolean createTabitemCOMBool=false;
@@ -107,14 +109,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static String nSIMpropsfiles="";
 	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
-	
+	static String fLaunchexternal_nsimprops_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	protected Button fLaunchtcfButton;//this button is for launching the Properties file for nsim
 	protected Label nSIMtcflabel;
 	public static Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
 	public static String nSIMtcffiles="";
 	public static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
-	
+	static String fLaunchexternal_nsimtcf_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	public static String externaltools="";
 	public static String externaltools_openocd_path="";
@@ -204,7 +206,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_openocd_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT, "true");
 		    fLaunchexternal_ashling_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT, "true");
 		    fLaunchexternal_nsim_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT, "true");
-		    
+		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
+		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
 		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
 		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
 			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
@@ -297,6 +300,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT,getAttributeValueFromString(fLaunchexternal_openocd_Buttonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT,getAttributeValueFromString(fLaunchexternal_ashling_Buttonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT,getAttributeValueFromString(fLaunchexternal_nsim_Buttonboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT,getAttributeValueFromString(fLaunchexternal_nsimtcf_Buttonboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT,getAttributeValueFromString(fLaunchexternal_nsimprops_Buttonboolean));
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,nSIMtcffiles_last);
@@ -540,24 +545,32 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						if (fLaunchexternal_nsim_Buttonboolean.equalsIgnoreCase("true")) {
 							fLaunchernalButton.setSelection(true);
 							fSearchexternalButton.setEnabled(true);
-							//fSearchexternalLabel.setEnabled(true);
 							fPrgmArgumentsTextexternal.setEnabled(true);
-							//nSIMtcflabel.setEnabled(true); 
-				        	fnSIMtcfText.setEnabled(true); 
-				        	fnSIMtcfButton.setEnabled(true);
-				        	//nSIMpropslabel.setEnabled(true); 
-				        	fnSIMpropsText.setEnabled(true); 
-				        	fnSIMpropslButton.setEnabled(true);
+
 
 						} else {
 							fLaunchernalButton.setSelection(false);
 							fSearchexternalButton.setEnabled(false);
-							//fSearchexternalLabel.setEnabled(false);
 							fPrgmArgumentsTextexternal.setEnabled(false);
-				        	//nSIMtcflabel.setEnabled(false);
+				    
+						}
+						if (fLaunchexternal_nsimtcf_Buttonboolean.equalsIgnoreCase("true")) {
+							fLaunchtcfButton.setSelection(true);
+				        	fnSIMtcfText.setEnabled(true); 
+				        	fnSIMtcfButton.setEnabled(true);
+
+						} else {
+							fLaunchtcfButton.setSelection(false);
 				        	fnSIMtcfText.setEnabled(false);
 				        	fnSIMtcfButton.setEnabled(false);
-				        	//nSIMpropslabel.setEnabled(false); 
+						}
+						if (fLaunchexternal_nsimprops_Buttonboolean.equalsIgnoreCase("true")) {
+							fLaunchPropsButton.setSelection(true);
+							fnSIMpropsText.setEnabled(true); 
+				        	fnSIMpropslButton.setEnabled(true);
+
+						} else {
+							fLaunchPropsButton.setSelection(false);
 				        	fnSIMpropsText.setEnabled(false); 
 				        	fnSIMpropslButton.setEnabled(false);
 						}
@@ -1064,39 +1077,68 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		});
-		
+
 		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-
 	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchernalButton.getSelection()==true) {
+					fLaunchexternal_nsim_Buttonboolean="true";
+					fLaunchernalButton.setSelection(true);
+					fSearchexternalButton.setEnabled(true);
+					fPrgmArgumentsTextexternal.setEnabled(true);
 
-	        	if(fLaunchernalButton.getSelection()==true){
-	        	fLaunchexternal_nsim_Buttonboolean="true";
-	        	fSearchexternalButton.setEnabled(true);
-	        	//fSearchexternalLabel.setEnabled(true);
-	        	fPrgmArgumentsTextexternal.setEnabled(true);
-	        	//nSIMtcflabel.setEnabled(true); 
-	        	fnSIMtcfText.setEnabled(true); 
-	        	fnSIMtcfButton.setEnabled(true);
-	        	//nSIMpropslabel.setEnabled(true); 
-	        	fnSIMpropsText.setEnabled(true); 
-	        	fnSIMpropslButton.setEnabled(true);
-	        	}
-	        	else {
-	        		fLaunchexternal_nsim_Buttonboolean="false";
-		        	fSearchexternalButton.setEnabled(false);
-		        	//fSearchexternalLabel.setEnabled(false);
-		        	fPrgmArgumentsTextexternal.setEnabled(false);
-		        	//nSIMtcflabel.setEnabled(false);
+
+				} else {
+					fLaunchexternal_nsim_Buttonboolean="false";
+					fLaunchernalButton.setSelection(false);
+					fSearchexternalButton.setEnabled(false);
+					fPrgmArgumentsTextexternal.setEnabled(false);
+		    
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
+		fLaunchtcfButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchtcfButton.getSelection()==true) {
+					fLaunchexternal_nsimtcf_Buttonboolean="true";
+					fLaunchtcfButton.setSelection(true);
+		        	fnSIMtcfText.setEnabled(true); 
+		        	fnSIMtcfButton.setEnabled(true);
+
+				} else {
+					fLaunchexternal_nsimtcf_Buttonboolean="false";
+					fLaunchtcfButton.setSelection(false);
 		        	fnSIMtcfText.setEnabled(false);
 		        	fnSIMtcfButton.setEnabled(false);
-		        	//nSIMpropslabel.setEnabled(false); 
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
+		fLaunchPropsButton.addSelectionListener(new SelectionListener() {
+
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchPropsButton.getSelection()==true) {
+					fLaunchexternal_nsimprops_Buttonboolean="true";
+					fLaunchPropsButton.setSelection(true);
+		        	fnSIMpropsText.setEnabled(true); 
+		        	fnSIMpropslButton.setEnabled(true);
+
+				} else {
+					fLaunchexternal_nsimprops_Buttonboolean="false";
+					fLaunchPropsButton.setSelection(false);
 		        	fnSIMpropsText.setEnabled(false); 
 		        	fnSIMpropslButton.setEnabled(false);
-		        	
-	           	}
+				}
 	        	updateLaunchConfigurationDialog();
 	        }
 
+	        
 	        public void widgetDefaultSelected(SelectionEvent event) {
 	        }
 	        
