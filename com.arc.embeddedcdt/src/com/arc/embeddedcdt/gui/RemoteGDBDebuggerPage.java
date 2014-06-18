@@ -106,8 +106,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 //			 			"nsim_av2em11.props";
 	public static String nSIMpropsfiles="";
 	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
+	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
 	
-	
+	protected Button fLaunchtcfButton;//this button is for launching the Properties file for nsim
 	protected Label nSIMtcflabel;
 	public static Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
@@ -539,24 +540,24 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						if (fLaunchexternal_nsim_Buttonboolean.equalsIgnoreCase("true")) {
 							fLaunchernalButton.setSelection(true);
 							fSearchexternalButton.setEnabled(true);
-							fSearchexternalLabel.setEnabled(true);
+							//fSearchexternalLabel.setEnabled(true);
 							fPrgmArgumentsTextexternal.setEnabled(true);
-							nSIMtcflabel.setEnabled(true); 
+							//nSIMtcflabel.setEnabled(true); 
 				        	fnSIMtcfText.setEnabled(true); 
 				        	fnSIMtcfButton.setEnabled(true);
-				        	nSIMpropslabel.setEnabled(true); 
+				        	//nSIMpropslabel.setEnabled(true); 
 				        	fnSIMpropsText.setEnabled(true); 
 				        	fnSIMpropslButton.setEnabled(true);
 
 						} else {
 							fLaunchernalButton.setSelection(false);
 							fSearchexternalButton.setEnabled(false);
-							fSearchexternalLabel.setEnabled(false);
+							//fSearchexternalLabel.setEnabled(false);
 							fPrgmArgumentsTextexternal.setEnabled(false);
-				        	nSIMtcflabel.setEnabled(false);
+				        	//nSIMtcflabel.setEnabled(false);
 				        	fnSIMtcfText.setEnabled(false);
 				        	fnSIMtcfButton.setEnabled(false);
-				        	nSIMpropslabel.setEnabled(false); 
+				        	//nSIMpropslabel.setEnabled(false); 
 				        	fnSIMpropsText.setEnabled(false); 
 				        	fnSIMpropslButton.setEnabled(false);
 						}
@@ -946,15 +947,21 @@ private void createTabitemCOMAshling(Composite subComp) {
 		@SuppressWarnings("restriction")
 		Composite compnSIM = SWTFactory.createComposite(groupnsim, 5, 5, GridData.FILL_BOTH);
 		
-		fSearchexternalLabel=new Label(compnSIM, SWT.LEFT);
-		fSearchexternalLabel.setText("nSIM Path");
-		GridData gd = new GridData();
-		fSearchexternalLabel.setLayoutData(gd);
+//		fSearchexternalLabel=new Label(compnSIM, SWT.LEFT);
+//		fSearchexternalLabel.setText("nSIM Path");
+//		GridData gd = new GridData();
+//		fSearchexternalLabel.setLayoutData(gd);
 			
+		fLaunchernalButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchernalButton.setSelection(true);
+		GridData gd = new GridData(SWT.BEGINNING);
+		fLaunchernalButton.setLayoutData(gd);
+		fLaunchernalButton.setText("Launch nSIM");
+		
 		fPrgmArgumentsTextexternal=new Text(compnSIM, SWT.SINGLE | SWT.BORDER);//6-1
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint=400;
-		gd.horizontalSpan =2;
+		gd.horizontalSpan =3;
 		fPrgmArgumentsTextexternal.setLayoutData(gd);
 		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
@@ -979,16 +986,13 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 	
-		fLaunchernalButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchernalButton.setSelection(true);
+//		nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
+//		nSIMtcflabel.setText("nSIM TCF:");
+		fLaunchtcfButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchtcfButton.setSelection(true);
 		gd = new GridData(SWT.BEGINNING);
-		fLaunchernalButton.setLayoutData(gd);
-		fLaunchernalButton.setText("Launch nSIM");
-		
-		
-		
-		nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
-		nSIMtcflabel.setText("nSIM TCF:");
+		fLaunchtcfButton.setLayoutData(gd);
+		fLaunchtcfButton.setText("TCF");
 	
 		fnSIMtcfText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -1024,9 +1028,15 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 	    
-		nSIMpropslabel = new Label(compnSIM, SWT.CENTER);
-		nSIMpropslabel.setText("nSIM Props:");
+//		nSIMpropslabel = new Label(compnSIM, SWT.CENTER);
+//		nSIMpropslabel.setText("nSIM Props:");
 	
+		fLaunchPropsButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchPropsButton.setSelection(true);
+		gd = new GridData(SWT.BEGINNING);
+		fLaunchPropsButton.setLayoutData(gd);
+		fLaunchPropsButton.setText("Properties file");
+		
 		fnSIMpropsText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint=400;
@@ -1062,24 +1072,24 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        	if(fLaunchernalButton.getSelection()==true){
 	        	fLaunchexternal_nsim_Buttonboolean="true";
 	        	fSearchexternalButton.setEnabled(true);
-	        	fSearchexternalLabel.setEnabled(true);
+	        	//fSearchexternalLabel.setEnabled(true);
 	        	fPrgmArgumentsTextexternal.setEnabled(true);
-	        	nSIMtcflabel.setEnabled(true); 
+	        	//nSIMtcflabel.setEnabled(true); 
 	        	fnSIMtcfText.setEnabled(true); 
 	        	fnSIMtcfButton.setEnabled(true);
-	        	nSIMpropslabel.setEnabled(true); 
+	        	//nSIMpropslabel.setEnabled(true); 
 	        	fnSIMpropsText.setEnabled(true); 
 	        	fnSIMpropslButton.setEnabled(true);
 	        	}
 	        	else {
 	        		fLaunchexternal_nsim_Buttonboolean="false";
 		        	fSearchexternalButton.setEnabled(false);
-		        	fSearchexternalLabel.setEnabled(false);
+		        	//fSearchexternalLabel.setEnabled(false);
 		        	fPrgmArgumentsTextexternal.setEnabled(false);
-		        	nSIMtcflabel.setEnabled(false);
+		        	//nSIMtcflabel.setEnabled(false);
 		        	fnSIMtcfText.setEnabled(false);
 		        	fnSIMtcfButton.setEnabled(false);
-		        	nSIMpropslabel.setEnabled(false); 
+		        	//nSIMpropslabel.setEnabled(false); 
 		        	fnSIMpropsText.setEnabled(false); 
 		        	fnSIMpropslButton.setEnabled(false);
 		        	
