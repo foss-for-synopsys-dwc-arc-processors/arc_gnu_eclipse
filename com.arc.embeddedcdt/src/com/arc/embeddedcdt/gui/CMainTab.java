@@ -58,6 +58,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.TwoPaneElementSelector;
@@ -401,12 +402,14 @@ public class CMainTab extends CLaunchConfigurationTab {
 	 * Iterate through and suck up all of the executable files that we can find.
 	 */
 	protected IBinary[] getBinaryFiles(final ICProject cproject) {
-		final Display display;
+		Display display = null;
 		if (cproject == null || !cproject.exists()) {
 			return null;
 		}
 		if (getShell() == null) {
-			display = LaunchUIPlugin.getShell().getDisplay();
+			Shell shell =LaunchUIPlugin.getShell();
+			if (shell!= null) 
+			display = shell.getDisplay();
 		} else {
 			display = getShell().getDisplay();
 		}

@@ -99,8 +99,6 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 
             public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
             }
-            public void onOptionVisiblementChanged (IOptionEnablementManager mgr, String optionId) {
-            }
             public void onOptionEnablementChanged (IOptionEnablementManager mgr, String optionID) {
                 // TODO Auto-generated method stub               
             }});
@@ -117,7 +115,6 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
         	
             Set<String> disabledSet = null;
-            Set<String> defaultSet = null; 
             // `contains()` because sometimes this options has numeric suffix in the end.
             if (optionId.contains(".option.target.processor")) { 
                 String value = (String) mgr.getValue(optionId);
@@ -146,7 +143,6 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                 }
                  else if (value.endsWith("option.mcpu.arcv2hs")){
                      disabledSet = DISABLED_FOR_ARCV2HS;
-                     defaultSet =  DEFAULT_FOR_ARCV2HS;
                      for (int i=0;i<ARCV2HS_DISABLED.length;i++) {
                     	 setEnabled(ARCV2HS_DISABLED[i],false);
                     	

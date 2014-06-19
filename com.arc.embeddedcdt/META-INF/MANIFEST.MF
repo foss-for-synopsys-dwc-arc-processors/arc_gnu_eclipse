@@ -37,7 +37,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.cdt.launch;bundle-version="7.1.0",
  org.eclipse.tm.terminal,
  org.eclipse.tm.terminal.serial,
- org.eclipse.tm.terminal.view
+ org.eclipse.tm.terminal.view,
+ org.eclipse.swt
 Bundle-NativeCode: lib/linux/x86/librxtxSerial.so; osname=Linux; processor=x86,
  lib/linux/x86_64/librxtxSerial.so; osname=Linux; processor=x86-64,
  lib/win32/x86/rxtxSerial.dll; osname=Win32; processor=x86,

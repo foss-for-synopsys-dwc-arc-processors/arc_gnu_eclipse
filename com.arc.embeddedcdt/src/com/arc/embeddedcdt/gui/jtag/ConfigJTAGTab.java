@@ -333,12 +333,6 @@ public class ConfigJTAGTab extends CLaunchConfigurationTab implements ITab
 	/** Flash target */
 	private void flash(Shell shell)
 	{
-		String debugger;
-		debugger = gdbinit.getDebugger();
-		final String executable = gdbinit.getExecutable();
-
-		final String strip = calcToolPath(debugger, "strip");
-
 		gdbinit.runAsync(new Runnable()
 		{
 			public void run()
@@ -681,7 +675,7 @@ public class ConfigJTAGTab extends CLaunchConfigurationTab implements ITab
 				executeCommandTcl(ip, tcl, app);
 			} finally
 			{
-				app.delete();
+				Boolean deletesucc=app.delete();
 			}
 		} catch (Exception e)
 		{
@@ -705,14 +699,12 @@ public class ConfigJTAGTab extends CLaunchConfigurationTab implements ITab
 	public static void uploadFile(ILaunchConfiguration configuration) throws CoreException
 	{
 		String gdb=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "");
-		String openOCD=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_CONFIG, "");
 		if (checkUploadFile(gdb))
 		{
 			String host=ConfigJTAGTab.getValue(gdb, ConfigJTAGTab.IP_ADDRESS, "Could not find host script");
 //			String port=ConfigJTAGTab.getValue(openOCD, TELNET_PORT_REGEXP, "Could not find port script");
 			
 			String strip=calcToolPath(configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, ""), "strip");
-			String objcopy=calcToolPath(configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, ""), "objcopy");
 			String executable=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME, "");
 			
 			//String strip=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "")

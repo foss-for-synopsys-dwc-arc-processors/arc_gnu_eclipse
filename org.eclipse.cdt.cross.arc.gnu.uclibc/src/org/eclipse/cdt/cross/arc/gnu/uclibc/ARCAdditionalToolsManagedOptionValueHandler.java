@@ -1,6 +1,5 @@
 package org.eclipse.cdt.cross.arc.gnu.uclibc;
 
-import java.io.PrintStream;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IOption;
@@ -8,6 +7,7 @@ import org.eclipse.cdt.managedbuilder.core.ManagedOptionValueHandler;
 import org.eclipse.cdt.managedbuilder.internal.core.FolderInfo;
 import org.eclipse.cdt.managedbuilder.internal.core.ResourceConfiguration;
 
+@SuppressWarnings("restriction")
 public class ARCAdditionalToolsManagedOptionValueHandler extends ManagedOptionValueHandler
 {
   public boolean handleValue(IBuildObject configuration, IHoldsOptions holder, IOption option, String extraArgument, int event)
@@ -15,8 +15,6 @@ public class ARCAdditionalToolsManagedOptionValueHandler extends ManagedOptionVa
      if (event == 4) {
        if ((configuration instanceof FolderInfo))
       {
-         FolderInfo oFolderInfo = (FolderInfo)configuration;
-
          return true;
        }if (!(configuration instanceof ResourceConfiguration))
       {

@@ -110,8 +110,8 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 	 * 
 	 * @since 3.6
 	 */
-	private final String SHARED_LAUNCH_CONFIGURATON_DIALOG = IDebugUIConstants.PLUGIN_ID + ".SHARED_LAUNCH_CONFIGURATON_DIALOG"; //$NON-NLS-1$
-	private final String WORKSPACE_SELECTION_DIALOG = IDebugUIConstants.PLUGIN_ID + ".WORKSPACE_SELECTION_DIALOG"; //$NON-NLS-1$
+	private final static String SHARED_LAUNCH_CONFIGURATON_DIALOG = IDebugUIConstants.PLUGIN_ID + ".SHARED_LAUNCH_CONFIGURATON_DIALOG"; //$NON-NLS-1$
+	private final static String WORKSPACE_SELECTION_DIALOG = IDebugUIConstants.PLUGIN_ID + ".WORKSPACE_SELECTION_DIALOG"; //$NON-NLS-1$
 	
 	/**
 	 * This attribute exists solely for the purpose of making sure that invalid shared locations
@@ -955,7 +955,7 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 	 * Provides the labels for the favorites table
 	 *
 	 */
-	class FavoritesLabelProvider implements ITableLabelProvider {
+	static class FavoritesLabelProvider implements ITableLabelProvider {
 		
 		private Map fImages = new HashMap();
 

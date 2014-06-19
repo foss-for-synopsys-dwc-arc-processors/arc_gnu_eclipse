@@ -217,7 +217,7 @@ abstract public class AbstractGDBCDIDebugger implements ICDIDebugger2 {
 		int code = ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR;
 		String ID = MIPlugin.getUniqueIdentifier();
 		MultiStatus status = new MultiStatus( ID, code, message, exception );
-		status.add( new Status( IStatus.ERROR, ID, code, exception == null ? new String() : exception.getLocalizedMessage(), exception ) );
+		status.add( new Status( IStatus.ERROR, ID, code, exception == null ? "" : exception.getLocalizedMessage(), exception ) );
 		return new CoreException( status );
 	}
 

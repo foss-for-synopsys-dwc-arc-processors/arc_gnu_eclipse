@@ -123,14 +123,14 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                 	     while ((oParent != null) && (!(oParent instanceof IToolChain)))
                 	       {
                 	       Object oSuper = tool.getSuperClass();
-                	       if ((oSuper != null) && ((oSuper instanceof ITool)))
-                	         oParent = ((ITool)oSuper).getParent();
+                	         if(oSuper != null)
+                	             oParent = ((ITool)oSuper).getParent();
                 	         else {
-                	         oParent = null;
+                	             oParent = null;
                 	         }
                 	       }
                 	   
-                	      if ((oParent != null) && ((oParent instanceof IToolChain))) {
+                	      if (oParent != null) {
                 	       IToolChain oToolChain = (IToolChain)oParent;
                 	   
                 	       IOption[] aoOptions = oToolChain.getOptions();

@@ -26,7 +26,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
-import org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationsMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -59,6 +58,7 @@ import com.arc.embeddedcdt.launch.Launch;
  * remote and then to connect to it from the host. The DSDP-TM project is
  * used to accomplish this.
  */
+@SuppressWarnings("restriction")
 public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	//protected Text fGDBServerCommandText;
@@ -187,33 +187,25 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		createTabitemCOMAshlingBool=false;
 		createTabitemnSIMBool=false;
 		super.initializeFrom(configuration);
-		String gdbserverCommand = null;
-		try {
-			gdbserverCommand = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND,
-														   IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
-			
-		}
-		catch( CoreException e ) {
-		}
 		
 		fGDBCommandText.setText( "arc-elf32-gdb" );
 		try {
- 		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String());
-		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, new String());
-		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, new String());
-		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, new String());
+ 		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, "");
+		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, "");
+		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, "");
 		    
 		    fLaunchexternal_openocd_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT, "true");
 		    fLaunchexternal_ashling_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT, "true");
 		    fLaunchexternal_nsim_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT, "true");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
-		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
-		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
-			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, new String());
-			nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, new String());
+		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
+			nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
 		    
-		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, new String()).equalsIgnoreCase(""))
+		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
 			fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
 		}
@@ -222,12 +214,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		 // Set host and IP.
 		 try {
-			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,new String() );
+			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
 //			 if(portnumber.equalsIgnoreCase("")){
 //				 portnumber="3333"; 
 //			 }
      		 fGDBServerPortNumberText.setText( portnumber );
-			 String hostname = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, new String());
+			 String hostname = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "");
 			 if(hostname.equalsIgnoreCase("")){
 				 hostname = "localhost";
 			 }
@@ -235,14 +227,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 
 
 				
-			 comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, new String());
+			 comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
 			 if (FirstlaunchDialog.value[1] != null) {
 					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
 						comport_openocd = FirstlaunchDialog.value[1];
 					}
 
 				}
-			 comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, new String());
+			 comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
 			 if (FirstlaunchDialog.value[1] != null) {
 					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
 						comport_ashling = FirstlaunchDialog.value[1];
@@ -257,9 +249,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 catch( CoreException e ) {
 		 }
 		
-		 String Terminallaunch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, new String());//get which external tool is in use
-
-		String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*new String()*/);
+		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*""*/);
 		
 		 if(!gdbserver.equalsIgnoreCase(""))
 		 {
@@ -279,16 +269,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	@Override
 	public void performApply( ILaunchConfigurationWorkingCopy configuration ) {
 		super.performApply(configuration);
-		//String str = fGDBServerCommandText.getText();
-		//str.trim();
 		//configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND, str );
 		String str = fGDBServerPortNumberText.getText();
-		str.trim();
+		str=str.trim();
 	
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
 		
 		String gdbStr = fGDBCommandText.getText();
-		gdbStr.trim();
+		gdbStr=gdbStr.trim();
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,external_openocd_path);
@@ -371,7 +359,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
-				boolean isWindows=isWindowsOS();
 				fGDBServerPortNumberText.getText();
 				//fGDBServerIPAddressText.setText("localhost");
 				fPrgmArgumentsComboInittext = combo.getText();
@@ -957,7 +944,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 		createTabitemnSIMBool=true;
 
 		groupnsim = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
-		@SuppressWarnings("restriction")
 		Composite compnSIM = SWTFactory.createComposite(groupnsim, 5, 5, GridData.FILL_BOTH);
 		
 //		fSearchexternalLabel=new Label(compnSIM, SWT.LEFT);

@@ -47,7 +47,6 @@ public class EmbeddedGDBCDIDebugger extends AbstractGDBCDIDebugger {
 			throws CoreException {
 		embeddedLaunch=launch2;
 		fLaunch = launch;
-		IPath gdbPath = getGDBPath( launch );
 		ICDISession dsession = null;
 		try {
 			Thread.sleep(1000);

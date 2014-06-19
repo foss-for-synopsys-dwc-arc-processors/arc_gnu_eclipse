@@ -81,7 +81,6 @@ public abstract class SourceContainer extends AbsolutePathSourceContainer {
 			if (file != null)
 			{
 				String name = file.toFile().getAbsolutePath();
-				SourceLookupDirector director = (SourceLookupDirector) getDirector();
 				count++;
 				try
 				{

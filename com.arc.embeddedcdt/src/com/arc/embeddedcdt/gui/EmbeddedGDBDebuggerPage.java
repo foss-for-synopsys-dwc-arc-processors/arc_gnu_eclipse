@@ -39,9 +39,10 @@ import com.arc.embeddedcdt.preferences.PrefConstants;
 /**
  * The dynamic tab for gdb-based debugger implementations.
  */
+@SuppressWarnings("restriction")
 public class EmbeddedGDBDebuggerPage extends StandardGDBDebuggerPage {
 	private boolean fIsInitializing = false;
-	/* (non-Javadoc)
+	/* (non-JavaDoc)
      * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createMainTab(org.eclipse.swt.widgets.TabFolder)
      */
     public void createMainTabX(Composite tabFolder)
@@ -125,6 +126,7 @@ public class EmbeddedGDBDebuggerPage extends StandardGDBDebuggerPage {
 		setInitializing(false);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected String getValue(String KEY) {
 		return LaunchPlugin.getDefault().getPluginPreferences().getString(KEY);
 	}
@@ -137,11 +139,11 @@ public class EmbeddedGDBDebuggerPage extends StandardGDBDebuggerPage {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		super.performApply(configuration) ;
 		String gdbStr = fGDBCommandText.getText();
-		gdbStr.trim();
+		gdbStr=gdbStr.trim();
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		
 		String gdbInit = fGDBInitText.getText();
-		gdbInit.trim();
+		gdbInit=gdbInit.trim();
 		configuration.setAttribute(
 				IMILaunchConfigurationConstants.ATTR_GDB_INIT, gdbInit);
 		

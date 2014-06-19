@@ -41,7 +41,7 @@ public class LaunchTerminator implements IDebugEventSetListener {
 	/**
 	 * Runnable to terminate launch asynchronously.
 	 */
-	private class TerminateRunnable implements Runnable {
+	private static class TerminateRunnable implements Runnable {
 
 		private ILaunch fLaunch;
 
@@ -61,7 +61,7 @@ public class LaunchTerminator implements IDebugEventSetListener {
 	/**
 	 * Show dialog and terminate launch.
 	 */
-	private class DialogRunnable implements Runnable {
+	private static class DialogRunnable implements Runnable {
 
 		private ILaunch fLaunch;
 		private IProcess fProcess;

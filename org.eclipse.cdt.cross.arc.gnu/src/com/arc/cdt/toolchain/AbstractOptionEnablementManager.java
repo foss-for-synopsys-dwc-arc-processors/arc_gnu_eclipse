@@ -165,7 +165,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
             return;
         }
         //NOTE: opt.getHolder() is not necessarily accurate!!
-        IHoldsOptions h = (IHoldsOptions)target[0];
+        //IHoldsOptions h = (IHoldsOptions)target[0];
         IOption opt = (IOption)target[1];
         try {
             if (value instanceof String) {               

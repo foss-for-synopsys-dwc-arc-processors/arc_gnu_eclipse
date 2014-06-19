@@ -11,37 +11,17 @@ F* This program and the accompanying materials
 package org.eclipse.cdt.cross.arc.gnu;
    
    import java.util.ArrayList;
-   import java.util.Arrays;
-   import org.eclipse.cdt.managedbuilder.core.BuildException;
-   import org.eclipse.cdt.managedbuilder.core.IManagedCommandLineInfo;
-   import org.eclipse.cdt.managedbuilder.core.IOption;
-   import org.eclipse.cdt.managedbuilder.core.ITool;
-   import org.eclipse.cdt.managedbuilder.core.IToolChain;
-   import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
+import java.util.Arrays;
+
+import org.eclipse.cdt.managedbuilder.core.BuildException;
+import org.eclipse.cdt.managedbuilder.core.IManagedCommandLineInfo;
+import org.eclipse.cdt.managedbuilder.core.IOption;
+import org.eclipse.cdt.managedbuilder.core.ITool;
+import org.eclipse.cdt.managedbuilder.core.IToolChain;
+import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
    
    public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator
    {
-     private static final String OPTION_SUFIX_PROCESSOR = ".option.target.processor";
-     private static final String OPTION_SUFIX_CORE = ".option.target.core700";                     //Customized for ARC GNU core 700
-     private static final String OPTION_SUFIX_BARRELSHIFTER = ".option.target.barrelshifter";      //Customized for ARC GNU core barrelshifter
-     private static final String OPTION_SUFIX_CODEDENSITY = ".option.target.codedensity";          //Customized for ARC GNU core codedensity
-     private static final String OPTION_SUFIX_DIVIDE = ".option.target.divide";                    //Customized for ARC GNU core divide
-     private static final String OPTION_SUFIX_NORMALIZE = ".option.target.normalize";              //Customized for ARC GNU core normalize
-     private static final String OPTION_SUFIX_SWAP = ".option.target.swap";                 //Customized for ARC GNU core swap
-     private static final String OPTION_SUFIX_SPFP_COMFP = ".option.target.spfp";                 //Customized for ARC GNU core sSpfp
-     private static final String OPTION_SUFIX_EA = ".option.target.ea";                 //Customized for ARC GNU core ea
-     private static final String OPTION_SUFIX_THUMB = ".option.target.thumb";
-     private static final String OPTION_SUFIX_THUMB_INTERWORK = ".option.target.thumbinterwork";
-     private static final String OPTION_SUFFIX_ENDIANNES = ".option.target.endiannes";
-     private static final String OPTION_SUFFIX_FLOAT_ABI = ".option.warnings.syntax";
-     private static final String OPTION_SUFFIX_FLOAT_UNIT = ".option.target.fpu.unit";
-     private static final String OPTION_SUFIX_DEBUGGING_LEVEL = ".option.debugging.flevel";
-     private static final String OPTION_SUFIX_DEBUGGING_FORMAT = ".option.debugging.format";
-     private static final String OPTION_SUFIX_DEBUGGING_OTHER = ".option.debugging.other";
-     private static final String OPTION_SUFIX_DEBUGGING_PROF = ".option.debugging.prof";
-     private static final String OPTION_SUFIX_DEBUGGING_GPROF = ".option.debugging.gprof";
-     private static final boolean DEBUG_LOCAL = false;
-   
      public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern)
      {
      return generateCommandLineInfo(oTool, sCommandName, asFlags,sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern, false);
@@ -49,7 +29,7 @@ package org.eclipse.cdt.cross.arc.gnu;
    
      public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern, boolean bFlag)
      {
-     ArrayList oList = new ArrayList();
+     ArrayList<String> oList = new ArrayList<String>();
      oList.addAll(Arrays.asList(asFlags));
 
    
@@ -352,17 +332,18 @@ package org.eclipse.cdt.cross.arc.gnu;
        if ((sll64 != null) && (sll64.length() > 0)) {                
            oList.add(sll64);                                             
            }  
-       
-       if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)<0)
-       {
-    	   oList.add("-mno-mpy");
-    	   
-       }
-       if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
-       {
-    	   oList.add("-mno-norm");
-    	   
-       }
+       if((sProcessor != null)){
+    	   if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)<0)
+           {
+        	   oList.add("-mno-mpy");
+        	   
+           }
+           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
+           {
+        	   oList.add("-mno-norm");
+        	   
+           }
+       }  
        
 //       if (sProcessor.equalsIgnoreCase("-mHS"))
 //       {
