@@ -415,27 +415,23 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles_last;
 						String nsimtcf = RemoteGDBDebuggerPage.nSIMtcffiles_last;
 						
-						ArrayList<String> nsim_cmd = new ArrayList<String>();
-						nsim_cmd.add(nsim_exec);
-						nsim_cmd.add("-port");
-						nsim_cmd.add(gdbserver_port);
-						nsim_cmd.add("-gdb");
-						nsim_cmd.add("-on");
-						nsim_cmd.add("nsim_emt");
+						String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb -on nsim_emt";
 
 						if(!nsimtcf.equalsIgnoreCase(""))
 						{
-							nsim_cmd.add("-tcf");
-							nsim_cmd.add(nsimtcf);
+							nsim_cmd += " -tcf " + nsimtcf;
 						}
 
 						if(!nsimProps.equalsIgnoreCase(""))
 						{
-							nsim_cmd.add("-propsfile");
-							nsim_cmd.add(nsimProps);
+							nsim_cmd += " -propsfile " + nsimProps;
 						}
-
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(nsim_cmd.toArray(new String[0]), nsim_wd), NSIM_PROCESS_LABEL);
+						
+						IProcess nsim_proc = DebugPlugin.newProcess(
+								launch,
+								DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
+								NSIM_PROCESS_LABEL);
+						nsim_proc.setAttribute(IProcess.ATTR_CMDLINE, nsim_cmd);
 					}
 
 				
