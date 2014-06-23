@@ -86,50 +86,34 @@ abort:
 	.type _exit_halt, @function
 	.align 4
 memory_error        :
-	b.d     _exit_halt
-	mov	r0, 0x101
 instruction_error   :
-	b.d     _exit_halt
-	mov	r0, 0x102
 EV_MachineCheck     :
-	b.d     _exit_halt
-	mov	r0, 0x103
 EV_TLBMissI         :
-	b.d     _exit_halt
-	mov	r0, 0x104
 EV_TLBMissD         :
-	b.d     _exit_halt
-	mov	r0, 0x105
 EV_ProtV            :
-	b.d     _exit_halt
-	mov	r0, 0x106
 EV_PrivilegeV       :
-	b.d     _exit_halt
-	mov	r0, 0x108
 EV_SWI              :
-	b.d     _exit_halt
-	mov	r0, 0x109
 EV_Trap             :
-	b.d     _exit_halt
-	mov	r0, 0x10A
 EV_Extension        :
-	b.d     _exit_halt
-	mov	r0, 0x10B
 EV_DivZero          :
-	b.d     _exit_halt
-	mov	r0, 0x10C
 EV_DCError          :
-	b.d     _exit_halt
-	mov	r0, 0x10D
 EV_Malignedr        :
-	mov	r0, 0x10E
 IRQ_Timer0          :
 IRQ_Timer1          :
 IRQ_18              :
 IRQ_19              :
 IRQ_20              :
 _exit_halt          :
-	; r0 contains exit code
+	; For simplicity same function _exit_halt() is used to handle exceptions
+	; and interrupts and to implement exit() function. If your CPU halted at
+	; this instruction:
+	; 1. Look at STATUS.AE bit. This is sixth bit (or mask 0x20). If it is
+	;    1, than exception happened, otherwise _exit_halt was called as a
+	;    normal function.
+	; 2. In the first case all registers has same values as at the moment
+	;    of exception, plus family of exception registers is set to their
+	;    appropriate values. In the latter case register R0 will containt
+	;    exit code of application.
 	flag 0x01
 	nop
 	nop
