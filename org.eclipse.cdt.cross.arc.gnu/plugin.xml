@@ -5534,17 +5534,17 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
                value="true">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.atomic"
+               name="Atomic functions (-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
        
       </toolChain>
@@ -7293,17 +7293,17 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
                value="true">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.atomic"
+               name="Atomic functions (-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
 
       </toolChain>
@@ -8691,17 +8691,17 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
                value="true">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.atomic"
+               name="Atomic functions (-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
       </toolChain>
       <toolChain
@@ -9546,17 +9546,17 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
                value="true">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.atomic"
+               name="Atomic functions (-matomic)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
       </toolChain>
       <projectType
