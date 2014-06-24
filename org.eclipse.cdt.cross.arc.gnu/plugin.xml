@@ -5527,13 +5527,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.windows.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
@@ -7293,13 +7286,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.windows.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
@@ -8698,13 +8684,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
@@ -9556,13 +9535,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.ea"
                name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
