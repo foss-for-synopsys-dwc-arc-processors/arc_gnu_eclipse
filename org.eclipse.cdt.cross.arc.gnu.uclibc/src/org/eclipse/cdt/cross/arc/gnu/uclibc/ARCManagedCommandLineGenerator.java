@@ -362,18 +362,7 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
        {
     	   oList.add("-mno-norm");
     	   
-       }
-       
-       if (sProcessor.equalsIgnoreCase("-mHS"))
-       {
-    	   oList.add("-mbarrel-shifter");
-    	   oList.add("-mshift-assist");
-    	   oList.add("-mcode-density");
-    	   oList.add("-mswap");
-    	   oList.add("-mnorm");
-    	   
-       }
-       
+       }       
        }
      
      return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
