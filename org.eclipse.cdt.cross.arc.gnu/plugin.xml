@@ -955,9 +955,9 @@
                   name="Single Precision FPU(-mfpu=fpus)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mfpu=fpus_dis"
+                  command="-mfpu=fpus_div"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuem.fpus_dis"
-                  name="Single Precision FPU with with DIV/SQRT instructions(-mfpu=fpus_dis)">
+                  name="Single Precision FPU with with DIV/SQRT instructions(-mfpu=fpus_div)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_fma"
@@ -982,9 +982,9 @@
                   name="SP FPU (-mfpu=fpus)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mfpu=fpus_dis"
+                  command="-mfpu=fpus_div"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
-                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_dis)">
+                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_fma"
@@ -1002,19 +1002,19 @@
                   name="DP FPU (-mfpu=fpud)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mfpu=fpud_dis"
+                  command="-mfpu=fpud_div"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_dis"
-                  name="DP FPU with DIV/SQRT instructions (-mfpu=fpus_dis)">
+                  name="DP FPU with DIV/SQRT instructions (-mfpu=fpud_div)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpud_fma"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_fma"
-                  name="DP FPU with fused instructions (-mfpu=fpus_fma)">
+                  name="DP FPU with fused instructions (-mfpu=fpud_fma)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpud_all"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_all"
-                  name="DP FPU with all instructions (-mfpu=fpus_all)">
+                  name="DP FPU with all instructions (-mfpu=fpud_all)">
             </enumeratedOptionValue>
          </option>
       <option
