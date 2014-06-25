@@ -422,15 +422,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
 						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles_last;
 						String nsimtcf = RemoteGDBDebuggerPage.nSIMtcffiles_last;
-						
+						String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
+						String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
+					    
 						String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb -on nsim_emt";
 
-						if(!nsimtcf.equalsIgnoreCase(""))
+						if(!nsimtcf.equalsIgnoreCase("")&&nsimtcf_Buttonboolean.equalsIgnoreCase("true"))
 						{
 							nsim_cmd += " -tcf " + nsimtcf;
 						}
 
-						if(!nsimProps.equalsIgnoreCase(""))
+						if(!nsimProps.equalsIgnoreCase("")&&nsimprops_Buttonboolean.equalsIgnoreCase("true"))
 						{
 							nsim_cmd += " -propsfile " + nsimProps;
 						}

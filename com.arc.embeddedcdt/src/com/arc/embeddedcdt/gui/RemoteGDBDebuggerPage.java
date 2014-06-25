@@ -198,8 +198,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_openocd_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT, "true");
 		    fLaunchexternal_ashling_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT, "true");
 		    fLaunchexternal_nsim_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT, "true");
-		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
-		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
+		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "false");
+		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "false");
 		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
 		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
 			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
@@ -988,7 +988,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 //		nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
 //		nSIMtcflabel.setText("nSIM TCF:");
 		fLaunchtcfButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchtcfButton.setSelection(true);
+		fLaunchtcfButton.setSelection(false);
 		gd = new GridData(SWT.BEGINNING);
 		fLaunchtcfButton.setLayoutData(gd);
 		fLaunchtcfButton.setText("TCF");
@@ -1031,7 +1031,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 //		nSIMpropslabel.setText("nSIM Props:");
 	
 		fLaunchPropsButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchPropsButton.setSelection(true);
+		fLaunchPropsButton.setSelection(false);
 		gd = new GridData(SWT.BEGINNING);
 		fLaunchPropsButton.setLayoutData(gd);
 		fLaunchPropsButton.setText("Properties file");
