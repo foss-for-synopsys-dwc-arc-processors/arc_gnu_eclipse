@@ -1094,6 +1094,42 @@
             name="MPY instructions (-mmpy)"
             valueType="boolean">
       </option>
+      <option
+            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem"
+            name="FPU EM Type"
+            valueType="enumerated">
+         <enumeratedOptionValue
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
+               isDefault="true"
+               name="None">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mfpu=fpus"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
+               name="SP FPU (-mfpu=fpus)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mfpu=fpus_div"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
+               name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mfpu=fpus_fma"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_fma"
+               name="SP FPU with fused instructions (-mfpu=fpus_fma)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mfpu=fpus_all"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all"
+               name="SP FPU with all instructions (-mfpu=fpus_all)">
+         </enumeratedOptionValue>
+		 <enumeratedOptionValue
+               command="-mfpu=dpuda"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpudpuda"
+               name="DP FPU with assist instructions (-mfpu=dpuda)">
+         </enumeratedOptionValue>
+      </option>
 
       </tool>
       <builder
@@ -3144,11 +3180,12 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpi"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem"
                isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+               name="FPU EM Type"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
+        
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
@@ -3378,7 +3415,7 @@
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
-        
+
          <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3987,25 +4024,10 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mpyhs"
-               name="Multiply instructions (ARC HS)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.fpuhs"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.fpuem"
                isAbstract="false"
-               name="FPU HS Type"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.fpi"
-               isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+               name="FPU EM Type"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4251,13 +4273,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -4347,13 +4362,11 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpi"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpuem"
                isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+               name="FPU EM Type"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4594,6 +4607,7 @@
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
+
          
          <!--
          <option
@@ -4877,14 +4891,13 @@
                name="Multiply instructions (ARC EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
-         <option
+                  <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpi"
+               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.fpuem"
                isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpi">
+               name="FPU EM Type"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"

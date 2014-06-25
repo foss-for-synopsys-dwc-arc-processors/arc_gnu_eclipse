@@ -132,9 +132,9 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            else if ((sID.endsWith(".option.warnings.syntax")) ||  //Customized for ARC GNU fsyntax-only
              (sID.indexOf(".option.warnings.syntax") > 0))
              sSyntaxonly = sEnumCommand;
-           //else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mEM"))) || 
-           //  (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
-           //  sFPUEM = sEnumCommand;
+           else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mEM"))) || 
+             (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
+             sFPUEM = sEnumCommand;
            else if ((sID.endsWith(".option.target.fpuhs"))&&(sProcessor.equalsIgnoreCase("-mHS")) || 
                    (sID.indexOf(".option.target.fpuhs.") > 0&&(sProcessor.equalsIgnoreCase("-mHS"))))
                    sFPUHS = sEnumCommand;
