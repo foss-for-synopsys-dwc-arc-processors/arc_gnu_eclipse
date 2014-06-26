@@ -386,13 +386,16 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String ash_dir = System.getProperty("Ashling");
 						File ash_wd = new java.io.File(ash_dir);
 						String ashling_exe = "ash-arc-gdb-server" + (RemoteGDBDebuggerPage.isWindowsOS() ? ".exe" : ""); 
-						String[] ash_cmd = {
-								ash_dir + java.io.File.separator + ashling_exe,
-								"--jtag-frequency", "8mhz",
-								"--device", "arc",
-								"--arc-reg-file", ash_dir + java.io.File.separator + "arc-opella-em.xml"
-								};
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(ash_cmd, ash_wd), ASHLING_PROCESS_LABEL);
+						String ash_cmd = 
+								ash_dir + java.io.File.separator + ashling_exe+
+								" --jtag-frequency"+ " 8mhz"+
+								" --device"+ " arc"+
+								" --arc-reg-file "+ ash_dir + java.io.File.separator + " arc-opella-em.xml";
+						IProcess ashling_proc = DebugPlugin.newProcess(
+								launch,
+								DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_wd),
+								ASHLING_PROCESS_LABEL);
+						ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
 					} 
 					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_openocd_launch.equalsIgnoreCase("true"))
 					{
@@ -400,8 +403,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						if(extenal_tools_openocd_path.isEmpty()) {
 							extenal_tools_openocd_path = RemoteGDBDebuggerPage.getOpenOCDDefaultPath();
 					    }
-						String[] openocd_cmd = { "openocd", "-f",extenal_tools_openocd_path,"-c","init","-c","halt","-c","\"reset halt\""  };
-						DebugPlugin.newProcess(launch, DebugPlugin.exec(openocd_cmd, null), OPENOCD_PROCESS_LABEL);
+						
+						String openocd_cmd =  "openocd" + " -f "+extenal_tools_openocd_path+" -c"+" init"+" -c"+" halt"+" -c"+" \"reset halt\"";
+						IProcess openocd_proc = DebugPlugin.newProcess(
+								launch,
+								DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),
+								OPENOCD_PROCESS_LABEL);
+						openocd_proc.setAttribute(IProcess.ATTR_CMDLINE, openocd_cmd);
 					}
 					else if (external_tools.equalsIgnoreCase("nSIM")&&external_nsim_launch.equalsIgnoreCase("true"))
 					{						
