@@ -353,15 +353,43 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
            oList.add(sll64);                                             
            }  
        
-       if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)<0)
-       {
-    	   oList.add("-mno-mpy");
+       if((sProcessor != null)){
+    	   if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)<0)
+           {
+        	   oList.add("-mno-mpy");
+        	   
+           }
+    	   else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)>0)
+           {
+        	   int i=oList.indexOf(sMPY);
+        	   oList.remove(i);
+        	   
+           }
     	   
-       }
-       if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
-       {
-    	   oList.add("-mno-norm");
-    	   
+           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
+           {
+        	   oList.add("-mno-norm");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)>0)
+           {
+        	   int i=oList.indexOf(sNormalize);
+        	   oList.remove(i);
+        	   
+           }
+           
+           
+           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sBarrelshifter)<0)
+           {
+        	   oList.add("-mno-barrel-shifter");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sBarrelshifter)>0)
+           {
+        	   int i=oList.indexOf(sBarrelshifter);
+        	   oList.remove(i);
+        	   
+           }
        }       
        }
      

@@ -338,9 +338,35 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
         	   oList.add("-mno-mpy");
         	   
            }
+    	   else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)>0)
+           {
+        	   int i=oList.indexOf(sMPY);
+        	   oList.remove(i);
+        	   
+           }
+    	   
            if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
            {
         	   oList.add("-mno-norm");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)>0)
+           {
+        	   int i=oList.indexOf(sNormalize);
+        	   oList.remove(i);
+        	   
+           }
+           
+           
+           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sBarrelshifter)<0)
+           {
+        	   oList.add("-mno-barrel-shifter");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sBarrelshifter)>0)
+           {
+        	   int i=oList.indexOf(sBarrelshifter);
+        	   oList.remove(i);
         	   
            }
        }  
