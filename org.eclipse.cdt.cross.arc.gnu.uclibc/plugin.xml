@@ -2912,7 +2912,7 @@
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.normalize"
-               name="Normalize instruction(-mnorm)"
+               name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
          </option>
          <option
@@ -3203,16 +3203,17 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
-               name="Normalize instruction(-mnorm)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.swap"
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
          </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
+               name="Bitscan instruction (-mnorm) "
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
+         </option>
+
          
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -6107,7 +6108,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
+               id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.swap"
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
          </option>
@@ -8149,15 +8150,15 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
-               name="Normalize instruction(-mnorm)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.swap"
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
+               name="Bitscan instruction (-mnorm) "
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -8667,14 +8668,14 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.swap"
+               id="org.eclipse.cdt.cross.arc.gnu.700.shared.uclibc.linux.option.target.swap"
                name="Swap instruction(-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize"
+               id="org.eclipse.cdt.cross.arc.gnu.700.shared.uclibc.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
          </option>
