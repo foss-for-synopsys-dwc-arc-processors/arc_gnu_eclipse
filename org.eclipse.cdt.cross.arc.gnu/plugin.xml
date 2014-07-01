@@ -2645,7 +2645,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for HS Windows hosts"
+               name="ARC GNU Make builder for Windows hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder.hs">
          </builder>
          <optionCategory
@@ -3141,7 +3141,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for EM Linux hosts"
+               name="ARC GNU Make builder for Linux hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -4863,7 +4863,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for EM Windows hosts"
+               name="ARC GNU Make builder for Windows hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -5294,7 +5294,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.700"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC700 Windows hosts"
+               name="ARC GNU Make builder for Windows hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder.700">
          </builder>
          <optionCategory
@@ -5735,7 +5735,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.600"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC600 Windows hosts"
+               name="ARC GNU Make builder for Windows hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder.600">
          </builder>
          <optionCategory
@@ -6150,7 +6150,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for HS Windows hosts (big endian)"
+               name="ARC GNU Make builder for Windows hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder.hs">
          </builder>
          <optionCategory
@@ -6570,7 +6570,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.600"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC 600 Windows hosts (big endian)"
+               name="ARC GNU Make builder for Windows hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder.600">
          </builder>
          <optionCategory
@@ -7023,7 +7023,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.700"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC 700 Windows hosts (big endian)"
+               name="ARC GNU Make builder for Windows hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder.700">
          </builder>
          <optionCategory
@@ -7486,7 +7486,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for HS Linux hosts"
+               name="ARC GNU Make builder for Linux hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -7871,7 +7871,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base.600"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC600 Linux hosts"
+               name="ARC GNU Make builder for Linux hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -8449,7 +8449,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base.700"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC700 Linux hosts"
+               name="ARC GNU Make builder for Linux hosts"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -8738,7 +8738,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for HS Linux hosts (big endian)"
+               name="ARC GNU Make builder for Linux hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -9275,7 +9275,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC700 Linux hosts (big endian)"
+               name="ARC GNU Make builder for Linux hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -9708,7 +9708,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for ARC600 Linux hosts (big endian)"
+               name="ARC GNU Make builder for Linux hosts (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
