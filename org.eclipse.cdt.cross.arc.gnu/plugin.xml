@@ -5142,50 +5142,50 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.hs">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.cpp.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.createflash.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.createlisting.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
                </tool>
@@ -5202,55 +5202,55 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.createflash.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.createlisting.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.windows.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base">
                </tool>
@@ -5576,50 +5576,50 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.700.windows.elf.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.700">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.cpp.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.createflash.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.createlisting.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
                </tool>
@@ -5636,55 +5636,55 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.700.windows.elf.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.createflash.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.createlisting.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.700.windows.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base">
                </tool>
@@ -6007,50 +6007,50 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.600.windows.elf.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base.600">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.cpp.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.createflash.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.createlisting.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
                </tool>
@@ -6067,55 +6067,55 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.600.windows.elf.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.createflash.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.createlisting.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.600.windows.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base">
                </tool>
@@ -6442,45 +6442,45 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.eb.hswindows.elf.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.hs">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.cpp.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.printsize.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.printsize.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.printsize.base">
                </tool>
@@ -6497,45 +6497,45 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.hs">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.printsize.base">
                </tool>
@@ -6888,45 +6888,45 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.600">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.cpp.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.printsize.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.printsize.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.printsize.base">
                </tool>
@@ -6943,45 +6943,45 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.hs">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.windows.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.printsize.base">
                </tool>
@@ -7351,45 +7351,45 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.cpp.linker.debug">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.platform.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.platform.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.builder.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.700">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.assembler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.assembler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.c.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.cpp.compiler.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.cpp.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.printsize.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.printsize.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.printsize.base">
                </tool>
@@ -7406,45 +7406,45 @@
                   isAbstract="false"
                   secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.cpp.linker.release">
                <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.platform.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.platform.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.platform.base">
                </targetPlatform>
                <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.builder.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.builder.base.700">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.assembler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.cpp.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.compiler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.c.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.c.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.cpp.linker.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.cpp.linker.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.windows.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.windows.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.windows.printsize.base">
                </tool>
