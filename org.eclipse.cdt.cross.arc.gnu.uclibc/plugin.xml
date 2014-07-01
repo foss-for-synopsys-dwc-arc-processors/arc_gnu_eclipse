@@ -1139,7 +1139,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mmpy"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mpy"
-               name="MPY instructions (-mmpy)"
+               name="MPY instruction (-mmpy)"
                valueType="boolean">
          </option>
       </tool>
@@ -3209,6 +3209,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
@@ -3246,6 +3247,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.mpy"
                name="MPY instruction (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy">
@@ -6115,6 +6117,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
@@ -6150,6 +6153,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpy"
                name="MPY instruction (-mmpy) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mpy">
@@ -8156,6 +8160,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
@@ -8191,6 +8196,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.mpy"
                name="MPY instruction (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy">
@@ -8675,6 +8681,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.shared.uclibc.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
@@ -8710,6 +8717,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpy"
                name="MPY instruction (-mmpy) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mpy">
