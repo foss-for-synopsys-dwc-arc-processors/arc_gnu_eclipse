@@ -625,10 +625,10 @@
                name="Processor (-mcpu)"
                valueType="enumerated">
             <enumeratedOptionValue
-                  command="-mEM"
+                  command="-mcpu=arcem"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2em"
                   isDefault="true"
-                  name="ARC EM (-mEM)">
+                  name="ARC EM (-mcpu=arcem)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -2659,9 +2659,9 @@
                name="ARC HS (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mHS"
+                  command="-mcpu=archs"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mHS)">
+                  name="ARC HS (-mcpu=archs)">
             </enumeratedOptionValue>
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
@@ -3156,10 +3156,10 @@
                name="ARC EM (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mEM"
+                  command="-mcpu=arcem"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2em"
                   isDefault="true"
-                  name="ARC EM (-mEM)">
+                  name="ARC EM (-mcpu=arcem)">
             </enumeratedOptionValue>
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
@@ -5308,9 +5308,9 @@
                name="ARC 700 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA7"
+                  command="-mcpu=arc700"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
-                  name="ARC 700 (-mA7)">
+                  name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -5749,9 +5749,9 @@
                name="ARC 600 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA6"
+                  command="-mcpu=arc600"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
-                  name="ARC 600 (-mA6)">
+                  name="ARC 600 (-mcpu=arc600)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -6163,9 +6163,9 @@
                name="ARC HS(-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mHS"
+                  command="-mcpu=archs"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mHS)">
+                  name="ARC HS (-mcpu=archs)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -6583,9 +6583,9 @@
                name="ARC 600(-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA6"
+                  command="-mcpu=arc600"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
-                  name="ARC 600 (-mA6)">
+                  name="ARC 600 (-mcpu=arc600)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -7036,9 +7036,9 @@
                name="ARC 700(-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA7"
+                  command="-mcpu=arc700"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
-                  name="ARC 700 (-mA7)">
+                  name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -7501,10 +7501,10 @@
                name="ARC HS (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mHS"
+                  command="-mcpu=archs"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
                   isDefault="true"
-                  name="ARC HS (-mHS)">
+                  name="ARC HS (-mcpu=archs)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -7886,10 +7886,10 @@
                name="ARC 600 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA6"
+                  command="-mcpu=arc600"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
                   isDefault="true"
-                  name="ARC 600 (-mA6)">
+                  name="ARC 600 (-mcpu=arc600)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -8464,10 +8464,10 @@
                name="ARC 700 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA7"
+                  command="-mcpu=arc700"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
                   isDefault="true"
-                  name="ARC 700 (-mA7)">
+                  name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -8751,9 +8751,9 @@
                name="ARC HS (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mHS"
+                  command="-mcpu=archs"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mHS)">
+                  name="ARC HS (-mcpu=archs)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -9288,9 +9288,9 @@
                name="ARC 700 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA7"
+                  command="-mcpu=arc700"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
-                  name="ARC 700 (-mA7)">
+                  name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -9721,9 +9721,9 @@
                name="ARC 600 (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
-                  command="-mA6"
+                  command="-mcpu=arc600"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
-                  name="ARC 600 (-mA6)">
+                  name="ARC 600 (-mcpu=arc600)">
             </enumeratedOptionValue>
          </option>
          <option
