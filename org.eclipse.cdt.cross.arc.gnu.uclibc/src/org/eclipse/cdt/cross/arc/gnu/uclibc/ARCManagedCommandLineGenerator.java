@@ -390,7 +390,18 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
         	   oList.remove(i);
         	   
            }
-       }       
+           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(satomic)<0)
+           {
+        	   oList.add("-mno-atomic");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(satomic)>0)
+           {
+        	   int i=oList.indexOf(satomic);
+        	   oList.remove(i);
+        	   
+           }
+         }       
        }
      
      return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);

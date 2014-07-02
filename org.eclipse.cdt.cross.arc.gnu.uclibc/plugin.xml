@@ -1003,6 +1003,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-matomic"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
                name="Atomic functions (-matomic)"
                valueType="boolean">
@@ -1130,9 +1131,9 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mEA"
+               command="-mea"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
+               name="Extended Arithmetic Instruction (-mea)"
                valueType="boolean">
          </option>
          <option
@@ -3220,26 +3221,13 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
+               name="Extended Arithmetic Instruction (-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -6126,26 +6114,13 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
+               name="Extended Arithmetic Instruction (-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.eb.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -8169,26 +8144,13 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
+               name="Extended Arithmetic Instruction (-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -8690,26 +8652,13 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
+               name="Extended Arithmetic Instruction (-mea)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.target.lock"
-               name="Atomic Option (-mlock)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.eb.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
