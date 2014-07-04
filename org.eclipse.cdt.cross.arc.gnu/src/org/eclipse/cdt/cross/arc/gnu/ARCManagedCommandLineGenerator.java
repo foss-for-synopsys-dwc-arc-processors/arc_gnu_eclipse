@@ -132,8 +132,8 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            else if ((sID.endsWith(".option.warnings.syntax")) ||  //Customized for ARC GNU fsyntax-only
              (sID.indexOf(".option.warnings.syntax") > 0))
              sSyntaxonly = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mEM"))) || 
-             (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
+           else if ((sID.endsWith(".option.target.fpuem")&&(sProcessor.equalsIgnoreCase("-mcpu=arcem"))) || 
+             (sID.indexOf(".option.target.fpuem.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=arcem")))
              sFPUEM = sEnumCommand;
            else if ((sID.endsWith(".option.target.fpuhs"))&&(sProcessor.equalsIgnoreCase("-mHS")) || 
                    (sID.indexOf(".option.target.fpuhs.") > 0&&(sProcessor.equalsIgnoreCase("-mHS"))))
@@ -141,11 +141,11 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            else if ((sID.endsWith(".option.target.mpyhs"))&&(sProcessor.equalsIgnoreCase("-mHS")) || 
                    (sID.indexOf(".option.target.mpyhs") > 0)&&(sProcessor.equalsIgnoreCase("-mHS")))
              smpyhs = sEnumCommand;
-           else if ((sID.endsWith(".option.target.mpyem"))&&(sProcessor.equalsIgnoreCase("-mEM")) || 
-                   (sID.indexOf(".option.target.mpyem") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")))
+           else if ((sID.endsWith(".option.target.mpyem"))&&(sProcessor.equalsIgnoreCase("-mcpu=arcem")) || 
+                   (sID.indexOf(".option.target.mpyem") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=arcem")))
              smpyem = sEnumCommand;
-           else if ((sID.endsWith(".option.target.fpi")&&(sProcessor.equalsIgnoreCase("-mEM")||sProcessor.equalsIgnoreCase("-mA6")||sProcessor.equalsIgnoreCase("-mA7"))) ||           //Customized for ARC GNU spfp 
-                   (sID.indexOf(".option.target.fpi") > 0)&&(sProcessor.equalsIgnoreCase("-mEM")||sProcessor.equalsIgnoreCase("-mA6")||sProcessor.equalsIgnoreCase("-mA7")))               //Customized for ARC GNU spfp
+           else if ((sID.endsWith(".option.target.fpi")&&(sProcessor.equalsIgnoreCase("-mcpu=arcem")||sProcessor.equalsIgnoreCase("-mcpu=arc600")||sProcessor.equalsIgnoreCase("-mcpu=arc700"))) ||           //Customized for ARC GNU spfp 
+                   (sID.indexOf(".option.target.fpi") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=arcem")||sProcessor.equalsIgnoreCase("-mcpu=arc600")||sProcessor.equalsIgnoreCase("-mcpu=arc700")))               //Customized for ARC GNU spfp
              smfpi = sEnumCommand;                                          //Customized for ARC GNU 
          else if ((sID.endsWith(".option.debugging.level")) || 
              (sID.indexOf(".option.debugging.level.") > 0))
@@ -184,8 +184,8 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
              (sID.indexOf(".option.target.barrelshifter.") > 0)) {       //Customized for ARC GNU barrelshifter
              if (bVal)                                                   //Customized for ARC GNU barrelshifter
                sBarrelshifter = sCommand;                                //Customized for ARC GNU barrelshifter
-           } else if ((sID.endsWith(".option.target.codedensity")&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))) ||    //Customized for ARC GNU codedensity
-             (sID.indexOf(".option.target.codedensity.") > 0)&&((sProcessor.equalsIgnoreCase("-mEM"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {         //Customized for ARC GNU codedensity
+           } else if ((sID.endsWith(".option.target.codedensity")&&((sProcessor.equalsIgnoreCase("-mcpu=arcem"))||(sProcessor.equalsIgnoreCase("-mHS"))) ||    //Customized for ARC GNU codedensity
+             (sID.indexOf(".option.target.codedensity.") > 0)&&((sProcessor.equalsIgnoreCase("-mcpu=arcem"))||(sProcessor.equalsIgnoreCase("-mHS"))))) {         //Customized for ARC GNU codedensity
               if (bVal)                                                  //Customized for ARC GNU codedensity
               sCodedensity = sCommand;                                   //Customized for ARC GNU codedensity
            } else if ((sID.endsWith(".option.target.divide")) ||         //Customized for ARC GNU divide
@@ -204,20 +204,20 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
              (sID.indexOf(".option.target.swap.") > 0)) {                //Customized for ARC GNU swap
              if (bVal)                                                   //Customized for ARC GNU swap
               sSwap = sCommand;                                          //Customized for ARC GNU swap
-           } else if ((sID.endsWith(".option.target.ea")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
-                   (sID.indexOf(".option.target.ea.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.ea")&&(sProcessor.equalsIgnoreCase("-mcpu=arc700")||sProcessor.equalsIgnoreCase("-mcpu=arc600"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.ea.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=arc700")||sProcessor.equalsIgnoreCase("-mcpu=arc600"))) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    sEa = sCommand;                                          //Customized for ARC GNU ea
-           } else if ((sID.endsWith(".option.target.mul3216")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
-                   (sID.indexOf(".option.target.mul3216.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.mul3216")&&(sProcessor.equalsIgnoreCase("-mcpu=arc700")||sProcessor.equalsIgnoreCase("-mcpu=arc600"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.mul3216.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=arc700")||sProcessor.equalsIgnoreCase("-mcpu=arc600"))) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    smul3216 = sCommand; 
-           } else if ((sID.endsWith(".option.target.xy")&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) ||           //Customized for ARC GNU ea
-                   (sID.indexOf(".option.target.xy.") > 0)&&(sProcessor.equalsIgnoreCase("-mA7")||sProcessor.equalsIgnoreCase("-mA6"))) {               //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.xy")&&(sProcessor.equalsIgnoreCase("-mcpu=arc700")||sProcessor.equalsIgnoreCase("-mcpu=arc600"))) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.xy.") > 0)&&(sProcessor.equalsIgnoreCase("-mcpu=arc700")||sProcessor.equalsIgnoreCase("-mcpu=arc600"))) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    smxy = sCommand; 
-           } else if ((sID.endsWith(".option.target.lock")&&sProcessor.equalsIgnoreCase("-mA7")) ||           //Customized for ARC GNU ea
-                   (sID.indexOf(".option.target.lock.") > 0)&&sProcessor.equalsIgnoreCase("-mA7")) {               //Customized for ARC GNU ea
+           } else if ((sID.endsWith(".option.target.lock")&&sProcessor.equalsIgnoreCase("-mcpu=arc700")) ||           //Customized for ARC GNU ea
+                   (sID.indexOf(".option.target.lock.") > 0)&&sProcessor.equalsIgnoreCase("-mcpu=arc700")) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    smxy = sCommand; 
            } else if ((sID.endsWith(".option.target.shiftassist")) ||  
@@ -235,8 +235,8 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
                if (bVal)                                                  
                  sll64 = sCommand;                                
            } 
-           else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")&&sProcessor.equalsIgnoreCase("-mEM")) ||  
-                   (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)&&sProcessor.equalsIgnoreCase("-mEM")) {       
+           else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")&&sProcessor.equalsIgnoreCase("-mcpu=arcem")) ||  
+                   (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)&&sProcessor.equalsIgnoreCase("-mcpu=arcem")) {       
                if (bVal)                                                  
             	   smno_dpfp_lrsr = sCommand;                                
            } 
@@ -333,24 +333,24 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            oList.add(sll64);                                             
            }  
        if((sProcessor != null)){
-    	   if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)<0)
+    	   if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sMPY)<0)
            {
         	   oList.add("-mno-mpy");
         	   
            }
-    	   else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sMPY)>0)
+    	   else if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sMPY)>0)
            {
         	   int i=oList.indexOf(sMPY);
         	   oList.remove(i);
         	   
            }
     	   
-           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)<0)
+           if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sNormalize)<0)
            {
         	   oList.add("-mno-norm");
         	   
            }
-           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sNormalize)>0)
+           else if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sNormalize)>0)
            {
         	   int i=oList.indexOf(sNormalize);
         	   oList.remove(i);
@@ -358,12 +358,12 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            }
            
            
-           if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sBarrelshifter)<0)
+           if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sBarrelshifter)<0)
            {
         	   oList.add("-mno-barrel-shifter");
         	   
            }
-           else if (sProcessor.equalsIgnoreCase("-mA7")&&oList.indexOf(sBarrelshifter)>0)
+           else if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sBarrelshifter)>0)
            {
         	   int i=oList.indexOf(sBarrelshifter);
         	   oList.remove(i);
