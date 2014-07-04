@@ -3227,7 +3227,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               defaultValue="t"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -8149,7 +8148,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               defaultValue="t"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
