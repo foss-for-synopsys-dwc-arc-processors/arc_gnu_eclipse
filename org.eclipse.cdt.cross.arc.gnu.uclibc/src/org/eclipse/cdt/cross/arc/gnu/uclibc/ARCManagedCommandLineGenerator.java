@@ -390,9 +390,16 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
         	   oList.remove(i);
         	   
            }
-           if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(satomic)<0)
+           
+           if (sProcessor.equalsIgnoreCase("-mcpu=archs")&&oList.indexOf(satomic)<0)
            {
         	   oList.add("-mno-atomic");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mcpu=archs")&&oList.indexOf(satomic)>0)
+           {
+        	   int i=oList.indexOf(satomic);
+        	   oList.remove(i);
         	   
            }
          }       
