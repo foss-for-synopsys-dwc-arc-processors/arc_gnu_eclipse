@@ -798,13 +798,6 @@
                valueType="boolean">
          </option>
 
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mno-dpfp-lrsr"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr"
-            name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-            valueType="boolean">
-      </option>
       <!--
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -1125,9 +1118,9 @@
                name="SP FPU with all instructions (-mfpu=fpus_all)">
          </enumeratedOptionValue>
 		 <enumeratedOptionValue
-               command="-mfpu=dpuda"
+               command="-mfpu=fpuda "
                id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpudpuda"
-               name="DP FPU with assist instructions (-mfpu=dpuda)">
+               name="DP FPU with assist instructions (-mfpu=fpuda )">
          </enumeratedOptionValue>
       </option>
 
@@ -3186,13 +3179,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
         
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.linux.category.debugging"
                name="Debugging">
@@ -4030,13 +4016,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.other"
                isAbstract="false"
@@ -4367,13 +4346,6 @@
                isAbstract="false"
                name="FPU EM Type"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
@@ -4898,13 +4870,6 @@
                isAbstract="false"
                name="FPU EM Type"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.windows.category.debugging"
