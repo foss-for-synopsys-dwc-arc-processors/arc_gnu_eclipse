@@ -369,6 +369,18 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
         	   oList.remove(i);
         	   
            }
+           
+           if (sProcessor.equalsIgnoreCase("-mcpu=archs")&&oList.indexOf(satomic)<0)
+           {
+        	   oList.add("-mno-atomic");
+        	   
+           }
+           else if (sProcessor.equalsIgnoreCase("-mcpu=archs")&&oList.indexOf(satomic)>0)
+           {
+        	   int i=oList.indexOf(satomic);
+        	   oList.remove(i);
+        	   
+           }
        }  
        
 //       if (sProcessor.equalsIgnoreCase("-mHS"))

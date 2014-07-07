@@ -2870,7 +2870,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.windows.option.target.atomic"
                name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
+               value="true">
          </option>
         
         <!--
@@ -6366,7 +6367,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.eb.windows.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.hs.windows.option.target.atomic"
                name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
+               value="true">
          </option>
       </toolChain>
       <configuration
@@ -7678,7 +7680,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
+               value="true">
          </option>
       </toolChain>
       <projectType
@@ -8954,7 +8957,8 @@
                category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
+               value="true">
          </option>
       </toolChain>
       <configuration
