@@ -3238,6 +3238,13 @@
                name="MPY instruction (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
+               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application"
@@ -6132,6 +6139,13 @@
                name="MPY instruction (-mmpy) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mpy">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
+               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.staticLib"
@@ -8162,6 +8176,13 @@
                name="MPY instruction (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
+               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
+         </option>
       </toolChain>
       <toolChain
             archList="all"
@@ -8669,6 +8690,13 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpy"
                name="MPY instruction (-mmpy) "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mpy">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
+               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
       </toolChain>
       
