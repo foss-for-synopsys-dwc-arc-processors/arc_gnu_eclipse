@@ -235,8 +235,8 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
                if (bVal)                                                  
                  sll64 = sCommand;                                
            } 
-           else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")&&sProcessor.equalsIgnoreCase("-mcpu=arcem")) ||  
-                   (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)&&sProcessor.equalsIgnoreCase("-mcpu=arcem")) {       
+           else if ((sID.endsWith(".option.target.mno-dpfp-lrsr")) ||  
+                   (sID.indexOf(".option.target.mno-dpfp-lrsr.") > 0)) {       
                if (bVal)                                                  
             	   smno_dpfp_lrsr = sCommand;                                
            } 
