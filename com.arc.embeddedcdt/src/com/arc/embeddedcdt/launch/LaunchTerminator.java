@@ -72,15 +72,15 @@ public class LaunchTerminator implements IDebugEventSetListener {
 		}
 
 		public void run() {
-			boolean terminate = true;
+			//boolean terminate = true;
 			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			if (window != null) {
 				Shell parent = window.getShell();
-				terminate = MessageDialog.openQuestion(
-						parent,
-						"Child process exited",
-						"Process `" + fProcess.getLabel() + "' required for debugging has exited. Do you want to end debug session?"
-				);
+//				terminate = MessageDialog.openQuestion(
+//						parent,
+//						"Child process exited",
+//						"Process `" + fProcess.getLabel() + "' required for debugging has exited. Do you want to end debug session?"
+//				);
 				IWorkbench workbench = PlatformUI.getWorkbench();
 				final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
@@ -95,9 +95,9 @@ public class LaunchTerminator implements IDebugEventSetListener {
 					e.printStackTrace();
 				}
 			}
-			if (terminate) {
+			//if (terminate) {
 				DebugPlugin.getDefault().asyncExec(new TerminateRunnable(fLaunch));
-			}
+			//}
 		}
 	}
 
