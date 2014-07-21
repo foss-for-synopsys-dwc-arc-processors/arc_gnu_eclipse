@@ -759,6 +759,11 @@
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format.dwarf2"
                   name="dwarf-2">
             </enumeratedOptionValue>
+           <enumeratedOptionValue
+                  command="-gdwarf-4"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format.dwarf4"
+                  name="dwarf-4">
+            </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-gstabs"
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format.stabs"
@@ -1130,9 +1135,9 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mea"
+               command="-mEA"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea"
-               name="Extended Arithmetic Instruction (-mea)"
+               name="Extended Arithmetic Instruction (-mEA)"
                valueType="boolean">
          </option>
          <option
@@ -3220,7 +3225,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mea)"
+               name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
@@ -6121,7 +6126,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mea)"
+               name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
@@ -8158,7 +8163,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mea)"
+               name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
@@ -8673,7 +8678,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mea)"
+               name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
          </option>
          <option
