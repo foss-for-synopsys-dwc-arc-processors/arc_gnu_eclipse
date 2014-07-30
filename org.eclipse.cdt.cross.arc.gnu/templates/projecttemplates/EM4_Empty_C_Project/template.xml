@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<template type="ProjTempl" version="1.0" supplier="Eclipse.org" revision="1.0" author="Bala Torati (Symbian), Synopsys Inc."
-		copyright="Copyright (c) 2007 Symbian Software Limited and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available athttp://www.eclipse.org/legal/epl-v10.html"
-		id="ARC_Emptyem4_C_Project" label="%Emptyem4.Ctemplate.label" description="%Emptyem4.Ctemplate.description"
-		 help="help.html">
+<template
+    type="ProjTempl" version="1.0" supplier="Eclipse.org" revision="1.0"
+    author="Bala Torati (Symbian), Synopsys Inc."
+    copyright="Copyright (c) 2007 Symbian Software Limited and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available athttp://www.eclipse.org/legal/epl-v10.html"
+    id="EM4_Empty_C_Project"
+    label="%Emptyem4.Ctemplate.label" description="%Emptyem4.Ctemplate.description"
+    help="help.html">
 
 	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
 		<simple name="name" value="$(projectName)" />
