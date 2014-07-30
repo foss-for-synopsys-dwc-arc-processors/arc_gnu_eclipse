@@ -401,10 +401,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					{
 						// Start OpenOCD GDB server
 						if(extenal_tools_openocd_path.isEmpty()) {
-							extenal_tools_openocd_path = RemoteGDBDebuggerPage.getOpenOCDDefaultPath();
+							extenal_tools_openocd_path = RemoteGDBDebuggerPage.getOpenOCDScriptDefaultPath();
 					    }
-						
-						String openocd_cmd =  "openocd" + " -f "+extenal_tools_openocd_path+" -c"+" init"+" -c"+" halt"+" -c"+" \"reset halt\"";
+
+						String openocd_cmd = RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath() +
+							" -s " + RemoteGDBDebuggerPage.getOpenOCDScriptDirectory() +
+							" -f " + extenal_tools_openocd_path;
 						IProcess openocd_proc = DebugPlugin.newProcess(
 								launch,
 								DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),

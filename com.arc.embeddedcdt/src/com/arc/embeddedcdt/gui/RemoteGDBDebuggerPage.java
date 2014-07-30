@@ -159,25 +159,39 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 	
-	public static String getOpenOCDDefaultPath() {
+	public static String getIDERootDirPath() {
+		String s = System.getProperty("eclipse.home.location");
+		s = s.substring("file:/".length()).replace("/", "\\");
+		String path = s + "\\..";
+		try {
+			return Paths.get(path).toRealPath().toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	public static String getOpenOCDExecutableDefaultPath() {
 		if (isWindowsOS()) {
-			String s = System.getProperty("eclipse.home.location");
-			s = s.substring("file:/".length()).replace("/", "\\");
-			String path = s + java.io.File.separator +
-					".." + java.io.File.separator +
-					"share" + java.io.File.separator +
-					"openocd" + java.io.File.separator +
-					"scripts" + java.io.File.separator +
-					"target" + java.io.File.separator +
-					"snps_starter_kit_arc-em.cfg";
-			try {
-				return Paths.get(path).toRealPath().toString();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return "";
-			}
+			return getIDERootDirPath() + "\\bin\\openocd.exe";
 		} else {
-			return "/usr/local/share/openocd/scripts/target/snps_starter_kit_arc-em.cfg";
+			return "/usr/local/bin/openocd";
+		}
+	}
+
+	public static String getOpenOCDScriptDirectory() {
+		if (isWindowsOS()) {
+			return getIDERootDirPath() + "\\share\\openocd\\scripts";
+		} else {
+			return "/usr/local/share/openocd/scripts";
+		}
+	}
+
+	public static String getOpenOCDScriptDefaultPath() {
+		if (isWindowsOS()) {
+			return getIDERootDirPath() + "\\share\\openocd\\scripts\\board\\snps_em_sk.cfg";
+		} else {
+			return "/usr/local/share/openocd/scripts/board/snps_em_sk.cfg";
 		}
 	}
 
@@ -381,7 +395,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 						createTabitemCOM(subComp);
 						if (externaltools_openocd_path.equalsIgnoreCase(""))
-							fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
+							fPrgmArgumentsTextexternal.setText(getOpenOCDScriptDefaultPath());
 						else
 							fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
 						
@@ -827,7 +841,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 		if(externaltools_openocd_path.equalsIgnoreCase(""))
-		     fPrgmArgumentsTextexternal.setText(getOpenOCDDefaultPath());
+		     fPrgmArgumentsTextexternal.setText(getOpenOCDScriptDefaultPath());
 		else  fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
 		
 		
