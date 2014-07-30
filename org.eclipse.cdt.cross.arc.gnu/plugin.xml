@@ -11250,8 +11250,14 @@
          point="org.eclipse.cdt.core.templates">
       <template
             filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_C_Project"
-            location="$nl$/templates/projecttemplates/HelloWorld_C_Project/template.xml"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_C_Project"
+            location="$nl$/templates/projecttemplates/EMSK_HelloWorld_C_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_CPP_Project"
+            location="$nl$/templates/projecttemplates/EMSK_HelloWorld_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
@@ -11264,12 +11270,6 @@
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_EM6_Empty_C_Project"
             location="$nl$/templates/projecttemplates/EM6_Empty_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.ARC_HelloWorld_CPP_Project"
-            location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template

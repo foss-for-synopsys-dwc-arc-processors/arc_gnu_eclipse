@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : $(baseName).cpp
+ Name        : $(baseName).c
  Author      : $(author)
  Version     :
  Copyright   : $(copyright)
- Description : Hello World in CPP
+ Description : Hello World in C
  ============================================================================
  */
 #include <stdio.h>
