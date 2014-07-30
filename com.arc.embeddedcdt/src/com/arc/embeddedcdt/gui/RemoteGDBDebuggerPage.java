@@ -202,8 +202,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "false");
 		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
 		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
-			nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
-			nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
+		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
+		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
+		    fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 		    
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
@@ -877,6 +878,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 	
 	
 		fLaunchComButton.setText("Launch Terminal");
+		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
 		fLaunchComButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
 	        	if(fLaunchComButton.getSelection()==true){
