@@ -1,19 +1,19 @@
-;; *******************************************************************************************************************
-;; -----------------
-;; ARC start up file
-;; -----------------
-;; The startup code for the ARC family of processors does the following before transferring control to user defined
-;; _main label :
-;;		1. Set sp to __stack_top (link time variable)
-;;		2. Set fp to zero
-;;		3. Zero out the bss section (for uninitialized globals)
-;; After returning from main, the processor is halted and the pipeline is flushed out
-;;
-;; *******************************************************************************************************************
+; *****************************************************************************
+; ARC start up file
+;
+; The startup code for the ARC family of processors does the following before
+; transferring control to user defined ;; _main label :
+;	1. Set sp to __stack_top (link time variable)
+;	2. Set fp to zero
+;	3. Zero out the bss section (for uninitialized globals)
+; After returning from main, the processor is halted and the pipeline is flushed out
+;
+; ******************************************************************************
+
 	.file "crt0.S"
 
 	.section .ivt, "a",@progbits
-;; *******************************************************************************************************************
+; ******************************************************************************
 ;// handler's name              type      number  name                    offset in IVT (hex/dec)
 .word   __start             ;   exception   0   program entry point offset  0x0     0
 .word   memory_error        ;   exception   1   memory_error        offset  0x4     4
@@ -36,7 +36,7 @@
 .word   IRQ_18              ;   IRQ         18                      offset  0x48    72
 .word   IRQ_19              ;   IRQ         19                      offset  0x4C    76
 .word   IRQ_20              ;   IRQ         20                      offset  0x50    80
-;; *******************************************************************************************************************
+; ******************************************************************************
 
 	.extern main
 	.text
@@ -85,6 +85,7 @@ abort:
 	.global _exit_halt
 	.type _exit_halt, @function
 	.align 4
+_exit_halt          :
 memory_error        :
 instruction_error   :
 EV_MachineCheck     :
@@ -103,7 +104,6 @@ IRQ_Timer1          :
 IRQ_18              :
 IRQ_19              :
 IRQ_20              :
-_exit_halt          :
 	; For simplicity same function _exit_halt() is used to handle exceptions
 	; and interrupts and to implement exit() function. If your CPU halted at
 	; this instruction:
@@ -118,5 +118,5 @@ _exit_halt          :
 	nop
 	nop
 	nop
-	b @_exit_halt
+	b_s @_exit_halt
 	nop
