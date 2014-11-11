@@ -835,15 +835,27 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 		// always exercise this statement.
 		File f;
-		
+		IPath path_to_return;
+
 		if (p.isAbsolute())
 		{
 			f = new File(p.toOSString());
+			path_to_return = p;
 		} else
 		{
+			// Convert to absolute path.
+			// That will handle cases where path is like ..\a\b\c
 			f = new File(project.getResource().getLocation().toFile(), p.toOSString());
-			 /* convert to absolute path */
-			p = new Path(f.getAbsolutePath());  
+			path_to_return = new Path(f.getAbsolutePath());
+		}
+
+		// Handle cases with virtual/linked paths. Strangely same code doesn't
+		// work properly with physical relative paths, consequently we have to
+		// handle those cases separately.
+		if (!dummy&&!f.exists())
+		{
+			path_to_return = project.getProject().getFile(p).getLocation();
+			f = path_to_return.toFile();
 		}
 
 		if (!dummy&&!f.exists())
@@ -857,7 +869,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			return null;
 		}
 		
-		return p;
+		return path_to_return;
 	}
 
 	@Override
