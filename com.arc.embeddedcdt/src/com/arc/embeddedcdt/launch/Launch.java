@@ -399,19 +399,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					} 
 					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_openocd_launch.equalsIgnoreCase("true"))
 					{
-						// Start OpenOCD GDB server
-						if(extenal_tools_openocd_path.isEmpty()) {
-							extenal_tools_openocd_path = RemoteGDBDebuggerPage.getOpenOCDScriptDefaultPath();
-					    }
-
-						String openocd_cmd = RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath() +
-							" -s " + RemoteGDBDebuggerPage.getOpenOCDScriptDirectory() +
-							" -f " + extenal_tools_openocd_path;
-						IProcess openocd_proc = DebugPlugin.newProcess(
-								launch,
-								DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),
-								OPENOCD_PROCESS_LABEL);
-						openocd_proc.setAttribute(IProcess.ATTR_CMDLINE, openocd_cmd);
+						start_openocd(configuration, launch);
 					}
 					else if (external_tools.equalsIgnoreCase("nSIM")&&external_nsim_launch.equalsIgnoreCase("true"))
 					{						
@@ -513,6 +501,34 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			monitor.done();
 		}
 
+	}
+
+	/**
+	 * Start OpenOCD executable.
+	 *
+	 * @throws CoreException
+	 */
+	private void start_openocd(final ILaunchConfiguration configuration, final ILaunch launch)
+		throws CoreException
+	{
+		String openocd_cfg = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
+				"");
+
+		if(openocd_cfg.isEmpty()) {
+			openocd_cfg = RemoteGDBDebuggerPage.getOpenOCDScriptDefaultPath();
+		}
+
+		final String openocd_cmd = RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath() +
+			" -s " + RemoteGDBDebuggerPage.getOpenOCDScriptDirectory() +
+			" -f " + openocd_cfg;
+
+		final IProcess openocd_proc = DebugPlugin.newProcess(
+				launch,
+				DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),
+				OPENOCD_PROCESS_LABEL);
+
+		openocd_proc.setAttribute(IProcess.ATTR_CMDLINE, openocd_cmd);
 	}
 
 	/**
