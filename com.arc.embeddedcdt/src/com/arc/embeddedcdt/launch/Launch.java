@@ -243,11 +243,14 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		if(external_tools.equalsIgnoreCase("")||gdbserver_port.equalsIgnoreCase(""))
 			return;
 		
-		String gdbserver_IPAddress = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "localhost");
+		String gdbserver_IPAddress = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
+				LaunchConfigurationConstants.DEFAULT_GDB_HOST
+			);
 		
 		if(gdbserver_IPAddress.equalsIgnoreCase(""))
 		{
-			gdbserver_IPAddress="localhost";
+			gdbserver_IPAddress = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
 		}
 		
 		launch_config = configuration.getWorkingCopy();
@@ -327,8 +330,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 					LaunchFrontend l = new LaunchFrontend(launch);
                     
-                    String extenal_tools_openocd_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,"");
-                    String extenal_tools_ashling_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,"");
                     String extenal_tools_nsim_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,"");
                     
                     prepareSession();
@@ -372,33 +373,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
 					
 					// TODO Replace hardcoded line with something more error-proof.
-					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_ashling_launch.equalsIgnoreCase("true"))
-					{
-						// TODO Path to Ashling GDB server is also configurable in CommandTab.
-						if(extenal_tools_ashling_path.equalsIgnoreCase("")) 
-						{
-							if (RemoteGDBDebuggerPage.isWindowsOS())
-								extenal_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_WINDOWS;
-							else
-								extenal_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
-						}
-						System.setProperty("Ashling", extenal_tools_ashling_path);
-						String ash_dir = System.getProperty("Ashling");
-						File ash_wd = new java.io.File(ash_dir);
-						String ashling_exe = "ash-arc-gdb-server" + (RemoteGDBDebuggerPage.isWindowsOS() ? ".exe" : ""); 
-						String ash_cmd = 
-								ash_dir + java.io.File.separator + ashling_exe+
-								" --jtag-frequency"+ " 8mhz"+
-								" --device"+ " arc"+
-								" --arc-reg-file "+ ash_dir + java.io.File.separator + " arc-opella-em.xml";
-						IProcess ashling_proc = DebugPlugin.newProcess(
-								launch,
-								DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_wd),
-								ASHLING_PROCESS_LABEL);
-						ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
-					} 
-					else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_openocd_launch.equalsIgnoreCase("true"))
-					{
+					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_ashling_launch.equalsIgnoreCase("true")) {
+						start_ashling(configuration, launch);
+					} else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_openocd_launch.equalsIgnoreCase("true")) {
 						start_openocd(configuration, launch);
 					}
 					else if (external_tools.equalsIgnoreCase("nSIM")&&external_nsim_launch.equalsIgnoreCase("true"))
@@ -501,6 +478,45 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			monitor.done();
 		}
 
+	}
+
+	/**
+	 * Start Ashling GDB Server executable.
+	 *
+	 * @throws CoreException
+	 */
+	private void start_ashling(final ILaunchConfiguration configuration, final ILaunch launch)
+			throws CoreException
+	{
+		String external_tools_ashling_path = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
+				""
+			);
+
+		/* TODO Currently we configure directory of Ashling GDBserver not path
+		 * to executable itself, which is rather clumsy. Let's move UI to
+		 * specify path to executable. */
+		if(external_tools_ashling_path.equalsIgnoreCase("")) {
+			if (RemoteGDBDebuggerPage.isWindowsOS())
+				external_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_WINDOWS;
+			else
+				external_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
+		}
+
+		System.setProperty("Ashling", external_tools_ashling_path);
+		final String ash_dir = System.getProperty("Ashling");
+		final File ash_wd = new java.io.File(ash_dir);
+		final String ashling_exe = "ash-arc-gdb-server" + (RemoteGDBDebuggerPage.isWindowsOS() ? ".exe" : "");
+		final String ash_cmd =
+				ash_dir + java.io.File.separator + ashling_exe +
+				" --jtag-frequency" + " 8mhz" +
+				" --device" + " arc" +
+				" --arc-reg-file " + ash_dir + java.io.File.separator + "arc-opella-em.xml";
+		final IProcess ashling_proc = DebugPlugin.newProcess(
+				launch,
+				DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_wd),
+				ASHLING_PROCESS_LABEL);
+		ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
 	}
 
 	/**
