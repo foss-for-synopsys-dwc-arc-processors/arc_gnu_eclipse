@@ -230,13 +230,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 // Set host and IP.
 		 try {
 			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
-//			 if(portnumber.equalsIgnoreCase("")){
-//				 portnumber="3333"; 
-//			 }
      		 fGDBServerPortNumberText.setText( portnumber );
 			 String hostname = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "");
 			 if(hostname.equalsIgnoreCase("")){
-				 hostname = "localhost";
+				 hostname = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
 			 }
 			 fGDBServerIPAddressText.setText(hostname);
 			 
@@ -375,14 +372,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				fGDBServerPortNumberText.getText();
-				//fGDBServerIPAddressText.setText("localhost");
 				fPrgmArgumentsComboInittext = combo.getText();
 						    
 				if (fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")) {
 					if(!portnumber.equalsIgnoreCase(""))
 						fGDBServerPortNumberText.setText(portnumber);
 					else
-						fGDBServerPortNumberText.setText("3333");
+						fGDBServerPortNumberText.setText(LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 					
 					
 					groupnsim.dispose();
@@ -437,7 +433,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					if(!portnumber.equalsIgnoreCase(""))
 						fGDBServerPortNumberText.setText(portnumber);
 					else
-						fGDBServerPortNumberText.setText("2331");
+						fGDBServerPortNumberText.setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 					
 					
 					groupnsim.dispose();
@@ -491,7 +487,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					if(!portnumber.equalsIgnoreCase(""))
 						fGDBServerPortNumberText.setText(portnumber);
 					else
-						fGDBServerPortNumberText.setText("1234");
+						fGDBServerPortNumberText.setText(LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
 				
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
@@ -647,7 +643,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		gd = new GridData();
 		gd.horizontalSpan =4;
 		fGDBServerIPAddressText.setLayoutData( gd );
-		fGDBServerIPAddressText.setText("localhost");
+		fGDBServerIPAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
 		fGDBServerIPAddressText.addModifyListener( new ModifyListener() {
 
 			public void modifyText( ModifyEvent evt ) {

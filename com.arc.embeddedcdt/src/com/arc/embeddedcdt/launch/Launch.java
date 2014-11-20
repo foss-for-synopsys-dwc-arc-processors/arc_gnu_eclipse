@@ -518,7 +518,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 		final String gdbserver_port = configuration.getAttribute(
 				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
-				"3333" // 3333 is default generic OpenOCD port
+				LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT
 				);
 
 		/* "gdb_port" is before -f <script> so script file can override our
