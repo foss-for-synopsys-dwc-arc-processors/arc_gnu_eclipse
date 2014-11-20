@@ -40,8 +40,8 @@ public interface LaunchConfigurationConstants {
 	String ATTR_NSIM_TCF_FILE =  LAUNCH_ID + ".nsim_tcf_file"; //$NON-NLS-1$
 
 	// Default option values
-	static final String DEFAULT_OPENOCD_PORT = "3333";
-	static final String DEFAULT_OPELLAXD_PORT = "2331";
-	static final String DEFAULT_NSIM_PORT = "1234";
+	static final String DEFAULT_OPENOCD_PORT = "49105";
+	static final String DEFAULT_OPELLAXD_PORT = "49105";
+	static final String DEFAULT_NSIM_PORT = "49105";
 	static final String DEFAULT_GDB_HOST = "localhost";
 }
