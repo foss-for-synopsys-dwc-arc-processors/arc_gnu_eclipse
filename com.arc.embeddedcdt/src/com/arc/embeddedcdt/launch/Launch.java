@@ -503,6 +503,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				external_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
 		}
 
+		final String gdbserver_port = configuration.getAttribute(
+				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
+				LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT
+			);
+
 		System.setProperty("Ashling", external_tools_ashling_path);
 		final String ash_dir = System.getProperty("Ashling");
 		final File ash_wd = new java.io.File(ash_dir);
@@ -511,6 +516,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				ash_dir + java.io.File.separator + ashling_exe +
 				" --jtag-frequency" + " 8mhz" +
 				" --device" + " arc" +
+				" --gdb-port " + gdbserver_port +
 				" --arc-reg-file " + ash_dir + java.io.File.separator + "arc-opella-em.xml";
 		final IProcess ashling_proc = DebugPlugin.newProcess(
 				launch,
