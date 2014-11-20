@@ -335,6 +335,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	static Group groupnsim;
 	
 	protected void createGdbserverSettingsTab( TabFolder tabFolder ) {
+		// Lets set minimal width of text field to 2 inches. If more required text fields will stretch.
+		final int screen_ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
+		final int min_text_width = 2 * screen_ppi;
+
 		TabItem tabItem = new TabItem( tabFolder, SWT.NONE );
 		tabItem.setText( Messages.Gdbserver_Settings_Tab_Name );
 		
@@ -359,10 +363,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		label.setText("ARC GDB Server:");
 		GridData gd = new GridData();
 		label.setLayoutData( gd );
-		gd = new GridData();
-		gd.horizontalSpan =4;
+		
+		GridData server_type_combo_gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+		server_type_combo_gd.horizontalSpan = 4;
+		server_type_combo_gd.minimumWidth = min_text_width;
 		fPrgmArgumentsComboInit =new Combo(subComp, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
-		fPrgmArgumentsComboInit.setLayoutData(gd);
+		fPrgmArgumentsComboInit.setLayoutData(server_type_combo_gd);
 		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
 		fPrgmArgumentsComboInit.add("JTAG via Ashling");
 		fPrgmArgumentsComboInit.add("nSIM");
@@ -615,37 +621,41 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			
 			}
 			});
-		
+
+		// GDB port label
 		label = new Label(subComp, SWT.LEFT);
 		label.setText(Messages.Port_number_textfield_label);
-		gd = new GridData();
-		gd.horizontalSpan =1;
-		label.setLayoutData( gd );
-		
-		fGDBServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-		gd = new GridData();
-		gd.horizontalSpan =4;
-		fGDBServerPortNumberText.setLayoutData(gd);
-		fGDBServerPortNumberText.addModifyListener( new ModifyListener() {
+		GridData gdb_port_label_gd = new GridData();
+		gdb_port_label_gd.horizontalSpan = 1;
+		label.setLayoutData(gdb_port_label_gd);
 
+		// GDB port text field
+		fGDBServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		GridData gdb_port_text_gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+		gdb_port_text_gd.horizontalSpan = 4;
+		gdb_port_text_gd.minimumWidth = min_text_width;
+		fGDBServerPortNumberText.setLayoutData(gdb_port_text_gd);
+		fGDBServerPortNumberText.addModifyListener( new ModifyListener() {
 			public void modifyText( ModifyEvent evt ) {
 				updateLaunchConfigurationDialog();
-				//portnumber=fGDBServerPortNumberText.getText();
 			}
 		} );
-		
+
+		// GDB host label
 		label = new Label(subComp, SWT.LEFT);
 		label.setText("Host Address:");
-		gd = new GridData();
-		gd.horizontalSpan =1;
-		label.setLayoutData( gd );
+		GridData gdb_host_label_gd = new GridData();
+		gdb_host_label_gd.horizontalSpan = 1;
+		label.setLayoutData(gdb_host_label_gd);
+
+		// GDB host text field
 		fGDBServerIPAddressText = new Text(subComp, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-		gd = new GridData();
-		gd.horizontalSpan =4;
-		fGDBServerIPAddressText.setLayoutData( gd );
+		GridData gdb_host_field_gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+		gdb_host_field_gd.horizontalSpan = 4;
+		gdb_host_field_gd.minimumWidth = min_text_width;
+		fGDBServerIPAddressText.setLayoutData(gdb_host_field_gd);
 		fGDBServerIPAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
 		fGDBServerIPAddressText.addModifyListener( new ModifyListener() {
-
 			public void modifyText( ModifyEvent evt ) {
 				updateLaunchConfigurationDialog();
 			}
