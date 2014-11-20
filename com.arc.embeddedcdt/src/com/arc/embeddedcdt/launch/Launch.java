@@ -511,15 +511,23 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	private void start_openocd(final ILaunchConfiguration configuration, final ILaunch launch)
 		throws CoreException
 	{
-		String openocd_cfg = configuration.getAttribute(
+		final String openocd_cfg = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
-				"");
+				RemoteGDBDebuggerPage.getOpenOCDScriptDefaultPath()
+				);
 
-		if(openocd_cfg.isEmpty()) {
-			openocd_cfg = RemoteGDBDebuggerPage.getOpenOCDScriptDefaultPath();
-		}
+		final String gdbserver_port = configuration.getAttribute(
+				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
+				"3333" // 3333 is default generic OpenOCD port
+				);
 
+		/* "gdb_port" is before -f <script> so script file can override our
+		 * settings. Also in case of configuration scripts supplied by
+		 * Synopsys we cannot set gdb_port after -f option - our scripts do
+		 * initialization and changing GDB port after that is not supported
+		 * OpenOCD. */
 		final String openocd_cmd = RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath() +
+			" -c \"gdb_port " + gdbserver_port + "\"" +
 			" -s " + RemoteGDBDebuggerPage.getOpenOCDScriptDirectory() +
 			" -f " + openocd_cfg;
 
