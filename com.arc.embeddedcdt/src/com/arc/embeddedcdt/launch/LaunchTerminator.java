@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (c) 2013 Synopsys, Inc.  All rights reserved.
+* Copyright (c) 2013, 2014 Synopsys, Inc.  All rights reserved.
 * This program and the accompanying materials are made available under the
 * terms of the Eclipse Public License v1.0  which accompanies this
 * distribution, and is available at
@@ -17,21 +17,13 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.tm.internal.terminal.connector.TerminalConnector;
-import org.eclipse.tm.internal.terminal.provisional.api.provider.TerminalConnectorImpl;
-import org.eclipse.tm.internal.terminal.serial.SerialConnector;
-import org.eclipse.tm.internal.terminal.serial.SerialSettings;
 import org.eclipse.tm.internal.terminal.view.TerminalView;
-import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.Workbench;
 
 /**
  * Debug event listener to terminate debug sessions when required.
@@ -64,23 +56,15 @@ public class LaunchTerminator implements IDebugEventSetListener {
 	private static class DialogRunnable implements Runnable {
 
 		private ILaunch fLaunch;
-		private IProcess fProcess;
 
 		public DialogRunnable(ILaunch launch, IProcess process) {
 			this.fLaunch = launch;
-			this.fProcess = process;
 		}
 
 		public void run() {
 			//boolean terminate = true;
 			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			if (window != null) {
-				Shell parent = window.getShell();
-//				terminate = MessageDialog.openQuestion(
-//						parent,
-//						"Child process exited",
-//						"Process `" + fProcess.getLabel() + "' required for debugging has exited. Do you want to end debug session?"
-//				);
 				IWorkbench workbench = PlatformUI.getWorkbench();
 				final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
 				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2009 PalmSource, Inc. and others.
+ * Copyright (c) 2006, 2014 PalmSource, Inc. and others.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -8,6 +8,7 @@
  * Contributors: 
  * Ewa Matejska    (PalmSource) - Adapted from IGDBServerMILaunchConfigurationConstants
  * Anna Dushistova (MontaVista) - [181517][usability] Specify commands to be run before remote application launch
+ * Synopsys, Inc.               - ARC GNU Toolchain support
  *******************************************************************************/
 
 

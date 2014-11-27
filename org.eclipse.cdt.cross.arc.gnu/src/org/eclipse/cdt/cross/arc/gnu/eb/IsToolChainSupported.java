@@ -14,7 +14,7 @@ package org.eclipse.cdt.cross.arc.gnu.eb;
  {
    public String getCompilerName()
    {
-    return "arcea-elf32-gcc";
+    return "arceb-elf32-gcc";
    }
  }
 
