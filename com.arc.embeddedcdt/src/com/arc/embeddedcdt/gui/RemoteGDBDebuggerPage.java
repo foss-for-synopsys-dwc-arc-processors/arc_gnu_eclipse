@@ -26,6 +26,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
+import org.eclipse.jface.preference.FileFieldEditor;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -78,11 +81,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	private boolean fSerialPortAvailable = true;
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
+	private FileFieldEditor fOpenOCDBinPath; // Editor for path to OpenOCD binary
 	
     static String runcom="";//this variable is for saving user's input run command
 	public String external_openocd_path="";//this variable is for saving user's external path
 	public String external_ashling_path="";//this variable is for saving user's external path
 	public String external_nsim_path="";//this variable is for saving user's external path
+	private String openocd_bin_path;
 	static String fLaunchexternal_openocd_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_ashling_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_nsim_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
@@ -175,7 +180,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		if (isWindowsOS()) {
 			return getIDERootDirPath() + "\\bin\\openocd.exe";
 		} else {
-			return "/usr/local/bin/openocd";
+			return LaunchConfigurationConstants.DEFAULT_OPENOCD_BIN_PATH_LINUX;
 		}
 	}
 
@@ -206,6 +211,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		try {
  		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, "");
+		    openocd_bin_path = configuration.getAttribute(
+		    	LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
+		    	getOpenOCDExecutableDefaultPath());
 		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, "");
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, "");
 		    
@@ -292,6 +300,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,external_openocd_path);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, openocd_bin_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,external_ashling_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,external_nsim_path);
 		
@@ -417,11 +426,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							fSearchexternalButton.setEnabled(true);
 							fSearchexternalLabel.setEnabled(true);
 							fPrgmArgumentsTextexternal.setEnabled(true);
+							fOpenOCDBinPath.setEnabled(true, fLaunchernalButton.getParent());
 						} else {
 							fLaunchernalButton.setSelection(false);
 							fSearchexternalButton.setEnabled(false);
 							fSearchexternalLabel.setEnabled(false);
 							fPrgmArgumentsTextexternal.setEnabled(false);
+							fOpenOCDBinPath.setEnabled(false, fLaunchernalButton.getParent());
 						}					
 					}
 					groupcom.setText("JTAG via OpenOCD");
@@ -827,7 +838,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		createTabitemCOMBool=true;
 		
 		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
-		Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
+		final Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
 
 		// Launch OpenOCD checkbox
 		fLaunchernalButton = new Button(compCOM,SWT.CHECK);
@@ -844,11 +855,13 @@ private void createTabitemCOMAshling(Composite subComp) {
 					fSearchexternalButton.setEnabled(true);
 					fSearchexternalLabel.setEnabled(true);
 					fPrgmArgumentsTextexternal.setEnabled(true);
+					fOpenOCDBinPath.setEnabled(true, compCOM);
 				} else {
 					fLaunchexternal_openocd_Buttonboolean="false";
 					fSearchexternalButton.setEnabled(false);
 					fSearchexternalLabel.setEnabled(false);
 					fPrgmArgumentsTextexternal.setEnabled(false);
+					fOpenOCDBinPath.setEnabled(false, compCOM);
 				}
 				updateLaunchConfigurationDialog();
 			}
@@ -856,7 +869,19 @@ private void createTabitemCOMAshling(Composite subComp) {
 			public void widgetDefaultSelected(SelectionEvent event) { }
 
 		});
-		
+
+		// Path to OpenOCD binary
+		fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", compCOM);
+		fOpenOCDBinPath.setStringValue(openocd_bin_path);
+		fOpenOCDBinPath.setPropertyChangeListener( new IPropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent event) {
+				if (event.getProperty() == "field_editor_value") {
+					openocd_bin_path = (String)event.getNewValue();
+					updateLaunchConfigurationDialog();
+				}
+			}
+		});
+
 		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
 		fSearchexternalLabel.setText("OpenOCD Path");
 		gd = new GridData();

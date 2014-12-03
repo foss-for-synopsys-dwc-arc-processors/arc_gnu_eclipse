@@ -27,6 +27,7 @@ public interface LaunchConfigurationConstants {
 	String ATTR_DEBUGGER_COM_OPENOCD_PORT =  LAUNCH_ID + ".debugger_com_oepnocd_port"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_COM_ASHLING_PORT =  LAUNCH_ID + ".debugger_com_ashling_port"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH =  LAUNCH_ID + ".debugger_external_tools_oepnocd_path"; //$NON-NLS-1$
+	String ATTR_DEBUGGER_OPENOCD_BIN_PATH =  LAUNCH_ID + ".debugger_openocd_bin_path";
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH =  LAUNCH_ID + ".debugger_external_tools_ashling_path"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH =  LAUNCH_ID + ".debugger_external_tools_nsim_path"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT = LAUNCH_ID + ".debugger_external_openocd_default";
@@ -44,4 +45,5 @@ public interface LaunchConfigurationConstants {
 	static final String DEFAULT_OPELLAXD_PORT = "49105";
 	static final String DEFAULT_NSIM_PORT = "49105";
 	static final String DEFAULT_GDB_HOST = "localhost";
+	static final String DEFAULT_OPENOCD_BIN_PATH_LINUX = "/usr/local/bin/openocd";
 }

@@ -543,14 +543,24 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT
 				);
 
+		final String openocd_bin = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
+				RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath()
+				);
+
+		// ${openocd_bin}/../share/openocd/scripts
+		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
+		final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd" + File.separator + "scripts");
+		final String openocd_tcl = scripts_dir.getAbsolutePath();
+
 		/* "gdb_port" is before -f <script> so script file can override our
 		 * settings. Also in case of configuration scripts supplied by
 		 * Synopsys we cannot set gdb_port after -f option - our scripts do
 		 * initialization and changing GDB port after that is not supported
 		 * OpenOCD. */
-		final String openocd_cmd = RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath() +
+		final String openocd_cmd = openocd_bin +
 			" -c \"gdb_port " + gdbserver_port + "\"" +
-			" -s " + RemoteGDBDebuggerPage.getOpenOCDScriptDirectory() +
+			" -s " + openocd_tcl +
 			" -f " + openocd_cfg;
 
 		final IProcess openocd_proc = DebugPlugin.newProcess(
