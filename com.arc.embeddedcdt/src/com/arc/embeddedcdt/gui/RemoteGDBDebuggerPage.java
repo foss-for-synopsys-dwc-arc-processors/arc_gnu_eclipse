@@ -826,19 +826,45 @@ private void createTabitemCOMAshling(Composite subComp) {
 	private void createTabitemCOM(Composite subComp) { 
 		createTabitemCOMBool=true;
 		
-		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
-		Composite compCOM = SWTFactory.createComposite(groupcom, 5, 5, GridData.FILL_BOTH);
-	
+		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
+		Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
+
+		// Launch OpenOCD checkbox
+		fLaunchernalButton = new Button(compCOM,SWT.CHECK);
+		GridData gd = new GridData(SWT.BEGINNING);
+		gd.horizontalSpan = 3;
+		fLaunchernalButton.setLayoutData(gd);
+		fLaunchernalButton.setSelection(true);
+		fLaunchernalButton.setText("Launch OpenOCD");
+		fLaunchernalButton.addSelectionListener(new SelectionListener() {
+
+			public void widgetSelected(SelectionEvent event) {
+				if(fLaunchernalButton.getSelection()==true){
+					fLaunchexternal_openocd_Buttonboolean="true";
+					fSearchexternalButton.setEnabled(true);
+					fSearchexternalLabel.setEnabled(true);
+					fPrgmArgumentsTextexternal.setEnabled(true);
+				} else {
+					fLaunchexternal_openocd_Buttonboolean="false";
+					fSearchexternalButton.setEnabled(false);
+					fSearchexternalLabel.setEnabled(false);
+					fPrgmArgumentsTextexternal.setEnabled(false);
+				}
+				updateLaunchConfigurationDialog();
+			}
+
+			public void widgetDefaultSelected(SelectionEvent event) { }
+
+		});
 		
 		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
 		fSearchexternalLabel.setText("OpenOCD Path");
-		GridData gd = new GridData();
+		gd = new GridData();
 		fSearchexternalLabel.setLayoutData(gd);
 			
 		fPrgmArgumentsTextexternal=new Text(compCOM, SWT.SINGLE | SWT.BORDER);//6-1
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint=400;
-		gd.horizontalSpan =2;
 		fPrgmArgumentsTextexternal.setLayoutData(gd);
 		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
@@ -861,34 +887,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 	
-		fLaunchernalButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchernalButton.setSelection(true);
-		gd = new GridData(SWT.BEGINNING);
-		fLaunchernalButton.setLayoutData(gd);
-		fLaunchernalButton.setText("Launch OpenOCD");
-		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-
-	        public void widgetSelected(SelectionEvent event) {
-	        	if(fLaunchernalButton.getSelection()==true){
-	        	fLaunchexternal_openocd_Buttonboolean="true";
-	        	fSearchexternalButton.setEnabled(true);
-	        	fSearchexternalLabel.setEnabled(true);
-	        	fPrgmArgumentsTextexternal.setEnabled(true);
-	        	}
-	        	else {
-		        	fLaunchexternal_openocd_Buttonboolean="false";
-		        	fSearchexternalButton.setEnabled(false);
-		        	fSearchexternalLabel.setEnabled(false);
-		        	fPrgmArgumentsTextexternal.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
-
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
-		
 			
 		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
