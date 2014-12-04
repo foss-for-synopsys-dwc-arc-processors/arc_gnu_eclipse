@@ -759,14 +759,11 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
 	
-	
-		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3 
-		
-		
-		
+		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
+		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		
 		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchComButton.setSelection(true);
+		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
 	
 	
 		fLaunchComButton.setText("Launch Terminal");
@@ -915,9 +912,9 @@ private void createTabitemCOMAshling(Composite subComp) {
 			
 		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-	    fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3 
+	    fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
+	    fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchComButton.setSelection(true);
 	
 	
 		fLaunchComButton.setText("Launch Terminal");
