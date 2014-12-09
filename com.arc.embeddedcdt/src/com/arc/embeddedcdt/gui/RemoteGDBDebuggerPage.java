@@ -880,7 +880,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		});
 
 		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
-		fSearchexternalLabel.setText("OpenOCD Path");
+		fSearchexternalLabel.setText("OpenOCD configuration");
 		gd = new GridData();
 		fSearchexternalLabel.setLayoutData(gd);
 			
