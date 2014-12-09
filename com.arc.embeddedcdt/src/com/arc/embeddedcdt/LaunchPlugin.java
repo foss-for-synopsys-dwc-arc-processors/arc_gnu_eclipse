@@ -22,8 +22,10 @@ package com.arc.embeddedcdt;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -103,5 +105,15 @@ public class LaunchPlugin extends AbstractUIPlugin {
 			return PLUGIN_ID;
 		}
 		return getDefault().getBundle().getSymbolicName();
+	}
+
+	/**
+	 * Helper message for exception handling.
+	 *
+	 * @param e Exception to log/
+	 */
+	public static void log(CoreException e)
+	{
+		StatusManager.getManager().handle(e, LaunchPlugin.getUniqueIdentifier());
 	}
 }

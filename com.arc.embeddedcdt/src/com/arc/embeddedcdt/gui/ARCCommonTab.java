@@ -86,6 +86,7 @@ import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
 
+import com.arc.embeddedcdt.LaunchPlugin;
 import com.ibm.icu.text.MessageFormat;
 
 /**
@@ -377,7 +378,7 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 			}
     	}
     	catch(CoreException ce) {
-    		DebugUIPlugin.log(ce);
+			LaunchPlugin.log(ce);
     	}
     	return ResourcesPlugin.getEncoding();
     }
@@ -506,8 +507,9 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 					}
 				}
 			}
-		} 
-		catch (CoreException e) {DebugUIPlugin.log(e);}
+		} catch (CoreException e) {
+			LaunchPlugin.log(e);
+		}
 		return path;
 	}
 	
@@ -621,6 +623,7 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 	    try {
 	        encoding = configuration.getAttribute(DebugPlugin.ATTR_CONSOLE_ENCODING, (String)null);
         } catch (CoreException e) {
+            LaunchPlugin.log(e);
         }
 	    String defaultEncoding = getDefaultEncoding(configuration);
 	    fDefaultEncodingButton.setText(MessageFormat.format(LaunchConfigurationsMessages.CommonTab_2, new String[]{defaultEncoding}));
@@ -648,7 +651,7 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 		try {
 			launchInBackground= configuration.getAttribute(IDebugUIConstants.ATTR_LAUNCH_IN_BACKGROUND, true);
 		} catch (CoreException ce) {
-			DebugUIPlugin.log(ce);
+			LaunchPlugin.log(ce);
 		}
 		return launchInBackground;
 	}
@@ -684,7 +687,7 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 				fFavoritesTable.setCheckedElements(list.toArray());
 			}
 		} catch (CoreException e) {
-			DebugUIPlugin.log(e);
+			LaunchPlugin.log(e);
 		}
 	}
 
@@ -767,7 +770,7 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 			}
 			config.setAttribute(IDebugUIConstants.ATTR_FAVORITE_GROUPS, groups);
 		} catch (CoreException e) {
-			DebugUIPlugin.log(e);
+			LaunchPlugin.log(e);
 		}		
 	}	
 	
