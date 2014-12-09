@@ -559,6 +559,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		 * initialization and changing GDB port after that is not supported
 		 * OpenOCD. */
 		final String openocd_cmd = openocd_bin +
+			" -d0 " +
 			" -c \"gdb_port " + gdbserver_port + "\"" +
 			" -s " + openocd_tcl +
 			" -f " + openocd_cfg;

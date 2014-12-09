@@ -583,17 +583,16 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
      * @param configuration the local configuration
      */
     private void updateConsoleOutput(ILaunchConfiguration configuration) {
-    	 //boolean outputToConsole = true;
-    	 boolean outputToConsole = false;
+         boolean outputToConsole = true;
          String outputFile = null;
          boolean append = false;
          
          try {
-             //outputToConsole = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
-        	 outputToConsole = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, false);
+             outputToConsole = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
              outputFile = configuration.getAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_FILE, (String)null);
              append = configuration.getAttribute(IDebugUIConstants.ATTR_APPEND_TO_FILE, false);
          } catch (CoreException e) {
+             LaunchPlugin.log(e);
          }
          
          fConsoleOutput.setSelection(outputToConsole);
@@ -865,9 +864,9 @@ public class ARCCommonTab extends AbstractLaunchConfigurationTab {
 		boolean captureOutput = false;
 		if (fConsoleOutput.getSelection()) {
 		    captureOutput = true;
-		    configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
-		} else {
 		    configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, (String)null);
+		} else {
+			configuration.setAttribute(IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, false);
 		}
 		if (fFileOutput.getSelection()) {
 		    captureOutput = true;
