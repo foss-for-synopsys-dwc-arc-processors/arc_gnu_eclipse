@@ -900,7 +900,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		
 		fSearchexternalButton = createPushButton(compCOM, "Browse", null); //$NON-NLS-1$  //6-2
-		gd = new GridData(SWT.BEGINNING);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
 		fSearchexternalButton.setLayoutData(gd);
 		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
