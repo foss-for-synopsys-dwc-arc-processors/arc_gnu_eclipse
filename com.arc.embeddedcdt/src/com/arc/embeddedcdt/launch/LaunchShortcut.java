@@ -137,8 +137,9 @@ public class LaunchShortcut implements ILaunchShortcut {
                           String platform = debugConfigs[i].getPlatform();
                           if (debugConfigs[i].supportsMode(ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN)) {
                                   if (platform.equals("*") || platform.equals(os)) { //$NON-NLS-1$
-                                          if (debugConfigs[i].supportsCPU(programCPU)) 
-                                                  debugList.add(debugConfigs[i]);
+                                          if (debugConfigs[i].supportsCPU(programCPU)
+                                        		  &&(debugConfigs[i].getName().indexOf("ARC remote")>-1||debugConfigs[i].getName().indexOf("gdbserver")>-1)) 
+                                        		  debugList.add(debugConfigs[i]);
                                   }
                           }
                   }
