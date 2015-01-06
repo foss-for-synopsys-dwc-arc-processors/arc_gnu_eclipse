@@ -33,6 +33,7 @@ public class RunfLaunchConfigurationTabGroup extends AbstractLaunchConfiguration
 				//new CommandTab(),
 				new SourceLookupTab(),
 				new EnvironmentTab(),
+				new EnvironmentTab(),
 				new ARCCommonTab() 
 				//new CommonTab() 
 			};

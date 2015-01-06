@@ -33,6 +33,7 @@ public class LaunchConfigurationTabGroup extends AbstractLaunchConfigurationTabG
 				new CommandTab(),
 				new SourceLookupTab(),
 				new EnvironmentTab(),
+				new ARCTerminalTab(),
 				new ARCCommonTab() 
 				//new CommonTab() 
 			};
