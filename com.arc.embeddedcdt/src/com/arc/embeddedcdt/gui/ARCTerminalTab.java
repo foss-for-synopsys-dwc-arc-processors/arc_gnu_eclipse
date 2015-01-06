@@ -1,10 +1,13 @@
 package com.arc.embeddedcdt.gui;
 
+import java.util.List;
+
 import org.eclipse.cdt.launch.ui.CLaunchConfigurationTab;
 import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -22,6 +25,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
+import com.arc.embeddedcdt.launch.Launch;
 
 public class ARCTerminalTab extends CLaunchConfigurationTab {
 	protected Button fLaunchComButton;//this variable is for launching COM port
@@ -30,7 +34,6 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	private boolean fSerialPortAvailable = true;
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
-	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -49,24 +52,41 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 
 
 	protected void createTerminalComponent(Composite comp, int i) {
-		Composite argsComp = new Composite(comp, SWT.NONE);
-		GridLayout projLayout = new GridLayout();
-		projLayout.numColumns = 1;
-		projLayout.marginHeight = 0;
-		projLayout.marginWidth = 0;
-		argsComp.setLayout(projLayout);		
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		Composite argsComp = SWTFactory.createComposite(comp, 3, 3, GridData.FILL_BOTH);
+		GridData gd = new GridData(GridData.BEGINNING);
 		gd.horizontalSpan = 3;
+		
 		argsComp.setLayoutData(gd);
 
 		
-		fPrgmArgumentsLabelCom = new Label(comp, SWT.NONE);//5-1
+		fPrgmArgumentsLabelCom = new Label(argsComp, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
 	
-		fPrgmArgumentsComCom =new Combo(comp, SWT.None);//5-2 and 5-3
+		fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);//5-2 and 5-3
 		//fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
-		
-		fLaunchComButton = new Button(comp,SWT.CHECK); //$NON-NLS-1$ //6-3
+		List<String> COM = null;
+		try {
+			COM = Launch.COMserialport();
+		} catch (java.lang.UnsatisfiedLinkError e) {
+			e.printStackTrace();
+		} catch (java.lang.NoClassDefFoundError e) {
+			e.printStackTrace();
+		}
+
+		if (COM != null) {
+			for (int ii=0;ii<COM.size();ii++) {
+				    String currentcom=(String) COM.get(ii);
+				    fPrgmArgumentsComCom.add(currentcom);
+				    
+	        }
+		} 
+		else {
+			fSerialPortAvailable = false;
+			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+			fLaunchComButton.setEnabled(fSerialPortAvailable);
+		}
+		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+		fLaunchComButton = new Button(argsComp,SWT.CHECK); //$NON-NLS-1$ //6-3
 		//fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
 	
 	
@@ -74,11 +94,9 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		fLaunchComButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
 	        	if(fLaunchComButton.getSelection()==true){
-	        		fLaunchTerminalboolean="true";
 	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
 	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
 	        	} else {
-	        		fLaunchTerminalboolean="false";
 		        	fPrgmArgumentsComCom.setEnabled(false);
 		        	fPrgmArgumentsLabelCom.setEnabled(false);
 	           	}
@@ -89,7 +107,8 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	        }
 	        
 	      });
-
+		
+		
 
 	}
 	protected void handleBinarylaunchButtonSelected(){
@@ -100,9 +119,6 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, (String) null);		
-		
 	}
 
 	/* (non-Javadoc)
@@ -116,11 +132,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		if (fSerialPortAvailable)
-			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
-		
-	
-	}
+			}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
