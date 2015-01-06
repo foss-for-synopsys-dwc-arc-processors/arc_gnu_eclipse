@@ -14,7 +14,7 @@ import org.eclipse.cdt.debug.core.ICDebugConfiguration;
 import org.eclipse.cdt.launch.ui.CDebuggerTab;
 
 
-public class EmbeddedDebuggerTab extends CDebuggerTab {
+public class EmbeddedDebuggerTab extends ARCCDebuggerTab {
 	public EmbeddedDebuggerTab(boolean attachMode) {
 		super(attachMode);
 		// TODO Auto-generated constructor stub
