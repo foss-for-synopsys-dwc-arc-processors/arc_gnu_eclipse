@@ -75,7 +75,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
 	protected Label fSearchexternalLabel;
 	protected Button fLaunchComButton;//this variable is for launching COM port
-	protected Button fLaunchernalButton;//this button is for launching the external tools
 	protected Button fLaunchterminallButton;//this button is for launching the external tools
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
@@ -421,19 +420,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						 }
 						 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 						 
-						if (fLaunchexternal_openocd_Buttonboolean.equalsIgnoreCase("true")) {
-							fLaunchernalButton.setSelection(true);
-							fSearchexternalButton.setEnabled(true);
-							fSearchexternalLabel.setEnabled(true);
-							fPrgmArgumentsTextexternal.setEnabled(true);
-							fOpenOCDBinPath.setEnabled(true, fLaunchernalButton.getParent());
-						} else {
-							fLaunchernalButton.setSelection(false);
-							fSearchexternalButton.setEnabled(false);
-							fSearchexternalLabel.setEnabled(false);
-							fPrgmArgumentsTextexternal.setEnabled(false);
-							fOpenOCDBinPath.setEnabled(false, fLaunchernalButton.getParent());
-						}					
 					}
 					groupcom.setText("JTAG via OpenOCD");
 					createTabitemnSIMBool=false;
@@ -481,17 +467,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						 }
 						 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 						 
-						if (fLaunchexternal_ashling_Buttonboolean.equalsIgnoreCase("true")) {
-							fLaunchernalButton.setSelection(true);
-							fSearchexternalButton.setEnabled(true);
-							fSearchexternalLabel.setEnabled(true);
-							fPrgmArgumentsTextexternal.setEnabled(true);
-						} else {
-							fLaunchernalButton.setSelection(false);
-							fSearchexternalButton.setEnabled(false);
-							fSearchexternalLabel.setEnabled(false);
-							fPrgmArgumentsTextexternal.setEnabled(false);
-						}
 					}
 						 
 					groupcomashling.setText("JTAG via Ashling");
@@ -552,44 +527,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    	fnSIMtcfText.setText(nSIMtcffiles);
 					    	nSIMtcffiles_last=nSIMtcffiles;
 					    }
-					    	
 					    else 
 					    	fnSIMtcfText.setText(nSIMtcffiles_last);
-					    
-					    
-						if (fLaunchexternal_nsim_Buttonboolean.equalsIgnoreCase("true")) {
-							fLaunchernalButton.setSelection(true);
-							fSearchexternalButton.setEnabled(true);
-							fPrgmArgumentsTextexternal.setEnabled(true);
-
-
-						} else {
-							fLaunchernalButton.setSelection(false);
-							fSearchexternalButton.setEnabled(false);
-							fPrgmArgumentsTextexternal.setEnabled(false);
-				    
-						}
-						if (fLaunchexternal_nsimtcf_Buttonboolean.equalsIgnoreCase("true")) {
-							fLaunchtcfButton.setSelection(true);
-				        	fnSIMtcfText.setEnabled(true); 
-				        	fnSIMtcfButton.setEnabled(true);
-
-						} else {
-							fLaunchtcfButton.setSelection(false);
-				        	fnSIMtcfText.setEnabled(false);
-				        	fnSIMtcfButton.setEnabled(false);
-						}
-						if (fLaunchexternal_nsimprops_Buttonboolean.equalsIgnoreCase("true")) {
-							fLaunchPropsButton.setSelection(true);
-							fnSIMpropsText.setEnabled(true); 
-				        	fnSIMpropslButton.setEnabled(true);
-
-						} else {
-							fLaunchPropsButton.setSelection(false);
-				        	fnSIMpropsText.setEnabled(false); 
-				        	fnSIMpropslButton.setEnabled(false);
-						}
-					    
 					}
 					groupnsim.setText("nSIM");
 					createTabitemCOMBool=false;
@@ -719,6 +658,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		fSearchexternalButton = createPushButton(compCOM, "Browse", null); //$NON-NLS-1$  //6-2
 		gd = new GridData(SWT.BEGINNING);
+		gd.horizontalSpan =2;
 		fSearchexternalButton.setLayoutData(gd);
 		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
@@ -726,35 +666,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		});
-	
-		fLaunchernalButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchernalButton.setSelection(true);
-		gd = new GridData(SWT.BEGINNING);
-		fLaunchernalButton.setLayoutData(gd);
-		fLaunchernalButton.setText("Launch Ashling");
-		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-
-	        public void widgetSelected(SelectionEvent event) {
-	        	if(fLaunchernalButton.getSelection()==true){
-	        	fLaunchexternal_ashling_Buttonboolean="true";
-	        	fSearchexternalButton.setEnabled(true);
-	        	fSearchexternalLabel.setEnabled(true);
-	        	fPrgmArgumentsTextexternal.setEnabled(true);
-	        	}
-	        	else {
-	        		fLaunchexternal_ashling_Buttonboolean="false";
-		        	fSearchexternalButton.setEnabled(false);
-		        	fSearchexternalLabel.setEnabled(false);
-		        	fPrgmArgumentsTextexternal.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
-
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
-		
 		
 		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
@@ -837,35 +748,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
 		final Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
 
-		// Launch OpenOCD checkbox
-		fLaunchernalButton = new Button(compCOM,SWT.CHECK);
 		GridData gd = new GridData(SWT.BEGINNING);
-		gd.horizontalSpan = 3;
-		fLaunchernalButton.setLayoutData(gd);
-		fLaunchernalButton.setSelection(true);
-		fLaunchernalButton.setText("Launch OpenOCD");
-		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-
-			public void widgetSelected(SelectionEvent event) {
-				if(fLaunchernalButton.getSelection()==true){
-					fLaunchexternal_openocd_Buttonboolean="true";
-					fSearchexternalButton.setEnabled(true);
-					fSearchexternalLabel.setEnabled(true);
-					fPrgmArgumentsTextexternal.setEnabled(true);
-					fOpenOCDBinPath.setEnabled(true, compCOM);
-				} else {
-					fLaunchexternal_openocd_Buttonboolean="false";
-					fSearchexternalButton.setEnabled(false);
-					fSearchexternalLabel.setEnabled(false);
-					fPrgmArgumentsTextexternal.setEnabled(false);
-					fOpenOCDBinPath.setEnabled(false, compCOM);
-				}
-				updateLaunchConfigurationDialog();
-			}
-
-			public void widgetDefaultSelected(SelectionEvent event) { }
-
-		});
 
 		// Path to OpenOCD binary
 		fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", compCOM);
@@ -988,16 +871,10 @@ private void createTabitemCOMAshling(Composite subComp) {
 		groupnsim = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
 		Composite compnSIM = SWTFactory.createComposite(groupnsim, 5, 5, GridData.FILL_BOTH);
 		
-//		fSearchexternalLabel=new Label(compnSIM, SWT.LEFT);
-//		fSearchexternalLabel.setText("nSIM Path");
-//		GridData gd = new GridData();
-//		fSearchexternalLabel.setLayoutData(gd);
-			
-		fLaunchernalButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchernalButton.setSelection(true);
-		GridData gd = new GridData(SWT.BEGINNING);
-		fLaunchernalButton.setLayoutData(gd);
-		fLaunchernalButton.setText("Launch nSIM");
+		fSearchexternalLabel=new Label(compnSIM, SWT.LEFT);
+		fSearchexternalLabel.setText("nSIM Path");
+		GridData gd = new GridData();
+		fSearchexternalLabel.setLayoutData(gd);
 		
 		fPrgmArgumentsTextexternal=new Text(compnSIM, SWT.SINGLE | SWT.BORDER);//6-1
 		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -1106,28 +983,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 
-		fLaunchernalButton.addSelectionListener(new SelectionListener() {
-	        public void widgetSelected(SelectionEvent event) {
-				if (fLaunchernalButton.getSelection()==true) {
-					fLaunchexternal_nsim_Buttonboolean="true";
-					fLaunchernalButton.setSelection(true);
-					fSearchexternalButton.setEnabled(true);
-					fPrgmArgumentsTextexternal.setEnabled(true);
-
-
-				} else {
-					fLaunchexternal_nsim_Buttonboolean="false";
-					fLaunchernalButton.setSelection(false);
-					fSearchexternalButton.setEnabled(false);
-					fPrgmArgumentsTextexternal.setEnabled(false);
-		    
-				}
-	        	updateLaunchConfigurationDialog();
-	        }
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
 		fLaunchtcfButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
 				if (fLaunchtcfButton.getSelection()==true) {
