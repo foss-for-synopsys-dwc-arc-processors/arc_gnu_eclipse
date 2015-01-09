@@ -2612,141 +2612,6 @@
       
       
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
-            id="org.eclipse.cdt.cross.arc.gnu.windows.elf"
-            isAbstract="true">
-         <configuration
-               artifactExtension="elf"
-               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.elf.debug"
-               name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.windows.configuration.base">
-            <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.windows.elf.toolchain.debug"
-                  isAbstract="false"
-				  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
-				  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug">
-               <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
-               </targetPlatform>
-               <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.debug"
-                     isAbstract="false"
-                     isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base">
-               </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base">
-               </tool>
-            </toolChain>
-         </configuration>
-         <configuration
-               artifactExtension="elf"
-               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="org.eclipse.cdt.cross.arc.gnu.windows.elf.release"
-               name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.windows.configuration.base">
-            <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.windows.elf.toolchain.release"
-                  isAbstract="false"
-				  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base"
-				  targetTool="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release">
-               <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.platform.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.platform.base">
-               </targetPlatform>
-               <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.builder.release"
-                     isAbstract="false"
-                     isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.builder.base">
-               </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.c.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.cpp.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createflash.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.createlisting.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.windows.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.windows.printsize.base">
-               </tool>
-            </toolChain>
-         </configuration>
-      </projectType>
-      <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="org.eclipse.cdt.cross.arc.gnu.windows.lib"
             isAbstract="true">
@@ -2846,14 +2711,14 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="ARC GNU Toolchain for EM Linux host "
-            osList="linux">
+            osList="linux,win32">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.linux.platform.base"
                isAbstract="false"
                name="Linux Platform"
-               osList="linux">
+               osList="linux,win32">
          </targetPlatform>
          <builder
                command="make"
