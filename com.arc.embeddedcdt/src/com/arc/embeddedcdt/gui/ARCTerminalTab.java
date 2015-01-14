@@ -1,3 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2006, 2014 PalmSource, Inc. and others.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0 
+ * which accompanies this distribution, and is available at 
+ * http://www.eclipse.org/legal/epl-v10.html 
+ * 
+ * Contributors: 
+ * Ewa Matejska (PalmSource)
+ * 
+ * Referenced GDBDebuggerPage code to write this.
+ * Anna Dushistova (Mentor Graphics) - moved to org.eclipse.cdt.launch.remote.tabs
+ * Synopsys, Inc. - ARC GNU Toolchain support
+ *******************************************************************************/
 package com.arc.embeddedcdt.gui;
 
 import java.util.List;
@@ -33,7 +47,10 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	private boolean fSerialPortAvailable = true;
+	public String comport_openocd="";//this variable is for launching the exactly com port chosen by users
+	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
+	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -63,7 +80,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
 	
 		fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);//5-2 and 5-3
-		//fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
+		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		List<String> COM = null;
 		try {
 			COM = Launch.COMserialport();
@@ -87,16 +104,17 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		}
 		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		fLaunchComButton = new Button(argsComp,SWT.CHECK); //$NON-NLS-1$ //6-3
-		//fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-	
+		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
 	
 		fLaunchComButton.setText("Launch Terminal");
 		fLaunchComButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
 	        	if(fLaunchComButton.getSelection()==true){
+	        		fLaunchTerminalboolean="true";
 	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
 	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
 	        	} else {
+	        		fLaunchTerminalboolean="false";
 		        	fPrgmArgumentsComCom.setEnabled(false);
 		        	fPrgmArgumentsLabelCom.setEnabled(false);
 	           	}
@@ -107,7 +125,6 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	        }
 	        
 	      });
-		
 		
 
 	}
@@ -125,13 +142,96 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
+		
+		try {
+			comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 if (FirstlaunchDialog.value[1] != null) {
+				if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
+					comport_openocd = FirstlaunchDialog.value[1];
+				}
 
+			}
+		 try {
+			comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 if (FirstlaunchDialog.value[1] != null) {
+				if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
+					comport_ashling = FirstlaunchDialog.value[1];
+				}
+
+			}	
+		 
+		 
+		try {
+			fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
+		} catch (CoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 String gdbserver = null;
+		try {
+			gdbserver = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*""*/);
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     if(gdbserver.indexOf("OpenOCD")>-1){
+			if (!comport_openocd.equalsIgnoreCase("")) {
+				int privious = fPrgmArgumentsComCom.indexOf(comport_openocd);
+				if (privious > -1)
+					fPrgmArgumentsComCom.remove(privious);
+				fPrgmArgumentsComCom.add(comport_openocd, 0);
+
+			}
+			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+			fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+				public void modifyText(ModifyEvent evt) {
+					Combo combo = (Combo) evt.widget;
+					comport_openocd = combo.getText();
+					updateLaunchConfigurationDialog();
+				}
+			});
+			
+	     }
+	     if(gdbserver.indexOf("Ashlin")>-1){
+			if (!comport_ashling.equalsIgnoreCase("")) {
+				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
+				if (privious > -1)
+					fPrgmArgumentsComCom.remove(privious);
+				fPrgmArgumentsComCom.add(comport_ashling, 0);
+
+			}
+			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+			fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+				public void modifyText(ModifyEvent evt) {
+					Combo combo = (Combo) evt.widget;
+					comport_ashling = combo.getText();
+					updateLaunchConfigurationDialog();
+				}
+			});
+	     }
+
+		else {
+			fLaunchTerminalboolean = "false";
+		}
 	}
+
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		if (fSerialPortAvailable)
+			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
 			}
 
 	/* (non-Javadoc)

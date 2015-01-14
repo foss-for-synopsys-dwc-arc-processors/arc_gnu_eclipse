@@ -74,12 +74,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
 	protected Label fSearchexternalLabel;
-	protected Button fLaunchComButton;//this variable is for launching COM port
-	protected Button fLaunchterminallButton;//this button is for launching the external tools
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
-	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
+	//protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	private boolean fSerialPortAvailable = true;
-	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
+	//protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	private FileFieldEditor fOpenOCDBinPath; // Editor for path to OpenOCD binary
 	
     static String runcom="";//this variable is for saving user's input run command
@@ -408,18 +406,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							fPrgmArgumentsTextexternal.setText(getOpenOCDScriptDefaultPath());
 						else
 							fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
-						
-						 if(!comport_openocd.equalsIgnoreCase(""))
-						 {
-							 int privious=fPrgmArgumentsComCom.indexOf(comport_openocd);
-							 if(privious>-1)
-							     fPrgmArgumentsComCom.remove(privious);
-							 fPrgmArgumentsComCom.add(comport_openocd, 0);
-							 
-							 
-						 }
-						 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-						 
 					}
 					groupcom.setText("JTAG via OpenOCD");
 					createTabitemnSIMBool=false;
@@ -456,17 +442,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						else 
 							fPrgmArgumentsTextexternal.setText(externaltools_ashling_path);
 						
-						 if(!comport_ashling.equalsIgnoreCase(""))
-						 {
-							 int privious=fPrgmArgumentsComCom.indexOf(comport_ashling);
-							 if(privious>-1)
-							     fPrgmArgumentsComCom.remove(privious);
-							 fPrgmArgumentsComCom.add(comport_ashling, 0);
-							 
-							 
-						 }
-						 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-						 
 					}
 						 
 					groupcomashling.setText("JTAG via Ashling");
@@ -667,35 +642,35 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 		
-		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
-		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-	
-		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
-		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
+//		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
+//		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
+//	
+//		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
+//		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		
-		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-	
-	
-		fLaunchComButton.setText("Launch Terminal");
-		fLaunchComButton.addSelectionListener(new SelectionListener() {
-	        public void widgetSelected(SelectionEvent event) {
-	        	if(fLaunchComButton.getSelection()==true){
-	        		fLaunchTerminalboolean="true";
-	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
-	        	} else {
-	        		fLaunchTerminalboolean="false";
-		        	fPrgmArgumentsComCom.setEnabled(false);
-		        	fPrgmArgumentsLabelCom.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
-
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
+//		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
+//		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
+//	
+//	
+//		fLaunchComButton.setText("Launch Terminal");
+//		fLaunchComButton.addSelectionListener(new SelectionListener() {
+//	        public void widgetSelected(SelectionEvent event) {
+//	        	if(fLaunchComButton.getSelection()==true){
+//	        		fLaunchTerminalboolean="true";
+//	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+//	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
+//	        	} else {
+//	        		fLaunchTerminalboolean="false";
+//		        	fPrgmArgumentsComCom.setEnabled(false);
+//		        	fPrgmArgumentsLabelCom.setEnabled(false);
+//	           	}
+//	        	updateLaunchConfigurationDialog();
+//	        }
+//
+//	        public void widgetDefaultSelected(SelectionEvent event) {
+//	        }
+//	        
+//	      });
 		
 		// Set serial port list. This call might fail, for example if RxTx
 		// library is not available. In this case let's just disable UI elements.
@@ -708,38 +683,38 @@ private void createTabitemCOMAshling(Composite subComp) {
 			e.printStackTrace();
 		}
 
-		if (COM != null) {
-			for (int ii=0;ii<COM.size();ii++) {
-				    String currentcom=(String) COM.get(ii);
-				    fPrgmArgumentsComCom.add(currentcom);
-	        }
-		} 
-		else {
-			fSerialPortAvailable = false;
-			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-			fLaunchComButton.setEnabled(fSerialPortAvailable);
-		}
-		
-		
-		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				comport_ashling=combo.getText();
-				updateLaunchConfigurationDialog();
-			}
-		});
-		
-		 if(!comport_ashling.equalsIgnoreCase(""))
-		 {
-			 int privious=fPrgmArgumentsComCom.indexOf(comport_ashling);
-			 if(privious>-1)
-			     fPrgmArgumentsComCom.remove(privious);
-			 fPrgmArgumentsComCom.add(comport_ashling, 0);
-			 
-			 
-		 }
-		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-		
+//		if (COM != null) {
+//			for (int ii=0;ii<COM.size();ii++) {
+//				    String currentcom=(String) COM.get(ii);
+//				    fPrgmArgumentsComCom.add(currentcom);
+//	        }
+//		} 
+//		else {
+//			fSerialPortAvailable = false;
+//			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+//			fLaunchComButton.setEnabled(fSerialPortAvailable);
+//		}
+//		
+//		
+//		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+//			public void modifyText(ModifyEvent evt) {
+//				Combo combo= (Combo)evt.widget;
+//				comport_ashling=combo.getText();
+//				updateLaunchConfigurationDialog();
+//			}
+//		});
+//		
+//		 if(!comport_ashling.equalsIgnoreCase(""))
+//		 {
+//			 int privious=fPrgmArgumentsComCom.indexOf(comport_ashling);
+//			 if(privious>-1)
+//			     fPrgmArgumentsComCom.remove(privious);
+//			 fPrgmArgumentsComCom.add(comport_ashling, 0);
+//			 
+//			 
+//		 }
+//		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+//		
 	}
 	
 	private void createTabitemCOM(Composite subComp) { 
@@ -793,33 +768,33 @@ private void createTabitemCOMAshling(Composite subComp) {
 		});
 	
 			
-		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
-		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-	    fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
-	    fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
-		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-	
-	
-		fLaunchComButton.setText("Launch Terminal");
-		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-		fLaunchComButton.addSelectionListener(new SelectionListener() {
-	        public void widgetSelected(SelectionEvent event) {
-	        	if(fLaunchComButton.getSelection()==true){
-	        		fLaunchTerminalboolean="true";
-	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
-	        	} else {
-	        		fLaunchTerminalboolean="false";
-		        	fPrgmArgumentsComCom.setEnabled(false);
-		        	fPrgmArgumentsLabelCom.setEnabled(false);
-	           	}
-	        	updateLaunchConfigurationDialog();
-	        }
-
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-	        
-	      });
+//		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
+//		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
+//	    fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
+//	    fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
+//		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
+//	
+//	
+//		fLaunchComButton.setText("Launch Terminal");
+//		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
+//		fLaunchComButton.addSelectionListener(new SelectionListener() {
+//	        public void widgetSelected(SelectionEvent event) {
+//	        	if(fLaunchComButton.getSelection()==true){
+//	        		fLaunchTerminalboolean="true";
+//	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+//	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
+//	        	} else {
+//	        		fLaunchTerminalboolean="false";
+//		        	fPrgmArgumentsComCom.setEnabled(false);
+//		        	fPrgmArgumentsLabelCom.setEnabled(false);
+//	           	}
+//	        	updateLaunchConfigurationDialog();
+//	        }
+//
+//	        public void widgetDefaultSelected(SelectionEvent event) {
+//	        }
+//	        
+//	      });
 		
 		// Set serial port list. This call might fail, for example if RxTx
 		// library is not available. In this case let's just disable UI elements.
@@ -832,37 +807,37 @@ private void createTabitemCOMAshling(Composite subComp) {
 			e.printStackTrace();
 		}
 
-		if (COM != null) {
-			for (int ii=0;ii<COM.size();ii++) {
-				    String currentcom=(String) COM.get(ii);
-				    fPrgmArgumentsComCom.add(currentcom);
-	        }
-		} 
-		else {
-			fSerialPortAvailable = false;
-			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-			fLaunchComButton.setEnabled(fSerialPortAvailable);
-		}
-		
-		
-		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				Combo combo= (Combo)evt.widget;
-				comport_openocd=combo.getText();
-				updateLaunchConfigurationDialog();
-			}
-		});
-		
-		 if(!comport_openocd.equalsIgnoreCase(""))
-		 {
-			 int privious=fPrgmArgumentsComCom.indexOf(comport_openocd);
-			 if(privious>-1)
-			     fPrgmArgumentsComCom.remove(privious);
-			 fPrgmArgumentsComCom.add(comport_openocd, 0);
-			 
-			 
-		 }
-		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
+//		if (COM != null) {
+//			for (int ii=0;ii<COM.size();ii++) {
+//				    String currentcom=(String) COM.get(ii);
+//				    fPrgmArgumentsComCom.add(currentcom);
+//	        }
+//		} 
+//		else {
+//			fSerialPortAvailable = false;
+//			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
+//			fLaunchComButton.setEnabled(fSerialPortAvailable);
+//		}
+//		
+//		
+//		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
+//			public void modifyText(ModifyEvent evt) {
+//				Combo combo= (Combo)evt.widget;
+//				comport_openocd=combo.getText();
+//				updateLaunchConfigurationDialog();
+//			}
+//		});
+//		
+//		 if(!comport_openocd.equalsIgnoreCase(""))
+//		 {
+//			 int privious=fPrgmArgumentsComCom.indexOf(comport_openocd);
+//			 if(privious>-1)
+//			     fPrgmArgumentsComCom.remove(privious);
+//			 fPrgmArgumentsComCom.add(comport_openocd, 0);
+//			 
+//			 
+//		 }
+//		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		
 	}
 	private void createTabitemnSIM(Composite subComp) { 
