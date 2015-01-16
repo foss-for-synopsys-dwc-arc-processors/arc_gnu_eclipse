@@ -70,8 +70,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	protected Text fGDBServerIPAddressText;
-	public String comport_openocd="";//this variable is for launching the exactly com port chosen by users
-	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
+//	public String comport_openocd="";//this variable is for launching the exactly com port chosen by users
+//	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
 	protected Label fSearchexternalLabel;
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
@@ -90,7 +90,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	static String fLaunchexternal_nsim_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	
-	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
+	//static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	public Boolean createTabitemCOMBool=false;
 	public Boolean createTabitemnSIMBool=false;
@@ -219,11 +219,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_nsim_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT, "true");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "false");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "false");
-		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+//		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+//		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-		    fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
+//		    fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 		    
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
@@ -244,20 +244,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 
 
 				
-			 comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-			 if (FirstlaunchDialog.value[1] != null) {
-					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-						comport_openocd = FirstlaunchDialog.value[1];
-					}
-
-				}
-			 comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
-			 if (FirstlaunchDialog.value[1] != null) {
-					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-						comport_ashling = FirstlaunchDialog.value[1];
-					}
-
-				}	 
+//			 comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+//			 if (FirstlaunchDialog.value[1] != null) {
+//					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
+//						comport_openocd = FirstlaunchDialog.value[1];
+//					}
+//
+//				}
+//			 comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+//			 if (FirstlaunchDialog.value[1] != null) {
+//					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
+//						comport_ashling = FirstlaunchDialog.value[1];
+//					}
+//
+//				}	 
 			 //fnSIMpropsText.setText(nsimprop);
 			 
 			 
@@ -311,8 +311,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,nSIMtcffiles_last);
-		if (fSerialPortAvailable)
-			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
+//		if (fSerialPortAvailable)
+//			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
 		String hostname = fGDBServerIPAddressText.getText();
 		configuration.setAttribute(
@@ -320,9 +320,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				getAttributeValueFromString(hostname)
 		);
 	
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
-		
+//		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
+//		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
+//		
 	}
 	/* 
 	* @return true---windows 
@@ -459,7 +459,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
 
-					fLaunchTerminalboolean="false";
+//					fLaunchTerminalboolean="false";
 
 					
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
@@ -516,7 +516,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("Generic gdbserver"))
 				{
 
-					fLaunchTerminalboolean="false";
+//					fLaunchTerminalboolean="false";
 
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 

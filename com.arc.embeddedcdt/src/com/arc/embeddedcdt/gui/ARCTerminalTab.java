@@ -51,6 +51,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
+	static String gdbserver = null;
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -136,6 +137,10 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
+			
 	}
 
 	/* (non-Javadoc)
@@ -175,14 +180,16 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		 String gdbserver = null;
+		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
+		fPrgmArgumentsLabelCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
+		
 		try {
 			gdbserver = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*""*/);
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	     if(gdbserver.indexOf("OpenOCD")>-1){
+		if(gdbserver.indexOf("OpenOCD")>-1){
 			if (!comport_openocd.equalsIgnoreCase("")) {
 				int privious = fPrgmArgumentsComCom.indexOf(comport_openocd);
 				if (privious > -1)
@@ -198,8 +205,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 					updateLaunchConfigurationDialog();
 				}
 			});
-			
-	     }
+		   }
 	     if(gdbserver.indexOf("Ashlin")>-1){
 			if (!comport_ashling.equalsIgnoreCase("")) {
 				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
@@ -217,10 +223,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 				}
 			});
 	     }
-
-		else {
-			fLaunchTerminalboolean = "false";
-		}
+	     
 	}
 
 
@@ -230,10 +233,20 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (fSerialPortAvailable)
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
-			}
+		
+		if(gdbserver.indexOf("OpenOCD")>-1){
+			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
+	     }
+	     if(gdbserver.indexOf("Ashlin")>-1){
+			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
+	     }
+	     
+			
 
+		
+		
+		   }
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
 	 */
