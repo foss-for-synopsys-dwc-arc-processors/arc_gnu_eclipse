@@ -608,7 +608,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		createTabitemnSIMBool=true;
 
 		groupnsim = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
-		Composite compnSIM = SWTFactory.createComposite(groupnsim, 3, 5, GridData.FILL_BOTH);
+		final Composite compnSIM = SWTFactory.createComposite(groupnsim, 3, 5, GridData.FILL_BOTH);
 		
 		GridData gd = new GridData();
 	
@@ -624,13 +624,14 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 		
-//		nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
-//		nSIMtcflabel.setText("nSIM TCF:");
-//		fLaunchtcfButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-//		fLaunchtcfButton.setSelection(false);
-//		gd = new GridData(SWT.BEGINNING);
-//		fLaunchtcfButton.setLayoutData(gd);
-//		fLaunchtcfButton.setText("TCF");
+		//nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
+		//nSIMtcflabel.setText("nSIM TCF:");
+		fLaunchtcfButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchtcfButton.setSelection(false);
+		gd = new GridData(SWT.BEGINNING);
+		gd.horizontalSpan = 3;
+		fLaunchtcfButton.setLayoutData(gd);
+		fLaunchtcfButton.setText("TCF");
 //	
 //		fnSIMtcfText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
 //		gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -723,26 +724,23 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 
-//		fLaunchtcfButton.addSelectionListener(new SelectionListener() {
-//	        public void widgetSelected(SelectionEvent event) {
-//				if (fLaunchtcfButton.getSelection()==true) {
-//					fLaunchexternal_nsimtcf_Buttonboolean="true";
-//					fLaunchtcfButton.setSelection(true);
-//		        	fnSIMtcfText.setEnabled(true); 
-//		        	fnSIMtcfButton.setEnabled(true);
-//
-//				} else {
-//					fLaunchexternal_nsimtcf_Buttonboolean="false";
-//					fLaunchtcfButton.setSelection(false);
-//		        	fnSIMtcfText.setEnabled(false);
-//		        	fnSIMtcfButton.setEnabled(false);
-//				}
-//	        	updateLaunchConfigurationDialog();
-//	        }
-//	        public void widgetDefaultSelected(SelectionEvent event) {
-//	        }
-//	        
-//	      });
+		fLaunchtcfButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchtcfButton.getSelection()==true) {
+					fLaunchexternal_nsimtcf_Buttonboolean="true";
+					fnSIMTCFPath.setEnabled(true, compnSIM);
+
+				} else {
+					fLaunchexternal_nsimtcf_Buttonboolean="false";
+					fLaunchtcfButton.setSelection(false);
+					fnSIMTCFPath.setEnabled(false, compnSIM);
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+
+	      });
 //		fLaunchPropsButton.addSelectionListener(new SelectionListener() {
 //
 //	        public void widgetSelected(SelectionEvent event) {
