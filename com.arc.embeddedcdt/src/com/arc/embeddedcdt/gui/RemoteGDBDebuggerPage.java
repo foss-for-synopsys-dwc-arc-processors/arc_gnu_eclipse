@@ -27,6 +27,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.jface.preference.FileFieldEditor;
+import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
@@ -75,6 +76,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	private FileFieldEditor fOpenOCDBinPath; // Editor for path to OpenOCD binary
 	private FileFieldEditor fOpenOCDConfigPath; // Editor for path to OpenOCD binary
+	private DirectoryFieldEditor fAshlingBinPath; // Editor for path to Ashling binary
     static String runcom="";//this variable is for saving user's input run command
 	public String external_openocd_path="";//this variable is for saving user's external path
 	public String external_ashling_path="";//this variable is for saving user's external path
@@ -109,7 +111,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
 	public static String externaltools="";
 	private String externaltools_openocd_path="";
-	public static String externaltools_ashling_path="";
+	private String externaltools_ashling_path="";
 	public static String externaltools_nsim_path="";
 	
 	public static String portnumber="";
@@ -263,7 +265,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,externaltools_openocd_path);
 
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, openocd_bin_path);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,external_ashling_path);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,externaltools_ashling_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,external_nsim_path);
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
@@ -556,48 +558,24 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
 private void createTabitemCOMAshling(Composite subComp) { 
 	    createTabitemCOMAshlingBool=true;
-		groupcomashling = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 5, 5, GridData.FILL_HORIZONTAL);
-		Composite compCOM = SWTFactory.createComposite(groupcomashling, 5, 5, GridData.FILL_BOTH);
+	    
+		groupcomashling = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
+		final Composite compCOM = SWTFactory.createComposite(groupcomashling, 3, 5, GridData.FILL_BOTH);
 		
-	
-		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
-		fSearchexternalLabel.setText("Ashling Path");
-		GridData gd = new GridData();
-		fSearchexternalLabel.setLayoutData(gd);
-			
-		fPrgmArgumentsTextexternal=new Text(compCOM, SWT.SINGLE | SWT.BORDER);//6-1
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.widthHint=400;
-		gd.horizontalSpan =2;
-		fPrgmArgumentsTextexternal.setLayoutData(gd);
-		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent evt) {
-				external_ashling_path=fPrgmArgumentsTextexternal.getText();
-				updateLaunchConfigurationDialog();
-			}
-		});
-		String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
-		
-		if(externaltools_ashling_path.equalsIgnoreCase(""))
-			fPrgmArgumentsTextexternal.setText(defaultValue);
-		else 
-			fPrgmArgumentsTextexternal.setText(externaltools_ashling_path);
-		
-		
-		
-		
-		fSearchexternalButton = createPushButton(compCOM, "Browse", null); //$NON-NLS-1$  //6-2
-		gd = new GridData(SWT.BEGINNING);
-		gd.horizontalSpan =2;
-		fSearchexternalButton.setLayoutData(gd);
-		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent evt) {
-				//handleBinaryBrowseButtonSelected();
-				updateLaunchConfigurationDialog();
+        // Path to Ashling binary
+		fAshlingBinPath = new DirectoryFieldEditor("fAshlingBinPath", "Ashling binary path", compCOM);
+		fAshlingBinPath.setStringValue(externaltools_ashling_path);
+
+		fAshlingBinPath.setPropertyChangeListener( new IPropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent event) {
+				if (event.getProperty() == "field_editor_value") {
+					externaltools_ashling_path = (String)event.getNewValue();
+					updateLaunchConfigurationDialog();
+				}
 			}
 		});
 	}
-	
+
 	private void createTabitemCOM(Composite subComp) { 
 		createTabitemCOMBool=true;
 		
@@ -618,36 +596,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 
-//		fSearchexternalLabel=new Label(compCOM, SWT.LEFT);
-//		fSearchexternalLabel.setText("OpenOCD configuration");
-//		gd = new GridData();
-//		fSearchexternalLabel.setLayoutData(gd);
-//			
-//		fPrgmArgumentsTextexternal=new Text(compCOM, SWT.SINGLE | SWT.BORDER);//6-1
-//		gd = new GridData(GridData.FILL_HORIZONTAL);
-//		gd.widthHint=400;
-//		fPrgmArgumentsTextexternal.setLayoutData(gd);
-//		fPrgmArgumentsTextexternal.addModifyListener(new ModifyListener() {
-//			public void modifyText(ModifyEvent evt) {
-//				external_openocd_path=fPrgmArgumentsTextexternal.getText();
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
-//		if(externaltools_openocd_path.equalsIgnoreCase(""))
-//		     fPrgmArgumentsTextexternal.setText(getOpenOCDScriptDefaultPath());
-//		else  fPrgmArgumentsTextexternal.setText(externaltools_openocd_path);
-//		
-//		
-//		fSearchexternalButton = createPushButton(compCOM, "Browse", null); //$NON-NLS-1$  //6-2
-//		gd = new GridData(GridData.FILL_HORIZONTAL);
-//		fSearchexternalButton.setLayoutData(gd);
-//		fSearchexternalButton.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent evt) {
-//				handleBinaryBrowseButtonSelected();
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
-	
 		// Path to OpenOCD binary
 		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
 		fOpenOCDConfigPath.setStringValue(externaltools_openocd_path);
@@ -659,6 +607,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
+
 	}
 
 	private void createTabitemnSIM(Composite subComp) { 
