@@ -511,9 +511,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		System.setProperty("Ashling", external_tools_ashling_path);
 		final String ash_dir = System.getProperty("Ashling");
 		final File ash_wd = new java.io.File(ash_dir);
-		final String ashling_exe = "ash-arc-gdb-server" + (RemoteGDBDebuggerPage.isWindowsOS() ? ".exe" : "");
+		
 		final String ash_cmd =
-				ash_dir + java.io.File.separator + ashling_exe +
+				ash_dir + java.io.File.separator + configuration.getAttribute(
+						LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
+						"") +
 				" --jtag-frequency" + " 8mhz" +
 				" --device" + " arc" +
 				" --gdb-port " + gdbserver_port +

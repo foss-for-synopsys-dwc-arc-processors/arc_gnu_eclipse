@@ -76,7 +76,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	private FileFieldEditor fOpenOCDBinPath; // Editor for path to OpenOCD binary
 	private FileFieldEditor fOpenOCDConfigPath; // Editor for path to OpenOCD binary
-	private DirectoryFieldEditor fAshlingBinPath; // Editor for path to Ashling binary
+	private FileFieldEditor fAshlingBinPath; // Editor for path to Ashling binary
 	private FileFieldEditor  fnSIMBinPath; // Editor for path to nSIM binary
 	private FileFieldEditor fnSIMTCFPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
@@ -94,8 +94,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
 	public Boolean createTabitemCOMAshlingBool=false;
 	// Constants
-	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC";
-	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin";
+	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";
+	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin/ash-arc-gdb-server";
 	
 	protected Label nSIMpropslabel;
 	public static Text fnSIMpropsText;
@@ -203,7 +203,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    openocd_bin_path = configuration.getAttribute(
 		    	LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
 		    	getOpenOCDExecutableDefaultPath());
-		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, "");
+		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX);
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, getNsimdrvDefaultPath());
 		    
 		    fLaunchexternal_openocd_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT, "true");
@@ -213,8 +213,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "false");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
-		    fLaunchPropsButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
-		    fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
+
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
 		    
@@ -400,7 +399,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 							groupcomashling.dispose();
 
 						createTabitemCOMAshling(subComp);
-						String defaultValue = isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX;
 					}
 						 
 					groupcomashling.setText("JTAG via Ashling");
@@ -438,6 +436,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						if(!groupnsim.isDisposed())
 						    groupnsim.dispose();
 					    createTabitemnSIM(subComp);
+					    
+					    fLaunchPropsButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
+					    fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
+					    
 //					    if(externaltools_nsim_path.equalsIgnoreCase(""))
 //					    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
 //						
@@ -561,7 +563,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		final Composite compCOM = SWTFactory.createComposite(groupcomashling, 3, 5, GridData.FILL_BOTH);
 		
         // Path to Ashling binary
-		fAshlingBinPath = new DirectoryFieldEditor("fAshlingBinPath", "Ashling binary path", compCOM);
+		fAshlingBinPath = new FileFieldEditor("fAshlingBinPath", "Ashling binary path", compCOM);
 		fAshlingBinPath.setStringValue(externaltools_ashling_path);
 
 		fAshlingBinPath.setPropertyChangeListener( new IPropertyChangeListener() {
