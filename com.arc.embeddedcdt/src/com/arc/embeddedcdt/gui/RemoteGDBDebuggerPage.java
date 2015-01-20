@@ -635,7 +635,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gd = new GridData(SWT.BEGINNING);
 		gd.horizontalSpan = 3;
 		fLaunchtcfButton.setLayoutData(gd);
-		fLaunchtcfButton.setText("TCF");
+		fLaunchtcfButton.setText("Use TCF?");
 
 
 		fnSIMTCFPath = new FileFieldEditor("fnSIMTCFPath", "nSIM TCF path", compnSIM);
@@ -656,7 +656,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gd = new GridData(SWT.BEGINNING);
 		gd.horizontalSpan = 3;
 		fLaunchPropsButton.setLayoutData(gd);
-		fLaunchPropsButton.setText("Properties");
+		fLaunchPropsButton.setText("Use nSIM properties file?");
 		fnSIMPropsPath = new FileFieldEditor("fnSIMPropsPath", "nSIM properties file", compnSIM);
 		fnSIMPropsPath.setStringValue(nSIMpropsfiles_last);
 		fnSIMPropsPath.setPropertyChangeListener( new IPropertyChangeListener() {
