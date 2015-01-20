@@ -103,14 +103,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static String nSIMpropsfiles="";
 	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
-	static String fLaunchexternal_nsimprops_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
+	private String fLaunchexternal_nsimprops_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	protected Button fLaunchtcfButton;//this button is for launching the Properties file for nsim
 	protected Label nSIMtcflabel;
 	public static Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
 	public static String nSIMtcffiles="";
 	public static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
-	static String fLaunchexternal_nsimtcf_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
+	private String fLaunchexternal_nsimtcf_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	public static String externaltools="";
 	private String externaltools_openocd_path="";
@@ -211,6 +211,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_nsim_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT, "true");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "false");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "false");
+		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
+		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
+		    fLaunchPropsButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
+		    fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
 		    
@@ -624,51 +628,14 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});
 		
-		//nSIMtcflabel = new Label(compnSIM, SWT.CENTER);
-		//nSIMtcflabel.setText("nSIM TCF:");
 		fLaunchtcfButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchtcfButton.setSelection(false);
+		fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
 		gd = new GridData(SWT.BEGINNING);
 		gd.horizontalSpan = 3;
 		fLaunchtcfButton.setLayoutData(gd);
 		fLaunchtcfButton.setText("TCF");
-//	
-//		fnSIMtcfText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-//		gd = new GridData(GridData.FILL_HORIZONTAL);
-//		gd.widthHint=400;
-//        gd.horizontalSpan=2;
-//        fnSIMtcfText.setLayoutData(gd);
-//        
-//	    if(nSIMtcffiles_last.equalsIgnoreCase(""))
-//	    {
-//	    	fnSIMtcfText.setText(nSIMtcffiles);
-//	    	nSIMtcffiles_last=nSIMtcffiles;
-//	    	
-//	    }
-//	    else 
-//	    	fnSIMtcfText.setText(nSIMtcffiles_last);
-//	    fnSIMtcfText.addModifyListener( new ModifyListener() {
-//
-//			public void modifyText( ModifyEvent evt ) {
-//				nSIMtcffiles_last=fnSIMtcfText.getText();
-//				updateLaunchConfigurationDialog();
-//			}
-//		} );
-//		
-//	    fnSIMtcfButton = createPushButton(compnSIM, "Browse", null); //$NON-NLS-1$  //6-2
-//	    gd = new GridData(SWT.BEGINNING);
-//        gd.horizontalSpan=2;
-//        fnSIMtcfButton.setLayoutData(gd);
-//	
-//	    fnSIMtcfButton.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent evt) {
-//				handletcfBinaryBrowseButtonSelected();
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
-	    
-//		nSIMpropslabel = new Label(compnSIM, SWT.CENTER);
-//		nSIMpropslabel.setText("nSIM Props:");
+
+
 		fnSIMTCFPath = new FileFieldEditor("fnSIMTCFPath", "nSIM TCF path", compnSIM);
 		fnSIMTCFPath.setStringValue(nSIMtcffiles_last);
 		fnSIMTCFPath.setPropertyChangeListener( new IPropertyChangeListener() {
@@ -679,40 +646,15 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
+		fnSIMTCFPath.setEnabled(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean), compnSIM);
 		
-//		fLaunchPropsButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-//		fLaunchPropsButton.setSelection(false);
-//		gd = new GridData(SWT.BEGINNING);
-//		fLaunchPropsButton.setLayoutData(gd);
-//		fLaunchPropsButton.setText("Properties file");
-//		
-//		fnSIMpropsText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-//		gd = new GridData(GridData.FILL_HORIZONTAL);
-//		gd.widthHint=400;
-//        gd.horizontalSpan=2;
-//        fnSIMpropsText.setLayoutData(gd);
-//	    if(nSIMpropsfiles_last.equalsIgnoreCase(""))
-//		    fnSIMpropsText.setText(nSIMpropsfiles);
-//	    else 
-//	    	fnSIMpropsText.setText(nSIMpropsfiles_last);
-//		fnSIMpropsText.addModifyListener( new ModifyListener() {
-//
-//			public void modifyText( ModifyEvent evt ) {
-//				nSIMpropsfiles_last=fnSIMpropsText.getText();
-//				updateLaunchConfigurationDialog();
-//			}
-//		} );
-//		
-//		fnSIMpropslButton = createPushButton(compnSIM, "Browse", null); //$NON-NLS-1$  //6-2
-//		gd = new GridData(SWT.BEGINNING);
-//        gd.horizontalSpan=2;
-//        fnSIMpropslButton.setLayoutData(gd);
-//		fnSIMpropslButton.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent evt) {
-//				handlepropsBinaryBrowseButtonSelected();
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
+		
+		fLaunchPropsButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchPropsButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
+		gd = new GridData(SWT.BEGINNING);
+		gd.horizontalSpan = 3;
+		fLaunchPropsButton.setLayoutData(gd);
+		fLaunchPropsButton.setText("Properties");
 		fnSIMPropsPath = new FileFieldEditor("fnSIMPropsPath", "nSIM properties file", compnSIM);
 		fnSIMPropsPath.setStringValue(nSIMpropsfiles_last);
 		fnSIMPropsPath.setPropertyChangeListener( new IPropertyChangeListener() {
@@ -723,6 +665,8 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
+
+		fnSIMPropsPath.setEnabled(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean), compnSIM);
 
 		fLaunchtcfButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
@@ -741,29 +685,25 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        }
 
 	      });
-//		fLaunchPropsButton.addSelectionListener(new SelectionListener() {
-//
-//	        public void widgetSelected(SelectionEvent event) {
-//				if (fLaunchPropsButton.getSelection()==true) {
-//					fLaunchexternal_nsimprops_Buttonboolean="true";
-//					fLaunchPropsButton.setSelection(true);
-//		        	fnSIMpropsText.setEnabled(true); 
-//		        	fnSIMpropslButton.setEnabled(true);
-//
-//				} else {
-//					fLaunchexternal_nsimprops_Buttonboolean="false";
-//					fLaunchPropsButton.setSelection(false);
-//		        	fnSIMpropsText.setEnabled(false); 
-//		        	fnSIMpropslButton.setEnabled(false);
-//				}
-//	        	updateLaunchConfigurationDialog();
-//	        }
-//
-//	        
-//	        public void widgetDefaultSelected(SelectionEvent event) {
-//	        }
-//	        
-//	      });
+		fLaunchPropsButton.addSelectionListener(new SelectionListener() {
+
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchPropsButton.getSelection()==true) {
+					fLaunchexternal_nsimprops_Buttonboolean="true";
+					fnSIMPropsPath.setEnabled(true,compnSIM); 
+
+				} else {
+					fLaunchexternal_nsimprops_Buttonboolean="false"; 
+		        	fnSIMPropsPath.setEnabled(false,compnSIM);
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+
+	        
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+	        
+	      });
 		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
