@@ -103,6 +103,31 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
 			fLaunchComButton.setEnabled(fSerialPortAvailable);
 		}
+//		if(gdbs)
+//		if(gdbserver.indexOf("OpenOCD")>-1){
+//			if (!comport_openocd.equalsIgnoreCase("")) {
+//				String tmp=comport_openocd;
+//				int privious = fPrgmArgumentsComCom.indexOf(tmp);
+//				if (privious > -1)
+//				{
+//					fPrgmArgumentsComCom.remove(privious);  
+//					fPrgmArgumentsComCom.add(comport_openocd, 0);
+//					  
+//				}
+//
+//			}
+//			
+//		}
+//		if(gdbserver.indexOf("Ashlin")>-1){
+//			if (!comport_ashling.equalsIgnoreCase("")) {
+//				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
+//				if (privious > -1)
+//					fPrgmArgumentsComCom.remove(privious);
+//				fPrgmArgumentsComCom.add(comport_ashling, 0);
+//
+//			}
+//			
+//		}
 		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		fLaunchComButton = new Button(argsComp,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
@@ -192,10 +217,11 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		}
 		if(gdbserver.indexOf("OpenOCD")>-1){
 			if (!comport_openocd.equalsIgnoreCase("")) {
-				int privious = fPrgmArgumentsComCom.indexOf(comport_openocd);
+				String tmp=comport_openocd;
+				int privious = fPrgmArgumentsComCom.indexOf(tmp);
 				if (privious > -1)
-					fPrgmArgumentsComCom.remove(privious);
-				fPrgmArgumentsComCom.add(comport_openocd, 0);
+					fPrgmArgumentsComCom.remove(privious);  
+					fPrgmArgumentsComCom.add(tmp, 0);
 
 			}
 			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
