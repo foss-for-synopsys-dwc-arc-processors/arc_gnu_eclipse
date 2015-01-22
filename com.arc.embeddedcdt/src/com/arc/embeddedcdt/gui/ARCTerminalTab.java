@@ -80,7 +80,8 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsLabelCom = new Label(argsComp, SWT.NONE);//5-1
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
 	
-		fPrgmArgumentsComCom =new Combo(argsComp, SWT.None);//5-2 and 5-3
+		fPrgmArgumentsComCom =new Combo(argsComp, SWT.READ_ONLY);//5-2 and 5-3
+	
 		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		List<String> COM = null;
 		try {
