@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2014 PalmSource, Inc. and others.
+ * Copyright (c) 2006, 2015 PalmSource, Inc. and others.
  * All rights reserved. This program and the accompanying materials 
  * are made available under the terms of the Eclipse Public License v1.0 
  * which accompanies this distribution, and is available at 
@@ -70,14 +70,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	protected Text fGDBServerIPAddressText;
-//	public String comport_openocd="";//this variable is for launching the exactly com port chosen by users
-//	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
 	protected Label fSearchexternalLabel;
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
-	//protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
-	private boolean fSerialPortAvailable = true;
-	//protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	private FileFieldEditor fOpenOCDBinPath; // Editor for path to OpenOCD binary
 	
     static String runcom="";//this variable is for saving user's input run command
@@ -88,9 +83,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	static String fLaunchexternal_openocd_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_ashling_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_nsim_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
-	
-	
-	//static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	public Boolean createTabitemCOMBool=false;
 	public Boolean createTabitemnSIMBool=false;
@@ -103,11 +95,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Label nSIMpropslabel;
 	public static Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
-//	public static String nSIMpropsfiles=System.getenv("NSIM_HOME")
-//			 			+ java.io.File.separator + "systemc"
-//			 			+ java.io.File.separator + "configs"
-//			 			+ java.io.File.separator +
-//			 			"nsim_av2em11.props";
 	public static String nSIMpropsfiles="";
 	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
@@ -219,11 +206,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    fLaunchexternal_nsim_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT, "true");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "false");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "false");
-//		    comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-//		    comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-//		    fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 		    
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
@@ -241,26 +225,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				 hostname = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
 			 }
 			 fGDBServerIPAddressText.setText(hostname);
-			 
-
-				
-//			 comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-//			 if (FirstlaunchDialog.value[1] != null) {
-//					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-//						comport_openocd = FirstlaunchDialog.value[1];
-//					}
-//
-//				}
-//			 comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
-//			 if (FirstlaunchDialog.value[1] != null) {
-//					if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-//						comport_ashling = FirstlaunchDialog.value[1];
-//					}
-//
-//				}	 
-			 //fnSIMpropsText.setText(nsimprop);
-			 
-			 
 			
 		 }
 		 catch( CoreException e ) {
@@ -311,19 +275,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,nSIMtcffiles_last);
-//		if (fSerialPortAvailable)
-//			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 		
 		String hostname = fGDBServerIPAddressText.getText();
 		configuration.setAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
 				getAttributeValueFromString(hostname)
 		);
-	
-//		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
-//		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
-//		
 	}
+
 	/* 
 	* @return true---windows 
 	*/
@@ -459,9 +418,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					if (!CommandTab.initcom.isEmpty())
 						CommandTab.initcom="";
 
-//					fLaunchTerminalboolean="false";
-
-					
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
 					String viewId = "org.eclipse.tm.terminal.view.TerminalView"; 
@@ -515,8 +471,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("Generic gdbserver"))
 				{
-
-//					fLaunchTerminalboolean="false";
 
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
 
@@ -641,80 +595,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		});
-		
-//		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
-//		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-//	
-//		fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
-//		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
-		
-//		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-//		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-//	
-//	
-//		fLaunchComButton.setText("Launch Terminal");
-//		fLaunchComButton.addSelectionListener(new SelectionListener() {
-//	        public void widgetSelected(SelectionEvent event) {
-//	        	if(fLaunchComButton.getSelection()==true){
-//	        		fLaunchTerminalboolean="true";
-//	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-//	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
-//	        	} else {
-//	        		fLaunchTerminalboolean="false";
-//		        	fPrgmArgumentsComCom.setEnabled(false);
-//		        	fPrgmArgumentsLabelCom.setEnabled(false);
-//	           	}
-//	        	updateLaunchConfigurationDialog();
-//	        }
-//
-//	        public void widgetDefaultSelected(SelectionEvent event) {
-//	        }
-//	        
-//	      });
-		
-		// Set serial port list. This call might fail, for example if RxTx
-		// library is not available. In this case let's just disable UI elements.
-		List<String> COM = null;
-		try {
-			COM = Launch.COMserialport();
-		} catch (java.lang.UnsatisfiedLinkError e) {
-			e.printStackTrace();
-		} catch (java.lang.NoClassDefFoundError e) {
-			e.printStackTrace();
-		}
-
-//		if (COM != null) {
-//			for (int ii=0;ii<COM.size();ii++) {
-//				    String currentcom=(String) COM.get(ii);
-//				    fPrgmArgumentsComCom.add(currentcom);
-//	        }
-//		} 
-//		else {
-//			fSerialPortAvailable = false;
-//			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-//			fLaunchComButton.setEnabled(fSerialPortAvailable);
-//		}
-//		
-//		
-//		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-//			public void modifyText(ModifyEvent evt) {
-//				Combo combo= (Combo)evt.widget;
-//				comport_ashling=combo.getText();
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
-//		
-//		 if(!comport_ashling.equalsIgnoreCase(""))
-//		 {
-//			 int privious=fPrgmArgumentsComCom.indexOf(comport_ashling);
-//			 if(privious>-1)
-//			     fPrgmArgumentsComCom.remove(privious);
-//			 fPrgmArgumentsComCom.add(comport_ashling, 0);
-//			 
-//			 
-//		 }
-//		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-//		
 	}
 	
 	private void createTabitemCOM(Composite subComp) { 
@@ -766,80 +646,8 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		});
-	
-			
-//		fPrgmArgumentsLabelCom = new Label(compCOM, SWT.NONE);//5-1
-//		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
-//	    fPrgmArgumentsComCom =new Combo(compCOM, SWT.None);//5-2 and 5-3
-//	    fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
-//		fLaunchComButton = new Button(compCOM,SWT.CHECK); //$NON-NLS-1$ //6-3
-//	
-//	
-//		fLaunchComButton.setText("Launch Terminal");
-//		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-//		fLaunchComButton.addSelectionListener(new SelectionListener() {
-//	        public void widgetSelected(SelectionEvent event) {
-//	        	if(fLaunchComButton.getSelection()==true){
-//	        		fLaunchTerminalboolean="true";
-//	        		fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-//	        		fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
-//	        	} else {
-//	        		fLaunchTerminalboolean="false";
-//		        	fPrgmArgumentsComCom.setEnabled(false);
-//		        	fPrgmArgumentsLabelCom.setEnabled(false);
-//	           	}
-//	        	updateLaunchConfigurationDialog();
-//	        }
-//
-//	        public void widgetDefaultSelected(SelectionEvent event) {
-//	        }
-//	        
-//	      });
-		
-		// Set serial port list. This call might fail, for example if RxTx
-		// library is not available. In this case let's just disable UI elements.
-		List<String> COM = null;
-		try {
-			COM = Launch.COMserialport();
-		} catch (java.lang.UnsatisfiedLinkError e) {
-			e.printStackTrace();
-		} catch (java.lang.NoClassDefFoundError e) {
-			e.printStackTrace();
-		}
-
-//		if (COM != null) {
-//			for (int ii=0;ii<COM.size();ii++) {
-//				    String currentcom=(String) COM.get(ii);
-//				    fPrgmArgumentsComCom.add(currentcom);
-//	        }
-//		} 
-//		else {
-//			fSerialPortAvailable = false;
-//			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
-//			fLaunchComButton.setEnabled(fSerialPortAvailable);
-//		}
-//		
-//		
-//		fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-//			public void modifyText(ModifyEvent evt) {
-//				Combo combo= (Combo)evt.widget;
-//				comport_openocd=combo.getText();
-//				updateLaunchConfigurationDialog();
-//			}
-//		});
-//		
-//		 if(!comport_openocd.equalsIgnoreCase(""))
-//		 {
-//			 int privious=fPrgmArgumentsComCom.indexOf(comport_openocd);
-//			 if(privious>-1)
-//			     fPrgmArgumentsComCom.remove(privious);
-//			 fPrgmArgumentsComCom.add(comport_openocd, 0);
-//			 
-//			 
-//		 }
-//		 fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-		
 	}
+
 	private void createTabitemnSIM(Composite subComp) { 
 		createTabitemnSIMBool=true;
 

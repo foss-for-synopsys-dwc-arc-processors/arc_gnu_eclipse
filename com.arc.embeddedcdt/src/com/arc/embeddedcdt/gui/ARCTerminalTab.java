@@ -52,6 +52,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String gdbserver = null;
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -67,7 +68,6 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		createVerticalSpacer(comp, 1);
 		createTerminalComponent(comp, 1);
 	}
-
 
 	protected void createTerminalComponent(Composite comp, int i) {
 		Composite argsComp = SWTFactory.createComposite(comp, 3, 3, GridData.FILL_BOTH);
@@ -104,31 +104,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
 			fLaunchComButton.setEnabled(fSerialPortAvailable);
 		}
-//		if(gdbs)
-//		if(gdbserver.indexOf("OpenOCD")>-1){
-//			if (!comport_openocd.equalsIgnoreCase("")) {
-//				String tmp=comport_openocd;
-//				int privious = fPrgmArgumentsComCom.indexOf(tmp);
-//				if (privious > -1)
-//				{
-//					fPrgmArgumentsComCom.remove(privious);  
-//					fPrgmArgumentsComCom.add(comport_openocd, 0);
-//					  
-//				}
-//
-//			}
-//			
-//		}
-//		if(gdbserver.indexOf("Ashlin")>-1){
-//			if (!comport_ashling.equalsIgnoreCase("")) {
-//				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
-//				if (privious > -1)
-//					fPrgmArgumentsComCom.remove(privious);
-//				fPrgmArgumentsComCom.add(comport_ashling, 0);
-//
-//			}
-//			
-//		}
+
 		fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
 		fLaunchComButton = new Button(argsComp,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
@@ -153,12 +129,11 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	        
 	      });
 		
-
 	}
+
 	protected void handleBinarylaunchButtonSelected(){
 	}
-	
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
@@ -196,14 +171,11 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 				if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
 					comport_ashling = FirstlaunchDialog.value[1];
 				}
-
 			}	
-		 
 		 
 		try {
 			fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 		} catch (CoreException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
@@ -233,7 +205,8 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 					updateLaunchConfigurationDialog();
 				}
 			});
-		   }
+		}
+
 	     if(gdbserver.indexOf("Ashlin")>-1){
 			if (!comport_ashling.equalsIgnoreCase("")) {
 				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
@@ -254,7 +227,6 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	     
 	}
 
-
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
@@ -268,12 +240,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	     if(gdbserver.indexOf("Ashlin")>-1){
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
 	     }
-	     
-			
-
-		
-		
-		   }
+	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
@@ -301,6 +268,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		}
 		return null;
 	}
+
 	public static String getAttributeValueFromString(String string) {
 		String content = string;
 		if (content.length() > 0) {
@@ -308,6 +276,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		}
 		return null;
 	}
+
 	protected String getAttributeValueFromCombo(Combo combo) {
 	
 		String content = combo.getText().trim();
@@ -317,6 +286,5 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		
 		return null;
 	}
-
 
 }
