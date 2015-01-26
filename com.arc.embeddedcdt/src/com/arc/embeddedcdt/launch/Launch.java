@@ -509,20 +509,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			);
 
 		System.setProperty("Ashling", external_tools_ashling_path);
-		final String ash_dir = System.getProperty("Ashling");
-		final File ash_wd = new java.io.File(ash_dir);
-		
+		final File ash_dir = new File(external_tools_ashling_path).getParentFile();
+
 		final String ash_cmd =
-				ash_dir + java.io.File.separator + configuration.getAttribute(
-						LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
-						"") +
+				external_tools_ashling_path +
 				" --jtag-frequency" + " 8mhz" +
 				" --device" + " arc" +
 				" --gdb-port " + gdbserver_port +
-				" --arc-reg-file " + ash_dir + java.io.File.separator + "arc-opella-em.xml";
+				" --arc-reg-file " + ash_dir.getPath() + java.io.File.separator + "arc-opella-em.xml";
 		final IProcess ashling_proc = DebugPlugin.newProcess(
 				launch,
-				DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_wd),
+				DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_dir),
 				ASHLING_PROCESS_LABEL);
 		ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
 	}
