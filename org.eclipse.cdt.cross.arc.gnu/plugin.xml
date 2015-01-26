@@ -2354,7 +2354,7 @@
       <tool
             command="arc-elf32-objcopy"
             id="org.eclipse.cdt.cross.arc.gnu.createflash"
-            name="ARC GNU Create Flash Image"
+            name="ARC ELF32 Create Flash Image"
             natureFilter="both">
          <enablement
                type="ALL">
@@ -2485,7 +2485,7 @@
       <tool
             command="arc-elf32-objdump"
             id="org.eclipse.cdt.cross.arc.gnu.createlisting"
-            name="ARC GNU Create Listing"
+            name="ARC ELF32 Create Listing"
             natureFilter="both"
             outputFlag="&gt;">
          <enablement
@@ -2530,7 +2530,7 @@
             command="arc-elf32-size"
             commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
             id="org.eclipse.cdt.cross.arc.gnu.printsize"
-            name="ARC GNU Print Size"
+            name="ARC ELF32 Print Size"
             natureFilter="both">
          <enablement
                type="ALL">
@@ -2624,7 +2624,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -2632,7 +2632,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts"
+               name="ARC GNU Make builder"
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -2732,7 +2732,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Assembler"
+               name="ARC ELF32 GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base.input"
@@ -2743,7 +2743,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Compiler"
+               name="ARC ELF32 GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base.input"
@@ -2754,7 +2754,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base.input"
@@ -2765,25 +2765,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Linker"
+               name="ARC ELF32 GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Linker"
+               name="ARC ELF32 GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
+               name="ARC ELF32 GNU Create Flash Image"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
             <enablement
                   type="ALL">
@@ -2803,7 +2803,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing"
+               name="ARC ELF32 GNU Create Listing"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
             <enablement
                   type="ALL">
@@ -2823,7 +2823,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux ELF32  Print Size"
+               name="ARC ELF32 Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
             <enablement
                   type="ALL">
@@ -2992,7 +2992,7 @@
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.linux.elf.printsize.debug"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
                </tool>
             </toolChain>
          </configuration>
@@ -3254,7 +3254,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -3262,7 +3262,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts (big endian)"
+               name="ARC GNU Make builder (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -3381,7 +3381,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux GCC Assembler "
+               name="ARC ELF32 GCC Assembler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base.input"
@@ -3392,7 +3392,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C Compiler "
+               name="ARC ELF32 GCC C Compiler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base.input"
@@ -3403,7 +3403,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base.input"
@@ -3414,25 +3414,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C Linker "
+               name="ARC ELF32 GCC C Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Linker "
+               name="ARC ELF32 GCC C++ Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image "
+               name="ARC ELF32 GNU Create Flash Image "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
             <enablement
                   type="ALL">
@@ -3452,7 +3452,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing "
+               name="ARC ELF32 GNU Create Listing "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
             <enablement
                   type="ALL">
@@ -3472,7 +3472,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux GNU Print Size "
+               name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
             <enablement
                   type="ALL">
@@ -3833,7 +3833,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -3841,7 +3841,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts"
+               name="ARC GNU Make builder  "
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -3941,7 +3941,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Assembler"
+               name="ARC ELF32 GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base.input"
@@ -3952,7 +3952,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Compiler"
+               name="ARC ELF32 GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base.input"
@@ -3963,7 +3963,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base.input"
@@ -3974,25 +3974,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Linker"
+               name="ARC ELF32 GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Linker"
+               name="ARC ELF32 GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
+               name="ARC ELF32 GNU Create Flash Image"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
             <enablement
                   type="ALL">
@@ -4012,7 +4012,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing"
+               name="ARC ELF32 GNU Create Listing"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
             <enablement
                   type="ALL">
@@ -4032,7 +4032,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux ELF32  Print Size"
+               name="ARC ELF32 Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
             <enablement
                   type="ALL">
@@ -4137,7 +4137,7 @@
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.printsize.debug"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
                </tool>
             </toolChain>
          </configuration>
@@ -4219,7 +4219,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.linux.platform.base.600"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -4227,7 +4227,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base.600"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts"
+               name="ARC GNU Make builder  "
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -4310,7 +4310,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Assembler"
+               name="ARC ELF32 GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base.input"
@@ -4321,7 +4321,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Compiler"
+               name="ARC ELF32 GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base.input"
@@ -4332,7 +4332,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base.input"
@@ -4343,25 +4343,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Linker"
+               name="ARC ELF32 GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Linker"
+               name="ARC ELF32 GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
+               name="ARC ELF32 GNU Create Flash Image"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
             <enablement
                   type="ALL">
@@ -4381,7 +4381,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing"
+               name="ARC ELF32 GNU Create Listing"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
             <enablement
                   type="ALL">
@@ -4401,7 +4401,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux ELF32  Print Size"
+               name="ARC ELF32  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
             <enablement
                   type="ALL">
@@ -4804,7 +4804,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -4812,7 +4812,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.builder.base.700"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts"
+               name="ARC GNU Make builder  "
                superClass="org.eclipse.cdt.cross.arc.gnu.builder">
          </builder>
          <optionCategory
@@ -4895,7 +4895,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Assembler"
+               name="ARC ELF32 GCC Assembler"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.assembler.base.input"
@@ -4906,7 +4906,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Compiler"
+               name="ARC ELF32 GCC C Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.c.compiler.base.input"
@@ -4917,7 +4917,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.compiler.base.input"
@@ -4928,25 +4928,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C Linker"
+               name="ARC ELF32 GCC C Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC C++ Linker"
+               name="ARC ELF32 GCC C++ Linker"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux ELF32 GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
+               name="ARC ELF32 GNU Create Flash Image"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
             <enablement
                   type="ALL">
@@ -4966,7 +4966,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing"
+               name="ARC ELF32 GNU Create Listing"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
             <enablement
                   type="ALL">
@@ -4986,7 +4986,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux ELF32  Print Size"
+               name="ARC ELF32 Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
             <enablement
                   type="ALL">
@@ -5100,7 +5100,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -5108,7 +5108,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts (big endian)"
+               name="ARC GNU Make builder (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -5232,7 +5232,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux GCC Assembler "
+               name="ARC ELF32 GCC Assembler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base.input"
@@ -5243,7 +5243,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C Compiler "
+               name="ARC ELF32 GCC C Compiler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base.input"
@@ -5254,7 +5254,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base.input"
@@ -5265,25 +5265,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C Linker "
+               name="ARC ELF32 GCC C Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Linker "
+               name="ARC ELF32 GCC C++ Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image "
+               name="ARC ELF32 GNU Create Flash Image "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
             <enablement
                   type="ALL">
@@ -5303,7 +5303,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing "
+               name="ARC ELF32 GNU Create Listing "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
             <enablement
                   type="ALL">
@@ -5323,7 +5323,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux GNU Print Size "
+               name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
             <enablement
                   type="ALL">
@@ -5638,7 +5638,7 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
+               name="All Platform"
                osList="linux,win32">
          </targetPlatform>
          <builder
@@ -5646,7 +5646,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts (big endian)"
+               name="ARC GNU Make builder (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -5757,7 +5757,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux GCC Assembler "
+               name="ARC ELF32 GCC Assembler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base.input"
@@ -5768,7 +5768,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C Compiler "
+               name="ARC ELF32 GCC C Compiler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base.input"
@@ -5779,7 +5779,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base.input"
@@ -5790,25 +5790,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C Linker "
+               name="ARC ELF32 GCC C Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Linker "
+               name="ARC ELF32 GCC C++ Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image "
+               name="ARC ELF32 GNU Create Flash Image "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
             <enablement
                   type="ALL">
@@ -5828,7 +5828,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing "
+               name="ARC ELF32 GNU Create Listing "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
             <enablement
                   type="ALL">
@@ -5848,7 +5848,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux GNU Print Size "
+               name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
             <enablement
                   type="ALL">
@@ -6078,15 +6078,15 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.platform.base"
                isAbstract="false"
-               name="Linux Platform"
-               osList="linux">
+               name="All Platform"
+               osList="linux,win32">
          </targetPlatform>
          <builder
                command="make"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC GNU Make builder for Linux hosts (big endian)"
+               name="ARC GNU Make builder (big endian)"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.builder">
          </builder>
          <optionCategory
@@ -6197,7 +6197,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base"
                isAbstract="false"
-               name="ARC Linux GCC Assembler "
+               name="ARC ELF32 GCC Assembler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.assembler.base.input"
@@ -6208,7 +6208,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C Compiler "
+               name="ARC ELF32 GCC C Compiler "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.compiler.base.input"
@@ -6219,7 +6219,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Compiler"
+               name="ARC ELF32 GCC C++ Compiler"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.compiler.base.input"
@@ -6230,25 +6230,25 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.c.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C Linker "
+               name="ARC ELF32 GCC C Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base"
                isAbstract="false"
-               name="ARC Linux GCC C++ Linker "
+               name="ARC ELF32 GCC C++ Linker "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.archiver.base"
                isAbstract="false"
-               name="ARC Linux GCC Archiver"
+               name="ARC ELF32 GCC Archiver"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createflash.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Flash Image "
+               name="ARC ELF32 GNU Create Flash Image "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
             <enablement
                   type="ALL">
@@ -6268,7 +6268,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.createlisting.base"
                isAbstract="false"
-               name="ARC Linux GNU Create Listing "
+               name="ARC ELF32 GNU Create Listing "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
             <enablement
                   type="ALL">
@@ -6288,7 +6288,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.printsize.base"
                isAbstract="false"
-               name="ARC Linux GNU Print Size "
+               name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
             <enablement
                   type="ALL">
