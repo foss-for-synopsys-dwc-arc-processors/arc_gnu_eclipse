@@ -4,7 +4,7 @@
  Author      : $(author)
  Version     :
  Copyright   : $(copyright)
- Description : Hello World in C
+ Description : Hello World in C++
  ============================================================================
  */
 #include <stdio.h>
@@ -29,7 +29,7 @@
 typedef volatile unsigned int DWCREG;
 typedef DWCREG * DWCREG_PTR;
 
-// set maximum lenght of debug message
+// Set maximum length of debug message
 #define	MAX_DEBUG_MSG	(256)
 
 void uart_print(DWCREG_PTR uartRegs, const char * pBuf);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
 	DWCREG_PTR uart = (DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE);
 
-	// initilize uart console
+	// Initialize UART console
 	uart_initDevice(uart, UART_CFG_BAUDRATE_115200, UART_CFG_DATA_8BITS,
 			UART_CFG_1STOP, UART_CFG_PARITY_NONE);
 
@@ -58,37 +58,37 @@ int main(int argc, char *argv[]) {
 
 void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud, uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity) {
 
-  // build uart configuration for U_LCR register
+  // Build UART configuration for U_LCR register
   unsigned int UCFG = data_bits | stop | parity;
 
-  // disable UART controller
+  // Disable UART controller
   uartRegs[U_MCR] = 0;
-  // enable FIFO in UART controller
+  // Enable FIFO in UART controller
   uartRegs[U_FCR] = 0x01;
 
-  // setup baudrate divisor
+  // Setup baudrate divisor
   uartRegs[U_LCR] = 0x80 | UCFG;
   uartRegs[U_DLL] = UART_BAUD_DLL(baud); //DLL 0x00  div = CPU_clock / 16 * baudrate.
   uartRegs[U_DLH] = UART_BAUD_DLH(baud); //DLH 0x4
 
   uartRegs[U_LCR] = (unsigned int) data_bits | stop | parity;
 
-  // disable uart interrupts
+  // Disable UART interrupts
   uartRegs[U_IER] = 0x0;
 }
 
 
-// simple debug print
+// Simple debug print
 void uart_print(DWCREG_PTR uartRegs, const char * pBuf) {
 	unsigned int i = MAX_DEBUG_MSG;
 
     unsigned char byte = *pBuf++;
     while(byte && i--) {
 
-        // wait if FIFO is full
+        // Wait if FIFO is full
         while(!(uartRegs[U_USR] & U_USR_TFNF));
 
-        // transmit data byte
+        // Transmit data byte
         uartRegs[U_THR] = byte;
         byte = *pBuf++;
     }

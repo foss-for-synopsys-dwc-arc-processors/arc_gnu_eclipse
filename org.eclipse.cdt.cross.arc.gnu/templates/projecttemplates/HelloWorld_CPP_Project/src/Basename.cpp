@@ -4,7 +4,7 @@
  Author      : $(author)
  Version     :
  Copyright   : $(copyright)
- Description : Hello World in C
+ Description : Hello World in C++
  ============================================================================
  */
 #include <stdio.h>
