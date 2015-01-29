@@ -87,7 +87,6 @@ import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 public abstract class Launch extends AbstractCLaunchDelegate implements
@@ -382,13 +381,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					{						
 						// Start nSIM GDB server
 						if (extenal_tools_nsim_path.isEmpty()) {
-							extenal_tools_nsim_path = RemoteGDBDebuggerPage.getNsimdrvDefaultPath();
+							extenal_tools_nsim_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, "");
 						}
 						System.setProperty("nSIM", extenal_tools_nsim_path);
 						String nsim_exec = System.getProperty("nSIM");
 						File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
-//						String nsimProps = RemoteGDBDebuggerPage.nSIMpropsfiles_last;
-//						String nsimtcf = RemoteGDBDebuggerPage.nSIMtcffiles_last;
 						String nsimProps = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 						String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
 						String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
@@ -497,7 +494,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		 * to executable itself, which is rather clumsy. Let's move UI to
 		 * specify path to executable. */
 		if(external_tools_ashling_path.equalsIgnoreCase("")) {
-			if (RemoteGDBDebuggerPage.isWindowsOS())
+			String iswindows=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_IS_WINDOWS,"");
+			
+			if (iswindows.equalsIgnoreCase("true"))
 				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS;
 			else
 				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
@@ -534,9 +533,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		throws CoreException
 	{
 		final String openocd_cfg = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
-				RemoteGDBDebuggerPage.getOpenOCDScriptDefaultPath()
-				);
+				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,"");
 
 		final String gdbserver_port = configuration.getAttribute(
 				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
@@ -544,9 +541,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				);
 
 		final String openocd_bin = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
-				RemoteGDBDebuggerPage.getOpenOCDExecutableDefaultPath()
-				);
+				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,"");
 
 		// ${openocd_bin}/../share/openocd/scripts
 		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();

@@ -39,8 +39,9 @@ public interface LaunchConfigurationConstants {
 	String ATTR_DEBUGGER_GDB_ADDRESS =  LAUNCH_ID + ".debugger_gdb_address"; //$NON-NLS-1$
 	String ATTR_NSIM_PROP_FILE =  LAUNCH_ID + ".nsim_prop_file"; //$NON-NLS-1$
 	String ATTR_NSIM_TCF_FILE =  LAUNCH_ID + ".nsim_tcf_file"; //$NON-NLS-1$
-
+	String ATTR_NSIM_DEFAULT_PATH =  LAUNCH_ID + ".nsim_default_path"; //$NON-NLS-1$
 	String ATTR_ASHLING_XML_PATH =  LAUNCH_ID + ".ashling_xml_path"; //$NON-NLS-1$
+	String ATTR_DEBUGGER_IS_WINDOWS = LAUNCH_ID + ".is_windows";
 	// Default option values
 	static final String DEFAULT_OPENOCD_PORT = "49105";
 	static final String DEFAULT_OPELLAXD_PORT = "49105";

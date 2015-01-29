@@ -123,17 +123,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
 									IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT );
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, (String) null);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, getOpenOCDScriptDefaultPath());
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, (String) null);
-		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, getNsimdrvDefaultPath());
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_IS_WINDOWS,String.valueOf(isWindowsOS()));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,getOpenOCDExecutableDefaultPath());
+
 	}
 	
 	/**
 	 * Get default path to nSIM application nsimdrv.
 	 */
-	public static String getNsimdrvDefaultPath() {
+	private static String getNsimdrvDefaultPath() {
 	
 		if (isWindowsOS()) {
 			return System.getenv("NSIM_HOME") + java.io.File.separator
@@ -146,7 +149,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 	
-	public static String getIDERootDirPath() {
+	private static String getIDERootDirPath() {
 		String s = System.getProperty("eclipse.home.location");
 		s = s.substring("file:/".length()).replace("/", "\\");
 		String path = s + "\\..";
@@ -158,7 +161,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 
-	public static String getOpenOCDExecutableDefaultPath() {
+	private static String getOpenOCDExecutableDefaultPath() {
 		if (isWindowsOS()) {
 			return getIDERootDirPath() + "\\bin\\openocd.exe";
 		} else {
@@ -166,7 +169,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 
-	public static String getOpenOCDScriptDirectory() {
+	private static String getOpenOCDScriptDirectory() {
 		if (isWindowsOS()) {
 			return getIDERootDirPath() + "\\share\\openocd\\scripts";
 		} else {
@@ -174,7 +177,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 
-	public static String getOpenOCDScriptDefaultPath() {
+	private static String getOpenOCDScriptDefaultPath() {
 		if (isWindowsOS()) {
 			return getIDERootDirPath() + "\\share\\openocd\\scripts\\board\\snps_em_sk.cfg";
 		} else {
@@ -191,6 +194,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		fGDBCommandText.setText( "arc-elf32-gdb" );
 		try {
+	
  		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, getOpenOCDScriptDefaultPath());
 		    openocd_bin_path = configuration.getAttribute(
@@ -262,6 +266,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
 		
+		String nsim_default_path = getNsimdrvDefaultPath();
+
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, nsim_default_path);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_IS_WINDOWS,String.valueOf(isWindowsOS()));
+
+		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
@@ -285,7 +295,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,nSIMtcffiles_last);
-		
 		String hostname = fGDBServerIPAddressText.getText();
 		configuration.setAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
@@ -296,7 +305,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	/* 
 	* @return true---windows 
 	*/
-	public static boolean isWindowsOS(){
+	private static boolean isWindowsOS(){
 	    boolean isWindowsOS = false;
 	    String osName = System.getProperty("os.name");
 	    if(osName.toLowerCase().indexOf("windows")>-1){
