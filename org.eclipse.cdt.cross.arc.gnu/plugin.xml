@@ -4514,11 +4514,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.linux.createlisting.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -4578,11 +4573,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.createlisting.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.linux.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base">
                </tool>
             </toolChain>
          </configuration>
