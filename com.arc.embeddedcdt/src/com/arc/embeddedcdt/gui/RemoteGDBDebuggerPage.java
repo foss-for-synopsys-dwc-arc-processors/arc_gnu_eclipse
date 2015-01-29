@@ -66,7 +66,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	//protected Text fGDBServerCommandText;
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
 	protected static  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
-	public static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
+	private static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	protected Text fGDBServerIPAddressText;
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
@@ -80,44 +80,37 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
     static String runcom="";//this variable is for saving user's input run command
-	public String external_openocd_path="";//this variable is for saving user's external path
-	public String external_ashling_path="";//this variable is for saving user's external path
-	public String external_nsim_path="";//this variable is for saving user's external path
 	private String openocd_bin_path;
 	static String fLaunchexternal_openocd_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_ashling_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	static String fLaunchexternal_nsim_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
-	public Boolean createTabitemCOMBool=false;
-	public Boolean createTabitemnSIMBool=false;
+	private Boolean createTabitemCOMBool=false;
+	private Boolean createTabitemnSIMBool=false;
 	
-	public Boolean createTabitemCOMAshlingBool=false;
-	// Constants
-	public static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";
-	public static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin/ash-arc-gdb-server";
+	private Boolean createTabitemCOMAshlingBool=false;
+
 	
 	protected Label nSIMpropslabel;
-	public static Text fnSIMpropsText;
+	private static Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
-	public static String nSIMpropsfiles="";
-	public static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
+	private static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
 	private String fLaunchexternal_nsimprops_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	protected Button fLaunchtcfButton;//this button is for launching the Properties file for nsim
 	protected Label nSIMtcflabel;
-	public static Text fnSIMtcfText;
+	private static Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
-	public static String nSIMtcffiles="";
-	public static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
+	private static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
 	private String fLaunchexternal_nsimtcf_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
-	public static String externaltools="";
+	private static String externaltools="";
 	private String externaltools_openocd_path="";
 	private String externaltools_ashling_path="";
-	public static String externaltools_nsim_path="";
+	private static String externaltools_nsim_path="";
 	private String Ashling_xml_path="";
 	
-	public static String portnumber="";
+	private static String portnumber="";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;

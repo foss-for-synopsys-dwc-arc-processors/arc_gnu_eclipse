@@ -498,9 +498,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		 * specify path to executable. */
 		if(external_tools_ashling_path.equalsIgnoreCase("")) {
 			if (RemoteGDBDebuggerPage.isWindowsOS())
-				external_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_WINDOWS;
+				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS;
 			else
-				external_tools_ashling_path = RemoteGDBDebuggerPage.ASHLING_DEFAULT_PATH_LINUX;
+				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
 		}
 
 		final String gdbserver_port = configuration.getAttribute(
