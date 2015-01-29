@@ -508,6 +508,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT
 			);
 
+		final String ashling_xml_file = configuration.getAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH,"");
 		System.setProperty("Ashling", external_tools_ashling_path);
 		final File ash_dir = new File(external_tools_ashling_path).getParentFile();
 
@@ -516,7 +517,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				" --jtag-frequency" + " 8mhz" +
 				" --device" + " arc" +
 				" --gdb-port " + gdbserver_port +
-				" --arc-reg-file " + ash_dir.getPath() + java.io.File.separator + "arc-opella-em.xml";
+				" --arc-reg-file " + ashling_xml_file;
 		final IProcess ashling_proc = DebugPlugin.newProcess(
 				launch,
 				DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_dir),

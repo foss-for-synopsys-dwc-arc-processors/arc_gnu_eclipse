@@ -15,6 +15,7 @@
 
 package com.arc.embeddedcdt.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -27,7 +28,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.jface.preference.FileFieldEditor;
-import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
@@ -41,7 +41,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -54,7 +53,6 @@ import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
-import com.arc.embeddedcdt.launch.Launch;
 
 /**
  * The dynamic debugger tab for remote launches using gdb server.
@@ -80,6 +78,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor  fnSIMBinPath; // Editor for path to nSIM binary
 	private FileFieldEditor fnSIMTCFPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
+	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
     static String runcom="";//this variable is for saving user's input run command
 	public String external_openocd_path="";//this variable is for saving user's external path
 	public String external_ashling_path="";//this variable is for saving user's external path
@@ -116,6 +115,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private String externaltools_openocd_path="";
 	private String externaltools_ashling_path="";
 	public static String externaltools_nsim_path="";
+	private String Ashling_xml_path="";
 	
 	public static String portnumber="";
 	@Override
@@ -203,7 +203,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    openocd_bin_path = configuration.getAttribute(
 		    	LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
 		    	getOpenOCDExecutableDefaultPath());
-		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, isWindowsOS() ? ASHLING_DEFAULT_PATH_WINDOWS : ASHLING_DEFAULT_PATH_LINUX);
+		    
+		    String default_ashling_path= isWindowsOS() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
+		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,default_ashling_path);
+		    
+		    String ash_xml_path = new File(default_ashling_path).getParentFile().getPath()+ java.io.File.separator + "arc-opella-em.xml";
+		    Ashling_xml_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, ash_xml_path);
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, getNsimdrvDefaultPath());
 		    
 		    fLaunchexternal_openocd_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT, "true");
@@ -272,6 +277,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, openocd_bin_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,externaltools_ashling_path);
+		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH,Ashling_xml_path);
+		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,externaltools_nsim_path);
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
@@ -574,6 +582,20 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
+		
+		
+		// Path to Ashling XMl file
+		fAshlingXMLPath = new FileFieldEditor("fAshlingXMLPath","Ashling XML File", compCOM);
+		fAshlingXMLPath.setStringValue(Ashling_xml_path);
+
+		fAshlingXMLPath.setPropertyChangeListener(new IPropertyChangeListener() {
+					public void propertyChange(PropertyChangeEvent event) {
+						if (event.getProperty() == "field_editor_value") {
+							Ashling_xml_path = (String) event.getNewValue();
+							updateLaunchConfigurationDialog();
+						}
+					}
+				});
 	}
 
 	private void createTabitemCOM(Composite subComp) { 
