@@ -5492,11 +5492,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.linux.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -5546,11 +5541,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.700.linux.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.700.linux.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base">
                </tool>
             </toolChain>
          </configuration>
@@ -5932,11 +5922,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.linux.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -5986,11 +5971,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.600.linux.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.eb.600.linux.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base">
                </tool>
             </toolChain>
          </configuration>
