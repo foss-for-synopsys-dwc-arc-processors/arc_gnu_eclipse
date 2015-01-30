@@ -1,7 +1,6 @@
 /*    */ package org.eclipse.cdt.cross.arc.gnu.uclibc.linux;
-/*    */ 
 /*    */ import org.eclipse.cdt.cross.arc.gnu.uclibc.common.IsToolchainData;
-/*    */ import org.eclipse.cdt.managedbuilder.core.IToolChain;
+import org.eclipse.cdt.managedbuilder.core.IToolChain;
 /*    */ import org.osgi.framework.Version;
 /*    */ 
 /*    */ public class IsToolChainSupported extends org.eclipse.cdt.cross.arc.gnu.uclibc.common.IsToolChainSupported
