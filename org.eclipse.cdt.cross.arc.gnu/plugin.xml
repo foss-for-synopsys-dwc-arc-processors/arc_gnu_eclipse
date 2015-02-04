@@ -2617,7 +2617,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for EM "
+            name="GNU Toolchain for ARC EM "
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -2914,7 +2914,7 @@
       </toolChain>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
-            name="ARC GNU Toolchain for EM Configuration"
+            name="GNU Toolchain for ARC EM Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3218,7 +3218,7 @@
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
-            name="ARC GNU Toolchain for EM (big-endian) Configuration"
+            name="GNU Toolchain for ARC EM (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3237,7 +3237,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for EM (big-endian)"
+            name="GNU Toolchain for ARC EM (big-endian)"
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -3788,7 +3788,7 @@
       </builder>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
-            name="ARC GNU Toolchain for HS Configuration"
+            name="GNU Toolchain for ARC HS Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3806,7 +3806,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for HS "
+            name="GNU Toolchain for ARC HS "
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -4182,7 +4182,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for ARC600"
+            name="GNU Toolchain for ARC 600"
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -4589,7 +4589,7 @@
       </projectType>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base"
-            name="ARC GNU Toolchain for ARC600 Configuration"
+            name="GNU Toolchain for ARC 600 Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base.600">
          <enablement
                attribute="artifactExtension"
@@ -4729,7 +4729,7 @@
       </projectType>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
-            name="ARC GNU Toolchain for ARC700 Configuration"
+            name="GNU Toolchain for ARC 700 Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -4747,7 +4747,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for ARC700  "
+            name="GNU Toolchain for ARC 700  "
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -5043,7 +5043,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for HS (big-endian)"
+            name="GNU Toolchain for ARC HS (big-endian)"
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -5316,7 +5316,7 @@
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
-            name="ARC GNU Toolchain for HS (big-endian) Configuration"
+            name="GNU Toolchain for ARC HS (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -5437,7 +5437,7 @@
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
-            name="ARC GNU Toolchain for ARC700 (big-endian) Configuration"
+            name="GNU Toolchain for ARC 700 (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -5561,7 +5561,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for ARC700 (big-endian)"
+            name="GNU Toolchain for ARC 700 (big-endian)"
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -5991,7 +5991,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
-            name="ARC GNU Toolchain for ARC600 (big-endian)"
+            name="GNU Toolchain for ARC 600 (big-endian)"
             osList="linux,win32">
          <targetPlatform
                archList="all"
@@ -6303,7 +6303,7 @@
       <configuration
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
-            name="ARC GNU Toolchain for ARC600 (big-endian) Configuration"
+            name="GNU Toolchain for ARC 600 (big-endian) Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
          <enablement
                attribute="artifactExtension"
