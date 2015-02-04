@@ -4001,7 +4001,7 @@
          </configuration>
       </projectType>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.assembler"
@@ -4200,7 +4200,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.compiler"
@@ -4486,7 +4486,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-g++"
+            command="arceb-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.compiler"
@@ -4804,7 +4804,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.linker"
@@ -4992,7 +4992,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-ld"
+            command="arceb-linux-ld"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.linker"
@@ -5180,7 +5180,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-ar"
+            command="arceb-linux-ar"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver"
             isAbstract="false"
             name="ARC uClibc GCC Archiver (eb)"
@@ -5245,7 +5245,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-objcopy"
+            command="arceb-linux-objcopy"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createflash"
             name="ARC GNU uClibc Create Flash Image (eb)"
             natureFilter="both">
@@ -5376,7 +5376,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-objdump"
+            command="arceb-linux-objdump"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createlisting"
             name="ARC GNU Create Listing (eb)"
             natureFilter="both"
@@ -5420,7 +5420,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-size"
+            command="arceb-linux-size"
             commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.printsize"
             name="ARC GNU uClibc Print Size (eb)"
@@ -6603,7 +6603,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker"
@@ -6818,7 +6818,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.c.compiler"

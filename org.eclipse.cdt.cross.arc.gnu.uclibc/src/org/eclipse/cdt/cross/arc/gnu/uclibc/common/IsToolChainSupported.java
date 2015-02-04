@@ -16,7 +16,7 @@ public abstract class IsToolChainSupported implements IManagedIsToolChainSupport
 
    public String getCompilerName()
   {
-     return "arc-elf32-gcc";
+     return "arc-linux-gcc";
   }
 
    public String getPlatform() {
