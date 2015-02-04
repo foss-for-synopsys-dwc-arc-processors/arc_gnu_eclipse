@@ -65,8 +65,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	//protected Text fGDBServerCommandText;
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
-	protected static  Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
-	private static String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
+	protected Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
+	private  String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	protected Text fGDBServerIPAddressText;
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
@@ -79,11 +79,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fnSIMTCFPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
-    static String runcom="";//this variable is for saving user's input run command
 	private String openocd_bin_path;
-	static String fLaunchexternal_openocd_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
-	static String fLaunchexternal_ashling_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
-	static String fLaunchexternal_nsim_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
@@ -92,25 +88,25 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	
 	protected Label nSIMpropslabel;
-	private static Text fnSIMpropsText;
+	private Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
-	private static String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
+	private String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
 	private String fLaunchexternal_nsimprops_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	protected Button fLaunchtcfButton;//this button is for launching the Properties file for nsim
 	protected Label nSIMtcflabel;
-	private static Text fnSIMtcfText;
+	private Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
-	private static String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
+	private String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
 	private String fLaunchexternal_nsimtcf_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
-	private static String externaltools="";
+	private String externaltools="";
 	private String externaltools_openocd_path="";
 	private String externaltools_ashling_path="";
-	private static String externaltools_nsim_path="";
 	private String Ashling_xml_path="";
-	
-	private static String portnumber="";
+	private String externaltools_nsim_path="";
+
+	private String portnumber="";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
