@@ -2530,7 +2530,7 @@
             command="arc-elf32-size"
             commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
             id="org.eclipse.cdt.cross.arc.gnu.printsize"
-            name="ARC ELF32 Print Size"
+            name="ARC ELF32 GNU Print Size"
             natureFilter="both">
          <enablement
                type="ALL">
@@ -4926,7 +4926,7 @@
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.printsize.base"
                isAbstract="false"
-               name="ARC ELF32 Print Size"
+               name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
             <enablement
                   type="ALL">
