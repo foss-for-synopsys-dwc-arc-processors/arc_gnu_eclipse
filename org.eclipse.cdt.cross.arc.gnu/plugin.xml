@@ -5784,7 +5784,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.addtools.printsize"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.addtools.printsize"
                      value="true">
                </checkOption>
                <and>
