@@ -30,11 +30,9 @@ public interface LaunchConfigurationConstants {
 	String ATTR_DEBUGGER_OPENOCD_BIN_PATH =  LAUNCH_ID + ".debugger_openocd_bin_path";
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH =  LAUNCH_ID + ".debugger_external_tools_ashling_path"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH =  LAUNCH_ID + ".debugger_external_tools_nsim_path"; //$NON-NLS-1$
-	String ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT = LAUNCH_ID + ".debugger_external_openocd_default";
-	String ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT = LAUNCH_ID + ".debugger_external_ashling_default";
-	String ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT = LAUNCH_ID + ".debugger_external_nsim_default";
-	String ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT = LAUNCH_ID + ".debugger_external_nsimtcf_default";
-	String ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT = LAUNCH_ID + ".debugger_external_nsimprops_default";
+
+	String ATTR_DEBUGGER_USE_NSIMTCF = LAUNCH_ID + ".debugger_use_nsimtcf";
+	String ATTR_DEBUGGER_USE_NSIMPROPS = LAUNCH_ID + ".debugger_use_nsimprops";
 	String ATTR_DEBUGGER_TERMINAL_DEFAULT =LAUNCH_ID + ".debugger_putty_default";
 	String ATTR_DEBUGGER_GDB_ADDRESS =  LAUNCH_ID + ".debugger_gdb_address"; //$NON-NLS-1$
 	String ATTR_NSIM_PROP_FILE =  LAUNCH_ID + ".nsim_prop_file"; //$NON-NLS-1$

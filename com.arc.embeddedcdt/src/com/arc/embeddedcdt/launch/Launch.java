@@ -230,9 +230,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	
 		
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,"");
-		String external_openocd_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_OPENOCD_DEFAULT,"true");
-		String external_ashling_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_ASHLING_DEFAULT,"true");
-		String external_nsim_launch = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIM_DEFAULT,"true");
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
 		if(external_tools.indexOf("OpenOCD")>0)
 		     serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
@@ -372,24 +369,21 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
 					
 					// TODO Replace hardcoded line with something more error-proof.
-					if (external_tools.equalsIgnoreCase("JTAG via Ashling")&&external_ashling_launch.equalsIgnoreCase("true")) {
+					if (external_tools.equalsIgnoreCase("JTAG via Ashling")) {
 						start_ashling(configuration, launch);
-					} else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")&&external_openocd_launch.equalsIgnoreCase("true")) {
+					} else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")) {
 						start_openocd(configuration, launch);
 					}
-					else if (external_tools.equalsIgnoreCase("nSIM")&&external_nsim_launch.equalsIgnoreCase("true"))
+					else if (external_tools.equalsIgnoreCase("nSIM"))
 					{						
 						// Start nSIM GDB server
-						if (extenal_tools_nsim_path.isEmpty()) {
-							extenal_tools_nsim_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, "");
-						}
 						System.setProperty("nSIM", extenal_tools_nsim_path);
 						String nsim_exec = System.getProperty("nSIM");
 						File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
 						String nsimProps = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 						String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-						String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMPROPS_DEFAULT, "true");
-						String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_NSIMTCF_DEFAULT, "true");
+						String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
+						String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
 					    
 						String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb -on nsim_emt";
 
