@@ -18,7 +18,6 @@ package com.arc.embeddedcdt.gui;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
 import org.eclipse.cdt.internal.launch.remote.Messages;
@@ -33,7 +32,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -63,7 +61,6 @@ import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 @SuppressWarnings("restriction")
 public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
-	//protected Text fGDBServerCommandText;
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
 	protected Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
 	private  String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
@@ -165,14 +162,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 
-	private static String getOpenOCDScriptDirectory() {
-		if (isWindowsOS()) {
-			return getIDERootDirPath() + "\\share\\openocd\\scripts";
-		} else {
-			return "/usr/local/share/openocd/scripts";
-		}
-	}
-
 	private static String getOpenOCDScriptDefaultPath() {
 		if (isWindowsOS()) {
 			return getIDERootDirPath() + "\\share\\openocd\\scripts\\board\\snps_em_sk.cfg";
@@ -233,7 +222,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 catch( CoreException e ) {
 		 }
 		
-		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*""*/);
+		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD");
 		
 		 if(!gdbserver.equalsIgnoreCase(""))
 		 {
@@ -595,8 +584,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
 		final Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
-
-		GridData gd = new GridData(SWT.BEGINNING);
 
 		// Path to OpenOCD binary
 		fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", compCOM);
