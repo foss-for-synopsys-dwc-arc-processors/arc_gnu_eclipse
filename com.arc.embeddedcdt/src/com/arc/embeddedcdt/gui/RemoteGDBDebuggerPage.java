@@ -62,6 +62,7 @@ import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
+	protected Combo fPrgmArgumentsJTAGFrenCombo;//this variable for select JTAG frequency
 	protected Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
 	private  String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
@@ -571,6 +572,19 @@ private void createTabitemCOMAshling(Composite subComp) {
 						}
 					}
 				});
+		
+		Label label = new Label(compCOM, SWT.LEFT);		
+		label.setText("JTAG frequency:");
+		
+		fPrgmArgumentsJTAGFrenCombo =new Combo(compCOM, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
+		fPrgmArgumentsJTAGFrenCombo.add("10Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("8Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("6Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("4Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("2Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("1.5Mhz");
+		fPrgmArgumentsJTAGFrenCombo.select(0);
+	
 	}
 
 	private void createTabitemCOM(Composite subComp) { 
@@ -602,6 +616,18 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
+		
+		Label label = new Label(compCOM, SWT.LEFT);		
+		label.setText("JTAG frequency:");
+		
+		fPrgmArgumentsJTAGFrenCombo =new Combo(compCOM, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
+		fPrgmArgumentsJTAGFrenCombo.add("10Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("8Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("6Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("4Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("2Mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("1.5Mhz");
+		fPrgmArgumentsJTAGFrenCombo.select(0);
 
 	}
 
