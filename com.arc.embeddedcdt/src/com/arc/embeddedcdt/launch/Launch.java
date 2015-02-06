@@ -470,6 +470,17 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		}
 
 	}
+	/* 
+	* @return true---windows 
+	*/
+	private static boolean isWindowsOS(){
+	    boolean isWindowsOS = false;
+	    String osName = System.getProperty("os.name");
+	    if(osName.toLowerCase().indexOf("windows")>-1){
+	      isWindowsOS = true;
+	    }
+	    return isWindowsOS;
+	 }
 
 	/**
 	 * Start Ashling GDB Server executable.
@@ -488,9 +499,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		 * to executable itself, which is rather clumsy. Let's move UI to
 		 * specify path to executable. */
 		if(external_tools_ashling_path.equalsIgnoreCase("")) {
-			String iswindows=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_IS_WINDOWS,"");
-			
-			if (iswindows.equalsIgnoreCase("true"))
+						
+			if (isWindowsOS())
 				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS;
 			else
 				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;

@@ -121,7 +121,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, getNsimdrvDefaultPath());
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_IS_WINDOWS,String.valueOf(isWindowsOS()));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,getOpenOCDExecutableDefaultPath());
 
 	}
@@ -245,14 +244,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		//configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND, str );
 		String str = fGDBServerPortNumberText.getText();
 		str=str.trim();
-	
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
-		
 		String nsim_default_path = getNsimdrvDefaultPath();
-
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, nsim_default_path);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_IS_WINDOWS,String.valueOf(isWindowsOS()));
-
 		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
