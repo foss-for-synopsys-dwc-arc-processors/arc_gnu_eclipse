@@ -3249,7 +3249,7 @@
          </targetPlatform>
          <builder
                command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
+               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
                name="ARC GNU Make builder (big endian)"
@@ -5055,7 +5055,7 @@
          </targetPlatform>
          <builder
                command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
                name="ARC GNU Make builder (big endian)"
@@ -5573,7 +5573,7 @@
          </targetPlatform>
          <builder
                command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.builder.base"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
                name="ARC GNU Make builder (big endian)"
