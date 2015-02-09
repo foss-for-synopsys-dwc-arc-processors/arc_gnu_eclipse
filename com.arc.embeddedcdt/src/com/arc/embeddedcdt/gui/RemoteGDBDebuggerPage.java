@@ -78,7 +78,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
 	private String openocd_bin_path;
-	
+	private String jtag_frequency="";
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
 	
@@ -123,6 +123,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, getNsimdrvDefaultPath());
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,getOpenOCDExecutableDefaultPath());
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
 
 	}
 	
@@ -200,7 +201,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-		    
+		    jtag_frequency = configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
+		    fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
 			fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
@@ -251,6 +253,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
+		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, jtag_frequency);
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,externaltools_openocd_path);
@@ -617,35 +621,56 @@ private void createTabitemCOMAshling(Composite subComp) {
 		Label label = new Label(Comp, SWT.LEFT);		
 		label.setText("JTAG frequency:");
 		fPrgmArgumentsJTAGFrenCombo =new Combo(Comp, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
-		fPrgmArgumentsJTAGFrenCombo.add("8MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("100MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("90MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("80MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("70MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("60MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("50MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("40MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("30MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("25MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("20MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("18MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("15MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("12MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("10MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("9MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("8MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("7MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("6MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("5MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("4MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("3MHz");
-		fPrgmArgumentsJTAGFrenCombo.add("2500kHz");
-		fPrgmArgumentsJTAGFrenCombo.add("2000kHz");
-		fPrgmArgumentsJTAGFrenCombo.add("1800kHz");
-		fPrgmArgumentsJTAGFrenCombo.add("1500kHz");
-		fPrgmArgumentsJTAGFrenCombo.add("1200kHz");
-		fPrgmArgumentsJTAGFrenCombo.add("1000MHz");
-		fPrgmArgumentsJTAGFrenCombo.select(0);
+		fPrgmArgumentsJTAGFrenCombo.add("8mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("100mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("90mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("80mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("70mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("60mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("50mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("40mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("30mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("25mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("20mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("18mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("15mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("12mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("10mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("9mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("8mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("7mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("6mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("5mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("4mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("3mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("2500khz");
+		fPrgmArgumentsJTAGFrenCombo.add("2000khz");
+		fPrgmArgumentsJTAGFrenCombo.add("1800khz");
+		fPrgmArgumentsJTAGFrenCombo.add("1500khz");
+		fPrgmArgumentsJTAGFrenCombo.add("1200khz");
+		fPrgmArgumentsJTAGFrenCombo.add("1000khz");
+		
+		if(!jtag_frequency.equalsIgnoreCase("")){
+			fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
+		}
+		else fPrgmArgumentsJTAGFrenCombo.select(0);
+		
+		
+		
+
+		fPrgmArgumentsJTAGFrenCombo.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				if(!jtag_frequency.equalsIgnoreCase("")){
+				    jtag_frequency = combo.getText();
+				    fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);				
+				}
+
+				updateLaunchConfigurationDialog();
+
+			
+			}
+			});
 		
 	}
 	private void createTabitemnSIM(Composite subComp) { 

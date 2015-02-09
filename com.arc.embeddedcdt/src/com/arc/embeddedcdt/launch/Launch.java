@@ -512,12 +512,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			);
 
 		final String ashling_xml_file = configuration.getAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH,"");
+		final String JAG_frequency = configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY,"");
 		System.setProperty("Ashling", external_tools_ashling_path);
 		final File ash_dir = new File(external_tools_ashling_path).getParentFile();
 
 		final String ash_cmd =
 				external_tools_ashling_path +
-				" --jtag-frequency" + " 8mhz" +
+				" --jtag-frequency " + JAG_frequency+
 				" --device" + " arc" +
 				" --gdb-port " + gdbserver_port +
 				" --arc-reg-file " + ashling_xml_file;
