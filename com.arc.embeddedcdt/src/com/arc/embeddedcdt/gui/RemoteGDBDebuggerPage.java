@@ -210,12 +210,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 		else fPrgmArgumentsComboInit.setText(externaltools);	
 		
-		  
+		  if(!fPrgmArgumentsJTAGFrenCombo.isDisposed()){
 			if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "").equalsIgnoreCase(""))
 			{
 				fPrgmArgumentsJTAGFrenCombo.setText(fPrgmArgumentsJTAGFrenCombo.getItem(0));
 			}
 			else fPrgmArgumentsJTAGFrenCombo.setText(jtagfrequency);
+		  }
 			
 		 // Set host and IP.
 		 try {
@@ -240,15 +241,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsComboInit.add(gdbserver, 0);
 			 fPrgmArgumentsComboInit.select(0);
 		 }
-		 
-		 if(!jtagfrequency.equalsIgnoreCase(""))
-		 {
-			 int privious=fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
-			 if(privious>-1)
-				 fPrgmArgumentsJTAGFrenCombo.remove(privious);
-			 fPrgmArgumentsJTAGFrenCombo.add(jtagfrequency, 0);
-			 fPrgmArgumentsJTAGFrenCombo.select(0);
-		 }
+		  if(!fPrgmArgumentsJTAGFrenCombo.isDisposed()){
+				 if(!jtagfrequency.equalsIgnoreCase(""))
+				 {
+					 int privious=fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
+					 if(privious>-1)
+						 fPrgmArgumentsJTAGFrenCombo.remove(privious);
+					 fPrgmArgumentsJTAGFrenCombo.add(jtagfrequency, 0);
+					 fPrgmArgumentsJTAGFrenCombo.select(0);
+				 }			  
+		  }
+
 		 
 
 		
@@ -270,8 +273,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
-		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
+		if(jtag_frequency!=null)
+		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,externaltools_openocd_path);
@@ -358,8 +361,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				Combo combo= (Combo)evt.widget;
 				fGDBServerPortNumberText.getText();
 				fPrgmArgumentsComboInittext = combo.getText();
-						    
-				fPrgmArgumentsJTAGFrenCombo.setText("10mhz");
+						  
 				if (fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")) {
 					if(!portnumber.equalsIgnoreCase(""))
 						fGDBServerPortNumberText.setText(portnumber);
@@ -548,8 +550,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				updateLaunchConfigurationDialog();
 			}
 		} );
-		
-				
+			
 
         if(createTabitemnSIMBool==false)
         	createTabitemnSIM(subComp);
@@ -664,6 +665,14 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsJTAGFrenCombo.add("1200khz");
 		fPrgmArgumentsJTAGFrenCombo.add("1000khz");
 		
+		if(jtag_frequency!=null){
+			if(fPrgmArgumentsJTAGFrenCombo.getText().equalsIgnoreCase("")&&jtag_frequency.equalsIgnoreCase(""))
+				fPrgmArgumentsJTAGFrenCombo.setText("10mhz");
+			else if(fPrgmArgumentsJTAGFrenCombo.getText().equalsIgnoreCase("")&&!jtag_frequency.equalsIgnoreCase(""))
+				fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);	
+		}
+		else fPrgmArgumentsJTAGFrenCombo.setText("10mhz");
+
 
 		fPrgmArgumentsJTAGFrenCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
