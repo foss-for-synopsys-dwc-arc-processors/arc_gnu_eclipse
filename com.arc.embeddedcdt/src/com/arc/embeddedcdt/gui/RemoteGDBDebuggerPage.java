@@ -610,11 +610,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
-		fPrgmArgumentsJTAGFrency(compCOM);
-		
-		
-	
-
+		//fPrgmArgumentsJTAGFrency(compCOM);
 	}
 	
 	private void fPrgmArgumentsJTAGFrency(Composite Comp){
@@ -654,7 +650,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 			fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
 		}
 		else fPrgmArgumentsJTAGFrenCombo.select(0);
-		
 		
 		
 
