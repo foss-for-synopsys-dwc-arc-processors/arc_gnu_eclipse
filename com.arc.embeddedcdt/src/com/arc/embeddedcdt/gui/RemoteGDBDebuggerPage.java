@@ -78,7 +78,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
 	private String openocd_bin_path;
-	private String jtag_frequency="";
+	private String jtag_frequency=null;
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
 	
@@ -181,6 +181,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		fGDBCommandText.setText( "arc-elf32-gdb" );
 		try {
 	
+			String jtagfrequency= configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
  		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, getOpenOCDScriptDefaultPath());
 		    openocd_bin_path = configuration.getAttribute(
@@ -201,15 +202,21 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-		    jtag_frequency = configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
-		    fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
+		
+		  
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
 			fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
 		}
 		else fPrgmArgumentsComboInit.setText(externaltools);	
 		
-
+		  
+			if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "").equalsIgnoreCase(""))
+			{
+				fPrgmArgumentsJTAGFrenCombo.setText(fPrgmArgumentsJTAGFrenCombo.getItem(0));
+			}
+			else fPrgmArgumentsJTAGFrenCombo.setText(jtagfrequency);
+			
 		 // Set host and IP.
 		 try {
 			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
@@ -225,7 +232,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 }
 		
 		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD");
-		
 		 if(!gdbserver.equalsIgnoreCase(""))
 		 {
 			 int privious=fPrgmArgumentsComboInit.indexOf(gdbserver);
@@ -234,6 +240,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsComboInit.add(gdbserver, 0);
 			 fPrgmArgumentsComboInit.select(0);
 		 }
+		 
+		 if(!jtagfrequency.equalsIgnoreCase(""))
+		 {
+			 int privious=fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
+			 if(privious>-1)
+				 fPrgmArgumentsJTAGFrenCombo.remove(privious);
+			 fPrgmArgumentsJTAGFrenCombo.add(jtagfrequency, 0);
+			 fPrgmArgumentsJTAGFrenCombo.select(0);
+		 }
+		 
+
 		
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
@@ -254,7 +271,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
 		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, jtag_frequency);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,externaltools_openocd_path);
@@ -342,6 +359,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				fGDBServerPortNumberText.getText();
 				fPrgmArgumentsComboInittext = combo.getText();
 						    
+				fPrgmArgumentsJTAGFrenCombo.setText("10mhz");
 				if (fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")) {
 					if(!portnumber.equalsIgnoreCase(""))
 						fGDBServerPortNumberText.setText(portnumber);
@@ -617,7 +635,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		Label label = new Label(Comp, SWT.LEFT);		
 		label.setText("JTAG frequency:");
 		fPrgmArgumentsJTAGFrenCombo =new Combo(Comp, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
-		fPrgmArgumentsJTAGFrenCombo.add("8mhz");
+		fPrgmArgumentsJTAGFrenCombo.add("10mhz");
 		fPrgmArgumentsJTAGFrenCombo.add("100mhz");
 		fPrgmArgumentsJTAGFrenCombo.add("90mhz");
 		fPrgmArgumentsJTAGFrenCombo.add("80mhz");
@@ -646,21 +664,11 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsJTAGFrenCombo.add("1200khz");
 		fPrgmArgumentsJTAGFrenCombo.add("1000khz");
 		
-		if(!jtag_frequency.equalsIgnoreCase("")){
-			fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
-		}
-		else fPrgmArgumentsJTAGFrenCombo.select(0);
-		
-		
 
 		fPrgmArgumentsJTAGFrenCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
-				if(!jtag_frequency.equalsIgnoreCase("")){
 				    jtag_frequency = combo.getText();
-				    fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);				
-				}
-
 				updateLaunchConfigurationDialog();
 
 			
