@@ -635,43 +635,47 @@ private void createTabitemCOMAshling(Composite subComp) {
 	private void fPrgmArgumentsJTAGFrency(Composite Comp){
 		Label label = new Label(Comp, SWT.LEFT);		
 		label.setText("JTAG frequency:");
-		fPrgmArgumentsJTAGFrenCombo =new Combo(Comp, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
-		fPrgmArgumentsJTAGFrenCombo.add("10mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("100mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("90mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("80mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("70mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("60mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("50mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("40mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("30mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("25mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("20mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("18mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("15mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("12mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("10mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("9mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("8mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("7mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("6mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("5mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("4mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("3mhz");
-		fPrgmArgumentsJTAGFrenCombo.add("2500khz");
-		fPrgmArgumentsJTAGFrenCombo.add("2000khz");
-		fPrgmArgumentsJTAGFrenCombo.add("1800khz");
-		fPrgmArgumentsJTAGFrenCombo.add("1500khz");
-		fPrgmArgumentsJTAGFrenCombo.add("1200khz");
-		fPrgmArgumentsJTAGFrenCombo.add("1000khz");
+		fPrgmArgumentsJTAGFrenCombo =new Combo(Comp, SWT.None);//1-2 and 1-3
+		
+		GridData gdjtag = new GridData(GridData.BEGINNING);
+		gdjtag.widthHint=70;
+	    fPrgmArgumentsJTAGFrenCombo.setLayoutData(gdjtag);
+	       
+		fPrgmArgumentsJTAGFrenCombo.add("100MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("90MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("80MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("70MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("60MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("50MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("40MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("30MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("25MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("20MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("18MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("15MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("12MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("10MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("9MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("8MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("7MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("6MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("5MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("4MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("3MHz");
+		fPrgmArgumentsJTAGFrenCombo.add("2500KHz");
+		fPrgmArgumentsJTAGFrenCombo.add("2000KHz");
+		fPrgmArgumentsJTAGFrenCombo.add("1800KHz");
+		fPrgmArgumentsJTAGFrenCombo.add("1500KHz");
+		fPrgmArgumentsJTAGFrenCombo.add("1200KHz");
+		fPrgmArgumentsJTAGFrenCombo.add("1000KHz");
 		
 		if(jtag_frequency!=null){
 			if(fPrgmArgumentsJTAGFrenCombo.getText().equalsIgnoreCase("")&&jtag_frequency.equalsIgnoreCase(""))
-				fPrgmArgumentsJTAGFrenCombo.setText("10mhz");
+				fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
 			else if(fPrgmArgumentsJTAGFrenCombo.getText().equalsIgnoreCase("")&&!jtag_frequency.equalsIgnoreCase(""))
 				fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);	
 		}
-		else fPrgmArgumentsJTAGFrenCombo.setText("10mhz");
+		else fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
 
 
 		fPrgmArgumentsJTAGFrenCombo.addModifyListener(new ModifyListener() {
