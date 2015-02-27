@@ -807,22 +807,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 		super.createTabs( tabFolder );
 		createGdbserverSettingsTab( tabFolder );
 	}
-	protected void handlepropsBinaryBrowseButtonSelected() {
-			FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
-			fileDialog.setFileName(fnSIMpropsText.getText());
-			String text= fileDialog.open();
-			if (text != null) {
-				fnSIMpropsText.setText(text);
-			}
-	}
-	protected void handletcfBinaryBrowseButtonSelected() {
-		FileDialog fileDialog = new FileDialog(getShell(), SWT.NONE);
-		fileDialog.setFileName(fnSIMtcfText.getText());
-		String text= fileDialog.open();
-		if (text != null) {
-			fnSIMtcfText.setText(text);
-		}
-	}
 	public static String getAttributeValueFromString(String string) {
 		String content = string;
 		if (content.length() > 0) {
