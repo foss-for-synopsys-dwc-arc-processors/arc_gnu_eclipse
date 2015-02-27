@@ -1153,7 +1153,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.builder"
             isAbstract="false"
             isVariableCaseSensitive="false"
-            name="ARC GNU Make builder"
+            name="GNU Make Builder for ARC"
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <tool
@@ -2713,7 +2713,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder "
+               name="GNU Make Builder for ARC "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
          </builder>
          <optionCategory
@@ -3243,7 +3243,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
+               name="GNU Make Builder for ARC"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
          </builder>
          <optionCategory
@@ -3631,7 +3631,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs"
             isAbstract="false"
             isVariableCaseSensitive="false"
-            name="ARC GNU Make builder"
+            name="GNU Make Builder for ARC"
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <toolChain
@@ -3654,7 +3654,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder (Big endian)"
+               name="GNU Make Builder for ARC"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
          </builder>
          <optionCategory
@@ -3925,7 +3925,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.c.compiler.debug"
@@ -3970,7 +3970,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.printsize.release"
@@ -5535,7 +5535,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.c.compiler.debug"
@@ -5580,7 +5580,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.c.compiler.release"
@@ -5625,7 +5625,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
+               name="GNU Make Builder for ARC"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
          </builder>
          <optionCategory
@@ -6013,7 +6013,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.lib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6037,7 +6037,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.lib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6066,7 +6066,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.hs.uclibc.linux.lib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6090,7 +6090,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.hs.uclibc.linux.lib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6265,7 +6265,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.debug"
@@ -6299,7 +6299,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.release"
@@ -6338,7 +6338,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug"
@@ -6372,7 +6372,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.hs.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.release"
