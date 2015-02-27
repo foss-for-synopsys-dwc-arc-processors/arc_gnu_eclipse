@@ -785,6 +785,19 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        }
 	        
 	      });
+		
+		// JIT 
+		Label label = new Label(compnSIM, SWT.LEFT);
+		label.setText("JIT");
+    	Text JIT_Text = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		JIT_Text.addModifyListener( new ModifyListener() {
+			public void modifyText( ModifyEvent evt ) {
+				updateLaunchConfigurationDialog();
+			}
+		} );
+
+		
+		
 		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
