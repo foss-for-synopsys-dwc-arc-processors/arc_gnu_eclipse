@@ -6127,16 +6127,6 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.compiler">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.linker">
@@ -6169,16 +6159,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
                </tool>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.release"

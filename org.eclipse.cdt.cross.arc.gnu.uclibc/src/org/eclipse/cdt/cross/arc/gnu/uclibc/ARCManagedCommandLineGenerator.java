@@ -409,7 +409,7 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
      
      int fpic=oList.indexOf("-c -fmessage-length=0");
      
-  	 if( oTool.getName().indexOf("Compiler")>1&&oTool.getParent().getId().indexOf("share")>-1){
+  	 if(oTool.getParent().getId().indexOf("share")>-1&&oTool.getId().indexOf("compiler")>-1){
  	    oList.remove(fpic);
  	    oList.add("-c -fmessage-length=0 -fPIC");
   	 }
