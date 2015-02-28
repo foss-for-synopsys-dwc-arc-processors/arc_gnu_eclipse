@@ -384,9 +384,14 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
 						String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
 						String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
-					    
+						String nsimJIT_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
 						String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb -on nsim_emt";
 
+						if(nsimJIT_Buttonboolean.equalsIgnoreCase("true"))
+						{
+							nsim_cmd += " -on nsim_fast ";
+						}
+						
 						if(nsimtcf_Buttonboolean.equalsIgnoreCase("true"))
 						{
 							nsim_cmd += " -tcf " + nsimtcf;

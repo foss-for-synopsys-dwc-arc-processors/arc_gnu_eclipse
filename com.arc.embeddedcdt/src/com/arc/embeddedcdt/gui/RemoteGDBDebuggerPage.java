@@ -198,7 +198,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, getNsimdrvDefaultPath());
 
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "false");
-		    fLaunchexternal_nsimjit_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "true");
+		    fLaunchexternal_nsimjit_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
 
@@ -810,7 +810,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
-		fLaunchJITButton.setText("GNU host I/O support?");
+		fLaunchJITButton.setText("JIT");
 		fLaunchJITButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
 				if (fLaunchJITButton.getSelection()==true) {
