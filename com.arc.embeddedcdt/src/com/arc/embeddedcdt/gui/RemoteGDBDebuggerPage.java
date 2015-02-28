@@ -96,6 +96,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Button fLaunchJITButton;//this button is for launching the Properties file for nsim jit
 	protected Button fLaunchHostlinkButton;//this button is for launching the Properties file for nsim hostlink
 	protected Button fLaunchMemoexptButton;//this button is for launching the Properties file for nsim Memory Exception
+	protected Button fLaunchInvalid_Instru_ExptButton;//this button is for launching the Properties file for Invalid Instruction Exception
+	
+	protected Button fLaunchEnableExptButton;//this button is for launching the Properties file for nsim Enable Exception
 	protected Label nSIMtcflabel;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
 	private String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
@@ -104,6 +107,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private String fLaunchexternal_nsimhostlink_Buttonboolean="true";//this variable is to get nsim gnu hostlink tools current status (Enable/disable)
 	
 	private String fLaunchexternal_nsimMemoExceButtonboolean="true";//this variable is to get nsim memory exception tools current status (Enable/disable)
+	private String fLaunchexternal_nsimEnableExceButtonboolean="true";//this variable is to get nsim memory exception tools current status (Enable/disable)
+	private String fLaunchexternal_nsiminvainstruExceButtonboolean="true";//this variable is to get nsim Invalid Instruction  exception tools current status (Enable/disable)
 	private String externaltools="";
 	private String externaltools_openocd_path="";
 	private String externaltools_ashling_path="";
@@ -203,6 +208,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		    fLaunchexternal_nsimjit_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "true");
 		    fLaunchexternal_nsimhostlink_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
+		    fLaunchexternal_nsimEnableExceButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
+		    fLaunchexternal_nsiminvainstruExceButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT, "true");
 		    fLaunchexternal_nsimMemoExceButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
@@ -300,6 +307,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT,getAttributeValueFromString(fLaunchexternal_nsimjit_Buttonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK,getAttributeValueFromString(fLaunchexternal_nsimhostlink_Buttonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT,getAttributeValueFromString(fLaunchexternal_nsimMemoExceButtonboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT,getAttributeValueFromString(fLaunchexternal_nsimEnableExceButtonboolean));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT,getAttributeValueFromString(fLaunchexternal_nsiminvainstruExceButtonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS,getAttributeValueFromString(fLaunchexternal_nsimprops_Buttonboolean));
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
@@ -461,6 +470,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
 					    fLaunchHostlinkButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimhostlink_Buttonboolean));
 					    fLaunchMemoexptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimMemoExceButtonboolean));
+					    fLaunchEnableExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
+					    
+					    fLaunchInvalid_Instru_ExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
 					    
 //					    if(externaltools_nsim_path.equalsIgnoreCase(""))
 //					    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
@@ -872,6 +884,45 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        }
 
 	      });
+		
+		fLaunchEnableExptButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchEnableExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
+		fLaunchEnableExptButton.setText("Enable Exception");
+		fLaunchEnableExptButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchEnableExptButton.getSelection()==true) {
+					fLaunchexternal_nsimEnableExceButtonboolean="true";
+
+				} else {
+					fLaunchexternal_nsimEnableExceButtonboolean="false";	
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+
+	      });
+		
+		
+		fLaunchInvalid_Instru_ExptButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchInvalid_Instru_ExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
+		fLaunchInvalid_Instru_ExptButton.setText("Enable Exception");
+		fLaunchInvalid_Instru_ExptButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchInvalid_Instru_ExptButton.getSelection()==true) {
+					fLaunchexternal_nsiminvainstruExceButtonboolean="true";
+
+				} else {
+					fLaunchexternal_nsiminvainstruExceButtonboolean="false";	
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+
+	      });
+		
+		
 		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)

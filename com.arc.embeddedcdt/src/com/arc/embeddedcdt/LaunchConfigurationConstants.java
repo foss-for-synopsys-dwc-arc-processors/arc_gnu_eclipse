@@ -36,6 +36,10 @@ public interface LaunchConfigurationConstants {
 	String ATTR_DEBUGGER_USE_NSIMJIT= LAUNCH_ID + ".debugger_use_nsimjit";
 	String ATTR_DEBUGGER_USE_NSIMHOSTLINK= LAUNCH_ID + ".debugger_use_nsimhostlink";
 	String ATTR_DEBUGGER_USE_NSIMMEMOEXPT= LAUNCH_ID + ".debugger_use_nsimmemoexpt";
+	String ATTR_DEBUGGER_USE_NSIMENABLEEXPT= LAUNCH_ID + ".debugger_use_nsimenableexpt";
+	String ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT= LAUNCH_ID + ".debugger_use_nsiminvaintruexpt";
+	
+	
 	String ATTR_DEBUGGER_TERMINAL_DEFAULT =LAUNCH_ID + ".debugger_putty_default";
 	String ATTR_DEBUGGER_GDB_ADDRESS =  LAUNCH_ID + ".debugger_gdb_address"; //$NON-NLS-1$
 	String ATTR_NSIM_PROP_FILE =  LAUNCH_ID + ".nsim_prop_file"; //$NON-NLS-1$
