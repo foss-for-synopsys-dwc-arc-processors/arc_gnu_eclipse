@@ -34,6 +34,8 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -86,17 +88,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	
 	protected Label nSIMpropslabel;
-	private Text fnSIMpropsText;
 	protected Button fnSIMpropslButton;//this button is for browsing the prop files for nSIM
 	private String nSIMpropsfiles_last="";//this variable is for launching the exactly com port chosen by users
 	protected Button fLaunchPropsButton;//this button is for launching the TCF for nsim
 	private String fLaunchexternal_nsimprops_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	protected Button fLaunchtcfButton;//this button is for launching the Properties file for nsim
+	protected Button fLaunchJITButton;//this button is for launching the Properties file for nsim jit
 	protected Label nSIMtcflabel;
-	private Text fnSIMtcfText;
 	protected Button fnSIMtcfButton;//this button is for browsing the tcf files for nSIM
 	private String nSIMtcffiles_last="";//this variable is for launching the exactly com port chosen by users
 	private String fLaunchexternal_nsimtcf_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
+	private String fLaunchexternal_nsimjit_Buttonboolean="true";//this variable is to get external tools current status (Enable/disable)
 	
 	private String externaltools="";
 	private String externaltools_openocd_path="";
@@ -196,7 +198,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, getNsimdrvDefaultPath());
 
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "false");
-		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "false");
+		    fLaunchexternal_nsimjit_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "true");
 		    fLaunchexternal_nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
 		    fLaunchexternal_nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
 
@@ -289,6 +291,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,getAttributeValueFromString(fPrgmArgumentsComboInittext));
 
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF,getAttributeValueFromString(fLaunchexternal_nsimtcf_Buttonboolean));
+		
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT,getAttributeValueFromString(fLaunchexternal_nsimjit_Buttonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS,getAttributeValueFromString(fLaunchexternal_nsimprops_Buttonboolean));
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
@@ -447,6 +451,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    
 					    fLaunchPropsButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
 					    fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
+					    fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
 					    
 //					    if(externaltools_nsim_path.equalsIgnoreCase(""))
 //					    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
@@ -788,16 +793,38 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		// JIT 
 		Label label = new Label(compnSIM, SWT.LEFT);
-		label.setText("JIT");
+		label.setText("JIT threads");
     	Text JIT_Text = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-		JIT_Text.addModifyListener( new ModifyListener() {
-			public void modifyText( ModifyEvent evt ) {
-				updateLaunchConfigurationDialog();
-			}
-		} );
 
 		
+		JIT_Text.addVerifyListener(new VerifyListener() {
+			@Override
+			public void verifyText(VerifyEvent arg0) {
+				// TODO Auto-generated method stub
+				boolean b = ("0123456789".indexOf(arg0.text) >= 0);
+				arg0.doit = b;
+				
+			}
+		});
+
 		
+		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
+		fLaunchJITButton.setText("GNU host I/O support?");
+		fLaunchJITButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchJITButton.getSelection()==true) {
+					fLaunchexternal_nsimjit_Buttonboolean="true";
+
+				} else {
+					fLaunchexternal_nsimjit_Buttonboolean="false";	
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+
+	      });
 		} 
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
