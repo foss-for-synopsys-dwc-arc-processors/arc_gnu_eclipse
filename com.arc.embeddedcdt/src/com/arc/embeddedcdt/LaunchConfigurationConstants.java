@@ -33,6 +33,7 @@ public interface LaunchConfigurationConstants {
 
 	String ATTR_DEBUGGER_USE_NSIMTCF = LAUNCH_ID + ".debugger_use_nsimtcf";
 	String ATTR_DEBUGGER_USE_NSIMPROPS = LAUNCH_ID + ".debugger_use_nsimprops";
+	String ATTR_DEBUGGER_USE_NSIMJITTHREAD= LAUNCH_ID + ".debugger_use_nsimjitthread";
 	String ATTR_DEBUGGER_USE_NSIMJIT= LAUNCH_ID + ".debugger_use_nsimjit";
 	String ATTR_DEBUGGER_USE_NSIMHOSTLINK= LAUNCH_ID + ".debugger_use_nsimhostlink";
 	String ATTR_DEBUGGER_USE_NSIMMEMOEXPT= LAUNCH_ID + ".debugger_use_nsimmemoexpt";

@@ -69,6 +69,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private  String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
 	protected Text fGDBServerIPAddressText;
+	
 	protected Button fSearchexternalButton;//this button is for searching the path for external tools
 	protected Label fSearchexternalLabel;
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
@@ -116,6 +117,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private String externaltools_nsim_path="";
 
 	private String portnumber="";
+	
+	protected Text JIT_threadText;
+	private String JITthread="";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -206,7 +210,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    Ashling_xml_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, ash_xml_path);
 		    externaltools_nsim_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, getNsimdrvDefaultPath());
 
-		    fLaunchexternal_nsimjit_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "true");
+		    fLaunchexternal_nsimjit_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
 		    fLaunchexternal_nsimhostlink_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
 		    fLaunchexternal_nsimEnableExceButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
 		    fLaunchexternal_nsiminvainstruExceButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT, "true");
@@ -216,7 +220,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-		
+		    JITthread= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "");
 		  
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
@@ -285,6 +289,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		String nsim_default_path = getNsimdrvDefaultPath();
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, nsim_default_path);
 		
+		
+		
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
 		if(jtag_frequency!=null)
@@ -310,6 +316,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT,getAttributeValueFromString(fLaunchexternal_nsimEnableExceButtonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT,getAttributeValueFromString(fLaunchexternal_nsiminvainstruExceButtonboolean));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS,getAttributeValueFromString(fLaunchexternal_nsimprops_Buttonboolean));
+		
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD,getAttributeValueFromString(JITthread));
 		
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,nSIMpropsfiles_last);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,nSIMtcffiles_last);
@@ -815,9 +823,15 @@ private void createTabitemCOMAshling(Composite subComp) {
 		// JIT 
 		Label label = new Label(compnSIM, SWT.BEGINNING);
 		label.setText("JIT threads");
-    	Text JIT_Text = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-	
-		JIT_Text.addVerifyListener(new VerifyListener() {
+    	JIT_threadText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
+		gd.widthHint=70;
+		
+		if(!JITthread.equalsIgnoreCase("1"))
+			JIT_threadText.setText(JITthread);
+		if(JITthread.equalsIgnoreCase("")) 
+			JIT_threadText.setText("1");
+    	JIT_threadText.setLayoutData(gd);
+    	JIT_threadText.addVerifyListener(new VerifyListener() {
 			@Override
 			public void verifyText(VerifyEvent arg0) {
 				// TODO Auto-generated method stub
@@ -826,7 +840,12 @@ private void createTabitemCOMAshling(Composite subComp) {
 				
 			}
 		});
-
+    	JIT_threadText.addModifyListener( new ModifyListener() {
+			public void modifyText( ModifyEvent evt ) {
+				JITthread=JIT_threadText.getText();
+				updateLaunchConfigurationDialog();
+			}
+		} );
 		
 		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
