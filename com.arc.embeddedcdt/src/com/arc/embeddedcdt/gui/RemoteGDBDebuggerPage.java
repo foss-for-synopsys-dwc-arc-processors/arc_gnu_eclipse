@@ -638,7 +638,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsJTAGFrenCombo =new Combo(Comp, SWT.None);//1-2 and 1-3
 		
 		GridData gdjtag = new GridData(GridData.BEGINNING);
-		gdjtag.widthHint=70;
+		gdjtag.widthHint=100;
 	    fPrgmArgumentsJTAGFrenCombo.setLayoutData(gdjtag);
 	       
 		fPrgmArgumentsJTAGFrenCombo.add("100MHz");
