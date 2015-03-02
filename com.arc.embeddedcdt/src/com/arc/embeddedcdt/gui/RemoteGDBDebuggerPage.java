@@ -820,17 +820,16 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        
 	      });
 		
+		
 		// JIT 
 		Label label = new Label(compnSIM, SWT.BEGINNING);
+		JIT_threadText = new Text(compnSIM, SWT.BORDER);
 		label.setText("JIT threads");
-    	JIT_threadText = new Text(compnSIM, SWT.SINGLE | SWT.BORDER| SWT.BEGINNING);
-		gd.widthHint=70;
 		
 		if(!JITthread.equalsIgnoreCase("1"))
 			JIT_threadText.setText(JITthread);
 		if(JITthread.equalsIgnoreCase("")) 
 			JIT_threadText.setText("1");
-    	JIT_threadText.setLayoutData(gd);
     	JIT_threadText.addVerifyListener(new VerifyListener() {
 			@Override
 			public void verifyText(VerifyEvent arg0) {
