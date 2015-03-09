@@ -394,10 +394,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						
 						String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb ";
 						
-						if(!nsimjit_thread.equalsIgnoreCase("1"))
-						{
-							nsim_cmd += "-p nsim_fast-num-threads="+nsimjit_thread;
-						}
 						
 						if(nsiminvalid_Instru_ExptButtonboolean.equalsIgnoreCase("false"))
 						{
@@ -418,6 +414,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 						if(nsimJIT_Buttonboolean.equalsIgnoreCase("true"))
 						{
 							nsim_cmd += " -on nsim_fast ";
+							if(!nsimjit_thread.equalsIgnoreCase("1"))
+							{
+								nsim_cmd += "-p nsim_fast-num-threads="+nsimjit_thread;
+							}
+							
 						}
 						
 						

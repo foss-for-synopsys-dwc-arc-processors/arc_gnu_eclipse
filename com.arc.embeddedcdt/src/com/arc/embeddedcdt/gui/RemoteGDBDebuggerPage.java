@@ -830,12 +830,40 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 
 		// JIT 
-		Label label = new Label(compnSIM, SWT.BEGINNING);
 		
-
+		gd = new GridData(SWT.BEGINNING);
+		gd.horizontalSpan = 3;
+		
+		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
+		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
+		fLaunchJITButton.setText("JIT");
+        final Label labeljit = new Label(compnSIM, SWT.BEGINNING);
 		JIT_threadspinner = new Spinner(compnSIM,SWT.NONE|SWT.BORDER);
-		label.setText("JIT threads");
+		labeljit.setText("JIT threads");
 		JIT_threadspinner.setValues(1, 1, 100, 10, 1,0 );
+		
+		fLaunchJITButton.addSelectionListener(new SelectionListener() {
+	        public void widgetSelected(SelectionEvent event) {
+				if (fLaunchJITButton.getSelection()==true) {
+					fLaunchexternal_nsimjit_Buttonboolean="true";
+					labeljit.setEnabled(true);
+		        	JIT_threadspinner.setEnabled(true);
+
+				} else {
+					fLaunchexternal_nsimjit_Buttonboolean="false";	
+					labeljit.setEnabled(false);
+		        	JIT_threadspinner.setEnabled(false);
+				}
+	        	updateLaunchConfigurationDialog();
+	        }
+	        public void widgetDefaultSelected(SelectionEvent event) {
+	        }
+
+	      });
+
+	 	fLaunchJITButton.setLayoutData(gd);
+	 	
+		
 		
 		if(!JITthread.equalsIgnoreCase("1"))
 			JIT_threadspinner.setSelection(Integer.parseInt(JITthread));
@@ -848,33 +876,13 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		} );
-    	
     	gd = new GridData(SWT.BEGINNING);
 		gd.horizontalSpan = 2;
-		JIT_threadspinner.setLayoutData(gd);
-		
+        JIT_threadspinner.setLayoutData(gd);
 		
     	GridData gdnsimui = new GridData(SWT.BEGINNING);
 		gdnsimui.horizontalSpan = 2;
-		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
-		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
-		fLaunchJITButton.setText("JIT");
-		fLaunchJITButton.addSelectionListener(new SelectionListener() {
-	        public void widgetSelected(SelectionEvent event) {
-				if (fLaunchJITButton.getSelection()==true) {
-					fLaunchexternal_nsimjit_Buttonboolean="true";
-
-				} else {
-					fLaunchexternal_nsimjit_Buttonboolean="false";	
-				}
-	        	updateLaunchConfigurationDialog();
-	        }
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        }
-
-	      });
-
-	 	fLaunchJITButton.setLayoutData(gdnsimui);
+	
 		
 		fLaunchHostlinkButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchHostlinkButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimhostlink_Buttonboolean));
