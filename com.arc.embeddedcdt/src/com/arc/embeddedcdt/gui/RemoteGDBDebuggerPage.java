@@ -828,7 +828,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        
 	      });
 		
-		
+
 		// JIT 
 		Label label = new Label(compnSIM, SWT.BEGINNING);
 		
@@ -848,9 +848,14 @@ private void createTabitemCOMAshling(Composite subComp) {
 				updateLaunchConfigurationDialog();
 			}
 		} );
-   	
     	
-    	
+    	gd = new GridData(SWT.BEGINNING);
+		gd.horizontalSpan = 2;
+		JIT_threadspinner.setLayoutData(gd);
+		
+		
+    	GridData gdnsimui = new GridData(SWT.BEGINNING);
+		gdnsimui.horizontalSpan = 2;
 		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
 		fLaunchJITButton.setText("JIT");
@@ -868,7 +873,8 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        }
 
 	      });
-		
+
+	 	fLaunchJITButton.setLayoutData(gdnsimui);
 		
 		fLaunchHostlinkButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchHostlinkButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimhostlink_Buttonboolean));
@@ -888,7 +894,8 @@ private void createTabitemCOMAshling(Composite subComp) {
 
 	      });
 		
-		
+
+	 	fLaunchHostlinkButton.setLayoutData(gdnsimui);
 		
 		fLaunchMemoexptButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchMemoexptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimMemoExceButtonboolean));
@@ -907,6 +914,8 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        }
 
 	      });
+
+		fLaunchMemoexptButton.setLayoutData(gdnsimui);
 		
 		fLaunchEnableExptButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchEnableExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
@@ -926,10 +935,12 @@ private void createTabitemCOMAshling(Composite subComp) {
 
 	      });
 		
+
+		fLaunchEnableExptButton.setLayoutData(gdnsimui);
 		
 		fLaunchInvalid_Instru_ExptButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchInvalid_Instru_ExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
-		fLaunchInvalid_Instru_ExptButton.setText("Enable Exception");
+		fLaunchInvalid_Instru_ExptButton.setText("Invalid Instruction  Exception");
 		fLaunchInvalid_Instru_ExptButton.addSelectionListener(new SelectionListener() {
 	        public void widgetSelected(SelectionEvent event) {
 				if (fLaunchInvalid_Instru_ExptButton.getSelection()==true) {
@@ -944,7 +955,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 	        }
 
 	      });
-		
+		fLaunchInvalid_Instru_ExptButton.setLayoutData(gdnsimui);
 		
 		} 
 	/* (non-Javadoc)
