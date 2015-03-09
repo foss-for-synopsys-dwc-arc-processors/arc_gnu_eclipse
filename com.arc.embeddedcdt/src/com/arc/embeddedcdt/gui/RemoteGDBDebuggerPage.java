@@ -833,22 +833,22 @@ private void createTabitemCOMAshling(Composite subComp) {
 		Label label = new Label(compnSIM, SWT.BEGINNING);
 		
 
-//		JIT_threadspinner = new Spinner(compnSIM,SWT.NONE|SWT.BORDER);
-//		label.setText("JIT threads");
-//		JIT_threadspinner.setValues(1, 1, 100, 10, 1,0 );
-//		
-//		if(!JITthread.equalsIgnoreCase("1"))
-//			JIT_threadspinner.setSelection(Integer.parseInt(JITthread));
-//		else 
-//			JIT_threadspinner.setSelection(1);
-//		
-//    	JIT_threadspinner.addModifyListener( new ModifyListener() {
-//			public void modifyText( ModifyEvent evt ) {
-//				JITthread=JIT_threadspinner.getText();
-//				updateLaunchConfigurationDialog();
-//			}
-//		} );
-//   	
+		JIT_threadspinner = new Spinner(compnSIM,SWT.NONE|SWT.BORDER);
+		label.setText("JIT threads");
+		JIT_threadspinner.setValues(1, 1, 100, 10, 1,0 );
+		
+		if(!JITthread.equalsIgnoreCase("1"))
+			JIT_threadspinner.setSelection(Integer.parseInt(JITthread));
+		else 
+			JIT_threadspinner.setSelection(1);
+		
+    	JIT_threadspinner.addModifyListener( new ModifyListener() {
+			public void modifyText( ModifyEvent evt ) {
+				JITthread=JIT_threadspinner.getText();
+				updateLaunchConfigurationDialog();
+			}
+		} );
+   	
     	
     	
 		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
@@ -947,10 +947,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		
 		} 
-	private Spinner findViewById(Spinner jIT_threadcombo2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
 	 */
