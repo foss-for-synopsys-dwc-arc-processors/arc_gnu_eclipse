@@ -15,9 +15,16 @@
 
 package com.arc.embeddedcdt.gui;
 
+import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
 import org.eclipse.cdt.internal.launch.remote.Messages;
@@ -44,6 +51,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
@@ -118,8 +126,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	private String portnumber="";
 	
-	protected Text JIT_threadText;
-	private String JITthread="";
+	protected Spinner JIT_threadspinner;
+	private String JITthread="1";
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -220,7 +228,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 		    nSIMpropsfiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-		    JITthread= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "");
+		    JITthread= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
 		  
 		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
 		{
@@ -823,29 +831,26 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		// JIT 
 		Label label = new Label(compnSIM, SWT.BEGINNING);
-		JIT_threadText = new Text(compnSIM, SWT.BORDER);
-		label.setText("JIT threads");
 		
-		if(!JITthread.equalsIgnoreCase("1"))
-			JIT_threadText.setText(JITthread);
-		if(JITthread.equalsIgnoreCase("")) 
-			JIT_threadText.setText("1");
-    	JIT_threadText.addVerifyListener(new VerifyListener() {
-			@Override
-			public void verifyText(VerifyEvent arg0) {
-				// TODO Auto-generated method stub
-				boolean b = ("0123456789".indexOf(arg0.text) >= 0);
-				arg0.doit = b;
-				
-			}
-		});
-    	JIT_threadText.addModifyListener( new ModifyListener() {
-			public void modifyText( ModifyEvent evt ) {
-				JITthread=JIT_threadText.getText();
-				updateLaunchConfigurationDialog();
-			}
-		} );
-		
+
+//		JIT_threadspinner = new Spinner(compnSIM,SWT.NONE|SWT.BORDER);
+//		label.setText("JIT threads");
+//		JIT_threadspinner.setValues(1, 1, 100, 10, 1,0 );
+//		
+//		if(!JITthread.equalsIgnoreCase("1"))
+//			JIT_threadspinner.setSelection(Integer.parseInt(JITthread));
+//		else 
+//			JIT_threadspinner.setSelection(1);
+//		
+//    	JIT_threadspinner.addModifyListener( new ModifyListener() {
+//			public void modifyText( ModifyEvent evt ) {
+//				JITthread=JIT_threadspinner.getText();
+//				updateLaunchConfigurationDialog();
+//			}
+//		} );
+//   	
+    	
+    	
 		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
 		fLaunchJITButton.setText("JIT");
@@ -942,6 +947,10 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		
 		} 
+	private Spinner findViewById(Spinner jIT_threadcombo2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage#createTabs(org.eclipse.swt.widgets.TabFolder)
 	 */
