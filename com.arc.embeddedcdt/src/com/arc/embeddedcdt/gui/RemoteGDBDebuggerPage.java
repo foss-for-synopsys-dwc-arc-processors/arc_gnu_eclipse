@@ -837,8 +837,9 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fLaunchJITButton = new Button(compnSIM,SWT.CHECK); //$NON-NLS-1$ //6-3
 		fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
 		fLaunchJITButton.setText("JIT");
-        final Label labeljit = new Label(compnSIM, SWT.BEGINNING);
+        
 		JIT_threadspinner = new Spinner(compnSIM,SWT.NONE|SWT.BORDER);
+		final Label labeljit = new Label(compnSIM, SWT.BEGINNING);
 		labeljit.setText("JIT threads");
 		JIT_threadspinner.setValues(1, 1, 100, 10, 1,0 );
 		
@@ -863,7 +864,16 @@ private void createTabitemCOMAshling(Composite subComp) {
 
 	 	fLaunchJITButton.setLayoutData(gd);
 	 	
-		
+		if(fLaunchexternal_nsimjit_Buttonboolean.equalsIgnoreCase("true"))
+		{
+			labeljit.setEnabled(true);
+        	JIT_threadspinner.setEnabled(true);
+		}
+		else if(fLaunchexternal_nsimjit_Buttonboolean.equalsIgnoreCase("false"))
+		{
+			labeljit.setEnabled(false);
+        	JIT_threadspinner.setEnabled(false);
+		}
 		
 		if(!JITthread.equalsIgnoreCase("1"))
 			JIT_threadspinner.setSelection(Integer.parseInt(JITthread));
@@ -878,7 +888,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		} );
     	gd = new GridData(SWT.BEGINNING);
 		gd.horizontalSpan = 2;
-        JIT_threadspinner.setLayoutData(gd);
+		labeljit.setLayoutData(gd);
 		
     	GridData gdnsimui = new GridData(SWT.BEGINNING);
 		gdnsimui.horizontalSpan = 2;
