@@ -89,6 +89,7 @@ import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
+@SuppressWarnings("restriction")
 public abstract class Launch extends AbstractCLaunchDelegate implements
 		ICDIEventListener
 {
@@ -171,7 +172,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	public static String serialport="";
 
 	
-	@SuppressWarnings("restriction")
 	private void startTerminal() {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 
