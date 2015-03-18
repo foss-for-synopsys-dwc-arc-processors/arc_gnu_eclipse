@@ -26,21 +26,21 @@ public abstract class IsToolChainSupported implements IManagedIsToolChainSupport
 public boolean isSupportedImpl(IToolChain oToolChain, Version oVersion, String sInstance, IsToolchainData oStaticData)
 {
 	ITool[] tools = oToolChain.getTools();
-	for (ITool tool : tools) {
-		String extensions[] = tool.getAllOutputExtensions();
-
-		if( tool.getName().indexOf("Linker")>1&&tool.getId().indexOf("share")>-1&&tool.getOutputFlag().indexOf("-shared")<1){
-			tool.setOutputFlag("-shared -o");   
-		}
-
-
-		String cmd = tool.getToolCommand();
-		if (cmd != null && cmd.length() > 0) {
-			if (!CommandInfo.commandExists(cmd))
-				return false;
-		}
-
-	}
+    for (ITool tool : tools) {
+        String extensions[] = tool.getAllOutputExtensions();
+        List<String> extList = Arrays.asList(extensions);
+        if (extList.contains("o") || extList.contains("obj")) {
+            // We assume this tool is the compiler if its output
+            // is .o or .obj file.
+            // If the compiler doesn't exist in the search path,
+            // then we don't support the tool.
+            String cmd = tool.getToolCommand();
+            if (cmd != null && cmd.length() > 0) {
+                if (!CommandInfo.commandExists(cmd))
+                    return false;
+            }
+        }
+    }
 	return true;
 }
 
