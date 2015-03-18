@@ -1116,12 +1116,12 @@
                valueType="boolean">
          </option>
          <option
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes"
                name="Endianness"
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mlittle-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.little"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.little"
                   isDefault="true"
                   name="Little Endian (-mlittle-endian)">
             </enumeratedOptionValue>
@@ -2710,6 +2710,13 @@
                   name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
+               isAbstract="false"
+               name="Endianness"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
+         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
                name="Debugging">
@@ -2961,13 +2968,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes">
          </option>
       </toolChain>
       <projectType
@@ -3237,6 +3237,13 @@
                   name="ARC HS (-mcpu=archs)">
             </enumeratedOptionValue>
          </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
+               isAbstract="false"
+               name="Endianness"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
+         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
                name="Debugging">
@@ -3438,13 +3445,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
                value="true">
          </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes">
-         </option>
       </toolChain>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs"
@@ -3641,6 +3641,18 @@
                   command="-mcpu=archs"
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arcv2hs"
                   name="ARC HS (-mcpu=archs)">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.endiannes"
+               isAbstract="false"
+               name="Endianness"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
+            <enumeratedOptionValue
+                  command="-mbig-endian"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.big"
+                  name="Big Endian (-mbig-endian)">
             </enumeratedOptionValue>
          </option>
          <optionCategory
@@ -3842,18 +3854,6 @@
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
                value="true">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mbig-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.big"
-                  name="Big Endian (-mbig-endian)">
-            </enumeratedOptionValue>
          </option>
       </toolChain>
       <configuration
@@ -5614,6 +5614,18 @@
                   name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.endiannes"
+               isAbstract="false"
+               name="Endianness"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
+            <enumeratedOptionValue
+                  command="-mbig-endian"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.big"
+                  name="Big Endian (-mbig-endian)">
+            </enumeratedOptionValue>
+         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
                name="Debugging">
@@ -5852,18 +5864,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mbig-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.big"
-                  name="Big Endian (-mbig-endian)">
-            </enumeratedOptionValue>
          </option>
       </toolChain>
       <projectType
