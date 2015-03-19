@@ -3236,7 +3236,7 @@
             configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base"
             isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC EM (big-endian)"
             osList="linux,win32">
          <targetPlatform
@@ -5042,7 +5042,7 @@
             configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
             isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC HS (big-endian)"
             osList="linux,win32">
          <targetPlatform
@@ -5560,7 +5560,7 @@
             configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
             isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 700 (big-endian)"
             osList="linux,win32">
          <targetPlatform
@@ -5990,7 +5990,7 @@
             configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
             isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.eb.linux.IsToolChainSupported"
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 600 (big-endian)"
             osList="linux,win32">
          <targetPlatform
