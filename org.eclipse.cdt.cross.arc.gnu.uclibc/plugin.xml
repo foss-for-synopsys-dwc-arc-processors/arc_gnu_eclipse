@@ -401,8 +401,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-linux-gcc">
+               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
