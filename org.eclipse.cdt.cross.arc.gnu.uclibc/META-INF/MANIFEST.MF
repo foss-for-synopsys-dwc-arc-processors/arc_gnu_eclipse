@@ -16,5 +16,6 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu.uclibc;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.cdt.cross.arc.gnu.uclibc
+Import-Package: org.eclipse.cdt.cross.arc.gnu.common
 
 

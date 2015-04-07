@@ -10,15 +10,20 @@
  
 package org.eclipse.cdt.cross.arc.gnu.common;
  
- import org.eclipse.cdt.managedbuilder.core.IManagedIsToolChainSupported;
- import org.eclipse.cdt.managedbuilder.core.IToolChain;
- import org.osgi.framework.Version;
+ import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+import org.eclipse.cdt.managedbuilder.core.IManagedIsToolChainSupported;
+import org.eclipse.cdt.managedbuilder.core.ITool;
+import org.eclipse.cdt.managedbuilder.core.IToolChain;
+import org.osgi.framework.Version;
  
  public abstract class IsToolChainSupported
    implements IManagedIsToolChainSupported
  {
    static final boolean DEBUG = false;
- 
+  
    public String getCompilerName()
    {
      return "arc-elf32-gcc";
@@ -30,7 +35,24 @@ package org.eclipse.cdt.cross.arc.gnu.common;
  
    public boolean isSupportedImpl(IToolChain oToolChain, Version oVersion, String sInstance, IsToolchainData oStaticData)
    {
-     return true;
+  
+	   ITool[] tools = oToolChain.getTools();
+       for (ITool tool : tools) {
+           String extensions[] = tool.getAllOutputExtensions();
+           List<String> extList = Arrays.asList(extensions);
+           if (extList.contains("o") || extList.contains("obj")) {
+               // We assume this tool is the compiler if its output
+               // is .o or .obj file.
+               // If the compiler doesn't exist in the search path,
+               // then we don't support the tool.
+               String cmd = tool.getToolCommand();
+               if (cmd != null && cmd.length() > 0) {
+                   if (!CommandInfo.commandExists(cmd))
+                       return false;
+               }
+           }
+       }
+       return true;
    }
  }
 

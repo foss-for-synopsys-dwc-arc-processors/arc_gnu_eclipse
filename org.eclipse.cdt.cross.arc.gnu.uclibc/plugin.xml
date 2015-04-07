@@ -401,8 +401,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-linux-gcc">
+               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider">
          </run>
          <scannerInfoConsoleParser
                class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
@@ -818,38 +817,6 @@
                </checkBuildProperty>
             </enablement>
          </option>
-         <option id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes"
-         		 name="Endianness"
-         		 valueType="enumerated">
-           <enumeratedOptionValue
-                 command="-mlittle-endian"
-                 id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.little"
-                 isDefault="true"
-                 name="Little Endian (-mlittle-endian)"/>
-           <enumeratedOptionValue id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.big"
-           						  name="Big Endian (-mbig-endian)"
-           						  command="-mbig-endian"/>
-           <enablement
-                 attribute="value"
-                 extensionAdjustment="false"
-                 type="CONTAINER_ATTRIBUTE"
-                 value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level.max">
-              <checkBuildProperty
-                    property="org.eclipse.cdt.build.core.buildType"
-                    value="org.eclipse.cdt.build.core.buildType.debug">
-              </checkBuildProperty>
-           </enablement>
-           <enablement
-                 attribute="value"
-                 extensionAdjustment="false"
-                 type="CONTAINER_ATTRIBUTE"
-                 value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.big">
-              <checkBuildProperty
-                    property="org.eclipse.cdt.build.core.buildType"
-                    value="org.eclipse.cdt.build.core.buildType.release">
-              </checkBuildProperty>
-           </enablement>
-         </option>
          <option
                command="-p"
                defaultValue="false"
@@ -1147,13 +1114,24 @@
                name="MPY instruction (-mmpy)"
                valueType="boolean">
          </option>
+         <option
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes"
+               name="Endianness"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mlittle-endian"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.little"
+                  isDefault="true"
+                  name="Little Endian (-mlittle-endian)">
+            </enumeratedOptionValue>
+         </option>
       </tool>
       <builder
             command="make"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.builder"
             isAbstract="false"
             isVariableCaseSensitive="false"
-            name="ARC GNU Make builder"
+            name="GNU Make Builder for ARC"
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <tool
@@ -2082,11 +2060,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.mapfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.mapfilename">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.other.cref"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.cref">
          </option>
@@ -2676,266 +2649,10 @@
       <!-- -->
       
       
-      <configuration
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.configuration.base"
-            name="ARC Windows uClibc GCC (GNUARC, WinARC) Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
       
-            <toolChain
-                  archList="all"
-                  configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.ConfigurationEnvironmentSupplier"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.toolchain.base"
-                  isAbstract="false"
-                  isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.IsToolChainSupported"
-                  name="ARC Windows uClibc GCC (GNUARC, WinARC)"
-                  osList="win32">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.platform.base"
-               isAbstract="false"
-               name="Linux Platform"
-               osList="win32">
-         </targetPlatform>
-         <builder
-               command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.builder.base"
-               isAbstract="false"
-               isVariableCaseSensitive="false"
-               name="ARC Windows GNU Make builder"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
-         </builder>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               name="Target Processor">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.processor"
-               name="Processor"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.processor">
-         </option>
-         <option category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-                 id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.endiannes"
-                 isAbstract="false"
-                 name="Endianness"
-                 superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
-         </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.assembler.base"
-               isAbstract="false"
-               name="ARC Windows GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.assembler.base.input"
-				  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.c.compiler.base"
-               isAbstract="false"
-               name="ARC Windows GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.c.compiler.base.input"
-				  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.cpp.compiler.base"
-               isAbstract="false"
-               name="ARC Windows GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.cpp.compiler.base.input"
-				  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.c.linker.base"
-               isAbstract="false"
-               name="ARC Windows GCC C Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.cpp.linker.base"
-               isAbstract="false"
-               name="ARC Windows GCC C++ Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.archiver.base"
-               isAbstract="false"
-               name="ARC Windows GCC Archiver"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.archiver">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.createflash.base"
-               isAbstract="false"
-               name="ARC Windows GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.createlisting.base"
-               isAbstract="false"
-               name="ARC Windows GNU Create Listing"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.printsize.base"
-               isAbstract="false"
-               name="ARC Windows GNU Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.codedensity">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.comfp"
-               name="Compact Single-precision floating point libraries(-mdpfp-compact)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.comfp">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.windows.option.target.swap"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
-         </option>
-      </toolChain>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base"
-            name="ARC Linux uClibc GCC For ARC700 Configuration"
+            name="Linux uClibc GCC For ARC 700 Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -2954,7 +2671,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC700"
+            name="Linux uClibc GCC For ARC 700"
             osList="linux">
          <targetPlatform
                archList="all"
@@ -2969,7 +2686,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder For ARC700"
+               name="GNU Make Builder for ARC "
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
          </builder>
          <optionCategory
@@ -2987,16 +2704,12 @@
                   name="ARC 700 (-mcpu=arc700)">
             </enumeratedOptionValue>
          </option>
-         <option category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-                 id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
-                 isAbstract="false"
-                 name="Endianness"
-                 superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mlittle-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.little"
-                  name="Little Endian (-mlittle-endian)">
-            </enumeratedOptionValue>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
+               isAbstract="false"
+               name="Endianness"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
@@ -3484,7 +3197,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC HS"
+            name="Linux uClibc GCC For ARC HS"
             osList="linux">
          <targetPlatform
                archList="all"
@@ -3499,7 +3212,7 @@
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder For HS"
+               name="GNU Make Builder for ARC"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
          </builder>
          <optionCategory
@@ -3520,15 +3233,10 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mlittle-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.little"
-                  name="Little Endian (-mlittle-endian)">
-            </enumeratedOptionValue>
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
@@ -3734,7 +3442,7 @@
       </toolChain>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs"
-            name="ARC Linux uClibc GCC For ARCHS Configuration"
+            name="Linux uClibc GCC For ARC HS Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -3809,11 +3517,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.hs.linux.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -3874,11 +3577,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.hs.linux.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
       </projectType>
@@ -3887,7 +3585,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs"
             isAbstract="false"
             isVariableCaseSensitive="false"
-            name="ARC GNU Make builder"
+            name="GNU Make Builder for ARC"
             superClass="cdt.managedbuild.target.gnu.builder">
       </builder>
       <toolChain
@@ -3895,7 +3593,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC HS (Big endian)"
+            name="Linux uClibc GCC For ARC HS (Big endian)"
             osList="linux">
          <targetPlatform
                archList="all"
@@ -3907,10 +3605,10 @@
          </targetPlatform>
          <builder
                command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.builder.base.hs"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder For HS (Big endian)"
+               name="GNU Make Builder for ARC"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
          </builder>
          <optionCategory
@@ -3931,13 +3629,13 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
             <enumeratedOptionValue
                   command="-mbig-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.big"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.big"
                   name="Big Endian (-mbig-endian)">
             </enumeratedOptionValue>
          </option>
@@ -4144,7 +3842,7 @@
       </toolChain>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs"
-            name="ARC Linux uClibc GCC For ARCHS Configuration (Big endian)"
+            name="Linux uClibc GCC For ARC HS Configuration (Big endian)"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -4181,7 +3879,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.c.compiler.debug"
@@ -4226,7 +3924,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.printsize.release"
@@ -4257,7 +3955,7 @@
          </configuration>
       </projectType>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.assembler"
@@ -4456,7 +4154,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.compiler"
@@ -4742,7 +4440,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-g++"
+            command="arceb-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.compiler"
@@ -5060,7 +4758,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.linker"
@@ -5182,11 +4880,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.mapfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.mapfilename">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.category.other"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.link.option.other.cref"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.cref">
          </option>
@@ -5248,7 +4941,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-ld"
+            command="arceb-linux-ld"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.linker"
@@ -5436,7 +5129,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-ar"
+            command="arceb-linux-ar"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver"
             isAbstract="false"
             name="ARC uClibc GCC Archiver (eb)"
@@ -5501,7 +5194,7 @@
          </outputType>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-objcopy"
+            command="arceb-linux-objcopy"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createflash"
             name="ARC GNU uClibc Create Flash Image (eb)"
             natureFilter="both">
@@ -5632,7 +5325,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-objdump"
+            command="arceb-linux-objdump"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createlisting"
             name="ARC GNU Create Listing (eb)"
             natureFilter="both"
@@ -5676,7 +5369,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-size"
+            command="arceb-linux-size"
             commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.printsize"
             name="ARC GNU uClibc Print Size (eb)"
@@ -5753,7 +5446,7 @@
       </tool>
       <configuration
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.configuration.base"
-            name="ARC Linux uClibc GCC For ARC700 Configuration (Big endian)"
+            name="Linux uClibc GCC For ARC 700 Configuration (Big endian)"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
          <enablement
                attribute="artifactExtension"
@@ -5791,7 +5484,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.c.compiler.debug"
@@ -5836,7 +5529,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.elf.c.compiler.release"
@@ -5866,7 +5559,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC700 (Big endian)"
+            name="Linux uClibc GCC For ARC 700 (Big endian)"
             osList="linux">
          <targetPlatform
                archList="all"
@@ -5878,10 +5571,10 @@
          </targetPlatform>
          <builder
                command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base"
                isAbstract="false"
                isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
+               name="GNU Make Builder for ARC"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
          </builder>
          <optionCategory
@@ -5902,13 +5595,13 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
+               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
             <enumeratedOptionValue
                   command="-mbig-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.big"
+                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes.big"
                   name="Big Endian (-mbig-endian)">
             </enumeratedOptionValue>
          </option>
@@ -6269,7 +5962,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.lib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6293,7 +5986,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.lib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6322,7 +6015,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.hs.uclibc.linux.lib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6346,7 +6039,7 @@
                      id="org.eclipse.cdt.cross.arc.gnu.eb.hs.uclibc.linux.lib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
             </toolChain>
          </configuration>
@@ -6364,7 +6057,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.linux.toolchain.base"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.platform.debug"
@@ -6383,16 +6076,6 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.compiler">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.c.linker">
@@ -6408,7 +6091,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.toolchain.release"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.linux.toolchain.base"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.platform.release"
@@ -6425,16 +6108,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.assembler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base">
                </tool>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.sharedlib.c.linker.release"
@@ -6457,7 +6130,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.linux.toolchain.base.hs"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.debug"
@@ -6491,7 +6164,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.release"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.linux.toolchain.base.hs"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.release"
@@ -6530,7 +6203,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.linux.toolchain.base"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.cpp.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.platform.debug"
@@ -6541,17 +6214,12 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.c.compiler">
                </tool>
             </toolChain>
          </configuration>
@@ -6564,7 +6232,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.toolchain.release"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.linux.toolchain.base"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.release;org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.cpp.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.platform.release"
@@ -6575,17 +6243,12 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.release">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.sharedlib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.c.compiler">
                </tool>
             </toolChain>
          </configuration>
@@ -6603,7 +6266,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.linux.toolchain.base.hs"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.cpp.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.platform.debug"
@@ -6614,17 +6277,12 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.builder.debug"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.debug"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.c.compiler">
                </tool>
             </toolChain>
          </configuration>
@@ -6637,7 +6295,7 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.toolchain.release"
                   isAbstract="false"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.linux.toolchain.base.hs"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.hs.linux.sharedlib.platform.release"
@@ -6648,17 +6306,12 @@
                      id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.hs.linux.sharedlib.builder.release"
                      isAbstract="false"
                      isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.builder.base">
                </builder>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.eb.linux.sharedlib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.c.compiler">
                </tool>
             </toolChain>
          </configuration>
@@ -6879,7 +6532,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.sharedlib.eb.c.linker"
@@ -7094,7 +6747,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-buildroot-linux-uclibc-gcc"
+            command="arceb-linux-gcc"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.c.compiler"
@@ -7665,1045 +7318,6 @@
                superClass="cdt.managedbuild.tool.gnu.c.compiler.output">
          </outputType>
       </tool>
-      <toolChain
-            archList="all"
-            id="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.linux.toolchain.base.hs"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC HS"
-            osList="linux">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base.hs"
-               isAbstract="false"
-               name="Linux Platform"
-               osList="linux">
-         </targetPlatform>
-         <builder
-               command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base.hs"
-               isAbstract="false"
-               isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder For HS"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
-         </builder>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.processor"
-               name="ARC HS (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=archs"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mcpu=archs)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mlittle-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.little"
-                  name="Little Endian (-mlittle-endian)">
-            </enumeratedOptionValue>
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.printsize.hs"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
-         </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Archiver"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.archiver">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Listing"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               command="arc-linux-size"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base.hs"
-               isAbstract="false"
-               name="ARC Linux uClibc  Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.printsize.hs"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpyhs"
-               name="Multiply instructions (ARC HS)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.fpuhs"
-               isAbstract="false"
-               name="FPU HS Type"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
-               value="true">
-         </option>
-      </toolChain>
-      <toolChain
-            archList="all"
-            id="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.linux.toolchain.base"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC700"
-            osList="linux">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base"
-               isAbstract="false"
-               name="Linux Platform"
-               osList="linux">
-         </targetPlatform>
-         <builder
-               command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.builder.base"
-               isAbstract="false"
-               isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
-         </builder>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.processor"
-               name="ARC 700 (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=arc700"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arc700"
-                  name="ARC 700 (-mcpu=arc700)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mlittle-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.little"
-                  name="Little Endian (-mlittle-endian)">
-            </enumeratedOptionValue>
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
-         </option>
-         <tool
-               command="arc-linux-gcc"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler.input">
-            </inputType>
-         </tool>
-         <tool
-               command="arc-linux-g++"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.input">
-            </inputType>
-         </tool>
-         <tool
-               command="arc-linux-ld"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker">
-         </tool>
-         <tool
-               command="arc-linux-ar"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.archiver.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Archiver"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.archiver">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Listing"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               command="arc-linux-size"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base"
-               isAbstract="false"
-               name="ARC Linux uClibc  Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.fpi"
-               isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.fpi">
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
-                  isDefault="true"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mspfp"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
-                  name="Single Precision FPX (-mspfp)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mdpfp"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
-                  name="Double Precision FPX (-mdpfp)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.core700"
-               isAbstract="false"
-               name="ARC 700 Core "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.core700">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
-               value="true">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.swap"
-               name="Swap instruction(-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.target.mpy"
-               name="MPY instruction (-mmpy)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-      </toolChain>
-      <toolChain
-            archList="all"
-            id="org.eclipse.cdt.cross.arc.gnu.uclibc.shared.eb.linux.toolchain.base.hs"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC HS (Big endian)"
-            osList="linux">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base.hs"
-               isAbstract="false"
-               name="Linux Platform"
-               osList="linux">
-         </targetPlatform>
-         <builder
-               command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base.hs"
-               isAbstract="false"
-               isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder For HS (Big endian)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder.hs">
-         </builder>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.processor"
-               name="ARC HS (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=archs"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mcpu=archs)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mbig-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.big"
-                  name="Big Endian (-mbig-endian)">
-            </enumeratedOptionValue>
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.addtools.printsize.hs"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
-         </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.assembler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.assembler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.cpp.compiler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.compiler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.c.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.archiver.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Archiver"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.createflash.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Listing"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.printsize.base.hs"
-               isAbstract="false"
-               name="ARC Linux uClibc  Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.addtools.printsize.hs"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpyhs"
-               name="Multiply instructions (ARC HS)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.fpuhs"
-               isAbstract="false"
-               name="FPU HS Type"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
-               value="true">
-         </option>
-      </toolChain>
-      <toolChain
-            archList="all"
-            id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.eb.linux.toolchain.base"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.IsToolChainSupported"
-            name="ARC Linux uClibc GCC For ARC700 (Big endian)"
-            osList="linux">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.platform.base.hs"
-               isAbstract="false"
-               name="Linux Platform"
-               osList="linux">
-         </targetPlatform>
-         <builder
-               command="make"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.builder.base"
-               isAbstract="false"
-               isVariableCaseSensitive="false"
-               name="ARC Linux GNU Make builder (Big endian)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.builder">
-         </builder>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.processor"
-               name="ARC 700 (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=arc700"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.mcpu.arc700"
-                  name="ARC 700 (-mcpu=arc700)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.endiannes"
-               isAbstract="false"
-               name="Endianness"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.endiannes">
-            <enumeratedOptionValue
-                  command="-mbig-endian"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes.big"
-                  name="Big Endian (-mbig-endian)">
-            </enumeratedOptionValue>
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.eb.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
-         </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.assembler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.assembler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.assembler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.assembler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.compiler">
-            <inputType
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.compiler.base.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.input">
-            </inputType>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC C++ Linker"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.cpp.linker">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.eb.archiver.base"
-               isAbstract="false"
-               name="ARC Linux uClibc GCC Archiver"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.archiver">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createflash.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC Linux GNU Create Listing"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.eb.linux.printsize.base"
-               isAbstract="false"
-               name="ARC Linux uClibc  Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.uclibc.eb.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.option.target.fpi"
-               isAbstract="false"
-               name="FPX"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.fpi">
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.none"
-                  isDefault="true"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mspfp"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.spfp"
-                  name="Single Precision FPX (-mspfp)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mdpfp"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
-                  name="Double Precision FPX (-mdpfp)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.barrelshifter"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.shared.uclibc.linux.option.target.swap"
-               name="Swap instruction(-mswap)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.swap">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.700.shared.uclibc.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.normalize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.ea">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.eb.linux.option.target.atomic"
-               name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.mpy"
-               name="MPY instruction (-mmpy) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.mpy">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
-      </toolChain>
       
       
       <!-- -->

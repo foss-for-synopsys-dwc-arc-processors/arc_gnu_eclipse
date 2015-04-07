@@ -405,7 +405,19 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc;
          }       
        }
      
-     return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
+     String[]options=(String[])oList.toArray(new String[0]);
+     
+     int fpic=oList.indexOf("-c -fmessage-length=0");
+     
+  	 if(oTool.getParent().getId().indexOf("share")>-1&&oTool.getId().indexOf("compiler")>-1){
+ 	    oList.remove(fpic);
+ 	    oList.add("-c -fmessage-length=0 -fPIC");
+  	 }
+
+  	 options=(String[])oList.toArray(new String[0]);
+     
+     return super.generateCommandLineInfo(oTool, sCommandName, options, sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
      }
+
    }
 
