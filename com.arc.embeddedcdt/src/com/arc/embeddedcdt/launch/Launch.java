@@ -53,9 +53,11 @@ import org.eclipse.cdt.launch.AbstractCLaunchDelegate;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.cdt.utils.BinaryObjectAdapter;
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -267,14 +269,24 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			monitor.worked(1);
 			ICProject project;
 			String name = org.eclipse.cdt.debug.core.CDebugUtils.getProjectName(configuration);
+			
+			//This code is for building current project before launching it
+			
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IProject genProject = root.getProject(name);
+			IBuildConfiguration[] buildConfigs=genProject.getBuildConfigs();
+			IProgressMonitor buildMonitor = new SubProgressMonitor(monitor, 10, SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK);
+			ResourcesPlugin.getWorkspace().build( buildConfigs, IncrementalProjectBuilder.INCREMENTAL_BUILD, true, new SubProgressMonitor(buildMonitor, 3));
+
+					
 			if ((name!=null)&&(name.length()>0))
 			{
 				project =  org.eclipse.cdt.debug.core.CDebugUtils.verifyCProject(configuration);
 			} else
 			{
 				// normal project
-				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-				IProject genProject = root.getProject("arc-cdt-debugging");
+				 root = ResourcesPlugin.getWorkspace().getRoot();
+				 genProject = root.getProject("arc-cdt-debugging");
 				if (!genProject.exists())
 				{
 					genProject.create(null);
