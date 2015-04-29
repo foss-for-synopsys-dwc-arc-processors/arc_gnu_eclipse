@@ -285,7 +285,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			} else
 			{
 				// normal project
-				 root = ResourcesPlugin.getWorkspace().getRoot();
 				 genProject = root.getProject("arc-cdt-debugging");
 				if (!genProject.exists())
 				{
