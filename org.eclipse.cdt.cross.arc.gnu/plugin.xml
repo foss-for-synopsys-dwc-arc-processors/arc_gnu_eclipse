@@ -1134,6 +1134,23 @@
                name="DP FPU with assist instructions (-mfpu=fpuda )">
          </enumeratedOptionValue>
       </option>
+      <option
+            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection"
+            name="ABI selection "
+            valueType="enumerated">
+         <enumeratedOptionValue
+               command="-mabi=std"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection.std"
+               name="Standard ABI (-mabi=std)">
+         </enumeratedOptionValue>
+         <enumeratedOptionValue
+               command="-mabi=mwabi"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection.mwabi"
+               name="MW-compatible ABI (-mabi=mwabi)">
+         </enumeratedOptionValue>
+      </option>
 
       </tool>
       <builder
@@ -4051,6 +4068,24 @@
                </and>
             </enablement>
          </tool>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.abiselection"
+               name="ABI selection "
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection"
+               value="true">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs"
+               isAbstract="false"
+               name="FPU HS Type"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
+         </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -5311,6 +5346,14 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.hs.linux.option.addtools.printsize"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.abiselection"
+               name="ABI selection "
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection"
+               value="true">
          </option>
       </toolChain>
       <configuration
