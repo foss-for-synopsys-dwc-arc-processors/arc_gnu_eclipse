@@ -116,8 +116,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     // Editor for path to OpenOCD binary.
     private FileFieldEditor fOpenOCDConfigPath;
 
+ // Editor for path to Custom gdbserver binary
+    private FileFieldEditor fCustomGdb;
+
     private String openocd_bin_path;
     private String openocd_cfg_path;
+
+    private Text fCustomGdbArgsText;// Editor for path to GDB server command line arguments
+    private String customGdbPath;
+    private String customGdbCommandArgs=null;
+
 
     // Editor for path to Ashling binary.
     private FileFieldEditor fAshlingBinPath;
@@ -143,6 +151,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     private Boolean createTabItemGenericGDBServerBool = false;
     private String gdb_path = null;
     private Boolean createTabitemCOMAshlingBool = false;
+    private Boolean createTabItemCustomGdbBool=false;
+
 
     protected Label nSIMpropslabel;
 
@@ -293,6 +303,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         createTabitemCOMAshlingBool = false;
         createTabitemnSIMBool = false;
         createTabItemGenericGDBServerBool = false;
+        createTabItemCustomGdbBool=false;
         super.initializeFrom(configuration);
 
         try {
@@ -358,6 +369,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             externaltools_nsim_path = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,
                     getNsimdrvDefaultPath());
+
+            customGdbPath = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH, "");
+            customGdbCommandArgs = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND, "");
 
             fLaunchexternal_nsimjit_Buttonboolean = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
@@ -480,6 +496,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
                 getAttributeValueFromString(gdbServer.toString()));
 
+        configuration.setAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH,
+                customGdbPath);
+        if (customGdbCommandArgs != null) {
+            configuration.setAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND,
+                    customGdbCommandArgs);
+        }
+
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF,
                 getAttributeValueFromString(fLaunchexternal_nsimtcf_Buttonboolean));
 
@@ -527,6 +552,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     static Group groupcomashling;
     static Group groupnsim;
     static Group groupGenericGDBServer;
+    static Group groupcom_customGdb;
 
     protected void createGdbserverSettingsTab(TabFolder tabFolder) {
         // Lets set minimal width of text field to 2 inches. If more required text fields will
@@ -588,6 +614,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         groupGenericGDBServer.dispose();
                     }
                     groupcomashling.dispose();
+                    groupcom_customGdb.dispose();
 
                     if (createTabitemCOMBool == false) {
                         if (!groupcom.isDisposed())
@@ -600,6 +627,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     createTabitemCOMAshlingBool = false;
                     groupcom.setVisible(true);
                     createTabItemGenericGDBServerBool = false;
+                    createTabItemCustomGdbBool = false;
 
                 } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
                     if (!portnumber.isEmpty())
@@ -613,9 +641,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         groupGenericGDBServer.dispose();
                     }
                     groupcom.dispose();
+                    groupcom_customGdb.dispose();
                     createTabitemnSIMBool = false;
                     createTabItemGenericGDBServerBool = false;
                     createTabitemCOMBool = false;
+                    createTabItemCustomGdbBool = false;
 
                     if (createTabitemCOMAshlingBool == false) {
                         if (!groupcomashling.isDisposed())
@@ -655,6 +685,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
                     groupcom.dispose();
                     groupcomashling.dispose();
+                    groupcom_customGdb.dispose();
                     if (groupGenericGDBServer != null) {
                         groupGenericGDBServer.dispose();
                     }
@@ -684,11 +715,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     createTabitemCOMAshlingBool = false;
                     groupnsim.setVisible(true);
                     createTabItemGenericGDBServerBool = false;
+                    createTabItemCustomGdbBool = false;
 
                 } else if (gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
                     groupcom.dispose();
                     groupcomashling.dispose();
                     groupnsim.dispose();
+                    groupcom_customGdb.dispose();
                     if (createTabItemGenericGDBServerBool == false) {
                         if (groupGenericGDBServer!=null&&!groupGenericGDBServer.isDisposed())
                             groupGenericGDBServer.dispose();
@@ -698,6 +731,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     createTabitemCOMBool = false;
                     createTabitemCOMAshlingBool = false;
                     createTabitemnSIMBool = false;
+                    createTabItemCustomGdbBool = false;
+                    groupGenericGDBServer.setText(gdbServer.toString());
                     groupGenericGDBServer.setVisible(true);
 
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
@@ -723,7 +758,35 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         groupnsim.setVisible(false);
                     if (!groupcomashling.isDisposed())
                         groupcomashling.setVisible(false);
+                    if (!groupcom_customGdb.isDisposed()) {
+                        groupcom_customGdb.setVisible(false);
+                    }
 
+                } else if (gdbServer == ArcGdbServer.CUSTOM_GDBSERVER) {
+                    if (!portnumber.equalsIgnoreCase(""))
+                        fGDBServerPortNumberText.setText(portnumber);
+                    else
+                        fGDBServerPortNumberText
+                                .setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
+
+                    groupnsim.dispose();
+                    groupcom.dispose();
+                    groupcomashling.dispose();
+                    groupGenericGDBServer.dispose();
+                    createTabitemnSIMBool = false;
+                    createTabitemCOMBool = false;
+                    createTabitemCOMAshlingBool = false;
+                    createTabItemGenericGDBServerBool = false;
+                    if (createTabItemCustomGdbBool == false) {
+                        if (!groupcom_customGdb.isDisposed())
+                            groupcom_customGdb.dispose();
+
+                        createTabCustomGdb(subComp);
+                    }
+
+                    groupcom_customGdb.setText(gdbServer.toString());
+                    if (!groupcom_customGdb.isVisible())
+                        groupcom_customGdb.setVisible(true);
                 }
 
                 updateLaunchConfigurationDialog();
@@ -758,7 +821,49 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             createTabitemCOMAshling(subComp);
         if (createTabItemGenericGDBServerBool == false)
             createTabitemhostaddress(subComp);
+        if (createTabItemCustomGdbBool == false)
+            createTabCustomGdb(subComp);
     }
+
+
+    private void createTabCustomGdb(Composite subComp) {
+        createTabItemCustomGdbBool = true;
+
+        groupcom_customGdb = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3,
+                5, GridData.FILL_HORIZONTAL);
+        final Composite compcustom_gdb = SWTFactory.createComposite(groupcom_customGdb, 3, 5,
+                GridData.FILL_BOTH);
+
+        // GDB server executable path
+        fCustomGdb = new FileFieldEditor("GDB server executable path", "GDB server executable path",
+                compcustom_gdb);
+        fCustomGdb.setStringValue(customGdbPath);
+        fCustomGdb.setPropertyChangeListener(new IPropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent event) {
+                if (event.getProperty() == "field_editor_value") {
+                    customGdbPath = (String) event.getNewValue();
+                    updateLaunchConfigurationDialog();
+                }
+            }
+        });
+
+        // GDB server command line arguments
+        Label label = new Label(compcustom_gdb, SWT.LEFT);
+        label.setText("GDB server command line arguments:");
+
+        // GDB host text field
+        fCustomGdbArgsText = new Text(compcustom_gdb, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+        if (customGdbCommandArgs != null)
+            fCustomGdbArgsText.setText(customGdbCommandArgs);
+        fCustomGdbArgsText.addModifyListener(new ModifyListener() {
+            public void modifyText(ModifyEvent evt) {
+                customGdbCommandArgs = fCustomGdbArgsText.getText();
+                updateLaunchConfigurationDialog();
+            }
+        });
+
+    }
+
 
     private void createTabitemhostaddress(Composite subComp) {
         final int screen_ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();

@@ -121,6 +121,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
     public final static String ASHLING_PROCESS_LABEL = "Ashling GDBserver";
     public final static String GDB_PROCESS_LABEL = "arc-elf32-gdb";
     public final static String NSIM_PROCESS_LABEL = "nSIM GDBserver";
+    public final static String CUSTOM_GDBSERVER_LABEL = "Custom GDBserver";
 
     public ICProject myProject;
     private ICDISession dsession;
@@ -395,6 +396,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     case NSIM:
                         start_nsim(configuration, launch);
                         break;
+                    case CUSTOM_GDBSERVER:
+                        start_custom_gdbserver(configuration, launch);
                     case GENERIC_GDBSERVER:
                         break;
                     default:
@@ -433,6 +436,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                             gdb_init = String.format("target remote %s:%s\nload",
                                     defaultGDBHost, gdbserver_port);
                             break;
+                        case CUSTOM_GDBSERVER:
                         case GENERIC_GDBSERVER:
                             gdb_init = String.format("target remote %s:%s\nload",
                                     gdbserver_IPAddress, gdbserver_port);
@@ -645,6 +649,24 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 OPENOCD_PROCESS_LABEL);
 
         openocd_proc.setAttribute(IProcess.ATTR_CMDLINE, openocd_cmd);
+    }
+
+    private void start_custom_gdbserver(final ILaunchConfiguration configuration,
+            final ILaunch launch) throws CoreException {
+
+        final String custom_gdbserver_bin = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH, "");
+
+        final String custom_gdbserver_arg = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND, "");
+
+        final String custom_gdbsever_cmd = custom_gdbserver_bin + " " + custom_gdbserver_arg;
+
+        final IProcess custom_gdbserver_proc = DebugPlugin.newProcess(launch,
+                DebugPlugin.exec(DebugPlugin.parseArguments(custom_gdbsever_cmd), null),
+                CUSTOM_GDBSERVER_LABEL);
+
+        custom_gdbserver_proc.setAttribute(IProcess.ATTR_CMDLINE, custom_gdbsever_cmd);
     }
 
     /**

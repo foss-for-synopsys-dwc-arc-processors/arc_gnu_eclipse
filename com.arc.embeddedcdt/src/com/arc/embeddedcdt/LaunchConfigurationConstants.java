@@ -70,4 +70,8 @@ public interface LaunchConfigurationConstants {
     // Constants
     static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";
     static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin/ash-arc-gdb-server";
+
+    //Custom Gdbserver
+    String ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH =  LAUNCH_ID + ".debugger_custom_gdbsever_bin_path";
+    String ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND =  LAUNCH_ID + ".debugger_custom_gdbsever_command";
 }

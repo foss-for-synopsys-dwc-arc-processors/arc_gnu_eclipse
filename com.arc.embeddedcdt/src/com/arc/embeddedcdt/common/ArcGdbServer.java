@@ -14,7 +14,8 @@ public enum ArcGdbServer {
     JTAG_OPENOCD("JTAG via OpenOCD"),
     JTAG_ASHLING("JTAG via Opella-XD"),
     NSIM("nSIM"),
-    GENERIC_GDBSERVER("Generic gdbserver");
+    GENERIC_GDBSERVER("Connect to running GDB server"),
+    CUSTOM_GDBSERVER("Custom GDB server");
 
     private final String string;
     public static final ArcGdbServer DEFAULT_GDB_SERVER = JTAG_OPENOCD;
