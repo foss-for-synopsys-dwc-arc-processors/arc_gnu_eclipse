@@ -276,7 +276,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			IProject genProject = root.getProject(name);
 			IBuildConfiguration[] buildConfigs=genProject.getBuildConfigs();
 			IProgressMonitor buildMonitor = new SubProgressMonitor(monitor, 10, SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK);
-			ResourcesPlugin.getWorkspace().build( buildConfigs, IncrementalProjectBuilder.INCREMENTAL_BUILD, true, new SubProgressMonitor(buildMonitor, 3));
+			boolean build_before_launch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH,LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT);
+			if(build_before_launch==true)
+			    ResourcesPlugin.getWorkspace().build( buildConfigs, IncrementalProjectBuilder.INCREMENTAL_BUILD, true, new SubProgressMonitor(buildMonitor, 3));
 
 					
 			if ((name!=null)&&(name.length()>0))
