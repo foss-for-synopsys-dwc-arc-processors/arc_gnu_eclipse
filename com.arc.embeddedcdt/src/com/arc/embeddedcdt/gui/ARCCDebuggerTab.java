@@ -57,6 +57,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.ibm.icu.text.Collator;
 import com.ibm.icu.text.MessageFormat;
     public class ARCCDebuggerTab extends ARCAbstractCDebuggerTab {
@@ -131,6 +132,7 @@ import com.ibm.icu.text.MessageFormat;
     final protected boolean fAttachMode;
     protected Button fAdvancedButton;
     protected Button fStopInMain;
+    protected Button fBuildBeforeLauch;
     protected Text fStopInMainSymbol;
     protected Button fAttachButton;
     private Map fAdvancedAttributes = new HashMap(5);
@@ -287,6 +289,7 @@ import com.ibm.icu.text.MessageFormat;
     ICDTLaunchConfigurationConstants.DEBUGGER_MODE_ATTACH);
     } else {
     config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, fStopInMain.getSelection());
+    config.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, fBuildBeforeLauch.getSelection());
     config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, fStopInMainSymbol.getText());
     config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_START_MODE, ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
     }
@@ -379,6 +382,7 @@ import com.ibm.icu.text.MessageFormat;
     optionsComp.setLayoutData(new GridData(GridData.BEGINNING, GridData.CENTER, true, false, 1, 1));
     if (fAttachMode == false) {
     fStopInMain = createCheckButton(optionsComp, LaunchMessages.CDebuggerTab_Stop_at_main_on_startup);
+    
     fStopInMain.addSelectionListener(new SelectionAdapter() {
     @Override
     public void widgetSelected(SelectionEvent e) {
@@ -405,6 +409,7 @@ import com.ibm.icu.text.MessageFormat;
     }
     );
     }
+    
     fAdvancedButton = createPushButton(optionsComp, LaunchMessages.CDebuggerTab_Advanced, null);
     ((GridData)fAdvancedButton.getLayoutData()).horizontalAlignment = GridData.END;
     fAdvancedButton.addSelectionListener(new SelectionAdapter() {
@@ -413,6 +418,14 @@ import com.ibm.icu.text.MessageFormat;
     dialog.open();
     }
     });
+    
+    fBuildBeforeLauch = createCheckButton(optionsComp, "Build Before Launch");
+    fBuildBeforeLauch.addSelectionListener(new SelectionAdapter() {
+        @Override
+        public void widgetSelected(SelectionEvent e) {
+        update();
+        }
+        });
     }
     protected Map getAdvancedAttributes() {
     return fAdvancedAttributes;
@@ -469,6 +482,9 @@ import com.ibm.icu.text.MessageFormat;
     if (!fAttachMode) {
     fStopInMain.setSelection(config.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,
     ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT));
+    
+    fBuildBeforeLauch.setSelection(config.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT));
+    
     fStopInMainSymbol.setText(config.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL,
     ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT));
     fStopInMainSymbol.setEnabled(fStopInMain.getSelection());

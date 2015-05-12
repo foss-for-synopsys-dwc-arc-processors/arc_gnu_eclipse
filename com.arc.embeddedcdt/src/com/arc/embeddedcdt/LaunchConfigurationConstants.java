@@ -19,6 +19,8 @@ public interface LaunchConfigurationConstants {
 	static final String ATTR_DEBUGGER_INIT_TARGET = LAUNCH_ID + ".debugger_init_target";
 	static final String ATTR_DEBUGGER_APP_CONSOLE =LAUNCH_ID + ".debugger_app_console";
 	static final boolean ATTR_DEBUGGER_APP_CONSOLE_DEFAULT = false;
+	static final String ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH =LAUNCH_ID + ".debugger_app_console";
+	static final boolean ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT= true;
 	//String ATTR_DEBUGGER_COMMANDS_INIT =  LAUNCH_ID + ".debugger_init_commands"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_COMMANDS_INIT =  LAUNCH_ID + ".debugger_init_commands"; //$NON-NLS-1$
 	String ATTR_DEBUGGER_COMMANDS_RUN =  LAUNCH_ID + ".debugger_run_commands"; //$NON-NLS-1$
