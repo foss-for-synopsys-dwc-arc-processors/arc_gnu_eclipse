@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
@@ -33,7 +34,7 @@ import com.arc.embeddedcdt.LaunchConfigurationConstants;
 public class MainTab extends CMainTab
 {
 	private Button checkButton;
-
+	protected Button fBuildBeforeLauch;
 
 	@Override
 	public void createControl(Composite parent)
@@ -56,6 +57,14 @@ public class MainTab extends CMainTab
 				
 			});
 		    checkButton.setText("Application console");
+		    
+		    fBuildBeforeLauch = createCheckButton(subComp, "Build Before Launch");
+		    fBuildBeforeLauch.addSelectionListener(new SelectionAdapter() {
+		        @Override
+		        public void widgetSelected(SelectionEvent e) {
+		        	updateLaunchConfigurationDialog();
+		        }
+		        });
 		
 	}
 
@@ -114,6 +123,13 @@ public class MainTab extends CMainTab
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		super.initializeFrom(configuration);
 		try {
+			fBuildBeforeLauch.setSelection(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT));
+		} catch (CoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		   
+		try {
 			checkButton.setSelection(configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE, 
 					LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE_DEFAULT)); //$NON-NLS-1$
 		} catch (CoreException e) {
@@ -124,6 +140,7 @@ public class MainTab extends CMainTab
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		super.performApply(configuration);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, fBuildBeforeLauch.getSelection());
 		configuration.setAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE,
 				(Boolean)checkButton.getSelection());

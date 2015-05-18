@@ -132,7 +132,7 @@ import com.ibm.icu.text.MessageFormat;
     final protected boolean fAttachMode;
     protected Button fAdvancedButton;
     protected Button fStopInMain;
-    protected Button fBuildBeforeLauch;
+    //protected Button fBuildBeforeLauch;
     protected Text fStopInMainSymbol;
     protected Button fAttachButton;
     private Map fAdvancedAttributes = new HashMap(5);
@@ -289,7 +289,7 @@ import com.ibm.icu.text.MessageFormat;
     ICDTLaunchConfigurationConstants.DEBUGGER_MODE_ATTACH);
     } else {
     config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, fStopInMain.getSelection());
-    config.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, fBuildBeforeLauch.getSelection());
+    //config.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, fBuildBeforeLauch.getSelection());
     config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, fStopInMainSymbol.getText());
     config.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_START_MODE, ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
     }
@@ -419,13 +419,13 @@ import com.ibm.icu.text.MessageFormat;
     }
     });
     
-    fBuildBeforeLauch = createCheckButton(optionsComp, "Build Before Launch");
-    fBuildBeforeLauch.addSelectionListener(new SelectionAdapter() {
-        @Override
-        public void widgetSelected(SelectionEvent e) {
-        update();
-        }
-        });
+//    fBuildBeforeLauch = createCheckButton(optionsComp, "Build Before Launch");
+//    fBuildBeforeLauch.addSelectionListener(new SelectionAdapter() {
+//        @Override
+//        public void widgetSelected(SelectionEvent e) {
+//        update();
+//        }
+//        });
     }
     protected Map getAdvancedAttributes() {
     return fAdvancedAttributes;
@@ -483,7 +483,7 @@ import com.ibm.icu.text.MessageFormat;
     fStopInMain.setSelection(config.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN,
     ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_DEFAULT));
     
-    fBuildBeforeLauch.setSelection(config.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT));
+    //fBuildBeforeLauch.setSelection(config.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH, LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT));
     
     fStopInMainSymbol.setText(config.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL,
     ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT));
