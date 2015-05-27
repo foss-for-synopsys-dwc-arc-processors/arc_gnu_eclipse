@@ -12,6 +12,8 @@ package org.eclipse.cdt.cross.arc.gnu.uclibc.common;
 
 import java.io.File;
 
+import org.eclipse.core.runtime.Platform;
+
 
 /**
  * A method for determining if a command exists under JRE 1.5 or later.
@@ -39,9 +41,19 @@ public class CommandInfo {
         File f = new File(cmd);
         if (f.isAbsolute())
             return f.exists();
+
+        // Checking for compiler presence in PATH,
         String path = System.getenv("PATH");
         if (path == null)
             return true; // punt
+
+        // Checking for compiler presence in location ../bin? Relative to eclipse.exe.
+        // So IDE releases will work even when PATH is not configured
+        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+        File predefined_path_dir = new File(eclipsehome).getParentFile();
+        String predefined_path = predefined_path_dir + File.separator + "bin";
+        path = predefined_path + File.pathSeparator + path;
+
         String paths[] = path.split(File.pathSeparator);
         for (String p : paths) {
             if (new File(p, cmd).isFile())
