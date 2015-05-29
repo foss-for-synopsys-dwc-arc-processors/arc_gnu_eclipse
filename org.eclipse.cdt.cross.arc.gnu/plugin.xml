@@ -7388,7 +7388,6 @@
    <extension
          point="org.eclipse.cdt.core.LanguageSettingsProvider">
             <provider
-            class="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuiltinSpecsDetector"
             id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuiltinSpecsDetector"
             name="ARC GNU GCC Built-in Compiler Settings"
             parameter="arc-elf32-gcc ${FLAGS}"
@@ -7401,11 +7400,28 @@
          </language-scope>
       </provider>
       <provider
-            class="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuildCommandParser"
             id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuildCommandParser"
             name="ARC GNU GCC  Build Output Parser"
             parameter="arc-elf32-gcc"
             prefer-non-shared="true">
+      </provider>
+      <provider
+            id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuildCommandParser"
+            name="ARC GNU GCC  Build Output Parser"
+            parameter="arceb-elf32-gcc"
+            prefer-non-shared="true">
+      </provider>
+      <provider
+            id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuiltinSpecsDetector"
+            name="ARC GNU GCC Built-in Compiler Settings"
+            parameter="arceb-elf32-gcc ${FLAGS}"
+            prefer-non-shared="true">
+         <language-scope
+               id="org.eclipse.cdt.core.gcc">
+         </language-scope>
+         <language-scope
+               id="org.eclipse.cdt.core.g++">
+         </language-scope>
       </provider>
       
    </extension>
