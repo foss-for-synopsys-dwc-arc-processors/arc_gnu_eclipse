@@ -10,7 +10,8 @@
    
 package org.eclipse.cdt.cross.arc.gnu;
    
-   import java.util.ArrayList;
+   import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.cdt.managedbuilder.core.BuildException;
@@ -19,6 +20,7 @@ import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
+import org.eclipse.core.runtime.Platform;
    
    public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator
    {
@@ -26,7 +28,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
      {
      return generateCommandLineInfo(oTool, sCommandName, asFlags,sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern, false);
      }
-   
      public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern, boolean bFlag)
      {
      ArrayList<String> oList = new ArrayList<String>();
@@ -400,8 +401,7 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
 //    	   
 //       }
        
-       }
-     
+       }   
      return super.generateCommandLineInfo(oTool, sCommandName, (String[])oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName, asInputResources, sCommandLinePattern);
      }
    }

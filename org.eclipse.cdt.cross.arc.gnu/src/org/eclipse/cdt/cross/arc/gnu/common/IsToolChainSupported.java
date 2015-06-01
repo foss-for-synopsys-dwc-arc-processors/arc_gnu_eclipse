@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.cdt.managedbuilder.core.IManagedIsToolChainSupported;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
+import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Version;
  
  public abstract class IsToolChainSupported
@@ -32,12 +33,13 @@ import org.osgi.framework.Version;
    public String getPlatform() {
      return "linux";
    }
- 
+   static String last_command="";
    public boolean isSupportedImpl(IToolChain oToolChain, Version oVersion, String sInstance, IsToolchainData oStaticData)
    {
   
 	   ITool[] tools = oToolChain.getTools();
        for (ITool tool : tools) {
+    	  
            String extensions[] = tool.getAllOutputExtensions();
            List<String> extList = Arrays.asList(extensions);
            if (extList.contains("o") || extList.contains("obj")) {
@@ -50,6 +52,19 @@ import org.osgi.framework.Version;
                    if (!CommandInfo.commandExists(cmd))
                        return false;
                }
+           }
+           
+           if(CommandInfo.path_or_predefined_path.equalsIgnoreCase("PREDEFINED_PATH")){
+        	  String current_tool_command=tool.getToolCommand();
+       	      String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+       		  File predefined_path_dir = new File(eclipsehome).getParentFile();
+       	      String predefined_path = predefined_path_dir + File.separator + "bin"+File.separator;
+       	      if(current_tool_command.indexOf(predefined_path)<0){
+       	    	 last_command=current_tool_command;
+       	    	 tool.setToolCommand(predefined_path+last_command); 
+       	    	 last_command="";
+       	       }  
+        	   
            }
        }
        return true;
