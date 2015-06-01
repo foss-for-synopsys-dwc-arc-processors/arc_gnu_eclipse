@@ -31,6 +31,7 @@ public class CommandInfo {
      * @param cmd the command
      * @return whether or not a command exists.
      */
+	public static String path_or_predefined_path="";
     public static boolean commandExists (String cmd) {
         // There may be arguments so only grab up to the whitespace
         if (cmd.indexOf(' ') > 0) {
@@ -41,24 +42,30 @@ public class CommandInfo {
         File f = new File(cmd);
         if (f.isAbsolute())
             return f.exists();
-
-        // Checking for compiler presence in PATH,
+        //Checking for compiler presence in PATH,
         String path = System.getenv("PATH");
         if (path == null)
             return true; // punt
 
-        // Checking for compiler presence in location ../bin? Relative to eclipse.exe.
-        // So IDE releases will work even when PATH is not configured
-        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
-        File predefined_path_dir = new File(eclipsehome).getParentFile();
-        String predefined_path = predefined_path_dir + File.separator + "bin";
-        path = predefined_path + File.pathSeparator + path;
-
+  
         String paths[] = path.split(File.pathSeparator);
         for (String p : paths) {
-            if (new File(p, cmd).isFile())
-                return true;
+            if (new File(p, cmd).isFile()){
+            	path_or_predefined_path="PATH";
+                return true;	
+            }            	
         }
+        
+        	// Checking for compiler presence in location ../bin? Relative to eclipse.exe.
+            // So IDE releases will work even when PATH is not configured
+            String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+    		File predefined_path_dir = new File(eclipsehome).getParentFile();
+            String predefined_path = predefined_path_dir + File.separator + "bin";
+            if (new File(predefined_path, cmd).isFile()){
+            	path_or_predefined_path="PREDEFINED_PATH";
+                 return true;	
+            }
+        
         return false;
     }
     
