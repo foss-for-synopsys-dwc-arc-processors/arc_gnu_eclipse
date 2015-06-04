@@ -6954,7 +6954,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arc-linux-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -7003,7 +7003,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arc-linux-g++">
          </run>
          <scannerInfoConsoleParser

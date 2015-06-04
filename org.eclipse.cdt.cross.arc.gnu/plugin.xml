@@ -63,7 +63,7 @@
             providerId="specsFile">
             <run
                 arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-                class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+                class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                 command="arceb-elf32-gcc">
             </run>
             <scannerInfoConsoleParser
@@ -112,7 +112,7 @@
             <run
             command="arceb-elf32-gcc"
             arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"/>
+            class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"/>
             <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser"/>
         </scannerInfoProvider>
     </extension>
@@ -154,7 +154,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arceb-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -183,7 +183,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arc-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -232,7 +232,7 @@
          <run
                command="arc-elf32-gcc"
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"/>
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"/>
          <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser"/>
       </scannerInfoProvider>
    </extension>
@@ -296,7 +296,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arc-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -348,7 +348,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arc-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -400,7 +400,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arceb-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -452,7 +452,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
                command="arceb-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -491,22 +491,22 @@
       <profilePage
             class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
             name="Managed Build System - per project scanner info profile (C)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileC">
+            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC">
       </profilePage>
       <profilePage
             class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
             name="Managed Build System - per project scanner info profile (C++)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinManagedMakePerProjectProfileCPP">
+            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCPP">
       </profilePage>
       <profilePage
             class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
             name="GCC per project scanner info profile"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerProjectProfile">
+            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerProjectProfile">
       </profilePage>
       <profilePage
             class="org.eclipse.cdt.make.ui.dialogs.GCCPerFileSCDProfilePage"
             name="GCC per file scanner info profile "
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCWinStandardMakePerFileProfile">
+            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile">
       </profilePage>
    </extension>
 

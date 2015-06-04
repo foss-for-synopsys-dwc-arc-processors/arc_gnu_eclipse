@@ -31,7 +31,6 @@ public class CommandInfo {
      * @param cmd the command
      * @return whether or not a command exists.
      */
-	public static String path_or_predefined_path="";
     public static boolean commandExists (String cmd) {
         // There may be arguments so only grab up to the whitespace
         if (cmd.indexOf(' ') > 0) {
@@ -51,9 +50,8 @@ public class CommandInfo {
         String paths[] = path.split(File.pathSeparator);
         for (String p : paths) {
             if (new File(p, cmd).isFile()){
-            	path_or_predefined_path="PATH";
-                return true;	
-            }            	
+                return true;
+            }
         }
         
         	// Checking for compiler presence in location ../bin? Relative to eclipse.exe.
@@ -62,8 +60,7 @@ public class CommandInfo {
     		File predefined_path_dir = new File(eclipsehome).getParentFile();
             String predefined_path = predefined_path_dir + File.separator + "bin";
             if (new File(predefined_path, cmd).isFile()){
-            	path_or_predefined_path="PREDEFINED_PATH";
-                 return true;	
+                return true;
             }
         
         return false;

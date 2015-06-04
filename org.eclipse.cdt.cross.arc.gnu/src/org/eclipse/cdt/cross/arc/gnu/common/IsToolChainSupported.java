@@ -33,7 +33,7 @@ import org.osgi.framework.Version;
    public String getPlatform() {
      return "linux";
    }
-   static String last_command="";
+
    public boolean isSupportedImpl(IToolChain oToolChain, Version oVersion, String sInstance, IsToolchainData oStaticData)
    {
   
@@ -54,17 +54,13 @@ import org.osgi.framework.Version;
                }
            }
            
-           if(CommandInfo.path_or_predefined_path.equalsIgnoreCase("PREDEFINED_PATH")){
-        	  String current_tool_command=tool.getToolCommand();
-       	      String eclipsehome = Platform.getInstallLocation().getURL().getPath();
-       		  File predefined_path_dir = new File(eclipsehome).getParentFile();
-       	      String predefined_path = predefined_path_dir + File.separator + "bin"+File.separator;
-       	      if(current_tool_command.indexOf(predefined_path)<0){
-       	    	 last_command=current_tool_command;
-       	    	 tool.setToolCommand(predefined_path+last_command); 
-       	    	 last_command="";
-       	       }  
-        	   
+           String current_tool_command = tool.getToolCommand();
+           String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+           File predefined_path_dir = new File(eclipsehome).getParentFile();
+           String predefined_path = predefined_path_dir + File.separator +
+                   "bin" + File.separator;
+           if(current_tool_command.indexOf(predefined_path)<0){
+               tool.setToolCommand(predefined_path + current_tool_command);
            }
        }
        return true;
