@@ -179,449 +179,10 @@
    </extension>
    
    <!-- Configuration discovery profiles -->
-   <extension
-         id="ARC_CS_GCCManagedMakePerProjectProfileC"
-         name="ARC Sourcery GNU C/C++ managed make per project SCD profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-none-eabi-gcc">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_CS_GCCManagedMakePerProjectProfileCPP"
-         name="ARC Sourcery GNU C/C++ managed make per project SCD profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-none-eabi-g++">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_CS_GCCStandardMakePerProjectProfile"
-         name="ARC Sourcery GNU C/C++ Scanner Info per project profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector"
-            scope="project"/>
-      <buildOutputProvider>
-         <open/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCScannerInfoConsoleParser"/>
-      </buildOutputProvider>
-      <scannerInfoProvider providerId="specsFile">
-         <run
-               command="arc-none-eabi-gcc"
-               arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser"/>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_CS_GCCStandardMakePerFileProfile"
-         name="ARC Sourcery GNU C/C++ Scanner Info per file profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerFileSICollector"
-            scope="file"/>
-      <buildOutputProvider>
-         <open/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileBOPConsoleParser"/>
-      </buildOutputProvider>
-      <scannerInfoProvider providerId="makefileGenerator">
-         <run
-               arguments="-f ${project_name}_scd.mk"
-               command="make"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.SCDMakefileGenerator"/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileSIPConsoleParser"/>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         point="org.eclipse.cdt.make.ui.DiscoveryProfilePage">
-   </extension>
    
    <!-- -->
-   <extension
-         id="ARC_CS_GCCWinManagedMakePerProjectProfileC"
-         name="ARC Sourcery GNU C/C++ managed make per project SCD profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGnuWinScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-none-eabi-gcc">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_CS_GCCWinManagedMakePerProjectProfileCPP"
-         name="ARC Sourcery GNU C/C++ managed make per project SCD profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGnuWinScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-none-eabi-g++">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_CS_GCCWinStandardMakePerProjectProfile"
-         name="ARC Sourcery GNU C/C++ Scanner Info per project profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-none-eabi-gcc">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_CS_GCCWinStandardMakePerFileProfile"
-         name="ARC Sourcery GNU C/C++ Scanner Info per file profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerFileSICollector"
-            scope="file">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileBOPConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="makefileGenerator">
-         <run
-               arguments="-f ${project_name}_scd.mk"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.SCDMakefileGenerator"
-               command="cs-make">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileSIPConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         point="org.eclipse.cdt.make.ui.DiscoveryProfilePage">
-   </extension>
 
    <!-- -->
-   <extension
-         id="ARC_GCCManagedMakePerProjectProfileC"
-         name="ARC GNU C/C++ managed make per project SCD profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_GCCManagedMakePerProjectProfileCPP"
-         name="ARC GNU C/C++ managed make per project SCD profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-linux-g++">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_GCCStandardMakePerProjectProfile"
-         name="ARC GNU C/C++ Scanner Info per project profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector"
-            scope="project"/>
-      <buildOutputProvider>
-         <open/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCScannerInfoConsoleParser"/>
-      </buildOutputProvider>
-      <scannerInfoProvider providerId="specsFile">
-         <run
-               command="arc-linux-gcc"
-               arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser"/>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_GCCStandardMakePerFileProfile"
-         name="ARC GNU C/C++ Scanner Info per file profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerFileSICollector"
-            scope="file"/>
-      <buildOutputProvider>
-         <open/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileBOPConsoleParser"/>
-      </buildOutputProvider>
-      <scannerInfoProvider providerId="makefileGenerator">
-         <run
-               arguments="-f ${project_name}_scd.mk"
-               command="make"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.SCDMakefileGenerator"/>
-         <scannerInfoConsoleParser class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileSIPConsoleParser"/>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         point="org.eclipse.cdt.make.ui.DiscoveryProfilePage">
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (GNUARC/C)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileC">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (GNUARC/C++)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="GCC per project scanner info profile (GNUARC)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerProjectProfile">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerFileSCDProfilePage"
-            name="GCC per file scanner info profile (GNUARC)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile">
-      </profilePage>
-   </extension>
-   <extension
-         id="ARC_GCCWinManagedMakePerProjectProfileC"
-         name="ARC GNU C/C++ managed make per project SCD profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGnuWinScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-linux-gcc">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_GCCWinManagedMakePerProjectProfileCPP"
-         name="ARC GNU C/C++ managed make per project SCD profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGnuWinScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-linux-g++">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_GCCWinStandardMakePerProjectProfile"
-         name="ARC GNU C/C++ Scanner Info per project profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
-               command="arc-linux-gcc">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="ARC_GCCWinStandardMakePerFileProfile"
-         name="ARC GNU C/C++ Scanner Info per file profile (Windows)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.make.internal.core.scannerconfig2.PerFileSICollector"
-            scope="file">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileBOPConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="makefileGenerator">
-         <run
-               arguments="-f ${project_name}_scd.mk"
-               class="org.eclipse.cdt.make.internal.core.scannerconfig2.SCDMakefileGenerator"
-               command="make">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCPerFileSIPConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         point="org.eclipse.cdt.make.ui.DiscoveryProfilePage">
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (GNUARC Windows/C)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinManagedMakePerProjectProfileC">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (GNUARC Windows/C++)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinManagedMakePerProjectProfileCPP">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="GCC per project scanner info profile (GNUARC Windows)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinStandardMakePerProjectProfile">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerFileSCDProfilePage"
-            name="GCC per file scanner info profile (GNUARC Windows)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCWinStandardMakePerFileProfile">
-      </profilePage>
-   </extension>
 
    <extension
          id="ARC_GCC_BuildDefinitions"
@@ -7374,6 +6935,120 @@
             location="$nl$/templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
       </template>
+   </extension>
+   <extension
+         id="ARC_GCCManagedMakePerProjectProfileC"
+         name="ARC GNU C/C++ managed make per project SCD profile"
+         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
+      <scannerInfoCollector
+            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGCCScannerInfoCollector"
+            scope="project">
+      </scannerInfoCollector>
+      <buildOutputProvider>
+         <open></open>
+         <scannerInfoConsoleParser
+               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
+         </scannerInfoConsoleParser>
+      </buildOutputProvider>
+      <scannerInfoProvider
+            providerId="specsFile">
+         <run
+               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
+               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               command="arc-linux-gcc">
+         </run>
+         <scannerInfoConsoleParser
+               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
+         </scannerInfoConsoleParser>
+      </scannerInfoProvider>
+   </extension>
+   <extension
+         point="org.eclipse.cdt.make.ui.DiscoveryProfilePage">
+      <profilePage
+            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
+            name="Managed Build System - per project scanner info profile (C)"
+            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileC">
+      </profilePage>
+      <profilePage
+            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
+            name="Managed Build System - per project scanner info profile (C++)"
+            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP">
+      </profilePage>
+      <profilePage
+            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
+            name="GCC per project scanner info profile "
+            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerProjectProfile">
+      </profilePage>
+      <profilePage
+            class="org.eclipse.cdt.make.ui.dialogs.GCCPerFileSCDProfilePage"
+            name="GCC per file scanner info profile "
+            profileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile">
+      </profilePage>
+   </extension>
+   <extension
+         id="ARC_GCCManagedMakePerProjectProfileCPP"
+         name="ARC GNU C/C++ managed make per project SCD profile"
+         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
+      <scannerInfoCollector
+            class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCGCCScannerInfoCollector"
+            scope="project">
+      </scannerInfoCollector>
+      <buildOutputProvider>
+         <open></open>
+         <scannerInfoConsoleParser
+               class="org.eclipse.cdt.cross.arc.gnu.uclibc.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
+         </scannerInfoConsoleParser>
+      </buildOutputProvider>
+      <scannerInfoProvider
+            providerId="specsFile">
+         <run
+               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
+               class="org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider"
+               command="arc-linux-g++">
+         </run>
+         <scannerInfoConsoleParser
+               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
+         </scannerInfoConsoleParser>
+      </scannerInfoProvider>
+   </extension>
+   <extension
+         point="org.eclipse.cdt.core.LanguageSettingsProvider">
+      <provider
+            id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuiltinSpecsDetector"
+            name="ARC GNU GCC Built-in Compiler Settings"
+            parameter="arc-linux-gcc -E -P -v -dD &quot;${INPUTS}&quot;"
+            prefer-non-shared="true">
+         <language-scope
+               id="org.eclipse.cdt.core.gcc">
+         </language-scope>
+         <language-scope
+               id="org.eclipse.cdt.core.g++">
+         </language-scope>
+      </provider>
+      <provider
+            id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuildCommandParser"
+            name="ARC GNU GCC  Build Output Parser"
+            parameter="arc-linux-gcc"
+            prefer-non-shared="true">
+      </provider>
+      <provider
+            id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuildCommandParser"
+            name="ARC GNU GCC  Build Output Parser"
+            parameter="arceb-linux-gcc"
+            prefer-non-shared="true">
+      </provider>
+      <provider
+            id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuiltinSpecsDetector"
+            name="ARC GNU GCC Built-in Compiler Settings"
+            parameter="arceb-linux-gcc  -E -P -v -dD &quot;${INPUTS}&quot;"
+            prefer-non-shared="true">
+         <language-scope
+               id="org.eclipse.cdt.core.gcc">
+         </language-scope>
+         <language-scope
+               id="org.eclipse.cdt.core.g++">
+         </language-scope>
+      </provider>
    </extension>
 
 </plugin>

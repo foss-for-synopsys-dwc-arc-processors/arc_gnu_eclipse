@@ -7390,7 +7390,7 @@
             <provider
             id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuiltinSpecsDetector"
             name="ARC GNU GCC Built-in Compiler Settings"
-            parameter="arc-elf32-gcc ${FLAGS}"
+            parameter="arc-elf32-gcc -E -P -v -dD &quot;${INPUTS}&quot;"
             prefer-non-shared="true">
          <language-scope
                id="org.eclipse.cdt.core.gcc">
@@ -7414,7 +7414,7 @@
       <provider
             id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuiltinSpecsDetector"
             name="ARC GNU GCC Built-in Compiler Settings"
-            parameter="arceb-elf32-gcc ${FLAGS}"
+            parameter="arceb-elf32-gcc -E -P -v -dD &quot;${INPUTS}&quot;"
             prefer-non-shared="true">
          <language-scope
                id="org.eclipse.cdt.core.gcc">
