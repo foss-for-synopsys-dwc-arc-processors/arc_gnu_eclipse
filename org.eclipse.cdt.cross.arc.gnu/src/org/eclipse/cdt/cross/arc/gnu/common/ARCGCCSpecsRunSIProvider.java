@@ -32,10 +32,12 @@ public class ARCGCCSpecsRunSIProvider extends GCCSpecsRunSIProvider {
         String predefined_path = predefined_path_dir + File.separator + "bin"+File.separator;
         
         // Append ../bin to PATH.
+        if(props!=null){
         String path = props.getProperty("PATH");
-        if (!path.endsWith(predefined_path)) {
+        if (path!=null&& !path.endsWith(predefined_path)) {
             path = path + File.pathSeparatorChar + predefined_path;
             props.setProperty("PATH", path);
+        }
         }
         
         // Use super-class method to do the rest.
