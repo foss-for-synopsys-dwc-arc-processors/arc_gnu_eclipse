@@ -23,6 +23,7 @@ import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
 import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
@@ -196,9 +197,19 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		   
 		    
 		    gdb_path= configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, "");
+		    
+		     // Get an absolute path to ../bin.
+	        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+	        File predefined_path_dir = new File(eclipsehome).getParentFile();
+	        String predefined_path = predefined_path_dir + File.separator + "bin"+File.separator;
+	        Boolean gdb_in_path=System.getenv("PATH").contains(predefined_path);
 		    if(gdb_path.equalsIgnoreCase("")){
-		    	gdb_path="arc-elf32-gdb";
+		    	if(gdb_in_path){
+		    	    gdb_path="arc-elf32-gdb";	
+		    	}	
+		    	else gdb_path=predefined_path+"arc-elf32-gdb";
 		    }
+	    
 		    fGDBCommandText.setText( gdb_path);
 		    
 			String jtagfrequency= configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");

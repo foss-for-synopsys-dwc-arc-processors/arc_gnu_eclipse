@@ -50,6 +50,8 @@ public interface IMILaunchConfigurationConstants {
 	/**
 	 * Launch configuration attribute value. The key is ATTR_DEBUG_NAME.
 	 */
+	
+	
 	public static final String DEBUGGER_DEBUG_NAME_DEFAULT = "arc-elf32-gdb"; //$NON-NLS-1$
 
 	/**
