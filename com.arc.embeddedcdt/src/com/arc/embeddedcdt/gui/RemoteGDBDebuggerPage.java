@@ -82,7 +82,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private String jtag_frequency=null;
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
-	
+	private  String gdb_path=null;
 	private Boolean createTabitemCOMAshlingBool=false;
 
 	
@@ -191,9 +191,16 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		createTabitemnSIMBool=false;
 		super.initializeFrom(configuration);
 		
-		fGDBCommandText.setText( "arc-elf32-gdb" );
-		try {
 	
+		try {
+		   
+		    
+		    gdb_path= configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, "");
+		    if(gdb_path.equalsIgnoreCase("")){
+		    	gdb_path="arc-elf32-gdb";
+		    }
+		    fGDBCommandText.setText( gdb_path);
+		    
 			String jtagfrequency= configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
  		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, getOpenOCDScriptDefaultPath());
@@ -285,15 +292,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		str=str.trim();
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str );
 		String nsim_default_path = getNsimdrvDefaultPath();
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, nsim_default_path);
-		
-		
-		
-		String gdbStr = fGDBCommandText.getText();
-		gdbStr=gdbStr.trim();
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, nsim_default_path);	
+		gdb_path = fGDBCommandText.getText();
 		if(jtag_frequency!=null)
 		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
-		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
+		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,externaltools_openocd_path);
 
