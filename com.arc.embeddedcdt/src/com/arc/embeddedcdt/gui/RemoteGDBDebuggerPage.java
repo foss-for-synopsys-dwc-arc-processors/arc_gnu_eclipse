@@ -197,17 +197,23 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		   
 		    
 		    gdb_path= configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, "");
-		    
-		     // Get an absolute path to ../bin.
-	        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
-	        File predefined_path_dir = new File(eclipsehome).getParentFile();
-	        String predefined_path = predefined_path_dir + File.separator + "bin"+File.separator;
-	        Boolean gdb_in_path=System.getenv("PATH").contains(predefined_path);
+
 		    if(gdb_path.equalsIgnoreCase("")){
-		    	if(gdb_in_path){
-		    	    gdb_path="arc-elf32-gdb";	
-		    	}	
-		    	else gdb_path=predefined_path+"arc-elf32-gdb";
+		        // Get an absolute path to ../bin.
+	            String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+	            String predefined_path = (new File(eclipsehome).getParentFile()).getAbsolutePath() + File.separator + "bin";
+	            File predefined_path_file = new File(predefined_path);
+	            
+	            if (predefined_path_file.isDirectory()) {
+	                File gdb_fp = new File(predefined_path + File.separator + "arc-elf32-gdb");
+	                if (gdb_fp.canExecute()) {
+	                    gdb_path = gdb_fp.getAbsolutePath();
+	                }
+	            }
+	            
+	            if(gdb_path.equalsIgnoreCase("")) {
+	                gdb_path = "arc-elf32-gdb";
+	            }
 		    }
 	    
 		    fGDBCommandText.setText( gdb_path);
