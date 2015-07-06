@@ -2230,6 +2230,7 @@
       
       
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base"
             name="Linux uClibc GCC For ARC 700 Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
@@ -3028,6 +3029,7 @@
          </option>
       </toolChain>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs"
             name="Linux uClibc GCC For ARC HS Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
@@ -3436,6 +3438,7 @@
          </option>
       </toolChain>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.configuration.base.hs"
             name="Linux uClibc GCC For ARC HS Configuration (Big endian)"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">
@@ -5040,6 +5043,7 @@
          </option>
       </tool>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.eb.linux.configuration.base"
             name="Linux uClibc GCC For ARC 700 Configuration (Big endian)"
             parent="org.eclipse.cdt.cross.arc.gnu.uclibc.configuration.base">

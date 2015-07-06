@@ -2931,6 +2931,7 @@
          -->
       </toolChain>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
             name="GNU Toolchain for ARC EM Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
@@ -3805,6 +3806,7 @@
             superClass="org.eclipse.cdt.cross.arc.gnu.builder">
       </builder>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
             name="GNU Toolchain for ARC HS Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
@@ -4623,6 +4625,7 @@
          </configuration>
       </projectType>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base"
             name="GNU Toolchain for ARC 600 Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base.600">
@@ -4763,6 +4766,7 @@
          </configuration>
       </projectType>
       <configuration
+            cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
             name="GNU Toolchain for ARC 700 Configuration"
             parent="org.eclipse.cdt.cross.arc.gnu.configuration.base">
