@@ -3568,7 +3568,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.lib.debug"
                name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.lib.toolchain.debug"
                   isAbstract="false"
@@ -3611,7 +3611,8 @@
                artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.lib.release"
-               name="Release">
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.eb.linux.lib.toolchain.release"
                   isAbstract="false"
@@ -6372,7 +6373,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.lib.debug"
                name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base.700">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.700.linux.lib.toolchain.debug"
                   isAbstract="false"
@@ -6416,7 +6417,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.lib.release"
                name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base.700">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.700.linux.lib.toolchain.release"
                   isAbstract="false"
@@ -6465,7 +6466,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.lib.debug"
                name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.600.linux.lib.toolchain.debug"
                   isAbstract="false"
@@ -6509,7 +6510,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.lib.release"
                name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.600.linux.lib.toolchain.release"
                   isAbstract="false"
@@ -6744,7 +6745,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.lib.debug"
                name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base.600">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.lib.toolchain.debug"
                   isAbstract="false"
@@ -6787,7 +6788,8 @@
                artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.lib.release"
-               name="Release">
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.lib.toolchain.release"
                   isAbstract="false"
@@ -6836,7 +6838,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.lib.debug"
                name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base.hs">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.lib.toolchain.debug"
                   isAbstract="false"
@@ -6879,7 +6881,8 @@
                artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.lib.release"
-               name="Release">
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.lib.toolchain.release"
                   isAbstract="false"
