@@ -51,6 +51,7 @@ public interface LaunchConfigurationConstants {
 	String ATTR_ASHLING_XML_PATH =  LAUNCH_ID + ".ashling_xml_path"; //$NON-NLS-1$
 	
 	String ATTR_JTAG_FREQUENCY=  LAUNCH_ID + ".jtag_frequency"; //$NON-NLS-1$
+	String ATTR_FTDI_DEVICE=  LAUNCH_ID + ".ftdi_device"; //$NON-NLS-1$
 	// Default option values
 	static final String DEFAULT_OPENOCD_PORT = "49105";
 	static final String DEFAULT_OPELLAXD_PORT = "49105";

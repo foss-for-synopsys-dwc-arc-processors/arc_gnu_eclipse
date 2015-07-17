@@ -589,7 +589,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	private void start_openocd(final ILaunchConfiguration configuration, final ILaunch launch)
 		throws CoreException
 	{
-		final String openocd_cfg = configuration.getAttribute(
+		String openocd_cfg="";
+		String openocd_custom_configuration_file= configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,"");
 
 		final String gdbserver_port = configuration.getAttribute(
@@ -599,12 +600,50 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 		final String openocd_bin = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,"");
-
+		String ftdi_device = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
 		// ${openocd_bin}/../share/openocd/scripts
 		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
 		final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd" + File.separator + "scripts");
 		final String openocd_tcl = scripts_dir.getAbsolutePath();
 
+		if(ftdi_device.equals("EM SK")){
+			openocd_cfg="snps_em_sk_fpga.cfg";
+		}
+		else if(ftdi_device.equals("AXS101")){
+			openocd_cfg="snps_axc001.cfg";
+		}
+		else if(ftdi_device.equals("AXS101:ARC700")){
+			openocd_cfg="snps_axc001.cfg";
+		}
+		
+		else if(ftdi_device.equals("AXS101:EM6")){
+			openocd_cfg="snps_axc001.cfg";
+		}
+		
+		else if(ftdi_device.equals("AXS101:AS221")){
+			openocd_cfg="snps_axc001.cfg";
+		}
+		
+		else if(ftdi_device.equals("AXS102")){
+			openocd_cfg="snps_axc002.cfg";
+		}
+		
+		else if(ftdi_device.equals("AXS102:HS34")){
+			openocd_cfg="snps_axc001.cfg";
+		}
+		else if(ftdi_device.equals("AXS102:HS36")){
+			openocd_cfg="snps_axc003_hs36.cfg";
+		}
+		else if(ftdi_device.equals("AXS103")){
+			openocd_cfg="snps_axc001.cfg";
+		}
+		else if(ftdi_device.equals("Custom configuration file")){
+			openocd_cfg=openocd_custom_configuration_file;
+		}
+  
+	    
+	    
 		/* "gdb_port" is before -f <script> so script file can override our
 		 * settings. Also in case of configuration scripts supplied by
 		 * Synopsys we cannot set gdb_port after -f option - our scripts do

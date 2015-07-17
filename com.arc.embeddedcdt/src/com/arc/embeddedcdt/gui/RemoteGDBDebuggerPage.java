@@ -83,6 +83,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
 	protected Combo fPrgmArgumentsJTAGFrenCombo;//this variable for select JTAG frequency
+	protected Combo fPrgmArgumentsFTDI_DeviceCombo;//this variable for select FTDI device
 	protected Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
 	private  String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
@@ -101,6 +102,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
 	private String jtag_frequency=null;
+	private String ftdi_device=null;
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
 	private  String gdb_path=null;
@@ -157,6 +159,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, getNsimdrvDefaultPath());
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, default_oocd_bin);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "");
 
 	}
 	
@@ -236,7 +239,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 			openocd_cfg_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
 			        default_oocd_cfg);
-
+			String ftdi_device= configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "");
 		    
 		    String default_ashling_path= isWindowsOS() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
 		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,default_ashling_path);
@@ -270,6 +273,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 			else fPrgmArgumentsJTAGFrenCombo.setText(jtagfrequency);
 		  }
+		  if(!fPrgmArgumentsFTDI_DeviceCombo.isDisposed()){
+				if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "").equalsIgnoreCase(""))
+				{
+					fPrgmArgumentsFTDI_DeviceCombo.setText(fPrgmArgumentsFTDI_DeviceCombo.getItem(0));
+				}
+				else fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device);
+			  }
 			
 		 // Set host and IP.
 		 try {
@@ -326,6 +336,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		gdb_path = fGDBCommandText.getText();
 		if(jtag_frequency!=null)
 		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
+		
+		if(ftdi_device!=null)
+		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, getAttributeValueFromString(ftdi_device));
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
@@ -659,8 +672,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
-
-		// Path to OpenOCD configuration file
 		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
 		fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
 		fOpenOCDConfigPath.setPropertyChangeListener( new IPropertyChangeListener() {
@@ -670,10 +681,62 @@ private void createTabitemCOMAshling(Composite subComp) {
 					updateLaunchConfigurationDialog();
 				}
 			}
-		});
-		//fPrgmArgumentsJTAGFrency(compCOM);
+		});	
+		
+		fPrgmArguments_FTDI_device(compCOM);
+		
 	}
-	
+	private void fPrgmArguments_FTDI_device(Composite Comp){
+		
+		Label label = new Label(Comp, SWT.LEFT);		
+		label.setText("FTDI Device:");
+		fPrgmArgumentsFTDI_DeviceCombo =new Combo(Comp, SWT.None);//1-2 and 1-3
+		
+		GridData gdjtag = new GridData(GridData.BEGINNING);
+		gdjtag.widthHint=100;
+		fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
+	       
+	    fPrgmArgumentsFTDI_DeviceCombo.add("EM SK");//right now OpenOCD doesn't separate v1 and v2, EM5D and EM7D, etc
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC700");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM6");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS34");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS36");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
+	  
+	    
+//		if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+//			fOpenOCDConfigPath.dispose();
+//			
+//		}		
+		if(ftdi_device!=null){
+			if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&ftdi_device.equalsIgnoreCase(""))
+				fPrgmArgumentsFTDI_DeviceCombo.setText("EM SK");
+			else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&!ftdi_device.equalsIgnoreCase(""))
+				fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device);	
+		}
+		else fPrgmArgumentsFTDI_DeviceCombo.setText("EM SK");
+
+
+		fPrgmArgumentsFTDI_DeviceCombo.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				ftdi_device = combo.getText();
+//				if(!ftdi_device.equalsIgnoreCase("Custom configuration file")){
+//					fOpenOCDConfigPath.dispose();				
+//				}
+				updateLaunchConfigurationDialog();
+
+			
+			}
+			});
+
+		
+		
+	}
 	private void fPrgmArgumentsJTAGFrency(Composite Comp){
 		Label label = new Label(Comp, SWT.LEFT);		
 		label.setText("JTAG frequency:");
