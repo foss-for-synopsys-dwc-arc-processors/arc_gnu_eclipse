@@ -608,35 +608,35 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		final String openocd_tcl = scripts_dir.getAbsolutePath();
 
 		if(ftdi_device.equals("EM SK")){
-			openocd_cfg="snps_em_sk_fpga.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk_fpga.cfg";
 		}
 		else if(ftdi_device.equals("AXS101")){
-			openocd_cfg="snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
 		}
 		else if(ftdi_device.equals("AXS101:ARC700")){
-			openocd_cfg="snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
 		}
 		
 		else if(ftdi_device.equals("AXS101:EM6")){
-			openocd_cfg="snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
 		}
 		
 		else if(ftdi_device.equals("AXS101:AS221")){
-			openocd_cfg="snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
 		}
 		
 		else if(ftdi_device.equals("AXS102")){
-			openocd_cfg="snps_axc002.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc002.cfg";
 		}
 		
 		else if(ftdi_device.equals("AXS102:HS34")){
-			openocd_cfg="snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
 		}
 		else if(ftdi_device.equals("AXS102:HS36")){
-			openocd_cfg="snps_axc003_hs36.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc003_hs36.cfg";
 		}
 		else if(ftdi_device.equals("AXS103")){
-			openocd_cfg="snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
 		}
 		else if(ftdi_device.equals("Custom configuration file")){
 			openocd_cfg=openocd_custom_configuration_file;
