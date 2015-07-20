@@ -40,6 +40,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
@@ -674,6 +675,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		});
 		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
 		fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
+		fOpenOCDConfigPath.setEnabled(false, compCOM);
 		fOpenOCDConfigPath.setPropertyChangeListener( new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
 				if (event.getProperty() == "field_editor_value") {
@@ -686,7 +688,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArguments_FTDI_device(compCOM);
 		
 	}
-	private void fPrgmArguments_FTDI_device(Composite Comp){
+	private void fPrgmArguments_FTDI_device(final Composite Comp){
 		
 		Label label = new Label(Comp, SWT.LEFT);		
 		label.setText("FTDI Device:");
@@ -708,10 +710,11 @@ private void createTabitemCOMAshling(Composite subComp) {
 	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
 	  
 	    
-//		if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
-//			fOpenOCDConfigPath.dispose();
-//			
-//		}		
+		if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+				fOpenOCDConfigPath.setEnabled(false, Comp);
+			
+		}	
+		else fOpenOCDConfigPath.setEnabled(true, Comp);
 		if(ftdi_device!=null){
 			if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&ftdi_device.equalsIgnoreCase(""))
 				fPrgmArgumentsFTDI_DeviceCombo.setText("EM SK");
@@ -724,10 +727,12 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsFTDI_DeviceCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
-				ftdi_device = combo.getText();
-//				if(!ftdi_device.equalsIgnoreCase("Custom configuration file")){
-//					fOpenOCDConfigPath.dispose();				
-//				}
+				ftdi_device = combo.getText();	
+				if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+					fOpenOCDConfigPath.setEnabled(false, Comp);
+				
+			}	
+			else fOpenOCDConfigPath.setEnabled(true, Comp);
 				updateLaunchConfigurationDialog();
 
 			
