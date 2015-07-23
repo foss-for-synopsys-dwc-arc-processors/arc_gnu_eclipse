@@ -609,38 +609,24 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	       
 
 		if(ftdi_device.equals("EM Starter Kit v1.x")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk_fpga.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk.cfg";
 		}
 		else if(ftdi_device.equals("EM Starter Kit v2.x")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
-		}
-		else if(ftdi_device.equals("AXS101:ARC770D")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_em_sk_v1.cfg";
 		}
 		
-		else if(ftdi_device.equals("AXS101:EM")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
+		else if(ftdi_device.equals("AXS101:AS221 core 1")||ftdi_device.equals("AXS101:AS221 core 2")||ftdi_device.equals("AXS101:EM")||ftdi_device.equals("AXS101:ARC770D")){
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs101.cfg";
+		}		
+		else if(ftdi_device.equals("AXS102:HS34")||ftdi_device.equals("AXS102:HS36")){
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs102.cfg";
 		}
-		
-		else if(ftdi_device.equals("AXS101:AS221 core 1")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
+		else if(ftdi_device.equals("AXS103:HS36")){
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs36.cfg";
 		}
-		else if(ftdi_device.equals("AXS101:AS221 core 2")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
-		}
-		
-		else if(ftdi_device.equals("AXS102:HS34")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
-		}
-		else if(ftdi_device.equals("AXS102:HS36")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc003_hs36.cfg";
-		}
-		else if(ftdi_device.equals("AXS103:HS38 core 0")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
-		}
-		else if(ftdi_device.equals("AXS103:HS38 core 1")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axc001.cfg";
-		}
+//		else if(ftdi_device.equals("AXS103:HS38 core 0")||ftdi_device.equals("AXS103:HS38 core 1")){
+//			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs38.cfg";
+//		}
 		else if(ftdi_device.equals("Custom configuration file")){
 			openocd_cfg=openocd_custom_configuration_file;
 		}

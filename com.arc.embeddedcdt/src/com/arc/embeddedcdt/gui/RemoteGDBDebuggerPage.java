@@ -691,8 +691,8 @@ private void createTabitemCOMAshling(Composite subComp) {
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 2");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS34");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS36");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 1");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 0");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 1");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 0");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
 	  
 	    
