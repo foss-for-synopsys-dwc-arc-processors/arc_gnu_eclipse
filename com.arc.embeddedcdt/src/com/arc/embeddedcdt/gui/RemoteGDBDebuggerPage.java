@@ -673,48 +673,30 @@ private void createTabitemCOMAshling(Composite subComp) {
 				}
 			}
 		});
-		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
-		fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
-		fOpenOCDConfigPath.setEnabled(false, compCOM);
-		fOpenOCDConfigPath.setPropertyChangeListener( new IPropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent event) {
-				if (event.getProperty() == "field_editor_value") {
-					openocd_cfg_path = (String)event.getNewValue();
-					updateLaunchConfigurationDialog();
-				}
-			}
-		});	
-		
-		fPrgmArguments_FTDI_device(compCOM);
-		
-	}
-	private void fPrgmArguments_FTDI_device(final Composite Comp){
-		
-		Label label = new Label(Comp, SWT.LEFT);		
-		label.setText("FTDI Device:");
-		fPrgmArgumentsFTDI_DeviceCombo =new Combo(Comp, SWT.None);//1-2 and 1-3
+		Label label = new Label(compCOM, SWT.LEFT);		
+		label.setText("Development system:");
+		fPrgmArgumentsFTDI_DeviceCombo =new Combo(compCOM, SWT.None);//1-2 and 1-3
 		
 		GridData gdjtag = new GridData(GridData.BEGINNING);
-		gdjtag.widthHint=100;
+		gdjtag.widthHint=180;
+		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
 	       
-	    fPrgmArgumentsFTDI_DeviceCombo.add("EM SK");//right now OpenOCD doesn't separate v1 and v2, EM5D and EM7D, etc
+	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v1.x");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v2.x");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC700");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM6");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC770D");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 1");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 2");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS34");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS36");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 1");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 0");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
 	  
 	    
-		if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
-				fOpenOCDConfigPath.setEnabled(false, Comp);
-			
-		}	
-		else fOpenOCDConfigPath.setEnabled(true, Comp);
+		
 		if(ftdi_device!=null){
 			if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&ftdi_device.equalsIgnoreCase(""))
 				fPrgmArgumentsFTDI_DeviceCombo.setText("EM SK");
@@ -728,11 +710,13 @@ private void createTabitemCOMAshling(Composite subComp) {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				ftdi_device = combo.getText();	
-				if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
-					fOpenOCDConfigPath.setEnabled(false, Comp);
-				
-			}	
-			else fOpenOCDConfigPath.setEnabled(true, Comp);
+				 if(fOpenOCDConfigPath!=null){
+					 if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+							fOpenOCDConfigPath.setEnabled(false, compCOM);
+						
+					}	
+					else fOpenOCDConfigPath.setEnabled(true, compCOM);
+				 }
 				updateLaunchConfigurationDialog();
 
 			
@@ -740,8 +724,26 @@ private void createTabitemCOMAshling(Composite subComp) {
 			});
 
 		
-		
+		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
+		fOpenOCDConfigPath.setEnabled(false, compCOM);
+		fOpenOCDConfigPath.setStringValue(externaltools_openocd_path);
+		fOpenOCDConfigPath.setPropertyChangeListener( new IPropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent event) {
+				if (event.getProperty() == "field_editor_value") {
+					externaltools_openocd_path = (String)event.getNewValue();
+					updateLaunchConfigurationDialog();
+				}
+			}
+		});	
+		if(fOpenOCDConfigPath!=null){
+	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+				fOpenOCDConfigPath.setEnabled(false, compCOM);
+			
+		}	
+		else fOpenOCDConfigPath.setEnabled(true, compCOM);
+	    }
 	}
+	
 	private void fPrgmArgumentsJTAGFrency(Composite Comp){
 		Label label = new Label(Comp, SWT.LEFT);		
 		label.setText("JTAG frequency:");
