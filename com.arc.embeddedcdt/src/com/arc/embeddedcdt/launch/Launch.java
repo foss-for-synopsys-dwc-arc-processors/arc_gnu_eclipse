@@ -593,7 +593,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		String openocd_custom_configuration_file= configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,"");
 
-		final String gdbserver_port = configuration.getAttribute(
+		String gdbserver_port = configuration.getAttribute(
 				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
 				LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT
 				);
@@ -630,7 +630,16 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		else if(ftdi_device.equals("Custom configuration file")){
 			openocd_cfg=openocd_custom_configuration_file;
 		}
-  
+	
+		if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")) {
+			gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
+		}
+
+		else if (ftdi_device.equals("AXS101:AS221 core 2")) {
+			gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
+		} else if (ftdi_device.equals("AXS101:AS221 core 1")) {
+			gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
+		}
 	    
 	    
 		/* "gdb_port" is before -f <script> so script file can override our

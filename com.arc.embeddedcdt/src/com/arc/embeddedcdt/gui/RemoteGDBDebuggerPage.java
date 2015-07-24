@@ -675,7 +675,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		});
 		Label label = new Label(compCOM, SWT.LEFT);		
 		label.setText("Development system:");
-		fPrgmArgumentsFTDI_DeviceCombo =new Combo(compCOM, SWT.None);//1-2 and 1-3
+		fPrgmArgumentsFTDI_DeviceCombo =new Combo(compCOM, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
 		
 		GridData gdjtag = new GridData(GridData.BEGINNING);
 		gdjtag.widthHint=180;
@@ -710,13 +710,10 @@ private void createTabitemCOMAshling(Composite subComp) {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				ftdi_device = combo.getText();	
-				 if(fOpenOCDConfigPath!=null){
-					 if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
-							fOpenOCDConfigPath.setEnabled(false, compCOM);
-						
+					 if(!ftdi_device.equalsIgnoreCase("Custom configuration file")){
+							fOpenOCDConfigPath.setEnabled(false, compCOM);		
 					}	
 					else fOpenOCDConfigPath.setEnabled(true, compCOM);
-				 }
 				updateLaunchConfigurationDialog();
 
 			
