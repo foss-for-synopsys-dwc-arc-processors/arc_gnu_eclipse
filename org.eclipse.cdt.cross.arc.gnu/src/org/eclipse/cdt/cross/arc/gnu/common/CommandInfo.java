@@ -31,39 +31,52 @@ public class CommandInfo {
      * @param cmd the command
      * @return whether or not a command exists.
      */
-    public static boolean commandExists (String cmd) {
+    public static boolean commandExists(String cmd) {
+        cmd = normalizeCommand(cmd);
+        
+        File f = new File(cmd);
+        if (f.isAbsolute())
+            return f.exists();
+        
+        return commandExistsInSystemPath(cmd) || commandExistsInPredefinedPath(cmd);
+    }
+    
+    private static String normalizeCommand(String cmd) {
         // There may be arguments so only grab up to the whitespace
         if (cmd.indexOf(' ') > 0) {
             cmd = cmd.substring(0, cmd.indexOf(' '));
         }
         if (isWindows() && !cmd.toLowerCase().endsWith(".exe"))
             cmd = cmd + ".exe";
-        File f = new File(cmd);
-        if (f.isAbsolute())
-            return f.exists();
-        //Checking for compiler presence in PATH,
+        return cmd;
+    }
+    
+    public static boolean commandExistsInSystemPath(String cmd) {
+        cmd = normalizeCommand(cmd);
+        
+        // Checking for compiler presence in PATH.
         String path = System.getenv("PATH");
-        if (path == null)
-            return true; // punt
-
-  
-        String paths[] = path.split(File.pathSeparator);
-        for (String p : paths) {
-            if (new File(p, cmd).isFile()){
-                return true;
+        if (path != null) {
+            String paths[] = path.split(File.pathSeparator);
+            for (String p : paths) {
+                if (new File(p, cmd).isFile()) {
+                    return true;
+                }
             }
         }
         
-        	// Checking for compiler presence in location ../bin? Relative to eclipse.exe.
-            // So IDE releases will work even when PATH is not configured
-            String eclipsehome = Platform.getInstallLocation().getURL().getPath();
-    		File predefined_path_dir = new File(eclipsehome).getParentFile();
-            String predefined_path = predefined_path_dir + File.separator + "bin";
-            if (new File(predefined_path, cmd).isFile()){
-                return true;
-            }
-        
         return false;
+    }
+    
+    public static boolean commandExistsInPredefinedPath(String cmd) {
+        cmd = normalizeCommand(cmd);
+        
+        // Checking for compiler presence in location ../bin relative to eclipse.exe.
+        // So IDE releases will work even when PATH is not configured
+        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+        File predefined_path_dir = new File(eclipsehome).getParentFile();
+        String predefined_path = predefined_path_dir + File.separator + "bin";
+        return new File(predefined_path, cmd).isFile();
     }
     
     /**
