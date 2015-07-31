@@ -698,11 +698,11 @@ private void createTabitemCOMAshling(Composite subComp) {
 		
 		if(ftdi_device!=null){
 			if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&ftdi_device.equalsIgnoreCase(""))
-				fPrgmArgumentsFTDI_DeviceCombo.setText("EM SK");
+				fPrgmArgumentsFTDI_DeviceCombo.setText("EM Starter Kit v1.x");
 			else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&!ftdi_device.equalsIgnoreCase(""))
 				fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device);	
 		}
-		else fPrgmArgumentsFTDI_DeviceCombo.setText("EM SK");
+		else fPrgmArgumentsFTDI_DeviceCombo.setText("EM Starter Kit v1.x");
 
 
 		fPrgmArgumentsFTDI_DeviceCombo.addModifyListener(new ModifyListener() {
