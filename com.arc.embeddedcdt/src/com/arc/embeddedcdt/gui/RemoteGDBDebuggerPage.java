@@ -684,7 +684,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 	       
 	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v1.x");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v2.x");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC770D");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 1");
