@@ -232,9 +232,23 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	
 		
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,"");
+		
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
-		if(external_tools.indexOf("OpenOCD")>0)
-		     serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+		String ftdi_device = configuration.getAttribute(
+				LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
+		
+		if(external_tools.indexOf("OpenOCD")>0){
+			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+			if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")) {
+				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
+			}
+
+			else if (ftdi_device.equals("AXS101:AS221 core 2")) {
+				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
+			} else if (ftdi_device.equals("AXS101:AS221 core 1")) {
+				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
+			}
+		}
 		else if(external_tools.indexOf("Ashling")>0)
 			 serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
 			
@@ -339,7 +353,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 					LaunchFrontend l = new LaunchFrontend(launch);
                     
-                    String extenal_tools_nsim_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,"");
+                   
                     
                     prepareSession();
 
@@ -389,72 +403,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 					}
 					else if (external_tools.equalsIgnoreCase("nSIM"))
 					{						
-						// Start nSIM GDB server
-						System.setProperty("nSIM", extenal_tools_nsim_path);
-						String nsim_exec = System.getProperty("nSIM");
-						File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
-						String nsimProps = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
-						String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-						String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
-						String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
-						String nsimJIT_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
-						String nsimHostlink_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
-						String nsimMemoExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
-						String nsimEnableExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
-						String nsiminvalid_Instru_ExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
-						
-						String nsimjit_thread=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
-						
-						String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb ";
-						
-						
-						if(nsiminvalid_Instru_ExptButtonboolean.equalsIgnoreCase("false"))
-						{
-							nsim_cmd += "-off invalid_instruction_interrupt ";
-						}
-						
-
-						if(nsimEnableExptButtonboolean.equalsIgnoreCase("false"))
-						{
-							nsim_cmd += " -off enable_exceptions ";
-						}
-						
-						if(nsimMemoExptButtonboolean.equalsIgnoreCase("false"))
-						{
-							nsim_cmd += " -off memory_exception_interrupt ";
-						}
-						
-						if(nsimJIT_Buttonboolean.equalsIgnoreCase("true"))
-						{
-							nsim_cmd += " -on nsim_fast ";
-							if(!nsimjit_thread.equalsIgnoreCase("1"))
-							{
-								nsim_cmd += "-p nsim_fast-num-threads="+nsimjit_thread;
-							}
-							
-						}
-						
-						
-						if(nsimHostlink_Buttonboolean.equalsIgnoreCase("true"))
-						{
-							nsim_cmd += " -on nsim_emt ";
-						}
-						
-						if(nsimtcf_Buttonboolean.equalsIgnoreCase("true"))
-						{
-							nsim_cmd += " -tcf " + nsimtcf;
-						}
-
-						if(nsimprops_Buttonboolean.equalsIgnoreCase("true"))
-						{
-							nsim_cmd += " -propsfile " + nsimProps;
-						}
-						
-						IProcess nsim_proc = DebugPlugin.newProcess(
-								launch,
-								DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
-								NSIM_PROCESS_LABEL);
-						nsim_proc.setAttribute(IProcess.ATTR_CMDLINE, nsim_cmd);
+						start_nsim(configuration, launch);
 					}
 
 				
@@ -580,7 +529,80 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				ASHLING_PROCESS_LABEL);
 		ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
 	}
+	/**
+	 * Start nSIM GDB server.
+	 *
+	 * @throws CoreException
+	 */
+	private void start_nsim(final ILaunchConfiguration configuration, final ILaunch launch)
+		throws CoreException{
+		 String extenal_tools_nsim_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,"");
+	System.setProperty("nSIM", extenal_tools_nsim_path);
+	String nsim_exec = System.getProperty("nSIM");
+	File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
+	String nsimProps = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
+	String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
+	String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
+	String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
+	String nsimJIT_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
+	String nsimHostlink_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
+	String nsimMemoExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
+	String nsimEnableExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
+	String nsiminvalid_Instru_ExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
+	
+	String nsimjit_thread=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
+	final String gdbserver_port = configuration.getAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
+	String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb ";
+	
+	
+	if(nsiminvalid_Instru_ExptButtonboolean.equalsIgnoreCase("false"))
+	{
+		nsim_cmd += "-off invalid_instruction_interrupt ";
+	}
+	
 
+	if(nsimEnableExptButtonboolean.equalsIgnoreCase("false"))
+	{
+		nsim_cmd += " -off enable_exceptions ";
+	}
+	
+	if(nsimMemoExptButtonboolean.equalsIgnoreCase("false"))
+	{
+		nsim_cmd += " -off memory_exception_interrupt ";
+	}
+	
+	if(nsimJIT_Buttonboolean.equalsIgnoreCase("true"))
+	{
+		nsim_cmd += " -on nsim_fast ";
+		if(!nsimjit_thread.equalsIgnoreCase("1"))
+		{
+			nsim_cmd += "-p nsim_fast-num-threads="+nsimjit_thread;
+		}
+		
+	}
+	
+	
+	if(nsimHostlink_Buttonboolean.equalsIgnoreCase("true"))
+	{
+		nsim_cmd += " -on nsim_emt ";
+	}
+	
+	if(nsimtcf_Buttonboolean.equalsIgnoreCase("true"))
+	{
+		nsim_cmd += " -tcf " + nsimtcf;
+	}
+
+	if(nsimprops_Buttonboolean.equalsIgnoreCase("true"))
+	{
+		nsim_cmd += " -propsfile " + nsimProps;
+	}
+	
+	IProcess nsim_proc = DebugPlugin.newProcess(
+			launch,
+			DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
+			NSIM_PROCESS_LABEL);
+	nsim_proc.setAttribute(IProcess.ATTR_CMDLINE, nsim_cmd);
+}
 	/**
 	 * Start OpenOCD executable.
 	 *
@@ -631,15 +653,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			openocd_cfg=openocd_custom_configuration_file;
 		}
 	
-		if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")) {
-			gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
-		}
-
-		else if (ftdi_device.equals("AXS101:AS221 core 2")) {
-			gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
-		} else if (ftdi_device.equals("AXS101:AS221 core 1")) {
-			gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
-		}
 	    
 	    
 		/* "gdb_port" is before -f <script> so script file can override our
