@@ -239,13 +239,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		
 		if(external_tools.indexOf("OpenOCD")>0){
 			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-			if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")) {
+			if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")||ftdi_device.equals("AXS103:HS38 core 0")) {
 				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
 			}
 
-			else if (ftdi_device.equals("AXS101:AS221 core 2")||ftdi_device.equals("AXS103:HS38 core 0")) {
+			else if (ftdi_device.equals("AXS101:AS221 core 2")) {
 				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
-			} else if (ftdi_device.equals("AXS101:AS221 core 1")||ftdi_device.equals("AXS103:HS38 core 1")) {
+			} else if (ftdi_device.equals("AXS101:AS221 core 1")) {
 				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
 			}
 		}
