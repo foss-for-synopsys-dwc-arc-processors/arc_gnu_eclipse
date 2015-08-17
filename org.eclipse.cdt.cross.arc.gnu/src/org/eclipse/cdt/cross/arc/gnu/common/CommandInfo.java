@@ -43,9 +43,8 @@ public class CommandInfo {
     
     private static String normalizeCommand(String cmd) {
         // There may be arguments so only grab up to the whitespace
-        if (cmd.indexOf(' ') > 0) {
+        if (cmd.indexOf(' ') > 0)
             cmd = cmd.substring(0, cmd.indexOf(' '));
-        }
         if (isWindows() && !cmd.toLowerCase().endsWith(".exe"))
             cmd = cmd + ".exe";
         return cmd;
@@ -59,9 +58,8 @@ public class CommandInfo {
         if (path != null) {
             String paths[] = path.split(File.pathSeparator);
             for (String p : paths) {
-                if (new File(p, cmd).isFile()) {
+                if (new File(p, cmd).isFile())
                     return true;
-                }
             }
         }
         
@@ -83,7 +81,7 @@ public class CommandInfo {
      * Determine whether or not we're running on Microsoft Windows.
      * @return true if we're running under Microsoft Windows.
      */
-    public static boolean isWindows(){
+    public static boolean isWindows() {
         return System.getProperty("os.name").indexOf("indow") > 0;
     }
 
