@@ -634,10 +634,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 	       
 
 		if(ftdi_device.equals("EM Starter Kit v1.x")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk_v1.cfg";
 		}
 		else if(ftdi_device.equals("EM Starter Kit v2.x")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_em_sk_v1.cfg";
+			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_em_sk.cfg";
 		}
 		
 		else if(ftdi_device.equals("AXS101:AS221 core 1")||ftdi_device.equals("AXS101:AS221 core 2")||ftdi_device.equals("AXS101:EM")||ftdi_device.equals("AXS101:ARC770D")){
