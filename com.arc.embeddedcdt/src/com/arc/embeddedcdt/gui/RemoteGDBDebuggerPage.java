@@ -85,6 +85,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
 	protected Combo fPrgmArgumentsJTAGFrenCombo;//this variable for select JTAG frequency
 	protected Combo fPrgmArgumentsFTDI_DeviceCombo;//this variable for select FTDI device
+	protected Combo fPrgmArgumentsFTDI_CoreCombo;//this variable for select FTDI core
 	protected Text fPrgmArgumentsTextInit;// this variable for showing  which target is be selected
 	private  String  fPrgmArgumentsComboInittext=null; //this variable is for getting user's input initial command
 	protected Text fGDBServerPortNumberText;
@@ -104,6 +105,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
 	private String jtag_frequency=null;
 	private String ftdi_device=null;
+	private String ftdi_core=null;
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
 	private  String gdb_path=null;
@@ -161,6 +163,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, default_oocd_bin);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "");
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, "");
+		
 
 	}
 	
@@ -237,10 +241,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			openocd_bin_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
 			        default_oocd_bin);
 			String jtagfrequency= configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
+			ftdi_device= configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "");
+			ftdi_core= configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, "");
 			externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 			openocd_cfg_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
 			        default_oocd_cfg);
-			String ftdi_device= configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "");
 		    
 		    String default_ashling_path= isWindowsOS() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
 		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,default_ashling_path);
@@ -281,7 +286,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				}
 				else fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device);
 			  }
-			
+		  if(!fPrgmArgumentsFTDI_CoreCombo.isDisposed()){
+				if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, "").equalsIgnoreCase(""))
+				{
+					fPrgmArgumentsFTDI_CoreCombo.setText(fPrgmArgumentsFTDI_CoreCombo.getItem(0));
+				}
+				else fPrgmArgumentsFTDI_CoreCombo.setText(ftdi_core);
+			  }	
 		 // Set host and IP.
 		 try {
 			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
@@ -340,6 +351,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		
 		if(ftdi_device!=null)
 		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, getAttributeValueFromString(ftdi_device));
+		if(ftdi_core!=null)
+		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, getAttributeValueFromString(ftdi_core));
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
@@ -684,15 +697,18 @@ private void createTabitemCOMAshling(Composite subComp) {
 	       
 	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v1.x");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v2.x");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC770D");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 1");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 2");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS34");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS36");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS36");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 0");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 1");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102");
+	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC770D");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 1");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 2");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS34");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS36");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS36");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 0");
+//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 1");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
 	  
 	    
@@ -714,6 +730,39 @@ private void createTabitemCOMAshling(Composite subComp) {
 							fOpenOCDConfigPath.setEnabled(false, compCOM);		
 					}	
 					else fOpenOCDConfigPath.setEnabled(true, compCOM);
+					 
+					 if(ftdi_device.equalsIgnoreCase("EM Starter Kit v1.x")||ftdi_device.equalsIgnoreCase("EM Starter Kit v2.x")||ftdi_device.equalsIgnoreCase("Custom configuration file")){
+						 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
+					}
+					 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
+				updateLaunchConfigurationDialog();
+
+			
+			}
+			});
+
+		Label label_croe = new Label(compCOM, SWT.LEFT);		
+		label_croe.setText("Target Core");
+		fPrgmArgumentsFTDI_CoreCombo =new Combo(compCOM, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
+
+		gdjtag.widthHint=180;
+		gdjtag.horizontalSpan = 2;
+		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
+	       
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1");
+		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v1.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v2.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+			 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
+		}
+		 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
+
+
+		fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent evt) {
+				Combo combo= (Combo)evt.widget;
+				ftdi_core = combo.getText();	
 				updateLaunchConfigurationDialog();
 
 			

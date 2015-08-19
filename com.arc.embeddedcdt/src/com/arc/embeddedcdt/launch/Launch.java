@@ -234,18 +234,21 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,"");
 		
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
-		String ftdi_device = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
-		
+		String ftdi_device = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
+		String ftdi_core = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,"");
 		if(external_tools.indexOf("OpenOCD")>0){
 			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-			if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")||ftdi_device.equals("AXS103:HS38 core 0")) {
-				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
-			}
+//			if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")) {
+//				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
+//			}
 
-			else if (ftdi_device.equals("AXS101:AS221 core 2")) {
+			if (ftdi_device.equals("AXS103")&&ftdi_core.equals("AXS103_HS38_0")) {
+				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
+			} 
+			else if (ftdi_device.equals("AXS101")&&ftdi_core.equals("AXS101_AS221_2")) {
 				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
-			} else if (ftdi_device.equals("AXS101:AS221 core 1")) {
+			} 
+			else if (ftdi_device.equals("AXS101")&&ftdi_core.equals("AXS101_AS221_1")) {
 				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
 			}
 		}
