@@ -726,6 +726,28 @@ private void createTabitemCOMAshling(Composite subComp) {
 						 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 					}
 					 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
+					 
+					fPrgmArgumentsFTDI_CoreCombo.removeAll();
+					if(ftdi_device.equalsIgnoreCase("AXS101")){
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_ARC770D",0);
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_EM",1);
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1",2);
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2",3);
+						fPrgmArgumentsFTDI_CoreCombo.setText("AXS101_ARC770D");
+						
+					}
+					else if(ftdi_device.equalsIgnoreCase("AXS102")){
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS34",0);
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS36",1);
+						fPrgmArgumentsFTDI_CoreCombo.setText("AXS102_HS34");
+					}
+					else if(ftdi_device.equalsIgnoreCase("AXS103")){
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS36",0);
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0",1);
+						fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1",2);
+						fPrgmArgumentsFTDI_CoreCombo.setText("AXS103_HS36");
+					}
+					else fPrgmArgumentsFTDI_CoreCombo.add("",0);;		 
 				updateLaunchConfigurationDialog();
 
 			
@@ -739,24 +761,33 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.widthHint=180;
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
-	    
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_ARC770D");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_EM");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS34");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS36");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS36");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0");
-		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1");
-
 		
 		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v1.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v2.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
 			 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 		}
 		 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
-
-
+		
+		fPrgmArgumentsFTDI_CoreCombo.removeAll();
+		
+		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS101")){
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_ARC770D",0);
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_EM",1);
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1",2);
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2",3);
+			fPrgmArgumentsFTDI_CoreCombo.setText("AXS101_ARC770D");
+		}
+		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS102")){
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS34",0);
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS36",1);
+			fPrgmArgumentsFTDI_CoreCombo.setText("AXS102_HS34");
+		}
+		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS103")){
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS36",0);
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0",1);
+			fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1",2);
+			fPrgmArgumentsFTDI_CoreCombo.setText("AXS103_HS36");
+		}
+		else fPrgmArgumentsFTDI_CoreCombo.add("",0);;
 		fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
