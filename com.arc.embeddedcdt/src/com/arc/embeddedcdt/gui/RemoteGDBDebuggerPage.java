@@ -700,15 +700,6 @@ private void createTabitemCOMAshling(Composite subComp) {
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:ARC770D");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:EM");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 1");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101:AS221 core 2");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS34");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102:HS36");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS36");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 0");
-//	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103:HS38 core 1");
 	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
 	  
 	    
@@ -748,11 +739,18 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.widthHint=180;
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
-	       
+	    
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_ARC770D");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_EM");
 		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1");
 		fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS34");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS36");
+		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS36");
 		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0");
 		fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1");
+
+		
 		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v1.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v2.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
 			 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 		}

@@ -238,9 +238,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		String ftdi_core = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,"");
 		if(external_tools.indexOf("OpenOCD")>0){
 			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-//			if (ftdi_device.equals("AXS101:EM")|| ftdi_device.equals("AXS102:HS34")) {
-//				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
-//			}
+			
+			if ((ftdi_device.equals("AXS101")&&ftdi_core.equals("EM"))|| (ftdi_device.equals("AXS102")&&ftdi_core.equals("HS34"))) {
+				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
+			}
 
 			if (ftdi_device.equals("AXS103")&&ftdi_core.equals("AXS103_HS38_0")) {
 				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
@@ -625,13 +626,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 		final String openocd_bin = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,"");
-		String ftdi_device = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
+		String ftdi_device = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
+		String ftdi_core = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,"");
 		// ${openocd_bin}/../share/openocd/scripts
 		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
 		final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd" + File.separator + "scripts");
 		final String openocd_tcl = scripts_dir.getAbsolutePath();
-	       
 
 		if(ftdi_device.equals("EM Starter Kit v1.x")){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk_v1.cfg";
@@ -639,17 +639,21 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		else if(ftdi_device.equals("EM Starter Kit v2.x")){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_em_sk.cfg";
 		}
-		
-		else if(ftdi_device.equals("AXS101:AS221 core 1")||ftdi_device.equals("AXS101:AS221 core 2")||ftdi_device.equals("AXS101:EM")||ftdi_device.equals("AXS101:ARC770D")){
+
+		else if(ftdi_device.equals("AXS101")
+				&&(ftdi_core.equals("AXS101_AS221_1")||ftdi_core.equals("AXS101_AS221_2")||ftdi_core.equals("AXS101_EM")||ftdi_core.equals("AXS101_ARC770D"))){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs101.cfg";
 		}		
-		else if(ftdi_device.equals("AXS102:HS34")||ftdi_device.equals("AXS102:HS36")){
+		else if(ftdi_device.equals("AXS102")
+				&&(ftdi_core.equals("AXS102_HS34")||ftdi_core.equals("AXS102_HS36"))){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs102.cfg";
 		}
-		else if(ftdi_device.equals("AXS103:HS36")){
+		else if(ftdi_device.equals("AXS103")
+				&&ftdi_core.equals("HS36")){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs36.cfg";
 		}
-		else if(ftdi_device.equals("AXS103:HS38 core 0")||ftdi_device.equals("AXS103:HS38 core 1")){
+		else if(ftdi_device.equals("AXS103")
+				&&(ftdi_device.equals("AXS103_HS38_0")||ftdi_device.equals("AXS103_HS38_1"))){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs38.cfg";
 		}
 		else if(ftdi_device.equals("Custom configuration file")){
