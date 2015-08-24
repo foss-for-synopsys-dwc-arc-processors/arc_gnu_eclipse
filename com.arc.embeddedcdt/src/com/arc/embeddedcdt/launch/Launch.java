@@ -641,11 +641,11 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		}
 
 		else if(ftdi_device.equals("AXS101")
-				&&(ftdi_core.equals("AXS101_AS221_1")||ftdi_core.equals("AXS101_AS221_2")||ftdi_core.equals("AXS101_EM")||ftdi_core.equals("AXS101_ARC770D"))){
+				&&(ftdi_core.equals("AS221_1")||ftdi_core.equals("AS221_2")||ftdi_core.equals("EM")||ftdi_core.equals("ARC770D"))){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs101.cfg";
 		}		
 		else if(ftdi_device.equals("AXS102")
-				&&(ftdi_core.equals("AXS102_HS34")||ftdi_core.equals("AXS102_HS36"))){
+				&&(ftdi_core.equals("HS34")||ftdi_core.equals("HS36"))){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs102.cfg";
 		}
 		else if(ftdi_device.equals("AXS103")
@@ -653,7 +653,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs36.cfg";
 		}
 		else if(ftdi_device.equals("AXS103")
-				&&(ftdi_device.equals("AXS103_HS38_0")||ftdi_device.equals("AXS103_HS38_1"))){
+				&&(ftdi_core.equals("HS38_0")||ftdi_core.equals("HS38_1"))){
 			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs38.cfg";
 		}
 		else if(ftdi_device.equals("Custom configuration file")){

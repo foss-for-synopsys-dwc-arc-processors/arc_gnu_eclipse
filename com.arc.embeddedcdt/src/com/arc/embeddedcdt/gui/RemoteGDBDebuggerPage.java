@@ -729,23 +729,23 @@ private void createTabitemCOMAshling(Composite subComp) {
 					 
 					fPrgmArgumentsFTDI_CoreCombo.removeAll();
 					if(ftdi_device.equalsIgnoreCase("AXS101")){
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_ARC770D",0);
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_EM",1);
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1",2);
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2",3);
-						fPrgmArgumentsFTDI_CoreCombo.setText("AXS101_ARC770D");
+						fPrgmArgumentsFTDI_CoreCombo.add("ARC770D",0);
+						fPrgmArgumentsFTDI_CoreCombo.add("EM",1);
+						fPrgmArgumentsFTDI_CoreCombo.add("AS221_1",2);
+						fPrgmArgumentsFTDI_CoreCombo.add("AS221_2",3);
+						fPrgmArgumentsFTDI_CoreCombo.setText("ARC770D");
 						
 					}
 					else if(ftdi_device.equalsIgnoreCase("AXS102")){
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS34",0);
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS36",1);
-						fPrgmArgumentsFTDI_CoreCombo.setText("AXS102_HS34");
+						fPrgmArgumentsFTDI_CoreCombo.add("HS34",0);
+						fPrgmArgumentsFTDI_CoreCombo.add("HS36",1);
+						fPrgmArgumentsFTDI_CoreCombo.setText("HS34");
 					}
 					else if(ftdi_device.equalsIgnoreCase("AXS103")){
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS36",0);
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0",1);
-						fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1",2);
-						fPrgmArgumentsFTDI_CoreCombo.setText("AXS103_HS36");
+						fPrgmArgumentsFTDI_CoreCombo.add("HS36",0);
+						fPrgmArgumentsFTDI_CoreCombo.add("HS38_0",1);
+						fPrgmArgumentsFTDI_CoreCombo.add("HS38_1",2);
+						fPrgmArgumentsFTDI_CoreCombo.setText("HS36");
 					}
 					else fPrgmArgumentsFTDI_CoreCombo.add("",0);;		 
 				updateLaunchConfigurationDialog();
@@ -770,22 +770,22 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsFTDI_CoreCombo.removeAll();
 		
 		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS101")){
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_ARC770D",0);
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_EM",1);
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_1",2);
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS101_AS221_2",3);
-			fPrgmArgumentsFTDI_CoreCombo.setText("AXS101_ARC770D");
+			fPrgmArgumentsFTDI_CoreCombo.add("ARC770D",0);
+			fPrgmArgumentsFTDI_CoreCombo.add("EM",1);
+			fPrgmArgumentsFTDI_CoreCombo.add("AS221_1",2);
+			fPrgmArgumentsFTDI_CoreCombo.add("AS221_2",3);
+			fPrgmArgumentsFTDI_CoreCombo.setText("ARC770D");
 		}
 		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS102")){
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS34",0);
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS102_HS36",1);
-			fPrgmArgumentsFTDI_CoreCombo.setText("AXS102_HS34");
+			fPrgmArgumentsFTDI_CoreCombo.add("HS34",0);
+			fPrgmArgumentsFTDI_CoreCombo.add("HS36",1);
+			fPrgmArgumentsFTDI_CoreCombo.setText("HS34");
 		}
 		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS103")){
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS36",0);
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_0",1);
-			fPrgmArgumentsFTDI_CoreCombo.add("AXS103_HS38_1",2);
-			fPrgmArgumentsFTDI_CoreCombo.setText("AXS103_HS36");
+			fPrgmArgumentsFTDI_CoreCombo.add("HS36",0);
+			fPrgmArgumentsFTDI_CoreCombo.add("HS38_0",1);
+			fPrgmArgumentsFTDI_CoreCombo.add("HS38_1",2);
+			fPrgmArgumentsFTDI_CoreCombo.setText("HS36");
 		}
 		else fPrgmArgumentsFTDI_CoreCombo.add("",0);;
 		fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
