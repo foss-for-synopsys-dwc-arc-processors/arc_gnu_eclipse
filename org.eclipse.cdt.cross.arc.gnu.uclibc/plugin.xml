@@ -2440,9 +2440,8 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.toolchain.debug"
                   isAbstract="false"
-				  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.toolchain.base"
-				  targetTool="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.cpp.linker.debug">
+				  targetTool="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.cpp.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.platform.debug"
                      isAbstract="false"
@@ -2479,21 +2478,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.cpp.linker.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.createflash.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.createlisting.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.printsize.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -2503,9 +2487,8 @@
                name="Release"
                parent="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.configuration.base">
             <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.elf.toolchain.release"
+                  id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.toolchain.release"
                   isAbstract="false"
-				  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.toolchain.base"
 				  targetTool="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.cpp.linker.release">
                <targetPlatform
@@ -2543,21 +2526,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.cpp.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.createflash.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.createlisting.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.createlisting.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.elf.printsize.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
                </tool>
             </toolChain>
          </configuration>
@@ -2940,7 +2908,6 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.toolchain.debug"
                   isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.cpp.linker.debug">
                <targetPlatform
@@ -2954,11 +2921,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.assembler.base">
-               </tool>
                <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.c.compiler.debug"
                      isAbstract="false"
@@ -2979,16 +2941,6 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.cpp.linker.base">
                </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.createflash.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.createlisting.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.createlisting.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -3000,7 +2952,6 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.toolchain.release"
                   isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.cpp.linker.release">
                <targetPlatform
@@ -3015,11 +2966,6 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.assembler.base">
-               </tool>
-               <tool
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.c.compiler.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.c.compiler.base">
@@ -3033,21 +2979,6 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.cpp.linker.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.createflash.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.createlisting.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.createlisting.base">
                </tool>
             </toolChain>
          </configuration>
@@ -3159,7 +3090,7 @@
          </optionCategory>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.eb.linux.option.addtools.printsize.hs"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.option.addtools.printsize.hs"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
          </option>
@@ -3393,7 +3324,6 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.toolchain.release"
                   isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.cpp.linker.release;org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.c.linker.release">
                <targetPlatform
@@ -3408,7 +3338,7 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.builder.base">
                </builder>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.elf.printsize.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.printsize.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.printsize.base">
                </tool>
@@ -4949,7 +4879,6 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.elf.toolchain.debug"
                   isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.elf.c.linker.debug">
                <targetPlatform
@@ -4994,7 +4923,6 @@
             <toolChain
                   id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.elf.toolchain.release"
                   isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.uclibc.createflash.output;org.eclipse.cdt.cross.arc.gnu.uclibc.createlisting.output;org.eclipse.cdt.cross.arc.gnu.uclibc.printsize.output"
                   superClass="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.toolchain.base"
                   targetTool="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.elf.c.linker.release;org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.elf.cpp.linker.release">
                <targetPlatform
@@ -5130,7 +5058,7 @@
          </optionCategory>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.eb.linux.option.addtools.printsize"
+               id="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.option.addtools.printsize"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.addtools.printsize">
          </option>
@@ -5233,7 +5161,7 @@
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.toolchain.base"
+                     holderId="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.toolchain.base"
                      optionId="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.option.addtools.printsize"
                      value="true">
                </checkOption>
