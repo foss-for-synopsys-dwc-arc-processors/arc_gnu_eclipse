@@ -143,6 +143,21 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	
 	protected Spinner JIT_threadspinner;
 	private String JITthread="1";
+	
+	public final static String AXS101 = "AXS101";
+	public final static String AXS102 = "AXS102";
+	public final static String AXS103 = "AXS103";
+	public final static String EM_SK_1 = "EM Starter Kit v1.x";
+	public final static String EM_SK_2 = "EM_SK_2";
+	public final static String CUSTOM_CONFIGURATION_FILE="Custom configuration file";
+	public final static String JTAG_OPENOCD = "JTAG via OpenOCD";
+	public final static String JTAG_ASHlING = "JTAG via Ashling";
+	public final static String NSIM = "nSIM";
+	public final static String GENERIC_GDBSERVER = "Generic gdbserver";
+	
+	
+	
+	
 	@Override
 	public String getName() {
 		return Messages.Remote_GDB_Debugger_Options;
@@ -307,7 +322,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 catch( CoreException e ) {
 		 }
 		
-		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD");
+		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, JTAG_OPENOCD);
 		 if(!gdbserver.isEmpty())
 		 {
 			 int privious=fPrgmArgumentsComboInit.indexOf(gdbserver);
@@ -438,10 +453,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		server_type_combo_gd.minimumWidth = min_text_width;
 		fPrgmArgumentsComboInit =new Combo(subComp, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
 		fPrgmArgumentsComboInit.setLayoutData(server_type_combo_gd);
-		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
-		fPrgmArgumentsComboInit.add("JTAG via Ashling");
-		fPrgmArgumentsComboInit.add("nSIM");
-		fPrgmArgumentsComboInit.add("Generic gdbserver");
+		fPrgmArgumentsComboInit.add(JTAG_OPENOCD);
+		fPrgmArgumentsComboInit.add(JTAG_ASHlING);
+		fPrgmArgumentsComboInit.add(NSIM);
+		fPrgmArgumentsComboInit.add(GENERIC_GDBSERVER);
 		
 		fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
@@ -449,7 +464,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				fGDBServerPortNumberText.getText();
 				fPrgmArgumentsComboInittext = combo.getText();
 						  
-				if (fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")) {
+				if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_OPENOCD)) {
 					if(!portnumber.isEmpty())
 						fGDBServerPortNumberText.setText(portnumber);
 					else
@@ -466,7 +481,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
 						createTabitemCOM(subComp);
 					}
-					groupcom.setText("JTAG via OpenOCD");
+					groupcom.setText(JTAG_OPENOCD);
 					createTabitemnSIMBool=false;
 					createTabitemCOMAshlingBool=false;
 					
@@ -476,7 +491,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					
 					
 				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_ASHlING))
 				{
 					if(!portnumber.isEmpty())
 						fGDBServerPortNumberText.setText(portnumber);
@@ -496,11 +511,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 						createTabitemCOMAshling(subComp);
 					}
 						 
-					groupcomashling.setText("JTAG via Ashling");
+					groupcomashling.setText(JTAG_ASHlING);
     				if(!groupcomashling.isVisible())
 						groupcomashling.setVisible(true);
 				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase(NSIM))
 				{
 					
 					if(!portnumber.isEmpty())
@@ -541,7 +556,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    
 					    fLaunchInvalid_Instru_ExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
 					}
-					groupnsim.setText("nSIM");
+					groupnsim.setText(NSIM);
 					createTabitemCOMBool=false;
 					createTabitemCOMAshlingBool=false;
 					if(!groupnsim.isVisible())
@@ -549,7 +564,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					
 					
 				}
-				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("Generic gdbserver"))
+				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase(GENERIC_GDBSERVER))
 				{
 
 					IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage();
@@ -695,34 +710,34 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
 	       
-	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v1.x");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("EM Starter Kit v2.x");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS101");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS102");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("AXS103");
-	    fPrgmArgumentsFTDI_DeviceCombo.add("Custom configuration file");
+	    fPrgmArgumentsFTDI_DeviceCombo.add(EM_SK_1);
+	    fPrgmArgumentsFTDI_DeviceCombo.add(EM_SK_2);
+	    fPrgmArgumentsFTDI_DeviceCombo.add(AXS101);
+	    fPrgmArgumentsFTDI_DeviceCombo.add(AXS102);
+	    fPrgmArgumentsFTDI_DeviceCombo.add(AXS103);
+	    fPrgmArgumentsFTDI_DeviceCombo.add(CUSTOM_CONFIGURATION_FILE);
 	  
 	    
 		
 		if(ftdi_device!=null){
 			if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&ftdi_device.equalsIgnoreCase(""))
-				fPrgmArgumentsFTDI_DeviceCombo.setText("EM Starter Kit v1.x");
+				fPrgmArgumentsFTDI_DeviceCombo.setText(EM_SK_1);
 			else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&!ftdi_device.equalsIgnoreCase(""))
 				fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device);	
 		}
-		else fPrgmArgumentsFTDI_DeviceCombo.setText("EM Starter Kit v1.x");
+		else fPrgmArgumentsFTDI_DeviceCombo.setText(EM_SK_1);
 
 
 		fPrgmArgumentsFTDI_DeviceCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				ftdi_device = combo.getText();	
-					 if(!ftdi_device.equalsIgnoreCase("Custom configuration file")){
+					 if(!ftdi_device.equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
 							fOpenOCDConfigPath.setEnabled(false, compCOM);		
 					}	
 					else fOpenOCDConfigPath.setEnabled(true, compCOM);
 					 
-					 if(ftdi_device.equalsIgnoreCase("EM Starter Kit v1.x")||ftdi_device.equalsIgnoreCase("EM Starter Kit v2.x")||ftdi_device.equalsIgnoreCase("Custom configuration file")){
+					 if(ftdi_device.equalsIgnoreCase(EM_SK_1)||ftdi_device.equalsIgnoreCase(EM_SK_2)||ftdi_device.equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
 						 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 					}
 					 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
@@ -741,7 +756,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
 		
-		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v1.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("EM Starter Kit v2.x")||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(EM_SK_1)||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(EM_SK_2)||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
 			 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 		}
 		 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
@@ -772,7 +787,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});	
 		if(fOpenOCDConfigPath!=null){
-	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("Custom configuration file")){
+	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
 				fOpenOCDConfigPath.setEnabled(false, compCOM);
 			
 		}	
@@ -781,19 +796,19 @@ private void createTabitemCOMAshling(Composite subComp) {
 	}
 	private void Device_core_name(){
 		fPrgmArgumentsFTDI_CoreCombo.removeAll();
-		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS101")){
+		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(AXS101)){
 			fPrgmArgumentsFTDI_CoreCombo.add("ARC770D",0);
 			fPrgmArgumentsFTDI_CoreCombo.add("EM",1);
 			fPrgmArgumentsFTDI_CoreCombo.add("AS221_1",2);
 			fPrgmArgumentsFTDI_CoreCombo.add("AS221_2",3);
 			fPrgmArgumentsFTDI_CoreCombo.setText("ARC770D");
 		}
-		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS102")){
+		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(AXS102)){
 			fPrgmArgumentsFTDI_CoreCombo.add("HS34",0);
 			fPrgmArgumentsFTDI_CoreCombo.add("HS36",1);
 			fPrgmArgumentsFTDI_CoreCombo.setText("HS34");
 		}
-		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("AXS103")){
+		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(AXS103)){
 			fPrgmArgumentsFTDI_CoreCombo.add("HS36",0);
 			fPrgmArgumentsFTDI_CoreCombo.add("HS38_0",1);
 			fPrgmArgumentsFTDI_CoreCombo.add("HS38_1",2);

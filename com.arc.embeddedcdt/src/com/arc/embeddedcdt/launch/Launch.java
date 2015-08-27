@@ -153,18 +153,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
       return new String[0];
 	}
 
-//	private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
-//		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-//		return external_tools.equalsIgnoreCase("JTAG via OpenOCD");
-//		//return external_tools_firstlaunch.equalsIgnoreCase("JTAG via OpenOCD");
-//	}
-//	
-//	private boolean isnSIM(ILaunchConfiguration configuration) throws CoreException {
-//		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-//		return external_tools.equalsIgnoreCase("nSIM");
-//		//return external_tools_firstlaunch.equalsIgnoreCase("nSIM");
-//	}
-	
 	private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
 		//return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
 		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
