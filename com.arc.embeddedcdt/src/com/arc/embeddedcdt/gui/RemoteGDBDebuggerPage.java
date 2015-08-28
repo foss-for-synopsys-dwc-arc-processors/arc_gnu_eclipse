@@ -144,18 +144,57 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Spinner JIT_threadspinner;
 	private String JITthread="1";
 	
-	public final static String AXS101 = "AXS101";
-	public final static String AXS102 = "AXS102";
-	public final static String AXS103 = "AXS103";
-	public final static String EM_SK_1 = "EM Starter Kit v1.x";
-	public final static String EM_SK_2 = "EM_SK_2";
-	public final static String CUSTOM_CONFIGURATION_FILE="Custom configuration file";
+
 	public final static String JTAG_OPENOCD = "JTAG via OpenOCD";
 	public final static String JTAG_ASHlING = "JTAG via Ashling";
 	public final static String NSIM = "nSIM";
 	public final static String GENERIC_GDBSERVER = "Generic gdbserver";
 	
-	
+	public  enum ftdi_device_enum{
+		   AXS101,
+	       AXS102,
+		   AXS103,
+		   EM_SK_v1x,
+		   EM_SK_v2x,	
+		   CUSTOM_CONFIGURATION_FILE;
+		   @Override
+		   public String toString() {
+		     switch(this) {
+		       case AXS101: return "AXS101";
+		       case AXS102: return "AXS102";
+		       case AXS103: return "AXS103";
+		       case EM_SK_v1x: return "EM Starter Kit v1.x";
+		       case EM_SK_v2x: return "EM Starter Kit v2.x";
+		       case CUSTOM_CONFIGURATION_FILE: return "Custom configuration file";
+		       default: throw new IllegalArgumentException();
+		     }
+		   }
+     };
+ 	public  enum ftdi_core_enum{
+ 		ARC770D,
+ 		EM,
+ 		AS221_1,
+ 		AS221_2,
+ 		HS34,
+ 		HS36,
+ 		HS38_0,
+ 		HS38_1;
+ 		@Override
+		   public String toString() {
+		     switch(this) {
+		       case ARC770D: return "ARC770D";
+		       case EM: return "EM";
+		       case AS221_1: return "AS221_1";
+		       case AS221_2: return "AS221_2";
+		       case HS34: return "HS34";    
+		       case HS36: return "HS36";
+		       case HS38_0: return "HS38_0";
+		       case HS38_1: return "HS38_1";
+
+		       default: throw new IllegalArgumentException();
+		     }
+		   }
+    };
 	
 	
 	@Override
@@ -710,34 +749,36 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
 	       
-	    fPrgmArgumentsFTDI_DeviceCombo.add(EM_SK_1);
-	    fPrgmArgumentsFTDI_DeviceCombo.add(EM_SK_2);
-	    fPrgmArgumentsFTDI_DeviceCombo.add(AXS101);
-	    fPrgmArgumentsFTDI_DeviceCombo.add(AXS102);
-	    fPrgmArgumentsFTDI_DeviceCombo.add(AXS103);
-	    fPrgmArgumentsFTDI_DeviceCombo.add(CUSTOM_CONFIGURATION_FILE);
+	    fPrgmArgumentsFTDI_DeviceCombo.add(ftdi_device_enum.EM_SK_v1x.toString());
+	    fPrgmArgumentsFTDI_DeviceCombo.add(ftdi_device_enum.EM_SK_v2x.toString());
+	    fPrgmArgumentsFTDI_DeviceCombo.add(ftdi_device_enum.AXS101.toString());
+	    fPrgmArgumentsFTDI_DeviceCombo.add(ftdi_device_enum.AXS102.toString());
+	    fPrgmArgumentsFTDI_DeviceCombo.add(ftdi_device_enum.AXS103.toString());
+	    fPrgmArgumentsFTDI_DeviceCombo.add(ftdi_device_enum.CUSTOM_CONFIGURATION_FILE.toString());
 	  
 	    
 		
 		if(ftdi_device!=null){
 			if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&ftdi_device.equalsIgnoreCase(""))
-				fPrgmArgumentsFTDI_DeviceCombo.setText(EM_SK_1);
+				fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device_enum.EM_SK_v1x.toString());
 			else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase("")&&!ftdi_device.equalsIgnoreCase(""))
 				fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device);	
 		}
-		else fPrgmArgumentsFTDI_DeviceCombo.setText(EM_SK_1);
+		else fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device_enum.EM_SK_v1x.toString());
 
 
 		fPrgmArgumentsFTDI_DeviceCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo= (Combo)evt.widget;
 				ftdi_device = combo.getText();	
-					 if(!ftdi_device.equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
+					 if(!ftdi_device.equalsIgnoreCase(ftdi_device_enum.CUSTOM_CONFIGURATION_FILE.toString())){
 							fOpenOCDConfigPath.setEnabled(false, compCOM);		
 					}	
 					else fOpenOCDConfigPath.setEnabled(true, compCOM);
 					 
-					 if(ftdi_device.equalsIgnoreCase(EM_SK_1)||ftdi_device.equalsIgnoreCase(EM_SK_2)||ftdi_device.equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
+					 if(ftdi_device.equalsIgnoreCase(ftdi_device_enum.EM_SK_v1x.toString())
+							 ||ftdi_device.equalsIgnoreCase(ftdi_device_enum.EM_SK_v2x.toString())
+							 ||ftdi_device.equalsIgnoreCase(ftdi_device_enum.CUSTOM_CONFIGURATION_FILE.toString())){
 						 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 					}
 					 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
@@ -756,12 +797,13 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
 		
-		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(EM_SK_1)||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(EM_SK_2)||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
+		
+		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.EM_SK_v1x.toString())
+				||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.EM_SK_v2x.toString())
+				||fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.CUSTOM_CONFIGURATION_FILE.toString())){
 			 fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);		
 		}
 		 else fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
-		
-		fPrgmArgumentsFTDI_CoreCombo.removeAll();
 		
 		Device_core_name();
 		fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
@@ -787,7 +829,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});	
 		if(fOpenOCDConfigPath!=null){
-	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(CUSTOM_CONFIGURATION_FILE)){
+	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.CUSTOM_CONFIGURATION_FILE.toString())){
 				fOpenOCDConfigPath.setEnabled(false, compCOM);
 			
 		}	
@@ -796,23 +838,23 @@ private void createTabitemCOMAshling(Composite subComp) {
 	}
 	private void Device_core_name(){
 		fPrgmArgumentsFTDI_CoreCombo.removeAll();
-		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(AXS101)){
-			fPrgmArgumentsFTDI_CoreCombo.add("ARC770D",0);
-			fPrgmArgumentsFTDI_CoreCombo.add("EM",1);
-			fPrgmArgumentsFTDI_CoreCombo.add("AS221_1",2);
-			fPrgmArgumentsFTDI_CoreCombo.add("AS221_2",3);
-			fPrgmArgumentsFTDI_CoreCombo.setText("ARC770D");
+		if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.AXS101.toString())){
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.ARC770D.toString(),0);
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.EM.toString(),1);
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.AS221_1.toString(),2);
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.AS221_2.toString(),3);
+			fPrgmArgumentsFTDI_CoreCombo.setText(ftdi_core_enum.ARC770D.toString());
 		}
-		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(AXS102)){
-			fPrgmArgumentsFTDI_CoreCombo.add("HS34",0);
-			fPrgmArgumentsFTDI_CoreCombo.add("HS36",1);
-			fPrgmArgumentsFTDI_CoreCombo.setText("HS34");
+		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.AXS102.toString())){
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.HS34.toString(),0);
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.HS36.toString(),1);
+			fPrgmArgumentsFTDI_CoreCombo.setText(ftdi_core_enum.HS34.toString());
 		}
-		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(AXS103)){
-			fPrgmArgumentsFTDI_CoreCombo.add("HS36",0);
-			fPrgmArgumentsFTDI_CoreCombo.add("HS38_0",1);
-			fPrgmArgumentsFTDI_CoreCombo.add("HS38_1",2);
-			fPrgmArgumentsFTDI_CoreCombo.setText("HS36");
+		else if(fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.AXS103.toString())){
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.HS36.toString(),0);
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.HS38_0.toString(),1);
+			fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.HS38_1.toString(),2);
+			fPrgmArgumentsFTDI_CoreCombo.setText(ftdi_core_enum.HS36.toString());
 		}
 		else fPrgmArgumentsFTDI_CoreCombo.add("",0);;
 	}
