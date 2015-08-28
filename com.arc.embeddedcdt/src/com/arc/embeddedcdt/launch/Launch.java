@@ -89,6 +89,9 @@ import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage.ftdi_core_enum;
+import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage.ftdi_device_enum;
+import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 @SuppressWarnings("restriction")
@@ -222,26 +225,39 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,"");
 		
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
-		String ftdi_device = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
-		String ftdi_core = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,"");
-		if(external_tools.indexOf("OpenOCD")>0){
-			serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-			
-			if ((ftdi_device.equals("AXS101")&&ftdi_core.equals("EM"))
-					|| (ftdi_device.equals("AXS102")&&ftdi_core.equals("HS34"))
-					||ftdi_device.equals("AXS103")&&ftdi_core.equals("HS38_0")) {
-				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
-			}
-			else if (ftdi_device.equals("AXS101")&&ftdi_core.equals("AS221_2")) {
-				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
-			} 
-			else if (ftdi_device.equals("AXS101")&&ftdi_core.equals("AS221_1")) {
-				gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
-			}
-		}
-		else if(external_tools.indexOf("Ashling")>0)
-			 serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
-			
+		
+        
+        ftdi_device_enum ftdi_device;
+        try {
+            ftdi_device = ftdi_device_enum.valueOf(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE, RemoteGDBDebuggerPage.getDefaultFtdiDevice().name()));
+        } catch (IllegalArgumentException e) {
+            ftdi_device = RemoteGDBDebuggerPage.getDefaultFtdiDevice();
+        }
+
+        ftdi_core_enum ftdi_core;
+        try {
+            ftdi_core = ftdi_core_enum.valueOf(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_FTDI_CORE, RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device).name()));
+        } catch (IllegalArgumentException e) {
+            ftdi_core = RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device);
+        }
+
+        if (external_tools.indexOf("OpenOCD") > 0) {
+            serialport = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+            if ((ftdi_device == ftdi_device_enum.AXS101 && ftdi_core == ftdi_core_enum.EM)
+                    || (ftdi_device == ftdi_device_enum.AXS102 && ftdi_core == ftdi_core_enum.HS34)
+                    || (ftdi_device == ftdi_device_enum.AXS103 && ftdi_core == ftdi_core_enum.HS38_0)) {
+                gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
+            } else if (ftdi_device == ftdi_device_enum.AXS101 && ftdi_core == ftdi_core_enum.AS221_2) {
+                gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
+            } else if (ftdi_device == ftdi_device_enum.AXS101 && ftdi_core == ftdi_core_enum.AS221_1) {
+                gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
+            }
+        } else if (external_tools.indexOf("Ashling") > 0) {
+            serialport = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+        }
+
 		if(external_tools.isEmpty()||gdbserver_port.isEmpty())
 			return;
 		
@@ -612,42 +628,44 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 		final String openocd_bin = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,"");
-		String ftdi_device = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,"");
-		String ftdi_core = configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,"");
+
+	        ftdi_device_enum ftdi_device;
+	        try {
+	            ftdi_device = ftdi_device_enum.valueOf(configuration.getAttribute(
+	                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE, RemoteGDBDebuggerPage.getDefaultFtdiDevice().name()));
+	        } catch (IllegalArgumentException e) {
+	            ftdi_device = RemoteGDBDebuggerPage.getDefaultFtdiDevice();
+	        }
+
+	        ftdi_core_enum ftdi_core;
+	        try {
+	            ftdi_core = ftdi_core_enum.valueOf(configuration.getAttribute(
+	                    LaunchConfigurationConstants.ATTR_FTDI_CORE, RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device).name()));
+	        } catch (IllegalArgumentException e) {
+	            ftdi_core = RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device);
+	        }
+
 		// ${openocd_bin}/../share/openocd/scripts
 		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
 		final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd" + File.separator + "scripts");
 		final String openocd_tcl = scripts_dir.getAbsolutePath();
 
-		if(ftdi_device.equals("EM Starter Kit v1.x")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+ "snps_em_sk_v1.cfg";
-		}
-		else if(ftdi_device.equals("EM Starter Kit v2.x")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_em_sk.cfg";
-		}
+        if (ftdi_device == ftdi_device_enum.EM_SK_v1x) {
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_em_sk_v1.cfg";
+        } else if (ftdi_device == ftdi_device_enum.EM_SK_v2x) {
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_em_sk.cfg";
+        } else if (ftdi_device == ftdi_device_enum.AXS101) {
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs101.cfg";
+        } else if (ftdi_device == ftdi_device_enum.AXS102) {
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs102.cfg";
+        } else if ((ftdi_device == ftdi_device_enum.AXS103) && (ftdi_core == ftdi_core_enum.HS36)) {
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs103_hs36.cfg";
+        } else if (ftdi_device == ftdi_device_enum.AXS103) {
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs103_hs38.cfg";
+        } else if (ftdi_device == ftdi_device_enum.CUSTOM_CONFIGURATION_FILE) {
+            openocd_cfg = openocd_custom_configuration_file;
+        }
 
-		else if(ftdi_device.equals("AXS101")
-				&&(ftdi_core.equals("AS221_1")||ftdi_core.equals("AS221_2")||ftdi_core.equals("EM")||ftdi_core.equals("ARC770D"))){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs101.cfg";
-		}		
-		else if(ftdi_device.equals("AXS102")
-				&&(ftdi_core.equals("HS34")||ftdi_core.equals("HS36"))){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs102.cfg";
-		}
-		else if(ftdi_device.equals("AXS103")
-				&&ftdi_core.equals("HS36")){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs36.cfg";
-		}
-		else if(ftdi_device.equals("AXS103")
-				&&(ftdi_core.equals("HS38_0")||ftdi_core.equals("HS38_1"))){
-			openocd_cfg=scripts_dir+ File.separator + "board"+ File.separator+"snps_axs103_hs38.cfg";
-		}
-		else if(ftdi_device.equals("Custom configuration file")){
-			openocd_cfg=openocd_custom_configuration_file;
-		}
-	
-	    
-	    
 		/* "gdb_port" is before -f <script> so script file can override our
 		 * settings. Also in case of configuration scripts supplied by
 		 * Synopsys we cannot set gdb_port after -f option - our scripts do
