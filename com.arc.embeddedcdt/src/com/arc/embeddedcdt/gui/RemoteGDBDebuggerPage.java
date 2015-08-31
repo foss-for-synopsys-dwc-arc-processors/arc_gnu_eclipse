@@ -104,8 +104,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
 	private String jtag_frequency=null;
-	private ftdi_device_enum ftdi_device = getDefaultFtdiDevice();
-	private ftdi_core_enum ftdi_core = getDefaultFtdiDeviceCore(ftdi_device);
+	private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
+	private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
 	private  String gdb_path=null;
@@ -150,99 +150,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	public final static String NSIM = "nSIM";
 	public final static String GENERIC_GDBSERVER = "Generic gdbserver";
 
-    public enum ftdi_device_enum {
-        AXS101("AXS101"),
-        AXS102("AXS102"),
-        AXS103("AXS103"),
-        EM_SK_v1x("EM Starter Kit v1.x"),
-        EM_SK_v2x("EM Starter Kit v2.x"),
-        CUSTOM_CONFIGURATION_FILE("Custom configuration file");
-
-        private final String text;
-
-        private ftdi_device_enum(final String text) {
-            this.text = text;
-        }
-
-        @Override
-        public String toString() {
-            return text;
-        }
-
-        public static ftdi_device_enum fromString(final String string) {
-            for (ftdi_device_enum device : ftdi_device_enum.values()) {
-                if (device.toString().equals(string))
-                    return device;
-            }
-            throw new IllegalArgumentException("String does not correspond to any FTDI device.");
-        }
-    };
-
-    public enum ftdi_core_enum {
-        ARC770D("ARC770D"),
-        EM("EM"),
-        AS221_1("AS221_1"),
-        AS221_2("AS221_2"),
-        HS34("HS34"),
-        HS36("HS36"),
-        HS38_0("HS38_0"),
-        HS38_1("HS38_1"),
-        EMPTY_CORE("");
-
-        private final String text;
-
-        private ftdi_core_enum(final String text) {
-            this.text = text;
-        }
-
-        @Override
-        public String toString() {
-            return text;
-        }
-
-        public static ftdi_core_enum fromString(final String string) {
-            for (ftdi_core_enum core : ftdi_core_enum.values()) {
-                if (core.toString().equals(string))
-                    return core;
-            }
-            throw new IllegalArgumentException("String does not correspond to any FTDI device core.");
-        }
-    };
-
-    public static java.util.List<ftdi_core_enum> getFtdiDeviceCores(ftdi_device_enum device) {
-        java.util.List<ftdi_core_enum> cores = new java.util.LinkedList<ftdi_core_enum>();
-        switch (device) {
-        case AXS101:
-            cores.add(ftdi_core_enum.ARC770D);
-            cores.add(ftdi_core_enum.EM);
-            cores.add(ftdi_core_enum.AS221_2);
-            cores.add(ftdi_core_enum.AS221_1);
-            break;
-        case AXS102:
-            cores.add(ftdi_core_enum.HS36);
-            cores.add(ftdi_core_enum.HS34);
-            break;
-        case AXS103:
-            cores.add(ftdi_core_enum.HS38_1);
-            cores.add(ftdi_core_enum.HS38_0);
-            cores.add(ftdi_core_enum.HS36);
-            break;
-        }
-        return cores;
-    }
-
-    public static ftdi_device_enum getDefaultFtdiDevice() {
-        return ftdi_device_enum.values()[0];
-    }
-
-    public static ftdi_core_enum getDefaultFtdiDeviceCore(ftdi_device_enum device) {
-        java.util.List<ftdi_core_enum> cores = getFtdiDeviceCores(device);
-        if (cores.isEmpty())
-            return ftdi_core_enum.EMPTY_CORE;
-        else
-            return cores.get(0);
-    }
-
     @Override
     public String getName() {
         return Messages.Remote_GDB_Debugger_Options;
@@ -261,9 +168,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, getNsimdrvDefaultPath());
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, default_oocd_bin);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
-        ftdi_device_enum defaultFtdiDevice = getDefaultFtdiDevice();
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, defaultFtdiDevice.name());
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, getDefaultFtdiDeviceCore(defaultFtdiDevice).name());
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME);
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME);
     }
 	
 	/**
@@ -340,15 +246,19 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			        default_oocd_bin);
 			String jtagfrequency= configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
             try {
-                ftdi_device = ftdi_device_enum.valueOf(configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, getDefaultFtdiDevice().name()));
+                ftdiDevice = FtdiDevice.valueOf(configuration.getAttribute(
+                        LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
+                        LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
             } catch (IllegalArgumentException e) {
-                ftdi_device = getDefaultFtdiDevice();
+                ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
             }
 
             try {
-                ftdi_core = ftdi_core_enum.valueOf(configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, getDefaultFtdiDeviceCore(ftdi_device).name()));
+                ftdiCore = FtdiCore.valueOf(configuration.getAttribute(
+                        LaunchConfigurationConstants.ATTR_FTDI_CORE,
+                        LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
             } catch (IllegalArgumentException e) {
-                ftdi_core = getDefaultFtdiDeviceCore(ftdi_device);
+                ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
             }
 			externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 			openocd_cfg_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
@@ -392,7 +302,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					fPrgmArgumentsFTDI_DeviceCombo.setText(fPrgmArgumentsFTDI_DeviceCombo.getItem(0));
 				}
 				else {
-				    fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device.toString());
+				    fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
 				}
 			  }
 		  if(!fPrgmArgumentsFTDI_CoreCombo.isDisposed()){
@@ -400,7 +310,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				{
 					fPrgmArgumentsFTDI_CoreCombo.setText(fPrgmArgumentsFTDI_CoreCombo.getItem(0));
 				}
-				else fPrgmArgumentsFTDI_CoreCombo.setText(ftdi_core.toString());
+				else fPrgmArgumentsFTDI_CoreCombo.setText(ftdiCore.toString());
 			  }	
 		 // Set host and IP.
 		 try {
@@ -458,8 +368,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		if(jtag_frequency!=null)
 		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
 		
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, getAttributeValueFromString(ftdi_device.name()));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, getAttributeValueFromString(ftdi_core.name()));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, getAttributeValueFromString(ftdiDevice.name()));
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, getAttributeValueFromString(ftdiCore.name()));
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
@@ -802,21 +712,21 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
 
-        for (ftdi_device_enum i : ftdi_device_enum.values())
+        for (FtdiDevice i : FtdiDevice.values())
             fPrgmArgumentsFTDI_DeviceCombo.add(i.toString());
-        fPrgmArgumentsFTDI_DeviceCombo.setText(ftdi_device.toString());
+        fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
 
         fPrgmArgumentsFTDI_DeviceCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
                 Combo combo = (Combo) evt.widget;
-                ftdi_device = ftdi_device_enum.fromString(combo.getText());
+                ftdiDevice = FtdiDevice.fromString(combo.getText());
 
-                if (ftdi_device == ftdi_device_enum.CUSTOM_CONFIGURATION_FILE)
+                if (ftdiDevice == FtdiDevice.CUSTOM)
                     fOpenOCDConfigPath.setEnabled(true, compCOM);
                 else
                     fOpenOCDConfigPath.setEnabled(false, compCOM);
 
-                if (getFtdiDeviceCores(ftdi_device).isEmpty())
+                if (ftdiDevice.getCores().size() <= 1)
                     fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);
                 else
                     fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
@@ -834,7 +744,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 		gdjtag.horizontalSpan = 2;
 		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
 		
-        if (getFtdiDeviceCores(ftdi_device).isEmpty())
+        if (ftdiDevice.getCores().size() <= 1)
             fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);
         else
             fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
@@ -844,7 +754,8 @@ private void createTabitemCOMAshling(Composite subComp) {
         fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
                 Combo combo = (Combo) evt.widget;
-                ftdi_core = ftdi_core_enum.fromString(combo.getText());
+                if (!combo.getText().isEmpty())
+                    ftdiCore = FtdiCore.fromString(combo.getText());
                 updateLaunchConfigurationDialog();
             }
         });
@@ -862,7 +773,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 			}
 		});	
 		if(fOpenOCDConfigPath!=null){
-	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(ftdi_device_enum.CUSTOM_CONFIGURATION_FILE.toString())){
+	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(FtdiDevice.CUSTOM.toString())){
 				fOpenOCDConfigPath.setEnabled(false, compCOM);
 			
 		}	
@@ -872,14 +783,10 @@ private void createTabitemCOMAshling(Composite subComp) {
 	
     private void Device_core_name() {
         fPrgmArgumentsFTDI_CoreCombo.removeAll();
-        java.util.List<ftdi_core_enum> cores = getFtdiDeviceCores(ftdi_device);
-        if (cores.isEmpty()) {
-            fPrgmArgumentsFTDI_CoreCombo.add(ftdi_core_enum.EMPTY_CORE.toString());
-        } else {
-            for (ftdi_core_enum core : cores)
-                fPrgmArgumentsFTDI_CoreCombo.add(core.toString());
-            fPrgmArgumentsFTDI_CoreCombo.setText(cores.get(0).toString());
-        }
+        java.util.List<FtdiCore> cores = ftdiDevice.getCores();
+        for (FtdiCore core : cores)
+            fPrgmArgumentsFTDI_CoreCombo.add(core.toString());
+        fPrgmArgumentsFTDI_CoreCombo.setText(cores.get(0).toString());
     }
 
 	private void fPrgmArgumentsJTAGFrency(Composite Comp){

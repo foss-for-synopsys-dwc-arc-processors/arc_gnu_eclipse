@@ -12,6 +12,9 @@
 
 package com.arc.embeddedcdt;
 
+import com.arc.embeddedcdt.gui.FtdiCore;
+import com.arc.embeddedcdt.gui.FtdiDevice;
+
 public interface LaunchConfigurationConstants {
 
 	static final String LAUNCH_ID = "com.arc.embeddedcdt"; //$NON-NLS-1$
@@ -60,6 +63,10 @@ public interface LaunchConfigurationConstants {
 	static final String DEFAULT_GDB_HOST = "localhost";
 	static final String DEFAULT_OPENOCD_BIN_PATH_LINUX = "/usr/local/bin/openocd";
 	static final String DEFAULT_OPENOCD_CFG_PATH_LINUX = "/usr/local/share/openocd/scripts/board/snps_em_sk.cfg";
+	static final FtdiDevice DEFAULT_FTDI_DEVICE = FtdiDevice.values()[0];
+	static final FtdiCore DEFAULT_FTDI_CORE = DEFAULT_FTDI_DEVICE.getCores().get(0);
+        static final String DEFAULT_FTDI_DEVICE_NAME = DEFAULT_FTDI_DEVICE.name();
+        static final String DEFAULT_FTDI_CORE_NAME = DEFAULT_FTDI_CORE.name();
 	
 	// Constants
 	static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";

@@ -89,9 +89,8 @@ import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage.ftdi_core_enum;
-import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage.ftdi_device_enum;
-import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
+import com.arc.embeddedcdt.gui.FtdiDevice;
+import com.arc.embeddedcdt.gui.FtdiCore;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 @SuppressWarnings("restriction")
@@ -227,31 +226,33 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
 		
         
-        ftdi_device_enum ftdi_device;
+        FtdiDevice ftdi_device;
         try {
-            ftdi_device = ftdi_device_enum.valueOf(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE, RemoteGDBDebuggerPage.getDefaultFtdiDevice().name()));
+            ftdi_device = FtdiDevice.valueOf(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
+                    LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
         } catch (IllegalArgumentException e) {
-            ftdi_device = RemoteGDBDebuggerPage.getDefaultFtdiDevice();
+            ftdi_device = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
         }
 
-        ftdi_core_enum ftdi_core;
+        FtdiCore ftdi_core;
         try {
-            ftdi_core = ftdi_core_enum.valueOf(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_FTDI_CORE, RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device).name()));
+            ftdi_core = FtdiCore.valueOf(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_FTDI_CORE,
+                    LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
         } catch (IllegalArgumentException e) {
-            ftdi_core = RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device);
+            ftdi_core = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
         }
 
         if (external_tools.indexOf("OpenOCD") > 0) {
             serialport = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-            if ((ftdi_device == ftdi_device_enum.AXS101 && ftdi_core == ftdi_core_enum.EM)
-                    || (ftdi_device == ftdi_device_enum.AXS102 && ftdi_core == ftdi_core_enum.HS34)
-                    || (ftdi_device == ftdi_device_enum.AXS103 && ftdi_core == ftdi_core_enum.HS38_0)) {
+            if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM)
+                    || (ftdi_device == FtdiDevice.AXS102 && ftdi_core == FtdiCore.HS34)
+                    || (ftdi_device == FtdiDevice.AXS103 && ftdi_core == FtdiCore.HS38_0)) {
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
-            } else if (ftdi_device == ftdi_device_enum.AXS101 && ftdi_core == ftdi_core_enum.AS221_2) {
+            } else if (ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.AS221_2) {
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 2);
-            } else if (ftdi_device == ftdi_device_enum.AXS101 && ftdi_core == ftdi_core_enum.AS221_1) {
+            } else if (ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.AS221_1) {
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
             }
         } else if (external_tools.indexOf("Ashling") > 0) {
@@ -629,40 +630,42 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		final String openocd_bin = configuration.getAttribute(
 				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,"");
 
-	        ftdi_device_enum ftdi_device;
-	        try {
-	            ftdi_device = ftdi_device_enum.valueOf(configuration.getAttribute(
-	                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE, RemoteGDBDebuggerPage.getDefaultFtdiDevice().name()));
-	        } catch (IllegalArgumentException e) {
-	            ftdi_device = RemoteGDBDebuggerPage.getDefaultFtdiDevice();
-	        }
+        FtdiDevice ftdiDevice;
+        try {
+            ftdiDevice = FtdiDevice.valueOf(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
+                    LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
+        } catch (IllegalArgumentException e) {
+            ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
+        }
 
-	        ftdi_core_enum ftdi_core;
-	        try {
-	            ftdi_core = ftdi_core_enum.valueOf(configuration.getAttribute(
-	                    LaunchConfigurationConstants.ATTR_FTDI_CORE, RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device).name()));
-	        } catch (IllegalArgumentException e) {
-	            ftdi_core = RemoteGDBDebuggerPage.getDefaultFtdiDeviceCore(ftdi_device);
-	        }
+        FtdiCore ftdiCore;
+        try {
+            ftdiCore = FtdiCore.valueOf(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_FTDI_CORE,
+                    LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
+        } catch (IllegalArgumentException e) {
+            ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
+        }
 
 		// ${openocd_bin}/../share/openocd/scripts
 		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
 		final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd" + File.separator + "scripts");
 		final String openocd_tcl = scripts_dir.getAbsolutePath();
 
-        if (ftdi_device == ftdi_device_enum.EM_SK_v1x) {
+        if (ftdiDevice == FtdiDevice.EM_SK_v1x) {
             openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_em_sk_v1.cfg";
-        } else if (ftdi_device == ftdi_device_enum.EM_SK_v2x) {
+        } else if (ftdiDevice == FtdiDevice.EM_SK_v2x) {
             openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_em_sk.cfg";
-        } else if (ftdi_device == ftdi_device_enum.AXS101) {
+        } else if (ftdiDevice == FtdiDevice.AXS101) {
             openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs101.cfg";
-        } else if (ftdi_device == ftdi_device_enum.AXS102) {
+        } else if (ftdiDevice == FtdiDevice.AXS102) {
             openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs102.cfg";
-        } else if ((ftdi_device == ftdi_device_enum.AXS103) && (ftdi_core == ftdi_core_enum.HS36)) {
+        } else if ((ftdiDevice == FtdiDevice.AXS103) && (ftdiCore == FtdiCore.HS36)) {
             openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs103_hs36.cfg";
-        } else if (ftdi_device == ftdi_device_enum.AXS103) {
+        } else if (ftdiDevice == FtdiDevice.AXS103) {
             openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs103_hs38.cfg";
-        } else if (ftdi_device == ftdi_device_enum.CUSTOM_CONFIGURATION_FILE) {
+        } else if (ftdiDevice == FtdiDevice.CUSTOM) {
             openocd_cfg = openocd_custom_configuration_file;
         }
 
