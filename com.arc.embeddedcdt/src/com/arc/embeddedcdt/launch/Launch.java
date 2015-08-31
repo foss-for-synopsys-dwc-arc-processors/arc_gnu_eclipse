@@ -238,7 +238,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		else if(external_tools.indexOf("Ashling")>0)
 			 serialport=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
 			
-		if(external_tools.equalsIgnoreCase("")||gdbserver_port.equalsIgnoreCase(""))
+		if(external_tools.isEmpty()||gdbserver_port.isEmpty())
 			return;
 		
 		String gdbserver_IPAddress = configuration.getAttribute(
@@ -246,7 +246,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 				LaunchConfigurationConstants.DEFAULT_GDB_HOST
 			);
 		
-		if(gdbserver_IPAddress.equalsIgnoreCase(""))
+		if(gdbserver_IPAddress.isEmpty())
 		{
 			gdbserver_IPAddress = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
 		}
@@ -317,7 +317,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 			
 			/* Do we need to connect to serial port? */
 			if (terminal_launch.equalsIgnoreCase("true") && !external_tools.equalsIgnoreCase("nSIM")
-					&& !serialport.equalsIgnoreCase("") && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
+					&& !serialport.isEmpty() && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e2) {
@@ -468,7 +468,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
 						monitor.subTask("Running GDB init script");
 						String initcommand =configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,"");
-						if(!initcommand.equalsIgnoreCase(""))
+						if(!initcommand.isEmpty())
 						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,"")), monitor);
 						
 						String gdb_init ="";
@@ -551,8 +551,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 		/* TODO Currently we configure directory of Ashling GDBserver not path
 		 * to executable itself, which is rather clumsy. Let's move UI to
 		 * specify path to executable. */
-		if(external_tools_ashling_path.equalsIgnoreCase("")) {
-						
+		if(external_tools_ashling_path.isEmpty()) {
 			if (isWindowsOS())
 				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS;
 			else

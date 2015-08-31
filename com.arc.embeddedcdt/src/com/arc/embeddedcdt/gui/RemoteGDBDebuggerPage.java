@@ -61,6 +61,25 @@ import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
  */
 @SuppressWarnings("restriction")
 public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
+    private static final String default_oocd_bin;
+    private static final String default_oocd_cfg;
+    static {
+        if (isWindowsOS()) {
+            default_oocd_bin = getIDERootDirPath() + "\\bin\\openocd.exe";
+            default_oocd_cfg = getIDERootDirPath()
+                    + "\\share\\openocd\\scripts\\board\\snps_em_sk.cfg";
+        } else {
+            String predefined_path = getIDEBinDir();
+            // Checking for OpenOCD binary presence in default path
+            if (new File(predefined_path).isFile()) {
+                default_oocd_bin = predefined_path + "openocd";
+                default_oocd_cfg = getIDERootDir() + "share/openocd/scripts/board/snps_em_sk.cfg";
+            } else {
+                default_oocd_bin = LaunchConfigurationConstants.DEFAULT_OPENOCD_BIN_PATH_LINUX;
+                default_oocd_cfg = LaunchConfigurationConstants.DEFAULT_OPENOCD_CFG_PATH_LINUX;
+            }
+        }
+    }
 
 	protected Combo fPrgmArgumentsComboInit;//this variable for select which externally tools
 	protected Combo fPrgmArgumentsJTAGFrenCombo;//this variable for select JTAG frequency
@@ -74,12 +93,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	private FileFieldEditor fOpenOCDBinPath; // Editor for path to OpenOCD binary
 	private FileFieldEditor fOpenOCDConfigPath; // Editor for path to OpenOCD binary
+	private String openocd_bin_path;
+	private String openocd_cfg_path;
 	private FileFieldEditor fAshlingBinPath; // Editor for path to Ashling binary
 	private FileFieldEditor  fnSIMBinPath; // Editor for path to nSIM binary
 	private FileFieldEditor fnSIMTCFPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fnSIMPropsPath; // Editor for path to nSIM TCF path
 	private FileFieldEditor fAshlingXMLPath; // Editor for path to nSIM TCF path
-	private String openocd_bin_path;
 	private String jtag_frequency=null;
 	private Boolean createTabitemCOMBool=false;
 	private Boolean createTabitemnSIMBool=false;
@@ -110,7 +130,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	private String fLaunchexternal_nsimEnableExceButtonboolean="true";//this variable is to get nsim memory exception tools current status (Enable/disable)
 	private String fLaunchexternal_nsiminvainstruExceButtonboolean="true";//this variable is to get nsim Invalid Instruction  exception tools current status (Enable/disable)
 	private String externaltools="";
-	private String externaltools_openocd_path="";
 	private String externaltools_ashling_path="";
 	private String Ashling_xml_path="";
 	private String externaltools_nsim_path="";
@@ -131,12 +150,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		configuration.setAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
 									IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT );
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, (String) null);
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, getOpenOCDScriptDefaultPath());
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, default_oocd_cfg);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, (String) null);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, getNsimdrvDefaultPath());
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,getOpenOCDExecutableDefaultPath());
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, default_oocd_bin);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
 
 	}
@@ -145,7 +164,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 	 * Get default path to nSIM application nsimdrv.
 	 */
 	private static String getNsimdrvDefaultPath() {
-	
 		if (isWindowsOS()) {
 			return System.getenv("NSIM_HOME") + java.io.File.separator
 					+ "bin" + java.io.File.separator +
@@ -169,21 +187,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		}
 	}
 
-	private static String getOpenOCDExecutableDefaultPath() {
-		if (isWindowsOS()) {
-			return getIDERootDirPath() + "\\bin\\openocd.exe";
-		} else {
-			return LaunchConfigurationConstants.DEFAULT_OPENOCD_BIN_PATH_LINUX;
-		}
-	}
+    static String getIDERootDir() {
+        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
+        File predefined_path_dir = new File(eclipsehome).getParentFile();
+        return predefined_path_dir + File.separator;
+    }
 
-	private static String getOpenOCDScriptDefaultPath() {
-		if (isWindowsOS()) {
-			return getIDERootDirPath() + "\\share\\openocd\\scripts\\board\\snps_em_sk.cfg";
-		} else {
-			return "/usr/local/share/openocd/scripts/board/snps_em_sk.cfg";
-		}
-	}
+    static String getIDEBinDir() {
+        return getIDERootDir() + "bin" + File.separator;
+    }
 
 	@Override
 	public void initializeFrom( ILaunchConfiguration configuration ) {
@@ -196,34 +208,35 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		try {
 		   
 		    
-		    gdb_path= configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, "");
+			gdb_path = configuration.getAttribute(
+					IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, "");
 
-		    if(gdb_path.equalsIgnoreCase("")){
-		        // Get an absolute path to ../bin.
-	            String eclipsehome = Platform.getInstallLocation().getURL().getPath();
-	            String predefined_path = (new File(eclipsehome).getParentFile()).getAbsolutePath() + File.separator + "bin";
-	            File predefined_path_file = new File(predefined_path);
-	            
-	            if (predefined_path_file.isDirectory()) {
-	                File gdb_fp = new File(predefined_path + File.separator + "arc-elf32-gdb");
-	                if (gdb_fp.canExecute()) {
-	                    gdb_path = gdb_fp.getAbsolutePath();
-	                }
-	            }
-	            
-	            if(gdb_path.equalsIgnoreCase("")) {
-	                gdb_path = "arc-elf32-gdb";
-	            }
-		    }
+			if (gdb_path.isEmpty()) {
+				// Get an absolute path to ../bin.
+
+				String predefined_path = getIDEBinDir();
+				File predefined_path_file = new File(predefined_path);
+
+				if (predefined_path_file.isDirectory()) {
+					File gdb_fp = new File(predefined_path + "arc-elf32-gdb");
+					if (gdb_fp.canExecute()) {
+						gdb_path = gdb_fp.getAbsolutePath();
+					}
+				}
+
+				if (gdb_path.isEmpty()) {
+					gdb_path = "arc-elf32-gdb";
+				}
+			}
 	    
-		    fGDBCommandText.setText( gdb_path);
-		    
+			fGDBCommandText.setText( gdb_path);
+			openocd_bin_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
+			        default_oocd_bin);
 			String jtagfrequency= configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
- 		    externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-		    externaltools_openocd_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, getOpenOCDScriptDefaultPath());
-		    openocd_bin_path = configuration.getAttribute(
-		    	LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
-		    	getOpenOCDExecutableDefaultPath());
+			externaltools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+			openocd_cfg_path = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
+			        default_oocd_cfg);
+
 		    
 		    String default_ashling_path= isWindowsOS() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
 		    externaltools_ashling_path=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,default_ashling_path);
@@ -244,14 +257,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    nSIMtcffiles_last = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
 		    JITthread = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
 		  
-		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").equalsIgnoreCase(""))
+		if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").isEmpty())
 		{
 			fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
 		}
 		else fPrgmArgumentsComboInit.setText(externaltools);	
 		
 		  if(!fPrgmArgumentsJTAGFrenCombo.isDisposed()){
-			if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "").equalsIgnoreCase(""))
+			if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "").isEmpty())
 			{
 				fPrgmArgumentsJTAGFrenCombo.setText(fPrgmArgumentsJTAGFrenCombo.getItem(0));
 			}
@@ -263,7 +276,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
      		 fGDBServerPortNumberText.setText( portnumber );
 			 String hostname = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "");
-			 if(hostname.equalsIgnoreCase("")){
+			 if(hostname.isEmpty()){
 				 hostname = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
 			 }
 			 fGDBServerIPAddressText.setText(hostname);
@@ -273,7 +286,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		 }
 		
 		 String gdbserver=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD");
-		 if(!gdbserver.equalsIgnoreCase(""))
+		 if(!gdbserver.isEmpty())
 		 {
 			 int privious=fPrgmArgumentsComboInit.indexOf(gdbserver);
 			 if(privious>-1)
@@ -282,7 +295,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			 fPrgmArgumentsComboInit.select(0);
 		 }
 		  if(!fPrgmArgumentsJTAGFrenCombo.isDisposed()){
-				 if(!jtagfrequency.equalsIgnoreCase(""))
+				 if(!jtagfrequency.isEmpty())
 				 {
 					 int privious=fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
 					 if(privious>-1)
@@ -315,7 +328,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 		    configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, getAttributeValueFromString(jtag_frequency));
 		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,externaltools_openocd_path);
+		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
+		        openocd_cfg_path);
 
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, openocd_bin_path);
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,externaltools_ashling_path);
@@ -409,7 +423,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				fPrgmArgumentsComboInittext = combo.getText();
 						  
 				if (fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via OpenOCD")) {
-					if(!portnumber.equalsIgnoreCase(""))
+					if(!portnumber.isEmpty())
 						fGDBServerPortNumberText.setText(portnumber);
 					else
 						fGDBServerPortNumberText.setText(LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
@@ -437,7 +451,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				}
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("JTAG via Ashling"))
 				{
-					if(!portnumber.equalsIgnoreCase(""))
+					if(!portnumber.isEmpty())
 						fGDBServerPortNumberText.setText(portnumber);
 					else
 						fGDBServerPortNumberText.setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
@@ -462,7 +476,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 				else if(fPrgmArgumentsComboInittext.equalsIgnoreCase("nSIM"))
 				{
 					
-					if(!portnumber.equalsIgnoreCase(""))
+					if(!portnumber.isEmpty())
 						fGDBServerPortNumberText.setText(portnumber);
 					else
 						fGDBServerPortNumberText.setText(LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
@@ -499,30 +513,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 					    fLaunchEnableExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
 					    
 					    fLaunchInvalid_Instru_ExptButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
-					    
-//					    if(externaltools_nsim_path.equalsIgnoreCase(""))
-//					    	fPrgmArgumentsTextexternal.setText(getNsimdrvDefaultPath());
-//						
-//						else
-//						     fPrgmArgumentsTextexternal.setText(externaltools_nsim_path);
-					    
-//					    if(nSIMpropsfiles_last.equalsIgnoreCase(""))
-//					    {
-//					    	fnSIMpropsText.setText(nSIMpropsfiles);
-//					    	nSIMpropsfiles_last=nSIMpropsfiles;
-//					    }
-//					    	
-//					    else 
-//					    	fnSIMpropsText.setText(nSIMpropsfiles_last);
-//					    
-//					    if(nSIMtcffiles_last.equalsIgnoreCase(""))
-//					    {
-//					    	fnSIMtcfText.setText(nSIMtcffiles);
-//					    	nSIMtcffiles_last=nSIMtcffiles;
-//					    }
-//					    	
-//					    else 
-//					    	fnSIMtcfText.setText(nSIMtcffiles_last);
 					}
 					groupnsim.setText("nSIM");
 					createTabitemCOMBool=false;
@@ -672,11 +662,11 @@ private void createTabitemCOMAshling(Composite subComp) {
 
 		// Path to OpenOCD configuration file
 		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
-		fOpenOCDConfigPath.setStringValue(externaltools_openocd_path);
+		fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
 		fOpenOCDConfigPath.setPropertyChangeListener( new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
 				if (event.getProperty() == "field_editor_value") {
-					externaltools_openocd_path = (String)event.getNewValue();
+					openocd_cfg_path = (String)event.getNewValue();
 					updateLaunchConfigurationDialog();
 				}
 			}
@@ -722,9 +712,9 @@ private void createTabitemCOMAshling(Composite subComp) {
 		fPrgmArgumentsJTAGFrenCombo.add("1000KHz");
 		
 		if(jtag_frequency!=null){
-			if(fPrgmArgumentsJTAGFrenCombo.getText().equalsIgnoreCase("")&&jtag_frequency.equalsIgnoreCase(""))
+			if(fPrgmArgumentsJTAGFrenCombo.getText().isEmpty()&&jtag_frequency.isEmpty())
 				fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
-			else if(fPrgmArgumentsJTAGFrenCombo.getText().equalsIgnoreCase("")&&!jtag_frequency.equalsIgnoreCase(""))
+			else if(fPrgmArgumentsJTAGFrenCombo.getText().isEmpty()&&!jtag_frequency.isEmpty())
 				fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);	
 		}
 		else fPrgmArgumentsJTAGFrenCombo.setText("10MHz");

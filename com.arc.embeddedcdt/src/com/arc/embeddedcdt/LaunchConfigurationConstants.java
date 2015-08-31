@@ -57,6 +57,7 @@ public interface LaunchConfigurationConstants {
 	static final String DEFAULT_NSIM_PORT = "49105";
 	static final String DEFAULT_GDB_HOST = "localhost";
 	static final String DEFAULT_OPENOCD_BIN_PATH_LINUX = "/usr/local/bin/openocd";
+	static final String DEFAULT_OPENOCD_CFG_PATH_LINUX = "/usr/local/share/openocd/scripts/board/snps_em_sk.cfg";
 	
 	// Constants
 	static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";
