@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Arrays;
 
 public enum FtdiDevice {
-    AXS101("AXS101", Arrays.asList(FtdiCore.ARC770D, FtdiCore.EM, FtdiCore.AS221_2,
+    AXS101("AXS101", Arrays.asList(FtdiCore.ARC770D, FtdiCore.EM6, FtdiCore.AS221_2,
             FtdiCore.AS221_1)),
     AXS102("AXS102", Arrays.asList(FtdiCore.HS36, FtdiCore.HS34)),
     AXS103("AXS103", Arrays.asList(FtdiCore.HS38_1, FtdiCore.HS38_0, FtdiCore.HS36)),

@@ -246,7 +246,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
 
         if (external_tools.indexOf("OpenOCD") > 0) {
             serialport = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
-            if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM)
+            if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM6)
                     || (ftdi_device == FtdiDevice.AXS102 && ftdi_core == FtdiCore.HS34)
                     || (ftdi_device == FtdiDevice.AXS103 && ftdi_core == FtdiCore.HS38_0)) {
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 1);
