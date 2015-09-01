@@ -686,31 +686,31 @@ private void createTabitemCOMAshling(Composite subComp) {
 	
 	}
 
-	private void createTabitemCOM(Composite subComp) { 
-		createTabitemCOMBool=true;
-		
-		groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5, GridData.FILL_HORIZONTAL);
-		final Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
+    private void createTabitemCOM(Composite subComp) {
+        createTabitemCOMBool = true;
+        groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5,
+                GridData.FILL_HORIZONTAL);
+        final Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
 
-		// Path to OpenOCD binary
-		fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", compCOM);
-		fOpenOCDBinPath.setStringValue(openocd_bin_path);
-		fOpenOCDBinPath.setPropertyChangeListener( new IPropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent event) {
-				if (event.getProperty() == "field_editor_value") {
-					openocd_bin_path = (String)event.getNewValue();
-					updateLaunchConfigurationDialog();
-				}
-			}
-		});
-		Label label = new Label(compCOM, SWT.LEFT);		
-		label.setText("Development system:");
-		fPrgmArgumentsFTDI_DeviceCombo =new Combo(compCOM, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
-		
-		GridData gdjtag = new GridData(GridData.BEGINNING);
-		gdjtag.widthHint=180;
-		gdjtag.horizontalSpan = 2;
-		fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
+        // Path to OpenOCD binary
+        fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", compCOM);
+        fOpenOCDBinPath.setStringValue(openocd_bin_path);
+        fOpenOCDBinPath.setPropertyChangeListener(new IPropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent event) {
+                if (event.getProperty() == "field_editor_value") {
+                    openocd_bin_path = (String) event.getNewValue();
+                    updateLaunchConfigurationDialog();
+                }
+            }
+        });
+        Label label = new Label(compCOM, SWT.LEFT);
+        label.setText("Development system:");
+        fPrgmArgumentsFTDI_DeviceCombo = new Combo(compCOM, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
+
+        GridData gdjtag = new GridData(GridData.BEGINNING);
+        gdjtag.widthHint = 180;
+        gdjtag.horizontalSpan = 2;
+        fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
 
         for (FtdiDevice i : FtdiDevice.values())
             fPrgmArgumentsFTDI_DeviceCombo.add(i.toString());
@@ -736,14 +736,14 @@ private void createTabitemCOMAshling(Composite subComp) {
             }
         });
 
-		Label label_croe = new Label(compCOM, SWT.LEFT);		
-		label_croe.setText("Target Core");
-		fPrgmArgumentsFTDI_CoreCombo =new Combo(compCOM, SWT.None|SWT.READ_ONLY);//1-2 and 1-3
+        Label label_croe = new Label(compCOM, SWT.LEFT);
+        label_croe.setText("Target Core");
+        fPrgmArgumentsFTDI_CoreCombo = new Combo(compCOM, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
 
-		gdjtag.widthHint=180;
-		gdjtag.horizontalSpan = 2;
-		fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
-		
+        gdjtag.widthHint = 180;
+        gdjtag.horizontalSpan = 2;
+        fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
+
         if (ftdiDevice.getCores().size() <= 1)
             fPrgmArgumentsFTDI_CoreCombo.setEnabled(false);
         else
@@ -760,27 +760,29 @@ private void createTabitemCOMAshling(Composite subComp) {
             }
         });
 
-		
-		fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file", compCOM);
-		fOpenOCDConfigPath.setEnabled(false, compCOM);
-		fOpenOCDConfigPath.setStringValue(externaltools_openocd_path);
-		fOpenOCDConfigPath.setPropertyChangeListener( new IPropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent event) {
-				if (event.getProperty() == "field_editor_value") {
-					externaltools_openocd_path = (String)event.getNewValue();
-					updateLaunchConfigurationDialog();
-				}
-			}
-		});	
-		if(fOpenOCDConfigPath!=null){
-	    	if(!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(FtdiDevice.CUSTOM.toString())){
-				fOpenOCDConfigPath.setEnabled(false, compCOM);
-			
-		}	
-		else fOpenOCDConfigPath.setEnabled(true, compCOM);
-	    }
-	}
-	
+        fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath",
+                "OpenOCD configuration file", compCOM);
+        fOpenOCDConfigPath.setEnabled(false, compCOM);
+        fOpenOCDConfigPath.setStringValue(externaltools_openocd_path);
+        fOpenOCDConfigPath.setPropertyChangeListener(new IPropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent event) {
+                if (event.getProperty() == "field_editor_value") {
+                    externaltools_openocd_path = (String) event.getNewValue();
+                    updateLaunchConfigurationDialog();
+                }
+            }
+        });
+
+        if (fOpenOCDConfigPath != null) {
+            if (!fPrgmArgumentsFTDI_DeviceCombo.getText().equalsIgnoreCase(
+                    FtdiDevice.CUSTOM.toString())) {
+                fOpenOCDConfigPath.setEnabled(false, compCOM);
+            } else {
+                fOpenOCDConfigPath.setEnabled(true, compCOM);
+            }
+        }
+    }
+
     private void updateFtdiCoreCombo() {
         fPrgmArgumentsFTDI_CoreCombo.removeAll();
         java.util.List<FtdiCore> cores = ftdiDevice.getCores();
