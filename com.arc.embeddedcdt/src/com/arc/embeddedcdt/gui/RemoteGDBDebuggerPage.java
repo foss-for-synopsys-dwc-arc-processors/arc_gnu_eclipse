@@ -731,7 +731,7 @@ private void createTabitemCOMAshling(Composite subComp) {
                 else
                     fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
 
-                Device_core_name();
+                updateFtdiCoreCombo();
                 updateLaunchConfigurationDialog();
             }
         });
@@ -749,7 +749,7 @@ private void createTabitemCOMAshling(Composite subComp) {
         else
             fPrgmArgumentsFTDI_CoreCombo.setEnabled(true);
 
-        Device_core_name();
+        updateFtdiCoreCombo();
 
         fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
@@ -781,7 +781,7 @@ private void createTabitemCOMAshling(Composite subComp) {
 	    }
 	}
 	
-    private void Device_core_name() {
+    private void updateFtdiCoreCombo() {
         fPrgmArgumentsFTDI_CoreCombo.removeAll();
         java.util.List<FtdiCore> cores = ftdiDevice.getCores();
         for (FtdiCore core : cores)
