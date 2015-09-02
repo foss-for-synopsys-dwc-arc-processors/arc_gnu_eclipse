@@ -26,11 +26,6 @@
 				<simple name="target" value="lds/arcelf.lds"/>
 				<simple name="replaceable" value="false"/>
 			</element>
-			<element>
-				<simple name="source" value="src/crt0.S"/>
-				<simple name="target" value="src/crt0.S"/>
-				<simple name="replaceable" value="false"/>
-			</element>
 		</complex-array>
 	</process>
 
@@ -44,17 +39,5 @@
 			</element>
 		</complex-array>
 	</process>
-
-	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
-		<simple name="projectName" value="$(projectName)"/>
-		<complex-array name="resourcePaths">
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.nostart" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-		</complex-array>
-	</process>
-
 </template>
 

@@ -68,11 +68,6 @@
 				<simple name="target" value="$(sourceDir)/starterkit.h"/>
 				<simple name="replaceable" value="true"/>
 			</element>
-                        <element>
-                                <simple name="source" value="src/crt0.S"/>
-                                <simple name="target" value="$(sourceDir)/crt0.S"/>
-                                <simple name="replaceable" value="false"/>
-                        </element>
                 </complex-array>
         </process>
 
@@ -82,17 +77,6 @@
                         <element>
                                 <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" />
                                 <simple name="value" value="${workspace_loc:${ProjName}}/lds/arcelf.lds" />
-                                <simple name="path" value="" />
-                        </element>
-                </complex-array>
-        </process>
-
-        <process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
-                <simple name="projectName" value="$(projectName)"/>
-                <complex-array name="resourcePaths">
-                        <element>
-                                <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.nostart" />
-                                <simple name="value" value="true" />
                                 <simple name="path" value="" />
                         </element>
                 </complex-array>
