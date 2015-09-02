@@ -71,7 +71,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         } else {
             String predefined_path = getIDEBinDir();
             // Checking for OpenOCD binary presence in default path
-            if (new File(predefined_path).isFile()) {
+            if (new File(predefined_path).isDirectory()) {
                 default_oocd_bin = predefined_path + "openocd";
                 default_oocd_cfg = getIDERootDir() + "share/openocd/scripts/board/snps_em_sk.cfg";
             } else {
