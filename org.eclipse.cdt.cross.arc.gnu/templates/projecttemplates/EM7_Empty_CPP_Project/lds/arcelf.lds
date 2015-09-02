@@ -6,7 +6,7 @@ MEMORY
 }
 
 REGION_ALIAS("REGION_IVT",    ICCM)
-REGION_ALIAS("REGION_INIT",   ICCM)
+REGION_ALIAS("REGION_INIT",   RAM)
 REGION_ALIAS("REGION_TEXT",   RAM)
 REGION_ALIAS("REGION_RODATA", RAM)
 REGION_ALIAS("REGION_DATA",   RAM)
@@ -24,7 +24,7 @@ SECTIONS
     {
       KEEP (*(.ivt));
     } > REGION_IVT
-    .init 0x100 :
+    .init :
     {
         KEEP (*(.init));
     } > REGION_INIT
