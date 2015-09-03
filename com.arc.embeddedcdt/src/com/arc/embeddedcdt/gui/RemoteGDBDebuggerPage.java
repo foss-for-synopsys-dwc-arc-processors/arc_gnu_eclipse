@@ -697,7 +697,7 @@ private void createTabitemCOMAshling(Composite subComp) {
         fPrgmArgumentsFTDI_DeviceCombo = new Combo(compCOM, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
 
         GridData gdjtag = new GridData(GridData.BEGINNING);
-        gdjtag.widthHint = 180;
+        gdjtag.widthHint = 220;
         gdjtag.horizontalSpan = 2;
         fPrgmArgumentsFTDI_DeviceCombo.setLayoutData(gdjtag);
 
@@ -728,9 +728,6 @@ private void createTabitemCOMAshling(Composite subComp) {
         Label label_croe = new Label(compCOM, SWT.LEFT);
         label_croe.setText("Target Core");
         fPrgmArgumentsFTDI_CoreCombo = new Combo(compCOM, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
-
-        gdjtag.widthHint = 180;
-        gdjtag.horizontalSpan = 2;
         fPrgmArgumentsFTDI_CoreCombo.setLayoutData(gdjtag);
 
         if (ftdiDevice.getCores().size() <= 1)
