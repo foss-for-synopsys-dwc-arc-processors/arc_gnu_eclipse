@@ -296,22 +296,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 			}
 			else fPrgmArgumentsJTAGFrenCombo.setText(jtagfrequency);
 		  }
-		  if(!fPrgmArgumentsFTDI_DeviceCombo.isDisposed()){
-				if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE, "").equalsIgnoreCase(""))
-				{
-					fPrgmArgumentsFTDI_DeviceCombo.setText(fPrgmArgumentsFTDI_DeviceCombo.getItem(0));
-				}
-				else {
-				    fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
-				}
-			  }
-		  if(!fPrgmArgumentsFTDI_CoreCombo.isDisposed()){
-				if (configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, "").equalsIgnoreCase(""))
-				{
-					fPrgmArgumentsFTDI_CoreCombo.setText(fPrgmArgumentsFTDI_CoreCombo.getItem(0));
-				}
-				else fPrgmArgumentsFTDI_CoreCombo.setText(ftdiCore.toString());
-			  }	
+            if (!fPrgmArgumentsFTDI_DeviceCombo.isDisposed())
+                fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
+
+            if (!fPrgmArgumentsFTDI_CoreCombo.isDisposed())
+                fPrgmArgumentsFTDI_CoreCombo.setText(ftdiCore.toString());
 		 // Set host and IP.
 		 try {
 			 portnumber = configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,"" );
