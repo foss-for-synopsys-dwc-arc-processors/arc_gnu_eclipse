@@ -94,138 +94,128 @@ import com.arc.embeddedcdt.gui.FtdiCore;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 @SuppressWarnings("restriction")
-public abstract class Launch extends AbstractCLaunchDelegate implements
-		ICDIEventListener
-{
+public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEventListener {
+    private final static class RunCommand implements Runnable {
+        private final CLICommand cli;
+        private final MISession miSession;
+        private MIException result;
 
-	private final static class RunCommand implements Runnable
-	{
-		private final CLICommand cli;
-		private final MISession miSession;
-		private MIException result;
+        private RunCommand(CLICommand cli, MISession miSession) {
+            this.cli = cli;
+            this.miSession = miSession;
+        }
 
-		private RunCommand(CLICommand cli, MISession miSession)
-		{
-			this.cli = cli;
-			this.miSession = miSession;
-		}
+        public void run() {
+            try {
+                miSession.postCommand(cli, 365 * 24 * 3600 * 1000);
+            } catch (MIException e) {
+                result = e;
+            }
+        }
+    }
 
-		public void run()
-		{
-			try
-			{
-				miSession.postCommand(cli, 365 * 24 * 3600 * 1000);
-			} catch (MIException e)
-			{
-				result = e;
-			}
-		}
-	}
+    // Process names useful for LaunchTerminator
+    public final static String OPENOCD_PROCESS_LABEL = "OpenOCD";
+    public final static String ASHLING_PROCESS_LABEL = "Ashling GDBserver";
+    public final static String GDB_PROCESS_LABEL = "arc-elf32-gdb";
+    public final static String NSIM_PROCESS_LABEL = "nSIM GDBserver";
 
-	// Process names useful for LaunchTerminator
-	public final static String OPENOCD_PROCESS_LABEL = "OpenOCD";
-	public final static String ASHLING_PROCESS_LABEL = "Ashling GDBserver";
-	public final static String GDB_PROCESS_LABEL = "arc-elf32-gdb";
-	public final static String NSIM_PROCESS_LABEL = "nSIM GDBserver";
+    public ICProject myProject;
+    private ICDISession dsession;
+    private ILaunchConfiguration launch_config;
 
-	public ICProject myProject;
-	private ICDISession dsession;
-	private ILaunchConfiguration launch_config;
+    abstract public String getSourcePathSeperator();
 
-	abstract public String getSourcePathSeperator();
+    public Launch() {
+        super();
+        DebugPlugin.getDefault().addDebugEventListener(new LaunchTerminator());
+    }
 
-	public Launch() {
-		super();
-		DebugPlugin.getDefault().addDebugEventListener(new LaunchTerminator());
-	}
-	
-	/**
-	 * Return the save environment variables in the configuration. The array
-	 * does not include the default environment of the target. array[n] :
-	 */
-	public String[] getEnvironment()  
-	{
-	  try 
-	  {
-		return super.getEnvironment(launch_config);
-	  } 
-	  catch (CoreException e) 
-	  {		  
-	  }	
-      return new String[0];
-	}
+    /**
+     * Return the save environment variables in the configuration. The array does not include the
+     * default environment of the target. array[n] :
+     */
+    public String[] getEnvironment() {
+        try {
+            return super.getEnvironment(launch_config);
+        } catch (CoreException e) {
+        }
+        return new String[0];
+    }
 
-	private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
-		//return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
-		String external_tools = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-		return external_tools.equalsIgnoreCase("JTAG via Ashling");
+    private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
+        // return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
+        String external_tools = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase("JTAG via Ashling");
+    }
 
-	}
-	public static String serialport="";
+    public static String serialport = "";
 
-	
-	private void startTerminal() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
+    private void startTerminal() {
+        IWorkbench workbench = PlatformUI.getWorkbench();
 
-        if (workbench.getDisplay().getThread() != Thread.currentThread()){
+        if (workbench.getDisplay().getThread() != Thread.currentThread()) {
             // Note that we do the work asynchronously so that we don't lock this thread. It is used
             // to launch the debugger engine.
-            workbench.getDisplay().asyncExec(new Runnable(){
+            workbench.getDisplay().asyncExec(new Runnable() {
                 @Override
-                public void run () {
-                	startTerminal();
-                }});
+                public void run() {
+                    startTerminal();
+                }
+            });
             return;
         }
-		
-		// Assertion: we're in the UI thread.
-		final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 
-		class MyClass extends SerialConnector {
-			public MyClass(SerialSettings settings) { super(settings); }
-			@Override
-			public void initialize() { }
-		}
+        // Assertion: we're in the UI thread.
+        final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+        IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
 
-		TerminalConnector.Factory factory = new TerminalConnector.Factory() {
-			public TerminalConnectorImpl makeConnector() throws Exception {
-				SerialSettings mySettings = new SerialSettings();
-				mySettings.setBaudRate("115200");
-				mySettings.setDataBits("8");
-				mySettings.setFlowControl("XON/XOFF");
-				mySettings.setParity("N");
-				mySettings.setSerialPort(serialport);
-				mySettings.setStopBits("1");
-				return new MyClass(mySettings);
-			}
-		};
+        class MyClass extends SerialConnector {
+            public MyClass(SerialSettings settings) {
+                super(settings);
+            }
 
-		TerminalConnector c1 = new TerminalConnector(factory, "connector-id",
-				"ARC GNU IDE", false /* is hidden */);
+            @Override
+            public void initialize() {
+            }
+        }
 
-		TerminalView viewPart;
-		try {
-			viewPart = (TerminalView) (activePage.showView(
-					"org.eclipse.tm.terminal.view.TerminalView", null,
-					IWorkbenchPage.VIEW_ACTIVATE));
-			viewPart.newTerminal(c1);
-		} catch (PartInitException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void launch(ILaunchConfiguration configuration, String mode,
-			final ILaunch launch, IProgressMonitor monitor)
-			throws CoreException
-	{
-	
-		
-		String external_tools=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,"");
-		
-		String gdbserver_port=configuration.getAttribute( IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
-		
-        
+        TerminalConnector.Factory factory = new TerminalConnector.Factory() {
+            public TerminalConnectorImpl makeConnector() throws Exception {
+                SerialSettings mySettings = new SerialSettings();
+                mySettings.setBaudRate("115200");
+                mySettings.setDataBits("8");
+                mySettings.setFlowControl("XON/XOFF");
+                mySettings.setParity("N");
+                mySettings.setSerialPort(serialport);
+                mySettings.setStopBits("1");
+                return new MyClass(mySettings);
+            }
+        };
+
+        TerminalConnector c1 = new TerminalConnector(factory, "connector-id", "ARC GNU IDE", false);
+
+        TerminalView viewPart;
+        try {
+            viewPart = (TerminalView) (activePage
+                    .showView("org.eclipse.tm.terminal.view.TerminalView", null,
+                            IWorkbenchPage.VIEW_ACTIVATE));
+            viewPart.newTerminal(c1);
+        } catch (PartInitException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch,
+            IProgressMonitor monitor) throws CoreException {
+
+        String external_tools = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+
+        String gdbserver_port = configuration.getAttribute(
+                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
+
         FtdiDevice ftdi_device;
         try {
             ftdi_device = FtdiDevice.valueOf(configuration.getAttribute(
@@ -245,7 +235,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
         }
 
         if (external_tools.indexOf("OpenOCD") > 0) {
-            serialport = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+            serialport = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
             if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM6)
                     || (ftdi_device == FtdiDevice.AXS102 && ftdi_core == FtdiCore.HS34)
                     || (ftdi_device == FtdiDevice.AXS103 && ftdi_core == FtdiCore.HS38_0)) {
@@ -256,379 +247,373 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
             }
         } else if (external_tools.indexOf("Ashling") > 0) {
-            serialport = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+            serialport = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
         }
 
-		if(external_tools.isEmpty()||gdbserver_port.isEmpty())
-			return;
-		
-		String gdbserver_IPAddress = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
-				LaunchConfigurationConstants.DEFAULT_GDB_HOST
-			);
-		
-		if(gdbserver_IPAddress.isEmpty())
-		{
-			gdbserver_IPAddress = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
-		}
-		
-		launch_config = configuration.getWorkingCopy();
-		
-		if (monitor == null)
-		{
-			monitor = new NullProgressMonitor();
-		}
+        if (external_tools.isEmpty() || gdbserver_port.isEmpty())
+            return;
 
-		monitor.subTask("Embedded debugger launch"); //$NON-NLS-1$
-		// check for cancellation
-		if (monitor.isCanceled())
-		{
-			return;
-		}
-		try
-		{
-			monitor.worked(1);
-			ICProject project;
-			String name = org.eclipse.cdt.debug.core.CDebugUtils.getProjectName(configuration);
-			
-			//This code is for building current project before launching it
-			
-			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			IProject genProject = root.getProject(name);
-			IBuildConfiguration[] buildConfigs=genProject.getBuildConfigs();
-			IProgressMonitor buildMonitor = new SubProgressMonitor(monitor, 10, SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK);
-			boolean build_before_launch=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH,LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT);
-			if(build_before_launch==true)
-			    ResourcesPlugin.getWorkspace().build( buildConfigs, IncrementalProjectBuilder.INCREMENTAL_BUILD, true, new SubProgressMonitor(buildMonitor, 3));
+        String gdbserver_IPAddress = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
+                LaunchConfigurationConstants.DEFAULT_GDB_HOST);
 
-					
-			if ((name!=null)&&(name.length()>0))
-			{
-				project =  org.eclipse.cdt.debug.core.CDebugUtils.verifyCProject(configuration);
-			} else
-			{
-				// normal project
-				 genProject = root.getProject("arc-cdt-debugging");
-				if (!genProject.exists())
-				{
-					genProject.create(null);
-				}
-				genProject.open(monitor);
-				// add C nature
-				IProjectDescription d = genProject.getDescription();
-				d.setNatureIds(new String[]
-				{ "org.eclipse.cdt.core.cnature" });
-				genProject.setDescription(d, null);
-				
-				project = CoreModel.getDefault().getCModel().getCProject(
-						genProject.getName());
-			}
-			IPath exePath = null;
-			myProject = project;
-			IBinaryObject exeFile = null;
-			if(project!=null){
-				   exePath = verifyProgramPath(configuration, project);
-				   exeFile = verifyBinary(project, exePath);
-			}
+        if (gdbserver_IPAddress.isEmpty()) {
+            gdbserver_IPAddress = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
+        }
 
-			// set the default source locator if required
-			setDefaultSourceLocator(launch, configuration);
+        launch_config = configuration.getWorkingCopy();
 
-			String terminal_launch= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
-			
-			/* Do we need to connect to serial port? */
-			if (terminal_launch.equalsIgnoreCase("true") && !external_tools.equalsIgnoreCase("nSIM")
-					&& !serialport.isEmpty() && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e2) {
-					// Do nothing.
-					e2.printStackTrace();
-				}
-				startTerminal();
-			}
-			
-			if (mode.equals(ILaunchManager.DEBUG_MODE)||mode.equals(ILaunchManager.RUN_MODE))
-			{
-				ICDebugConfiguration debugConfig = getDebugConfig(configuration);
-				dsession = null;
+        if (monitor == null) {
+            monitor = new NullProgressMonitor();
+        }
 
-				String debugMode = configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_START_MODE,ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
+        monitor.subTask("Embedded debugger launch"); //$NON-NLS-1$
+        // check for cancellation
+        if (monitor.isCanceled()) {
+            return;
+        }
+        try {
+            monitor.worked(1);
+            ICProject project;
+            String name = org.eclipse.cdt.debug.core.CDebugUtils.getProjectName(configuration);
 
-				if (debugMode.equals(ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN))
-				{
+            // This code is for building current project before launching it
 
-					LaunchFrontend l = new LaunchFrontend(launch);
-                    
-                   
-                    
+            IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+            IProject genProject = root.getProject(name);
+            IBuildConfiguration[] buildConfigs = genProject.getBuildConfigs();
+            IProgressMonitor buildMonitor = new SubProgressMonitor(monitor, 10,
+                    SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK);
+            boolean build_before_launch = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH,
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT);
+            if (build_before_launch == true)
+                ResourcesPlugin.getWorkspace().build(buildConfigs,
+                        IncrementalProjectBuilder.INCREMENTAL_BUILD, true,
+                        new SubProgressMonitor(buildMonitor, 3));
+
+            if ((name != null) && (name.length() > 0)) {
+                project = org.eclipse.cdt.debug.core.CDebugUtils.verifyCProject(configuration);
+            } else {
+                // normal project
+                genProject = root.getProject("arc-cdt-debugging");
+                if (!genProject.exists()) {
+                    genProject.create(null);
+                }
+                genProject.open(monitor);
+                // add C nature
+                IProjectDescription d = genProject.getDescription();
+                d.setNatureIds(new String[] { "org.eclipse.cdt.core.cnature" });
+                genProject.setDescription(d, null);
+
+                project = CoreModel.getDefault().getCModel().getCProject(genProject.getName());
+            }
+            IPath exePath = null;
+            myProject = project;
+            IBinaryObject exeFile = null;
+            if (project != null) {
+                exePath = verifyProgramPath(configuration, project);
+                exeFile = verifyBinary(project, exePath);
+            }
+
+            // set the default source locator if required
+            setDefaultSourceLocator(launch, configuration);
+
+            String terminal_launch = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
+
+            /* Do we need to connect to serial port? */
+            if (terminal_launch.equalsIgnoreCase("true")
+                    && !external_tools.equalsIgnoreCase("nSIM") && !serialport.isEmpty()
+                    && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e2) {
+                    // Do nothing.
+                    e2.printStackTrace();
+                }
+                startTerminal();
+            }
+
+            if (mode.equals(ILaunchManager.DEBUG_MODE) || mode.equals(ILaunchManager.RUN_MODE)) {
+                ICDebugConfiguration debugConfig = getDebugConfig(configuration);
+                dsession = null;
+
+                String debugMode = configuration.getAttribute(
+                        ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_START_MODE,
+                        ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
+
+                if (debugMode.equals(ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN)) {
+                    LaunchFrontend l = new LaunchFrontend(launch);
                     prepareSession();
 
-					// Start GDB first. This is required to ensure that if gdbserver
-					// will fail to start up then GDB will be closed. Eclipse cannot
-					// kill GDB when it is trying to execute script commands.
-					if (exeFile!=null)
-					{
-						dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createDebuggerSession(this, l,exeFile, new SubProgressMonitor(monitor, 8));
-					} else
-					{
-						/* no executable for session*/
-						dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger()).createSession(this, launch, null, new SubProgressMonitor(monitor, 8));
-					}
+                    // Start GDB first. This is required to ensure that if gdbserver
+                    // will fail to start up then GDB will be closed. Eclipse cannot
+                    // kill GDB when it is trying to execute script commands.
+                    if (exeFile != null) {
+                        dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger())
+                                .createDebuggerSession(this, l, exeFile, new SubProgressMonitor(
+                                        monitor, 8));
+                    } else {
+                        /* no executable for session */
+                        dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger())
+                                .createSession(this, launch, null, new SubProgressMonitor(monitor,
+                                        8));
+                    }
 
-					if(dsession!=null)
-					    dsession.getEventManager().addEventListener(this);
-					patchSession(configuration);
-					ICDITarget[] dtargets = null;
-					if(dsession!=null)
-					    dtargets = dsession.getTargets();
-					
-					/* Do not allow processing of events while we launch as this
-					 * would query the target with e.g. process list before we're
-					 * ready.
-					 */
-					EventManager eventManager = null;
-					if(dsession!=null)
-						eventManager= (EventManager) dsession.getEventManager();
-					boolean prevstateAllowEvents = false;
-					if(eventManager!=null){
-					    prevstateAllowEvents = eventManager.isAllowingProcessingEvents();
-					    eventManager.allowProcessingEvents(false);
-					}
-					if(dtargets!=null)
-					    setupTargets(dtargets);
+                    if (dsession != null)
+                        dsession.getEventManager().addEventListener(this);
+                    patchSession(configuration);
+                    ICDITarget[] dtargets = null;
+                    if (dsession != null)
+                        dtargets = dsession.getTargets();
 
-					// Start gdbserver
-					String eclipsehome= Platform.getInstallLocation().getURL().toString();
-					eclipsehome=eclipsehome.substring(eclipsehome.lastIndexOf("file:/")+6, eclipsehome.length());
-					
-					// TODO Replace hardcoded line with something more error-proof.
-					if (external_tools.equalsIgnoreCase("JTAG via Ashling")) {
-						start_ashling(configuration, launch);
-					} else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")) {
-						start_openocd(configuration, launch);
-					}
-					else if (external_tools.equalsIgnoreCase("nSIM"))
-					{						
-						start_nsim(configuration, launch);
-					}
+                    /*
+                     * Do not allow processing of events while we launch as this would query the
+                     * target with e.g. process list before we're ready.
+                     */
+                    EventManager eventManager = null;
+                    if (dsession != null)
+                        eventManager = (EventManager) dsession.getEventManager();
+                    boolean prevstateAllowEvents = false;
+                    if (eventManager != null) {
+                        prevstateAllowEvents = eventManager.isAllowingProcessingEvents();
+                        eventManager.allowProcessingEvents(false);
+                    }
+                    if (dtargets != null)
+                        setupTargets(dtargets);
 
-				
-					try
-					{
-						monitor.subTask("Running .gdbinit");
-						if(dtargets!=null)
-						    runGDBInit(configuration, dtargets, monitor);
+                    // Start gdbserver
+                    String eclipsehome = Platform.getInstallLocation().getURL().toString();
+                    eclipsehome = eclipsehome.substring(eclipsehome.lastIndexOf("file:/") + 6,
+                            eclipsehome.length());
 
-						uploadFile(monitor, configuration);
+                    // TODO Replace hardcoded line with something more error-proof.
+                    if (external_tools.equalsIgnoreCase("JTAG via Ashling")) {
+                        start_ashling(configuration, launch);
+                    } else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")) {
+                        start_openocd(configuration, launch);
+                    } else if (external_tools.equalsIgnoreCase("nSIM")) {
+                        start_nsim(configuration, launch);
+                    }
 
-						monitor.subTask("Running GDB init script");
-						String initcommand =configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,"");
-						if(!initcommand.isEmpty())
-						     executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,"")), monitor);
-						
-						String gdb_init ="";
-						
-						if (!isAshling(configuration))
-							gdb_init=String.format("target remote %s:%s\nload",gdbserver_IPAddress,gdbserver_port);
-						else 
-							gdb_init=String.format("set arc opella-target arcem \ntarget remote %s:%s\nload",gdbserver_IPAddress, gdbserver_port);
+                    try {
+                        monitor.subTask("Running .gdbinit");
+                        if (dtargets != null)
+                            runGDBInit(configuration, dtargets, monitor);
 
-						executeGDBScript("GDB commands",configuration,dtargets,	getExtraCommands(configuration,	gdb_init), monitor);
-											
-						monitor.worked(2);
-						monitor.subTask("Creating launch target");
-						if(project!=null)
-						    createLaunchTarget(launch, project, exeFile,debugConfig, dtargets, configuration, mode);
-						monitor.subTask("Query target state");
-						queryTargetState(dtargets);
-						// This will make the GDB console frontmost.
-						l.addStragglers();
-						
-						if(eventManager!=null)
-						    eventManager.allowProcessingEvents(prevstateAllowEvents);
-						
-						
-					} catch (Exception e)
-					{
-						try
-						{
-							if(dsession!=null)
-							    dsession.terminate();
-						} catch (CDIException e1)
-						{
-							// ignore
-						}
-						MultiStatus status = new MultiStatus(
-								LaunchPlugin.PLUGIN_ID,
-								ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
-								"Could not start debug session", e);
-						LaunchUIPlugin.log(status);
-						throw new CoreException(status);
+                        uploadFile(monitor, configuration);
 
-					}
-				}
-			} else
-			{
-				cancel("TargetConfiguration not supported",
-						ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR);
-			}
-		} finally
-		{
-			monitor.done();
-		}
+                        monitor.subTask("Running GDB init script");
+                        String initcommand = configuration.getAttribute(
+                                LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "");
+                        if (!initcommand.isEmpty()) {
+                            String commands = configuration.getAttribute(
+                                    LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "");
+                            String[] extraCommands = getExtraCommands(configuration, commands);
+                            executeGDBScript("GDB commands", configuration, dtargets,
+                                    extraCommands, monitor);
+                        }
 
-	}
-	/* 
-	* @return true---windows 
-	*/
-	private static boolean isWindowsOS(){
-	    boolean isWindowsOS = false;
-	    String osName = System.getProperty("os.name");
-	    if(osName.toLowerCase().indexOf("windows")>-1){
-	      isWindowsOS = true;
-	    }
-	    return isWindowsOS;
-	 }
+                        String gdb_init = "";
 
-	/**
-	 * Start Ashling GDB Server executable.
-	 *
-	 * @throws CoreException
-	 */
-	private void start_ashling(final ILaunchConfiguration configuration, final ILaunch launch)
-			throws CoreException
-	{
-		String external_tools_ashling_path = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
-				""
-			);
+                        if (!isAshling(configuration))
+                            gdb_init = String.format("target remote %s:%s\nload",
+                                    gdbserver_IPAddress, gdbserver_port);
+                        else
+                            gdb_init = String.format(
+                                    "set arc opella-target arcem \ntarget remote %s:%s\nload",
+                                    gdbserver_IPAddress, gdbserver_port);
 
-		/* TODO Currently we configure directory of Ashling GDBserver not path
-		 * to executable itself, which is rather clumsy. Let's move UI to
-		 * specify path to executable. */
-		if(external_tools_ashling_path.isEmpty()) {
-			if (isWindowsOS())
-				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS;
-			else
-				external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
-		}
+                        executeGDBScript("GDB commands", configuration, dtargets,
+                                getExtraCommands(configuration, gdb_init), monitor);
 
-		final String gdbserver_port = configuration.getAttribute(
-				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
-				LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT
-			);
+                        monitor.worked(2);
+                        monitor.subTask("Creating launch target");
+                        if (project != null)
+                            createLaunchTarget(launch, project, exeFile, debugConfig, dtargets,
+                                    configuration, mode);
+                        monitor.subTask("Query target state");
+                        queryTargetState(dtargets);
+                        // This will make the GDB console frontmost.
+                        l.addStragglers();
 
-		final String ashling_xml_file = configuration.getAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH,"");
-		final String jtag_frequency = configuration.getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY,"");
-		System.setProperty("Ashling", external_tools_ashling_path);
-		final File ash_dir = new File(external_tools_ashling_path).getParentFile();
+                        if (eventManager != null)
+                            eventManager.allowProcessingEvents(prevstateAllowEvents);
 
-		final String ash_cmd =
-				external_tools_ashling_path +
-				" --jtag-frequency " + jtag_frequency+
-				" --device" + " arc" +
-				" --gdb-port " + gdbserver_port +
-				" --arc-reg-file " + ashling_xml_file;
-		final IProcess ashling_proc = DebugPlugin.newProcess(
-				launch,
-				DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_dir),
-				ASHLING_PROCESS_LABEL);
-		ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
-	}
-	/**
-	 * Start nSIM GDB server.
-	 *
-	 * @throws CoreException
-	 */
-	private void start_nsim(final ILaunchConfiguration configuration, final ILaunch launch)
-		throws CoreException{
-		 String extenal_tools_nsim_path= configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,"");
-	System.setProperty("nSIM", extenal_tools_nsim_path);
-	String nsim_exec = System.getProperty("nSIM");
-	File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
-	String nsimProps = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
-	String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-	String nsimprops_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
-	String nsimtcf_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
-	String nsimJIT_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
-	String nsimHostlink_Buttonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
-	String nsimMemoExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
-	String nsimEnableExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
-	String nsiminvalid_Instru_ExptButtonboolean=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
-	
-	String nsimjit_thread=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
-	final String gdbserver_port = configuration.getAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
-	String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb ";
-	
-	
-	if(nsiminvalid_Instru_ExptButtonboolean.equalsIgnoreCase("false"))
-	{
-		nsim_cmd += "-off invalid_instruction_interrupt ";
-	}
-	
+                    } catch (Exception e) {
+                        try {
+                            if (dsession != null)
+                                dsession.terminate();
+                        } catch (CDIException e1) {
+                            // ignore
+                        }
+                        MultiStatus status = new MultiStatus(LaunchPlugin.PLUGIN_ID,
+                                ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
+                                "Could not start debug session", e);
+                        LaunchUIPlugin.log(status);
+                        throw new CoreException(status);
 
-	if(nsimEnableExptButtonboolean.equalsIgnoreCase("false"))
-	{
-		nsim_cmd += " -off enable_exceptions ";
-	}
-	
-	if(nsimMemoExptButtonboolean.equalsIgnoreCase("false"))
-	{
-		nsim_cmd += " -off memory_exception_interrupt ";
-	}
-	
-	if(nsimJIT_Buttonboolean.equalsIgnoreCase("true"))
-	{
-		nsim_cmd += " -on nsim_fast ";
-		if(!nsimjit_thread.equalsIgnoreCase("1"))
-		{
-			nsim_cmd += "-p nsim_fast-num-threads="+nsimjit_thread;
-		}
-		
-	}
-	
-	
-	if(nsimHostlink_Buttonboolean.equalsIgnoreCase("true"))
-	{
-		nsim_cmd += " -on nsim_emt ";
-	}
-	
-	if(nsimtcf_Buttonboolean.equalsIgnoreCase("true"))
-	{
-		nsim_cmd += " -tcf " + nsimtcf;
-	}
+                    }
+                }
+            } else {
+                cancel("TargetConfiguration not supported",
+                        ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR);
+            }
+        } finally {
+            monitor.done();
+        }
 
-	if(nsimprops_Buttonboolean.equalsIgnoreCase("true"))
-	{
-		nsim_cmd += " -propsfile " + nsimProps;
-	}
-	
-	IProcess nsim_proc = DebugPlugin.newProcess(
-			launch,
-			DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
-			NSIM_PROCESS_LABEL);
-	nsim_proc.setAttribute(IProcess.ATTR_CMDLINE, nsim_cmd);
-}
-	/**
-	 * Start OpenOCD executable.
-	 *
-	 * @throws CoreException
-	 */
-	private void start_openocd(final ILaunchConfiguration configuration, final ILaunch launch)
-		throws CoreException
-	{
-		String openocd_cfg="";
-		String openocd_custom_configuration_file= configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,"");
+    }
 
-		String gdbserver_port = configuration.getAttribute(
-				IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
-				LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT
-				);
+    /*
+     * @return true---windows
+     */
+    private static boolean isWindowsOS() {
+        boolean isWindowsOS = false;
+        String osName = System.getProperty("os.name");
+        if (osName.toLowerCase().indexOf("windows") > -1) {
+            isWindowsOS = true;
+        }
+        return isWindowsOS;
+    }
 
-		final String openocd_bin = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,"");
+    /**
+     * Start Ashling GDB Server executable.
+     *
+     * @throws CoreException
+     */
+    private void start_ashling(final ILaunchConfiguration configuration, final ILaunch launch)
+            throws CoreException {
+        String external_tools_ashling_path = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH, "");
+
+        /*
+         * TODO Currently we configure directory of Ashling GDBserver not path to executable itself,
+         * which is rather clumsy. Let's move UI to specify path to executable.
+         */
+        if (external_tools_ashling_path.isEmpty()) {
+            if (isWindowsOS())
+                external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS;
+            else
+                external_tools_ashling_path = LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
+        }
+
+        final String gdbserver_port = configuration.getAttribute(
+                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
+                LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
+
+        final String ashling_xml_file = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, "");
+        final String jtag_frequency = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
+        System.setProperty("Ashling", external_tools_ashling_path);
+        final File ash_dir = new File(external_tools_ashling_path).getParentFile();
+
+        final String ash_cmd = external_tools_ashling_path + " --jtag-frequency " + jtag_frequency
+                + " --device" + " arc" + " --gdb-port " + gdbserver_port + " --arc-reg-file "
+                + ashling_xml_file;
+        final IProcess ashling_proc = DebugPlugin.newProcess(launch,
+                DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_dir),
+                ASHLING_PROCESS_LABEL);
+        ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
+    }
+
+    /**
+     * Start nSIM GDB server.
+     *
+     * @throws CoreException
+     */
+    private void start_nsim(final ILaunchConfiguration configuration, final ILaunch launch)
+            throws CoreException {
+        String extenal_tools_nsim_path = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, "");
+        System.setProperty("nSIM", extenal_tools_nsim_path);
+        String nsim_exec = System.getProperty("nSIM");
+        File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
+        String nsimProps = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
+        String nsimtcf = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
+        String nsimprops_Buttonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
+        String nsimtcf_Buttonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
+        String nsimJIT_Buttonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
+        String nsimHostlink_Buttonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
+        String nsimMemoExptButtonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
+        String nsimEnableExptButtonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
+        String nsiminvalid_Instru_ExptButtonboolean = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
+
+        String nsimjit_thread = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
+        final String gdbserver_port = configuration.getAttribute(
+                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
+                LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
+        String nsim_cmd = nsim_exec + " -port " + gdbserver_port + " -gdb ";
+
+        if (nsiminvalid_Instru_ExptButtonboolean.equalsIgnoreCase("false")) {
+            nsim_cmd += "-off invalid_instruction_interrupt ";
+        }
+
+        if (nsimEnableExptButtonboolean.equalsIgnoreCase("false")) {
+            nsim_cmd += " -off enable_exceptions ";
+        }
+
+        if (nsimMemoExptButtonboolean.equalsIgnoreCase("false")) {
+            nsim_cmd += " -off memory_exception_interrupt ";
+        }
+
+        if (nsimJIT_Buttonboolean.equalsIgnoreCase("true")) {
+            nsim_cmd += " -on nsim_fast ";
+            if (!nsimjit_thread.equalsIgnoreCase("1")) {
+                nsim_cmd += "-p nsim_fast-num-threads=" + nsimjit_thread;
+            }
+
+        }
+
+        if (nsimHostlink_Buttonboolean.equalsIgnoreCase("true")) {
+            nsim_cmd += " -on nsim_emt ";
+        }
+
+        if (nsimtcf_Buttonboolean.equalsIgnoreCase("true")) {
+            nsim_cmd += " -tcf " + nsimtcf;
+        }
+
+        if (nsimprops_Buttonboolean.equalsIgnoreCase("true")) {
+            nsim_cmd += " -propsfile " + nsimProps;
+        }
+
+        IProcess nsim_proc = DebugPlugin
+                .newProcess(launch,
+                        DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
+                        NSIM_PROCESS_LABEL);
+        nsim_proc.setAttribute(IProcess.ATTR_CMDLINE, nsim_cmd);
+    }
+
+    /**
+     * Start OpenOCD executable.
+     *
+     * @throws CoreException
+     */
+    private void start_openocd(final ILaunchConfiguration configuration, final ILaunch launch)
+            throws CoreException {
+        String openocd_cfg = "";
+        String openocd_custom_configuration_file = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, "");
+
+        String gdbserver_port = configuration.getAttribute(
+                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
+                LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
+
+        final String openocd_bin = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, "");
 
         FtdiDevice ftdiDevice;
         try {
@@ -648,488 +633,422 @@ public abstract class Launch extends AbstractCLaunchDelegate implements
             ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
         }
 
-		// ${openocd_bin}/../share/openocd/scripts
-		final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
-		final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd" + File.separator + "scripts");
-		final String openocd_tcl = scripts_dir.getAbsolutePath();
+        // ${openocd_bin}/../share/openocd/scripts
+        final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
+        final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd"
+                + File.separator + "scripts");
+        final String openocd_tcl = scripts_dir.getAbsolutePath();
 
         if (ftdiDevice == FtdiDevice.EM_SK_v1x) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_em_sk_v1.cfg";
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
+                    + "snps_em_sk_v1.cfg";
         } else if (ftdiDevice == FtdiDevice.EM_SK_v2x) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_em_sk.cfg";
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
+                    + "snps_em_sk.cfg";
         } else if (ftdiDevice == FtdiDevice.AXS101) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs101.cfg";
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
+                    + "snps_axs101.cfg";
         } else if (ftdiDevice == FtdiDevice.AXS102) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs102.cfg";
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
+                    + "snps_axs102.cfg";
         } else if ((ftdiDevice == FtdiDevice.AXS103) && (ftdiCore == FtdiCore.HS36)) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs103_hs36.cfg";
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
+                    + "snps_axs103_hs36.cfg";
         } else if (ftdiDevice == FtdiDevice.AXS103) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator + "snps_axs103_hs38.cfg";
+            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
+                    + "snps_axs103_hs38.cfg";
         } else if (ftdiDevice == FtdiDevice.CUSTOM) {
             openocd_cfg = openocd_custom_configuration_file;
         }
 
-		/* "gdb_port" is before -f <script> so script file can override our
-		 * settings. Also in case of configuration scripts supplied by
-		 * Synopsys we cannot set gdb_port after -f option - our scripts do
-		 * initialization and changing GDB port after that is not supported
-		 * OpenOCD. */
-		final String openocd_cmd = openocd_bin +
-			" -d0 " +
-			" -c \"gdb_port " + gdbserver_port + "\"" +
-			" -s " + openocd_tcl +
-			" -f " + openocd_cfg;
+        /*
+         * "gdb_port" is before -f <script> so script file can override our settings. Also in case
+         * of configuration scripts supplied by Synopsys we cannot set gdb_port after -f option -
+         * our scripts do initialization and changing GDB port after that is not supported OpenOCD.
+         */
+        final String openocd_cmd = openocd_bin + " -d0 " + " -c \"gdb_port " + gdbserver_port
+                + "\"" + " -s " + openocd_tcl + " -f " + openocd_cfg;
 
-		final IProcess openocd_proc = DebugPlugin.newProcess(
-				launch,
-				DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),
-				OPENOCD_PROCESS_LABEL);
+        final IProcess openocd_proc = DebugPlugin.newProcess(launch,
+                DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),
+                OPENOCD_PROCESS_LABEL);
 
-		openocd_proc.setAttribute(IProcess.ATTR_CMDLINE, openocd_cmd);
-	}
+        openocd_proc.setAttribute(IProcess.ATTR_CMDLINE, openocd_cmd);
+    }
 
-	/**
-	 * Allow subclasses to do their bit before launching. Could be to start a
-	 * simulator.
-	 */
-	protected void prepareSession()
-	{
+    /**
+     * Allow subclasses to do their bit before launching. Could be to start a simulator.
+     */
+    protected void prepareSession() {
 
-	}
+    }
 
-	private void createLaunchTarget(final ILaunch launch, ICProject project,
-			IBinaryObject exeFile, ICDebugConfiguration debugConfig,
-			ICDITarget[] dtargets, ILaunchConfiguration configuration, String mode)
-			throws CoreException
-	{
-		boolean appConsole = getAppConsole(configuration);
-		// create the Launch targets/processes for eclipse.
-		for (int i = 0; i < dtargets.length; i++)
-		{
-			Target target = (Target) dtargets[i];
-			target.setConfiguration(new Configuration(target));
-			Process process = target.getProcess();
-			IProcess iprocess = null;
-			if (appConsole && (process != null))
-			{
-				iprocess = DebugPlugin.newProcess(launch, process,
-						renderProcessLabel(exeFile.getPath().toOSString()));
-			}
+    private void createLaunchTarget(final ILaunch launch, ICProject project, IBinaryObject exeFile,
+            ICDebugConfiguration debugConfig, ICDITarget[] dtargets,
+            ILaunchConfiguration configuration, String mode) throws CoreException {
+        boolean appConsole = getAppConsole(configuration);
+        // create the Launch targets/processes for eclipse.
+        for (int i = 0; i < dtargets.length; i++) {
+            Target target = (Target) dtargets[i];
+            target.setConfiguration(new Configuration(target));
+            Process process = target.getProcess();
+            IProcess iprocess = null;
+            if (appConsole && (process != null)) {
+                iprocess = DebugPlugin.newProcess(launch, process, renderProcessLabel(exeFile
+                        .getPath().toOSString()));
+            }
 
-			boolean stopInMain = configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, false);
-			String stopSymbol = null;
-			// Do not stop at symbol (usually it is main) if it is "Run" configuration, not "Debug" one.
-			if (stopInMain && mode.equalsIgnoreCase(ILaunchManager.DEBUG_MODE))
-				stopSymbol = launch.getLaunchConfiguration().getAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL, 
-						ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
+            boolean stopInMain = configuration.getAttribute(
+                    ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, false);
+            String stopSymbol = null;
+            // Do not stop at symbol (usually it is main) if it is "Run" configuration, not "Debug"
+            // one.
+            if (stopInMain && mode.equalsIgnoreCase(ILaunchManager.DEBUG_MODE))
+                stopSymbol = launch.getLaunchConfiguration().getAttribute(
+                        ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL,
+                        ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
 
+            CDIDebugModel
+                    .newDebugTarget(launch, project.getProject(), dtargets[i],
+                            renderTargetLabel(debugConfig), iprocess, exeFile, true, true,
+                            stopSymbol, true);
+        }
+    }
 
-			CDIDebugModel.newDebugTarget(launch, project.getProject(),
-					dtargets[i], renderTargetLabel(debugConfig), iprocess,exeFile, true, true, stopSymbol, true);
-		}
-	}
+    private boolean getAppConsole(ILaunchConfiguration configuration) throws CoreException {
+        boolean appConsole = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE,
+                LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE_DEFAULT);
+        return appConsole;
+    }
 
-	private boolean getAppConsole(ILaunchConfiguration configuration)
-			throws CoreException
-	{
-		boolean appConsole = configuration.getAttribute(
-				LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE,
-				LaunchConfigurationConstants.ATTR_DEBUGGER_APP_CONSOLE_DEFAULT);
-		return appConsole;
-	}
+    public void runGDBInit(ILaunchConfiguration configuration, ICDITarget[] dtargets,
+            IProgressMonitor monitor) throws CoreException {
+        String iniFile = configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_GDB_INIT,
+                IMILaunchConfigurationConstants.DEBUGGER_GDB_INIT_DEFAULT);
 
-	public void runGDBInit(ILaunchConfiguration configuration,
-			ICDITarget[] dtargets, IProgressMonitor monitor)
-			throws CoreException
-	{
-		String iniFile = configuration.getAttribute(
-				IMILaunchConfigurationConstants.ATTR_GDB_INIT,
-				IMILaunchConfigurationConstants.DEBUGGER_GDB_INIT_DEFAULT);
+        if (iniFile.equals("") || !new File(iniFile).exists())
+            return;
 
-		if (iniFile.equals("") || !new File(iniFile).exists())
-			return;
+        try {
+            executeGDBScript("GDB commands", configuration, dtargets,
+                    getExtraCommands(configuration, "source " + fixPath(iniFile)), monitor);
 
-		try
-		{
-			executeGDBScript("GDB commands", configuration, dtargets,getExtraCommands(configuration, "source " +fixPath(iniFile)), monitor);
+        } catch (Exception e) {
+            MultiStatus status = new MultiStatus(getPluginID(),
+                    ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
+                    "Executing GDB startup file", e);
+            CDebugCorePlugin.log(status);
+        }
+    }
 
-		} catch (Exception e)
-		{
-			MultiStatus status = new MultiStatus(getPluginID(),
-					ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
-					"Executing GDB startup file", e);
-			CDebugCorePlugin.log(status);
-		}
-	}
+    // Do we need to upload the file to the target?
+    protected void uploadFile(IProgressMonitor monitor, ILaunchConfiguration configuration)
+            throws CoreException {
 
-	// Do we need to upload the file to the target?
-	protected void uploadFile(IProgressMonitor monitor,
-			ILaunchConfiguration configuration) throws CoreException
-	{
+    }
 
-	}
+    // We need to override the parser to be able to handle output "monitor"
+    // commands.
+    private void patchSession(ILaunchConfiguration configuration) throws CoreException {
+        if (getAppConsole(configuration))
+            return;
+        ICDITarget[] dtargets = dsession.getTargets();
+        for (int i = 0; i < dtargets.length; ++i) {
+            Target target = (Target) dtargets[i];
+            MISession miSession = target.getMISession();
 
-	// We need to override the parser to be able to handle output "monitor"
-	// commands.
-	private void patchSession(ILaunchConfiguration configuration)
-			throws CoreException
-	{
-		if (getAppConsole(configuration))
-			return;
-		ICDITarget[] dtargets = dsession.getTargets();
-		for (int i = 0; i < dtargets.length; ++i)
-		{
-			Target target = (Target) dtargets[i];
-			MISession miSession = target.getMISession();
+            miSession.setMIParser(new MIParser() {
 
-			miSession.setMIParser(new MIParser()
-			{
+                @Override
+                public MIOutput parse(String buffer) {
+                    // Convert from:
+                    // @"target already halted\\n"\n
+                    // to:
+                    // &"set remotetimeout 100\\n"\n
+                    //
+                    // Also CDT interprets any other string e.g. from "shell"
+                    // command
+                    // as coming from the target. We want everything into the
+                    // gdb console.
+                    //
+                    // This will make output from "monitor" commands visible as
+                    // the
+                    // remote protocol does not have a way to distinguish
+                    // between
+                    // output from the application and "monitor" commands.
+                    MIOutput o = super.parse(buffer);
 
-				@Override
-				public MIOutput parse(String buffer)
-				{
-					// Convert from:
-					// @"target already halted\\n"\n
-					// to:
-					// &"set remotetimeout 100\\n"\n
-					//
-					// Also CDT interprets any other string e.g. from "shell"
-					// command
-					// as coming from the target. We want everything into the
-					// gdb console.
-					//
-					// This will make output from "monitor" commands visible as
-					// the
-					// remote protocol does not have a way to distinguish
-					// between
-					// output from the application and "monitor" commands.
-					MIOutput o = super.parse(buffer);
+                    MIOOBRecord[] oobs = o.getMIOOBRecords();
+                    for (int i = 0; i < oobs.length; i++) {
+                        if (oobs[i] instanceof MITargetStreamOutput) {
+                            MITargetStreamOutput t = (MITargetStreamOutput) oobs[i];
+                            MIConsoleStreamOutput c = new MIConsoleStreamOutput();
+                            c.setCString(t.getCString());
+                            oobs[i] = c;
 
-					MIOOBRecord[] oobs = o.getMIOOBRecords();
-					for (int i = 0; i < oobs.length; i++)
-					{
-						if (oobs[i] instanceof MITargetStreamOutput)
-						{
-							MITargetStreamOutput t = (MITargetStreamOutput) oobs[i];
-							MIConsoleStreamOutput c = new MIConsoleStreamOutput();
-							c.setCString(t.getCString());
-							oobs[i] = c;
+                        }
+                    }
+                    return o;
+                }
 
-						}
-					}
-					return o;
-				}
+            });
+        }
+    }
 
-			});
-		}
-	}
+    /** We always talk to a GDB server, set it up. */
+    private void setupTargets(ICDITarget[] dtargets) {
+        for (int i = 0; i < dtargets.length; ++i) {
+            Target target = (Target) dtargets[i];
+            MISession miSession = target.getMISession();
 
-	
-	/** We always talk to a GDB server, set it up. */
-	private void setupTargets(ICDITarget[] dtargets)
-	{
-		for (int i = 0; i < dtargets.length; ++i)
-		{
-			Target target = (Target) dtargets[i];
-			MISession miSession = target.getMISession();
-			
-			/*
-			 * We're running against a GDB server. 
-			 */
-//			miSession.getMIInferior().setIsRemoteInferior(true);
-			/* Tell CDT not to try to figure out the process ID! It makes
-			 * no sense for embedded.
-			 */
-			miSession.getMIInferior().setInferiorPID(-1);
-		}
-	}
+            /*
+             * We're running against a GDB server.
+             */
+            // miSession.getMIInferior().setIsRemoteInferior(true);
+            /*
+             * Tell CDT not to try to figure out the process ID! It makes no sense for embedded.
+             */
+            miSession.getMIInferior().setInferiorPID(-1);
+        }
+    }
 
+    private void queryTargetState(ICDITarget[] dtargets) {
+        // Try to detect if we have been attach/connected via "target remote
+        // localhost:port"
+        // or "attach" and set the state to be suspended.
+        for (int i = 0; i < dtargets.length; ++i) {
+            Target target = (Target) dtargets[i];
+            MISession miSession = target.getMISession();
+            CommandFactory factory = miSession.getCommandFactory();
+            try {
+                MIStackListFrames frames = factory.createMIStackListFrames();
+                miSession.postCommand(frames, 1000);
+                MIInfo info = frames.getMIInfo();
+                if (info == null) {
+                    throw new MIException("GDB state query failed"); //$NON-NLS-1$
+                } else {
+                    // @@@ We have to manually set the suspended state since we
+                    // have some stackframes
+                    miSession.getMIInferior().setSuspended();
+                    miSession.getMIInferior().update();
+                }
+            } catch (MIException e) {
+                // If an exception is thrown that means ok
+                // we did not attach/connect to any target.
+            }
+        }
+    }
 
-	private void queryTargetState(ICDITarget[] dtargets)
-	{
-		// Try to detect if we have been attach/connected via "target remote
-		// localhost:port"
-		// or "attach" and set the state to be suspended.
-		for (int i = 0; i < dtargets.length; ++i)
-		{
-			Target target = (Target) dtargets[i];
-			MISession miSession = target.getMISession();
-			CommandFactory factory = miSession.getCommandFactory();
-			try
-			{
-				MIStackListFrames frames = factory.createMIStackListFrames();
-				miSession.postCommand(frames, 1000);
-				MIInfo info = frames.getMIInfo();
-				if (info == null)
-				{
-					throw new MIException("GDB state query failed"); //$NON-NLS-1$
-				} else
-				{
-					// @@@ We have to manually set the suspended state since we
-					// have some stackframes
-					miSession.getMIInferior().setSuspended();
-					miSession.getMIInferior().update();
-				}
-			} catch (MIException e)
-			{
-				// If an exception is thrown that means ok
-				// we did not attach/connect to any target.
-			}
-		}
-	}
+    public void executeGDBScript(String scriptSource, ILaunchConfiguration configuration,
+            ICDITarget[] dtargets, String[] extraCommands2, IProgressMonitor monitor)
+            throws CoreException {
+        // Try to execute any extract command
+        String[] commands = extraCommands2;
+        for (int i = 0; i < dtargets.length; ++i) {
+            Target target = (Target) dtargets[i];
+            final MISession miSession = target.getMISession();
+            // Could we manage to add back the prompt here by creating or
+            // ownMIParser? It wouldn't be pretty...
+            // MIParser m=new EmbeddedMIParser();
+            // miSession.setMIParser(m);
+            for (int j = 0; j < commands.length; ++j) {
+                try {
+                    if (monitor.isCanceled())
+                        return;
+                    // Skip comments
+                    if (commands[j].startsWith("#"))
+                        continue;
+                    monitor.subTask(scriptSource + ": " + commands[j]);
 
-	public void executeGDBScript(String scriptSource,
-			ILaunchConfiguration configuration, ICDITarget[] dtargets,
-			String[] extraCommands2, IProgressMonitor monitor)
-			throws CoreException
-	{
-		// Try to execute any extract command
-		String[] commands = extraCommands2;
-		for (int i = 0; i < dtargets.length; ++i)
-		{
-			Target target = (Target) dtargets[i];
-			final MISession miSession = target.getMISession();
-			// Could we manage to add back the prompt here by creating or
-			// ownMIParser? It wouldn't be pretty...
-// MIParser m=new EmbeddedMIParser();
-// miSession.setMIParser(m);
-			for (int j = 0; j < commands.length; ++j)
-			{
-				try
-				{
-					if (monitor.isCanceled())
-						return;
-					// Skip comments
-					if (commands[j].startsWith("#"))
-						continue;
-					monitor.subTask(scriptSource + ": " + commands[j]);
+                    final CLICommand cli = new CLICommand(commands[j]);
+                    // cli.setSilent(false);
+                    RunCommand result = new RunCommand(cli, miSession);
+                    Thread t = new Thread(result);
+                    t.start();
+                    while (t.isAlive()) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        if (monitor.isCanceled()) {
+                            // stop session
+                            miSession.terminate();
+                        }
+                    }
 
-					final CLICommand cli = new CLICommand(commands[j]);
-					// cli.setSilent(false);
-					RunCommand result = new RunCommand(cli, miSession);
-					Thread t = new Thread(result);
-					t.start();
-					while (t.isAlive())
-					{
-						try
-						{
-							Thread.sleep(100);
-						} catch (InterruptedException e)
-						{
-							throw new RuntimeException(e);
-						}
-						if (monitor.isCanceled())
-						{
-							// stop session
-							miSession.terminate();
-						}
-					}
+                    if (result.result != null) {
+                        throw result.result;
+                    }
 
-					if (result.result != null)
-					{
-						throw result.result;
-					}
+                    MIInfo info = cli.getMIInfo();
+                    if (info == null) {
+                        throw new MIException("Timeout: " + commands[j]); //$NON-NLS-1$
+                    }
+                } catch (MIException e) {
+                    MultiStatus status = new MultiStatus(getPluginID(),
+                            ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR, "Failed command: "
+                                    + commands[j], e);
+                    status.add(new Status(IStatus.ERROR, getPluginID(),
+                            ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
+                            e == null ? "" : e.getLocalizedMessage(), //$NON-NLS-1$
+                            e));
+                    CDebugCorePlugin.log(status);
+                }
+            }
+        }
+    }
 
-					MIInfo info = cli.getMIInfo();
-					if (info == null)
-					{
-						throw new MIException("Timeout: " + commands[j]); //$NON-NLS-1$
-					}
-				} catch (MIException e)
-				{
-					MultiStatus status = new MultiStatus(
-							getPluginID(),
-							ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
-							"Failed command: " + commands[j], e);
-					status
-							.add(new Status(
-									IStatus.ERROR,
-									getPluginID(),
-									ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
-									e == null ? "" : e.getLocalizedMessage(), //$NON-NLS-1$
-									e));
-					CDebugCorePlugin.log(status);
-				}
-			}
-		}
-	}
+    protected String getPluginID() {
+        return LaunchPlugin.PLUGIN_ID;
+    }
 
-	protected String getPluginID()
-	{
-		return LaunchPlugin.PLUGIN_ID;
-	}
+    protected String[] getExtraCommands(ILaunchConfiguration configuration, String commands2)
+            throws CoreException {
+        String commands = commands2;
+        if (commands != null && commands.length() > 0) {
+            StringTokenizer st = new StringTokenizer(commands, "\r\n");
+            String[] cmds = new String[st.countTokens()];
+            for (int i = 0; st.hasMoreTokens(); ++i) {
+                cmds[i] = st.nextToken();
+            }
+            return cmds;
+        }
+        return new String[0];
+    }
 
-	protected String[] getExtraCommands(ILaunchConfiguration configuration,
-			String commands2) throws CoreException
-	{
-		String commands = commands2;
-		if (commands != null && commands.length() > 0)
-		{
-			StringTokenizer st = new StringTokenizer(commands, "\r\n");
-			String[] cmds = new String[st.countTokens()];
-			for (int i = 0; st.hasMoreTokens(); ++i)
-			{
-				cmds[i] = st.nextToken();
-			}
-			return cmds;
-		}
-		return new String[0];
-	}
+    /**
+     * embedded targets should not rebuild before launching the debugger as flash programming might
+     * be done out of bands.
+     */
+    public boolean buildForLaunch(ILaunchConfiguration configuration, String mode,
+            IProgressMonitor monitor) throws CoreException {
+        return false;
+    }
 
-	/**
-	 * embedded targets should not rebuild before launching the debugger as
-	 * flash programming might be done out of bands.
-	 */
-	public boolean buildForLaunch(ILaunchConfiguration configuration,
-			String mode, IProgressMonitor monitor) throws CoreException
-	{
-		return false;
-	}
+    /**
+     * Translate Windows speak to host GDB speak(e.g. CygWin or MinGW).
+     */
+    abstract public String fixPath(String line);
 
-	/**
-	 * Translate Windows speak to host GDB speak(e.g. CygWin or MinGW).
-	 */
-	abstract public String fixPath(String line);
+    @SuppressWarnings("deprecation")
+    protected IPath verifyProgramPath(ILaunchConfiguration config, ICProject project)
+            throws CoreException {
+        IPath p = getProgramPath(config);
+        boolean dummy = false;
+        if (p == null) {
+            // no executable specified, we just need something to silence
+            // the angry CDT code, which doesn't have a concept of launching
+            // a debug session without an executable
+            p = new Path("dummy.elf");
+            dummy = true;
+        }
 
-	@SuppressWarnings("deprecation")
-	protected IPath verifyProgramPath(ILaunchConfiguration config,
-			ICProject project) throws CoreException
-	{
-		IPath p = getProgramPath(config);
-		boolean dummy=false;
-		if (p == null)
-		{
-			// no executable specified, we just need something to silence
-			// the angry CDT code, which doesn't have a concept of launching
-			// a debug session without an executable
-			p = new Path("dummy.elf");
-			dummy=true;
-		}
+        // always exercise this statement.
+        File f;
+        IPath path_to_return;
 
-		// always exercise this statement.
-		File f;
-		IPath path_to_return;
+        if (p.isAbsolute()) {
+            f = new File(p.toOSString());
+            path_to_return = p;
+        } else {
+            // Convert to absolute path.
+            // That will handle cases where path is like ..\a\b\c
+            f = new File(project.getResource().getLocation().toFile(), p.toOSString());
+            path_to_return = new Path(f.getAbsolutePath());
+        }
 
-		if (p.isAbsolute())
-		{
-			f = new File(p.toOSString());
-			path_to_return = p;
-		} else
-		{
-			// Convert to absolute path.
-			// That will handle cases where path is like ..\a\b\c
-			f = new File(project.getResource().getLocation().toFile(), p.toOSString());
-			path_to_return = new Path(f.getAbsolutePath());
-		}
+        // Handle cases with virtual/linked paths. Strangely same code doesn't
+        // work properly with physical relative paths, consequently we have to
+        // handle those cases separately.
+        if (!dummy && !f.exists()) {
+            path_to_return = project.getProject().getFile(p).getLocation();
+            f = path_to_return.toFile();
+        }
 
-		// Handle cases with virtual/linked paths. Strangely same code doesn't
-		// work properly with physical relative paths, consequently we have to
-		// handle those cases separately.
-		if (!dummy&&!f.exists())
-		{
-			path_to_return = project.getProject().getFile(p).getLocation();
-			f = path_to_return.toFile();
-		}
+        if (!dummy && !f.exists()) {
+            abort(LaunchMessages.getString("AbstractCLaunchDelegate.Program_file_does_not_exist"), //$NON-NLS-1$
+                    new FileNotFoundException(LaunchMessages.getFormattedString(
+                            "AbstractCLaunchDelegate.PROGRAM_PATH_not_found", f.toString())), //$NON-NLS-1$
+                    ICDTLaunchConfigurationConstants.ERR_PROGRAM_NOT_EXIST);
+            return null;
+        }
 
-		if (!dummy&&!f.exists())
-		{
-			abort(
-					LaunchMessages.getString("AbstractCLaunchDelegate.Program_file_does_not_exist"), //$NON-NLS-1$
-					new FileNotFoundException(
-							LaunchMessages.getFormattedString(
-																"AbstractCLaunchDelegate.PROGRAM_PATH_not_found", f.toString())), //$NON-NLS-1$
-					ICDTLaunchConfigurationConstants.ERR_PROGRAM_NOT_EXIST);
-			return null;
-		}
-		
-		return path_to_return;
-	}
+        return path_to_return;
+    }
 
-	@Override
-	protected IBinaryObject verifyBinary(ICProject proj, IPath exePath)
-			throws CoreException {
-		
-			try
-			{
-				 IBinaryObject tmp = super.verifyBinary(proj, exePath);
-				 if (tmp == null)
-				 {
-					 /* CDT 7 started returning null from verifyBinary()... */
-					 throw new Exception();
-				 }
-				 return tmp;
-			} catch (Exception e)
-			{
-				return new BinaryObjectAdapter(null, exePath,	-1 // none of CDT's business
-						)
-				{
-					IAddressFactory factory=new FakeAddressFactory();
-					@Override
-					public IAddressFactory getAddressFactory()
-					{
-						return factory;
-					}
+    @Override
+    protected IBinaryObject verifyBinary(ICProject proj, IPath exePath) throws CoreException {
 
-					@Override
-					protected BinaryObjectInfo getBinaryObjectInfo()
-					{
-						return null; // seems to work...
-					}
+        try {
+            IBinaryObject tmp = super.verifyBinary(proj, exePath);
+            if (tmp == null) {
+                /* CDT 7 started returning null from verifyBinary()... */
+                throw new Exception();
+            }
+            return tmp;
+        } catch (Exception e) {
+            return new BinaryObjectAdapter(null, exePath, -1 // none of CDT's business
+            ) {
+                IAddressFactory factory = new FakeAddressFactory();
 
-					@Override
-					public ISymbol[] getSymbols()
-					{
-						return null; // seems to work
-					}
-				};
-				
-			}
-	}
+                @Override
+                public IAddressFactory getAddressFactory() {
+                    return factory;
+                }
 
-	public File getStartDir()
-	{
-		return myProject.getResource().getLocation().toFile();
-	}
+                @Override
+                protected BinaryObjectInfo getBinaryObjectInfo() {
+                    return null; // seems to work...
+                }
 
-	public void handleDebugEvents(ICDIEvent[] events)
-	{
-		for (int i = 0; i < events.length; i++)
-		{
-			ICDIEvent event = events[i];
-			if (event instanceof ICDIDestroyedEvent)
-			{
-			}
-		}
-	}
+                @Override
+                public ISymbol[] getSymbols() {
+                    return null; // seems to work
+                }
+            };
 
-	/** Convenient spot for subclasses to destroy things belonging to this event */
-	protected void debugSessionEnded()
-	{
-	}
+        }
+    }
 
-	public static List COMserialport()
-	{
-		List<String> list = new ArrayList<String>();
-		try {
-			Enumeration portIdEnum= CommPortIdentifier.getPortIdentifiers();
-			while (portIdEnum.hasMoreElements()) {
-				CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
-				String strName = identifier.getName();
-				int nPortType = identifier.getPortType();
+    public File getStartDir() {
+        return myProject.getResource().getLocation().toFile();
+    }
 
-				if (nPortType == CommPortIdentifier.PORT_SERIAL)
-					list.add(strName);
-			}
+    public void handleDebugEvents(ICDIEvent[] events) {
+        for (int i = 0; i < events.length; i++) {
+            ICDIEvent event = events[i];
+            if (event instanceof ICDIDestroyedEvent) {
+            }
+        }
+    }
 
-		} catch (IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if(list.size()<1) {
-			list.add("Please connect to EM Starter Kit");
-		}
-		return list;
-	}
+    /** Convenient spot for subclasses to destroy things belonging to this event */
+    protected void debugSessionEnded() {
+    }
 
-	  
+    public static List COMserialport() {
+        List<String> list = new ArrayList<String>();
+        try {
+            Enumeration portIdEnum = CommPortIdentifier.getPortIdentifiers();
+            while (portIdEnum.hasMoreElements()) {
+                CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
+                String strName = identifier.getName();
+                int nPortType = identifier.getPortType();
+
+                if (nPortType == CommPortIdentifier.PORT_SERIAL)
+                    list.add(strName);
+            }
+
+        } catch (IllegalArgumentException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        if (list.size() < 1) {
+            list.add("Please connect to EM Starter Kit");
+        }
+        return list;
+    }
+
 }
