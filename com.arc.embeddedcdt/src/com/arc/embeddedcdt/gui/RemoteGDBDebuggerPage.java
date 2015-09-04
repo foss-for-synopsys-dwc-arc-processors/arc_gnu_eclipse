@@ -749,11 +749,11 @@ private void createTabitemCOMAshling(Composite subComp) {
         fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath",
                 "OpenOCD configuration file", compCOM);
         fOpenOCDConfigPath.setEnabled(false, compCOM);
-        fOpenOCDConfigPath.setStringValue(externaltools_openocd_path);
+        fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
         fOpenOCDConfigPath.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    externaltools_openocd_path = (String) event.getNewValue();
+                    openocd_cfg_path = (String) event.getNewValue();
                     updateLaunchConfigurationDialog();
                 }
             }
