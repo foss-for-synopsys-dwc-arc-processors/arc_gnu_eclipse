@@ -3,8 +3,8 @@
     type="ProjTempl" version="1.0" supplier="Eclipse.org" revision="1.0"
     author="Bala Torati (Symbian), Synopsys Inc."
     copyright="Copyright (c) 2007 Symbian Software Limited and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html"
-    id="AXS102_Empty_CPP_Project"
-    label="%Emptyaxs102.CCtemplate.label" description="%Emptyaxs102.CCtemplate.description"
+    id="AXS102_HS34_Empty_CPP_Project"
+    label="%Emptyaxs102hs34.CCtemplate.label" description="%Emptyaxs102hs34.CCtemplate.description"
     help="help.html">
 
 	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
