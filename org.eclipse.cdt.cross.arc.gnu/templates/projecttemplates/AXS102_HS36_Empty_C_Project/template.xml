@@ -44,17 +44,6 @@
 		<simple name="projectName" value="$(projectName)"/>
 		<complex-array name="resourcePaths">
 			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.fpuhs" />
-				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_all" />
-				<simple name="path" value="" />
-			</element>
-		</complex-array>
-	</process>
-
-	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
-		<simple name="projectName" value="$(projectName)"/>
-		<complex-array name="resourcePaths">
-			<element>
 				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile" />
 				<simple name="value" value="${workspace_loc:${ProjName}}/lds/arcelf.lds" />
 				<simple name="path" value="" />
