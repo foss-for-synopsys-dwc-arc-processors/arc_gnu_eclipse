@@ -10,7 +10,10 @@
  *******************************************************************************/
 package org.eclipse.cdt.cross.arc.gnu.uclibc.common;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.eclipse.core.runtime.Platform;
 
@@ -85,4 +88,23 @@ public class CommandInfo {
         return System.getProperty("os.name").indexOf("indow") > 0;
     }
 
+    /**
+     * Check whether GCC is built for ARC HS or not. It's implemented by scanning output of "gcc -v"
+     * command and looking for "--with-cpu=archs" substring.
+     *
+     * @param pathToGcc path to the GCC binary
+     * @return true if GCC is built for ARC HS
+     * @throws IOException
+     */
+    public static boolean isGccForArcHs(String pathToGcc) throws IOException {
+        String[] cmd = { pathToGcc, "-v" };
+        Process p = Runtime.getRuntime().exec(cmd);
+        BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+        String line;
+        while ((line = br.readLine()) != null) {
+            if (line.indexOf("--with-cpu=archs") > -1)
+                return true;
+        }
+        return false;
+    }
 }

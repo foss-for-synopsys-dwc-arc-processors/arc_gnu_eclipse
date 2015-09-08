@@ -11,6 +11,7 @@
 package org.eclipse.cdt.cross.arc.gnu.uclibc.common;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,7 +61,22 @@ public abstract class IsToolChainSupported implements
                         + "bin" + File.separator;
                 if (current_tool_command.indexOf(predefined_path) < 0) {
                     tool.setToolCommand(predefined_path + current_tool_command);
+                    current_tool_command = tool.getToolCommand();
                 }
+            }
+
+            if (current_tool_command.endsWith("-gcc")) {
+                boolean gccForArcHs;
+                try {
+                    gccForArcHs = CommandInfo.isGccForArcHs(current_tool_command);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+                boolean toolchainForArcHs = oToolChain.getName().indexOf("ARC HS") > -1;
+                if (gccForArcHs != toolchainForArcHs)
+                    return false;
             }
         }
 
