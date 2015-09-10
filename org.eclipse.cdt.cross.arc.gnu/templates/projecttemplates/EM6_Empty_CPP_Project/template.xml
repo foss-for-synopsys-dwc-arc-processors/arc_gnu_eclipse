@@ -33,6 +33,17 @@
 		<simple name="projectName" value="$(projectName)"/>
 		<complex-array name="resourcePaths">
 			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem" />
+				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.6" />
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="resourcePaths">
+			<element>
 				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" />
 				<simple name="value" value="${workspace_loc:${ProjName}}/lds/arcelf.lds" />
 				<simple name="path" value="" />
