@@ -3807,7 +3807,7 @@
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.mpyhs"
                name="Multiply instructions (ARC HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
          </option>
