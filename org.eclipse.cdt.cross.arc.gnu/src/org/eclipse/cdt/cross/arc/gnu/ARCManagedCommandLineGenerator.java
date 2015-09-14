@@ -82,7 +82,6 @@ import org.eclipse.core.runtime.Platform;
        String sDebugProf = null;
    
        String sDebugGProf = null;
-       String sshiftassist= null; 
        String satomic = null;
        String sll64 = null;
        String smfpi= null;
@@ -225,11 +224,7 @@ import org.eclipse.core.runtime.Platform;
                    (sID.indexOf(".option.target.lock.") > 0)&&sProcessor.equalsIgnoreCase("-mcpu=arc700")) {               //Customized for ARC GNU ea
                    if (bVal)                                                   //Customized for ARC GNU ea
                    smxy = sCommand; 
-           } else if ((sID.endsWith(".option.target.shiftassist")) ||  
-                   (sID.indexOf(".option.target.shiftassist.") > 0)) {       
-               if (bVal)                                                  
-                 sshiftassist = sCommand;                                
-           }
+           } 
            else if ((sID.endsWith(".option.target.atomic")) ||  
                    (sID.indexOf(".option.target.atomic.") > 0)) {       
                if (bVal)                                                  
@@ -328,9 +323,6 @@ import org.eclipse.core.runtime.Platform;
        if ((smxy != null) && (smxy.length() > 0)) {                 
            oList.add(smxy);                                              
            } 
-       if ((sshiftassist != null) && (sshiftassist.length() > 0)) {           
-           oList.add(sshiftassist);                                         
-           }
        if ((satomic != null) && (satomic.length() > 0)) {                
            oList.add(satomic);                                             
            }  
