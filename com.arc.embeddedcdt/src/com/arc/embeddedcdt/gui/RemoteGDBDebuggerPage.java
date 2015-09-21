@@ -972,6 +972,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         });
 
         fLaunchtcfButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
+        fLaunchtcfButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
         fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
         gd = new GridData(SWT.BEGINNING);
         gd.horizontalSpan = 3;
@@ -992,6 +993,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 compnSIM);
 
         fLaunchPropsButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
+        fLaunchPropsButton.setToolTipText("-propsfile=path");
         fLaunchPropsButton.setSelection(Boolean
                 .parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
         gd = new GridData(SWT.BEGINNING);
@@ -1057,8 +1059,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fLaunchJITButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
         fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
         fLaunchJITButton.setText("JIT");
-
+        fLaunchJITButton.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
         JIT_threadspinner = new Spinner(compnSIM, SWT.NONE | SWT.BORDER);
+        JIT_threadspinner.setToolTipText("Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
         final Label labeljit = new Label(compnSIM, SWT.BEGINNING);
         labeljit.setText("JIT threads");
         JIT_threadspinner.setValues(1, 1, 100, 10, 1, 0);
@@ -1112,6 +1115,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         gdnsimui.horizontalSpan = 2;
 
         fLaunchHostlinkButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
+        fLaunchHostlinkButton.setToolTipText("Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property works only if the application that is being simulated is compiled with the ARC GCC compiler.");
         fLaunchHostlinkButton.setSelection(Boolean
                 .parseBoolean(fLaunchexternal_nsimhostlink_Buttonboolean));
         fLaunchHostlinkButton.setText("GNU host I/O support");
@@ -1134,6 +1138,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fLaunchHostlinkButton.setLayoutData(gdnsimui);
 
         fLaunchMemoexptButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
+        fLaunchMemoexptButton.setToolTipText("Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
         fLaunchMemoexptButton.setSelection(Boolean
                 .parseBoolean(fLaunchexternal_nsimMemoExceButtonboolean));
         fLaunchMemoexptButton.setText("Memory Exception");
@@ -1159,6 +1164,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fLaunchEnableExptButton.setSelection(Boolean
                 .parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
         fLaunchEnableExptButton.setText("Enable Exception");
+        fLaunchEnableExptButton.setToolTipText("Simulate (1) or break (0) on any exception (-p enable_exceptions={0,1})");
         fLaunchEnableExptButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchEnableExptButton.getSelection() == true) {
@@ -1178,6 +1184,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fLaunchEnableExptButton.setLayoutData(gdnsimui);
 
         fLaunchInvalid_Instru_ExptButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
+        fLaunchInvalid_Instru_ExptButton.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
         fLaunchInvalid_Instru_ExptButton.setSelection(Boolean
                 .parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
         fLaunchInvalid_Instru_ExptButton.setText("Invalid Instruction  Exception");
