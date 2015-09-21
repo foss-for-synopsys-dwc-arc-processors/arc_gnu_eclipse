@@ -40,7 +40,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
@@ -255,12 +254,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
      * Get default path to nSIM application nsimdrv.
      */
     private static String getNsimdrvDefaultPath() {
-        if (isWindowsOS()) {
-            return System.getenv("NSIM_HOME") + java.io.File.separator + "bin"
-                    + java.io.File.separator + "nsimdrv.exe";
-        } else {
-            return System.getenv("NSIM_HOME") + java.io.File.separator + "bin"
-                    + java.io.File.separator + "nsimdrv";
+        String nsim_home = System.getenv("NSIM_HOME");
+        if (nsim_home == null)
+            return "";
+        else {
+            String path = nsim_home + java.io.File.separator + "bin" + java.io.File.separator
+                    + "nsimdrv";
+            if (isWindowsOS()) {
+                return path + ".exe";
+            } else {
+                return path;
+            }
         }
     }
 
