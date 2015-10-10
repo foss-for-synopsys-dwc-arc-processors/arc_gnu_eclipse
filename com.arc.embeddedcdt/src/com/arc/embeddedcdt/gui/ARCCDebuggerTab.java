@@ -314,9 +314,13 @@ import com.ibm.icu.text.MessageFormat;
     return false;
     }
     }
-    if (super.isValid(config) == false) {
-    return false;
-    }
+        setErrorMessage(null);
+        setMessage(null);
+
+        ICDebuggerPage dynamicTab = getDynamicTab();
+        if (dynamicTab != null) {
+            return dynamicTab.isValid(config);
+        }
     return true;
     }
     protected boolean validatePlatform(ILaunchConfiguration config, ICDebugConfiguration debugConfig) {
