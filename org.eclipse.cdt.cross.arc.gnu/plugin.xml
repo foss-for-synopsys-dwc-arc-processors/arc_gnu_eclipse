@@ -42,6 +42,26 @@
             name="ARC Cross ELF32 Target Static Library"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
+      <propertyValue
+            id="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            name="AXS101 Projects"
+            property="org.eclipse.cdt.build.core.buildArtefactType">
+      </propertyValue>
+      <propertyValue
+            id="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application"
+            name="AXS102 Projects"
+            property="org.eclipse.cdt.build.core.buildArtefactType">
+      </propertyValue>
+      <propertyValue
+            id="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
+            name="AXS103 Projects"
+            property="org.eclipse.cdt.build.core.buildArtefactType">
+      </propertyValue>
+      <propertyValue
+            id="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application"
+            name="EM Starter Kit Projects"
+            property="org.eclipse.cdt.build.core.buildArtefactType">
+      </propertyValue>
    </extension>
    
    <!-- eb discovery extensions -->
@@ -696,13 +716,17 @@
                value="true"
                valueHandler="org.eclipse.cdt.cross.arc.gnu.ARCAdditionalToolsManagedOptionValueHandler"
                valueType="boolean">
-            <enablement
-                  type="ALL">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
+            <supportedProperties>
+               <property
+                     id="org.eclipse.cdt.build.core.buildType">
+                  <value
+                        id="org.eclipse.cdt.build.core.buildType.debug">
+                  </value>
+                  <value
+                        id="org.eclipse.cdt.build.core.buildType.release">
+                  </value>
+               </property>
+            </supportedProperties>
          </option>
          <option id="org.eclipse.cdt.cross.arc.gnu.base.option.target.endiannes"
          		 name="Endianness"
@@ -1942,21 +1966,6 @@
             name="ARC ELF32 GCC C Linker"
             natureFilter="cnature"
             outputFlag="-o">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildArtefactType">
-               <value
-                     id="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </value>
-            </property>
-         </supportedProperties>
          <envVarBuildPath
                pathType="buildpathLibrary"
                variableList="LIBRARY_PATH">
@@ -2124,21 +2133,6 @@
             name="ARC ELF32 GCC C++ Linker"
             natureFilter="ccnature"
             outputFlag="-o">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildArtefactType">
-               <value
-                     id="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </value>
-            </property>
-         </supportedProperties>
          <envVarBuildPath
                pathType="buildpathLibrary"
                variableList="LIBRARY_PATH">
@@ -2296,6 +2290,17 @@
                name="Generate prof information (-p)"
                valueType="boolean">
          </option>
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildType">
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.debug">
+               </value>
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.release">
+               </value>
+            </property>
+         </supportedProperties>
       </tool>
       <tool
             command="arc-elf32-ar"
@@ -2543,13 +2548,6 @@
             id="org.eclipse.cdt.cross.arc.gnu.printsize"
             name="ARC ELF32 GNU Print Size"
             natureFilter="both">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.printsize.general"
                name="General"
@@ -2612,6 +2610,17 @@
                value="${BuildArtifactFileName}"
                valueType="string">
          </option>
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildType">
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.debug">
+               </value>
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.release">
+               </value>
+            </property>
+         </supportedProperties>
       </tool>
       <!---->
       <!---->
@@ -2881,20 +2890,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
 
          <!--
@@ -3472,20 +3467,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
 
          
@@ -3990,20 +3971,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4335,20 +4302,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.600.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
                   <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4902,20 +4855,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -5230,20 +5169,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.hs.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
@@ -5702,20 +5627,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -6107,20 +6018,6 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -6771,6 +6668,756 @@
             </toolChain>
          </configuration>
       </projectType>
+      <projectType
+            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application"
+            id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.axs102"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.debug.axs102"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.axs102.hs.linux.elf.toolchain.debug"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.debug.axs102;org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.debug.axs102">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.platform.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.builder.debug.axs102"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.assembler.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.compiler.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.compiler.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createflash.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createlisting.debug.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.release.axs102"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.axs102.hs.linux.elf.toolchain.release"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.release.axs102;org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.release.axs102">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.platform.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.builder.release.axs102"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.assembler.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.compiler.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.compiler.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createflash.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createlisting.release.axs102"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
+            id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.axs103"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.debug.axs103"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.toolchain.debug.axs103"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.debug.axs103;org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.debug.axs103">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.platform.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.builder.debug.axs103"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.assembler.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.compiler.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.compiler.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createflash.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createlisting.debug.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.release.axs103"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.toolchain.release.axs103"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.release.axs103;org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.release.axs103">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.platform.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.builder.release.axs103"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.assembler.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.compiler.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.compiler.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.c.linker.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.cpp.linker.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createflash.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.linux.elf.createlisting.release.axs103"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application"
+            id="org.eclipse.cdt.cross.arc.gnu.linux.elf.emsk"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.emsk"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.linux.emsk.elf.toolchain.debug"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.debug.emsk;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.debug.emsk">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug.emsk"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.compiler.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createflash.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createlisting.debug.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.release.emsk"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.linux.emsk.elf.toolchain.release"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.release.emsk;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.emsk">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.release.emsk"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.compiler.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.em.linux.elf.c.linker.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createflash.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createlisting.release.emsk"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.axs101"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.debug.axs101"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.toolchain.debug.axs101"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.c.linker.debug.axs101;org.eclipse.cdt.cross.arc.gnu.700.linux.elf.cpp.linker.debug.axs101">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.platform.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.builder.debug.axs101"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.assembler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.c.compiler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.cpp.compiler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.c.linker.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.cpp.linker.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.createflash.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.createlisting.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.release.axs101"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.toolchain.release.axs101"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.c.linker.release.axs101;org.eclipse.cdt.cross.arc.gnu.700.linux.elf.cpp.linker.release.axs101">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.platform.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.builder.release.axs101"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.assembler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.c.compiler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.cpp.compiler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.c.linker.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.cpp.linker.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.createflash.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.createlisting.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.axs101"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.debug.axs101"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.toolchain.debug.axs101"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.c.linker.debug.axs101;org.eclipse.cdt.cross.arc.gnu.600.linux.elf.cpp.linker.debug.axs101">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.platform.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.builder.debug.axs101"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.assembler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.c.compiler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.cpp.compiler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.c.linker.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.cpp.linker.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.createflash.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.createlisting.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.release.axs101"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.toolchain.release.axs101"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.c.linker.release.axs101;org.eclipse.cdt.cross.arc.gnu.600.linux.elf.cpp.linker.release.axs101">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.platform.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.builder.release.axs101"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.assembler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.c.compiler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.cpp.compiler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.c.linker.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.cpp.linker.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.createflash.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.600.linux.elf.createlisting.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            id="org.eclipse.cdt.cross.arc.gnu.linux.elf.axs101"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.axs101"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.linux.elf.toolchain.debug.axs101"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.debug.axs101;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.debug.axs101">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug.axs101"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.compiler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createflash.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createlisting.debug.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.release.axs101"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.linux.elf.toolchain.release.axs101"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.release.axs101;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.axs101">
+               <targetPlatform
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.release.axs101"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base">
+               </builder>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.compiler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.em.linux.elf.c.linker.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createflash.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createlisting.release.axs101"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
       
       
       <!-- -->
@@ -7091,126 +7738,123 @@
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_C_Project"
             location="$nl$/templates/projecttemplates/EMSK_HelloWorld_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_CPP_Project"
             location="$nl$/templates/projecttemplates/EMSK_HelloWorld_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK2_HelloWorld_CPP_Project"
             location="$nl$/templates/projecttemplates/EMSK2_HelloWorld_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK2_HelloWorld_C_Project"
             location="$nl$/templates/projecttemplates/EMSK2_HelloWorld_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_C_Project"
             location="$nl$/templates/projecttemplates/EM4_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/EM4_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_C_Project"
             location="$nl$/templates/projecttemplates/EM5_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/EM5_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_C_Project"
             location="$nl$/templates/projecttemplates/EM6_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/EM6_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM7_Empty_C_Project"
             location="$nl$/templates/projecttemplates/EM7_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM7_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/EM7_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
 
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_C_Project"
             location="$nl$/templates/projecttemplates/AXS101_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/AXS101_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_C_Project"
             location="$nl$/templates/projecttemplates/AXS102_HS34_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/AXS102_HS34_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_C_Project"
             location="$nl$/templates/projecttemplates/AXS102_HS36_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/AXS102_HS36_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_C_Project"
             location="$nl$/templates/projecttemplates/AXS103_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/AXS103_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application">
       </template>
-
-
-
    </extension>
    <extension
          point="org.eclipse.cdt.core.LanguageSettingsProvider">
