@@ -33,7 +33,6 @@
             class="com.arc.embeddedcdt.gui.LaunchConfigurationTabGroup"
             id="com.arc.embeddedcdt.TabGroup">
          <launchMode
-               description="ARCApplicationTabGroupDescription.debug"
                mode="debug"
                perspective="org.eclipse.debug.ui.DebugPerspective">
          </launchMode>
@@ -44,8 +43,7 @@
             id="com.arc.embeddedcdt.TabGroup">
             <launchMode 
                   mode="debug"
-                  perspective="org.eclipse.debug.ui.DebugPerspective"
-                  description="ARCApplicationTabGroupDescription.debug">
+                  perspective="org.eclipse.debug.ui.DebugPerspective">
             </launchMode>
       </launchConfigurationTabGroup>
       <launchConfigurationTabGroup

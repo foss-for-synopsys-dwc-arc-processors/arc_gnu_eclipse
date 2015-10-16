@@ -28,6 +28,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.jface.preference.FileFieldEditor;
+import org.eclipse.jface.preference.StringButtonFieldEditor;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
@@ -796,7 +797,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 GridData.FILL_BOTH);
 
         // Path to Ashling binary
-        fAshlingBinPath = new FileFieldEditor("fAshlingBinPath", "Ashling binary path", compCOM);
+        fAshlingBinPath = new FileFieldEditor("fAshlingBinPath", "Ashling binary path", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compCOM);
         fAshlingBinPath.setStringValue(externaltools_ashling_path);
 
         fAshlingBinPath.setPropertyChangeListener(new IPropertyChangeListener() {
@@ -809,7 +811,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         });
 
         // Path to Ashling XMl file
-        fAshlingXMLPath = new FileFieldEditor("fAshlingXMLPath", "Ashling XML File", compCOM);
+        fAshlingXMLPath = new FileFieldEditor("fAshlingXMLPath", "Ashling XML File", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compCOM);
         fAshlingXMLPath.setStringValue(Ashling_xml_path);
 
         fAshlingXMLPath.setPropertyChangeListener(new IPropertyChangeListener() {
@@ -825,6 +828,54 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.eclipse.debug.ui.ILaunchConfigurationTab#isValid(org.eclipse.debug.core.ILaunchConfiguration)
+     */
+    public boolean isValid(ILaunchConfiguration config) {
+        setErrorMessage(null);
+        setMessage(null);
+
+        if (fPrgmArgumentsComboInittext != null) {
+            if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_OPENOCD)
+                    && !groupcom.isDisposed()) {
+                if (!isValidFileFieldEditor(fOpenOCDBinPath)
+                        || !isValidFileFieldEditor(fOpenOCDConfigPath))
+                    return false;
+            } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_ASHLING)
+                    && !groupcomashling.isDisposed()) {
+                if (!isValidFileFieldEditor(fAshlingBinPath)
+                        || !isValidFileFieldEditor(fAshlingXMLPath))
+                    return false;
+            } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(NSIM) && !groupnsim.isDisposed()) {
+                if (!isValidFileFieldEditor(fnSIMBinPath))
+                    return false;
+                if (fLaunchtcfButton.getSelection() && !isValidFileFieldEditor(fnSIMTCFPath))
+                    return false;
+                if (fLaunchPropsButton.getSelection() && !isValidFileFieldEditor(fnSIMPropsPath))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isValidFileFieldEditor(FileFieldEditor editor) {
+        if (editor != null) {
+            String label = editor.getLabelText();
+            if (editor.getStringValue().isEmpty()) {
+                setErrorMessage(label + "'s value cannot be empty");
+                return false;
+            }
+            if (!editor.isValid()) {
+                setErrorMessage(label + "'s value must be an existing file");
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void createTabitemCOM(Composite subComp) {
         createTabitemCOMBool = true;
         groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5,
@@ -832,7 +883,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         final Composite compCOM = SWTFactory.createComposite(groupcom, 3, 5, GridData.FILL_BOTH);
 
         // Path to OpenOCD binary
-        fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", compCOM);
+        fOpenOCDBinPath = new FileFieldEditor("fOpenOCDBinPath", "OpenOCD executable", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compCOM);
         fOpenOCDBinPath.setStringValue(openocd_bin_path);
         fOpenOCDBinPath.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
@@ -896,8 +948,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             }
         });
 
-        fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath",
-                "OpenOCD configuration file", compCOM);
+        fOpenOCDConfigPath = new FileFieldEditor("fOpenOCDConfigPath", "OpenOCD configuration file",
+                false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compCOM);
         fOpenOCDConfigPath.setEnabled(false, compCOM);
         fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
         fOpenOCDConfigPath.setPropertyChangeListener(new IPropertyChangeListener() {
@@ -992,7 +1044,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
         GridData gd = new GridData();
 
-        fnSIMBinPath = new FileFieldEditor("fnSIMBinPath", "nSIM executable", compnSIM);
+        fnSIMBinPath = new FileFieldEditor("fnSIMBinPath", "nSIM executable", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compnSIM);
 
         fnSIMBinPath.setStringValue(externaltools_nsim_path);
         fnSIMBinPath.setPropertyChangeListener(new IPropertyChangeListener() {
@@ -1012,7 +1065,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fLaunchtcfButton.setLayoutData(gd);
         fLaunchtcfButton.setText("Use TCF?");
 
-        fnSIMTCFPath = new FileFieldEditor("fnSIMTCFPath", "nSIM TCF path", compnSIM);
+        fnSIMTCFPath = new FileFieldEditor("fnSIMTCFPath", "nSIM TCF path", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compnSIM);
         fnSIMTCFPath.setStringValue(nSIMtcffiles_last);
         fnSIMTCFPath.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
@@ -1033,7 +1087,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         gd.horizontalSpan = 3;
         fLaunchPropsButton.setLayoutData(gd);
         fLaunchPropsButton.setText("Use nSIM properties file?");
-        fnSIMPropsPath = new FileFieldEditor("fnSIMPropsPath", "nSIM properties file", compnSIM);
+        fnSIMPropsPath = new FileFieldEditor("fnSIMPropsPath", "nSIM properties file", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compnSIM);
         fnSIMPropsPath.setStringValue(nSIMpropsfiles_last);
         fnSIMPropsPath.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
