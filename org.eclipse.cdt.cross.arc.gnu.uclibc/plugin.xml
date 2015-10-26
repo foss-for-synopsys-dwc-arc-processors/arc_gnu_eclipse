@@ -265,13 +265,6 @@
                value="true"
                valueHandler="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCAdditionalToolsManagedOptionValueHandler"
                valueType="boolean">
-            <enablement
-                  type="ALL">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
          </option>
          <option
                command="-p"
@@ -485,6 +478,13 @@
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_all"
                   name="DP FPU with all instructions (-mfpu=fpud_all)">
             </enumeratedOptionValue>
+         </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               command="-mshift-assist"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.shiftassist"
+               name="Shift assist(-mshift-assist)"
+               valueType="boolean">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -807,7 +807,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler"
             isAbstract="false"
             name="ARC uClibc GCC C Compiler"
-            natureFilter="both"
+            natureFilter="cnature"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -1588,7 +1588,7 @@
          </option>
       </tool>
       <tool
-            command="arc-linux-ld"
+            command="arc-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.linker"
@@ -2270,7 +2270,7 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.c.linker">
          </tool>
          <tool
-               command="arc-linux-ld"
+               command="arc-linux-g++"
                id="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.cpp.linker.base"
                isAbstract="false"
                name="ARC Linux uClibc GCC C++ Linker"
@@ -2329,20 +2329,6 @@
                isAbstract="false"
                name="ARC Linux uClibc  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.uclibc.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -2811,20 +2797,6 @@
                isAbstract="false"
                name="ARC Linux uClibc  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.uclibc.linux.option.addtools.printsize.hs"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3117,7 +3089,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.cpp.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCManagedMakePerProjectProfileCPP|org.eclipse.cdt.cross.arc.gnu.uclibc.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -3183,20 +3155,6 @@
                isAbstract="false"
                name="ARC Linux uClibc  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.linux.option.addtools.printsize.hs"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3274,7 +3232,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.c.linker.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.cpp.linker.debug">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.elf.platform.debug"
                      isAbstract="false"
@@ -3564,7 +3522,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.c.compiler"
             isAbstract="false"
             name="ARC uClibc GCC C Compiler (eb)"
-            natureFilter="both"
+            natureFilter="cnature"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -3849,20 +3807,9 @@
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler"
             isAbstract="false"
-            name="ARC uClibc GCC C++ Compiler (eb)"
+            name="ARC uClibc GCC C++ (eb)Compiler"
             natureFilter="ccnature"
             outputFlag="-o">
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildType">
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.debug">
-               </value>
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.release">
-               </value>
-            </property>
-         </supportedProperties>
          <envVarBuildPath
                pathType="buildpathInclude"
                variableList="CPATH,CPLUS_INCLUDE_PATH">
@@ -4073,22 +4020,22 @@
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-ansi"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.option.misc.std.ansi"
+                  id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler.option.misc.std.ansi"
                   name="ISO 1998 C++ incl. amendments (-ansi)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.option.misc.std.default"
+                  id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler.option.misc.std.default"
                   isDefault="true"
                   name="Compiler Default (ISO 1998 C++ with GNU extensions)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-std=c++0x"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.option.misc.std.cpp0x"
+                  id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler.option.misc.std.cpp0x"
                   name="ISO 2009 C++ (-std=c++0x)">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-std=gnu++0x"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler.option.misc.std.gnucpp0x"
+                  id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler.option.misc.std.gnucpp0x"
                   name="ISO 2009 C++ with GNU Extensions (-std=gnu++0x)">
             </enumeratedOptionValue>
          </option>
@@ -4345,7 +4292,7 @@
          </option>
       </tool>
       <tool
-            command="arceb-linux-ld"
+            command="arceb-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.linker"
@@ -4773,13 +4720,6 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.printsize"
             name="ARC GNU uClibc Print Size (eb)"
             natureFilter="both">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.printsize.general"
                name="General"
@@ -4842,6 +4782,13 @@
                value="${BuildArtifactFileName}"
                valueType="string">
          </option>
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
       </tool>
       <configuration
             cleanCommand="rm -rf"
@@ -5151,20 +5098,6 @@
                isAbstract="false"
                name="ARC Linux uClibc  Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.eb.uclibc.linux.option.addtools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -5269,26 +5202,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.assembler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.c.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.cpp.compiler.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.archiver.debug"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.archiver.base">
-               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -5313,26 +5226,6 @@
                      isVariableCaseSensitive="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.builder.base">
                </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.assembler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.c.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.cpp.compiler.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.lib.archiver.release"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.archiver.base">
-               </tool>
             </toolChain>
          </configuration>
       </projectType>
@@ -5529,7 +5422,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.debug"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.debug">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.debug;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.cpp.linker.debug;">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.debug"
                      isAbstract="false"
@@ -5547,9 +5440,9 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.linker">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.debug"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.cpp.linker.debug"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -5563,7 +5456,7 @@
                   id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.toolchain.release"
                   isAbstract="false"
                   superClass="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.release">
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.linker.release;org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.cpp.linker.release">
                <targetPlatform
                      id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.platform.release"
                      isAbstract="false"
@@ -5581,9 +5474,9 @@
                      superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.linker">
                </tool>
                <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.c.compiler.release"
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.sharedlib.cpp.linker.release"
                      isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
+                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -5682,6 +5575,11 @@
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.linker">
                </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.sharedlib.cpp.linker.debug"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker">
+               </tool>
             </toolChain>
          </configuration>
          <configuration
@@ -5710,6 +5608,11 @@
                      id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.sharedlib.c.linker.release"
                      isAbstract="false"
                      superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.linker">
+               </tool>
+               <tool
+                     id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.sharedlib.cpp.linker.release"
+                     isAbstract="false"
+                     superClass="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker">
                </tool>
             </toolChain>
          </configuration>
@@ -6077,7 +5980,7 @@
          <inputType
                buildVariable="OBJS"
                dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc..c.linker.input"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.linker.input"
                multipleOfType="true"
                sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
                sources="o">
@@ -6145,576 +6048,434 @@
          </option>
       </tool>
       <tool
-            command="arceb-linux-gcc"
+            command="arc-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
-            errorParsers="org.eclipse.cdt.core.GCCErrorParser"
-            id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler"
+            errorParsers="org.eclipse.cdt.core.GLDErrorParser"
+            id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker"
             isAbstract="false"
-            name="ARC uClibc GCC C Compiler"
-            natureFilter="both"
-            outputFlag="-o">
+            name="ARC uClibc GCC C++ Linker"
+            natureFilter="ccnature"
+            outputFlag="-shared -o">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.SharedLib">
+            </checkBuildProperty>
+         </enablement>
          <supportedProperties>
             <property
-                  id="org.eclipse.cdt.build.core.buildType">
+                  id="org.eclipse.cdt.build.core.buildArtefactType">
                <value
-                     id="org.eclipse.cdt.build.core.buildType.debug">
-               </value>
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.release">
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.SharedLib">
                </value>
             </property>
          </supportedProperties>
          <envVarBuildPath
-               pathType="buildpathInclude"
-               variableList="CPATH,C_INCLUDE_PATH">
+               pathType="buildpathLibrary"
+               variableList="LIBRARY_PATH">
          </envVarBuildPath>
          <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.preprocessor"
-               name="Preprocessor"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler">
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               name="General"
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker">
          </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.preprocessor"
-               command="-nostdinc"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-nostartfiles"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.preprocessor.nostdinc"
-               name="Do not search system directories (-nostdinc)"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.nostart"
+               name="Do not use standard start files (-nostartfiles)"
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.preprocessor"
-               command="-E"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-nodefaultlibs"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.preprocessor.preprocess"
-               name="Preprocess only (-E)"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.nodeflibs"
+               name="Do not use default libraries (-nodefaultlibs)"
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.preprocessor"
-               command="-D"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.preprocessor.def"
-               name="Defined symbols (-D)"
-               valueType="definedSymbols">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-nostdlib"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.nostdlibs"
+               name="No startup or default libs (-nostdlib)"
+               valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.preprocessor"
-               command="-U"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.preprocessor.undef"
-               name="Undefined symbols (-U)"
-               valueType="undefDefinedSymbols">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-Xlinker --gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.gcsections"
+               name="Remove unused sections (-Xlinker --gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-Xlinker --print-gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.printgcsections"
+               name="Print removed sections (-Xlinker --print-gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-s"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.strip"
+               name="Omit all symbol information (-s)"
+               valueType="boolean">
          </option>
          <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.dirs"
-               name="Directories"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler">
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.libs"
+               name="Libraries"
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker">
          </optionCategory>
+         <option
+               browseType="none"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.libs"
+               command="-l"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.libs"
+               name="Libraries (-l)"
+               valueType="libs">
+         </option>
          <option
                browseType="directory"
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.dirs"
-               command="-I"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.include.paths"
-               name="Include paths (-I)"
-               valueType="includePath">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.libs"
+               command="-L"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.paths"
+               name="Library search path (-L)"
+               valueType="libPaths">
          </option>
          <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               name="Optimization"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.optimization.level"
-               name="Optimization level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.optimization.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               command="-fpack-struct"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.optimization.packstruct"
-               name="Pack structures (-fpack-struct)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               command="-fshort-enums"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.optimization.shortenums"
-               name="Short enumerations (-fshort-enums)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               command="-ffunction-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.optimization.functionsections"
-               name="Function sections (-ffunction-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               command="-fdata-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.optimization.datasections"
-               name="Data sections (-fdata-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.category.optimization"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.option.optimization.flags"
-               name="Other optimization flags"
-               valueType="string">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               name="Warnings"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-fsyntax-only"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.syntax"
-               name="Check syntax only (-fsyntax-only)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-fno-common"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.nocommon"
-               name="No common (-fno-common)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-pedantic"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.pedantic"
-               name="Pedantic (-pedantic)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-pedantic-errors"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.pedantic.error"
-               name="Pedantic warnings as errors (-pedantic-errors)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-w"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.nowarn"
-               name="Inhibit all warnings (-w)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-Wall"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.allwarn"
-               name="All warnings (-Wall)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-Wextra"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.extrawarn"
-               name="Extra warnings (-Wextra)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.warnings"
-               command="-Werror"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.warnings.toerrors"
-               name="Warnings as errors (-Werror)"
-               valueType="boolean">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
                name="Miscellaneous"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler">
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker">
          </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.misc.std"
-               name="Language Standard"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-ansi"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.ansi"
-                  name="ISO C90 (-ansi)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=c99"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.c99"
-                  name="ISO C99 (-std=c99)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.default"
-                  isDefault="true"
-                  name="Compiler Default (ISO C90 with GNU extensions)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=gnu99"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.gnu99"
-                  name="ISO C99 with GNU Extensions (-std=gnu99)">
-            </enumeratedOptionValue>
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
+               command="-Xlinker ${VALUE}"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.ldflags"
+               name="Linker flags (-Xlinker [option])"
+               valueType="stringList">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.misc.lstfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.lstfilename">
+               browseType="file"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.otherobjs"
+               name="Other objects"
+               valueType="userObjs">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
-               command="-fno-inline-functions"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.misc.noinlinefunctions"
-               name="Do not inline functions (-fno-inline-functions)"
-               valueType="boolean">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.other.cref"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.cref">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
-               command="-fsigned-char"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.misc.signedchar"
-               name="&apos;char&apos; is signed (-fsigned-char)"
-               valueType="boolean">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.other.printmap"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.printmap">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
-               command="-funsigned-bitfields"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.misc.unsignedbitfields"
-               name="Bitfields are unsigned (-funsigned-bitfields)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
                command="-v"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.other.verbose"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker.option.other.verbose"
                name="Verbose (-v)"
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.category.other"
-               defaultValue="-c -fmessage-length=0 -fPIC"
-               id="org.eclipse.cdt.cross.arc.gnu.shared.eb.uclibc.c.compiler.option.other.otherflags"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.otherflags"
                name="Other flags"
                valueType="string">
          </option>
          <inputType
-               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
-               dependencyContentType="org.eclipse.cdt.core.cHeader"
-               dependencyExtensions="h"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.input"
-               languageId="org.eclipse.cdt.core.gcc"
-               sourceContentType="org.eclipse.cdt.core.cSource"
-               sources="c"
-               superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
+               buildVariable="OBJS"
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker.input"
+               multipleOfType="true"
+               sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
+               sources="o">
+            <additionalInput
+                  kind="additionalinputdependency"
+                  paths="$(USER_OBJS)">
+            </additionalInput>
+            <additionalInput
+                  kind="additionalinput"
+                  paths="$(LIBS)">
+            </additionalInput>
          </inputType>
          <outputType
-               buildVariable="OBJS"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.output"
-               outputs="o"
-               superClass="cdt.managedbuild.tool.gnu.c.compiler.output">
+               buildVariable="EXECUTABLES"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker.output"
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
+               outputPrefix="lib">
          </outputType>
+         <option
+               applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.GprofAppCalculator"
+               command="-pg"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.debugging.gprof"
+               name="Generate gprof information (-pg)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.ProfAppCalculator"
+               command="-p"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.debugging.prof"
+               name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.sharedlibset"
+               name="Shared Library Settings"
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.linker">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.category.general"
+               command="-static"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.cpp.link.option.static"
+               name="No shared libraries (-static)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.option.sharedobject"
+               name="Shared object name (-Wl,-soname=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.option.importlib"
+               name="import Library name (-Wl,--out-imlib=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.link.option.deffile"
+               name="DEF file name (-Wl,--output-def=)"
+               valueType="string">
+         </option>
       </tool>
       <tool
-            command="arc-linux-gcc"
+            command="arceb-linux-g++"
             commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.uclibc.ARCManagedCommandLineGenerator"
-            errorParsers="org.eclipse.cdt.core.GCCErrorParser"
-            id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler"
+            errorParsers="org.eclipse.cdt.core.GLDErrorParser"
+            id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker"
             isAbstract="false"
-            name="ARC uClibc GCC C Compiler"
-            natureFilter="both"
-            outputFlag="-o">
+            name="ARC uClibc GCC C++ Linker"
+            natureFilter="ccnature"
+            outputFlag="-shared -o">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.SharedLib">
+            </checkBuildProperty>
+         </enablement>
          <supportedProperties>
             <property
-                  id="org.eclipse.cdt.build.core.buildType">
+                  id="org.eclipse.cdt.build.core.buildArtefactType">
                <value
-                     id="org.eclipse.cdt.build.core.buildType.debug">
-               </value>
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.release">
+                     id="org.eclipse.cdt.cross.arc.gnu.uclibc.buildArtefactType.SharedLib">
                </value>
             </property>
          </supportedProperties>
          <envVarBuildPath
-               pathType="buildpathInclude"
-               variableList="CPATH,C_INCLUDE_PATH">
+               pathType="buildpathLibrary"
+               variableList="LIBRARY_PATH">
          </envVarBuildPath>
          <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.preprocessor"
-               name="Preprocessor"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               name="General"
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker">
          </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.preprocessor"
-               command="-nostdinc"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-nostartfiles"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.preprocessor.nostdinc"
-               name="Do not search system directories (-nostdinc)"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.nostart"
+               name="Do not use standard start files (-nostartfiles)"
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.preprocessor"
-               command="-E"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-nodefaultlibs"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.preprocessor.preprocess"
-               name="Preprocess only (-E)"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.nodeflibs"
+               name="Do not use default libraries (-nodefaultlibs)"
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.preprocessor"
-               command="-D"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.preprocessor.def"
-               name="Defined symbols (-D)"
-               valueType="definedSymbols">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-nostdlib"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.nostdlibs"
+               name="No startup or default libs (-nostdlib)"
+               valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.preprocessor"
-               command="-U"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.preprocessor.undef"
-               name="Undefined symbols (-U)"
-               valueType="undefDefinedSymbols">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-Xlinker --gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.gcsections"
+               name="Remove unused sections (-Xlinker --gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-Xlinker --print-gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.printgcsections"
+               name="Print removed sections (-Xlinker --print-gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-s"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.strip"
+               name="Omit all symbol information (-s)"
+               valueType="boolean">
          </option>
          <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.dirs"
-               name="Directories"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.libs"
+               name="Libraries"
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker">
          </optionCategory>
+         <option
+               browseType="none"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.libs"
+               command="-l"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.libs"
+               name="Libraries (-l)"
+               valueType="libs">
+         </option>
          <option
                browseType="directory"
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.dirs"
-               command="-I"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.include.paths"
-               name="Include paths (-I)"
-               valueType="includePath">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.libs"
+               command="-L"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.paths"
+               name="Library search path (-L)"
+               valueType="libPaths">
          </option>
          <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               name="Optimization"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.optimization.level"
-               name="Optimization level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.optimization.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               command="-fpack-struct"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.optimization.packstruct"
-               name="Pack structures (-fpack-struct)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               command="-fshort-enums"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.optimization.shortenums"
-               name="Short enumerations (-fshort-enums)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               command="-ffunction-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.optimization.functionsections"
-               name="Function sections (-ffunction-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               command="-fdata-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.optimization.datasections"
-               name="Data sections (-fdata-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.optimization"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.optimization.flags"
-               name="Other optimization flags"
-               valueType="string">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               name="Warnings"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-fsyntax-only"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.syntax"
-               name="Check syntax only (-fsyntax-only)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-fno-common"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.nocommon"
-               name="No common (-fno-common)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-pedantic"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.pedantic"
-               name="Pedantic (-pedantic)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-pedantic-errors"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.pedantic.error"
-               name="Pedantic warnings as errors (-pedantic-errors)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-w"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.nowarn"
-               name="Inhibit all warnings (-w)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-Wall"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.allwarn"
-               name="All warnings (-Wall)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-Wextra"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.extrawarn"
-               name="Extra warnings (-Wextra)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.warnings"
-               command="-Werror"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.warnings.toerrors"
-               name="Warnings as errors (-Werror)"
-               valueType="boolean">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
                name="Miscellaneous"
-               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler">
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker">
          </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.misc.std"
-               name="Language Standard"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-ansi"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.ansi"
-                  name="ISO C90 (-ansi)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=c99"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.c99"
-                  name="ISO C99 (-std=c99)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.default"
-                  isDefault="true"
-                  name="Compiler Default (ISO C90 with GNU extensions)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=gnu99"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler.option.misc.std.gnu99"
-                  name="ISO C99 with GNU Extensions (-std=gnu99)">
-            </enumeratedOptionValue>
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
+               command="-Xlinker ${VALUE}"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.ldflags"
+               name="Linker flags (-Xlinker [option])"
+               valueType="stringList">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.misc.lstfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.lstfilename">
+               browseType="file"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.otherobjs"
+               name="Other objects"
+               valueType="userObjs">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
-               command="-fno-inline-functions"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.misc.noinlinefunctions"
-               name="Do not inline functions (-fno-inline-functions)"
-               valueType="boolean">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.other.cref"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.cref">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
-               command="-fsigned-char"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.misc.signedchar"
-               name="&apos;char&apos; is signed (-fsigned-char)"
-               valueType="boolean">
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.other.printmap"
+               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.other.printmap">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
-               command="-funsigned-bitfields"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.misc.unsignedbitfields"
-               name="Bitfields are unsigned (-funsigned-bitfields)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
                command="-v"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.other.verbose"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker.option.other.verbose"
                name="Verbose (-v)"
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.category.other"
-               defaultValue="-c -fmessage-length=0 -fPIC"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.option.other.otherflags"
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.other"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.otherflags"
                name="Other flags"
                valueType="string">
          </option>
          <inputType
-               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
-               dependencyContentType="org.eclipse.cdt.core.cHeader"
-               dependencyExtensions="h"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.c.compiler.input"
-               languageId="org.eclipse.cdt.core.gcc"
-               sourceContentType="org.eclipse.cdt.core.cSource"
-               sources="c"
-               superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
+               buildVariable="OBJS"
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker.input"
+               multipleOfType="true"
+               sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
+               sources="o">
+            <additionalInput
+                  kind="additionalinputdependency"
+                  paths="$(USER_OBJS)">
+            </additionalInput>
+            <additionalInput
+                  kind="additionalinput"
+                  paths="$(LIBS)">
+            </additionalInput>
          </inputType>
          <outputType
-               buildVariable="OBJS"
-               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.uclibc.c.compiler.output"
-               outputs="o"
-               superClass="cdt.managedbuild.tool.gnu.c.compiler.output">
+               buildVariable="EXECUTABLES"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker.output"
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
+               outputPrefix="lib">
          </outputType>
+         <option
+               applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.GprofAppCalculator"
+               command="-pg"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.debugging.gprof"
+               name="Generate gprof information (-pg)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.ProfAppCalculator"
+               command="-p"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.debugging.prof"
+               name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.sharedlibset"
+               name="Shared Library Settings"
+               owner="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.linker">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.general"
+               command="-static"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.static"
+               name="No shared libraries (-static)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.sharedobject"
+               name="Shared object name (-Wl,-soname=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.importlib"
+               name="import Library name (-Wl,--out-imlib=)"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.category.sharedlibset"
+               id="org.eclipse.cdt.cross.arc.gnu.sharedlib.eb.uclibc.cpp.link.option.deffile"
+               name="DEF file name (-Wl,--output-def=)"
+               valueType="string">
+         </option>
       </tool>
       
       
