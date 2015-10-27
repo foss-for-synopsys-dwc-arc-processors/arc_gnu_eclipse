@@ -12,7 +12,7 @@
 
 package com.arc.embeddedcdt.gui;
 
-
+import org.eclipse.cdt.launch.ui.CMainTab;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.EnvironmentTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
@@ -28,7 +28,7 @@ public class RunfLaunchConfigurationTabGroup extends AbstractLaunchConfiguration
 	 */
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-				new MainTab(),
+				new CMainTab(),
 				//new EmbeddedDebuggerTab(false),
 				//new CommandTab(),
 				new SourceLookupTab(),
