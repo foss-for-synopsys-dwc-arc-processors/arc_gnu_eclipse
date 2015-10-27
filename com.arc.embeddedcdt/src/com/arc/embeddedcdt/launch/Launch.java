@@ -91,6 +91,7 @@ import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.gui.FtdiDevice;
 import com.arc.embeddedcdt.gui.FtdiCore;
+import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 @SuppressWarnings("restriction")
@@ -143,11 +144,25 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
         return new String[0];
     }
 
-    private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
-        // return external_tools_firstlaunch.equalsIgnoreCase("JTAG via Ashling");
+     private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
         String external_tools = configuration.getAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase("JTAG via Ashling");
+        return external_tools.equalsIgnoreCase("JTAG via AshLing");
+    }
+    private boolean isnSIM(ILaunchConfiguration configuration) throws CoreException {
+        String external_tools = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase("nSIM");
+    }
+    private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
+        String external_tools = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase("JTAG via OpenOCD");
+    }
+    private boolean isGenericserver(ILaunchConfiguration configuration) throws CoreException {
+        String external_tools = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase("Generic gdbserver");
     }
 
     public static String serialport = "";
@@ -417,14 +432,23 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                         }
 
                         String gdb_init = "";
-
-                        if (!isAshling(configuration))
-                            gdb_init = String.format("target remote %s:%s\nload",
-                                    gdbserver_IPAddress, gdbserver_port);
-                        else
+                        
+                        if(isAshling(configuration)){
                             gdb_init = String.format(
                                     "set arc opella-target arcem \ntarget remote %s:%s\nload",
-                                    gdbserver_IPAddress, gdbserver_port);
+                                    configuration.getAttribute(LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""), gdbserver_port);
+                        }
+
+                        if (isOpenOCD(configuration)||isnSIM(configuration)){
+                            gdb_init = String.format("target remote %s:%s\nload",
+                            		configuration.getAttribute(LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""), gdbserver_port);
+                        }
+
+
+                       if(isGenericserver(configuration)){
+                            gdb_init = String.format("target remote %s:%s\nload",
+                               		gdbserver_IPAddress, gdbserver_port);
+                       }
 
                         executeGDBScript("GDB commands", configuration, dtargets,
                                 getExtraCommands(configuration, gdb_init), monitor);

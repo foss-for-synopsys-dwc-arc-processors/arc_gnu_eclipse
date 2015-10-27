@@ -138,6 +138,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
     private Boolean createTabitemCOMBool = false;
     private Boolean createTabitemnSIMBool = false;
+    private Boolean createTabItemGenericGDBServerBool = false;
     private String gdb_path = null;
     private Boolean createTabitemCOMAshlingBool = false;
 
@@ -204,14 +205,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     private String externaltools_ashling_path = "";
     private String Ashling_xml_path = "";
     private String externaltools_nsim_path = "";
-
+    private String hostname = "";
     private String portnumber = "";
 
     protected Spinner JIT_threadspinner;
     private String JITthread = "1";
 
     public final static String JTAG_OPENOCD = "JTAG via OpenOCD";
-    public final static String JTAG_ASHlING = "JTAG via Ashling";
+    public final static String JTAG_ASHLING = "JTAG via Ashling";
     public final static String NSIM = "nSIM";
     public final static String GENERIC_GDBSERVER = "Generic gdbserver";
 
@@ -295,6 +296,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         createTabitemCOMBool = false;
         createTabitemCOMAshlingBool = false;
         createTabitemnSIMBool = false;
+        createTabItemGenericGDBServerBool = false;
         super.initializeFrom(configuration);
 
         try {
@@ -406,13 +408,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 portnumber = configuration.getAttribute(
                         IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
                 fGDBServerPortNumberText.setText(portnumber);
-                String hostname = configuration.getAttribute(
-                        LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "");
-                if (hostname.isEmpty()) {
-                    hostname = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
-                }
-                fGDBServerIPAddressText.setText(hostname);
-
+                hostname = configuration
+                        .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "");
+                if (groupGenericGDBServer != null && !groupGenericGDBServer.isDisposed())
+                    fGDBServerIPAddressText.setText(hostname);
             } catch (CoreException e) {
             }
 
@@ -509,9 +508,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 nSIMpropsfiles_last);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,
                 nSIMtcffiles_last);
-        String hostname = fGDBServerIPAddressText.getText();
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
-                getAttributeValueFromString(hostname));
+        if (groupGenericGDBServer != null && !groupGenericGDBServer.isDisposed()) {
+            hostname = fGDBServerIPAddressText.getText();
+            configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
+                    getAttributeValueFromString(hostname));
+        }
     }
 
     /*
@@ -529,6 +530,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     static Group groupcom;
     static Group groupcomashling;
     static Group groupnsim;
+    static Group groupGenericGDBServer;
 
     protected void createGdbserverSettingsTab(TabFolder tabFolder) {
         // Lets set minimal width of text field to 2 inches. If more required text fields will
@@ -563,7 +565,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fPrgmArgumentsComboInit = new Combo(subComp, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
         fPrgmArgumentsComboInit.setLayoutData(server_type_combo_gd);
         fPrgmArgumentsComboInit.add(JTAG_OPENOCD);
-        fPrgmArgumentsComboInit.add(JTAG_ASHlING);
+        fPrgmArgumentsComboInit.add(JTAG_ASHLING);
         fPrgmArgumentsComboInit.add(NSIM);
         fPrgmArgumentsComboInit.add(GENERIC_GDBSERVER);
 
@@ -581,6 +583,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 
                     groupnsim.dispose();
+                    if (groupGenericGDBServer != null) {
+                        groupGenericGDBServer.dispose();
+                    }
                     groupcomashling.dispose();
 
                     if (createTabitemCOMBool == false) {
@@ -592,11 +597,10 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     groupcom.setText(JTAG_OPENOCD);
                     createTabitemnSIMBool = false;
                     createTabitemCOMAshlingBool = false;
+                    groupcom.setVisible(true);
+                    createTabItemGenericGDBServerBool = false;
 
-                    if (!groupcom.isVisible())
-                        groupcom.setVisible(true);
-
-                } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_ASHlING)) {
+                } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_ASHLING)) {
                     if (!portnumber.isEmpty())
                         fGDBServerPortNumberText.setText(portnumber);
                     else
@@ -604,8 +608,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
                     groupnsim.dispose();
+                    if (groupGenericGDBServer != null) {
+                        groupGenericGDBServer.dispose();
+                    }
                     groupcom.dispose();
                     createTabitemnSIMBool = false;
+                    createTabItemGenericGDBServerBool = false;
                     createTabitemCOMBool = false;
 
                     if (createTabitemCOMAshlingBool == false) {
@@ -615,9 +623,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         createTabitemCOMAshling(subComp);
                     }
 
-                    groupcomashling.setText(JTAG_ASHlING);
-                    if (!groupcomashling.isVisible())
-                        groupcomashling.setVisible(true);
+                    groupcomashling.setText(JTAG_ASHLING);
+                    groupcomashling.setVisible(true);
                 } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(NSIM)) {
                     if (!portnumber.isEmpty())
                         fGDBServerPortNumberText.setText(portnumber);
@@ -647,6 +654,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
                     groupcom.dispose();
                     groupcomashling.dispose();
+                    if (groupGenericGDBServer != null) {
+                        groupGenericGDBServer.dispose();
+                    }
                     if (createTabitemnSIMBool == false) {
                         if (!groupnsim.isDisposed())
                             groupnsim.dispose();
@@ -671,10 +681,24 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     groupnsim.setText(NSIM);
                     createTabitemCOMBool = false;
                     createTabitemCOMAshlingBool = false;
-                    if (!groupnsim.isVisible())
-                        groupnsim.setVisible(true);
+                    groupnsim.setVisible(true);
+                    createTabItemGenericGDBServerBool = false;
 
                 } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(GENERIC_GDBSERVER)) {
+                    groupcom.dispose();
+                    groupcomashling.dispose();
+                    groupnsim.dispose();
+                    if (createTabItemGenericGDBServerBool == false) {
+                        if (groupGenericGDBServer!=null&&!groupGenericGDBServer.isDisposed())
+                            groupGenericGDBServer.dispose();
+
+                        createTabitemhostaddress(subComp);
+                    }
+                    createTabitemCOMBool = false;
+                    createTabitemCOMAshlingBool = false;
+                    createTabitemnSIMBool = false;
+                    groupGenericGDBServer.setVisible(true);
+
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
                             .getActivePage();
 
@@ -725,33 +749,42 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             }
         });
 
-        // GDB host label
-        label = new Label(subComp, SWT.LEFT);
-        label.setText("Host Address:");
-        GridData gdb_host_label_gd = new GridData();
-        gdb_host_label_gd.horizontalSpan = 1;
-        label.setLayoutData(gdb_host_label_gd);
-
-        // GDB host text field
-        fGDBServerIPAddressText = new Text(subComp, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
-        GridData gdb_host_field_gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
-        gdb_host_field_gd.horizontalSpan = 4;
-        gdb_host_field_gd.minimumWidth = min_text_width;
-        fGDBServerIPAddressText.setLayoutData(gdb_host_field_gd);
-        fGDBServerIPAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
-        fGDBServerIPAddressText.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent evt) {
-                updateLaunchConfigurationDialog();
-            }
-        });
-
         if (createTabitemnSIMBool == false)
             createTabitemnSIM(subComp);
         if (createTabitemCOMBool == false)
             createTabitemCOM(subComp);
         if (createTabitemCOMAshlingBool == false)
             createTabitemCOMAshling(subComp);
+        if (createTabItemGenericGDBServerBool == false)
+            createTabitemhostaddress(subComp);
+    }
 
+    private void createTabitemhostaddress(Composite subComp) {
+        final int screen_ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
+        final int min_text_width = 2 * screen_ppi;
+        createTabItemGenericGDBServerBool = true;
+        groupGenericGDBServer = SWTFactory.createGroup(subComp, GENERIC_GDBSERVER, 3, 5,
+                GridData.FILL_HORIZONTAL);
+        final Composite compCOM = SWTFactory.createComposite(groupGenericGDBServer, 3, 5,
+                GridData.FILL_BOTH);
+
+        Label label1 = new Label(compCOM, SWT.LEFT);
+        label1.setText("Host Address:");
+
+        // GDB host text field
+        fGDBServerIPAddressText = new Text(compCOM, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+        GridData gdb_host_field_gd = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+        gdb_host_field_gd.minimumWidth = min_text_width;
+        fGDBServerIPAddressText.setLayoutData(gdb_host_field_gd);
+        if (hostname.isEmpty())
+            fGDBServerIPAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
+        else
+            fGDBServerIPAddressText.setText(hostname);
+        fGDBServerIPAddressText.addModifyListener(new ModifyListener() {
+            public void modifyText(ModifyEvent evt) {
+                updateLaunchConfigurationDialog();
+            }
+        });
     }
 
     private void createTabitemCOMAshling(Composite subComp) {
