@@ -144,25 +144,28 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
         return new String[0];
     }
 
-     private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase("JTAG via AshLing");
+    private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
+        String external_tools = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.JTAG_ASHLING);
     }
+
     private boolean isnSIM(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase("nSIM");
+        String external_tools = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.NSIM);
     }
+
     private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase("JTAG via OpenOCD");
+        String external_tools = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.JTAG_OPENOCD);
     }
-    private boolean isGenericserver(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase("Generic gdbserver");
+
+    private boolean isGenericServer(ILaunchConfiguration configuration) throws CoreException {
+        String external_tools = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.GENERIC_GDBSERVER);
     }
 
     public static String serialport = "";
@@ -213,9 +216,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
 
         TerminalView viewPart;
         try {
-            viewPart = (TerminalView) (activePage
-                    .showView("org.eclipse.tm.terminal.view.TerminalView", null,
-                            IWorkbenchPage.VIEW_ACTIVATE));
+            viewPart = (TerminalView) (activePage.showView(
+                    "org.eclipse.tm.terminal.view.TerminalView", null,
+                    IWorkbenchPage.VIEW_ACTIVATE));
             viewPart.newTerminal(c1);
         } catch (PartInitException e) {
             e.printStackTrace();
@@ -225,33 +228,33 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
     public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch,
             IProgressMonitor monitor) throws CoreException {
 
-        String external_tools = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        String external_tools = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
 
-        String gdbserver_port = configuration.getAttribute(
-                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
+        String gdbserver_port = configuration
+                .getAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
 
         FtdiDevice ftdi_device;
         try {
-            ftdi_device = FtdiDevice.valueOf(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
-                    LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
+            ftdi_device = FtdiDevice.valueOf(
+                    configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
+                            LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
         } catch (IllegalArgumentException e) {
             ftdi_device = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
         }
 
         FtdiCore ftdi_core;
         try {
-            ftdi_core = FtdiCore.valueOf(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_FTDI_CORE,
-                    LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
+            ftdi_core = FtdiCore
+                    .valueOf(configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
+                            LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
         } catch (IllegalArgumentException e) {
             ftdi_core = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
         }
 
         if (external_tools.indexOf("OpenOCD") > 0) {
-            serialport = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+            serialport = configuration
+                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
             if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM6)
                     || (ftdi_device == FtdiDevice.AXS102 && ftdi_core == FtdiCore.HS34)
                     || (ftdi_device == FtdiDevice.AXS103 && ftdi_core == FtdiCore.HS38_0)) {
@@ -262,8 +265,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
             }
         } else if (external_tools.indexOf("Ashling") > 0) {
-            serialport = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
+            serialport = configuration
+                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
         }
 
         if (external_tools.isEmpty() || gdbserver_port.isEmpty())
@@ -339,8 +342,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 
             /* Do we need to connect to serial port? */
-            if (terminal_launch.equalsIgnoreCase("true")
-                    && !external_tools.equalsIgnoreCase("nSIM") && !serialport.isEmpty()
+            if (terminal_launch.equalsIgnoreCase("true") && !external_tools.equalsIgnoreCase("nSIM")
+                    && !serialport.isEmpty()
                     && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
                 try {
                     Thread.sleep(1000);
@@ -368,13 +371,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     // kill GDB when it is trying to execute script commands.
                     if (exeFile != null) {
                         dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger())
-                                .createDebuggerSession(this, l, exeFile, new SubProgressMonitor(
-                                        monitor, 8));
+                                .createDebuggerSession(this, l, exeFile,
+                                        new SubProgressMonitor(monitor, 8));
                     } else {
                         /* no executable for session */
                         dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger())
-                                .createSession(this, launch, null, new SubProgressMonitor(monitor,
-                                        8));
+                                .createSession(this, launch, null,
+                                        new SubProgressMonitor(monitor, 8));
                     }
 
                     if (dsession != null)
@@ -427,28 +430,31 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                             String commands = configuration.getAttribute(
                                     LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "");
                             String[] extraCommands = getExtraCommands(configuration, commands);
-                            executeGDBScript("GDB commands", configuration, dtargets,
-                                    extraCommands, monitor);
+                            executeGDBScript("GDB commands", configuration, dtargets, extraCommands,
+                                    monitor);
                         }
 
                         String gdb_init = "";
-                        
-                        if(isAshling(configuration)){
+
+                        if (isAshling(configuration)) {
                             gdb_init = String.format(
                                     "set arc opella-target arcem \ntarget remote %s:%s\nload",
-                                    configuration.getAttribute(LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""), gdbserver_port);
+                                    configuration.getAttribute(
+                                            LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""),
+                                    gdbserver_port);
                         }
 
-                        if (isOpenOCD(configuration)||isnSIM(configuration)){
+                        if (isOpenOCD(configuration) || isnSIM(configuration)) {
                             gdb_init = String.format("target remote %s:%s\nload",
-                            		configuration.getAttribute(LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""), gdbserver_port);
+                                    configuration.getAttribute(
+                                            LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""),
+                                    gdbserver_port);
                         }
 
-
-                       if(isGenericserver(configuration)){
+                        if (isGenericServer(configuration)) {
                             gdb_init = String.format("target remote %s:%s\nload",
-                               		gdbserver_IPAddress, gdbserver_port);
-                       }
+                                    gdbserver_IPAddress, gdbserver_port);
+                        }
 
                         executeGDBScript("GDB commands", configuration, dtargets,
                                 getExtraCommands(configuration, gdb_init), monitor);
@@ -528,10 +534,10 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
                 LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
-        final String ashling_xml_file = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, "");
-        final String jtag_frequency = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
+        final String ashling_xml_file = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, "");
+        final String jtag_frequency = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
         System.setProperty("Ashling", external_tools_ashling_path);
         final File ash_dir = new File(external_tools_ashling_path).getParentFile();
 
@@ -556,27 +562,27 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
         System.setProperty("nSIM", extenal_tools_nsim_path);
         String nsim_exec = System.getProperty("nSIM");
         File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
-        String nsimProps = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
-        String nsimtcf = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-        String nsimprops_Buttonboolean = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
-        String nsimtcf_Buttonboolean = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
-        String nsimJIT_Buttonboolean = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
-        String nsimHostlink_Buttonboolean = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
-        String nsimMemoExptButtonboolean = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
+        String nsimProps = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
+        String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,
+                "");
+        String nsimprops_Buttonboolean = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
+        String nsimtcf_Buttonboolean = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
+        String nsimJIT_Buttonboolean = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
+        String nsimHostlink_Buttonboolean = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
+        String nsimMemoExptButtonboolean = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
         String nsimEnableExptButtonboolean = configuration.getAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
         String nsiminvalid_Instru_ExptButtonboolean = configuration.getAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
 
-        String nsimjit_thread = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
+        String nsimjit_thread = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
         final String gdbserver_port = configuration.getAttribute(
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
                 LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
@@ -614,10 +620,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
             nsim_cmd += " -propsfile " + nsimProps;
         }
 
-        IProcess nsim_proc = DebugPlugin
-                .newProcess(launch,
-                        DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
-                        NSIM_PROCESS_LABEL);
+        IProcess nsim_proc = DebugPlugin.newProcess(launch,
+                DebugPlugin.exec(DebugPlugin.parseArguments(nsim_cmd), nsim_wd),
+                NSIM_PROCESS_LABEL);
         nsim_proc.setAttribute(IProcess.ATTR_CMDLINE, nsim_cmd);
     }
 
@@ -636,31 +641,31 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
                 LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 
-        final String openocd_bin = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, "");
+        final String openocd_bin = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, "");
 
         FtdiDevice ftdiDevice;
         try {
-            ftdiDevice = FtdiDevice.valueOf(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
-                    LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
+            ftdiDevice = FtdiDevice.valueOf(
+                    configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
+                            LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
         } catch (IllegalArgumentException e) {
             ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
         }
 
         FtdiCore ftdiCore;
         try {
-            ftdiCore = FtdiCore.valueOf(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_FTDI_CORE,
-                    LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
+            ftdiCore = FtdiCore
+                    .valueOf(configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
+                            LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
         } catch (IllegalArgumentException e) {
             ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
         }
 
         // ${openocd_bin}/../share/openocd/scripts
         final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
-        final File scripts_dir = new File(root_dir, "share" + File.separator + "openocd"
-                + File.separator + "scripts");
+        final File scripts_dir = new File(root_dir,
+                "share" + File.separator + "openocd" + File.separator + "scripts");
         final String openocd_tcl = scripts_dir.getAbsolutePath();
 
         if (ftdiDevice == FtdiDevice.EM_SK_v1x) {
@@ -690,8 +695,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
          * of configuration scripts supplied by Synopsys we cannot set gdb_port after -f option -
          * our scripts do initialization and changing GDB port after that is not supported OpenOCD.
          */
-        final String openocd_cmd = openocd_bin + " -d0 " + " -c \"gdb_port " + gdbserver_port
-                + "\"" + " -s " + openocd_tcl + " -f " + openocd_cfg;
+        final String openocd_cmd = openocd_bin + " -d0 " + " -c \"gdb_port " + gdbserver_port + "\""
+                + " -s " + openocd_tcl + " -f " + openocd_cfg;
 
         final IProcess openocd_proc = DebugPlugin.newProcess(launch,
                 DebugPlugin.exec(DebugPlugin.parseArguments(openocd_cmd), null),
@@ -718,8 +723,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
             Process process = target.getProcess();
             IProcess iprocess = null;
             if (appConsole && (process != null)) {
-                iprocess = DebugPlugin.newProcess(launch, process, renderProcessLabel(exeFile
-                        .getPath().toOSString()));
+                iprocess = DebugPlugin.newProcess(launch, process,
+                        renderProcessLabel(exeFile.getPath().toOSString()));
             }
 
             boolean stopInMain = configuration.getAttribute(
@@ -732,10 +737,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                         ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN_SYMBOL,
                         ICDTLaunchConfigurationConstants.DEBUGGER_STOP_AT_MAIN_SYMBOL_DEFAULT);
 
-            CDIDebugModel
-                    .newDebugTarget(launch, project.getProject(), dtargets[i],
-                            renderTargetLabel(debugConfig), iprocess, exeFile, true, true,
-                            stopSymbol, true);
+            CDIDebugModel.newDebugTarget(launch, project.getProject(), dtargets[i],
+                    renderTargetLabel(debugConfig), iprocess, exeFile, true, true, stopSymbol,
+                    true);
         }
     }
 
@@ -866,7 +870,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
 
     public void executeGDBScript(String scriptSource, ILaunchConfiguration configuration,
             ICDITarget[] dtargets, String[] extraCommands2, IProgressMonitor monitor)
-            throws CoreException {
+                    throws CoreException {
         // Try to execute any extract command
         String[] commands = extraCommands2;
         for (int i = 0; i < dtargets.length; ++i) {
@@ -912,8 +916,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     }
                 } catch (MIException e) {
                     MultiStatus status = new MultiStatus(getPluginID(),
-                            ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR, "Failed command: "
-                                    + commands[j], e);
+                            ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
+                            "Failed command: " + commands[j], e);
                     status.add(new Status(IStatus.ERROR, getPluginID(),
                             ICDTLaunchConfigurationConstants.ERR_INTERNAL_ERROR,
                             e == null ? "" : e.getLocalizedMessage(), //$NON-NLS-1$
