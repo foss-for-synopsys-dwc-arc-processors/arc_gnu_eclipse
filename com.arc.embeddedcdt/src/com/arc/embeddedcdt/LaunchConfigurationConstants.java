@@ -67,7 +67,6 @@ public interface LaunchConfigurationConstants {
     static final FtdiCore DEFAULT_FTDI_CORE = DEFAULT_FTDI_DEVICE.getCores().get(0);
     static final String DEFAULT_FTDI_DEVICE_NAME = DEFAULT_FTDI_DEVICE.name();
     static final String DEFAULT_FTDI_CORE_NAME = DEFAULT_FTDI_CORE.name();
-
     // Constants
     static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";
     static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin/ash-arc-gdb-server";

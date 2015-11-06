@@ -21,6 +21,7 @@ import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.internal.Workbench;
 
+import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.launch.Launch;
 
 public class FirstlaunchDialog extends Dialog {
@@ -66,10 +67,9 @@ public class FirstlaunchDialog extends Dialog {
 
 		Combo fPrgmArgumentsComboInit = new Combo(shell, SWT.SINGLE
 				| SWT.BORDER);
-		fPrgmArgumentsComboInit.add("JTAG via OpenOCD");
-		fPrgmArgumentsComboInit.add("JTAG via Ashling");
-		fPrgmArgumentsComboInit.add("nSIM");
-		//fPrgmArgumentsComboInit.add("Generic gdbserver");
+		fPrgmArgumentsComboInit.add(ArcGdbServer.JTAG_OPENOCD.toString());
+		fPrgmArgumentsComboInit.add(ArcGdbServer.JTAG_ASHLING.toString());
+		fPrgmArgumentsComboInit.add(ArcGdbServer.NSIM.toString());
 
 		fPrgmArgumentsLabelCom = new Label(shell, SWT.NULL);
 		fPrgmArgumentsLabelCom.setText("COM  Ports:"); //$NON-NLS-1$
@@ -94,8 +94,8 @@ public class FirstlaunchDialog extends Dialog {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo = (Combo) evt.widget;
 				value[0] = combo.getText();
-				String gdbserver = combo.getText();
-				if (gdbserver.equalsIgnoreCase("nSIM")||gdbserver.equalsIgnoreCase("Generic gdbserver")) {
+				ArcGdbServer gdbServer = ArcGdbServer.fromString(combo.getText());
+				if (gdbServer == ArcGdbServer.NSIM || gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
 					fFirstlaunchPrgmArgumentsComCom.setVisible(false);
 					fPrgmArgumentsLabelCom.setVisible(false);
 				}

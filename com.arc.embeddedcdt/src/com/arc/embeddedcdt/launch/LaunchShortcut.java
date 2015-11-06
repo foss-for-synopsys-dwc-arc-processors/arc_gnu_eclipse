@@ -60,6 +60,7 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.TwoPaneElementSelector;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
+import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.gui.FirstlaunchDialog;
 
 
@@ -209,22 +210,30 @@ public class LaunchShortcut implements ILaunchShortcut {
                           ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
                   wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.RemoteGDBDebugger");
                   //wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.EmbeddedCDebugger");
-                  
+
                   startrunas();
-                  
+
 
                   if(!FirstlaunchDialog.value[0].equalsIgnoreCase("")) {
-                      String external_tools= FirstlaunchDialog.value[0];
+                      ArcGdbServer gdbServer = ArcGdbServer.fromString(FirstlaunchDialog.value[0]);
                       String gdbserver_port="";
 
-                      if (external_tools.equalsIgnoreCase("JTAG via Ashling")) {
+                      switch (gdbServer) {
+                      case JTAG_ASHLING:
                           gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT;
                           wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,FirstlaunchDialog.value[1]);
-                      } else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")) {
+                          break;
+                      case JTAG_OPENOCD:
                           gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT;
                           wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,FirstlaunchDialog.value[1]);
-                      } else if (external_tools.equalsIgnoreCase("nSIM")) {
+                          break;
+                      case NSIM:
                           gdbserver_port = LaunchConfigurationConstants.DEFAULT_NSIM_PORT;
+                          break;
+                      case GENERIC_GDBSERVER:
+                          break;
+                      default:
+                          throw new IllegalArgumentException("Unknown enum value has been used");
                       }
 
                       wc.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);

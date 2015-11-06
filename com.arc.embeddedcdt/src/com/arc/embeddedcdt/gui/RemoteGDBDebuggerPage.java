@@ -52,6 +52,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
+import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 
 /**
@@ -96,9 +97,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     // This variable for showing which target is be selected.
     protected Text fPrgmArgumentsTextInit;
 
-    // This variable is for getting user's input initial command.
-    private String fPrgmArgumentsComboInittext = null;
-
     protected Text fGDBServerPortNumberText;
     protected Text fGDBServerIPAddressText;
 
@@ -137,6 +135,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     private String jtag_frequency = null;
     private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
+    private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     private Boolean createTabitemCOMBool = false;
     private Boolean createTabitemnSIMBool = false;
     private Boolean createTabItemGenericGDBServerBool = false;
@@ -202,7 +201,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     // (Enable/disable).
     private String fLaunchexternal_nsiminvainstruExceButtonboolean = "true";
 
-    private String externaltools = "";
     private String externaltools_ashling_path = "";
     private String Ashling_xml_path = "";
     private String externaltools_nsim_path = "";
@@ -211,11 +209,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
     protected Spinner JIT_threadspinner;
     private String JITthread = "1";
-
-    public final static String JTAG_OPENOCD = "JTAG via OpenOCD";
-    public final static String JTAG_ASHLING = "JTAG via Ashling";
-    public final static String NSIM = "nSIM";
-    public final static String GENERIC_GDBSERVER = "Generic gdbserver";
 
     @Override
     public String getName() {
@@ -230,7 +223,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         configuration.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                (String) null);
+                ArcGdbServer.DEFAULT_GDB_SERVER.toString());
         configuration.setAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
                 default_oocd_cfg);
@@ -343,8 +336,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             } catch (IllegalArgumentException e) {
                 ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
             }
-            externaltools = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+            gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
             openocd_cfg_path = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
                     default_oocd_cfg);
@@ -385,11 +379,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             JITthread = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
 
-            if (configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "").isEmpty()) {
-                fPrgmArgumentsComboInit.setText(fPrgmArgumentsComboInit.getItem(0));
-            } else
-                fPrgmArgumentsComboInit.setText(externaltools);
+            fPrgmArgumentsComboInit.setText(gdbServer.toString());
 
             if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
                 if (configuration
@@ -416,20 +406,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             } catch (CoreException e) {
             }
 
-            String gdbserver = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, JTAG_OPENOCD);
-            if (!gdbserver.isEmpty()) {
-                int privious = fPrgmArgumentsComboInit.indexOf(gdbserver);
-                if (privious > -1)
-                    fPrgmArgumentsComboInit.remove(privious);
-                fPrgmArgumentsComboInit.add(gdbserver, 0);
-                fPrgmArgumentsComboInit.select(0);
-            }
+            ArcGdbServer gdbserver = ArcGdbServer.fromString(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
+            int previous = fPrgmArgumentsComboInit.indexOf(gdbserver.toString());
+            if (previous > -1)
+                fPrgmArgumentsComboInit.remove(previous);
+            fPrgmArgumentsComboInit.add(gdbserver.toString(), 0);
+            fPrgmArgumentsComboInit.select(0);
+
             if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
                 if (!jtagfrequency.isEmpty()) {
-                    int privious = fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
-                    if (privious > -1)
-                        fPrgmArgumentsJTAGFrenCombo.remove(privious);
+                    previous = fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
+                    if (previous > -1)
+                        fPrgmArgumentsJTAGFrenCombo.remove(previous);
                     fPrgmArgumentsJTAGFrenCombo.add(jtagfrequency, 0);
                     fPrgmArgumentsJTAGFrenCombo.select(0);
                 }
@@ -464,7 +454,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 getAttributeValueFromString(ftdiCore.name()));
         configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                CommandTab.getAttributeValueFromString(fPrgmArgumentsComboInit.getItem(0)));
+                CommandTab.getAttributeValueFromString(gdbServer.toString()));
         configuration.setAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
                 openocd_cfg_path);
@@ -481,9 +471,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         configuration.setAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,
                 externaltools_nsim_path);
-        if (fPrgmArgumentsComboInittext != null)
-            configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                    getAttributeValueFromString(fPrgmArgumentsComboInittext));
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+                getAttributeValueFromString(gdbServer.toString()));
 
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF,
                 getAttributeValueFromString(fLaunchexternal_nsimtcf_Buttonboolean));
@@ -565,18 +554,23 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         server_type_combo_gd.minimumWidth = min_text_width;
         fPrgmArgumentsComboInit = new Combo(subComp, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
         fPrgmArgumentsComboInit.setLayoutData(server_type_combo_gd);
-        fPrgmArgumentsComboInit.add(JTAG_OPENOCD);
-        fPrgmArgumentsComboInit.add(JTAG_ASHLING);
-        fPrgmArgumentsComboInit.add(NSIM);
-        fPrgmArgumentsComboInit.add(GENERIC_GDBSERVER);
+        for (ArcGdbServer server: ArcGdbServer.values()) {
+            fPrgmArgumentsComboInit.add(server.toString());
+        }
+
+
 
         fPrgmArgumentsComboInit.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
                 Combo combo = (Combo) evt.widget;
                 fGDBServerPortNumberText.getText();
-                fPrgmArgumentsComboInittext = combo.getText();
+                try {
+                    gdbServer = ArcGdbServer.fromString(combo.getText());
+                } catch (IllegalArgumentException e) {
+                    gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
+                }
 
-                if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_OPENOCD)) {
+                if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
                     if (!portnumber.isEmpty())
                         fGDBServerPortNumberText.setText(portnumber);
                     else
@@ -595,13 +589,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
                         createTabitemCOM(subComp);
                     }
-                    groupcom.setText(JTAG_OPENOCD);
+                    groupcom.setText(gdbServer.toString());
                     createTabitemnSIMBool = false;
                     createTabitemCOMAshlingBool = false;
                     groupcom.setVisible(true);
                     createTabItemGenericGDBServerBool = false;
 
-                } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_ASHLING)) {
+                } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
                     if (!portnumber.isEmpty())
                         fGDBServerPortNumberText.setText(portnumber);
                     else
@@ -624,9 +618,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         createTabitemCOMAshling(subComp);
                     }
 
-                    groupcomashling.setText(JTAG_ASHLING);
+                    groupcomashling.setText(gdbServer.toString());
                     groupcomashling.setVisible(true);
-                } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(NSIM)) {
+                } else if (gdbServer == ArcGdbServer.NSIM) {
                     if (!portnumber.isEmpty())
                         fGDBServerPortNumberText.setText(portnumber);
                     else
@@ -679,13 +673,13 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         fLaunchInvalid_Instru_ExptButton.setSelection(Boolean
                                 .parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
                     }
-                    groupnsim.setText(NSIM);
+                    groupnsim.setText(gdbServer.toString());
                     createTabitemCOMBool = false;
                     createTabitemCOMAshlingBool = false;
                     groupnsim.setVisible(true);
                     createTabItemGenericGDBServerBool = false;
 
-                } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(GENERIC_GDBSERVER)) {
+                } else if (gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
                     groupcom.dispose();
                     groupcomashling.dispose();
                     groupnsim.dispose();
@@ -764,8 +758,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         final int screen_ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
         final int min_text_width = 2 * screen_ppi;
         createTabItemGenericGDBServerBool = true;
-        groupGenericGDBServer = SWTFactory.createGroup(subComp, GENERIC_GDBSERVER, 3, 5,
-                GridData.FILL_HORIZONTAL);
+        groupGenericGDBServer = SWTFactory.createGroup(subComp,
+                ArcGdbServer.GENERIC_GDBSERVER.toString(), 3, 5, GridData.FILL_HORIZONTAL);
         final Composite compCOM = SWTFactory.createComposite(groupGenericGDBServer, 3, 5,
                 GridData.FILL_BOTH);
 
@@ -837,24 +831,43 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         setErrorMessage(null);
         setMessage(null);
 
-        if (fPrgmArgumentsComboInittext != null) {
-            if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_OPENOCD)
-                    && !groupcom.isDisposed()) {
+        if (gdbServer != null) {
+
+            switch (gdbServer) {
+            case JTAG_OPENOCD:
+                if (groupcom.isDisposed()) {
+                    return true;
+                }
                 if (!isValidFileFieldEditor(fOpenOCDBinPath)
-                        || !isValidFileFieldEditor(fOpenOCDConfigPath))
-                    return false;
-            } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(JTAG_ASHLING)
-                    && !groupcomashling.isDisposed()) {
+                        || !isValidFileFieldEditor(fOpenOCDConfigPath)) {
+                     return false;
+                }
+                break;
+            case JTAG_ASHLING:
+                if (groupcomashling.isDisposed()){
+                    return true;
+                }
                 if (!isValidFileFieldEditor(fAshlingBinPath)
-                        || !isValidFileFieldEditor(fAshlingXMLPath))
-                    return false;
-            } else if (fPrgmArgumentsComboInittext.equalsIgnoreCase(NSIM) && !groupnsim.isDisposed()) {
-                if (!isValidFileFieldEditor(fnSIMBinPath))
-                    return false;
-                if (fLaunchtcfButton.getSelection() && !isValidFileFieldEditor(fnSIMTCFPath))
-                    return false;
-                if (fLaunchPropsButton.getSelection() && !isValidFileFieldEditor(fnSIMPropsPath))
-                    return false;
+                        || !isValidFileFieldEditor(fAshlingXMLPath)) {
+                     return false;
+                }
+                break;
+            case NSIM:
+                if (groupnsim.isDisposed()) {
+                    return true;
+                }
+                if (!isValidFileFieldEditor(fnSIMBinPath)
+                        || (fLaunchtcfButton.getSelection()
+                                && !isValidFileFieldEditor(fnSIMTCFPath))
+                        || (fLaunchPropsButton.getSelection()
+                                && !isValidFileFieldEditor(fnSIMPropsPath))) {
+                     return false;
+                }
+                break;
+            case GENERIC_GDBSERVER:
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown enum value has been used");
             }
         }
 

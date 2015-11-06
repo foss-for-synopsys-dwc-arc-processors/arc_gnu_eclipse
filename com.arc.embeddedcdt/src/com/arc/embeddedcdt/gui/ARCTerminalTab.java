@@ -39,6 +39,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
+import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.launch.Launch;
 
 public class ARCTerminalTab extends CLaunchConfigurationTab {
@@ -51,7 +52,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
-	static String gdbserver = null;
+	private ArcGdbServer gdbServer = null;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -181,14 +182,16 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		fPrgmArgumentsLabelCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-		
+
 		try {
-			gdbserver = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "JTAG via OpenOCD"/*""*/);
+			gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
+			        LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+			        ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(gdbserver.indexOf("OpenOCD")>-1){
+		if(gdbServer == ArcGdbServer.JTAG_OPENOCD){
 			if (!comport_openocd.equalsIgnoreCase("")) {
 				String tmp=comport_openocd;
 				int privious = fPrgmArgumentsComCom.indexOf(tmp);
@@ -207,7 +210,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			});
 		}
 
-	     if(gdbserver.indexOf("Ashlin")>-1){
+	     if(gdbServer == ArcGdbServer.JTAG_ASHLING){
 			if (!comport_ashling.equalsIgnoreCase("")) {
 				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
 				if (privious > -1)
@@ -233,11 +236,11 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		if (fSerialPortAvailable)
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
-		
-		if(gdbserver.indexOf("OpenOCD")>-1){
+
+		if(gdbServer == ArcGdbServer.JTAG_OPENOCD){
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
 	     }
-	     if(gdbserver.indexOf("Ashlin")>-1){
+	     if(gdbServer == ArcGdbServer.JTAG_ASHLING){
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
 	     }
 	}

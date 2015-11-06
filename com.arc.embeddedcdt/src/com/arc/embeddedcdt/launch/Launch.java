@@ -89,6 +89,7 @@ import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.gui.FtdiDevice;
 import com.arc.embeddedcdt.gui.FtdiCore;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
@@ -142,30 +143,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
         } catch (CoreException e) {
         }
         return new String[0];
-    }
-
-    private boolean isAshling(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration
-                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.JTAG_ASHLING);
-    }
-
-    private boolean isnSIM(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration
-                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.NSIM);
-    }
-
-    private boolean isOpenOCD(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration
-                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.JTAG_OPENOCD);
-    }
-
-    private boolean isGenericServer(ILaunchConfiguration configuration) throws CoreException {
-        String external_tools = configuration
-                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
-        return external_tools.equalsIgnoreCase(RemoteGDBDebuggerPage.GENERIC_GDBSERVER);
     }
 
     public static String serialport = "";
@@ -228,8 +205,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
     public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch,
             IProgressMonitor monitor) throws CoreException {
 
-        String external_tools = configuration
-                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, "");
+        ArcGdbServer gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+                ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
 
         String gdbserver_port = configuration
                 .getAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
@@ -252,7 +230,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
             ftdi_core = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
         }
 
-        if (external_tools.indexOf("OpenOCD") > 0) {
+        if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
             serialport = configuration
                     .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
             if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM6)
@@ -264,12 +242,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
             } else if (ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.AS221_1) {
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
             }
-        } else if (external_tools.indexOf("Ashling") > 0) {
+        } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
             serialport = configuration
                     .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
         }
 
-        if (external_tools.isEmpty() || gdbserver_port.isEmpty())
+        if (gdbserver_port.isEmpty())
             return;
 
         String gdbserver_IPAddress = configuration.getAttribute(
@@ -342,9 +320,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 
             /* Do we need to connect to serial port? */
-            if (terminal_launch.equalsIgnoreCase("true") && !external_tools.equalsIgnoreCase("nSIM")
+            if (terminal_launch.equalsIgnoreCase("true") && gdbServer != ArcGdbServer.NSIM
                     && !serialport.isEmpty()
-                    && !external_tools.equalsIgnoreCase("Generic gdbserver")) {
+                    && gdbServer != ArcGdbServer.GENERIC_GDBSERVER) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e2) {
@@ -407,13 +385,20 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     eclipsehome = eclipsehome.substring(eclipsehome.lastIndexOf("file:/") + 6,
                             eclipsehome.length());
 
-                    // TODO Replace hardcoded line with something more error-proof.
-                    if (external_tools.equalsIgnoreCase("JTAG via Ashling")) {
+                    switch (gdbServer) {
+                    case JTAG_ASHLING:
                         start_ashling(configuration, launch);
-                    } else if (external_tools.equalsIgnoreCase("JTAG via OpenOCD")) {
+                        break;
+                    case JTAG_OPENOCD:
                         start_openocd(configuration, launch);
-                    } else if (external_tools.equalsIgnoreCase("nSIM")) {
+                        break;
+                    case NSIM:
                         start_nsim(configuration, launch);
+                        break;
+                    case GENERIC_GDBSERVER:
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown enum value has been used");
                     }
 
                     try {
@@ -436,24 +421,25 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
 
                         String gdb_init = "";
 
-                        if (isAshling(configuration)) {
+                        String defaultGDBHost = configuration.getAttribute(
+                                LaunchConfigurationConstants.DEFAULT_GDB_HOST, "");
+                        switch (gdbServer) {
+                        case JTAG_ASHLING:
                             gdb_init = String.format(
                                     "set arc opella-target arcem \ntarget remote %s:%s\nload",
-                                    configuration.getAttribute(
-                                            LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""),
-                                    gdbserver_port);
-                        }
-
-                        if (isOpenOCD(configuration) || isnSIM(configuration)) {
+                                    defaultGDBHost, gdbserver_port);
+                            break;
+                        case JTAG_OPENOCD:
+                        case NSIM:
                             gdb_init = String.format("target remote %s:%s\nload",
-                                    configuration.getAttribute(
-                                            LaunchConfigurationConstants.DEFAULT_GDB_HOST, ""),
-                                    gdbserver_port);
-                        }
-
-                        if (isGenericServer(configuration)) {
+                                    defaultGDBHost, gdbserver_port);
+                            break;
+                        case GENERIC_GDBSERVER:
                             gdb_init = String.format("target remote %s:%s\nload",
                                     gdbserver_IPAddress, gdbserver_port);
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unknown enum value has been used");
                         }
 
                         executeGDBScript("GDB commands", configuration, dtargets,
