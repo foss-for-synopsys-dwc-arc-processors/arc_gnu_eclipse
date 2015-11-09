@@ -619,63 +619,20 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
      */
     private void start_openocd(final ILaunchConfiguration configuration, final ILaunch launch)
             throws CoreException {
-        String openocd_cfg = "";
-        String openocd_custom_configuration_file = configuration.getAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, "");
-
         String gdbserver_port = configuration.getAttribute(
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
                 LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 
+        String openocd_cfg = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH, "");
         final String openocd_bin = configuration
                 .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, "");
-
-        FtdiDevice ftdiDevice;
-        try {
-            ftdiDevice = FtdiDevice.valueOf(
-                    configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
-                            LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
-        } catch (IllegalArgumentException e) {
-            ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
-        }
-
-        FtdiCore ftdiCore;
-        try {
-            ftdiCore = FtdiCore
-                    .valueOf(configuration.getAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
-                            LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
-        } catch (IllegalArgumentException e) {
-            ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
-        }
 
         // ${openocd_bin}/../share/openocd/scripts
         final File root_dir = new File(openocd_bin).getParentFile().getParentFile();
         final File scripts_dir = new File(root_dir,
                 "share" + File.separator + "openocd" + File.separator + "scripts");
         final String openocd_tcl = scripts_dir.getAbsolutePath();
-
-        if (ftdiDevice == FtdiDevice.EM_SK_v1x) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
-                    + "snps_em_sk_v1.cfg";
-        } else if (ftdiDevice == FtdiDevice.EM_SK_v2x) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
-                    + "snps_em_sk.cfg";
-        } else if (ftdiDevice == FtdiDevice.AXS101) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
-                    + "snps_axs101.cfg";
-        } else if (ftdiDevice == FtdiDevice.AXS102) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
-                    + "snps_axs102.cfg";
-        } else if ((ftdiDevice == FtdiDevice.AXS103) && (ftdiCore == FtdiCore.HS36)) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
-                    + "snps_axs103_hs36.cfg";
-        } else if (ftdiDevice == FtdiDevice.AXS103) {
-            openocd_cfg = scripts_dir + File.separator + "board" + File.separator
-                    + "snps_axs103_hs38.cfg";
-        } else if (ftdiDevice == FtdiDevice.CUSTOM) {
-            openocd_cfg = openocd_custom_configuration_file;
-        }
-
         /*
          * "gdb_port" is before -f <script> so script file can override our settings. Also in case
          * of configuration scripts supplied by Synopsys we cannot set gdb_port after -f option -

@@ -840,9 +840,19 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 if (groupcom.isDisposed()) {
                     return true;
                 }
-                if (!isValidFileFieldEditor(fOpenOCDBinPath)
-                        || !isValidFileFieldEditor(fOpenOCDConfigPath)) {
-                     return false;
+                if (!isValidFileFieldEditor(fOpenOCDBinPath)) {
+                    return false;
+                }
+                if (ftdiDevice == FtdiDevice.CUSTOM) {
+                    if (!isValidFileFieldEditor(fOpenOCDConfigPath)) {
+                        return false;
+                    }
+                } else {
+                    File cfg_file = new File(openocd_cfg_path);
+                    if (!cfg_file.exists()) {
+                        setErrorMessage("Default OpenOCD configuration file for this development system \'" + openocd_cfg_path + "\' must exist");
+                        return false;
+                    }
                 }
                 break;
             case JTAG_ASHLING:
@@ -891,6 +901,40 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         return true;
     }
 
+    private String getOpenOCDCfgPath() {
+        final File root_dir = new File(openocd_bin_path).getParentFile().getParentFile();
+        final File scripts_dir = new File(root_dir,
+                "share" + File.separator + "openocd" + File.separator + "scripts");
+        String openocd_cfg = scripts_dir + File.separator + "board" + File.separator;
+
+        switch (ftdiDevice) {
+        case EM_SK_v1x:
+            openocd_cfg += "snps_em_sk_v1.cfg";
+            break;
+        case EM_SK_v2x:
+            openocd_cfg += "snps_em_sk.cfg";
+            break;
+        case AXS101:
+            openocd_cfg += "snps_axs101.cfg";
+            break;
+        case AXS102:
+            openocd_cfg += "snps_axs102.cfg";
+            break;
+        case AXS103:
+            if (ftdiCore == FtdiCore.HS36) {
+                openocd_cfg += "snps_axs103_hs36.cfg";
+            } else {
+                openocd_cfg += "snps_axs103_hs38.cfg";
+            }
+            break;
+        case CUSTOM:
+            break;
+        default:
+            throw new IllegalArgumentException("Unknown enum value has been used");
+        }
+        return openocd_cfg;
+    }
+
     private void createTabitemCOM(Composite subComp) {
         createTabitemCOMBool = true;
         groupcom = SWTFactory.createGroup(subComp, fPrgmArgumentsComboInit.getItem(0), 3, 5,
@@ -905,6 +949,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
                     openocd_bin_path = (String) event.getNewValue();
+                    if (ftdiDevice != FtdiDevice.CUSTOM) {
+                        openocd_cfg_path = getOpenOCDCfgPath();
+                    }
                     updateLaunchConfigurationDialog();
                 }
             }
@@ -957,8 +1004,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fPrgmArgumentsFTDI_CoreCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
                 Combo combo = (Combo) evt.widget;
-                if (!combo.getText().isEmpty())
+                if (!combo.getText().isEmpty()) {
                     ftdiCore = FtdiCore.fromString(combo.getText());
+                    if (ftdiDevice != FtdiDevice.CUSTOM) {
+                        openocd_cfg_path = getOpenOCDCfgPath();
+                    }
+                }
                 updateLaunchConfigurationDialog();
             }
         });
