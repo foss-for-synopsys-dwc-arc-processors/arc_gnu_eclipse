@@ -421,8 +421,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
 
                         String gdb_init = "";
 
-                        String defaultGDBHost = configuration.getAttribute(
-                                LaunchConfigurationConstants.DEFAULT_GDB_HOST, "");
+                        String defaultGDBHost = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
                         switch (gdbServer) {
                         case JTAG_ASHLING:
                             gdb_init = String.format(
