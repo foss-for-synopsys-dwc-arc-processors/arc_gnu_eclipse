@@ -8,7 +8,7 @@
  *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 
-package com.arc.embeddedcdt.gui;
+package com.arc.embeddedcdt.common;
 
 import java.util.LinkedList;
 import java.util.List;

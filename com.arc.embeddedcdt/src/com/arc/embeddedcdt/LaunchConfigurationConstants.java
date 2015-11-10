@@ -12,8 +12,8 @@
 
 package com.arc.embeddedcdt;
 
-import com.arc.embeddedcdt.gui.FtdiCore;
-import com.arc.embeddedcdt.gui.FtdiDevice;
+import com.arc.embeddedcdt.common.FtdiCore;
+import com.arc.embeddedcdt.common.FtdiDevice;
 
 public interface LaunchConfigurationConstants {
     static final String LAUNCH_ID = "com.arc.embeddedcdt"; //$NON-NLS-1$

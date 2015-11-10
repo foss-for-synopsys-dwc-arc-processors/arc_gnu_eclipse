@@ -90,8 +90,8 @@ import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.common.ArcGdbServer;
-import com.arc.embeddedcdt.gui.FtdiDevice;
-import com.arc.embeddedcdt.gui.FtdiCore;
+import com.arc.embeddedcdt.common.FtdiCore;
+import com.arc.embeddedcdt.common.FtdiDevice;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 

@@ -53,6 +53,8 @@ import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.common.FtdiCore;
+import com.arc.embeddedcdt.common.FtdiDevice;
 import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 
 /**

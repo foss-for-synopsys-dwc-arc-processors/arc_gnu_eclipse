@@ -8,7 +8,7 @@
  *     Synopsys, Inc. - ARC GNU Toolchain support
  *******************************************************************************/
 
-package com.arc.embeddedcdt.gui;
+package com.arc.embeddedcdt.common;
 
 public enum FtdiCore {
     ARC770D("ARC770D"),
