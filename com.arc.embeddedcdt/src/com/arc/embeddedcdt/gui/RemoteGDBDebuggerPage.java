@@ -408,13 +408,17 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             } catch (CoreException e) {
             }
 
-            ArcGdbServer gdbserver = ArcGdbServer.fromString(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
-            int previous = fPrgmArgumentsComboInit.indexOf(gdbserver.toString());
+            int previous = fPrgmArgumentsComboInit.indexOf(gdbServer.toString());
             if (previous > -1)
                 fPrgmArgumentsComboInit.remove(previous);
-            fPrgmArgumentsComboInit.add(gdbserver.toString(), 0);
+            /*
+             * Reading gdbServer again from configuration because field gdbServer might have been
+             * changed by event handler called by fPrgmArgumentsComboInit.remove(previous)
+             */
+            gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
+            fPrgmArgumentsComboInit.add(gdbServer.toString(), 0);
             fPrgmArgumentsComboInit.select(0);
 
             if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
@@ -1040,9 +1044,19 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     private void updateFtdiCoreCombo() {
         fPrgmArgumentsFTDI_CoreCombo.removeAll();
         java.util.List<FtdiCore> cores = ftdiDevice.getCores();
-        for (FtdiCore core : cores)
+        String text = cores.get(0).toString();
+        for (FtdiCore core : cores) {
             fPrgmArgumentsFTDI_CoreCombo.add(core.toString());
-        fPrgmArgumentsFTDI_CoreCombo.setText(cores.get(0).toString());
+            if (ftdiCore == core) {
+                /*
+                 * Should select current ftdiCore if it is present in cores list in order to be able
+                 * to initialize from configuration. Otherwise ftdiCore field will be rewritten to
+                 * the selected core when we initialize FTDI_DeviceCombo
+                 */
+                text = ftdiCore.toString();
+            }
+        }
+        fPrgmArgumentsFTDI_CoreCombo.setText(text);
     }
 
     private void fPrgmArgumentsJTAGFrency(Composite Comp) {
