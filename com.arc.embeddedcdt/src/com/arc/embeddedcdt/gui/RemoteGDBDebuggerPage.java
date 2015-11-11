@@ -955,6 +955,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     openocd_bin_path = (String) event.getNewValue();
                     if (ftdiDevice != FtdiDevice.CUSTOM) {
                         openocd_cfg_path = getOpenOCDCfgPath();
+                        fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
                     }
                     updateLaunchConfigurationDialog();
                 }
@@ -1012,6 +1013,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     ftdiCore = FtdiCore.fromString(combo.getText());
                     if (ftdiDevice != FtdiDevice.CUSTOM) {
                         openocd_cfg_path = getOpenOCDCfgPath();
+                        fOpenOCDConfigPath.setStringValue(openocd_cfg_path);
                     }
                 }
                 updateLaunchConfigurationDialog();
