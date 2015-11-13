@@ -321,7 +321,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             fGDBCommandText.setText(gdb_path);
             openocd_bin_path = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, default_oocd_bin);
-            String jtagfrequency = configuration.getAttribute(
+            jtag_frequency = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
             try {
                 ftdiDevice = FtdiDevice.valueOf(configuration.getAttribute(
@@ -389,7 +389,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         .isEmpty()) {
                     fPrgmArgumentsJTAGFrenCombo.setText(fPrgmArgumentsJTAGFrenCombo.getItem(0));
                 } else
-                    fPrgmArgumentsJTAGFrenCombo.setText(jtagfrequency);
+                    fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
             }
             if (!fPrgmArgumentsFTDI_DeviceCombo.isDisposed())
                 fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
@@ -422,11 +422,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             fPrgmArgumentsComboInit.select(0);
 
             if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
-                if (!jtagfrequency.isEmpty()) {
-                    previous = fPrgmArgumentsJTAGFrenCombo.indexOf(jtagfrequency);
+                if (!jtag_frequency.isEmpty()) {
+                    previous = fPrgmArgumentsJTAGFrenCombo.indexOf(jtag_frequency);
                     if (previous > -1)
                         fPrgmArgumentsJTAGFrenCombo.remove(previous);
-                    fPrgmArgumentsJTAGFrenCombo.add(jtagfrequency, 0);
+                    fPrgmArgumentsJTAGFrenCombo.add(jtag_frequency, 0);
                     fPrgmArgumentsJTAGFrenCombo.select(0);
                 }
             }
@@ -1098,14 +1098,6 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         fPrgmArgumentsJTAGFrenCombo.add("1200KHz");
         fPrgmArgumentsJTAGFrenCombo.add("1000KHz");
 
-        if (jtag_frequency != null) {
-            if (fPrgmArgumentsJTAGFrenCombo.getText().isEmpty() && jtag_frequency.isEmpty())
-                fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
-            else if (fPrgmArgumentsJTAGFrenCombo.getText().isEmpty() && !jtag_frequency.isEmpty())
-                fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
-        } else
-            fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
-
         fPrgmArgumentsJTAGFrenCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
                 Combo combo = (Combo) evt.widget;
@@ -1114,7 +1106,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
             }
         });
-
+        //Setting text after adding listener to make sure jtag_frequency field value is updated
+        if (jtag_frequency != null) {
+            if (fPrgmArgumentsJTAGFrenCombo.getText().isEmpty() && jtag_frequency.isEmpty())
+                fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
+            else if (fPrgmArgumentsJTAGFrenCombo.getText().isEmpty() && !jtag_frequency.isEmpty())
+                fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
+        } else {
+            fPrgmArgumentsJTAGFrenCombo.setText("10MHz");
+        }
     }
 
     private void createTabitemnSIM(Composite subComp) {
