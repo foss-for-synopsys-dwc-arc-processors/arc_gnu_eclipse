@@ -1629,6 +1629,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
+               defaultValue="--specs=nsim.specs"
                id="org.eclipse.cdt.cross.arc.gnu.c.link.option.otherflags"
                name="Other flags"
                valueType="string">
@@ -1796,6 +1797,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.other"
+               defaultValue="--specs=nsim.specs"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.otherflags"
                name="Other flags"
                valueType="string">
