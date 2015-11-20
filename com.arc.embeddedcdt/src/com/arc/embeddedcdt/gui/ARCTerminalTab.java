@@ -197,7 +197,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 				int privious = fPrgmArgumentsComCom.indexOf(tmp);
 				if (privious > -1)
 					fPrgmArgumentsComCom.remove(privious);  
-					fPrgmArgumentsComCom.add(tmp, 0);
+				fPrgmArgumentsComCom.add(tmp, 0);
 
 			}
 			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
@@ -210,12 +210,16 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			});
 		}
 
-	     if(gdbServer == ArcGdbServer.JTAG_ASHLING){
+		if(gdbServer == ArcGdbServer.JTAG_ASHLING){
 			if (!comport_ashling.equalsIgnoreCase("")) {
-				int privious = fPrgmArgumentsComCom.indexOf(comport_ashling);
-				if (privious > -1)
-					fPrgmArgumentsComCom.remove(privious);
-				fPrgmArgumentsComCom.add(comport_ashling, 0);
+				// One of the items in the list of COM ports became blank
+				// sometimes, if comport_ashling is removed directly instead
+				// of via a temporary variable.
+				String tmp = comport_ashling;
+				int previous = fPrgmArgumentsComCom.indexOf(comport_ashling);
+				if (previous > -1)
+					fPrgmArgumentsComCom.remove(previous);
+				fPrgmArgumentsComCom.add(tmp, 0);
 
 			}
 			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
