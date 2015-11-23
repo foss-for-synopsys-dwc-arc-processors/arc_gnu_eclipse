@@ -540,6 +540,20 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 DebugPlugin.exec(DebugPlugin.parseArguments(ash_cmd), ash_dir),
                 ASHLING_PROCESS_LABEL);
         ashling_proc.setAttribute(IProcess.ATTR_CMDLINE, ash_cmd);
+
+        /* Additional sleep is required so that Ashling GDB server has time to start
+            before GDB connects to it.
+            It doesn't seem possible to wait for Ashling server to write a special
+            message and then continue, because if everything goes as supposed, it
+            doesn't write anything. It is probable that this happens because event
+            listener is added only after all the messages are sent to the stream and
+            it isn't called until something else is sent there, which doesn't happen
+            in our case. */
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
