@@ -142,6 +142,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     // Editor for path to nSIM TCF path.
     private FileFieldEditor fAshlingXMLPath;
 
+    // Editor for path to Ashling target description XML file.
+    private FileFieldEditor fAshlingTDescXMLPath;
+
     private String jtag_frequency = null;
     private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
@@ -215,6 +218,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
     private String externaltools_ashling_path = "";
     private String Ashling_xml_path = "";
+    private String ashlingTDescPath = "";
     private String externaltools_nsim_path = "";
     private String hostname = "";
     private String portnumber = "";
@@ -366,6 +370,12 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     + java.io.File.separator + "arc-opella-em.xml";
             Ashling_xml_path = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, ash_xml_path);
+
+            String defaultTDescPath = new File(default_ashling_path).getParentFile().getPath()
+                    + java.io.File.separator + "opella-arcem-tdesc.xml";
+            ashlingTDescPath = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_ASHLING_TDESC_PATH, defaultTDescPath);
+
             externaltools_nsim_path = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,
                     getNsimdrvDefaultPath());
@@ -489,6 +499,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH,
                 Ashling_xml_path);
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_ASHLING_TDESC_PATH,
+                ashlingTDescPath);
 
         configuration.setAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,
@@ -933,6 +945,23 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             }
         });
 
+
+        // Path to ashling target description file
+        fAshlingTDescXMLPath = new FileFieldEditor("fAshlingTDescXMLPath",
+                "Target description XML file", false,
+                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compCOM);
+        fAshlingTDescXMLPath.setStringValue(ashlingTDescPath);
+
+        fAshlingTDescXMLPath.setPropertyChangeListener(new IPropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent event) {
+                if (event.getProperty() == "field_editor_value") {
+                    ashlingTDescPath = (String) event.getNewValue();
+                    updateLaunchConfigurationDialog();
+                }
+            }
+        });
+
+
         fPrgmArgumentsJTAGFrency(compCOM);
 
     }
@@ -963,7 +992,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                 } else {
                     File cfg_file = new File(openocd_cfg_path);
                     if (!cfg_file.exists()) {
-                        setErrorMessage("Default OpenOCD configuration file for this development system \'" + openocd_cfg_path + "\' must exist");
+                        setErrorMessage(
+                                "Default OpenOCD configuration file for this development system \'"
+                                        + openocd_cfg_path + "\' must exist");
                         return false;
                     }
                 }
@@ -973,7 +1004,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     return true;
                 }
                 if (!isValidFileFieldEditor(fAshlingBinPath)
-                        || !isValidFileFieldEditor(fAshlingXMLPath)) {
+                        || !isValidFileFieldEditor(fAshlingXMLPath)
+                        || !isValidFileFieldEditor(fAshlingTDescXMLPath)) {
                      return false;
                 }
                 break;

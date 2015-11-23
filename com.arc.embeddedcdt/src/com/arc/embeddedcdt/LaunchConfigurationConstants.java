@@ -52,6 +52,7 @@ public interface LaunchConfigurationConstants {
     String ATTR_NSIM_TCF_FILE = LAUNCH_ID + ".nsim_tcf_file"; //$NON-NLS-1$
     String ATTR_NSIM_DEFAULT_PATH = LAUNCH_ID + ".nsim_default_path"; //$NON-NLS-1$
     String ATTR_ASHLING_XML_PATH = LAUNCH_ID + ".ashling_xml_path"; //$NON-NLS-1$
+    String ATTR_ASHLING_TDESC_PATH = LAUNCH_ID + ".ashling_tdesc_path"; //$NON-NLS-1$
     String ATTR_JTAG_FREQUENCY = LAUNCH_ID + ".jtag_frequency"; //$NON-NLS-1$
     String ATTR_FTDI_DEVICE = LAUNCH_ID + ".ftdi_device"; //$NON-NLS-1$
     String ATTR_FTDI_CORE = LAUNCH_ID + ".ftdi_core"; //$NON-NLS-1$

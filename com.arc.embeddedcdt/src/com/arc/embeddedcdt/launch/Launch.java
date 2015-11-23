@@ -427,9 +427,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                         String defaultGDBHost = LaunchConfigurationConstants.DEFAULT_GDB_HOST;
                         switch (gdbServer) {
                         case JTAG_ASHLING:
-                            gdb_init = String.format(
-                                    "set arc opella-target arcem \ntarget remote %s:%s\nload",
-                                    defaultGDBHost, gdbserver_port);
+                            String ashlingTDescPath = configuration.getAttribute(
+                                    LaunchConfigurationConstants.ATTR_ASHLING_TDESC_PATH, "");
+                            gdb_init = "set tdesc filename " + ashlingTDescPath
+                                    + "\nset remote P-packet 0\n"
+                                    + String.format("target remote %s:%s\nload",
+                                            defaultGDBHost, gdbserver_port);
                             break;
                         case JTAG_OPENOCD:
                         case NSIM:
