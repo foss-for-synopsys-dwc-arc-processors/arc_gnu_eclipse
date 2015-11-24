@@ -989,6 +989,14 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                      return false;
                 }
                 break;
+            case CUSTOM_GDBSERVER:
+                if (groupcom_customGdb.isDisposed()) {
+                    return true;
+                }
+                if (!isValidFileFieldEditor(fCustomGdb)) {
+                    return false;
+                }
+                break;
             case GENERIC_GDBSERVER:
                 break;
             default:
