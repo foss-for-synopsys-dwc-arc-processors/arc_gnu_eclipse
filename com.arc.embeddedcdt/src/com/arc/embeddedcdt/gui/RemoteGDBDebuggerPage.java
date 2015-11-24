@@ -850,11 +850,15 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         // GDB server command line arguments
         Label label = new Label(compcustom_gdb, SWT.LEFT);
         label.setText("GDB server command line arguments:");
-
-        // GDB host text field
         fCustomGdbArgsText = new Text(compcustom_gdb, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+
+        GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
+        layoutData.widthHint = 220;
+        layoutData.horizontalSpan = 2;
+        fCustomGdbArgsText.setLayoutData(layoutData);
         if (customGdbCommandArgs != null)
             fCustomGdbArgsText.setText(customGdbCommandArgs);
+
         fCustomGdbArgsText.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent evt) {
                 customGdbCommandArgs = fCustomGdbArgsText.getText();
