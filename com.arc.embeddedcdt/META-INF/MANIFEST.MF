@@ -44,5 +44,5 @@ Bundle-NativeCode: lib/linux/x86/librxtxSerial.so; osname=Linux; processor=x86,
  lib/win32/x86/rxtxSerial.dll; osname=Win32; processor=x86,
  *
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.ibm.icu.text
