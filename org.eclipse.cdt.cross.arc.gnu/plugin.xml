@@ -391,38 +391,38 @@
                   command="-mmpy-option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.0"
                   isDefault="false"
-                  name="None">
+                  name="none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=1"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.1"
-                  name="1 - 16x16 multiplier, fully pipelined">
+                  name="w">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=2"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.2"
                   isDefault="true"
-                  name="2 - 32x32 multiplier, fully pipelined (1 stage)">
+                  name="wlh1">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=3"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.3"
-                  name="3 - 32x32 multiplier, fully pipelined (2 stages)">
+                  name="wlh2">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=4"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.4"
-                  name="4 - 2 16x16 multipliers, blocking, sequential">
+                  name="wlh3">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=5"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.5"
-                  name="5 - 16x16 multiplier, blocking, sequential">
+                  name="wlh4">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=6"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.6"
-                  name="6 - 32x4 multiplier, blocking, sequential">
+                  name="wlh5">
             </enumeratedOptionValue>
          </option>
              <option
@@ -435,53 +435,28 @@
                   command="-mmpy-option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.0"
                   isDefault="false"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mmpy-option=1"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.1"
-                  name="1 - 16x16 multiplier, fully pipelined">
+                  name="none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=2"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.2"
                   isDefault="true"
-                  name="2 - 32x32 multiplier, fully pipelined (1 stage)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mmpy-option=3"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.3"
-                  name="3 - 32x32 multiplier, fully pipelined (2 stages)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mmpy-option=4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.4"
-                  name="4 - 2 16x16 multipliers, blocking, sequential">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mmpy-option=5"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.5"
-                  name="5 - 16x16 multiplier, blocking, sequential">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mmpy-option=6"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.6"
-                  name="6 - 32x4 multiplier, blocking, sequential">
+                  name="mpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=7"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.7"
-                  name="7 - Short vector instructions (32bits)">
+                  name="plus_dmpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=8"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.8"
-                  name="8 - Double MAC instructions">
+                  name="plus_macd">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=9"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.9"
-                  name="9 - 64bit operations">
+                  name="plus_qmacw">
             </enumeratedOptionValue>
          </option>
          <option
