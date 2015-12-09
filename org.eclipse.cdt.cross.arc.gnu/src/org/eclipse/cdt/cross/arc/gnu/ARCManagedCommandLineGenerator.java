@@ -38,6 +38,10 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static ITool lastTool;
     private static String lastProject;
 
+    private static final String MMPY_OPTION_EM = "org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem";
+    private static final String MMPY_OPTION_HS = "org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs";
+    private static final String MMPY_OPTION_FOR_REPLACEMENT = "-mmpy-option=2";
+
     public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName,
             String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName,
             String[] asInputResources, String sCommandLinePattern) {
@@ -368,12 +372,22 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     while (e.hasMoreElements()) {
                         String gcc_option = (String) e.nextElement();
                         String value = gccOptions.getProperty(gcc_option);
-                        if (!gcc_option.equalsIgnoreCase("-mcpu")) {
-                            if (!value.isEmpty()) {
-                                gcc_option = gcc_option + "=" + value;
-                            }
-                            tcf_properties.add(gcc_option);
+                        if (gcc_option.equals("-mcpu")) {
+                            continue;
                         }
+                        if (!value.isEmpty()) {
+                            gcc_option = gcc_option + "=" + value;
+                            if (gcc_option.contains("-mmpy-option")) {
+                                try {
+                                    gcc_option = getMultiplyOption(gcc_option, oToolChain, sProcessor);
+                                } catch (BuildException e1) {
+                                    StatusManager.getManager().handle(
+                                            new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                            StatusManager.LOG);
+                                }
+                            }
+                        }
+                        tcf_properties.add(gcc_option);
                     }
 
                     if (oTool.getBaseId().contains("linker")) {
@@ -423,5 +437,22 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
         return projectBuildPath;
     }
 
+    private String getMultiplyOption(String gccOption, IToolChain toolChain,
+            String cpu) throws BuildException {
+        String superClassId = cpu.equals("-mcpu=arcem") ? MMPY_OPTION_EM : MMPY_OPTION_HS;
+        IOption mmpyOption = toolChain.getOptionBySuperClassId(superClassId);
+
+        boolean isApplicable = false;
+        for (String appValue : mmpyOption.getApplicableValues()) {
+            if (gccOption.equals(mmpyOption.getEnumCommand(appValue))) {
+                isApplicable = true;
+                break;
+            }
+        }
+        if (!isApplicable) {
+            return MMPY_OPTION_FOR_REPLACEMENT;
+        }
+        return gccOption;
+    }
 }
 
