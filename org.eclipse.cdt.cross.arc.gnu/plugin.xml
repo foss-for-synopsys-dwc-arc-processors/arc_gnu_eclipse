@@ -366,16 +366,6 @@
              name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
              valueType="boolean">
        </option>
-      <!--
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mEA"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
-               name="Extended arithmetic instruction (-mEA)"
-               valueType="boolean">
-         </option>
-         -->
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mll64"
@@ -492,41 +482,6 @@
                   name="9 - 64bit operations">
             </enumeratedOptionValue>
          </option>
-        <!--
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem"
-               name="FPU EM Type "
-               visible="false"
-               valueType="enumerated"> 
-               
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuem.none"
-                  isDefault="true"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_all"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuem.fpus_all"
-                  name="Single Precision FPU with all instructions (-mfpu=fpus_all)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuem.fpus"
-                  name="Single Precision FPU(-mfpu=fpus)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_div"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuem.fpus_dis"
-                  name="Single Precision FPU with with DIV/SQRT instructions(-mfpu=fpus_div)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_fma"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpuem.fpus_fma"
-                  name="Single Precision FPU with with fused instructions (-mfpu=fpus_fma)">
-            </enumeratedOptionValue>
-         </option>
-         -->
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs"
@@ -2164,16 +2119,7 @@
             </property>
          </supportedProperties>
       </tool>
-      <!---->
-      <!---->
-      <!---->
-      <!---->
 
-      <!-- -->
-      
-      
-      
-      
       <toolChain
             archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
@@ -2417,16 +2363,6 @@
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
-        <!--
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea"
-               name="Extended arithmetic instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
-               valueType="boolean">
-         </option>
-         -->
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base"
                isAbstract="false"
@@ -7023,13 +6959,8 @@
             </toolChain>
          </configuration>
       </projectType>
-      
-      
-      <!-- -->
-      
 
-      <!---->
-            
+
    </extension>
    <extension
          point="org.eclipse.cdt.core.templateAssociations">
