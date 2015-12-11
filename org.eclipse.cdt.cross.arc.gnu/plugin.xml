@@ -682,6 +682,7 @@
             isAbstract="false"
             name="TCF path"
             resourceFilter="all"
+            valueHandler="com.arc.cdt.toolchain.tcf.TcfValueHandler"
             valueType="string">
       </option>
       <option

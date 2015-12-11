@@ -33,9 +33,11 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.cdt.toolchain.tcf.TcfContent;
-import com.arc.cdt.toolchain.tcf.TcfContentException;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
+    private static ITool lastTool;
+    private static String lastProject;
+
     public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName,
             String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName,
             String[] asInputResources, String sCommandLinePattern) {
@@ -339,14 +341,26 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
             if ((tcf_selected != null) && tcf_selected && sTCF != null) {
                 oList_gcc_options.clear();
                 TcfContent fileContent = null;
-                try {
-                    fileContent = TcfContent.readFile(new File(sTCF));
-                } catch (TcfContentException e1) {
-                    StatusManager.getManager().handle(
-                            new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
-                            StatusManager.SHOW);
-                    e1.printStackTrace();
-                }
+                /*
+                 * There are two ways we can handle exceptions occurring while reading TCF: we can
+                 * handle them manually or throw them further. Since this method is called both when
+                 * building a project and when determining what options to show in tool tab in IDE,
+                 * we should choose the way which is good enough for both situations.
+                 * 
+                 * If we threw the exceptions further, the building of the project would be aborted,
+                 * which is better than just ignoring TCF, as it is done if the other way is chosen.
+                 * But in this case there would be a problem with IDE. If a user closed project
+                 * properties window while on some tool tab and then tried to open these properties
+                 * again, the page wouldn't be able to render correctly. For example, it is possible
+                 * that the user wouldn't be able to change path to TCF, because the button might be
+                 * missing from the page.
+                 * 
+                 * It is not obvious how to fix the page in that case, so we decided to show error
+                 * dialogs manually so that the properties page would be displayed correctly.
+                 */
+                int showStyle = (oTool.equals(lastTool) && projectBuildPath.equals(lastProject))
+                        ? StatusManager.NONE : StatusManager.SHOW;
+                fileContent = TcfContent.readFile(new File(sTCF), sProcessor, showStyle, "\n\nIgnoring TCF.");
                 if (fileContent != null) {
                     Properties gccOptions = fileContent.getGccOptions();
                     Enumeration<?> e = gccOptions.propertyNames();
@@ -361,32 +375,33 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                             tcf_properties.add(gcc_option);
                         }
                     }
-                    String memoryMap = fileContent.getLinkerMemoryMap();
-                    if (tcf_map_selected != null && tcf_map_selected && memoryMap != null) {
-                        try {
-                            Files.deleteIfExists(Paths.get(tcfMapPath));
-                            Files.write(Paths.get(tcfMapPath), memoryMap.getBytes(),
-                                    StandardOpenOption.CREATE);
-                        } catch (IOException e1) {
-                            StatusManager.getManager().handle(
-                                    new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
-                                    StatusManager.SHOW);
-                            e1.printStackTrace();
-                        }
-                    }
 
-                    if (tcf_map_selected != null && tcf_map_selected
-                            && Files.exists(Paths.get(tcfMapPath))) {
-                        if (oTool.getBaseId().contains("linker")) {
-                            oList_gcc_options.add("-Wl,-marcv2elfb -L " + projectBuildPath);
+                    if (oTool.getBaseId().contains("linker")) {
+                        if (tcf_map_selected != null && tcf_map_selected) {
+                            String memoryMap = fileContent.getLinkerMemoryMap();
+                            try {
+                                Files.deleteIfExists(Paths.get(tcfMapPath));
+                                Files.write(Paths.get(tcfMapPath), memoryMap.getBytes(),
+                                        StandardOpenOption.CREATE);
+                            } catch (IOException e1) {
+                                StatusManager.getManager().handle(
+                                        new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                        StatusManager.SHOW);
+                                e1.printStackTrace();
+                            }
+                            if (Files.exists(Paths.get(tcfMapPath))) {
+                                oList_gcc_options.add("-Wl,-marcv2elfb -L " + projectBuildPath);
+                            }
                         }
                     }
                 }
                 oList_gcc_options.addAll(tcf_properties);
             }
             oList.addAll(Arrays.asList(asFlags));
+            lastProject = projectBuildPath;
         }
         oList.addAll(oList_gcc_options);
+        lastTool = oTool;
         return super.generateCommandLineInfo(oTool, sCommandName,
                 (String[]) oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName,
                 asInputResources, sCommandLinePattern);
