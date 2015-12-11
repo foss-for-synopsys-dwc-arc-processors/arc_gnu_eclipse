@@ -11,173 +11,126 @@
  *******************************************************************************/
 package com.arc.cdt.toolchain.arc;
 
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import org.eclipse.cdt.managedbuilder.core.IOption;
+import org.eclipse.cdt.managedbuilder.core.ITool;
 
-import com.arc.cdt.toolchain.AbstractOptionEnablementManager;
 import com.arc.cdt.toolchain.IOptionEnablementManager;
 import com.arc.cdt.toolchain.OptionEnablementManager;
 
 public class ArcOptionEnablementManager extends OptionEnablementManager {
 
-       
-   
-    private static String ARCV2EM_DISABLED[] = {
-    	         
-            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea",//Customized for ARC GNU ea   
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea",//Customized for ARC GNU ea  
-            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ll64",//Customized for ARC GNU ea   
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ll64",//Customized for ARC GNU ea  
-            
-            
-            "org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.ea",//Customized for ARC GNU ea  big-en
-            "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ea",//Customized for ARC GNU ea  big-en
-            "org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.ll64",//Customized for ARC GNU ea   big-en
-            "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.ll64",//Customized for ARC GNU ea  big-en
-            
-            //"org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpu",
-    };
-    
- 
-    
-    /**
-     * The names of options that are disabled for ARCv2EM
-     */
-   private static Set<String> DISABLED_FOR_ARCV2EM = new HashSet<String>(Arrays.asList(ARCV2EM_DISABLED));
-   
-    /**
-     * The names of options that are disabled for ARC700
-     */
-    private static String ARC7_DISABLED[] = {
-    	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity
-    	    "org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity
-            "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//Customized for ARC GNU windows_swap
-            "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
-           
-    	    "org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.codedensity", //Customized for ARC GNU windows_codedensity big-en
-    	    "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity", //Customized for ARC GNU linux_codedensity big-en
-            "org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.swap",//Customized for ARC GNU windows_swap big-en
-            "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap",//Customized for ARC GNU linux_swap big-en
-        
-    };
-    private static String ARC6_DISABLED[] = {
-	    "org.eclipse.cdt.cross.arc.gnu.windows.option.target.swap",//Customized for ARC GNU windows_swap
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap",//Customized for ARC GNU linux_swap
-        
-	    "org.eclipse.cdt.cross.arc.gnu.eb.windows.option.target.swap",//Customized for ARC GNU windows_swap big-en
-        "org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap",//Customized for ARC GNU linux_swap big-en
-    };
-    private static String ARCV2HS_DISABLED[] = {
-    };
-    
-    // default value on ARCV2HS
-    private static String[]  ARCV2HS_DEFAULT = {
-    };
-    
-    private static Set<String> DISABLED_FOR_ARC7 = new HashSet<String>(Arrays.asList(ARC7_DISABLED));
-    private static Set<String> DISABLED_FOR_ARC6 = new HashSet<String>(Arrays.asList(ARC6_DISABLED));
-    private static Set<String> DISABLED_FOR_ARCV2HS = new HashSet<String>(Arrays.asList(ARCV2HS_DISABLED));
-    private static Set<String> DEFAULT_FOR_ARCV2HS = new HashSet<String>(Arrays.asList(ARCV2HS_DEFAULT));
-    private static Set<String> ALL_TARGET_DEPENDENT = new HashSet<String>();
-    static {
+    private static final String TCF_OPTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf";
+    private static final String TCF_FILE_OPTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf";
+    private static final String ABI_SELECTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection";
+    private static final String TCF_MEMORY_MAP = "org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf";
 
-        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARC7);
-        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARC6);
-        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARCV2EM);
-        ALL_TARGET_DEPENDENT.addAll(DISABLED_FOR_ARCV2HS);
-    }
-    
-     
-    
+    private static final String[] DISABLE_WHEN_NO_TCF = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP };
+    private static final String[] ENABLE_WHEN_TCF = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP, TCF_OPTION_ID,
+            ABI_SELECTION_ID };
+
+    private static final String[] LINKER_SCRIPT_IDS = { "org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile",
+            "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" };
+
+    private List<String> targetOptions;
+
     public ArcOptionEnablementManager() {
         addObserver(new Observer());
-        
-        AbstractOptionEnablementManager generalOptionManager = com.arc.cdt.toolchain.ApplicabilityCalculator.getOptionEnablementManager();
-        generalOptionManager.addObserver(new IObserver(){
-
-            public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
-            }
-            public void onOptionEnablementChanged (IOptionEnablementManager mgr, String optionID) {
-                // TODO Auto-generated method stub               
-            }});
     }
-  
+
+    private boolean tcfValue;
+    private boolean tcfLinkSelected;
+
+    private void readTargetOptions() {
+        targetOptions = new ArrayList<String>();
+        for (IOption option : getToolChain().getOptions()) {
+            if (option.getCategory().getBaseId().contains("category.target")) {
+                targetOptions.add(option.getBaseId());
+            }
+        }
+    }
+
+    private List<String> getToolChainSpecificOption(String optionId) {
+        List<String> list = new ArrayList<String>();
+        for (IOption option : getToolChain().getOptions()) {
+            IOption tmp = option;
+            while (tmp != null) {
+                if (tmp.getBaseId().equals(optionId)) {
+                    list.add(option.getBaseId());
+                }
+                tmp = tmp.getSuperClass();
+            }
+        }
+        for (ITool tool : getToolChain().getTools()) {
+            for (IOption option : tool.getOptions()) {
+                IOption tmp = option;
+                while (tmp != null) {
+                    if (tmp.getBaseId().equals(optionId)) {
+                        list.add(option.getBaseId());
+                    }
+                    tmp = tmp.getSuperClass();
+                }
+            }
+        }
+        return list;
+    }
+
     class Observer implements IOptionEnablementManager.IObserver {
 
         /**
-         * Called when an option value changes. Enable or disable any options that are dependent on this one.
+         * Called when an option value changes. Enable or disable any options that are dependent on
+         * this one.
+         * 
          * @param mgr
          * @param optionId
          */
-        int processor_control =0;
-        public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
-        	
-            Set<String> disabledSet = null;
+        public void onOptionValueChanged(IOptionEnablementManager mgr, String optionId) {
             // `contains()` because sometimes this options has numeric suffix in the end.
-            if (optionId.contains(".option.target.processor")) { 
-                String value = (String) mgr.getValue(optionId);
-                //System.out.println("com.arc.cdt.toolchain.arc.ArcOptionEnablementManager~~~~~~~~~~~~~~~~~~~~~"+value);
-                 if (value.endsWith("option.mcpu.arc700")) {
-                    disabledSet = DISABLED_FOR_ARC7;
-                    for (int i=0;i<ARC7_DISABLED.length;i++) 	setEnabled(ARC7_DISABLED[i],false);
-                    for (int i=0;i<ARC6_DISABLED.length;i++)    	setEnabled(ARC6_DISABLED[i],false);
-                 }
-               else if (value.endsWith("option.mcpu.arc600")) {
-                    disabledSet = DISABLED_FOR_ARC6;
-                    for (int i=0;i<ARC7_DISABLED.length;i++)     setEnabled(ARC7_DISABLED[i],false);
-                    for (int i=0;i<ARCV2EM_DISABLED.length;i++)  setEnabled(ARCV2EM_DISABLED[i],false);
-                    processor_control++;
-      
-                 }
-                 else if (value.endsWith("option.mcpu.arcv2em")){
-                    disabledSet = DISABLED_FOR_ARCV2EM;
-                    for (int i=0;i<ARCV2EM_DISABLED.length;i++) 
-                    	setEnabled(ARCV2EM_DISABLED[i],false);
-                    for (int i=0;i<ARCV2HS_DEFAULT.length;i++) {
-                   	    setOptionValue(ARCV2HS_DEFAULT[i],false);
-                    }
-                   processor_control++;
-
-                }
-                 else if (value.endsWith("option.mcpu.arcv2hs")){
-                     disabledSet = DISABLED_FOR_ARCV2HS;
-                     for (int i=0;i<ARCV2HS_DISABLED.length;i++) {
-                    	 setEnabled(ARCV2HS_DISABLED[i],false);
-                    	
-                     }
-                     for (int i=0;i<ARCV2HS_DEFAULT.length;i++) {
-                    	 setOptionValue(ARCV2HS_DEFAULT[i],true);
-                     }
-                   processor_control++;
-
-                 }
+            if (optionId.contains("option.target.processor")) {
+                readTargetOptions();
             }
-            // TN: this calls only when target changing 
-			if (disabledSet != null) {
-				// Turn on any option not in the set.
-				for (String id : ALL_TARGET_DEPENDENT) {
-					if (!disabledSet.contains(id)) {
-						setEnabled(id, true);
-					}
-				}
-			
-
-				// Now disable all options in the set.
-
-				for (String id : disabledSet) {
-					setEnabled(id, false);
-				}
-
-				// TN: move checkMPY after disabledSet running
-			
-			}
-			
-			 
+            if (optionId.contains("option.target.tcf")) {
+                tcfValue = (Boolean) mgr.getValue(optionId);
+                if (tcfValue) {
+                    setEnabled(targetOptions, false);
+                    for (String option : ENABLE_WHEN_TCF) {
+                        setEnabled(getToolChainSpecificOption(option), true);
+                    }
+                    if (tcfLinkSelected) {
+                        for (String option : LINKER_SCRIPT_IDS) {
+                            setEnabled(getToolChainSpecificOption(option), false);
+                        }
+                    }
+                    // Else do nothing because if TCF is not selected, these options were enabled
+                    // either by default or when TCF was cancelled
+                } else {
+                    setEnabled(targetOptions, true);
+                    for (String option : DISABLE_WHEN_NO_TCF) {
+                        setEnabled(getToolChainSpecificOption(option), false);
+                    }
+                    if (tcfLinkSelected) {
+                        for (String option : LINKER_SCRIPT_IDS) {
+                            setEnabled(getToolChainSpecificOption(option), true);
+                        }
+                    }
+                }
+            }
+            if (optionId.contains("option.target.maptcf")) {
+                tcfLinkSelected = (Boolean) mgr.getValue(optionId);
+                if (tcfLinkSelected && tcfValue) {
+                    for (String option : LINKER_SCRIPT_IDS) {
+                        setEnabled(getToolChainSpecificOption(option), false);
+                    }
+                } else
+                    for (String option : LINKER_SCRIPT_IDS) {
+                        setEnabled(getToolChainSpecificOption(option), true);
+                    }
+            }
         }
- 
-        public void onOptionEnablementChanged (IOptionEnablementManager mgr, String optionID) {
+
+        public void onOptionEnablementChanged(IOptionEnablementManager mgr, String optionID) {
             // Nothing to do.
 
         }

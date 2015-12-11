@@ -15,7 +15,9 @@ Bundle-Activator: org.eclipse.cdt.cross.arc.gnu.ARCPlugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: org.eclipse.cdt.managedbuilder.internal.envvar
+Import-Package: org.eclipse.cdt.managedbuilder.internal.envvar,
+ org.eclipse.core.variables,
+ org.eclipse.ui.statushandlers
 Export-Package: com.arc.cdt.toolchain,
  com.arc.cdt.toolchain.arc,
  org.eclipse.cdt.cross.arc.gnu,

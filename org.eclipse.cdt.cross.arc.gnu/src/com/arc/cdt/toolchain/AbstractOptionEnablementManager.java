@@ -81,18 +81,21 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         if ((config != mConfig || toolchain != mLastToolChain) && config instanceof IResourceInfo) {
             initializing = true;
             try {
+                mDisabledSet.clear();
+                mValueMap.clear();
                 mConfig = (IResourceInfo)config;
                 mLastToolChain = toolchain;
                 ITool tools[] = mConfig.getTools();
                 mTools = tools;
+                for (IOption option : toolchain.getOptions()) {
+                    set(option.getBaseId(), option.getValue());
+                }
                 for (ITool tool : tools) {
                     for (IOption option : tool.getOptions()) {
                         set(option.getBaseId(), option.getValue());
                         }
                 }
-        //These codes are customized for ARC GNU toolchain
-            }
-            finally {
+            } finally {
                 initializing = false;
             }
         }
@@ -111,6 +114,14 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
     private Object[] getOption(String id){
         // We cannot cannot create an ID-to-Option map because the IOption object
         // changes when it becomes dirty!
+        if (mLastToolChain == null) {
+            return null;
+        }
+        for (IOption option : mLastToolChain.getOptions()) {
+            if (id.equals(option.getBaseId())){
+                return new Object[]{mLastToolChain, option};
+            }
+        }
         if (mTools == null) return null;
         for (ITool tool : mTools) {
             for (IOption option : tool.getOptions()) {
@@ -231,6 +242,9 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
     }
     // public so as to be called by other OptionEnablementManagers
     public void setEnabled (String optionId, boolean v) {
+        if (optionId == null) {
+            return;
+        }
         if (isEnabled(optionId) != v) {
             if (v)
                 mDisabledSet.remove(optionId);
@@ -239,6 +253,13 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
             fireEnablementChange(optionId);
         }
     }
+
+    public void setEnabled (List<String> optionIds, boolean v) {
+        for (String optionId : optionIds) {
+            setEnabled(optionId, v);
+        }
+    }
+
 
     @Override
     public void addObserver (IObserver observer) {
@@ -304,9 +325,12 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         // Due to CDT bug option is the original option such that option.getValue() does not
        // necessarily reflect the new value. We must retrieve the modified instance of option
        // These codes are customized for ARC GNU toolchain
-        if(option.getBaseId().endsWith(".option.target.processor"))
-        {
-        	Object[] optLookup = getOption(option.getBaseId());
+        if(option.getBaseId().endsWith(".option.target.processor")
+                || option.getBaseId().contains("option.target.tcf")
+                || option.getBaseId().contains(".option.target.filefortcf")
+                || option.getBaseId().contains(".option.target.maptcf")) {
+
+            Object[] optLookup = getOption(option.getBaseId());
             if(optLookup != null) option = (IOption) optLookup[1];
         }
      set(option.getBaseId(),option.getValue());
