@@ -162,6 +162,14 @@ public class TcfContent {
                 String data = getCharacterDataFromElement((Element) stringList.item(0));
                 if (elementName.equals(GCC_OPTIONS_SECTION)) {
                     tcfContent.gccOptions = new Properties();
+                    /*
+                     * Need to escape whitespaces here because in java.util.Properties key termination
+                     * characters are '=', ':' and whitespace. So if our TCF has several option like
+                     * "--param ...", --param will be considered a key and therefore Properties will
+                     * load only one of these options. If we escape a whitespace, it will be considered
+                     * part of a key.
+                     */
+                    data = data.replace(" ", "\\ ");
                     tcfContent.gccOptions.load(new StringReader(data));
                     tcfContent.checkArchitecture(cpu);
                 }
