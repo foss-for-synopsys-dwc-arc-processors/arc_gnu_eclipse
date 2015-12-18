@@ -1,31 +1,15 @@
 /*
- ============================================================================
  Name        : $(baseName).c
  Author      : $(author)
- Version     :
+ Version     : 1.0
  Copyright   : $(copyright)
- Description : Hello World in C
- ============================================================================
+ Description : Print a greeting on UART output and exit.
  */
+
 #include <stdio.h>
 #include "starterkit.h"
-/*
 
- Print a greeting on standard output and exit.
-
- On embedded platforms this might need to enable semi-hosting or similar.
-
- For example, for tool chains derived from GNU Tools for Embedded,
- the following should be added to the linker:
-
- --specs=rdimon.specs -Wl,--start-group -lgcc -lc -lc -lm -lrdimon -Wl,--end-group
-
- */
-
-
-//***************************************************************/
-//	TYPEDEFS, DEFINES, FUNCTION PROTOTYPES
-//***************************************************************/
+// Typedefs, defines, function prototypes.
 typedef volatile unsigned int DWCREG;
 typedef DWCREG * DWCREG_PTR;
 
@@ -37,12 +21,10 @@ void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud,
 		uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity);
 
 
-
-
-//***************************************************************/
-//	MAIN
-//***************************************************************/
-int main(int argc, char *argv[]) {
+// Functions
+int
+main(int argc, char *argv[])
+{
 
 	DWCREG_PTR uart = (DWCREG_PTR) (DWC_UART_CONSOLE | PERIPHERAL_BASE);
 
@@ -56,7 +38,10 @@ int main(int argc, char *argv[]) {
 }
 
 
-void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud, uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity) {
+void
+uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud,
+	uart_data_bits_t data_bits, uart_stop_t stop, uart_parity_t parity)
+{
 
   // Build UART configuration for U_LCR register
   unsigned int UCFG = data_bits | stop | parity;
@@ -79,7 +64,9 @@ void uart_initDevice(DWCREG_PTR uartRegs, uart_baudrate_t baud, uart_data_bits_t
 
 
 // Simple debug print
-void uart_print(DWCREG_PTR uartRegs, const char * pBuf) {
+void
+uart_print(DWCREG_PTR uartRegs, const char * pBuf)
+{
 	unsigned int i = MAX_DEBUG_MSG;
 
     unsigned char byte = *pBuf++;
