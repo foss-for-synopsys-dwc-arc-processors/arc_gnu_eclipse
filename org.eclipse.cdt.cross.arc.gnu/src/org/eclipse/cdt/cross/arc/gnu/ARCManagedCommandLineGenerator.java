@@ -242,73 +242,73 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                 oList.add(sCore700);
             if (sProcessorEndiannes != null && !sProcessorEndiannes.isEmpty())
                 oList_gcc_options.add(sProcessorEndiannes);
-            if (sSyntaxonly != null && sSyntaxonly.isEmpty()) {
+            if (sSyntaxonly != null && !sSyntaxonly.isEmpty()) {
                 oList.add(sSyntaxonly);
             }
             if (sFPUEM != null && !sFPUEM.isEmpty())
                 oList_gcc_options.add(sFPUEM);
             if (sFPUHS != null && !sFPUHS.isEmpty())
                 oList_gcc_options.add(sFPUHS);
-            if (smpyhs != null && smpyhs.isEmpty())
+            if (smpyhs != null && !smpyhs.isEmpty())
                 oList_gcc_options.add(smpyhs);
-            if (smpyem != null && smpyem.isEmpty())
+            if (smpyem != null && !smpyem.isEmpty())
                 oList_gcc_options.add(smpyem);
-            if (sDebugLevel != null && sDebugLevel.isEmpty()) {
+            if (sDebugLevel != null && !sDebugLevel.isEmpty()) {
                 oList.add(sDebugLevel);
-                if (sDebugFormat != null && sDebugFormat.isEmpty())
+                if (sDebugFormat != null && !sDebugFormat.isEmpty())
                     oList.add(sDebugFormat);
             }
-            if (sDebugOther != null && sDebugOther.isEmpty())
+            if (sDebugOther != null && !sDebugOther.isEmpty())
                 oList.add(sDebugOther);
-            if (sDebugProf != null && sDebugProf.isEmpty())
+            if (sDebugProf != null && !sDebugProf.isEmpty())
                 oList.add(sDebugProf);
-            if (sDebugGProf != null && sDebugGProf.isEmpty()) {
+            if (sDebugGProf != null && !sDebugGProf.isEmpty()) {
                 oList.add(sDebugGProf);
             }
-            if (sBarrelshifter != null && sBarrelshifter.isEmpty()) {
+            if (sBarrelshifter != null && !sBarrelshifter.isEmpty()) {
                 oList_gcc_options.add(sBarrelshifter); // Customized for ARC GNU barrelshifter
             }
-            if (sCodedensity != null && sCodedensity.isEmpty()) {
+            if (sCodedensity != null && !sCodedensity.isEmpty()) {
                 oList_gcc_options.add(sCodedensity); // Customized for ARC GNU codedensity
             }
-            if (sDivide != null && sDivide.isEmpty()) {
+            if (sDivide != null && !sDivide.isEmpty()) {
                 oList_gcc_options.add(sDivide); // Customized for ARC GNU divide
             }
-            if (sNormalize != null && sNormalize.isEmpty()) {
+            if (sNormalize != null && !sNormalize.isEmpty()) {
                 oList_gcc_options.add(sNormalize); // Customized for ARC GNU normalize
             }
-            if (sMPY != null && sMPY.isEmpty()) {
+            if (sMPY != null && !sMPY.isEmpty()) {
                 oList_gcc_options.add(sMPY); // Customized for ARC GNU mpy
             }
-            if (sSwap != null && sSwap.isEmpty()) {
+            if (sSwap != null && !sSwap.isEmpty()) {
                 oList_gcc_options.add(sSwap); // Customized for ARC GNU swap
             }
-            if (smfpi != null && smfpi.isEmpty()) {
+            if (smfpi != null && !smfpi.isEmpty()) {
                 oList_gcc_options.add(smfpi);
             }
-            if (smno_dpfp_lrsr != null && smno_dpfp_lrsr.isEmpty()) {
+            if (smno_dpfp_lrsr != null && !smno_dpfp_lrsr.isEmpty()) {
                 oList_gcc_options.add(smno_dpfp_lrsr);
             }
 
-            if (sEa != null && sEa.isEmpty()) {
+            if (sEa != null && !sEa.isEmpty()) {
                 oList_gcc_options.add(sEa);
             }
-            if (smul3216 != null && smul3216.isEmpty()) {
+            if (smul3216 != null && !smul3216.isEmpty()) {
                 oList_gcc_options.add(smul3216);
             }
-            if ((smxy != null) && (smxy.length() > 0)) {
+            if (smxy != null && !smxy.isEmpty()) {
                 oList_gcc_options.add(smxy);
             }
-            if ((satomic != null) && (satomic.length() > 0)) {
+            if (satomic != null && !satomic.isEmpty()) {
                 oList_gcc_options.add(satomic);
             }
-            if (sll64 != null && sll64.isEmpty()) {
+            if (sll64 != null && !sll64.isEmpty()) {
                 oList_gcc_options.add(sll64);
             }
-            if (sabi != null && sabi.isEmpty()) {
+            if (sabi != null && !sabi.isEmpty()) {
                 oList.add(sabi);
             }
-            if (sTCF != null && sTCF.isEmpty()) {
+            if (sTCF != null && !sTCF.isEmpty()) {
                 oList_gcc_options.addAll(tcf_properties);
             }
             if (sProcessor != null) {
