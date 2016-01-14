@@ -2647,16 +2647,6 @@
             isAbstract="false"
             name="ARC GCC C Compiler (EB)"
             superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         <inputType
-               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
-               dependencyContentType="org.eclipse.cdt.core.cHeader"
-               dependencyExtensions="h"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler.input"
-               languageId="org.eclipse.cdt.core.gcc"
-               sourceContentType="org.eclipse.cdt.core.cSource"
-               sources="c"
-               superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
-         </inputType>
       </tool>
       <tool
             command="arceb-elf32-g++"
@@ -2664,10 +2654,6 @@
             isAbstract="false"
             name="ARC GCC C++ Compiler (EB)"
             superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler.input"
-               superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
-         </inputType>
       </tool>
       <tool
             command="arceb-elf32-gcc"
@@ -2865,7 +2851,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -2876,7 +2862,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -4654,7 +4640,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -4665,7 +4651,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -5173,7 +5159,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -5184,7 +5170,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -5564,7 +5550,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -5575,7 +5561,7 @@
             <inputType
                   id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.compiler.base.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler.input">
+                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
             </inputType>
          </tool>
          <tool
