@@ -7049,12 +7049,6 @@
       <template
             id="org.eclipse.cdt.build.core.templates.EmptyProject">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
-         <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
          <toolChain
@@ -7066,17 +7060,11 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_CPP_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs">
          </toolChain>
       </template>
       <template
@@ -7084,17 +7072,11 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_CPP_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs">
          </toolChain>
       </template>
       <template
@@ -7108,15 +7090,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.600">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.700">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_CPP_Project">
@@ -7129,15 +7102,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.600">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.700">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_C_Project">
@@ -7146,12 +7110,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
       <template
@@ -7162,12 +7120,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_C_Project">
@@ -7176,12 +7128,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
       <template
@@ -7192,12 +7138,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_C_Project">
@@ -7206,12 +7146,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
       <template
@@ -7222,29 +7156,17 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_C_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_CPP_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base.hs">
          </toolChain>
       </template>
       <template
@@ -7255,12 +7177,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK2_HelloWorld_C_Project">
@@ -7269,12 +7185,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
       <template
@@ -7285,12 +7195,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_CPP_Project">
@@ -7299,12 +7203,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
       <template
@@ -7315,12 +7213,6 @@
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
          </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
-         </toolChain>
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EM7_Empty_CPP_Project">
@@ -7329,12 +7221,6 @@
          </toolChain>
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.windows.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base">
          </toolChain>
       </template>
    </extension>
