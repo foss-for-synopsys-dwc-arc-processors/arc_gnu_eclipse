@@ -1064,8 +1064,11 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         case EM_SK_v1x:
             openocd_cfg += "snps_em_sk_v1.cfg";
             break;
-        case EM_SK_v2x:
-            openocd_cfg += "snps_em_sk.cfg";
+        case EM_SK_v21:
+            openocd_cfg += "snps_em_sk_v2.1.cfg";
+            break;
+        case EM_SK_v22:
+            openocd_cfg += "snps_em_sk_v2.2.cfg";
             break;
         case AXS101:
             openocd_cfg += "snps_axs101.cfg";
