@@ -51,7 +51,9 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
     private boolean clangBased = false;
 
     private ITool[] mTools;
-    
+
+    private Map<String, Object> toolChainOptionValues = new HashMap<>();
+
     public AbstractOptionEnablementManager() {
          NotificationManager.getInstance().subscribe(this);
     }
@@ -59,7 +61,15 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
     protected IToolChain getToolChain() {
     	return mLastToolChain;
     }
-    
+
+    protected IResourceInfo getConfig() {
+        return mConfig;
+    }
+
+    protected Object optionValueFromCommand(String command) {
+        return toolChainOptionValues.get(command);
+    }
+
     @Override
     public void initialize (IBuildObject config) {
         //cr92699: when the toolchain is changed, CDT still delivers the original configuration!
@@ -89,6 +99,32 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                 mTools = tools;
                 for (IOption option : toolchain.getOptions()) {
                     set(option.getBaseId(), option.getValue());
+
+                    /*
+                     * Get all applicable values for the option and put them into a map. For each
+                     * applicable value get flag which is passed to compiler if this value is
+                     * selected and use it as a key. This then will be used to synchronize flags
+                     * from TCF with option values in IDE in case TCF is chosen.
+                     */
+                    String[] appValues = option.getApplicableValues();
+                    if (appValues != null && appValues.length > 0) {
+                        for (String appValue: appValues) {
+                            String key = null;
+                            try {
+                                key = option.getEnumCommand(appValue);
+                            } catch (BuildException e) {
+                                e.printStackTrace();
+                            }
+                            if (key != null) {
+                                toolChainOptionValues.put(key, appValue);
+                            }
+                        }
+                    } else {
+                        String key = option.getCommand();
+                        if (key != null) {
+                            toolChainOptionValues.put(key, true);
+                        }
+                    }
                 }
                 for (ITool tool : tools) {
                     for (IOption option : tool.getOptions()) {
@@ -111,7 +147,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
      * @param id
      * @return holder and option or null.
      */
-    private Object[] getOption(String id){
+    protected Object[] getOption(String id){
         // We cannot cannot create an ID-to-Option map because the IOption object
         // changes when it becomes dirty!
         if (mLastToolChain == null) {
@@ -161,6 +197,34 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
             }
         }
         return null;   
+    }
+
+
+    /**
+     * Returns corresponding to this option compiler flag. If there are several possible values,
+     * returns one of them.
+     * 
+     * @param optionId
+     *            to get command from
+     * @return command corresponding to the option. If option has several enumerated values, get
+     *         command from one of the values.
+     */
+    protected String getCommand(String optionId) {
+        IOption option = (IOption)getOption(optionId)[1];
+        String[] applicableValues = option.getApplicableValues();
+        if (applicableValues != null) {
+            for (String appValue: applicableValues) {
+                try {
+                    String value = option.getEnumCommand(appValue);
+                    if (!value.isEmpty()) {
+                        return value;
+                    }
+                } catch (BuildException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return option.getCommand();
     }
 
     // Made public so that various subclasses can access this method from each other.
