@@ -462,7 +462,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs"
-               name="FPU HS Type"
+               name="FPU Type (ARC HS)"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
@@ -590,7 +590,7 @@
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem"
-            name="FPU EM Type"
+            name="FPU Type (ARC EM)"
             valueType="enumerated">
          <enumeratedOptionValue
                id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
@@ -620,7 +620,7 @@
 		 <enumeratedOptionValue
                command="-mfpu=fpuda "
                id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpudpuda"
-               name="DP FPU with assist instructions (-mfpu=fpuda )">
+               name="FPU with DP assist instructions (-mfpu=fpuda)">
          </enumeratedOptionValue>
       </option>
       <option
@@ -633,12 +633,12 @@
                command="-mabi=std"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection.std"
                isDefault="true"
-               name="Standard ABI (-mabi=std)">
+               name="Standard GNU ABI (-mabi=std)">
          </enumeratedOptionValue>
          <enumeratedOptionValue
                command="-mabi=mwabi"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection.mwabi"
-               name="MW-compatible ABI (-mabi=mwabi)">
+               name="MetaWare ABI (-mabi=mwabi)">
          </enumeratedOptionValue>
       </option>
       <option
@@ -2186,7 +2186,7 @@
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem"
                isAbstract="false"
-               name="FPU EM Type"
+               name="FPU Type (ARC EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
         
@@ -2776,7 +2776,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpuem"
                isAbstract="false"
-               name="FPU EM Type"
+               name="FPU Type (ARC EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
          </option>
          <optionCategory
@@ -3343,7 +3343,7 @@
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs"
                isAbstract="false"
-               name="FPU HS Type"
+               name="FPU Type (ARC HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
          <optionCategory
@@ -4571,7 +4571,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.fpuhs"
                isAbstract="false"
-               name="FPU HS Type"
+               name="FPU Type (ARC HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
          <optionCategory
