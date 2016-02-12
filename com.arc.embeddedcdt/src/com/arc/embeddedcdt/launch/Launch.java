@@ -12,8 +12,6 @@
 
 package com.arc.embeddedcdt.launch;
 
-import gnu.io.CommPortIdentifier;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -94,6 +92,8 @@ import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
+
+import gnu.io.CommPortIdentifier;
 
 @SuppressWarnings("restriction")
 public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEventListener {

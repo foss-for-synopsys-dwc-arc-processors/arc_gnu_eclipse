@@ -69,4 +69,11 @@ applications for the ARC series of processors.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="com.arc.embeddedcdt.rxtx"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
