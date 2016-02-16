@@ -8,6 +8,9 @@ ECLIPSE_HOME := /remote/ru20home1/apologo/eclipse
 # Qualifier
 VERSION_QUALIFIER := $(shell date --utc +%Y%m%d%H%M)
 
+# Release
+RELEASE := 2016.03
+
 all: arc_gnu_plugins.zip
 
 %.zip: %
@@ -33,7 +36,8 @@ feature_export:
 	    -DbuildDirectory=$$(readlink -m $@) \
 	    -Dqualifier=$(VERSION_QUALIFIER) \
 	    -DprojectRoot=.. \
-	    -DeclipseHome=$(ECLIPSE_HOME)
+	    -DeclipseHome=$(ECLIPSE_HOME) \
+	    -Drelease=$(RELEASE)
 
 
 .NOTPARALLEL: clean

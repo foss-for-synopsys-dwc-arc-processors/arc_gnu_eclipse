@@ -10,7 +10,8 @@
 	<property name="qualifier" value="0"/>
 	<property name="eclipseHome" value=""/>
 	<property name="projectRoot" value=""/>
-	<property name="bundleVersion" value="2015.12.0.${qualifier}"/>
+	<property name="release" value="0.0" />
+	<property name="bundleVersion" value="${release}.0.${qualifier}"/>
 	<property name="p2.publishonerror" value="false"/>
 
 	<!-- Compiler settings. -->
