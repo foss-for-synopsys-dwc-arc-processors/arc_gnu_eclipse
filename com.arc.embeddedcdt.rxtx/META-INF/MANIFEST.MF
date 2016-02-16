@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RXTX library for ARC GNU Toolchain Embedded CDT
 Bundle-SymbolicName: com.arc.embeddedcdt.rxtx
-Bundle-Version: 2015.12.0.qualifier
+Bundle-Version: 2016.3.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: gnu.io
 Bundle-NativeCode: lib/linux/x86/librxtxSerial.so; osname=Linux; processor=x86,
