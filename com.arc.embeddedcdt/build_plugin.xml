@@ -234,7 +234,7 @@
 			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
 			<classpath refid="com.arc.embeddedcdt..jar.classpath" />
 			<src path="src/"			/>
-			<compilerarg value="@${basedir}/javaCompiler.com.arc.embeddedcdt..jar.args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+			<compilerarg value="@${basedir}/javaCompiler_args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
 			<compilerarg line="-log &apos;${temp.folder}/com.arc.embeddedcdt..jar.bin${logExtension}&apos;" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
 		</javac>
 		<antcall target="checkCompilationResults"/>

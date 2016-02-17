@@ -29,7 +29,7 @@ feature_export:
 	$(ECLIPSE_HOME)/eclipse -nosplash \
 	    -configuration @user.dir/configuration \
 	    -application org.eclipse.ant.core.antRunner \
-	    -buildfile ../feature/build.xml \
+	    -buildfile ../feature/build_feature.xml \
 	    -DbuildDirectory=$$(readlink -m $@) \
 	    -Dqualifier=$(VERSION_QUALIFIER) \
 	    -DprojectRoot=.. \

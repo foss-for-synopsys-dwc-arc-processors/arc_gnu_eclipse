@@ -196,7 +196,7 @@
 			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
 			<classpath refid="@dot.classpath" />
 			<src path="src/"			/>
-			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
+			<compilerarg value="@${basedir}/javaCompiler_args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
 			<compilerarg line="-log &apos;${build.result.folder}/@dot${logExtension}&apos;" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"			/>
 		</javac>
 		<antcall target="checkCompilationResults"/>

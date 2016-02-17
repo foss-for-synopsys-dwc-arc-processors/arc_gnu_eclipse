@@ -15,22 +15,22 @@
 	</target>
 
 	<target name="all.plugins" depends="init">
-		<ant antfile="build.xml" dir="../com.arc.embeddedcdt.rxtx" target="${target}">
+		<ant antfile="build_plugin.xml" dir="../com.arc.embeddedcdt.rxtx" target="${target}">
 			<property name="arch" value="x86_64"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
 		</ant>
-		<ant antfile="build.xml" dir="../org.eclipse.cdt.cross.arc.gnu" target="${target}">
+		<ant antfile="build_plugin.xml" dir="../org.eclipse.cdt.cross.arc.gnu" target="${target}">
 			<property name="arch" value="x86_64"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
 		</ant>
-		<ant antfile="build.xml" dir="../org.eclipse.cdt.cross.arc.gnu.uclibc" target="${target}">
+		<ant antfile="build_plugin.xml" dir="../org.eclipse.cdt.cross.arc.gnu.uclibc" target="${target}">
 			<property name="arch" value="x86_64"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
 		</ant>
-		<ant antfile="build.xml" dir="../com.arc.embeddedcdt" target="${target}">
+		<ant antfile="build_plugin.xml" dir="../com.arc.embeddedcdt" target="${target}">
 			<property name="arch" value="x86_64"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
