@@ -186,19 +186,40 @@
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mcpu=arcem"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2em"
-                  isDefault="true"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem"
+                  isDefault="false"
                   name="ARC EM (-mcpu=arcem)">
             </enumeratedOptionValue>
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mcpu="
-               defaultValue="${MCU}"
-               errorParsers="org.eclipse.cdt.core.GLDErrorParser"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.processorref"
-               name="Processor (-mcpu)"
-               valueType="string">
+            <enumeratedOptionValue
+                  command="-mcpu=em"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em"
+                  isDefault="true"
+                  name="ARC EM (-mcpu=em)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_dmips"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4_dmips)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_fpus"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4_fpus)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_fpuda"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4_fpuda)">
+            </enumeratedOptionValue>
          </option>
          <option
                id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format"
@@ -390,7 +411,7 @@
             <enumeratedOptionValue
                   command="-mmpy-option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.0"
-                  isDefault="false"
+                  isDefault="true"
                   name="none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
@@ -401,7 +422,7 @@
             <enumeratedOptionValue
                   command="-mmpy-option=2"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.2"
-                  isDefault="true"
+                  isDefault="false"
                   name="wlh1">
             </enumeratedOptionValue>
             <enumeratedOptionValue
@@ -434,13 +455,13 @@
             <enumeratedOptionValue
                   command="-mmpy-option=0"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.0"
-                  isDefault="false"
+                  isDefault="true"
                   name="none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=2"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.2"
-                  isDefault="true"
+                  isDefault="false"
                   name="mpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
@@ -2174,12 +2195,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor"
                name="ARC EM (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=arcem"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2em"
-                  isDefault="true"
-                  name="ARC EM (-mcpu=arcem)">
-            </enumeratedOptionValue>
          </option>
          <option category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                  id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.endiannes"
@@ -3332,9 +3347,33 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
             <enumeratedOptionValue
                   command="-mcpu=archs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
-                  isDefault="true"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs"
+                  isDefault="false"
                   name="ARC HS (-mcpu=archs)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs"
+                  isDefault="true"
+                  name="ARC HS (-mcpu=hs)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs34"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs34"
+                  isDefault="false"
+                  name="ARC HS (-mcpu=hs34)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs38"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38"
+                  isDefault="false"
+                  name="ARC HS (-mcpu=hs38)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs38_linux"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux"
+                  isDefault="false"
+                  name="ARC HS (-mcpu=hs38_linux)">
             </enumeratedOptionValue>
          </option>
          <option
@@ -3523,8 +3562,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.printsize.base"
@@ -4557,12 +4595,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.processor"
                name="ARC HS (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=archs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcv2hs"
-                  name="ARC HS (-mcpu=archs)">
-            </enumeratedOptionValue>
+               superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
@@ -4766,8 +4799,7 @@
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
-               value="true">
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
          <option
                category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
