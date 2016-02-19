@@ -17,21 +17,23 @@ import java.util.Map;
 import java.util.Properties;
 
 public enum ArcCpu {
-    ARCEM("arcem"),
-    EM("em"),
-    EM4("em4"),
-    EM4_DMIPS("em4_dmips"),
-    EM4_FPUS("em4_fpus"),
-    EM4_FPUDA("em4_fpuda"),
-    ARCHS("archs"),
-    HS("hs"),
-    HS34("hs34"),
-    HS38("hs38"),
-    HS38_LINUX("hs38_linux"),
-    ARC600("arc600"),
-    ARC700("arc700");
+    ARCEM("arcem", ArcCpuFamily.ARCEM),
+    EM("em", ArcCpuFamily.ARCEM),
+    EM4("em4", ArcCpuFamily.ARCEM),
+    EM4_DMIPS("em4_dmips", ArcCpuFamily.ARCEM),
+    EM4_FPUS("em4_fpus", ArcCpuFamily.ARCEM),
+    EM4_FPUDA("em4_fpuda", ArcCpuFamily.ARCEM),
+    ARCHS("archs", ArcCpuFamily.ARCHS),
+    HS("hs", ArcCpuFamily.ARCHS),
+    HS34("hs34", ArcCpuFamily.ARCHS),
+    HS38("hs38", ArcCpuFamily.ARCHS),
+    HS38_LINUX("hs38_linux", ArcCpuFamily.ARCHS),
+    ARC600("arc600", ArcCpuFamily.ARC600),
+    ARC700("arc700", ArcCpuFamily.ARC700);
 
     private String string;
+    private ArcCpuFamily toolchain;
+
     private static Map<ArcCpu, Properties> SET_OPTIONS = new HashMap<>();
     static {
         for (ArcCpu cpu: ArcCpu.values()) {
@@ -62,8 +64,9 @@ public enum ArcCpu {
         }
     }
 
-    private ArcCpu(String string) {
+    private ArcCpu(String string, ArcCpuFamily toolchain) {
         this.string = string;
+        this.toolchain = toolchain;
     }
 
     @Override
@@ -81,6 +84,10 @@ public enum ArcCpu {
 
     public Properties getOptionsToSet() {
         return SET_OPTIONS.get(this);
+    }
+
+    public ArcCpuFamily getToolChain() {
+        return toolchain;
     }
 
 }

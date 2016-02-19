@@ -32,6 +32,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.ui.statushandlers.StatusManager;
 
+import com.arc.cdt.toolchain.ArcCpu;
+import com.arc.cdt.toolchain.ArcCpuFamily;
 import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
@@ -153,16 +155,15 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sProcessorEndiannes = sEnumCommand;
            } else if (sID.indexOf(".option.warnings.syntax") > 0) {
                sSyntaxonly = sEnumCommand;
-           } else if (sID.indexOf(".option.target.fpuem") > 0 && sProcessor.equals("-mcpu=arcem")) {
+           } else if (sID.indexOf(".option.target.fpuem") > 0) {
                sFPUEM = sEnumCommand;
-           } else if (sID.indexOf(".option.target.fpuhs") > 0 && sProcessor.equals("-mcpu=archs")) {
+           } else if (sID.indexOf(".option.target.fpuhs") > 0) {
                sFPUHS = sEnumCommand;
-           } else if (sID.indexOf(".option.target.mpyhs") > 0 && sProcessor.equals("-mcpu=archs")) {
+           } else if (sID.indexOf(".option.target.mpyhs") > 0) {
                smpyhs = sEnumCommand;
-           } else if (sID.indexOf(".option.target.mpyem") > 0 && sProcessor.equals("-mcpu=arcem")) {
+           } else if (sID.indexOf(".option.target.mpyem") > 0) {
                smpyem = sEnumCommand;
-           } else if (sID.indexOf(".option.target.fpi") > 0 && (sProcessor.equals("-mcpu=arcem") ||
-                   sProcessor.equals("-mcpu=arc600")||sProcessor.equals("-mcpu=arc700"))) {
+           } else if (sID.indexOf(".option.target.fpi") > 0) {
                smfpi = sEnumCommand;  //Customized for ARC GNU
            } else if (sID.indexOf(".option.debugging.level") > 0) {
                sDebugLevel = sEnumCommand;
@@ -192,9 +193,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sDebugProf = sCommand;
                 } else if (sID.indexOf(".option.target.barrelshifter") > 0) {
                     sBarrelshifter = sCommand; // Customized for ARC GNU barrelshifter
-                } else if (sID.indexOf(".option.target.codedensity") > 0
-                        && (sProcessor.equals("-mcpu=arcem")
-                                || sProcessor.equals("-mcpu=archs"))) {
+                } else if (sID.indexOf(".option.target.codedensity") > 0) {
                     sCodedensity = sCommand; // Customized for ARC GNU codedensity
                 } else if (sID.indexOf(".option.target.divide") > 0) {
                     sDivide = sCommand; // Customized for ARC GNU divide
@@ -204,20 +203,11 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sMPY = sCommand;
                 } else if (sID.indexOf(".option.target.swap") > 0) {
                     sSwap = sCommand; // Customized for ARC GNU swap
-                } else if (sID.indexOf(".option.target.ea") > 0
-                        && (sProcessor.equals("-mcpu=arc700")
-                                || sProcessor.equals("-mcpu=arc600"))) {
+                } else if (sID.indexOf(".option.target.ea") > 0) {
                     sEa = sCommand; // Customized for ARC GNU ea
-                } else if (sID.indexOf(".option.target.mul3216") > 0
-                        && (sProcessor.equals("-mcpu=arc700")
-                                || sProcessor.equals("-mcpu=arc600"))) {
+                } else if (sID.indexOf(".option.target.mul3216") > 0) {
                     smul3216 = sCommand;
-                } else if (sID.indexOf(".option.target.xy") > 0
-                        && (sProcessor.equals("-mcpu=arc700")
-                                || sProcessor.equals("-mcpu=arc600"))) {
-                    smxy = sCommand;
-                } else if (sID.indexOf(".option.target.lock") > 0
-                        && sProcessor.equals("-mcpu=arc700")) {
+                } else if (sID.indexOf(".option.target.xy") > 0) {
                     smxy = sCommand;
                 } else if (sID.indexOf(".option.target.atomic") > 0) {
                     satomic = sCommand;
@@ -312,7 +302,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                 oList_gcc_options.addAll(tcf_properties);
             }
             if (sProcessor != null) {
-                if (sProcessor.equals("-mcpu=arc700")) {
+                if (ArcCpu.fromCommand(sProcessor).getToolChain().equals(ArcCpuFamily.ARC700)) {
                     if (oList_gcc_options.indexOf(sMPY) < 0) {
                         oList_gcc_options.add("-mno-mpy");
                     } else {
@@ -332,7 +322,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                         oList_gcc_options.remove(i);
                     }
                 }
-                if (sProcessor.equals("-mcpu=archs")) {
+                if (ArcCpu.fromCommand(sProcessor).getToolChain().equals(ArcCpuFamily.ARCHS)) {
                     if (oList_gcc_options.indexOf(satomic) < 0) {
                         oList_gcc_options.add("-mno-atomic");
                     } else {
@@ -438,8 +428,9 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     }
 
     private String getMultiplyOption(String gccOption, IToolChain toolChain,
-            String cpu) throws BuildException {
-        String superClassId = cpu.equals("-mcpu=arcem") ? MMPY_OPTION_EM : MMPY_OPTION_HS;
+            String cpuFlag) throws BuildException {
+        String superClassId = ArcCpu.fromCommand(cpuFlag).getToolChain().equals(ArcCpuFamily.ARCEM)
+                ? MMPY_OPTION_EM : MMPY_OPTION_HS;
         IOption mmpyOption = toolChain.getOptionBySuperClassId(superClassId);
 
         boolean isApplicable = false;

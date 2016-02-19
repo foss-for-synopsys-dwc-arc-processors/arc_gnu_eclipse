@@ -33,6 +33,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.arc.cdt.toolchain.ArcCpu;
+import com.arc.cdt.toolchain.ArcCpuFamily;
+
 public class TcfContent {
 
     public static final String GCC_OPTIONS_SECTION = "gcc_compiler";
@@ -62,24 +65,22 @@ public class TcfContent {
 
     /**
      * Check that TCF file and used tool chain are for the same processor
-     * @param cpu  processor value from tool chain
+     * @param cpuFlag  processor value from tool chain in "-mcpu=" form
      * @throws TcfContentException
      */
-    private void checkArchitecture(String cpu)
+    private void checkArchitecture(String cpuFlag)
             throws TcfContentException {
-        String cpu_option = "-mcpu";
-        String value = gccOptions.getProperty(cpu_option);
+        String tcfCpuOption = "-mcpu";
+        String value = gccOptions.getProperty(tcfCpuOption);
         if (value.isEmpty()) {
-            throw new TcfContentException("Invalid option in TCF: " + cpu_option + ".");
+            throw new TcfContentException("Invalid option in TCF: " + tcfCpuOption + ".");
         }
-        cpu_option = cpu_option + "=" + value;
-        if (!cpu_option.equals(cpu)) {
-            String expected_arch = cpu.split("=")[1].toUpperCase();
-            expected_arch = expected_arch.substring(0, 3) + " "
-                    + expected_arch.substring(3);
-            value = (value.substring(0, 3) + " " + value.substring(3)).toUpperCase();
-            throw new TcfContentException("TCF describes " + value
-                    + " architecture, but selected tool chain is for " + expected_arch + ".");
+        tcfCpuOption = tcfCpuOption + "=" + value;
+        ArcCpuFamily expectedArch = ArcCpu.fromCommand(cpuFlag).getToolChain();
+        ArcCpuFamily tcfArch = ArcCpu.fromCommand(tcfCpuOption).getToolChain();
+        if (!expectedArch.equals(tcfArch)) {
+            throw new TcfContentException("TCF describes " + tcfArch
+                    + " architecture, but selected tool chain is for " + expectedArch + ".");
         }
     }
 
@@ -90,8 +91,8 @@ public class TcfContent {
      * 
      * @param f
      *            TCF to read
-     * @param cpu
-     *            processor value from tool chain
+     * @param cpuFlag
+     *            processor value from tool chain in "-mcpu=" form
      * @param showStyle
      *            style indicating what should be done in case exception occurred while reading.
      *            Applicable values are <code>StatusManager.NONE</code>,
@@ -101,10 +102,10 @@ public class TcfContent {
      *            Additional messages to display
      * @return TcfContent, if reading was successful, and null otherwise
      */
-    public static TcfContent readFile(File f, String cpu, int showStyle, String... messages) {
+    public static TcfContent readFile(File f, String cpuFlag, int showStyle, String... messages) {
         TcfContent tcfContent = null;
         try {
-            tcfContent = readFile(f, cpu);
+            tcfContent = readFile(f, cpuFlag);
         } catch (TcfContentException e) {
             StringBuilder builder = new StringBuilder(e.getMessage());
             for (String message: messages) {
@@ -123,12 +124,12 @@ public class TcfContent {
      * 
      * @param f
      *            TCF to read
-     * @param cpu
-     *            processor value from tool chain
+     * @param cpuFlag
+     *            processor value from tool chain in "-mcpu=" form
      * @return TcfContent or null if cannot read
      * @throws TcfContentException
      */
-    public static TcfContent readFile(File f, String cpu) throws TcfContentException {
+    public static TcfContent readFile(File f, String cpuFlag) throws TcfContentException {
 
         TcfContent tcfContent = cache.get(f);
         if (tcfContent != null && tcfContent.modTime == f.lastModified()) {
@@ -171,7 +172,7 @@ public class TcfContent {
                      */
                     data = data.replace(" ", "\\ ");
                     tcfContent.gccOptions.load(new StringReader(data));
-                    tcfContent.checkArchitecture(cpu);
+                    tcfContent.checkArchitecture(cpuFlag);
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
                     tcfContent.linkerMemoryMap = data;
