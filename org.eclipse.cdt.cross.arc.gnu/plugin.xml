@@ -618,10 +618,25 @@
                name="SP FPU with all instructions (-mfpu=fpus_all)">
          </enumeratedOptionValue>
 		 <enumeratedOptionValue
-               command="-mfpu=fpuda "
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpudpuda"
+               command="-mfpu=fpuda"
+               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda"
                name="FPU with DP assist instructions (-mfpu=fpuda)">
          </enumeratedOptionValue>
+   <enumeratedOptionValue
+         command="-mfpu=fpuda_div"
+         id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_div"
+         name="FPU with DP assist instructions and DIV/SQRT extensions (-mfpu=fpuda_div)">
+   </enumeratedOptionValue>
+   <enumeratedOptionValue
+         command="-mfpu=fpuda_fma"
+         id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_fma"
+         name="FPU with DP assist instructions and fused extensions (-mfpu=fpuda_fma)">
+   </enumeratedOptionValue>
+   <enumeratedOptionValue
+         command="-mfpu=fpuda_all"
+         id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_all"
+         name="FPU with DP assist instructions and all extensions (-mfpu=fpuda_all)">
+   </enumeratedOptionValue>
       </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
