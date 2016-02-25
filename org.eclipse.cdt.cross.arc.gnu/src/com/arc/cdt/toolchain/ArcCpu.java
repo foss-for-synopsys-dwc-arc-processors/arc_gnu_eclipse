@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.arc.cdt.toolchain.tcf.OrderedProperties;
+
 public enum ArcCpu {
     ARCEM("arcem", ArcCpuFamily.ARCEM),
     EM("em", ArcCpuFamily.ARCEM),
@@ -37,7 +39,7 @@ public enum ArcCpu {
     private static Map<ArcCpu, Properties> SET_OPTIONS = new HashMap<>();
     static {
         for (ArcCpu cpu: ArcCpu.values()) {
-            SET_OPTIONS.put(cpu, new Properties());
+            SET_OPTIONS.put(cpu, new OrderedProperties());
         }
         try {
             SET_OPTIONS.get(ARCEM).load(new StringReader(

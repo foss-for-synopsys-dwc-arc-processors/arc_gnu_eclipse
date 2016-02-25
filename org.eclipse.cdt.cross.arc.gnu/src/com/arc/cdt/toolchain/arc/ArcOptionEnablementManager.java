@@ -13,6 +13,7 @@ package com.arc.cdt.toolchain.arc;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -153,7 +154,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         }
 
         List<String> setOptions = new ArrayList<>();
-        for (String key : properties.stringPropertyNames()) {
+        for (Enumeration<?> e = properties.propertyNames(); e.hasMoreElements();) {
+            String key = e.nextElement().toString();
             String keyValue = properties.getProperty(key);
             String command = key;
             command += (keyValue.isEmpty()) ? "" : "=" + keyValue;

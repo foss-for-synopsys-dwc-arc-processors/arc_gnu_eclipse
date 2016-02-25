@@ -162,7 +162,14 @@ public class TcfContent {
                 }
                 String data = getCharacterDataFromElement((Element) stringList.item(0));
                 if (elementName.equals(GCC_OPTIONS_SECTION)) {
-                    tcfContent.gccOptions = new Properties();
+                    /*
+                     * Should use OrderedProperties instead of Properties here because if several
+                     * values for the same option are specified, the last one should be used. The
+                     * order of options is important not only if several values of the same options
+                     * are set in TCF explicitly, but also when options values are set implicitly by
+                     * -mcpu option.
+                     */
+                    tcfContent.gccOptions = new OrderedProperties();
                     /*
                      * Need to escape whitespaces here because in java.util.Properties key termination
                      * characters are '=', ':' and whitespace. So if our TCF has several option like
