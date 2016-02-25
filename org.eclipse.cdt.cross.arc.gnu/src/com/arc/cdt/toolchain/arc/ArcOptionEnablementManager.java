@@ -22,6 +22,7 @@ import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
 import org.eclipse.ui.statushandlers.StatusManager;
 
+import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.IOptionEnablementManager;
 import com.arc.cdt.toolchain.OptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
@@ -33,14 +34,16 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     private static final String ABI_SELECTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection";
     private static final String TCF_MEMORY_MAP = "org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf";
 
-    private static final String[] DISABLE_WHEN_NO_TCF = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP };
-    private static final String[] ENABLE_WHEN_TCF = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP, TCF_OPTION_ID,
-            ABI_SELECTION_ID };
+    private static final String[] TCF_RELATED_OPTIONS = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP };
+    private static final String[] NOT_ARCHITECTURE_OPTIONS = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP,
+            TCF_OPTION_ID, ABI_SELECTION_ID };
 
     private static final String[] LINKER_SCRIPT_IDS = { "org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile",
             "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" };
 
     private List<String> targetOptions;
+
+    private int settingOptionsLevel = 0;
 
     public ArcOptionEnablementManager() {
         addObserver(new Observer());
@@ -49,7 +52,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     private boolean useTcf;
     private boolean tcfLinkSelected;
     private String tcfPath = "";
-    private String processor = null;
+    private String mcpuFlag = null;
 
     private void readTargetOptions() {
         targetOptions = new ArrayList<String>();
@@ -57,6 +60,9 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             if (option.getCategory().getBaseId().contains("category.target")) {
                 targetOptions.add(option.getBaseId());
             }
+        }
+        for (String baseOptionId : NOT_ARCHITECTURE_OPTIONS) {
+            targetOptions.removeAll(getToolChainSpecificOption(baseOptionId));
         }
     }
 
@@ -85,56 +91,80 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         return list;
     }
 
-    /**
-     * Sets values for options from Target Processor tab, if they are also present in TCF. If cannot
-     * set values, shows or logs the error or does nothing depending on <code>showStyle</code>.
-     * 
-     * @param showStyle
-     *            style indicating what should be done if exception has occurred while importing.
-     *            Applicable values are <code>StatusManager.NONE</code>,
-     *            <code>StatusManager.LOG</code>, <code>StatusManager.SHOW</code> and
-     *            <code>StatusManager.BLOCK</code>.
+    /*
+     * Need one more method which set value to an option because set() does not affect GUI and
+     * setOptionValue() calls option.setValue() method, which rewrites default value of the option.
+     * This method just sets option value in GUI without rewriting defaults.
      */
-    private void importOptionsFromTcf(int showStyle) {
-        TcfContent tcfContent = null;
-        tcfContent = TcfContent.readFile(new File(tcfPath), processor, showStyle);
-        if (tcfContent != null) {
-            Properties gccOptions = tcfContent.getGccOptions();
-            for (String targetOptionId : targetOptions) {
-                String command = getCommand(targetOptionId);
-                if (command != null && !command.isEmpty() && !command.contains("-mabi")) {
-                    IOption targetOption = (IOption) getOption(targetOptionId)[1];
-                    command = command.split("=")[0];
-                    String value = gccOptions.getProperty(command);
-                    Object valueToSet = null;
-
-                    if (value != null) {
-                        if (!value.isEmpty()) {
-                            command += "=" + value;
-                        }
-                        valueToSet = optionValueFromCommand(command);
-                    } else {
-                        valueToSet = getDefaultValue(targetOption);
-                    }
-                    if (valueToSet != null) {
-                        if (valueToSet instanceof Boolean) {
-                            /* Need to use ManagedBuildManager here instead of just option.setValue()
-                             * because option.setValue() method rewrites default value of this option
-                             * with what is set. But ManagedBuildManager does nothing with the default
-                             * value and just changes build configuration for the project.*/
-                            ManagedBuildManager.setOption(getConfig(), getToolChain(), targetOption,
-                                    ((Boolean) valueToSet).booleanValue());
-                        } else if (valueToSet instanceof String) {
-                            ManagedBuildManager.setOption(getConfig(), getToolChain(), targetOption,
-                                    (String) valueToSet);
-                        } else {
-                            throw new IllegalArgumentException("Invalid value to set option "
-                                    + targetOptionId + ": " + valueToSet);
-                        }
-                    }
+    private void setValueWithoutRewritingDefaults(IOption option, Object value) {
+        if (value instanceof Boolean) {
+            /* Need to use ManagedBuildManager here instead of just option.setValue()
+             * because option.setValue() method rewrites default value of this option
+             * with what is set. But ManagedBuildManager does nothing with the default
+             * value and just changes build configuration for the project.*/
+            ManagedBuildManager.setOption(getConfig(), getToolChain(), option,
+                    ((Boolean) value).booleanValue());
+        } else if (value instanceof String) {
+            /*
+             * If option has enumerated type it is necessary to use enumeration id as a
+             * value so that option.getSelectedEnum() would return id like it does when
+             * value is selected by user in GUI.
+             */
+            try {
+                if (option.getValueType() == IOption.ENUMERATED) {
+                    value = option.getEnumeratedId((String)value);
                 }
+            } catch (BuildException e) {
+                e.printStackTrace();
+            }
+            ManagedBuildManager.setOption(getConfig(), getToolChain(), option,
+                    (String) value);
+        } else {
+            throw new IllegalArgumentException("Invalid value to set option "
+                    + option.getName() + ": " + value);
+        }
+    }
+
+    /**
+     * Set all target options values to default. It is needed to set options values automatically
+     * from TCF or from -mcpu value.
+     */
+    private void setOptionsToDefaults() {
+        for (String targetOptionId : targetOptions) {
+            IOption targetOption = (IOption) getOption(targetOptionId)[1];
+            Object defaultValue = getDefaultValue(targetOption);
+            setValueWithoutRewritingDefaults(targetOption, defaultValue);
+        }
+    }
+
+    /**
+     * For all architecture (-m) options from Target Processor tab set values from properties. If
+     * there isn't a value for the option in properties, set the default one.
+     * 
+     * @param properties
+     *            from which to get option values
+     * 
+     * @return list of options that were set from properties
+     */
+    private List<String> setOptionsFromProperties(Properties properties) {
+        settingOptionsLevel++;
+        if (settingOptionsLevel == 1) {
+            setOptionsToDefaults();
+        }
+
+        List<String> setOptions = new ArrayList<>();
+        for (String key : properties.stringPropertyNames()) {
+            String keyValue = properties.getProperty(key);
+            String command = key;
+            command += (keyValue.isEmpty()) ? "" : "=" + keyValue;
+            Object[] toSet = getOptionAndValueFromCommand(command);
+            if (toSet != null) {
+                setValueWithoutRewritingDefaults((IOption)toSet[0], toSet[1]);
+                setOptions.add(((IOption)toSet[0]).getBaseId());
             }
         }
+        settingOptionsLevel--;
+        return setOptions;
     }
 
     /**
@@ -179,14 +209,34 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         public void onOptionValueChanged(IOptionEnablementManager mgr, String optionId) {
             // `contains()` because sometimes this options has numeric suffix in the end.
             if (optionId.contains("option.target.processor")) {
-                processor = getCommand(optionId);
-                readTargetOptions();
+                mcpuFlag = null;
+                try {
+                    IOption option = (IOption)(getOption(optionId)[1]);
+                    mcpuFlag = option.getEnumCommand(option.getSelectedEnum());
+                } catch (BuildException e) {
+                    e.printStackTrace();
+                }
+                if (mcpuFlag != null) {
+                    readTargetOptions();
+                    List<String> setOptions = setOptionsFromProperties(
+                            ArcCpu.fromCommand(mcpuFlag).getOptionsToSet());
+
+                }
             }
             if (optionId.contains("option.target.tcf")) {
                 useTcf = (Boolean) mgr.getValue(optionId);
                 if (useTcf) {
+                    if (!tcfPath.isEmpty()) {
+                        TcfContent tcfContent = null;
+                        tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.SHOW);
+                        if (tcfContent != null) {
+                            Properties gccOptions = tcfContent.getGccOptions();
+                            setOptionsFromProperties(gccOptions);
+                        }
+                    }
+
                     setEnabled(targetOptions, false);
-                    for (String option : ENABLE_WHEN_TCF) {
+                    for (String option : TCF_RELATED_OPTIONS) {
                         setEnabled(getToolChainSpecificOption(option), true);
                     }
                     if (tcfLinkSelected) {
@@ -197,12 +247,9 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     // Else do nothing because if TCF is not selected, these options were enabled
                     // either by default or when TCF was cancelled.
 
-                    if (!tcfPath.isEmpty()) {
-                        importOptionsFromTcf(StatusManager.SHOW);
-                    }
                 } else {
                     setEnabled(targetOptions, true);
-                    for (String option : DISABLE_WHEN_NO_TCF) {
+                    for (String option : TCF_RELATED_OPTIONS) {
                         setEnabled(getToolChainSpecificOption(option), false);
                     }
                     if (tcfLinkSelected) {
@@ -215,9 +262,14 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             if (optionId.contains("option.target.filefortcf")) {
                 tcfPath = (String)mgr.getValue(optionId);
                 if (useTcf) {
+                    TcfContent tcfContent = null;
                     // Don't show anything here because TcfValueHandler shows errors when
                     // TCF path value is changed
-                    importOptionsFromTcf(StatusManager.NONE);
+                    tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.NONE);
+                    if (tcfContent != null) {
+                        Properties gccOptions = tcfContent.getGccOptions();
+                        setOptionsFromProperties(gccOptions);
+                    }
                 }
             }
             if (optionId.contains("option.target.maptcf")) {

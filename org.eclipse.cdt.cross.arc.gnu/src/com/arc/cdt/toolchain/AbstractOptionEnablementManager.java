@@ -52,7 +52,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
 
     private ITool[] mTools;
 
-    private Map<String, Object> toolChainOptionValues = new HashMap<>();
+    private Map<String, Object[]> toolChainOptionValues = new HashMap<>();
 
     public AbstractOptionEnablementManager() {
          NotificationManager.getInstance().subscribe(this);
@@ -66,7 +66,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         return mConfig;
     }
 
-    protected Object optionValueFromCommand(String command) {
+    protected Object[] getOptionAndValueFromCommand(String command) {
         return toolChainOptionValues.get(command);
     }
 
@@ -98,8 +98,6 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                 ITool tools[] = mConfig.getTools();
                 mTools = tools;
                 for (IOption option : toolchain.getOptions()) {
-                    set(option.getBaseId(), option.getValue());
-
                     /*
                      * Get all applicable values for the option and put them into a map. For each
                      * applicable value get flag which is passed to compiler if this value is
@@ -116,15 +114,25 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                                 e.printStackTrace();
                             }
                             if (key != null) {
-                                toolChainOptionValues.put(key, appValue);
+                                toolChainOptionValues.put(key, new Object[]{option, appValue});
                             }
                         }
                     } else {
                         String key = option.getCommand();
                         if (key != null) {
-                            toolChainOptionValues.put(key, true);
+                            toolChainOptionValues.put(key, new Object[]{option, true});
+                            if (key.startsWith("-m")) {
+                                String noKey = key.substring(0, 2) + "no-" + key.substring(2);
+                                toolChainOptionValues.put(noKey, new Object[]{option, false});
+                            }
                         }
                     }
+                }
+                /* First read applicable values for all the options, then start to set options
+                 * so that when we set processor value, we could also set all the other necessary
+                 * values to other options. */
+                for (IOption option : toolchain.getOptions()) {
+                    set(option.getBaseId(), option.getValue());
                 }
                 for (ITool tool : tools) {
                     for (IOption option : tool.getOptions()) {
