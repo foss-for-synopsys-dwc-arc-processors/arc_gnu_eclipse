@@ -46,7 +46,7 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
     
     private IToolChain mLastToolChain;
 
-    private transient boolean initializing = false;
+    protected transient boolean initializing = false;
     
     private boolean clangBased = false;
 
@@ -114,7 +114,11 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
                                 e.printStackTrace();
                             }
                             if (key != null) {
-                                toolChainOptionValues.put(key, new Object[]{option, appValue});
+                                try {
+                                    toolChainOptionValues.put(key, new Object[]{option, option.getEnumeratedId(appValue)});
+                                } catch (BuildException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     } else {
@@ -397,15 +401,9 @@ public abstract class AbstractOptionEnablementManager implements IOptionEnableme
         // Due to CDT bug option is the original option such that option.getValue() does not
        // necessarily reflect the new value. We must retrieve the modified instance of option
        // These codes are customized for ARC GNU toolchain
-        if(option.getBaseId().endsWith(".option.target.processor")
-                || option.getBaseId().contains("option.target.tcf")
-                || option.getBaseId().contains(".option.target.filefortcf")
-                || option.getBaseId().contains(".option.target.maptcf")) {
-
-            Object[] optLookup = getOption(option.getBaseId());
-            if(optLookup != null) option = (IOption) optLookup[1];
-        }
-     set(option.getBaseId(),option.getValue());
+        Object[] optLookup = getOption(option.getBaseId());
+        if(optLookup != null) option = (IOption) optLookup[1];
+        set(option.getBaseId(),option.getValue());
     }
 
 }

@@ -21,6 +21,7 @@ import java.util.Properties;
 
 import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
+import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
@@ -54,15 +55,27 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     private Map<String, String> cpuSpecificEnumValues = new HashMap<>();
 
     private int settingOptionsLevel = 0;
+    private Observer observer;
+
 
     public ArcOptionEnablementManager() {
-        addObserver(new Observer());
+        observer = new Observer();
+        addObserver(observer);
     }
 
     private boolean useTcf;
     private boolean tcfLinkSelected;
     private String tcfPath = "";
     private String mcpuFlag = null;
+
+    @Override
+    public void initialize(IBuildObject config) {
+        super.initialize(config);
+        List<String> tcfOption = getToolChainSpecificOption(TCF_OPTION_ID);
+        if (tcfOption != null && tcfOption.size() > 0) {
+            observer.onOptionValueChanged(this, tcfOption.get(0));
+        }
+    }
 
     private void readTargetOptions() {
         targetOptions = new ArrayList<String>();
@@ -103,10 +116,16 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 
     /*
      * Need one more method which set value to an option because set() does not affect GUI and
-     * setOptionValue() calls option.setValue() method, which rewrites default value of the option.
-     * This method just sets option value in GUI without rewriting defaults.
+     * setOptionValue() from AbstractOptionEnablementManager class calls option.setValue() method,
+     * which rewrites default value of the option. This method just sets option value in GUI without
+     * rewriting defaults.
      */
-    private void setValueWithoutRewritingDefaults(IOption option, Object value) {
+    private void setOptionValue(IOption option, Object value) {
+        // Do not rewrite configuration when initializing. Otherwise some values from configuration
+        // we initialize from might be lost.
+        if (initializing) {
+            return;
+        }
         if (value instanceof Boolean) {
             /* Need to use ManagedBuildManager here instead of just option.setValue()
              * because option.setValue() method rewrites default value of this option
@@ -115,18 +134,6 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             ManagedBuildManager.setOption(getConfig(), getToolChain(), option,
                     ((Boolean) value).booleanValue());
         } else if (value instanceof String) {
-            /*
-             * If option has enumerated type it is necessary to use enumeration id as a
-             * value so that option.getSelectedEnum() would return id like it does when
-             * value is selected by user in GUI.
-             */
-            try {
-                if (option.getValueType() == IOption.ENUMERATED) {
-                    value = option.getEnumeratedId((String)value);
-                }
-            } catch (BuildException e) {
-                e.printStackTrace();
-            }
             ManagedBuildManager.setOption(getConfig(), getToolChain(), option,
                     (String) value);
         } else {
@@ -140,10 +147,50 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
      * from TCF or from -mcpu value.
      */
     private void setOptionsToDefaults() {
+        disabledForCpu.clear();
+        inapplicableEnumValues.clear();
+        cpuSpecificEnumValues.clear();
+
         for (String targetOptionId : targetOptions) {
             IOption targetOption = (IOption) getOption(targetOptionId)[1];
             Object defaultValue = getDefaultValue(targetOption);
-            setValueWithoutRewritingDefaults(targetOption, defaultValue);
+            set(targetOptionId, defaultValue);
+        }
+    }
+
+    private void computeInapplicableAndDisabledOptionsForCpu(List<String> options) {
+        /*
+         * For each -mcpu value there is a standard library that uses some options. We
+         * set these options in IDE, but if user unchecks one of the checkboxes, he
+         * might think that options he unselected are not used, but it would not be true
+         * because they would still be used by standard library. As for dropdown lists,
+         * we should prevent user from choosing weaker options than are used in standard
+         * library for the same reason, but he can choose stronger ones, so we don't
+         * disable dropdown lists.
+         */
+        for (String setOptionId : options) {
+            if (setOptionId.contains("target.processor")) {
+                continue;
+            }
+            IOption setOption = (IOption)(getOption(setOptionId)[1]);
+            try {
+                if (setOption.getValueType() == IOption.BOOLEAN) {
+                    disabledForCpu.add(setOptionId);
+                } else if (setOption.getValueType() == IOption.ENUMERATED) {
+                    inapplicableEnumValues.put(setOptionId, new ArrayList<String>());
+                    String selectedValueId = getValue(setOptionId).toString();
+                    cpuSpecificEnumValues.put(setOptionId, selectedValueId);
+                    for (String value : setOption.getApplicableValues()) {
+                        String enumId = setOption.getEnumeratedId(value);
+                        if (enumId.equals(selectedValueId)) {
+                            break;
+                        }
+                        inapplicableEnumValues.get(setOptionId).add(enumId);
+                    }
+                }
+            } catch (BuildException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -170,46 +217,65 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             command += (keyValue.isEmpty()) ? "" : "=" + keyValue;
             Object[] toSet = getOptionAndValueFromCommand(command);
             if (toSet != null) {
-                setValueWithoutRewritingDefaults((IOption)toSet[0], toSet[1]);
                 setOptions.add(((IOption)toSet[0]).getBaseId());
+                set(((IOption)toSet[0]).getBaseId(), toSet[1]);
             }
         }
         settingOptionsLevel--;
+        if (settingOptionsLevel == 0) {
+            for (String key : targetOptions) {
+                setOptionValue((IOption) getOption(key)[1], getValue(key));
+            }
+        }
         return setOptions;
     }
 
     /**
      * Check if option's value is inapplicable due to current CPU value. If value is incorrect, show
-     * error message. If <code>rewrite</code> is chosen, change incorrect value to the one that
-     * corresponds to CPU.
+     * error message or change incorrect value to the one that corresponds to CPU depending on
+     * <code>rewrite</code> and <code>showStyle</code> values.
      * 
      * @param optionId
      *            id of option to check
      * @param rewrite
      *            if true, change inapplicable option's value to the one that corresponds to CPU
+     * @param showStyle
+     *            style indicating how error message should be shown if value is incorrect.
+     *            Possible values are <code>StatusManager.NONE</code>,
+     *            <code>StatusManager.LOG</code>, <code>StatusManager.SHOW</code> and
+     *            <code>StatusManager.BLOCK</code>.
      */
-    private void checkOptionIsCorrect(String optionId, boolean rewrite) {
-        IOption option = (IOption)getOption(optionId)[1];
+    private void checkOptionIsCorrect(String optionId, boolean rewrite, int showStyle) {
+        // Do not show errors while initializing: TCF might be selected
+        if (initializing) return;
+        Object[] optLookup = getOption(optionId);
+        if (optLookup == null) {
+            return;
+        }
+        IOption option = (IOption)optLookup[1];
         String postfix = rewrite ? " Setting option's value corresponding to the CPU"
                 : " It is recommended that you change value of either " + option.getName()
                         + " or CPU.";
         boolean isCorrect = true;
-        String optionValue = "";
+        String optionValueName = "";
+        String newValueName = "";
         Object newValue = null;
         try {
             if (disabledForCpu.contains(optionId)) {
-                Boolean value = option.getBooleanValue();
+                Boolean value = (Boolean)getValue(optionId);
                 if (!value) {
-                    optionValue = value.toString();
+                    optionValueName = value.toString();
                     newValue = true;
+                    newValueName = "true";
                     isCorrect = false;
                 }
             }
             if (inapplicableEnumValues.containsKey(optionId)) {
-                String value = option.getSelectedEnum();
+                String value = getValue(optionId).toString();
                 if (inapplicableEnumValues.get(optionId).contains(value)) {
-                    optionValue = option.getEnumName(value);
-                    newValue = option.getEnumName(cpuSpecificEnumValues.get(optionId));
+                    optionValueName = option.getEnumName(value);
+                    newValue = cpuSpecificEnumValues.get(optionId);
+                    newValueName = option.getEnumName(newValue.toString());
                     isCorrect = false;
                 }
             }
@@ -218,14 +284,15 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         }
         if (!isCorrect) {
             if (rewrite) {
-                postfix += ": \"" + newValue + "\".";
-                setValueWithoutRewritingDefaults(option, newValue);
+                postfix += ": \"" + newValueName + "\".";
+                setOptionValue(option, newValue);
             }
-            String errorMessage = "Combination of " + option.getName() + "'s value \"" + optionValue
-                    + "\" and current CPU value is not valid." + postfix;
+            String errorMessage = "Combination of " + option.getName() + "'s value \""
+                    + optionValueName + "\" and CPU value \"" + ArcCpu.fromCommand(mcpuFlag)
+                    + "\" is not valid." + postfix;
             StatusManager.getManager().handle(
                     new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, errorMessage),
-                    StatusManager.SHOW);
+                    showStyle);
         }
     }
 
@@ -273,53 +340,22 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             if (optionId.contains("option.target.processor")) {
                 mcpuFlag = null;
                 try {
-                    IOption option = (IOption)(getOption(optionId)[1]);
-                    mcpuFlag = option.getEnumCommand(option.getSelectedEnum());
+                    Object[] optLookup = getOption(optionId);
+                    if (optLookup != null) {
+                        IOption option = (IOption)optLookup[1];
+                        mcpuFlag = option.getEnumCommand(getValue(optionId).toString());
+                    }
                 } catch (BuildException e) {
                     e.printStackTrace();
                 }
                 if (mcpuFlag != null) {
                     readTargetOptions();
                     setEnabled(disabledForCpu, true);
-                    disabledForCpu = new ArrayList<>();
-                    inapplicableEnumValues = new HashMap<>();
-                    cpuSpecificEnumValues = new HashMap<>();
 
                     List<String> setOptions = setOptionsFromProperties(
                             ArcCpu.fromCommand(mcpuFlag).getOptionsToSet());
 
-                    /*
-                     * For each -mcpu value there is a standard library that uses some options. We
-                     * set these options in IDE, but if user unchecks one of the checkboxes, he
-                     * might think that options he unselected are not used, but it would not be true
-                     * because they would still be used by standard library. As for dropdown lists,
-                     * we should prevent user from choosing weaker options than are used in standard
-                     * library for the same reason, but he can choose stronger ones, so we don't
-                     * disable dropdown lists.
-                     */
-                    for (String setOptionId : setOptions) {
-                        if (setOptionId.equals(optionId)) {
-                            continue;
-                        }
-                        IOption setOption = (IOption)(getOption(setOptionId)[1]);
-                        try {
-                            if (setOption.getValueType() == IOption.BOOLEAN) {
-                                disabledForCpu.add(setOptionId);
-                            } else if (setOption.getValueType() == IOption.ENUMERATED) {
-                                inapplicableEnumValues.put(setOptionId, new ArrayList<String>());
-                                cpuSpecificEnumValues.put(setOptionId, setOption.getSelectedEnum());
-                                for (String value : setOption.getApplicableValues()) {
-                                    String enumId = setOption.getEnumeratedId(value);
-                                    if (enumId.equals(setOption.getSelectedEnum())) {
-                                        break;
-                                    }
-                                    inapplicableEnumValues.get(setOptionId).add(enumId);
-                                }
-                            }
-                        } catch (BuildException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    computeInapplicableAndDisabledOptionsForCpu(setOptions);
                     setEnabled(disabledForCpu, false);
                 }
             }
@@ -328,22 +364,12 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
              * message.
              */
             if (inapplicableEnumValues.containsKey(optionId) || disabledForCpu.contains(optionId)) {
-                checkOptionIsCorrect(optionId, false);
+                int showStyle = useTcf ? StatusManager.LOG : StatusManager.BLOCK;
+                checkOptionIsCorrect(optionId, !useTcf, showStyle);
             }
             if (optionId.contains("option.target.tcf")) {
                 useTcf = (Boolean) mgr.getValue(optionId);
                 if (useTcf) {
-                    // First set option values, then enable/disable them because changing -mcpu value
-                    // also enables/disables some options.
-                    if (!tcfPath.isEmpty()) {
-                        TcfContent tcfContent = null;
-                        tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.SHOW);
-                        if (tcfContent != null) {
-                            Properties gccOptions = tcfContent.getGccOptions();
-                            setOptionsFromProperties(gccOptions);
-                        }
-                    }
-
                     setEnabled(targetOptions, false);
                     for (String option : TCF_RELATED_OPTIONS) {
                         setEnabled(getToolChainSpecificOption(option), true);
@@ -355,6 +381,15 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     }
                     // Else do nothing because if TCF is not selected, these options were enabled
                     // either by default or when TCF was cancelled.
+
+                    if (!tcfPath.isEmpty()) {
+                        TcfContent tcfContent = null;
+                        tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.SHOW);
+                        if (tcfContent != null) {
+                            Properties gccOptions = tcfContent.getGccOptions();
+                            setOptionsFromProperties(gccOptions);
+                        }
+                    }
 
                 } else {
                     setEnabled(targetOptions, true);
@@ -368,10 +403,10 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                         }
                     }
                     for (String id : disabledForCpu) {
-                        checkOptionIsCorrect(id, true);
+                        checkOptionIsCorrect(id, true, StatusManager.SHOW);
                     }
                     for (String id : inapplicableEnumValues.keySet()) {
-                        checkOptionIsCorrect(id, true);
+                        checkOptionIsCorrect(id, true, StatusManager.SHOW);
                     }
                 }
             }
