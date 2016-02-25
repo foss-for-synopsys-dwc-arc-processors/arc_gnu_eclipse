@@ -14,13 +14,18 @@ package com.arc.cdt.toolchain.arc;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.cdt.toolchain.ArcCpu;
@@ -44,6 +49,9 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 
     private List<String> targetOptions;
     private List<String> disabledForCpu = new ArrayList<>();
+
+    private Map<String, List<String>> inapplicableEnumValues = new HashMap<>();
+    private Map<String, String> cpuSpecificEnumValues = new HashMap<>();
 
     private int settingOptionsLevel = 0;
 
@@ -171,6 +179,57 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     }
 
     /**
+     * Check if option's value is inapplicable due to current CPU value. If value is incorrect, show
+     * error message. If <code>rewrite</code> is chosen, change incorrect value to the one that
+     * corresponds to CPU.
+     * 
+     * @param optionId
+     *            id of option to check
+     * @param rewrite
+     *            if true, change inapplicable option's value to the one that corresponds to CPU
+     */
+    private void checkOptionIsCorrect(String optionId, boolean rewrite) {
+        IOption option = (IOption)getOption(optionId)[1];
+        String postfix = rewrite ? " Setting option's value corresponding to the CPU"
+                : " It is recommended that you change value of either " + option.getName()
+                        + " or CPU.";
+        boolean isCorrect = true;
+        String optionValue = "";
+        Object newValue = null;
+        try {
+            if (disabledForCpu.contains(optionId)) {
+                Boolean value = option.getBooleanValue();
+                if (!value) {
+                    optionValue = value.toString();
+                    newValue = true;
+                    isCorrect = false;
+                }
+            }
+            if (inapplicableEnumValues.containsKey(optionId)) {
+                String value = option.getSelectedEnum();
+                if (inapplicableEnumValues.get(optionId).contains(value)) {
+                    optionValue = option.getEnumName(value);
+                    newValue = option.getEnumName(cpuSpecificEnumValues.get(optionId));
+                    isCorrect = false;
+                }
+            }
+        } catch (BuildException e) {
+            e.printStackTrace();
+        }
+        if (!isCorrect) {
+            if (rewrite) {
+                postfix += ": \"" + newValue + "\".";
+                setValueWithoutRewritingDefaults(option, newValue);
+            }
+            String errorMessage = "Combination of " + option.getName() + "'s value \"" + optionValue
+                    + "\" and current CPU value is not valid." + postfix;
+            StatusManager.getManager().handle(
+                    new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, errorMessage),
+                    StatusManager.SHOW);
+        }
+    }
+
+    /**
      * Returns default value for the option. If default value is not specified, it is considered
      * <code>false</code> for options with <code>IOption.BOOLEAN</code> value type and empty string
      * for options with <code>IOption.STRING</code> value type.
@@ -223,6 +282,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     readTargetOptions();
                     setEnabled(disabledForCpu, true);
                     disabledForCpu = new ArrayList<>();
+                    inapplicableEnumValues = new HashMap<>();
+                    cpuSpecificEnumValues = new HashMap<>();
 
                     List<String> setOptions = setOptionsFromProperties(
                             ArcCpu.fromCommand(mcpuFlag).getOptionsToSet());
@@ -244,6 +305,16 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                         try {
                             if (setOption.getValueType() == IOption.BOOLEAN) {
                                 disabledForCpu.add(setOptionId);
+                            } else if (setOption.getValueType() == IOption.ENUMERATED) {
+                                inapplicableEnumValues.put(setOptionId, new ArrayList<String>());
+                                cpuSpecificEnumValues.put(setOptionId, setOption.getSelectedEnum());
+                                for (String value : setOption.getApplicableValues()) {
+                                    String enumId = setOption.getEnumeratedId(value);
+                                    if (enumId.equals(setOption.getSelectedEnum())) {
+                                        break;
+                                    }
+                                    inapplicableEnumValues.get(setOptionId).add(enumId);
+                                }
                             }
                         } catch (BuildException e) {
                             e.printStackTrace();
@@ -251,6 +322,13 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     }
                     setEnabled(disabledForCpu, false);
                 }
+            }
+            /*
+             * If some of option's values are inapplicable due to current -mcpu value, show error
+             * message.
+             */
+            if (inapplicableEnumValues.containsKey(optionId) || disabledForCpu.contains(optionId)) {
+                checkOptionIsCorrect(optionId, false);
             }
             if (optionId.contains("option.target.tcf")) {
                 useTcf = (Boolean) mgr.getValue(optionId);
@@ -288,6 +366,12 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                         for (String option : LINKER_SCRIPT_IDS) {
                             setEnabled(getToolChainSpecificOption(option), true);
                         }
+                    }
+                    for (String id : disabledForCpu) {
+                        checkOptionIsCorrect(id, true);
+                    }
+                    for (String id : inapplicableEnumValues.keySet()) {
+                        checkOptionIsCorrect(id, true);
                     }
                 }
             }
