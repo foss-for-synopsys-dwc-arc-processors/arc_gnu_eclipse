@@ -43,6 +43,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" };
 
     private List<String> targetOptions;
+    private List<String> disabledForCpu = new ArrayList<>();
 
     private int settingOptionsLevel = 0;
 
@@ -220,14 +221,42 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                 }
                 if (mcpuFlag != null) {
                     readTargetOptions();
+                    setEnabled(disabledForCpu, true);
+                    disabledForCpu = new ArrayList<>();
+
                     List<String> setOptions = setOptionsFromProperties(
                             ArcCpu.fromCommand(mcpuFlag).getOptionsToSet());
 
+                    /*
+                     * For each -mcpu value there is a standard library that uses some options. We
+                     * set these options in IDE, but if user unchecks one of the checkboxes, he
+                     * might think that options he unselected are not used, but it would not be true
+                     * because they would still be used by standard library. As for dropdown lists,
+                     * we should prevent user from choosing weaker options than are used in standard
+                     * library for the same reason, but he can choose stronger ones, so we don't
+                     * disable dropdown lists.
+                     */
+                    for (String setOptionId : setOptions) {
+                        if (setOptionId.equals(optionId)) {
+                            continue;
+                        }
+                        IOption setOption = (IOption)(getOption(setOptionId)[1]);
+                        try {
+                            if (setOption.getValueType() == IOption.BOOLEAN) {
+                                disabledForCpu.add(setOptionId);
+                            }
+                        } catch (BuildException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    setEnabled(disabledForCpu, false);
                 }
             }
             if (optionId.contains("option.target.tcf")) {
                 useTcf = (Boolean) mgr.getValue(optionId);
                 if (useTcf) {
+                    // First set option values, then enable/disable them because changing -mcpu value
+                    // also enables/disables some options.
                     if (!tcfPath.isEmpty()) {
                         TcfContent tcfContent = null;
                         tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.SHOW);
@@ -251,6 +280,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 
                 } else {
                     setEnabled(targetOptions, true);
+                    setEnabled(disabledForCpu, false);
                     for (String option : TCF_RELATED_OPTIONS) {
                         setEnabled(getToolChainSpecificOption(option), false);
                     }
