@@ -382,7 +382,9 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     // Else do nothing because if TCF is not selected, these options were enabled
                     // either by default or when TCF was cancelled.
 
-                    if (!tcfPath.isEmpty()) {
+                    tcfPath = (String)mgr.getValue(
+                            getToolChainSpecificOption(TCF_FILE_OPTION_ID).get(0));
+                    if (tcfPath != null && !tcfPath.isEmpty()) {
                         TcfContent tcfContent = null;
                         tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.SHOW);
                         if (tcfContent != null) {

@@ -133,6 +133,7 @@ public class TcfContent {
 
         TcfContent tcfContent = cache.get(f);
         if (tcfContent != null && tcfContent.modTime == f.lastModified()) {
+            tcfContent.checkArchitecture(cpuFlag);
             return tcfContent;
         }
 
