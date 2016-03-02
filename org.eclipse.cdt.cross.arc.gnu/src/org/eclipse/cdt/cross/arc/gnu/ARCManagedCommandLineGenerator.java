@@ -227,7 +227,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        }
 
             if (sProcessor != null && !sProcessor.isEmpty())
-                oList.add(sProcessor);
+                oList_gcc_options.add(sProcessor);
             if (sCore700 != null && !sCore700.isEmpty())
                 oList.add(sCore700);
             if (sProcessorEndiannes != null && !sProcessorEndiannes.isEmpty())
@@ -362,9 +362,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     while (e.hasMoreElements()) {
                         String gcc_option = (String) e.nextElement();
                         String value = gccOptions.getProperty(gcc_option);
-                        if (gcc_option.equals("-mcpu")) {
-                            continue;
-                        }
                         if (!value.isEmpty()) {
                             gcc_option = gcc_option + "=" + value;
                             if (gcc_option.contains("-mmpy-option")) {
@@ -404,7 +401,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
             oList.addAll(Arrays.asList(asFlags));
             lastProject = projectBuildPath;
         }
-        oList.addAll(oList_gcc_options);
+        oList.addAll(0, oList_gcc_options);
         lastTool = oTool;
         return super.generateCommandLineInfo(oTool, sCommandName,
                 (String[]) oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName,
