@@ -477,13 +477,6 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mlock"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.lock"
-               name="Atomic Option (-mlock)"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.fpi"
                name="FPX"

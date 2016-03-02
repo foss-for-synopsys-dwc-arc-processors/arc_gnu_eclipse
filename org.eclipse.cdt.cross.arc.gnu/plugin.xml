@@ -596,13 +596,6 @@
       </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mlock"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.lock"
-            name="Atomic Option (-mlock)"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             command="-mmpy"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
             name="MPY instructions (-mmpy)"
