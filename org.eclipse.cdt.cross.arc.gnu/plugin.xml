@@ -688,6 +688,7 @@
       </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            browseFilterExtensions="*.tcf"
             browseType="file"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
             isAbstract="false"
