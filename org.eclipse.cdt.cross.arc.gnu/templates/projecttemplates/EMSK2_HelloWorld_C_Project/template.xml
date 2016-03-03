@@ -96,7 +96,7 @@
 		<complex-array name="resourcePaths">
 			<element>
 				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem" />
-				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.6" />
+				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.2" />
 				<simple name="path" value="" />
 			</element>
 		</complex-array>
