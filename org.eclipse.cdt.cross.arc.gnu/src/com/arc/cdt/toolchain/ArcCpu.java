@@ -64,6 +64,7 @@ public enum ArcCpu {
                 + "-mbarrel-shifter\n"
                 + "-mdiv-rem\n"
                 + "-mnorm\n"
+                + "-mswap\n"
             ));
             SET_OPTIONS.get(EM4_FPUS).load(new StringReader(
                 "-mcpu=em4_fpus\n"
@@ -72,6 +73,7 @@ public enum ArcCpu {
                 + "-mbarrel-shifter\n"
                 + "-mdiv-rem\n"
                 + "-mnorm\n"
+                + "-mswap\n"
                 + "-mfpu=fpus\n"
             ));
             SET_OPTIONS.get(EM4_FPUDA).load(new StringReader(
@@ -81,6 +83,7 @@ public enum ArcCpu {
                 + "-mbarrel-shifter\n"
                 + "-mdiv-rem\n"
                 + "-mnorm\n"
+                + "-mswap\n"
                 + "-mfpu=fpuda\n"
             ));
             SET_OPTIONS.get(ARCHS).load(new StringReader(
