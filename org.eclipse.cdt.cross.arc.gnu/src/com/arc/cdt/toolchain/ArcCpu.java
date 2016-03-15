@@ -43,25 +43,77 @@ public enum ArcCpu {
         }
         try {
             SET_OPTIONS.get(ARCEM).load(new StringReader(
-                    "-mcpu=arcem\n -mcode-density\n -mmpy-option=2\n -mbarrel-shifter\n"));
-            SET_OPTIONS.get(EM).load(new StringReader("-mcpu=em\n -mmpy-option=0\n"));
-            SET_OPTIONS.get(EM4)
-                    .load(new StringReader("-mcpu=em4\n -mcode-density\n -mmpy-option=0\n"));
+                "-mcpu=arcem\n"
+                + "-mcode-density\n"
+                + "-mmpy-option=2\n"
+                + "-mbarrel-shifter\n"
+            ));
+            SET_OPTIONS.get(EM).load(new StringReader(
+                "-mcpu=em\n"
+                + "-mmpy-option=0\n"
+            ));
+            SET_OPTIONS.get(EM4).load(new StringReader(
+                "-mcpu=em4\n"
+                + "-mcode-density\n"
+                + "-mmpy-option=0\n"
+            ));
             SET_OPTIONS.get(EM4_DMIPS).load(new StringReader(
-                    "-mcpu=em4_dmips\n -mcode-density\n -mmpy-option=2\n -mbarrel-shifter\n -mdiv-rem\n -mnorm\n"));
+                "-mcpu=em4_dmips\n"
+                + "-mcode-density\n"
+                + "-mmpy-option=2\n"
+                + "-mbarrel-shifter\n"
+                + "-mdiv-rem\n"
+                + "-mnorm\n"
+            ));
             SET_OPTIONS.get(EM4_FPUS).load(new StringReader(
-                    "-mcpu=em4_fpus\n -mcode-density\n -mmpy-option=2\n -mbarrel-shifter\n -mdiv-rem\n -mnorm\n -mfpu=fpus\n"));
+                "-mcpu=em4_fpus\n"
+                + "-mcode-density\n"
+                + "-mmpy-option=2\n"
+                + "-mbarrel-shifter\n"
+                + "-mdiv-rem\n"
+                + "-mnorm\n"
+                + "-mfpu=fpus\n"
+            ));
             SET_OPTIONS.get(EM4_FPUDA).load(new StringReader(
-                    "-mcpu=em4_fpuda\n -mcode-density\n -mmpy-option=2\n -mbarrel-shifter\n -mdiv-rem\n -mnorm\n -mfpu=fpuda\n"));
+                "-mcpu=em4_fpuda\n"
+                + "-mcode-density\n"
+                + "-mmpy-option=2\n"
+                + "-mbarrel-shifter\n"
+                + "-mdiv-rem\n"
+                + "-mnorm\n"
+                + "-mfpu=fpuda\n"
+            ));
             SET_OPTIONS.get(ARCHS).load(new StringReader(
-                    "-mcpu=archs\n -mdiv-rem\n -mmpy-option=2\n -mll64\n -matomic\n"));
-            SET_OPTIONS.get(HS).load(new StringReader("-mcpu=hs\n -mmpy-option=0\n"));
-            SET_OPTIONS.get(HS34)
-                    .load(new StringReader("-mcpu=hs34\n -mmpy-option=2\n -matomic\n"));
+                "-mcpu=archs\n"
+                + "-mdiv-rem\n"
+                + "-mmpy-option=2\n"
+                + "-mll64\n"
+                + "-matomic\n"
+            ));
+            SET_OPTIONS.get(HS).load(new StringReader(
+                "-mcpu=hs\n"
+                + "-mmpy-option=0\n"
+            ));
+            SET_OPTIONS.get(HS34).load(new StringReader(
+                "-mcpu=hs34\n"
+                + "-mmpy-option=2\n"
+                + "-matomic\n"
+            ));
             SET_OPTIONS.get(HS38).load(new StringReader(
-                    "-mcpu=hs38\n -mdiv-rem\n -mmpy-option=9\n -mll64\n -matomic\n"));
+                "-mcpu=hs38\n"
+                + "-mdiv-rem\n"
+                + "-mmpy-option=9\n"
+                + "-mll64\n"
+                + "-matomic\n"
+            ));
             SET_OPTIONS.get(HS38_LINUX).load(new StringReader(
-                    "-mcpu=hs38_linux\n -mdiv-rem\n -mmpy-option=9\n -mll64\n -matomic\n -mfpu=fpud_all\n"));
+                "-mcpu=hs38_linux\n"
+                + "-mdiv-rem\n"
+                + "-mmpy-option=9\n"
+                + "-mll64\n"
+                + "-matomic\n"
+                + "-mfpu=fpud_all\n"
+            ));
         } catch (IOException e) {
         }
     }
