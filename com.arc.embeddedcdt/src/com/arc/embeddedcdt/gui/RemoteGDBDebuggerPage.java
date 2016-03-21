@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
+import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.StringButtonFieldEditor;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -144,6 +145,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
 
     // Editor for path to Ashling target description XML file.
     private FileFieldEditor fAshlingTDescXMLPath;
+
+    private ARCWorkingDirectoryBlock fWorkingDirectoryBlockNSim = new ARCWorkingDirectoryBlock();
 
     private String jtag_frequency = null;
     private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
@@ -385,6 +388,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             customGdbCommandArgs = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND, "");
 
+            fWorkingDirectoryBlockNSim.initializeFrom(configuration);
             fLaunchexternal_nsimjit_Buttonboolean = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
             fLaunchexternal_nsimhostlink_Buttonboolean = configuration.getAttribute(
@@ -466,8 +470,9 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
     @Override
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
         super.performApply(configuration);
-        // configuration.setAttribute(
-        // IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND, str );
+        if (!groupnsim.isDisposed()) {
+            fWorkingDirectoryBlockNSim.performApply(configuration);
+        }
         String str = fGDBServerPortNumberText.getText();
         str = str.trim();
         configuration
@@ -1017,7 +1022,8 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                         || (fLaunchtcfButton.getSelection()
                                 && !isValidFileFieldEditor(fnSIMTCFPath))
                         || (fLaunchPropsButton.getSelection()
-                                && !isValidFileFieldEditor(fnSIMPropsPath))) {
+                                && !isValidFileFieldEditor(fnSIMPropsPath))
+                        || !fWorkingDirectoryBlockNSim.isValid(config)) {
                      return false;
                 }
                 break;
@@ -1527,6 +1533,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
         });
         fLaunchInvalid_Instru_ExptButton.setLayoutData(gdnsimui);
 
+        fWorkingDirectoryBlockNSim.createControl(compnSIM);
     }
 
     /*
@@ -1548,5 +1555,20 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
             return content;
         }
         return null;
+    }
+
+    @Override
+    public void setLaunchConfigurationDialog(ILaunchConfigurationDialog dialog) {
+        super.setLaunchConfigurationDialog(dialog);
+        fWorkingDirectoryBlockNSim.setLaunchConfigurationDialog(dialog);
+    }
+
+    @Override
+    public String getErrorMessage() {
+        String errorMessage = super.getErrorMessage();
+        if (errorMessage == null && !groupnsim.isDisposed()) {
+            return fWorkingDirectoryBlockNSim.getErrorMessage();
+        }
+        return errorMessage;
     }
 }

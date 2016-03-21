@@ -567,7 +567,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, "");
         System.setProperty("nSIM", extenal_tools_nsim_path);
         String nsim_exec = System.getProperty("nSIM");
-        File nsim_wd = (new java.io.File(nsim_exec)).getParentFile();
+        File nsim_wd = new File(System.getProperty("user.dir"));
+        String workingDirectoryPath = configuration.getAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, (String)null);
+        if (workingDirectoryPath != null) {
+            nsim_wd = new File(workingDirectoryPath);
+        }
         String nsimProps = configuration
                 .getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
         String nsimtcf = configuration.getAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,

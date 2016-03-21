@@ -38,6 +38,7 @@ public interface LaunchConfigurationConstants {
             + ".debugger_external_tools_ashling_path"; //$NON-NLS-1$
     String ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH = LAUNCH_ID
             + ".debugger_external_tools_nsim_path"; //$NON-NLS-1$
+    String ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY = LAUNCH_ID + ".nsim_working_directory";
     String ATTR_DEBUGGER_USE_NSIMTCF = LAUNCH_ID + ".debugger_use_nsimtcf";
     String ATTR_DEBUGGER_USE_NSIMPROPS = LAUNCH_ID + ".debugger_use_nsimprops";
     String ATTR_DEBUGGER_USE_NSIMJITTHREAD = LAUNCH_ID + ".debugger_use_nsimjitthread";
