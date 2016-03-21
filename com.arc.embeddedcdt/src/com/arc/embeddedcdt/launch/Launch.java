@@ -82,6 +82,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.embeddedcdt.Configuration;
 import com.arc.embeddedcdt.EmbeddedGDBCDIDebugger;
@@ -572,6 +573,12 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                 LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, (String)null);
         if (workingDirectoryPath != null) {
             nsim_wd = new File(workingDirectoryPath);
+        } else {
+            String message = "Working directory for nSIM is not specified or incorrect.\n"
+                    + "Using directory \'" + nsim_wd.getPath() + "\' instead.";
+            StatusManager.getManager().handle(
+                    new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, message),
+                    StatusManager.BLOCK);
         }
         String nsimProps = configuration
                 .getAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
