@@ -91,7 +91,8 @@ import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
-import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
+import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
+import com.arc.embeddedcdt.gui.ARCWorkingDirectoryBlock;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
 import gnu.io.CommPortIdentifier;
@@ -571,11 +572,13 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
         File nsim_wd = new File(System.getProperty("user.dir"));
         String workingDirectoryPath = configuration.getAttribute(
                 LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, (String)null);
-        if (workingDirectoryPath != null) {
+        try {
+            workingDirectoryPath = ARCWorkingDirectoryBlock.resolveDirectoryPath(workingDirectoryPath);
             nsim_wd = new File(workingDirectoryPath);
-        } else {
-            String message = "Working directory for nSIM is not specified or incorrect.\n"
-                    + "Using directory \'" + nsim_wd.getPath() + "\' instead.";
+        } catch (InvalidDirectoryPathException e) {
+            String message = "Working directory for nSIM is not specified or incorrect:\n"
+                    + e.getMessage()
+                    + "\n\nUsing directory \'" + nsim_wd.getPath() + "\' instead.";
             StatusManager.getManager().handle(
                     new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, message),
                     StatusManager.BLOCK);

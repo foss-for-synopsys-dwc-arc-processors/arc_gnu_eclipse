@@ -12,7 +12,6 @@ package com.arc.embeddedcdt.gui;
 
 import java.io.File;
 
-import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
 import org.eclipse.cdt.launch.internal.ui.LaunchMessages;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.internal.ui.WorkingDirectoryBlock;
@@ -38,6 +37,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
+import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
 
 /**
  * This class is used to add working directory block to GDB server setting page for nSIM. Other GDB
@@ -56,11 +56,8 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
     // Shows if 'Use default' is checked
     private boolean isDefaultWorkingDir = true;
 
-    // Working directory path containing unresolved variables to show in debug configuration dialog
+    // Working directory path containing unresolved variables
     private String workingDir = null;
-
-    // Fully resolved path
-    private String workingDirPath = null;
 
     /**
      * A listener to update for text changes and widget selection
@@ -159,28 +156,35 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
      */
     @Override
     public boolean isValid(ILaunchConfiguration config) {
-        boolean valid = super.isValid(config);
-        if (valid) {
-            String workingDir = getAttributeValueFrom(fWorkingDirText);
-            if (workingDir.isEmpty()) {
-                setErrorMessage("Working directory can not be empty");
-                return false;
-            }
-
-            IStringVariableManager manager = VariablesPlugin.getDefault()
-                    .getStringVariableManager();
-            try {
-                workingDirPath = manager.performStringSubstitution(workingDir, true);
-            } catch (CoreException e) {
-                setErrorMessage(e.getMessage());
-                return false;
-            }
-            if (!new File(workingDirPath).exists()) {
-                setErrorMessage("Directory \'" + workingDirPath + "\' does not exist");
-                return false;
-            }
+        setErrorMessage(null);
+        setMessage(null);
+        String workingDir = getAttributeValueFrom(fWorkingDirText);
+        try {
+            resolveDirectoryPath(workingDir);
+        } catch (InvalidDirectoryPathException e) {
+            setErrorMessage(e.getMessage());
+            return false;
         }
-        return valid;
+        return true;
+    }
+
+    public static String resolveDirectoryPath(String path) throws InvalidDirectoryPathException {
+        if (path == null || path.isEmpty()) {
+            throw new InvalidDirectoryPathException("Working directory can not be empty.");
+        }
+
+        IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
+        String workingDirPath;
+        try {
+            workingDirPath = manager.performStringSubstitution(path, true);
+        } catch (CoreException e) {
+            throw new InvalidDirectoryPathException(e.getMessage());
+        }
+        if (!new File(workingDirPath).isDirectory()) {
+            throw new InvalidDirectoryPathException(
+                    "Directory \'" + workingDirPath + "\' does not exist.");
+        }
+        return workingDirPath;
     }
 
     @Override
@@ -188,8 +192,12 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
         setLaunchConfiguration(configuration);
         try {
             workingDir = configuration.getAttribute(
-                    ICDTLaunchConfigurationConstants.ATTR_WORKING_DIRECTORY, (String) null);
-            isDefaultWorkingDir = (workingDir == null) ? true : false;
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, (String) null);
+            isDefaultWorkingDir = configuration.getAttribute(
+                    LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_USE_DEFAULT_DIRECTORY, true);
+            if (workingDir == null) {
+                isDefaultWorkingDir = true;
+            }
         } catch (CoreException e) {
             setErrorMessage(
                     LaunchMessages.WorkingDirectoryBlock_Exception_occurred_reading_configuration_15
@@ -199,20 +207,17 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
     }
 
     /*
-     * Set one more attribute to configuration that would represent working directory path that
-     * would be used when launching nSIM. It should not have unresolved variables in it and
-     * corresponding file should exist, so that it wouldn't be needed to check validity of this path
-     * again. If working directory path shown in IDE is incorrect, set this attribute to null.
+     * Save working directory to configuration even if it is default one so that we could read it
+     * from configuration when launching nSIM. This way we have to save value of 'Use default'
+     * checkbox too.
      */
     @Override
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-        super.performApply(configuration);
-        if (getErrorMessage() != null) {
-            workingDirPath = null;
-        }
         configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY,
-                workingDirPath);
+                LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, workingDir);
+        configuration.setAttribute(
+                LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_USE_DEFAULT_DIRECTORY,
+                isDefaultWorkingDir);
     }
 
     /*
