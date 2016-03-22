@@ -51,7 +51,10 @@ public abstract class IsToolChainSupported implements
             }
 
             String current_tool_command = tool.getToolCommand();
-            if (CommandInfo.commandExistsInPredefinedPath(current_tool_command)) {
+            // If command is present in both PATH and ../bin, do nothing (use tool from PATH). If it
+            // is present only in ../bin, change command name to path/to/command/command_name.
+            if (CommandInfo.commandExistsInPredefinedPath(current_tool_command)
+                    && !CommandInfo.commandExistsInSystemPath(current_tool_command)) {
                 String eclipsehome = Platform.getInstallLocation().getURL().getPath();
                 File predefined_path_dir = new File(eclipsehome).getParentFile();
                 String predefined_path = predefined_path_dir + File.separator
