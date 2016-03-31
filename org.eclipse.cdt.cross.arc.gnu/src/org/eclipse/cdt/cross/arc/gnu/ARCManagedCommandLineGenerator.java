@@ -391,7 +391,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                                 e1.printStackTrace();
                             }
                             if (Files.exists(Paths.get(tcfMapPath))) {
-                                oList_gcc_options.add("-Wl,-marcv2elfb -L " + projectBuildPath);
+                                oList_gcc_options.add("-Wl,-marcv2elfx -L " + projectBuildPath);
                             }
                         }
                     }
