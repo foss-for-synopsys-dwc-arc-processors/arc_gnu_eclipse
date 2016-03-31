@@ -431,8 +431,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                         case JTAG_ASHLING:
                             String ashlingTDescPath = configuration.getAttribute(
                                     LaunchConfigurationConstants.ATTR_ASHLING_TDESC_PATH, "");
-                            gdb_init = "set tdesc filename " + ashlingTDescPath
-                                    + "\nset remote P-packet 0\n"
+                            gdb_init = "set tdesc filename " + ashlingTDescPath + "\n"
                                     + String.format("target remote %s:%s\nload",
                                             defaultGDBHost, gdbserver_port);
                             break;
