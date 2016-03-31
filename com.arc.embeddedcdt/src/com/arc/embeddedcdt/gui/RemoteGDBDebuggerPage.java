@@ -370,7 +370,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     default_ashling_path);
 
             String ash_xml_path = new File(default_ashling_path).getParentFile().getPath()
-                    + java.io.File.separator + "arc-opella-em.xml";
+                    + java.io.File.separator + "arc-cpu-em.xml";
             Ashling_xml_path = configuration.getAttribute(
                     LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, ash_xml_path);
 
