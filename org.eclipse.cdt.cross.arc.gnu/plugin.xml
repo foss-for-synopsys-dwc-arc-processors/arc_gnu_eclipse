@@ -904,7 +904,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.c.compiler"
             isAbstract="false"
             name="ARC ELF32 GCC C Compiler"
-            natureFilter="cnature"
+            natureFilter="both"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -1182,7 +1182,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler"
             isAbstract="false"
             name="ARC ELF32 GCC C++ Compiler"
-            natureFilter="ccnature"
+            natureFilter="both"
             outputFlag="-o">
          <supportedProperties>
             <property

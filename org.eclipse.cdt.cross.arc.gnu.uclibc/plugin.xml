@@ -775,7 +775,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.c.compiler"
             isAbstract="false"
             name="ARC uClibc GCC C Compiler"
-            natureFilter="cnature"
+            natureFilter="both"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -1061,7 +1061,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.uclibc.cpp.compiler"
             isAbstract="false"
             name="ARC uClibc GCC C++ Compiler"
-            natureFilter="ccnature"
+            natureFilter="both"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -3490,7 +3490,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.c.compiler"
             isAbstract="false"
             name="ARC uClibc GCC C Compiler (EB)"
-            natureFilter="cnature"
+            natureFilter="both"
             outputFlag="-o">
          <supportedProperties>
             <property
@@ -3776,7 +3776,7 @@
             id="org.eclipse.cdt.cross.arc.gnu.eb.uclibc.cpp.compiler"
             isAbstract="false"
             name="ARC uClibc GCC C++ Compiler (EB)"
-            natureFilter="ccnature"
+            natureFilter="both"
             outputFlag="-o">
          <envVarBuildPath
                pathType="buildpathInclude"
