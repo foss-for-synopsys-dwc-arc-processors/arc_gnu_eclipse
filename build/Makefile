@@ -9,7 +9,7 @@ ECLIPSE_HOME := /remote/ru20home1/apologo/eclipse
 VERSION_QUALIFIER := $(shell date --utc +%Y%m%d%H%M)
 
 # Release
-RELEASE := 2016.03
+RELEASE := 2016.09
 
 all: arc_gnu_plugins.zip
 
