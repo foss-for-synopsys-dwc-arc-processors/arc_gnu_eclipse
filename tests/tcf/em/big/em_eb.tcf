@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_list>
+  <tool_config version="1.0.51" mwdt_version="K-2015.12" />
+  <configuration name="nSIM" filename="nsim.props">
+    <string><![CDATA[
+	nsim_isa_family=av2em
+	nsim_isa_core=2
+	arcver=0x42
+	nsim_isa_rgf_num_banks=1
+	nsim_isa_rgf_num_regs=32
+	nsim_isa_rgf_num_wr_ports=2
+	nsim_isa_big_endian=1
+	nsim_isa_lpc_size=32
+	nsim_isa_pc_size=16
+	nsim_isa_addr_size=16
+	nsim_isa_code_density_option=0
+	nsim_isa_div_rem_option=0
+	nsim_isa_turbo_boost=1
+	nsim_isa_swap_option=0
+	nsim_isa_bitscan_option=0
+	nsim_isa_mpy_option=0
+	nsim_isa_shift_option=1
+	nsim_isa_number_of_interrupts=8
+	nsim_isa_number_of_levels=2
+	nsim_isa_number_of_external_interrupts=7
+	nsim_isa_intvbase_preset=0x0
+	dcache=32768,32,2,a
+	nsim_isa_dc_feature_level=2
+	icache=32768,32,2,a
+	nsim_isa_ic_feature_level=0
+]]></string>
+  </configuration>
+  <configuration name="gcc_compiler" filename="gcc.arg">
+    <string><![CDATA[
+	-mcpu=em
+	-mbig-endian
+	-mmpy-option=0
+]]></string>
+  </configuration>
+  <configuration name="gnu_linker_command_file" filename="memory.x">
+    <string><![CDATA[
+MEMORY {
+    SYSTEM0  : ORIGIN = 0x00000000, LENGTH = 0x01000000
+    }
+REGION_ALIAS("startup", SYSTEM0)
+REGION_ALIAS("text", SYSTEM0)
+REGION_ALIAS("data", SYSTEM0)
+REGION_ALIAS("sdata", SYSTEM0)
+PROVIDE (__stack_top = (0x00ffffff & -4 ));
+PROVIDE (__end_heap =  (0x00ffffff ));
+]]></string>
+  </configuration>
+</config_list>
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_list>
+  <tool_config version="1.0.51" mwdt_version="K-2015.12" />
+  <configuration name="nSIM" filename="nsim.props">
+    <string><![CDATA[
+	nsim_isa_family=av2hs
+	nsim_isa_core=2
+	arcver=0x52
+	nsim_isa_rgf_num_banks=1
+	nsim_isa_rgf_num_regs=32
+	nsim_isa_rgf_num_wr_ports=2
+	nsim_isa_big_endian=1
+	nsim_isa_lpc_size=32
+	nsim_isa_pc_size=32
+	nsim_isa_addr_size=32
+	nsim_isa_atomic_option=1
+	nsim_isa_ll64_option=1
+	nsim_isa_ad_option=1
+	nsim_isa_code_density_option=2
+	nsim_isa_div_rem_option=2
+	nsim_isa_swap_option=1
+	nsim_isa_bitscan_option=1
+	nsim_isa_mpy_option=9
+	nsim_isa_shift_option=3
+	nsim_isa_enable_timer_0=1
+	nsim_isa_timer_0_int_level=0
+	nsim_isa_enable_timer_1=1
+	nsim_isa_timer_1_int_level=0
+	nsim_isa_num_actionpoints=8
+	nsim_bpu_bc_entries=512
+	nsim_bpu_pt_entries=8192
+	nsim_bpu_rs_entries=4
+	nsim_bpu_bc_full_tag=1
+	nsim_bpu_bc_tag_size=20
+	nsim_bpu_tosq_entries=5
+	nsim_bpu_fb_entries=2
+	nsim_mmu=4
+	mmu_pagesize=8K
+	mmu_ntlb_ways=4
+	mmu_ntlb_sets=128
+	mmu_stlb_entries=16
+	mmu_super_pagesize=2M
+	nsim_isa_number_of_interrupts=32
+	nsim_isa_number_of_levels=2
+	nsim_isa_number_of_external_interrupts=27
+	nsim_isa_intvbase_preset=0x80000000
+	dcache=32768,64,2,a
+	nsim_isa_dc_feature_level=2
+	nsim_isa_dc_uncached_region=1
+	nsim_isa_dc_mem_cycles=2
+	icache=32768,64,4,a
+	nsim_isa_ic_feature_level=2
+	nsim_isa_pct_counters=8
+	nsim_isa_pct_interrupt=1
+]]></string>
+  </configuration>
+  <configuration name="gcc_compiler" filename="gcc.arg">
+    <string><![CDATA[
+	-mcpu=hs38
+	-mbig-endian
+	-matomic
+	-mll64
+	-mdiv-rem
+	-mmpy-option=9
+]]></string>
+  </configuration>
+  <configuration name="gnu_linker_command_file" filename="memory.x">
+    <string><![CDATA[
+MEMORY {
+    SYSTEM0  : ORIGIN = 0x00000000, LENGTH = 0x80000000
+    SYSTEM1  : ORIGIN = 0x80000000, LENGTH = 0x80000000
+    }
+REGION_ALIAS("startup", SYSTEM0)
+REGION_ALIAS("text", SYSTEM0)
+REGION_ALIAS("data", SYSTEM0)
+REGION_ALIAS("sdata", SYSTEM0)
+PROVIDE (__stack_top = (0x7fffffff & -4 ));
+PROVIDE (__end_heap =  (0x7fffffff ));
+]]></string>
+  </configuration>
+</config_list>
+

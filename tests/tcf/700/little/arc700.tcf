@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_list>
+  <tool_config version="1.0.51" mwdt_version="K-2015.12" />
+  <configuration name="nSIM" filename="nsim.props">
+    <string><![CDATA[
+	nsim_isa_family=a700
+	nsim_isa_core=5
+	arcver=0x35
+	chipid=0x270f
+	nsim_isa_big_endian=0
+	nsim_isa_mpy32=1
+	nsim_isa_shift_option=2
+	nsim_isa_xmac_d16=1
+	nsim_isa_mul32x16=1
+	nsim_isa_number_of_interrupts=8
+	nsim_isa_intvbase_preset=0x0
+	nsim_bpu_bc_entries=512
+	nsim_bpu_bc_full_tag=0
+	nsim_mmu=3
+	mmu_jtlb_ways=2
+	mmu_jtlb_sets=128
+	mmu_pagesize=8K
+	dcache=32768,32,4,a
+	icache=32768,32,2,a
+]]></string>
+  </configuration>
+  <configuration name="gcc_compiler" filename="gcc.arg">
+    <string><![CDATA[
+	-mcpu=arc700
+	-mlittle-endian
+]]></string>
+  </configuration>
+  <configuration name="gnu_linker_command_file" filename="memory.x">
+    <string><![CDATA[
+MEMORY {
+    SYSTEM0  : ORIGIN = 0x00000000, LENGTH = 0x100000000
+    }
+REGION_ALIAS("startup", SYSTEM0)
+REGION_ALIAS("text", SYSTEM0)
+REGION_ALIAS("data", SYSTEM0)
+REGION_ALIAS("sdata", SYSTEM0)
+PROVIDE (__stack_top = (0xffffffff & -4 ));
+PROVIDE (__end_heap =  (0xffffffff ));
+]]></string>
+  </configuration>
+</config_list>
+
