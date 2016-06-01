@@ -686,7 +686,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
                             .getActivePage();
 
-                    String viewId = "org.eclipse.tm.terminal.view.TerminalView";
+                    String viewId = "org.eclipse.tm.terminal.view.ui.TerminalsView";
 
                     if (page != null) {
                         IViewReference[] viewReferences = page.getViewReferences();
@@ -755,7 +755,7 @@ public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
                             .getActivePage();
 
-                    String viewId = "org.eclipse.tm.terminal.view.TerminalView";
+                    String viewId = "org.eclipse.tm.terminal.view.ui.TerminalsView";
 
                     if (page != null) {
                         IViewReference[] viewReferences = page.getViewReferences();
