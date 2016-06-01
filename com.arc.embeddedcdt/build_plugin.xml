@@ -214,9 +214,10 @@
 			<pathelement path="${eclipseHome}/plugins/org.eclipse.ui.navigator.resources_3.5.1.v20160128-1644.jar"/>
 			<pathelement path="${eclipseHome}/plugins/org.eclipse.ui.views.properties.tabbed_3.6.100.v20150423-0822.jar"/>
 			<pathelement path="${eclipseHome}/plugins/org.eclipse.cdt.launch_7.3.0.201602051005.jar"/>
-			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal_3.3.0.201501281007.jar"/>
-			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.serial_2.1.400.201412161015.jar"/>
-			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.view_2.4.200.201412161015.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.control_4.0.0.201505221029.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.connector.serial_4.0.0.201505101444.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.view.core_4.0.0.201505101440.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.view.ui_4.0.0.201506031417.jar"/>
 			<pathelement path="bin/"/>
 			<pathelement path="${build.result.folder}/../com.arc.embeddedcdt_${bundleVersion}/bin/"/>
 			<pathelement path="arcembeddedcdt.jar"/>
