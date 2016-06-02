@@ -29,8 +29,7 @@ public interface LaunchConfigurationConstants {
     String ATTR_DEBUGGER_COMMANDS_RUN = LAUNCH_ID + ".debugger_run_commands"; //$NON-NLS-1$
     String ATTR_DEBUGGER_COMMANDS_LAUNCH = LAUNCH_ID + ".debugger_lauch_commands"; //$NON-NLS-1$
     String ATTR_DEBUGGER_EXTERNAL_TOOLS = LAUNCH_ID + ".debugger_external_tools"; //$NON-NLS-1$
-    String ATTR_DEBUGGER_COM_OPENOCD_PORT = LAUNCH_ID + ".debugger_com_oepnocd_port"; //$NON-NLS-1$
-    String ATTR_DEBUGGER_COM_ASHLING_PORT = LAUNCH_ID + ".debugger_com_ashling_port"; //$NON-NLS-1$
+    String ATTR_DEBUGGER_COM_PORT = LAUNCH_ID + ".debugger_com_port"; // $NON-NLS-1$
     String ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH = LAUNCH_ID
             + ".debugger_external_tools_oepnocd_path"; //$NON-NLS-1$
     String ATTR_DEBUGGER_OPENOCD_BIN_PATH = LAUNCH_ID + ".debugger_openocd_bin_path";

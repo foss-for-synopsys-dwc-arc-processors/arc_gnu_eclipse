@@ -221,11 +221,13 @@ public class LaunchShortcut implements ILaunchShortcut {
                       switch (gdbServer) {
                       case JTAG_ASHLING:
                           gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT;
-                          wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,FirstlaunchDialog.value[1]);
+                          wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
+                                  FirstlaunchDialog.value[1]);
                           break;
                       case JTAG_OPENOCD:
                           gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT;
-                          wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,FirstlaunchDialog.value[1]);
+                          wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
+                                  FirstlaunchDialog.value[1]);
                           break;
                       case NSIM:
                           gdbserver_port = LaunchConfigurationConstants.DEFAULT_NSIM_PORT;

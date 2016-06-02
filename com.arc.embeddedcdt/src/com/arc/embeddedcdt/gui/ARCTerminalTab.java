@@ -48,8 +48,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	protected Text fPrgmArgumentsTextexternal;//this button is for searching the path for external tools
 	protected Combo fPrgmArgumentsComCom;//this variable is for getting user's input COM port
 	private boolean fSerialPortAvailable = true;
-	public String comport_openocd="";//this variable is for launching the exactly com port chosen by users
-	public String comport_ashling="";//this variable is for launching the exactly com port chosen by users
+	public String comPort = ""; // this variable is for launching the COM port chosen by users
 	protected Label fPrgmArgumentsLabelCom;//this variable is for showing COM port
 	static String fLaunchTerminalboolean="true";//this variable is to get external tools current status (Enable/disable)
 	private ArcGdbServer gdbServer = null;
@@ -140,40 +139,28 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 	 */
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,"true");
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(comport_openocd));
-		configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(comport_ashling));
-			
+		configuration.setAttribute(
+		        LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
+		        getAttributeValueFromString(comPort));
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		
 		try {
-			comport_openocd=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
+			comPort = configuration.getAttribute(
+			        LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, "");
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 if (FirstlaunchDialog.value[1] != null) {
 				if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-					comport_openocd = FirstlaunchDialog.value[1];
+					comPort = FirstlaunchDialog.value[1];
 				}
 
 			}
-		 try {
-			comport_ashling=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
-		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 if (FirstlaunchDialog.value[1] != null) {
-				if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
-					comport_ashling = FirstlaunchDialog.value[1];
-				}
-			}	
-		 
 		try {
 			fLaunchTerminalboolean = configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
 		} catch (CoreException e1) {
@@ -191,32 +178,16 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(gdbServer == ArcGdbServer.JTAG_OPENOCD){
-			if (!comport_openocd.equalsIgnoreCase("")) {
-				String tmp=comport_openocd;
-				int privious = fPrgmArgumentsComCom.indexOf(tmp);
-				if (privious > -1)
-					fPrgmArgumentsComCom.remove(privious);  
-				fPrgmArgumentsComCom.add(tmp, 0);
-
-			}
-			fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
-			fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
-				public void modifyText(ModifyEvent evt) {
-					Combo combo = (Combo) evt.widget;
-					comport_openocd = combo.getText();
-					updateLaunchConfigurationDialog();
-				}
-			});
-		}
-
-		if(gdbServer == ArcGdbServer.JTAG_ASHLING){
-			if (!comport_ashling.equalsIgnoreCase("")) {
-				// One of the items in the list of COM ports became blank
-				// sometimes, if comport_ashling is removed directly instead
-				// of via a temporary variable.
-				String tmp = comport_ashling;
-				int previous = fPrgmArgumentsComCom.indexOf(comport_ashling);
+		if (gdbServer == ArcGdbServer.JTAG_OPENOCD || gdbServer == ArcGdbServer.JTAG_ASHLING) {
+			if (!comPort.equalsIgnoreCase("")) {
+			        // One of the items in the list of COM ports becomes blank
+			        // sometimes, if comPort is removed directly instead
+			        // of via a temporary variable.
+			        // This probably happens because comPort value is updated
+			        // by listener's modifyText() method between removing a value
+			        // from combo box and adding a new one.
+				String tmp = comPort;
+				int previous = fPrgmArgumentsComCom.indexOf(tmp);
 				if (previous > -1)
 					fPrgmArgumentsComCom.remove(previous);
 				fPrgmArgumentsComCom.add(tmp, 0);
@@ -226,12 +197,11 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 			fPrgmArgumentsComCom.addModifyListener(new ModifyListener() {
 				public void modifyText(ModifyEvent evt) {
 					Combo combo = (Combo) evt.widget;
-					comport_ashling = combo.getText();
+					comPort = combo.getText();
 					updateLaunchConfigurationDialog();
 				}
 			});
-	     }
-	     
+		}
 	}
 
 	/* (non-Javadoc)
@@ -241,12 +211,9 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		if (fSerialPortAvailable)
 			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,getAttributeValueFromString(fLaunchTerminalboolean));
 
-		if(gdbServer == ArcGdbServer.JTAG_OPENOCD){
-			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
-	     }
-	     if(gdbServer == ArcGdbServer.JTAG_ASHLING){
-			configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT,getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
-	     }
+		configuration.setAttribute(
+		        LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
+		        getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
 	}
 	
 	/* (non-Javadoc)

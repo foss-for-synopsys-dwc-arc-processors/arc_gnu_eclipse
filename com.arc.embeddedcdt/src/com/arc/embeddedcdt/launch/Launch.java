@@ -233,9 +233,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
             ftdi_core = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
         }
 
+        serialport = configuration
+                .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, "");
         if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
-            serialport = configuration
-                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_OPENOCD_PORT, "");
             if ((ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.EM6)
                     || (ftdi_device == FtdiDevice.AXS102 && ftdi_core == FtdiCore.HS34)
                     || (ftdi_device == FtdiDevice.AXS103 && ftdi_core == FtdiCore.HS38_0)) {
@@ -245,9 +245,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
             } else if (ftdi_device == FtdiDevice.AXS101 && ftdi_core == FtdiCore.AS221_1) {
                 gdbserver_port = String.valueOf(Integer.parseInt(gdbserver_port) + 3);
             }
-        } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
-            serialport = configuration
-                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_ASHLING_PORT, "");
         }
 
         if (gdbserver_port.isEmpty())
