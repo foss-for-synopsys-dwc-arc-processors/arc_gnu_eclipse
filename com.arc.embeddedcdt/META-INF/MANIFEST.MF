@@ -33,9 +33,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.variables,
  org.eclipse.ui.ide,
  org.eclipse.cdt.launch;bundle-version="7.1.0",
- org.eclipse.tm.terminal,
- org.eclipse.tm.terminal.serial,
- org.eclipse.tm.terminal.view,
+ org.eclipse.tm.terminal.control,
+ org.eclipse.tm.terminal.connector.serial,
+ org.eclipse.tm.terminal.view.ui,
+ org.eclipse.tm.terminal.view.core,
  org.eclipse.swt
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

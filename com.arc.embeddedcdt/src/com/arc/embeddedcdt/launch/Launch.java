@@ -72,16 +72,6 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.tm.internal.terminal.connector.TerminalConnector;
-import org.eclipse.tm.internal.terminal.provisional.api.provider.TerminalConnectorImpl;
-import org.eclipse.tm.internal.terminal.serial.SerialConnector;
-import org.eclipse.tm.internal.terminal.serial.SerialSettings;
-import org.eclipse.tm.internal.terminal.view.TerminalView;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.embeddedcdt.Configuration;
@@ -149,61 +139,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
     }
 
     public static String serialport = "";
-
-    private void startTerminal() {
-        IWorkbench workbench = PlatformUI.getWorkbench();
-
-        if (workbench.getDisplay().getThread() != Thread.currentThread()) {
-            // Note that we do the work asynchronously so that we don't lock this thread. It is used
-            // to launch the debugger engine.
-            workbench.getDisplay().asyncExec(new Runnable() {
-                @Override
-                public void run() {
-                    startTerminal();
-                }
-            });
-            return;
-        }
-
-        // Assertion: we're in the UI thread.
-        final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-        IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-
-        class MyClass extends SerialConnector {
-            public MyClass(SerialSettings settings) {
-                super(settings);
-            }
-
-            @Override
-            public void initialize() {
-            }
-        }
-
-        TerminalConnector.Factory factory = new TerminalConnector.Factory() {
-            public TerminalConnectorImpl makeConnector() throws Exception {
-                SerialSettings mySettings = new SerialSettings();
-                mySettings.setBaudRate("115200");
-                mySettings.setDataBits("8");
-                mySettings.setFlowControl("XON/XOFF");
-                mySettings.setParity("N");
-                mySettings.setSerialPort(serialport);
-                mySettings.setStopBits("1");
-                return new MyClass(mySettings);
-            }
-        };
-
-        TerminalConnector c1 = new TerminalConnector(factory, "connector-id", "ARC GNU IDE", false);
-
-        TerminalView viewPart;
-        try {
-            viewPart = (TerminalView) (activePage.showView(
-                    "org.eclipse.tm.terminal.view.TerminalView", null,
-                    IWorkbenchPage.VIEW_ACTIVATE));
-            viewPart.newTerminal(c1);
-        } catch (PartInitException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch,
             IProgressMonitor monitor) throws CoreException {
@@ -329,7 +264,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     // Do nothing.
                     e2.printStackTrace();
                 }
-                startTerminal();
+                TerminalLauncher terminalLauncher = new TerminalLauncher(launch);
+                terminalLauncher.startTerminal();
             }
 
             if (mode.equals(ILaunchManager.DEBUG_MODE) || mode.equals(ILaunchManager.RUN_MODE)) {
