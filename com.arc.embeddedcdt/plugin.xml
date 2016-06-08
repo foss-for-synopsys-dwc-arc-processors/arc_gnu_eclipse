@@ -4,7 +4,7 @@
      <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
            <launchConfigurationType
-            delegate="com.arc.embeddedcdt.launch.nativeos.NativeLaunch"
+            delegate="com.arc.embeddedcdt.dsf.ArcLaunchDelegate"
             public="true"
             name="ARC C/C++ application"
             modes="run,debug"
