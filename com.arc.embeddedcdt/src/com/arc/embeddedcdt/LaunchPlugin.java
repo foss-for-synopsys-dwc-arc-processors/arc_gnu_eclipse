@@ -36,6 +36,7 @@ public class LaunchPlugin extends AbstractUIPlugin {
 
     // The shared instance.
     private static LaunchPlugin plugin;
+    private static BundleContext bundleContext;
 
     /**
      * The constructor.
@@ -50,6 +51,7 @@ public class LaunchPlugin extends AbstractUIPlugin {
      */
     public void start(BundleContext context) throws Exception {
         super.start(context);
+        bundleContext = context;
     }
 
     /**
@@ -106,5 +108,9 @@ public class LaunchPlugin extends AbstractUIPlugin {
      */
     public static void log(CoreException e) {
         StatusManager.getManager().handle(e, LaunchPlugin.getUniqueIdentifier());
+    }
+
+    public static BundleContext getBundleContext() {
+        return bundleContext;
     }
 }
