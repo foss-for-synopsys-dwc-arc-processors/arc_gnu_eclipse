@@ -47,6 +47,7 @@ import org.eclipse.cdt.debug.mi.core.output.MIOOBRecord;
 import org.eclipse.cdt.debug.mi.core.output.MIOutput;
 import org.eclipse.cdt.debug.mi.core.output.MIParser;
 import org.eclipse.cdt.debug.mi.core.output.MITargetStreamOutput;
+import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.launch.AbstractCLaunchDelegate;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
@@ -680,8 +681,8 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
 
     public void runGDBInit(ILaunchConfiguration configuration, ICDITarget[] dtargets,
             IProgressMonitor monitor) throws CoreException {
-        String iniFile = configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_GDB_INIT,
-                IMILaunchConfigurationConstants.DEBUGGER_GDB_INIT_DEFAULT);
+        String iniFile = configuration.getAttribute(IGDBLaunchConfigurationConstants.ATTR_GDB_INIT,
+                IGDBLaunchConfigurationConstants.DEBUGGER_GDB_INIT_DEFAULT);
 
         if (iniFile.equals("") || !new File(iniFile).exists())
             return;

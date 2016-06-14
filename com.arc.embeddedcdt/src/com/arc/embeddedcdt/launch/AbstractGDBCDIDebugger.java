@@ -32,6 +32,7 @@ import org.eclipse.cdt.debug.mi.core.MISession;
 import org.eclipse.cdt.debug.mi.core.cdi.Session;
 import org.eclipse.cdt.debug.mi.core.cdi.model.Target;
 import org.eclipse.cdt.debug.mi.core.command.CommandFactory;
+import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -175,8 +176,8 @@ abstract public class AbstractGDBCDIDebugger implements ICDIDebugger2 {
 
    protected IPath getGDBPath(ILaunch launch) throws CoreException {
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
-		String command = config.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME,
-				IMILaunchConfigurationConstants.DEBUGGER_DEBUG_NAME_DEFAULT);
+		String command = config.getAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
+				IGDBLaunchConfigurationConstants.DEBUGGER_DEBUG_NAME_DEFAULT);
 		try {
 			command = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(command, false);
 		} catch (Exception e) {

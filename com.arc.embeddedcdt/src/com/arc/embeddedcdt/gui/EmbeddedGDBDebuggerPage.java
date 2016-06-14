@@ -15,6 +15,7 @@ import java.io.File;
 
 import org.eclipse.cdt.debug.mi.internal.ui.MIUIMessages;
 import org.eclipse.cdt.debug.mi.internal.ui.StandardGDBDebuggerPage;
+import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.utils.ui.controls.ControlFactory;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -33,7 +34,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 import com.arc.embeddedcdt.preferences.PrefConstants;
 
 /**
@@ -113,10 +113,10 @@ public class EmbeddedGDBDebuggerPage extends StandardGDBDebuggerPage {
 		try {
 			// if there is a saved attribute, use that, else use the preference
 			gdbCommand = configuration.getAttribute(
-					IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, 
+					IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, 
 					gdbCommand); 
 			gdbInit = configuration.getAttribute( 
-					IMILaunchConfigurationConstants.ATTR_GDB_INIT, 
+					IGDBLaunchConfigurationConstants.ATTR_GDB_INIT, 
 					gdbInit );
 
 		} catch (CoreException e) {
@@ -140,21 +140,21 @@ public class EmbeddedGDBDebuggerPage extends StandardGDBDebuggerPage {
 		super.performApply(configuration) ;
 		String gdbStr = fGDBCommandText.getText();
 		gdbStr=gdbStr.trim();
-		configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
+		configuration.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbStr);
 		
 		String gdbInit = fGDBInitText.getText();
 		gdbInit=gdbInit.trim();
 		configuration.setAttribute(
-				IMILaunchConfigurationConstants.ATTR_GDB_INIT, gdbInit);
+				IGDBLaunchConfigurationConstants.ATTR_GDB_INIT, gdbInit);
 		
 	}
 
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		String gdbCommand = getValue(PrefConstants.P_DEBUGGER_NAME); //$NON-NLS-1$ // ****
 		configuration.setAttribute(
-				IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbCommand); //$NON-NLS-1$
+				IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, gdbCommand); //$NON-NLS-1$
 		configuration.setAttribute(
-				IMILaunchConfigurationConstants.ATTR_GDB_INIT, ".gdbinit");
+				IGDBLaunchConfigurationConstants.ATTR_GDB_INIT, ".gdbinit");
 	}
 	public String getDebugger()
 	{

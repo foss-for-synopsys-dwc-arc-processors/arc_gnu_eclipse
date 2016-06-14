@@ -34,7 +34,7 @@ import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
 import org.apache.commons.httpclient.methods.multipart.Part;
 import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
-import org.eclipse.cdt.debug.mi.core.IMILaunchConfigurationConstants;
+import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.ui.CLaunchConfigurationTab;
 import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
@@ -704,7 +704,7 @@ public class ConfigJTAGTab extends CLaunchConfigurationTab implements ITab
 			String host=ConfigJTAGTab.getValue(gdb, ConfigJTAGTab.IP_ADDRESS, "Could not find host script");
 //			String port=ConfigJTAGTab.getValue(openOCD, TELNET_PORT_REGEXP, "Could not find port script");
 			
-			String strip=calcToolPath(configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, ""), "strip");
+			String strip=calcToolPath(configuration.getAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, ""), "strip");
 			String executable=configuration.getAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME, "");
 			
 			//String strip=configuration.getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, "")

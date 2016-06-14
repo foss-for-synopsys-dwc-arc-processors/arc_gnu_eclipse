@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.eclipse.cdt.dsf.gdb.internal.ui.launching.GdbDebuggerPage;
+import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.CoreException;
@@ -56,7 +57,6 @@ import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
-import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
 
 /**
  * The dynamic debugger tab for remote launches using gdb server. The gdbserver settings are used to
@@ -315,7 +315,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
         try {
 
-            gdb_path = configuration.getAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME,
+            gdb_path = configuration.getAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
                     "");
 
             if (gdb_path.isEmpty()) {
@@ -489,7 +489,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
                 getAttributeValueFromString(ftdiDevice.name()));
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
                 getAttributeValueFromString(ftdiCore.name()));
-        configuration.setAttribute(IMILaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
+        configuration.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
                 CommandTab.getAttributeValueFromString(gdbServer.toString()));
         configuration.setAttribute(
