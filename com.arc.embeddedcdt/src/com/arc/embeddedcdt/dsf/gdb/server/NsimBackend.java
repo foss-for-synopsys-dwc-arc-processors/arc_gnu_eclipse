@@ -10,11 +10,19 @@
 
 package com.arc.embeddedcdt.dsf.gdb.server;
 
-import org.eclipse.cdt.dsf.service.DsfSession;
-import org.eclipse.debug.core.ILaunchConfiguration;
+import java.io.File;
 
+import org.eclipse.cdt.dsf.service.DsfSession;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.ui.statushandlers.StatusManager;
+
+import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
 import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.gui.ARCWorkingDirectoryBlock;
 
 public class NsimBackend extends GdbServerBackend {
 
@@ -78,4 +86,27 @@ public class NsimBackend extends GdbServerBackend {
     public String getProcessLabel() {
         return "nSIM GDBserver";
     }
+
+    @Override
+    public File getWorkingDirectory() {
+        String workingDirectoryPath = Configuration
+                .getNsimWorkingDirectoryPath(launchConfiguration);
+        File workingDir = new File(System.getProperty("user.dir"));
+
+        try {
+            workingDirectoryPath = ARCWorkingDirectoryBlock
+                    .resolveDirectoryPath(workingDirectoryPath);
+            workingDir = new File(workingDirectoryPath);
+        } catch (InvalidDirectoryPathException e) {
+            String message = "Working directory for nSIM is not specified or incorrect:\n"
+                    + e.getMessage() + "\n\nUsing directory \'" + workingDir.getPath()
+                    + "\' instead.";
+            StatusManager.getManager().handle(
+                    new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, message),
+                    StatusManager.BLOCK);
+        }
+
+        return workingDir;
+    }
+
 }

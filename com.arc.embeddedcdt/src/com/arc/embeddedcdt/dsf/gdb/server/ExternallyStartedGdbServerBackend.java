@@ -42,4 +42,5 @@ public class ExternallyStartedGdbServerBackend extends GdbServerBackend {
     protected String getHostAddress() {
         return Configuration.getHostAddress(launchConfiguration);
     }
+
 }

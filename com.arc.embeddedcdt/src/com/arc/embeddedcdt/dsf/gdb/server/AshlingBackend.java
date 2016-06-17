@@ -10,6 +10,8 @@
 
 package com.arc.embeddedcdt.dsf.gdb.server;
 
+import java.io.File;
+
 import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -51,4 +53,10 @@ public class AshlingBackend extends GdbServerBackend {
         return "set tdesc filename " + Configuration.getAshlingTDescPath(launchConfiguration) + "\n"
                 + super.getCommandToConnect();
     }
+
+    @Override
+    public File getWorkingDirectory() {
+        return new File(Configuration.getAshlingPath(launchConfiguration)).getParentFile();
+    }
+
 }
