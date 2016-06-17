@@ -11,6 +11,7 @@
 package com.arc.embeddedcdt.dsf;
 
 import org.eclipse.cdt.dsf.debug.service.IDsfDebugServicesFactory;
+import org.eclipse.cdt.dsf.gdb.launching.GdbLaunch;
 import org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate;
 import org.eclipse.cdt.dsf.gdb.launching.LaunchMessages;
 import org.eclipse.core.runtime.CoreException;
@@ -19,6 +20,9 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.model.ISourceLocator;
+
+import com.arc.embeddedcdt.dsf.utils.DebugUtils;
 
 /**
  * Launch delegate for DSF/GDB debugger.
@@ -29,6 +33,17 @@ public class ArcLaunchDelegate extends GdbLaunchDelegate {
     protected IDsfDebugServicesFactory newServiceFactory(ILaunchConfiguration config,
             String version) {
         return new ArcDebugServicesFactory(version);
+    }
+
+    /*
+     * This method is called first when starting a debug session. If there already is a debug
+     * session running with the same launch configuration, do not start another one.
+     */
+    @Override
+    protected GdbLaunch createGdbLaunch(ILaunchConfiguration configuration, String mode,
+            ISourceLocator locator) throws CoreException {
+        DebugUtils.checkLaunchConfigurationStarted(configuration);
+        return super.createGdbLaunch(configuration, mode, locator);
     }
 
     // We need to launch debugger not only if the mode is DEBUG_MODE, but also in RUN_MODE, so
