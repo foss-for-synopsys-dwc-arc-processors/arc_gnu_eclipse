@@ -19,6 +19,7 @@ import org.eclipse.cdt.dsf.gdb.IGdbDebugConstants;
 import org.eclipse.cdt.dsf.gdb.service.GDBBackend;
 import org.eclipse.cdt.dsf.gdb.service.SessionType;
 import org.eclipse.cdt.dsf.service.DsfSession;
+import org.eclipse.cdt.utils.CommandLineUtil;
 import org.eclipse.cdt.utils.spawner.Spawner;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugPlugin;
@@ -27,27 +28,53 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
 import org.osgi.framework.BundleContext;
 
+import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.dsf.utils.Configuration;
 
 /**
  * DSF service containing GDB server-related logic:
  *                      commands to start a server,
+ *                      commands for GDB to connect to the server,
+ *                      process label,
  *                      server start and shutdown methods,
  *                      creating console for the server.
  */
-public class GdbServerBackend extends GDBBackend {
+public abstract class GdbServerBackend extends GDBBackend {
 
     private Process process;
     private DsfSession session;
+    protected ILaunchConfiguration launchConfiguration;
 
-    private String[] commandLineArray = new String[] {
-            "/home/apologo/2016.03-rc1/ide_linux/bin/openocd", "-d0", "-c", "gdb_port 49105",
-            "-f", "/home/apologo/2016.03-rc1/ide_linux/share/openocd/scripts/board/snps_em_sk_v2.1.cfg",
-            "-s", "/home/apologo/2016.03-rc1/ide_linux/share/openocd/scripts/" };
+    public String[] getCommandLineArray() {
+        return CommandLineUtil.argumentsToArray(getCommandLine());
+    }
+
+    public abstract String getCommandLine();
+
+    public abstract String getProcessLabel();
+
+    public boolean doLaunchProcess() {
+        return true;
+    }
+
+    public String getCommandToConnect() {
+        return String.format("\ntarget remote %s:%s\nload\n", getHostAddress(), getPortToConnect());
+    }
+
+    // For OpenOCD on AXS10x this port might be different from the one in the launch configuration
+    protected String getPortToConnect() {
+        return Configuration.getGdbServerPort(launchConfiguration);
+    }
+
+    protected String getHostAddress() {
+        return LaunchConfigurationConstants.DEFAULT_GDB_HOST;
+    }
 
     public GdbServerBackend(DsfSession session, ILaunchConfiguration launchConfiguration) {
         super(session, launchConfiguration);
         this.session = session;
+        this.launchConfiguration = launchConfiguration;
     }
 
     @Override
@@ -59,13 +86,17 @@ public class GdbServerBackend extends GDBBackend {
     public void initialize(final RequestMonitor requestMonitor) {
         register( new String[]{ GdbServerBackend.class.getName() },
             new Hashtable<String,String>() );
+        if (!doLaunchProcess()) {
+            requestMonitor.done();
+            return;
+        }
         try {
-            process = launchGDBProcess(commandLineArray);
+            process = launchGDBProcess(getCommandLineArray());
         } catch (CoreException e) {
             e.printStackTrace();
+        } finally {
             requestMonitor.done();
         }
-        requestMonitor.done();
     }
 
     /**
@@ -74,8 +105,10 @@ public class GdbServerBackend extends GDBBackend {
      * @throws CoreException
      */
     public void initializeServerConsole() throws CoreException {
-        IProcess newProcess = addServerProcess("GDB Server");
-        newProcess.setAttribute(IProcess.ATTR_CMDLINE, "openOCD");
+        if (doLaunchProcess()) {
+            IProcess newProcess = addServerProcess(getProcessLabel());
+            newProcess.setAttribute(IProcess.ATTR_CMDLINE, getCommandLine());
+        }
     }
 
     /**
