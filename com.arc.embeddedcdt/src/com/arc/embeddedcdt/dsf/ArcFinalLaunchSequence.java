@@ -45,6 +45,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchManager;
 
 import com.arc.embeddedcdt.LaunchPlugin;
+import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.dsf.utils.Configuration;
 
 /**
@@ -118,6 +119,7 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
                     "stepInitializeArcFinalLaunchSequence",
                     "stepCreateGdbServerService",
                     "stepOpenGdbServerConsole",
+                    "stepStartTerminal",
                     "stepSpecifyFileToDebug",
                     "stepUserInitCommands",
                     "stepConnectToTarget",
@@ -386,4 +388,15 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
         queueCommands(Arrays.asList("continue"), rm);
     }
 
+    @Execute
+    public void stepStartTerminal(final RequestMonitor rm) {
+        ArcGdbServer gdbServer = Configuration.getGdbServer(launch.getLaunchConfiguration());
+        String serialPort = Configuration.getComPort(launch.getLaunchConfiguration());
+        if (Configuration.doLaunchTerminal(launch.getLaunchConfiguration())
+                && gdbServer != ArcGdbServer.NSIM && !serialPort.isEmpty()) {
+            new TerminalService(session).initialize(rm);
+        } else {
+            rm.done();
+        }
+    }
 }
