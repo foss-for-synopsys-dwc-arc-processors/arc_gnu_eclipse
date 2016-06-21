@@ -11,12 +11,12 @@
 
 package com.arc.embeddedcdt.launch;
 
+import org.eclipse.cdt.dsf.gdb.launching.GDBProcess;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.model.IProcess;
 
 /**
  * Debug event listener to terminate debug sessions when required.
@@ -46,17 +46,10 @@ public class LaunchTerminator implements IDebugEventSetListener {
     public void handleDebugEvents(DebugEvent[] events) {
         for (DebugEvent ev : events) {
             int code = ev.getKind();
-            if (code == DebugEvent.TERMINATE && (ev.getSource() instanceof IProcess)) {
-                final IProcess p = (IProcess) ev.getSource();
+            if (code == DebugEvent.TERMINATE && ev.getSource() instanceof GDBProcess) {
+                final GDBProcess p = (GDBProcess) ev.getSource();
                 final ILaunch launch = p.getLaunch();
-                /*
-                 * We used to check for p.canTerminate(), but now we don't do this anymore, so we
-                 * could close non-processes as well, like connection to serial port.
-                 */
-                if (p.isTerminated() &&
-                        (p.getLabel() == Launch.OPENOCD_PROCESS_LABEL ||
-                         p.getLabel() == Launch.ASHLING_PROCESS_LABEL ||
-                         p.getLabel().startsWith(Launch.GDB_PROCESS_LABEL) )) {
+                if (p.isTerminated()) {
                     DebugPlugin.getDefault().asyncExec(new TerminateRunnable(launch));
                     /*
                      * If two processes are already terminated, then user will get two dialogs

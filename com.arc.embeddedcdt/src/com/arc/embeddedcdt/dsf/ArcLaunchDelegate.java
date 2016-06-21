@@ -17,12 +17,14 @@ import org.eclipse.cdt.dsf.gdb.launching.LaunchMessages;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ISourceLocator;
 
 import com.arc.embeddedcdt.dsf.utils.DebugUtils;
+import com.arc.embeddedcdt.launch.LaunchTerminator;
 
 /**
  * Launch delegate for DSF/GDB debugger.
@@ -43,6 +45,15 @@ public class ArcLaunchDelegate extends GdbLaunchDelegate {
     protected GdbLaunch createGdbLaunch(ILaunchConfiguration configuration, String mode,
             ISourceLocator locator) throws CoreException {
         DebugUtils.checkLaunchConfigurationStarted(configuration);
+        /*
+         * Add debug event listener for the case when GDB process has terminated. GDB back-end
+         * monitors the GDB process and in case it exited the debug session will be terminated.
+         * 
+         * However, GDB server back-end does not have a way to track if process is terminated or
+         * not, so we need to listen to the process termination events and stop the debug session
+         * manually.
+         */
+        DebugPlugin.getDefault().addDebugEventListener(new LaunchTerminator());
         return super.createGdbLaunch(configuration, mode, locator);
     }
 
