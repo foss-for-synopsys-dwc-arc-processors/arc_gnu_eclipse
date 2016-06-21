@@ -24,61 +24,64 @@ import org.eclipse.swt.widgets.Display;
  */
 public class LaunchTerminator implements IDebugEventSetListener {
 
-	/**
-	 * Runnable to terminate launch asynchronously.
-	 */
-	private static class TerminateRunnable implements Runnable {
+    /**
+     * Runnable to terminate launch asynchronously.
+     */
+    private static class TerminateRunnable implements Runnable {
 
-		private ILaunch fLaunch;
+        private ILaunch fLaunch;
 
-		public TerminateRunnable(ILaunch launch) {
-			this.fLaunch = launch;
-		}
+        public TerminateRunnable(ILaunch launch) {
+            this.fLaunch = launch;
+        }
 
-		public void run() {
-			try {
-				fLaunch.terminate();
-			} catch (DebugException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        public void run() {
+            try {
+                fLaunch.terminate();
+            } catch (DebugException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	/**
-	 * Show dialog and terminate launch.
-	 */
-	private static class DialogRunnable implements Runnable {
+    /**
+     * Show dialog and terminate launch.
+     */
+    private static class DialogRunnable implements Runnable {
 
-		private ILaunch fLaunch;
+        private ILaunch fLaunch;
 
-		public DialogRunnable(ILaunch launch, IProcess process) {
-			this.fLaunch = launch;
-		}
+        public DialogRunnable(ILaunch launch, IProcess process) {
+            this.fLaunch = launch;
+        }
 
-		public void run() {
-			DebugPlugin.getDefault().asyncExec(new TerminateRunnable(fLaunch));
-		}
-	}
+        public void run() {
+            DebugPlugin.getDefault().asyncExec(new TerminateRunnable(fLaunch));
+        }
+    }
 
-	public void handleDebugEvents(DebugEvent[] events) {
-		for (DebugEvent ev : events) {
-			int code = ev.getKind();
-			if ( code == DebugEvent.TERMINATE && (ev.getSource() instanceof IProcess)) {
-				final IProcess p = (IProcess)ev.getSource();
-				final ILaunch launch = p.getLaunch();
-				/* We used to check for p.canTerminate(), but now we don't do
-				   this anymore, so we could close non-processes as well, like
-				   connection to serial port. */ 
-				if (p.isTerminated() &&
-						(p.getLabel() == Launch.OPENOCD_PROCESS_LABEL ||
-						 p.getLabel() == Launch.ASHLING_PROCESS_LABEL ||
-						 p.getLabel().startsWith(Launch.GDB_PROCESS_LABEL) )) {
-					Display.getDefault().asyncExec(new DialogRunnable(launch, p));
-					/* If two processes are already terminated, then user
-					 * will get two dialogs without this return. */
-					return;
-				}
-			}
-		}
-	}
+    public void handleDebugEvents(DebugEvent[] events) {
+        for (DebugEvent ev : events) {
+            int code = ev.getKind();
+            if (code == DebugEvent.TERMINATE && (ev.getSource() instanceof IProcess)) {
+                final IProcess p = (IProcess) ev.getSource();
+                final ILaunch launch = p.getLaunch();
+                /*
+                 * We used to check for p.canTerminate(), but now we don't do this anymore, so we
+                 * could close non-processes as well, like connection to serial port.
+                 */
+                if (p.isTerminated() &&
+                        (p.getLabel() == Launch.OPENOCD_PROCESS_LABEL ||
+                         p.getLabel() == Launch.ASHLING_PROCESS_LABEL ||
+                         p.getLabel().startsWith(Launch.GDB_PROCESS_LABEL) )) {
+                    Display.getDefault().asyncExec(new DialogRunnable(launch, p));
+                    /*
+                     * If two processes are already terminated, then user will get two dialogs
+                     * without this return.
+                     */
+                    return;
+                }
+            }
+        }
+    }
 }
