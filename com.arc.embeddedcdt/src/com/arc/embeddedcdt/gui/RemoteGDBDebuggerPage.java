@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import org.eclipse.cdt.debug.mi.internal.ui.GDBDebuggerPage;
+import org.eclipse.cdt.dsf.gdb.internal.ui.launching.GdbDebuggerPage;
 import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.CoreException;
@@ -64,7 +64,7 @@ import com.arc.embeddedcdt.launch.IMILaunchConfigurationConstants;
  * project is used to accomplish this.
  */
 @SuppressWarnings("restriction")
-public class RemoteGDBDebuggerPage extends GDBDebuggerPage {
+public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
     private static final String default_oocd_bin;
     private static final String default_oocd_cfg;
     static {

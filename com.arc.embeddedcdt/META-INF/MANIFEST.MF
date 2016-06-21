@@ -37,7 +37,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.tm.terminal.connector.serial,
  org.eclipse.tm.terminal.view.ui,
  org.eclipse.tm.terminal.view.core,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.eclipse.cdt.dsf.gdb.ui
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.ibm.icu.text,
