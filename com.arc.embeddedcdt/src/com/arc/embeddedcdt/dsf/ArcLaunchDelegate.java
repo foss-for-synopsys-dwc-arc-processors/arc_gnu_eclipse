@@ -10,6 +10,7 @@
 
 package com.arc.embeddedcdt.dsf;
 
+import org.eclipse.cdt.dsf.debug.service.IDsfDebugServicesFactory;
 import org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate;
 import org.eclipse.cdt.dsf.gdb.launching.LaunchMessages;
 import org.eclipse.core.runtime.CoreException;
@@ -23,6 +24,12 @@ import org.eclipse.debug.core.ILaunchManager;
  * Launch delegate for DSF/GDB debugger.
  */
 public class ArcLaunchDelegate extends GdbLaunchDelegate {
+
+    @Override
+    protected IDsfDebugServicesFactory newServiceFactory(ILaunchConfiguration config,
+            String version) {
+        return new ArcDebugServicesFactory(version);
+    }
 
     // We need to launch debugger not only if the mode is DEBUG_MODE, but also in RUN_MODE, so
     // overriding the method.
