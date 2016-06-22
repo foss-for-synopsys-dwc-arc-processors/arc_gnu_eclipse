@@ -17,7 +17,6 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * Debug event listener to terminate debug sessions when required.
@@ -44,22 +43,6 @@ public class LaunchTerminator implements IDebugEventSetListener {
         }
     }
 
-    /**
-     * Show dialog and terminate launch.
-     */
-    private static class DialogRunnable implements Runnable {
-
-        private ILaunch fLaunch;
-
-        public DialogRunnable(ILaunch launch, IProcess process) {
-            this.fLaunch = launch;
-        }
-
-        public void run() {
-            DebugPlugin.getDefault().asyncExec(new TerminateRunnable(fLaunch));
-        }
-    }
-
     public void handleDebugEvents(DebugEvent[] events) {
         for (DebugEvent ev : events) {
             int code = ev.getKind();
@@ -74,7 +57,7 @@ public class LaunchTerminator implements IDebugEventSetListener {
                         (p.getLabel() == Launch.OPENOCD_PROCESS_LABEL ||
                          p.getLabel() == Launch.ASHLING_PROCESS_LABEL ||
                          p.getLabel().startsWith(Launch.GDB_PROCESS_LABEL) )) {
-                    Display.getDefault().asyncExec(new DialogRunnable(launch, p));
+                    DebugPlugin.getDefault().asyncExec(new TerminateRunnable(launch));
                     /*
                      * If two processes are already terminated, then user will get two dialogs
                      * without this return.
