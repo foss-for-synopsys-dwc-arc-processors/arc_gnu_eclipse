@@ -89,7 +89,7 @@ import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 import gnu.io.CommPortIdentifier;
 
 @SuppressWarnings("restriction")
-public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEventListener {
+public class Launch extends AbstractCLaunchDelegate implements ICDIEventListener {
     private final static class RunCommand implements Runnable {
         private final CLICommand cli;
         private final MISession miSession;
@@ -120,7 +120,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
     private ICDISession dsession;
     private ILaunchConfiguration launch_config;
 
-    abstract public String getSourcePathSeperator();
+    public String getSourcePathSeperator() {
+        return File.pathSeparator;
+    }
 
     public Launch() {
         super();
@@ -278,7 +280,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                         ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN);
 
                 if (debugMode.equals(ICDTLaunchConfigurationConstants.DEBUGGER_MODE_RUN)) {
-                    LaunchFrontend l = new LaunchFrontend(launch);
                     prepareSession();
 
                     // Start GDB first. This is required to ensure that if gdbserver
@@ -286,7 +287,7 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                     // kill GDB when it is trying to execute script commands.
                     if (exeFile != null) {
                         dsession = ((EmbeddedGDBCDIDebugger) debugConfig.createDebugger())
-                                .createDebuggerSession(this, l, exeFile,
+                                .createDebuggerSession(this, launch, exeFile,
                                         new SubProgressMonitor(monitor, 8));
                     } else {
                         /* no executable for session */
@@ -393,8 +394,6 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
                                     configuration, mode);
                         monitor.subTask("Query target state");
                         queryTargetState(dtargets);
-                        // This will make the GDB console frontmost.
-                        l.addStragglers();
 
                         if (eventManager != null)
                             eventManager.allowProcessingEvents(prevstateAllowEvents);
@@ -887,7 +886,9 @@ public abstract class Launch extends AbstractCLaunchDelegate implements ICDIEven
     /**
      * Translate Windows speak to host GDB speak(e.g. CygWin or MinGW).
      */
-    abstract public String fixPath(String line);
+    public String fixPath(String line) {
+        return line;
+    }
 
     @SuppressWarnings("deprecation")
     protected IPath verifyProgramPath(ILaunchConfiguration config, ICProject project)
