@@ -10,7 +10,9 @@
 
 package com.arc.embeddedcdt.dsf;
 
+import org.eclipse.cdt.dsf.debug.service.command.ICommandControl;
 import org.eclipse.cdt.dsf.gdb.service.GdbDebugServicesFactory;
+import org.eclipse.cdt.dsf.mi.service.command.CommandFactory;
 import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
@@ -40,6 +42,10 @@ public class ArcDebugServicesFactory extends GdbDebugServicesFactory {
     }
     return super.createService(clazz, session, optionalArguments);
 }
+    @Override
+    protected ICommandControl createCommandControl(DsfSession session, ILaunchConfiguration config) {
+        return new ArcGdbControl(session, config, new CommandFactory());
+    }
 
     protected GdbServerBackend createGdbServerBackendService(DsfSession session, ILaunchConfiguration arg) {
         ArcGdbServer gdbServer = Configuration.getGdbServer(arg);
