@@ -51,6 +51,7 @@ import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.launch.AbstractCLaunchDelegate;
 import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
+import org.eclipse.cdt.utils.Addr32Factory;
 import org.eclipse.cdt.utils.BinaryObjectAdapter;
 import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IProject;
@@ -947,7 +948,7 @@ public class Launch extends AbstractCLaunchDelegate implements ICDIEventListener
         } catch (Exception e) {
             return new BinaryObjectAdapter(null, exePath, -1 // none of CDT's business
             ) {
-                IAddressFactory factory = new FakeAddressFactory();
+                IAddressFactory factory = new Addr32Factory();
 
                 @Override
                 public IAddressFactory getAddressFactory() {
