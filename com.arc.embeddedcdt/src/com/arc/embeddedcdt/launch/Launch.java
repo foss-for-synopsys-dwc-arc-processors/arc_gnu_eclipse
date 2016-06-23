@@ -86,8 +86,6 @@ import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
 import com.arc.embeddedcdt.gui.ARCWorkingDirectoryBlock;
 import com.arc.embeddedcdt.proxy.cdt.LaunchMessages;
 
-import gnu.io.CommPortIdentifier;
-
 @SuppressWarnings("restriction")
 public class Launch extends AbstractCLaunchDelegate implements ICDIEventListener {
     private final static class RunCommand implements Runnable {
@@ -984,29 +982,6 @@ public class Launch extends AbstractCLaunchDelegate implements ICDIEventListener
 
     /** Convenient spot for subclasses to destroy things belonging to this event */
     protected void debugSessionEnded() {
-    }
-
-    public static List COMserialport() {
-        List<String> list = new ArrayList<String>();
-        try {
-            Enumeration portIdEnum = CommPortIdentifier.getPortIdentifiers();
-            while (portIdEnum.hasMoreElements()) {
-                CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
-                String strName = identifier.getName();
-                int nPortType = identifier.getPortType();
-
-                if (nPortType == CommPortIdentifier.PORT_SERIAL)
-                    list.add(strName);
-            }
-
-        } catch (IllegalArgumentException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        if (list.size() < 1) {
-            list.add("Please connect to EM Starter Kit");
-        }
-        return list;
     }
 
 }

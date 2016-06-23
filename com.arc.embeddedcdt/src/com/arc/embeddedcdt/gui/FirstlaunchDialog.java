@@ -76,7 +76,7 @@ public class FirstlaunchDialog extends Dialog {
 
 		fFirstlaunchPrgmArgumentsComCom = new Combo(shell, SWT.SINGLE | SWT.BORDER);
 
-		List COM = Launch.COMserialport();
+		List COM = ARCTerminalTab.COMserialport();
 		for (int ii = 0; ii < COM.size(); ii++) {
 			String currentcom = (String) COM.get(ii);
 			fFirstlaunchPrgmArgumentsComCom.add(currentcom);

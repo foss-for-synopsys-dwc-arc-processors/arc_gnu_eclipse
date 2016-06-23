@@ -14,6 +14,8 @@
  *******************************************************************************/
 package com.arc.embeddedcdt.gui;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import org.eclipse.cdt.launch.ui.CLaunchConfigurationTab;
@@ -41,6 +43,8 @@ import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.launch.Launch;
+
+import gnu.io.CommPortIdentifier;
 
 public class ARCTerminalTab extends CLaunchConfigurationTab {
 	protected Button fLaunchComButton;//this variable is for launching COM port
@@ -85,7 +89,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
 		List<String> COM = null;
 		try {
-			COM = Launch.COMserialport();
+			COM = COMserialport();
 		} catch (java.lang.UnsatisfiedLinkError e) {
 			e.printStackTrace();
 		} catch (java.lang.NoClassDefFoundError e) {
@@ -260,5 +264,29 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 		
 		return null;
 	}
+
+	    public static List COMserialport() {
+	        List<String> list = new ArrayList<String>();
+	        try {
+	            Enumeration portIdEnum = CommPortIdentifier.getPortIdentifiers();
+	            while (portIdEnum.hasMoreElements()) {
+	                CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
+	                String strName = identifier.getName();
+	                int nPortType = identifier.getPortType();
+
+	                if (nPortType == CommPortIdentifier.PORT_SERIAL)
+	                    list.add(strName);
+	            }
+
+	        } catch (IllegalArgumentException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+	        }
+	        if (list.size() < 1) {
+	            list.add("Please connect to EM Starter Kit");
+	        }
+	        return list;
+	    }
+
 
 }
