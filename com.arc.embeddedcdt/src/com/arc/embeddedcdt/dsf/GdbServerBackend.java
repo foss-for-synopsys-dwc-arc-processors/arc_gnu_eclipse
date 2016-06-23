@@ -10,15 +10,21 @@
 
 package com.arc.embeddedcdt.dsf;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 import org.eclipse.cdt.dsf.concurrent.RequestMonitor;
+import org.eclipse.cdt.dsf.gdb.IGdbDebugConstants;
 import org.eclipse.cdt.dsf.gdb.service.GDBBackend;
 import org.eclipse.cdt.dsf.gdb.service.SessionType;
 import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.cdt.utils.spawner.Spawner;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.model.IProcess;
 import org.osgi.framework.BundleContext;
 
 import com.arc.embeddedcdt.LaunchPlugin;
@@ -26,11 +32,13 @@ import com.arc.embeddedcdt.LaunchPlugin;
 /**
  * DSF service containing GDB server-related logic:
  *                      commands to start a server,
- *                      server start and shutdown methods.
+ *                      server start and shutdown methods,
+ *                      creating console for the server.
  */
 public class GdbServerBackend extends GDBBackend {
 
     private Process process;
+    private DsfSession session;
 
     private String[] commandLineArray = new String[] {
             "/home/apologo/2016.03-rc1/ide_linux/bin/openocd", "-d0", "-c", "gdb_port 49105",
@@ -39,6 +47,7 @@ public class GdbServerBackend extends GDBBackend {
 
     public GdbServerBackend(DsfSession session, ILaunchConfiguration launchConfiguration) {
         super(session, launchConfiguration);
+        this.session = session;
     }
 
     @Override
@@ -57,6 +66,38 @@ public class GdbServerBackend extends GDBBackend {
             requestMonitor.done();
         }
         requestMonitor.done();
+    }
+
+    /**
+     * Add server process to the launch and assign to the process a label and a command line.
+     * 
+     * @throws CoreException
+     */
+    public void initializeServerConsole() throws CoreException {
+        IProcess newProcess = addServerProcess("GDB Server");
+        newProcess.setAttribute(IProcess.ATTR_CMDLINE, "openOCD");
+    }
+
+    /**
+     * Add server process to the launch: show it in the debug tree and add its console.
+     * 
+     * @param label
+     *            Label to assign to the process
+     * @return process added to the launch
+     * @throws CoreException
+     */
+    private IProcess addServerProcess(String label) throws CoreException {
+        Map<String, String> attributes = new HashMap<String, String>();
+        attributes.put(IGdbDebugConstants.PROCESS_TYPE_CREATION_ATTR,
+                IGdbDebugConstants.GDB_PROCESS_CREATION_VALUE);
+
+        ILaunch launch = (ILaunch) session.getModelAdapter(ILaunch.class);
+        IProcess newProcess = null;
+        Process serverProc = getProcess();
+        if (serverProc != null) {
+            newProcess = DebugPlugin.newProcess(launch, serverProc, label, attributes);
+        }
+        return newProcess;
     }
 
     @Override
