@@ -218,6 +218,10 @@
 			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.connector.serial_4.0.0.201505101444.jar"/>
 			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.view.core_4.0.0.201505101440.jar"/>
 			<pathelement path="${eclipseHome}/plugins/org.eclipse.tm.terminal.view.ui_4.0.0.201506031417.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.cdt.dsf.gdb.ui_2.5.0.201602051005.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.cdt.dsf_2.6.0.201602051005.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.cdt.dsf.ui_2.5.0.201602051005.jar"/>
+			<pathelement path="${eclipseHome}/plugins/org.eclipse.cdt.dsf.gdb_4.8.0.201602051005.jar"/>
 			<pathelement path="bin/"/>
 			<pathelement path="${build.result.folder}/../com.arc.embeddedcdt_${bundleVersion}/bin/"/>
 			<pathelement path="arcembeddedcdt.jar"/>
