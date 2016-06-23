@@ -17,8 +17,7 @@ Export-Package: com.arc.embeddedcdt,
  com.arc.embeddedcdt.gui.buttons,
  com.arc.embeddedcdt.gui.jtag,
  com.arc.embeddedcdt.launch,
- com.arc.embeddedcdt.preferences,
- com.arc.embeddedcdt.sourcelookup
+ com.arc.embeddedcdt.preferences
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.cdt.debug.mi.core,
