@@ -22,7 +22,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.common.ArcGdbServer;
-import com.arc.embeddedcdt.launch.Launch;
 
 public class FirstlaunchDialog extends Dialog {
 	public static String[] value= new String[2];;

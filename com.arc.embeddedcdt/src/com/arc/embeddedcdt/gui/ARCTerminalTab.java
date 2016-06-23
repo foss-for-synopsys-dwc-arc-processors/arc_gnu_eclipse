@@ -42,7 +42,6 @@ import org.eclipse.ui.PlatformUI;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
 import com.arc.embeddedcdt.common.ArcGdbServer;
-import com.arc.embeddedcdt.launch.Launch;
 
 import gnu.io.CommPortIdentifier;
 
