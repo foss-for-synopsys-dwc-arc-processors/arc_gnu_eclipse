@@ -1043,8 +1043,8 @@ rc.setLocal("portNum", portNum)</code>
         <ProcedureCall id="_2JDd" procedure="debugProcess.continue"/>
         <CheckStringStep checktype="item" client="$(client)"
                          component="org.eclipse.e4.ui.compatibility.editor3.text&amp;0"
-                         id="_2JBg" raise="true" timeout="1500">
-          <text>No source available for "_exit_halt() " </text>
+                         id="_2JBg" raise="true" regexp="true" timeout="1500">
+          <text>No source available for \"_exit_halt\(\).*\" </text>
         </CheckStringStep>
         <IfSequence id="_2JWT"
                     test="&#34;$(template)&#34; == &#34;hello&#34;">
