@@ -1081,10 +1081,14 @@ rc.setLocal("portNum", portNum)</code>
             <ElseSequence id="_2JWK">
               <SelectionEventStep client="$(client)"
                                   component="tabfolder-org.eclipse.debug.internal.ui.ConsoleFolderView@Terminal 1"
-                                  event="SELECTION" id="_2JWL"/>
+                                  disabled="true" event="SELECTION"
+                                  id="_2JWL"/>
+              <SelectionEventStep client="$(client)"
+                                  component="tabfolder-org.eclipse.debug.internal.ui.ConsoleFolderView@Terminal"
+                                  event="SELECTION" id="_2JYy"/>
               <IfSequence id="_2JXo"
                           test="&#34;${qftest:windows}&#34; == &#34;true&#34;">
-                <CheckImageStep client="$(client)" component="Terminal_1"
+                <CheckImageStep client="$(client)" component="Terminal.canvas"
                                 height="20" id="_2JXq" width="200">
                   <ImageNode height="140" name="checkimage" width="1588">
                     <binary size="1771">eJzt4bFu12wAhuF85nJ7G5hfSKAgsbGABAMbMhNSVySEYICITlxFJQZQnbZpysDGn9TUdWynNZDwQfQ9Q6TY
@@ -1120,9 +1124,9 @@ AABgU7o32W2Q73hTAAAAAGxK2aaOfsb/Hakpfg==</binary>
                   </ImageNode>
                 </CheckImageStep>
                 <ElseSequence id="_2JXr">
-                  <CheckImageStep client="$(client)" component="Terminal_1"
-                                  height="20" id="_2JWM" width="200" x="0"
-                                  y="0">
+                  <CheckImageStep client="$(client)"
+                                  component="Terminal.canvas" height="20"
+                                  id="_2JWM" width="200" x="0" y="0">
                     <ImageNode height="179" name="checkimage" width="1908">
                       <binary size="3693">eJzt4ftvVdWCwPH/yVYttELVYjCGRE1QQUJoCBMf+ANBMVBQKeVRqDK4kkFR56WEwFVGBBTSQW6FKCCvqXJB
 XlIobWmh0nl7annOCjtz1unjtOsSp9n299n6Ye/VvVfX4ue4b183vncPAAAAAIA/r00ab3Q+J59f+/ij
@@ -2050,7 +2054,75 @@ rc.setLocal("toolchain", toolchain)</code>
       </ProcedureCall>
     </Procedure>
   </PackageRoot>
-  <ExtraSequence id="_4"/>
+  <ExtraSequence id="_4">
+    <BasicSequence id="_2JYv" name="Recorded 6/24/16 2:37 PM">
+      <SelectionEventStep client="$(client)"
+                          component="tabfolder-org.eclipse.debug.internal.ui.ConsoleFolderView@Terminal"
+                          event="SELECTION" id="_2JYw"/>
+      <CheckImageStep client="$(client)" component="Terminal.canvas"
+                      id="_2JYx">
+        <ImageNode height="146" name="checkimage" width="1906">
+          <binary size="3418">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</binary>
+        </ImageNode>
+      </CheckImageStep>
+    </BasicSequence>
+  </ExtraSequence>
   <WindowList id="_5">
     <WindowStep class="Window" engine="swt" feature="C/C++ - Eclipse"
                 height="768" id="WorkbenchWindow" name="WorkbenchWindow"
@@ -3585,6 +3657,31 @@ rc.setLocal("toolchain", toolchain)</code>
                         state="1">$(projectName) [ARC C/C++ application] nSIM GDBserver</extrafeature>
           <extrafeature name="qfs:systemclass" negate="false" regexp="false"
                         state="0">org.eclipse.swt.widgets.Label</extrafeature>
+        </ComponentStep>
+        <ComponentStep class="Panel" id="Terminal" name="Terminal"
+                       uid="_2JYs">
+          <extrafeature name="qfs:class" negate="false" regexp="false"
+                        state="0">org.eclipse.ui.part.PageBook</extrafeature>
+          <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                        state="0">Panel</extrafeature>
+          <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                        state="0">org.eclipse.swt.widgets.Composite</extrafeature>
+          <ComponentStep class="TabPanel" id="Terminal.tabbed" uid="_2JYt">
+            <extrafeature name="qfs:class" negate="false" regexp="false"
+                          state="0">org.eclipse.swt.custom.CTabFolder</extrafeature>
+            <extrafeature name="qfs:genericclass" negate="false"
+                          regexp="false" state="0">TabPanel</extrafeature>
+            <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                          state="0">org.eclipse.swt.custom.CTabFolder</extrafeature>
+            <ComponentStep class="Panel" id="Terminal.canvas" uid="_2JYu">
+              <extrafeature name="qfs:class" negate="false" regexp="false"
+                            state="0">org.eclipse.tm.internal.terminal.textcanvas.TextCanvas</extrafeature>
+              <extrafeature name="qfs:genericclass" negate="false"
+                            regexp="false" state="0">Panel</extrafeature>
+              <extrafeature name="qfs:systemclass" negate="false"
+                            regexp="false" state="0">org.eclipse.swt.widgets.Canvas</extrafeature>
+            </ComponentStep>
+          </ComponentStep>
         </ComponentStep>
       </ComponentStep>
       <ComponentStep class="TabPanel" classcount="4" classindex="0"
