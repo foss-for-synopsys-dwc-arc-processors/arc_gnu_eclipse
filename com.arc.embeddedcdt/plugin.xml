@@ -17,15 +17,6 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            type="com.arc.embeddedcdt.idle"
-            class="com.arc.embeddedcdt.gui.LaunchConfigurationTabGroup"
-            id="com.arc.embeddedcdt.TabGroup">
-         <launchMode
-               mode="debug"
-               perspective="org.eclipse.debug.ui.DebugPerspective">
-         </launchMode>
-      </launchConfigurationTabGroup>
-      <launchConfigurationTabGroup
             type="com.arc.embeddedcdt.idleNative"
             class="com.arc.embeddedcdt.gui.LaunchConfigurationTabGroup"
             id="com.arc.embeddedcdt.TabGroup">
@@ -44,25 +35,10 @@
                perspective="org.eclipse.debug.ui.DebugPerspective">
          </launchMode>
       </launchConfigurationTabGroup>
-      <launchConfigurationTabGroup
-            class="com.arc.embeddedcdt.gui.RunfLaunchConfigurationTabGroup"
-            id="com.arc.embeddedcdt.RunTabGroup"
-            type="com.arc.embeddedcdt.idle">
-         <launchMode
-               description="ARCApplicationTabGroupDescription.run"
-               mode="run"
-               perspective="org.eclipse.debug.ui.DebugPerspective">
-         </launchMode>
-      </launchConfigurationTabGroup>
 	</extension>
 
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
-      <launchConfigurationTypeImage
-            icon="icons/c_app.gif"
-            configTypeID="com.arc.embeddedcdt.idle"
-            id="com.arc.embeddedcdt.Image">
-      </launchConfigurationTypeImage>
       <launchConfigurationTypeImage
             icon="icons/c_app.gif"
             configTypeID="com.arc.embeddedcdt.idleNative"
