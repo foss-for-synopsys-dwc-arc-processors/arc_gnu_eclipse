@@ -16,18 +16,6 @@
    
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
-         <!--
-      <launchConfigurationTabGroup
-            type="com.arc.embeddedcdt.idleJTAG"
-            class="com.arc.embeddedcdt.gui.jtag.JTAGLaunchConfigurationTabGroup"
-            id="com.arc.embeddedcdt.TabGroup">
-      </launchConfigurationTabGroup>
-      <launchConfigurationTabGroup
-            type="com.arc.embeddedcdt.idleJTAGNative"
-            class="com.arc.embeddedcdt.gui.jtag.JTAGLaunchConfigurationTabGroup"
-            id="com.arc.embeddedcdt.TabGroup">
-      </launchConfigurationTabGroup>
-            -->
       <launchConfigurationTabGroup
             type="com.arc.embeddedcdt.idle"
             class="com.arc.embeddedcdt.gui.LaunchConfigurationTabGroup"
@@ -75,13 +63,6 @@
             configTypeID="com.arc.embeddedcdt.idle"
             id="com.arc.embeddedcdt.Image">
       </launchConfigurationTypeImage>
-      <!--
-      <launchConfigurationTypeImage
-            icon="icons/c_app.gif"
-            configTypeID="com.arc.embeddedcdt.idleJTAG"
-            id="com.arc.embeddedcdt.Image">
-      </launchConfigurationTypeImage>
-      -->
       <launchConfigurationTypeImage
             icon="icons/c_app.gif"
             configTypeID="com.arc.embeddedcdt.idleNative"
