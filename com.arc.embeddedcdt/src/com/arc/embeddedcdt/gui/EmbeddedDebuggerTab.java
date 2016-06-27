@@ -30,8 +30,4 @@ public class EmbeddedDebuggerTab extends ARCCDebuggerTab {
 		super.loadDebuggerCombo(debugConfigs, "com.arc.embeddedcdt.RemoteGDBDebugger");
 	}
 
-	public String getDebugger()
-	{
-		return ((EmbeddedGDBDebuggerPage)getDynamicTab()).getDebugger();
-	}
 }

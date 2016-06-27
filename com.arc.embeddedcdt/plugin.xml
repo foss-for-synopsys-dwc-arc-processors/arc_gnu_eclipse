@@ -67,11 +67,6 @@
    </extension>
    <extension
          point="org.eclipse.cdt.debug.ui.CDebuggerPage">
-      <debuggerPage
-            class="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage"
-            debuggerID="com.arc.embeddedcdt.EmbeddedCDebugger"
-            id="com.arc.embeddedcdt.gui.EmbeddedGDBDebuggerPage">
-      </debuggerPage>
        <debuggerPage
             class="com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage"
             debuggerID="com.arc.embeddedcdt.RemoteGDBDebugger"
