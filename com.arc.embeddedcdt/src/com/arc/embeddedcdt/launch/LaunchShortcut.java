@@ -21,6 +21,7 @@ import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.cdt.core.model.IBinary;
 import org.eclipse.cdt.core.model.ICProject;
 import org.eclipse.cdt.debug.core.CDebugCorePlugin;
+import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
 import org.eclipse.cdt.debug.core.ICDebugConfiguration;
 import org.eclipse.cdt.debug.internal.ui.launch.LaunchMessages;
 import org.eclipse.cdt.launch.AbstractCLaunchDelegate;
@@ -254,7 +255,7 @@ public class LaunchShortcut implements ILaunchShortcut {
    * @return ILaunchConfigurationType
    */
   protected ILaunchConfigurationType getCLaunchConfigType() {
-          return getLaunchManager().getLaunchConfigurationType(ICDTLaunchConfigurationConstants.ID_LAUNCH_C_APP);
+          return getLaunchManager().getLaunchConfigurationType(LaunchConfigurationConstants.ID_LAUNCH_C_APP);
   }
 
   protected ILaunchManager getLaunchManager() {

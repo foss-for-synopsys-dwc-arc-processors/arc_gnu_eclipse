@@ -76,4 +76,7 @@ public interface LaunchConfigurationConstants {
     //Custom Gdbserver
     String ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH =  LAUNCH_ID + ".debugger_custom_gdbsever_bin_path";
     String ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND =  LAUNCH_ID + ".debugger_custom_gdbsever_command";
+
+    public static final String ID_LAUNCH_C_APP = "com.arc.embeddedcdt.idleNative";
+
 }
