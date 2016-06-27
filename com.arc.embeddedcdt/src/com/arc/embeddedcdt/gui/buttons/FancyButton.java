@@ -18,7 +18,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import com.arc.embeddedcdt.gui.jtag.ConfigJTAGTab;
 import com.arc.embeddedcdt.gui.jtag.IFirstExpression;
 import com.arc.embeddedcdt.gui.jtag.IScript;
 import com.arc.embeddedcdt.gui.jtag.ITab;
@@ -110,11 +109,11 @@ public abstract class FancyButton implements IFancyCombo, IFirstExpression
 	
 	public String appendLine(String t)
 	{
-		if (t.endsWith(ConfigJTAGTab.LINE_END()))
+		if (t.endsWith(System.getProperty("line.separator")))
 		{
 			return t;
 		}
-		return t+ConfigJTAGTab.LINE_END();
+		return t+System.getProperty("line.separator");
 	}
 
 	public String createFirstEntry(String script, String newText)
