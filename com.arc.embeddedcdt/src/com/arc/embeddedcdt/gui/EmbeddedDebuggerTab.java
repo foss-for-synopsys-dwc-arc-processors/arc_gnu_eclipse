@@ -10,27 +10,24 @@
 
 package com.arc.embeddedcdt.gui;
 
+import org.eclipse.cdt.debug.core.CDebugCorePlugin;
 import org.eclipse.cdt.debug.core.ICDebugConfiguration;
 import org.eclipse.cdt.launch.ui.CDebuggerTab;
+import org.eclipse.debug.core.ILaunchConfiguration;
 
 public class EmbeddedDebuggerTab extends CDebuggerTab {
+
+    private static final String debuggerId = "com.arc.embeddedcdt.RemoteGDBDebugger";
+
     public EmbeddedDebuggerTab(boolean attachMode) {
         super(attachMode);
-        // TODO Auto-generated constructor stub
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.cdt.launch.internal.ui.AbstractCDebuggerTab#loadDebuggerCombo(org.eclipse.cdt.
-     * debug.core.ICDebugConfiguration[], java.lang.String)
-     */
     @SuppressWarnings("restriction")
-    protected void loadDebuggerCombo(ICDebugConfiguration[] debugConfigs, String current) {
-        /* Force the only choice */
-        super.loadDebuggerCombo(debugConfigs, "com.arc.embeddedcdt.EmbeddedCDebugger");
-        super.loadDebuggerCombo(debugConfigs, "com.arc.embeddedcdt.RemoteGDBDebugger");
+    @Override
+    protected void loadDebuggerComboBox(ILaunchConfiguration config, String selection) {
+        CDebugCorePlugin.getDefault().saveDefaultDebugConfiguration(debuggerId);
+        ICDebugConfiguration dc = CDebugCorePlugin.getDefault().getDefaultDebugConfiguration();
+        loadDebuggerCombo(new ICDebugConfiguration[] { dc }, dc.getID());
     }
-
 }
