@@ -93,7 +93,12 @@ public class FirstlaunchDialog extends Dialog {
 			public void modifyText(ModifyEvent evt) {
 				Combo combo = (Combo) evt.widget;
 				value[0] = combo.getText();
-				ArcGdbServer gdbServer = ArcGdbServer.fromString(combo.getText());
+				ArcGdbServer gdbServer;
+				try {
+				    gdbServer = ArcGdbServer.fromString(combo.getText());
+				} catch (IllegalArgumentException e) {
+				    gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
+				}
 				if (gdbServer == ArcGdbServer.NSIM || gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
 					fFirstlaunchPrgmArgumentsComCom.setVisible(false);
 					fPrgmArgumentsLabelCom.setVisible(false);
