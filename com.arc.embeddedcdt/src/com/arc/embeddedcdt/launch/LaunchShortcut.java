@@ -33,103 +33,102 @@ import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.gui.FirstlaunchDialog;
 import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
 
-
 /**
  * Using "Run As" --> "Node Application" or "Run As" --> "coffee" will lead here
  **/
 @SuppressWarnings("restriction")
 public class LaunchShortcut extends CApplicationLaunchShortcut implements ILaunchShortcut {
 
+    public void startrunas() {
+        IWorkbench workbench = PlatformUI.getWorkbench();
 
-	public void startrunas() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-
-        if (workbench.getDisplay().getThread() != Thread.currentThread()){
-            // Note that we do the work synchronously so that we can lock this thread when getting null gdbserver value. It is used
+        if (workbench.getDisplay().getThread() != Thread.currentThread()) {
+            // Note that we do the work synchronously so that we can lock this thread when getting
+            // null gdbserver value. It is used
             // to launch Debug As/ Run as pop up window for the first time launching.
-            workbench.getDisplay().syncExec(new Runnable(){
+            workbench.getDisplay().syncExec(new Runnable() {
                 @Override
-                public void run () {
-                	startrunas();
-                }});
+                public void run() {
+                    startrunas();
+                }
+            });
             return;
         }
-		
-		// Assertion: we're in the UI thread.
-		final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
-		IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-		IWorkbenchWindow window=activePage.getWorkbenchWindow();
-		if (window != null) {
-			Shell parent = window.getShell();
-			//MessageDialog.openQuestion(parent,	"The first time launch","Need to create Debug configuration for the first launch");
-			FirstlaunchDialog dlg=new FirstlaunchDialog(parent);
-			dlg.open();
-			System.out.println("gdbserver: \""+dlg.value[0]+"\" COM serial port: \""+dlg.value[1]+"\"");
-    	}
-	}
-	
-	@Override
-	protected ILaunchConfiguration findLaunchConfiguration(IBinary bin, String mode) {
-	    ILaunchConfiguration lc = super.findLaunchConfiguration(bin, mode);
-	    return editConfiguration(lc, bin);
-	}
-  /**
-   * Method createConfiguration.
-   * @param bin
-   * @return ILaunchConfiguration
-   */
-  private ILaunchConfiguration editConfiguration(ILaunchConfiguration lc, IBinary bin) {
-          ILaunchConfiguration config = null;
-          try {
-                  ILaunchConfigurationWorkingCopy wc = lc.getWorkingCopy();
-                  wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, true);
-                  wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID, "com.arc.embeddedcdt.RemoteGDBDebugger");
-                  wc.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, RemoteGDBDebuggerPage.getDefaultGdbPath());
 
-                  startrunas();
+        // Assertion: we're in the UI thread.
+        final IWorkbenchWindow activeWorkbenchWindow = workbench.getActiveWorkbenchWindow();
+        IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+        IWorkbenchWindow window = activePage.getWorkbenchWindow();
+        if (window != null) {
+            Shell parent = window.getShell();
+            // MessageDialog.openQuestion(parent, "The first time launch","Need to create Debug
+            // configuration for the first launch");
+            FirstlaunchDialog dlg = new FirstlaunchDialog(parent);
+            dlg.open();
+        }
+    }
 
-                  if(!FirstlaunchDialog.value[0].equalsIgnoreCase("")) {
-                      ArcGdbServer gdbServer = ArcGdbServer.fromString(FirstlaunchDialog.value[0]);
-                      String gdbserver_port="";
+    @Override
+    protected ILaunchConfiguration findLaunchConfiguration(IBinary bin, String mode) {
+        ILaunchConfiguration lc = super.findLaunchConfiguration(bin, mode);
+        return editConfiguration(lc);
+    }
 
-                      switch (gdbServer) {
-                      case JTAG_ASHLING:
-                          gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT;
-                          wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
-                                  FirstlaunchDialog.value[1]);
-                          break;
-                      case JTAG_OPENOCD:
-                          gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT;
-                          wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
-                                  FirstlaunchDialog.value[1]);
-                          break;
-                      case NSIM:
-                          gdbserver_port = LaunchConfigurationConstants.DEFAULT_NSIM_PORT;
-                          break;
-                      case GENERIC_GDBSERVER:
-                          break;
-                      default:
-                          throw new IllegalArgumentException("Unknown enum value has been used");
-                      }
+    /* Set ARC-specific properties to the configuration created by super-class.
+     * Launch FirstlaunchDialog and get GDB server and serial port from it.*/
+    private ILaunchConfiguration editConfiguration(ILaunchConfiguration lc) {
+        ILaunchConfiguration config = null;
+        try {
+            ILaunchConfigurationWorkingCopy wc = lc.getWorkingCopy();
+            wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_STOP_AT_MAIN, true);
+            wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID,
+                    "com.arc.embeddedcdt.RemoteGDBDebugger");
+            wc.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
+                    RemoteGDBDebuggerPage.getDefaultGdbPath());
 
-                      wc.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,gdbserver_port);
-                      wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,FirstlaunchDialog.value[0]);
-                  }
-                  config = wc.doSave();
+            startrunas();
 
-          } catch (CoreException ce) {
-                  LaunchUIPlugin.log(ce);
-          }
-          return config;
-  }
+            if (!FirstlaunchDialog.value[0].equalsIgnoreCase("")) {
+                ArcGdbServer gdbServer = ArcGdbServer.fromString(FirstlaunchDialog.value[0]);
+                String gdbserver_port = "";
 
-  /**
-   * Method getCLaunchConfigType.
-   * @return ILaunchConfigurationType
-   */
-  @Override
-  protected ILaunchConfigurationType getCLaunchConfigType() {
-          return getLaunchManager().getLaunchConfigurationType(LaunchConfigurationConstants.ID_LAUNCH_C_APP);
-  }
+                switch (gdbServer) {
+                case JTAG_ASHLING:
+                    gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT;
+                    wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
+                            FirstlaunchDialog.value[1]);
+                    break;
+                case JTAG_OPENOCD:
+                    gdbserver_port = LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT;
+                    wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
+                            FirstlaunchDialog.value[1]);
+                    break;
+                case NSIM:
+                    gdbserver_port = LaunchConfigurationConstants.DEFAULT_NSIM_PORT;
+                    break;
+                case GENERIC_GDBSERVER:
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown enum value has been used");
+                }
+
+                wc.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
+                        gdbserver_port);
+                wc.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
+                        FirstlaunchDialog.value[0]);
+            }
+            config = wc.doSave();
+
+        } catch (CoreException ce) {
+            LaunchUIPlugin.log(ce);
+        }
+        return config;
+    }
+
+    @Override
+    protected ILaunchConfigurationType getCLaunchConfigType() {
+        return getLaunchManager()
+                .getLaunchConfigurationType(LaunchConfigurationConstants.ID_LAUNCH_C_APP);
+    }
 
 }
