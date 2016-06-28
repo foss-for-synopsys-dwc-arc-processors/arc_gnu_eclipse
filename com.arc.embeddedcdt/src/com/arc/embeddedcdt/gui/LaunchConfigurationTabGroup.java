@@ -12,7 +12,6 @@
 
 package com.arc.embeddedcdt.gui;
 
-
 import org.eclipse.cdt.launch.ui.CMainTab2;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
@@ -21,30 +20,22 @@ import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.debug.ui.sourcelookup.SourceLookupTab;
 
-/**
- */
 public class LaunchConfigurationTabGroup extends AbstractLaunchConfigurationTabGroup {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTabGroup#createTabs(org.eclipse.debug.ui.ILaunchConfigurationDialog, java.lang.String)
-	 */
-	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-				new CMainTab2(),
-				new EmbeddedDebuggerTab(false),
-				new CommandTab(),
-				new SourceLookupTab(),
-				new EnvironmentTab(),
-				new ARCTerminalTab(),
-				new CommonTab()
-			};
-			setTabs(tabs);
-			
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.debug.ui.ILaunchConfigurationTabGroup#createTabs(org.eclipse.debug.ui.
+     * ILaunchConfigurationDialog, java.lang.String)
+     */
+    public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+        ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] { new CMainTab2(),
+                new EmbeddedDebuggerTab(false), new CommandTab(), new SourceLookupTab(),
+                new EnvironmentTab(), new ARCTerminalTab(), new CommonTab() };
+        setTabs(tabs);
+    }
 
-	  
-	public void setLaunchConfigurationDialog(ILaunchConfigurationDialog dialog){
-	
-	}
-	 
+    public void setLaunchConfigurationDialog(ILaunchConfigurationDialog dialog) {
+    }
+
 }
