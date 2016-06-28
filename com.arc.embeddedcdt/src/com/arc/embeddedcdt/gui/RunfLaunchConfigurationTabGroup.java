@@ -14,6 +14,7 @@ package com.arc.embeddedcdt.gui;
 
 import org.eclipse.cdt.launch.ui.CMainTab2;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
+import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.EnvironmentTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
@@ -34,8 +35,7 @@ public class RunfLaunchConfigurationTabGroup extends AbstractLaunchConfiguration
 				new SourceLookupTab(),
 				new EnvironmentTab(),
 				new ARCTerminalTab(),
-				new ARCCommonTab() 
-				//new CommonTab() 
+				new CommonTab()
 			};
 			setTabs(tabs);
 			
