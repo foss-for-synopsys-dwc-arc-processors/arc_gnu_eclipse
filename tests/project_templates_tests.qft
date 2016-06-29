@@ -791,6 +791,8 @@ rc.setLocal("portNum", portNum)</code>
         <DependencyReference id="_2JHX"
                              reference="dependencies.switchToDebugPerspective"/>
         <SetupSequence id="_2JHr">
+          <ProcedureCall id="_2JZd"
+                         procedure="debugProcess.removeAllBreakpoints"/>
           <ProcedureCall id="_2JTy"
                          procedure="debugConfigurations.createArcConfiguration">
             <variable name="projectName">$(projectName)</variable>
@@ -829,6 +831,8 @@ rc.setLocal("portNum", portNum)</code>
           </ProcedureCall>
           <ProcedureCall id="_2JHI"
                          procedure="debugProcess.removeTerminated"/>
+          <ProcedureCall id="_2JZb"
+                         procedure="debugProcess.removeAllBreakpoints"/>
         </CleanupSequence>
         <ErrorHandler id="_2JI6" name="">
           <ProcedureCall id="_2JI7"
@@ -840,6 +844,8 @@ rc.setLocal("portNum", portNum)</code>
           </ProcedureCall>
           <ProcedureCall id="_2JI9"
                          procedure="debugProcess.removeTerminated"/>
+          <ProcedureCall id="_2JZc"
+                         procedure="debugProcess.removeAllBreakpoints"/>
         </ErrorHandler>
       </Dependency>
       <Dependency id="_2JEp" name="createProject">
@@ -941,6 +947,22 @@ rc.setLocal("portNum", portNum)</code>
       </Dependency>
     </Package>
     <Package id="_2JBl" name="debugProcess">
+      <Procedure id="_2JZX" name="removeAllBreakpoints">
+        <SelectionEventStep client="$(client)"
+                            component="tabfolder-org.eclipse.debug.internal.ui.ToolsFolderView@Breakpoints"
+                            event="SELECTION" id="_2JZY"/>
+        <TryStep id="_2JZh">
+          <SelectionEventStep client="$(client)"
+                              component="tool-org.eclipse.debug.ui.breakpointsView.toolbar.removeAll"
+                              event="SELECTION" id="_2JZZ"/>
+          <ComponentWaiter client="$(client)"
+                           component="MessageDialogWithToggle" id="_2JZa"/>
+          <MouseEventStep clicks="1" client="$(client)" component="buttonOk"
+                          event="MOUSE_MPRC" id="_2JZg" modifiers="16"/>
+          <CatchSequence exception="DisabledComponentException" id="_2JZi"
+                         maxerror="0"/>
+        </TryStep>
+      </Procedure>
       <Procedure id="_2JZB" name="placeBreakpointOnExit">
         <ProcedureCall id="_2JZH" procedure="qfs.swt.tree.selectNode">
           <variable name="id">Debug.tree</variable>
@@ -953,7 +975,7 @@ rc.setLocal("portNum", portNum)</code>
         <TextInputStep client="$(client)"
                        component="Console3.text2_[ARC_C/C++_application]_nSIM_GDBserver"
                        id="_2JZF">
-          <text>b exit</text>
+          <text>tbreak exit</text>
         </TextInputStep>
         <KeyEventStep client="$(client)"
                       component="Console3.text2_[ARC_C/C++_application]_nSIM_GDBserver"
@@ -3752,6 +3774,42 @@ rc.setLocal("toolchain", toolchain)</code>
                       state="0">TabPanel</extrafeature>
         <extrafeature name="qfs:systemclass" negate="false" regexp="false"
                       state="0">org.eclipse.swt.custom.CTabFolder</extrafeature>
+      </ComponentStep>
+      <ComponentStep class="TabPanel"
+                     id="tabfolder-org.eclipse.debug.internal.ui.ToolsFolderView"
+                     name="tabfolder-org.eclipse.debug.internal.ui.ToolsFolderView"
+                     uid="_2JZO">
+        <extrafeature name="qfs:class" negate="false" regexp="false"
+                      state="0">org.eclipse.swt.custom.CTabFolder</extrafeature>
+        <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                      state="0">TabPanel</extrafeature>
+        <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                      state="0">org.eclipse.swt.custom.CTabFolder</extrafeature>
+        <ComponentStep class="ToolBar" id="toolbar-Breakpoints"
+                       name="toolbar-Breakpoints" uid="_2JZP">
+          <extrafeature name="qfs:class" negate="false" regexp="false"
+                        state="0">org.eclipse.swt.widgets.ToolBar</extrafeature>
+          <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                        state="0">ToolBar</extrafeature>
+          <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                        state="0">org.eclipse.swt.widgets.ToolBar</extrafeature>
+          <ComponentStep class="ToolBarItem"
+                         feature="ToolTip: Remove All Breakpoints"
+                         id="tool-org.eclipse.debug.ui.breakpointsView.toolbar.removeAll"
+                         name="tool-org.eclipse.debug.ui.breakpointsView.toolbar.removeAll"
+                         uid="_2JZQ">
+            <extrafeature name="imagehash" negate="false" regexp="false"
+                          state="1">-130685025</extrafeature>
+            <extrafeature name="qfs:class" negate="false" regexp="false"
+                          state="0">org.eclipse.swt.widgets.ToolItem</extrafeature>
+            <extrafeature name="qfs:genericclass" negate="false"
+                          regexp="false" state="0">ToolBarItem</extrafeature>
+            <extrafeature name="qfs:label" negate="false" regexp="false"
+                          state="1">Remove All Breakpoints</extrafeature>
+            <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                          state="0">org.eclipse.swt.widgets.ToolItem</extrafeature>
+          </ComponentStep>
+        </ComponentStep>
       </ComponentStep>
     </WindowStep>
     <WindowStep class="Dialog" engine="swt" feature="New" height="500"
