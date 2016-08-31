@@ -55,6 +55,7 @@ import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.common.DebuggerPluginVersionsChecker;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 
@@ -239,6 +240,8 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
         super.setDefaults(configuration);
         configuration.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND,
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PLUGIN_VERSION,
+                LaunchConfigurationConstants.DEBUGGER_PLUGIN_VERSION_NUMBER);
         configuration.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
                 IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
@@ -320,6 +323,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
+        DebuggerPluginVersionsChecker.getDebuggerPluginVersionsChecker().checkPluginVersion(configuration);
         createTabitemCOMBool = false;
         createTabitemCOMAshlingBool = false;
         createTabitemnSIMBool = false;
@@ -484,6 +488,8 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
             configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY,
                     getAttributeValueFromString(jtag_frequency));
 
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_PLUGIN_VERSION,
+                LaunchConfigurationConstants.DEBUGGER_PLUGIN_VERSION_NUMBER);
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
                 getAttributeValueFromString(ftdiDevice.name()));
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
