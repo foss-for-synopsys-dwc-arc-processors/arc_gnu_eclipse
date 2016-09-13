@@ -172,7 +172,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
            } else if (sID.indexOf(".option.debugging.other") > 0) {
                sDebugOther = sVal;
            } else if (sID.indexOf(".option.target.abiselection") > 0) {
-               sabi = sEnumCommand;
+//               sabi = sEnumCommand;
            } else if (sID.indexOf(".option.target.filefortcf") > 0) {
                sTCF = sVal;
            }
