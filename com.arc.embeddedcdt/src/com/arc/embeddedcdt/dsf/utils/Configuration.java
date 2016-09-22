@@ -48,8 +48,26 @@ public class Configuration {
         }
     }
 
+    private static int getAttribute(ILaunchConfiguration lc, String attribute, int defaultValue) {
+        try {
+            return lc.getAttribute(attribute, defaultValue);
+        } catch (CoreException e) {
+            e.printStackTrace();
+            return defaultValue;
+        }
+    }
+
     public static String getProgramName(ILaunchConfiguration lc) {
         return getAttribute(lc, ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME, "");
+    }
+
+    public static String getTimeStamp(ILaunchConfiguration lc){
+        return getAttribute(lc, LaunchConfigurationConstants.ATTR_TIMESTAMP, "");
+    }
+
+    public static int getFileFormatVersion(ILaunchConfiguration lc){
+        return getAttribute(lc, LaunchConfigurationConstants.ATTR_FILE_FORMAT_VERSION,
+                LaunchConfigurationConstants.UNREAL_FILE_FORMAT_VERSION);
     }
 
     public static String getGdbPath(ILaunchConfiguration lc) {

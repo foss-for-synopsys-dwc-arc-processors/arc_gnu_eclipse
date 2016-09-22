@@ -55,6 +55,7 @@ import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.common.LaunchFileFormatVersionChecker;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 
@@ -320,6 +321,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
+        LaunchFileFormatVersionChecker.getInstance().check(configuration);
         createTabitemCOMBool = false;
         createTabitemCOMAshlingBool = false;
         createTabitemnSIMBool = false;
@@ -484,6 +486,11 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
             configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY,
                     getAttributeValueFromString(jtag_frequency));
 
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FILE_FORMAT_VERSION,
+                LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
+        /* Because there is no setAttribute(String, long) method. */
+        configuration.setAttribute(LaunchConfigurationConstants.ATTR_TIMESTAMP,
+                String.format("%d", System.currentTimeMillis()));
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
                 getAttributeValueFromString(ftdiDevice.name()));
         configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
