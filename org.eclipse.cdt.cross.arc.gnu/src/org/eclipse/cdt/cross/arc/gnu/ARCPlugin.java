@@ -10,6 +10,8 @@
 
 package org.eclipse.cdt.cross.arc.gnu;
 
+import org.eclipse.cdt.cross.arc.gnu.common.StateListener;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
@@ -31,6 +33,7 @@ import org.osgi.framework.BundleContext;
    {
      super.start(oContext);
      m_oPlugin = this;
+     ResourcesPlugin.getWorkspace().addResourceChangeListener(StateListener.getInstance());
    }
  
    public void stop(BundleContext oContext) throws Exception {
