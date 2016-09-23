@@ -109,7 +109,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        String smul3216= null;
        String smxy= null;
 
-       String sabi= null;
        String sTCF= null;
        Boolean tcf_selected= (Boolean) null;
        Boolean tcf_map_selected= (Boolean) null;
@@ -171,8 +170,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sDebugFormat = sEnumCommand;
            } else if (sID.indexOf(".option.debugging.other") > 0) {
                sDebugOther = sVal;
-           } else if (sID.indexOf(".option.target.abiselection") > 0) {
-//               sabi = sEnumCommand;
            } else if (sID.indexOf(".option.target.filefortcf") > 0) {
                sTCF = sVal;
            }
@@ -294,9 +291,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
             }
             if (sll64 != null && !sll64.isEmpty()) {
                 oList_gcc_options.add(sll64);
-            }
-            if (sabi != null && !sabi.isEmpty()) {
-                oList.add(sabi);
             }
             if (sTCF != null && !sTCF.isEmpty()) {
                 oList_gcc_options.addAll(tcf_properties);

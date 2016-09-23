@@ -90,7 +90,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
        String smul3216= null;
        String smxy= null;
        String smlock= null;
-       String sabi= null;
        for (int i = 0; i < aoOptions.length; i++)
          {
          IOption oOption = aoOptions[i];
@@ -158,9 +157,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            else if ((sID.endsWith(".option.debugging.other")) || 
              (sID.indexOf(".option.debugging.other.") > 0))
              sDebugOther = sVal;
-           else if ((sID.endsWith(".option.target.abiselection")) || 
-                   (sID.indexOf(".option.target.abiselection.") > 0))
-                   sabi = sEnumCommand;
            }
            else if ((oValue instanceof Boolean)) {
              boolean bVal;
@@ -330,9 +326,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
        if ((sll64 != null) && (sll64.length() > 0)) {                
            oList.add(sll64);      
            }  
-       if ((sabi != null) && (sabi.length() > 0)) {                
-           oList.add(sabi);                                             
-           }
        if((sProcessor != null)){
     	   if (sProcessor.equalsIgnoreCase("-mcpu=arc700")&&oList.indexOf(sMPY)<0)
            {

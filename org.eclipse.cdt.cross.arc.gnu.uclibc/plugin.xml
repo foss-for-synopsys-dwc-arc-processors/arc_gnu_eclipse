@@ -542,24 +542,6 @@
                   name="Little Endian (-mlittle-endian)">
             </enumeratedOptionValue>
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.abiselection"
-               name="ABI selection "
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-mabi=std"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.abiselection.std"
-                  isDefault="true"
-                  name="Standard GNU ABI (-mabi=std)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mabi=mwabi"
-                  id="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.abiselection.mwabi"
-                  name="MetaWare ABI (-mabi=mwabi)">
-            </enumeratedOptionValue>
-         </option>
       </tool>
       <builder
             command="make"
@@ -2803,14 +2785,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.atomic"
                value="true">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.uclibc.linux.option.target.abiselection"
-               name="ABI selection "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.abiselection">
-         </option>
       </toolChain>
       <configuration
             cleanCommand="rm -rf"
@@ -3160,14 +3134,6 @@
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.atomic"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.uclibc.linux.option.target.abiselection"
-               name="ABI selection "
-               superClass="org.eclipse.cdt.cross.arc.gnu.uclibc.base.option.target.abiselection">
          </option>
       </toolChain>
       <configuration

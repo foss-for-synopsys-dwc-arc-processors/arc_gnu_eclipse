@@ -38,12 +38,11 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
 
     private static final String TCF_OPTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf";
     private static final String TCF_FILE_OPTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf";
-    private static final String ABI_SELECTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.abiselection";
     private static final String TCF_MEMORY_MAP = "org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf";
 
     private static final String[] TCF_RELATED_OPTIONS = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP };
     private static final String[] NOT_ARCHITECTURE_OPTIONS = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP,
-            TCF_OPTION_ID, ABI_SELECTION_ID };
+            TCF_OPTION_ID };
 
     private static final String[] LINKER_SCRIPT_IDS = { "org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile",
             "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" };
