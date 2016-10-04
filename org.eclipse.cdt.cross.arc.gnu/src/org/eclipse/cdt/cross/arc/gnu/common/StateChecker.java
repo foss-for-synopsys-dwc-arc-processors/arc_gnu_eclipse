@@ -96,12 +96,22 @@ public class StateChecker {
             + "Your compiler plug-in' state is %s, but this project was created with a "
             + "compiler state %s.", currentState, projectState);
 
-    final boolean isHeadless = System.getProperty("eclipse.application")
-        .equals("org.eclipse.cdt.managedbuilder.core.headlessbuild");
-    if (isHeadless) {
+    /* Try to use eclipse.application property to figure out if this is GUI or console run and to
+     * show user an error message in a proper way. Property may not be set, then it is unknown
+     * whether the GUI mode or headless is launched, therefore show warning both by creating marker
+     * and writing to the System.err. */
+    final String applicationProperty = System.getProperty("eclipse.application");
+    if (applicationProperty == null) {
       System.err.println(warningMsg);
-    } else {
       createMarker(project, warningMsg);
+    } else {
+      final boolean isHeadless =
+          applicationProperty.equals("org.eclipse.cdt.managedbuilder.core.headlessbuild");
+      if (isHeadless) {
+        System.err.println(warningMsg);
+      } else {
+        createMarker(project, warningMsg);
+      }
     }
   }
 
