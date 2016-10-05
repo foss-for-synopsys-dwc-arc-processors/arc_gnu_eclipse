@@ -48,8 +48,22 @@ public class Configuration {
         }
     }
 
+    private static int getAttribute(ILaunchConfiguration lc, String attribute, int defaultValue) {
+        try {
+            return lc.getAttribute(attribute, defaultValue);
+        } catch (CoreException e) {
+            e.printStackTrace();
+            return defaultValue;
+        }
+    }
+
     public static String getProgramName(ILaunchConfiguration lc) {
         return getAttribute(lc, ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME, "");
+    }
+
+    public static int getDebuggerPluginVersion(ILaunchConfiguration lc){
+        return getAttribute(lc, LaunchConfigurationConstants.ATTR_DEBUGGER_PLUGIN_VERSION,
+                LaunchConfigurationConstants.UNREAL_DEBUGGER_PLUGIN_VERSION_NUMBER);
     }
 
     public static String getGdbPath(ILaunchConfiguration lc) {

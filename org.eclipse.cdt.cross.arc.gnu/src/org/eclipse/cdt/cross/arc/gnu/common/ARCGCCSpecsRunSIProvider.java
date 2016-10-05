@@ -23,23 +23,25 @@ public class ARCGCCSpecsRunSIProvider extends GCCSpecsRunSIProvider {
 
     @Override
     protected String[] setEnvironment(ICommandLauncher launcher, Properties initialEnv) {
+        CompilerPluginVersionsChecker.getCompilerPluginVersionsChecker()
+                .checkPluginVersions(collector);
+
         // Ensure that we have properties.
         Properties props = initialEnv != null ? initialEnv : launcher.getEnvironment();
-        
+
         // Get an absolute path to ../bin.
         String eclipsehome = Platform.getInstallLocation().getURL().getPath();
         File predefined_path_dir = new File(eclipsehome).getParentFile();
-        String predefined_path = predefined_path_dir + File.separator + "bin"+File.separator;
-        
+        String predefined_path = predefined_path_dir + File.separator + "bin" + File.separator;
         // Append ../bin to PATH.
-        if(props!=null){
-        String path = props.getProperty("PATH");
-        if (path!=null&& !path.endsWith(predefined_path)) {
-            path = path + File.pathSeparatorChar + predefined_path;
-            props.setProperty("PATH", path);
+        if (props != null) {
+            String path = props.getProperty("PATH");
+            if (path != null && !path.endsWith(predefined_path)) {
+                path = path + File.pathSeparatorChar + predefined_path;
+                props.setProperty("PATH", path);
+            }
         }
-        }
-        
+
         // Use super-class method to do the rest.
         return super.setEnvironment(launcher, initialEnv);
     }

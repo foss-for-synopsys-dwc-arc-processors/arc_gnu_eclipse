@@ -25,6 +25,7 @@ public interface LaunchConfigurationConstants {
             + ".debugger_build_before_launch";
     static final boolean ATTR_DEBUGGER_BUILD_BEFORE_LAUNCH_DEFAULT = true;
 
+    String ATTR_DEBUGGER_PLUGIN_VERSION = LAUNCH_ID + ".debugger_plugin_version";
     String ATTR_DEBUGGER_COMMANDS_INIT = LAUNCH_ID + ".debugger_init_commands"; //$NON-NLS-1$
     String ATTR_DEBUGGER_COMMANDS_RUN = LAUNCH_ID + ".debugger_run_commands"; //$NON-NLS-1$
     String ATTR_DEBUGGER_COMMANDS_LAUNCH = LAUNCH_ID + ".debugger_lauch_commands"; //$NON-NLS-1$
@@ -57,6 +58,11 @@ public interface LaunchConfigurationConstants {
     String ATTR_JTAG_FREQUENCY = LAUNCH_ID + ".jtag_frequency"; //$NON-NLS-1$
     String ATTR_FTDI_DEVICE = LAUNCH_ID + ".ftdi_device"; //$NON-NLS-1$
     String ATTR_FTDI_CORE = LAUNCH_ID + ".ftdi_core"; //$NON-NLS-1$
+
+    static final int UNREAL_DEBUGGER_PLUGIN_VERSION_NUMBER = -1;
+
+    // These version number should be incremented when incompatible changes appear in the debugger plug-in.
+    static final int DEBUGGER_PLUGIN_VERSION_NUMBER = 1;
 
     // Default option values
     static final String DEFAULT_OPENOCD_PORT = "49105";

@@ -25,6 +25,7 @@ import org.eclipse.debug.core.model.ISourceLocator;
 
 import com.arc.embeddedcdt.dsf.utils.DebugUtils;
 import com.arc.embeddedcdt.launch.LaunchTerminator;
+import com.arc.embeddedcdt.common.DebuggerPluginVersionsChecker;
 
 /**
  * Launch delegate for DSF/GDB debugger.
@@ -63,6 +64,7 @@ public class ArcLaunchDelegate extends GdbLaunchDelegate {
     public void launch(ILaunchConfiguration config, String mode, ILaunch launch,
             IProgressMonitor monitor) throws CoreException {
 
+        DebuggerPluginVersionsChecker.getDebuggerPluginVersionsChecker().checkPluginVersion(config);
         if (monitor == null) {
             monitor = new NullProgressMonitor();
         }
