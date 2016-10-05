@@ -89,10 +89,10 @@ public class StateChecker {
 
   private void warnUser(final IProject project,final String currentState, String projectState) {
     final String warningMsg = projectState.equals(UNREAL_STATE)
-        ? String.format("Compatibility issues are possible.\n"
+        ? String.format("Compatibility issues are possible. "
             + "Your compiler plug-in' state is %s, but this project was created with an "
             + "older compiler plug-in' state.", currentState)
-        : String.format("Compatibility issues are possible.\n"
+        : String.format("Compatibility issues are possible. "
             + "Your compiler plug-in' state is %s, but this project was created with a "
             + "compiler state %s.", currentState, projectState);
 
