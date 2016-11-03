@@ -538,7 +538,7 @@ rc.setLocal("portNum", portNum)</code>
         </CheckStringStep>
         <CheckStringStep checktype="item" client="$(client)"
                          component="Console.textCDT_Build_Console@$(quote)Finished building: ../src/$(projectName).$(extension)$(quote)"
-                         id="_2JRe" raise="true" timeout="1000">
+                         id="_2JRe" raise="true" timeout="5000">
           <text>$(quote)Finished building: ../src/$(projectName).$(extension)$(quote)</text>
         </CheckStringStep>
         <CheckStringStep checktype="item" client="$(client)"
