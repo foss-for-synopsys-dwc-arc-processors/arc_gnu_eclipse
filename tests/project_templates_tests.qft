@@ -1671,6 +1671,12 @@ efzYJxs/LF+2YmVZ7eBPGA0/PXHiWDjyfwBnTrKL</binary>
                   <variable name="newline">\n</variable>
                 </ProcedureCall>
               </CatchSequence>
+              <CatchSequence exception="ModalDialogException" id="_2JZz"
+                             maxerror="0">
+                <MouseEventStep clicks="1" client="$(client)"
+                                component="buttonOk5" event="MOUSE_MPRC"
+                                id="_2JZ-" modifiers="16"/>
+              </CatchSequence>
             </TryStep>
           </CatchSequence>
         </TryStep>
@@ -2053,9 +2059,25 @@ rc.setLocal("toolchain", toolchain)</code>
                         component="fileSystemImportPage1.tableFile_system&amp;0@$(sourceFile)"
                         disabled="true" event="MOUSE_MPRC" id="_2JS+"
                         modifiers="16"/>
-        <MouseEventStep clicks="1" client="$(client)"
-                        component="buttonSelect_All" event="MOUSE_MPRC"
-                        id="_2JXz" modifiers="16"/>
+        <TryStep id="_2Ja3">
+          <MouseEventStep clicks="1" client="$(client)"
+                          component="buttonSelect_All" event="MOUSE_MPRC"
+                          id="_2JXz" modifiers="16"/>
+          <CatchSequence exception="TestException" id="_2Ja6" maxerror="0">
+            <SelectionEventStep client="$(client)"
+                                component="dialogImport_from_directory"
+                                detail="C:\Workspace\arc_gnu_eclipse\tests\src"
+                                event="SELECTION" id="_2JaJ"/>
+            <MouseEventStep clicks="1" client="$(client)"
+                            component="FileSystemImportWizard"
+                            event="MOUSE_MPRC" id="_2JaK" modifiers="16"
+                            x="311" y="309"/>
+            <MouseEventStep clicks="1" client="$(client)"
+                            component="fileSystemImportPage1.treeFrom_directory:@/src"
+                            event="MOUSE_MPRC" id="_2JaL" modifiers="16"
+                            x="-22" y="8"/>
+          </CatchSequence>
+        </TryStep>
         <MouseEventStep clicks="1" client="$(client)"
                         component="buttonBrowse...10" event="MOUSE_MPRC"
                         id="_2JSl" modifiers="16"/>
@@ -2102,7 +2124,22 @@ rc.setLocal("toolchain", toolchain)</code>
       </ProcedureCall>
     </Procedure>
   </PackageRoot>
-  <ExtraSequence id="_4"/>
+  <ExtraSequence id="_4">
+    <BasicSequence id="_2JZ+" name="Recorded 10/21/16 8:09 PM"/>
+    <BasicSequence id="_2JaF" name="Recorded 10/28/16 6:02 PM">
+      <SelectionEventStep client="$(client)"
+                          component="dialogImport_from_directory"
+                          detail="C:\Workspace\arc_gnu_eclipse\tests\src"
+                          event="SELECTION" id="_2JaG"/>
+      <MouseEventStep clicks="1" client="$(client)"
+                      component="FileSystemImportWizard" event="MOUSE_MPRC"
+                      id="_2JaH" modifiers="16" x="311" y="309"/>
+      <MouseEventStep clicks="1" client="$(client)"
+                      component="fileSystemImportPage1.treeFrom_directory:@/src"
+                      event="MOUSE_MPRC" id="_2JaI" modifiers="16" x="-22"
+                      y="8"/>
+    </BasicSequence>
+  </ExtraSequence>
   <WindowList id="_5">
     <WindowStep class="Window" engine="swt" feature="C/C++ - Eclipse"
                 height="768" id="WorkbenchWindow" name="WorkbenchWindow"
@@ -5844,6 +5881,18 @@ can be associated with a toolchain.</extrafeature>
                         state="1">Select All</extrafeature>
           <extrafeature name="qfs:systemclass" negate="false" regexp="false"
                         state="0">org.eclipse.swt.widgets.Button</extrafeature>
+        </ComponentStep>
+        <ComponentStep class="Tree" classcount="1" classindex="0" height="171"
+                       id="fileSystemImportPage1.treeFrom_directory:"
+                       uid="_2JaE" width="291" x="5" y="45">
+          <extrafeature name="qfs:class" negate="false" regexp="false"
+                        state="0">org.eclipse.swt.widgets.Tree</extrafeature>
+          <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                        state="0">Tree</extrafeature>
+          <extrafeature name="qfs:label" negate="false" regexp="false"
+                        state="1">From directory:</extrafeature>
+          <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                        state="0">org.eclipse.swt.widgets.Tree</extrafeature>
         </ComponentStep>
       </ComponentStep>
       <ComponentStep class="Button" classcount="4" classindex="3"
