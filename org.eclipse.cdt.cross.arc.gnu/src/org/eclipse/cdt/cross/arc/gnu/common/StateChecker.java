@@ -88,13 +88,11 @@ public class StateChecker {
     }
 
   private void warnUser(final IProject project,final String currentState, String projectState) {
-    final String warningMsg = projectState.equals(UNREAL_STATE)
-        ? String.format("Compatibility issues are possible. "
-            + "Your compiler plug-in' state is %s, but this project was created with an "
-            + "older compiler plug-in' state.", currentState)
-        : String.format("Compatibility issues are possible. "
-            + "Your compiler plug-in' state is %s, but this project was created with a "
-            + "compiler state %s.", currentState, projectState);
+    final String warningMsg = String.format(
+        "This project was created with an incompatible version of ARC plug-in."
+        + " Supported version of a project file is %s, but it is %s.",
+        currentState, 
+        projectState.equals(UNREAL_STATE) ? "an older one" : projectState);
 
     /* Try to use eclipse.application property to figure out if this is GUI or console run and to
      * show user an error message in a proper way. Property may not be set, then it is unknown
