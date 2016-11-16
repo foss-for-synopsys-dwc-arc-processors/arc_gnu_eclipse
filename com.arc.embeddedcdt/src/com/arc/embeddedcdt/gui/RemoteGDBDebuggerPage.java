@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.eclipse.cdt.dsf.gdb.internal.ui.launching.GdbDebuggerPage;
+import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
 import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
@@ -56,6 +57,7 @@ import org.eclipse.ui.internal.Workbench;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.common.LaunchFileFormatVersionChecker;
+import com.arc.embeddedcdt.dsf.utils.Configuration;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 
@@ -471,6 +473,9 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
     @Override
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
         super.performApply(configuration);
+        final String programName = Configuration.getProgramName(configuration);
+        configuration.setAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME,
+            programName.replace('\\', '/'));
         if (!groupnsim.isDisposed()) {
             fWorkingDirectoryBlockNSim.performApply(configuration);
         }
