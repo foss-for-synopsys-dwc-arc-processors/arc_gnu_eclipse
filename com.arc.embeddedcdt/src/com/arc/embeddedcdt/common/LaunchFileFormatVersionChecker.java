@@ -62,16 +62,12 @@ public class LaunchFileFormatVersionChecker {
 
   private void warnUser(final ILaunchConfiguration launchCfg, final int currentFileVersion,
       final int cfgFileVersion) {
-    final String warningMsg =
-        cfgFileVersion == LaunchConfigurationConstants.UNREAL_FILE_FORMAT_VERSION
-            ? String.format("Compatibility issues are possible. "
-                + "Your launch configuration's file format version is %d, but this launch "
-                + "configuration was created with a debugger plug-in with an older file format"
-                + " version.", currentFileVersion)
-            : String.format("Compatibility issues are possible. "
-                + "Your launch configuration's file format version is %d, but this launch "
-                + "configuration was created with a debugger plug-in with the file format "
-                + "version %d.\n", currentFileVersion, cfgFileVersion);
+    final String warningMsg = String.format(
+        "This launch configuration was created with an incompatible version of ARC plug-in."
+        + " Supported version of a launch configuration file is %d, but it is %s.",
+        currentFileVersion,
+        (cfgFileVersion == LaunchConfigurationConstants.UNREAL_FILE_FORMAT_VERSION ? "an older one"
+            : cfgFileVersion));
 
     /* Try to use eclipse.application property to figure out if this is GUI or console run and to
      * show user an error message in a proper way. Property may not be set, then it is unknown
