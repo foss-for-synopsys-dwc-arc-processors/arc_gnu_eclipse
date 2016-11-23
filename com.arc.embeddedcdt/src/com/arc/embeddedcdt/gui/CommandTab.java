@@ -29,8 +29,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
-import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
 
 public class CommandTab extends CLaunchConfigurationTab {
 
@@ -122,10 +123,9 @@ public class CommandTab extends CLaunchConfigurationTab {
      * ILaunchConfigurationWorkingCopy)
      */
     public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,
-                (String) null);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN,
-                (String) null);
+        ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
+        cfgWriter.setUserInitCommands(null);
+        cfgWriter.setUserRunCommands(null);
 
     }
 
@@ -136,16 +136,9 @@ public class CommandTab extends CLaunchConfigurationTab {
      * ILaunchConfiguration)
      */
     public void initializeFrom(ILaunchConfiguration configuration) {
-        try {
-            fPrgmArgumentsTextInit.setText(configuration
-                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT, ""));
-            fPrgmArgumentsTextRun.setText(configuration
-                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, ""));
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        ConfigurationReader cfgReader = new ConfigurationReader(configuration);
+        fPrgmArgumentsTextInit.setText(cfgReader.getUserInitCommands());
+        fPrgmArgumentsTextRun.setText(cfgReader.getUserRunCommands());
     }
 
     /*
@@ -155,10 +148,9 @@ public class CommandTab extends CLaunchConfigurationTab {
      * ILaunchConfigurationWorkingCopy)
      */
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_INIT,
-                initcom);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COMMANDS_RUN, runcom);
-
+        ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
+        cfgWriter.setUserInitCommands(initcom);
+        cfgWriter.setUserRunCommands(runcom);
     }
 
     /*

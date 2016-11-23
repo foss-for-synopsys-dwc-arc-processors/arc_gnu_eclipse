@@ -21,7 +21,7 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.gui.ARCWorkingDirectoryBlock;
 
 public class NsimBackend extends GdbServerBackend {
@@ -37,46 +37,46 @@ public class NsimBackend extends GdbServerBackend {
     @Override
     public String getCommandLine() {
 
-        String nsimPath = Configuration.getNsimPath(launchConfiguration);
-        String gdbServerPort = Configuration.getGdbServerPort(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        String nsimPath = cfgReader.getNsimPath();
+        String gdbServerPort = cfgReader.getGdbServerPort();
         StringBuffer commandLine = new StringBuffer();
         commandLine.append(String.format(commandLineTemplate, nsimPath, gdbServerPort));
 
-        boolean simulateMemoryExceptions = Configuration
-                .getNsimSimulateMemoryExceptions(launchConfiguration);
+        boolean simulateMemoryExceptions = cfgReader.getNsimSimulateMemoryExceptions();
         if (!simulateMemoryExceptions) {
             commandLine.append(" -off memory_exception_interrupt");
         }
-        boolean simulateExceptions = Configuration.getNsimSimulateExceptions(launchConfiguration);
+        boolean simulateExceptions = cfgReader.getNsimSimulateExceptions();
         if (!simulateExceptions) {
             commandLine.append(" -off enable_exceptions");
         }
-        boolean simulateInvalidInstExceptions = Configuration
-                .getNsimSimulateInvalidInstructionExceptions(launchConfiguration);
+        boolean simulateInvalidInstExceptions = cfgReader
+                .getNsimSimulateInvalidInstructionExceptions();
         if (!simulateInvalidInstExceptions) {
             commandLine.append(" -off invalid_instruction_interrupt");
         }
-        boolean useJit = Configuration.getNsimUseJit(launchConfiguration);
+        boolean useJit = cfgReader.getNsimUseJit();
         if (useJit) {
-            String jitThreads = Configuration.getNsimJitThreads(launchConfiguration);
+            String jitThreads = cfgReader.getNsimJitThreads();
             commandLine.append(" -on nsim_fast");
             if (!jitThreads.equals("1")) {
                 commandLine.append(" -p nsim_fast-num-threads=").append(jitThreads);
             }
         }
-        boolean useHostLink = Configuration.getNsimUseNsimHostlink(launchConfiguration);
+        boolean useHostLink = cfgReader.getNsimUseNsimHostlink();
         if (useHostLink) {
             commandLine.append(" -on nsim_emt");
         }
 
-        boolean useTcf = Configuration.getNsimUseTcf(launchConfiguration);
+        boolean useTcf = cfgReader.getNsimUseTcf();
         if (useTcf) {
-            String tcfPath = Configuration.getNsimTcfPath(launchConfiguration);
+            String tcfPath = cfgReader.getNsimTcfPath();
             commandLine.append(" -tcf ").append(tcfPath);
         }
-        boolean useProps = Configuration.getNsimUseProps(launchConfiguration);
+        boolean useProps = cfgReader.getNsimUseProps();
         if (useProps) {
-            String propsPath = Configuration.getNsimPropsPath(launchConfiguration);
+            String propsPath = cfgReader.getNsimPropsPath();
             commandLine.append(" -propsfile ").append(propsPath);
         }
         return commandLine.toString();
@@ -89,8 +89,8 @@ public class NsimBackend extends GdbServerBackend {
 
     @Override
     public File getWorkingDirectory() {
-        String workingDirectoryPath = Configuration
-                .getNsimWorkingDirectoryPath(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        String workingDirectoryPath = cfgReader.getNsimWorkingDirectoryPath();
         File workingDir = new File(System.getProperty("user.dir"));
 
         try {

@@ -35,7 +35,7 @@ import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.BundleContext;
 
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 /**
  * DSF service for connecting to the UART on the board and opening Terminal view in Eclipse.
@@ -64,7 +64,8 @@ public class TerminalService extends AbstractDsfService {
     public TerminalService(DsfSession session) {
         super(session);
         ILaunch launch = (ILaunch) session.getModelAdapter(ILaunch.class);
-        String serialPort = Configuration.getComPort(launch.getLaunchConfiguration());
+        ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+        String serialPort = cfgReader.getComPort();
         properties.put(ITerminalsConnectorConstants.PROP_SERIAL_DEVICE, serialPort);
         connector = delegate.createTerminalConnector(properties);
     }

@@ -37,7 +37,7 @@ import org.osgi.framework.BundleContext;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 /**
  * DSF service containing GDB server-related logic:
@@ -72,7 +72,8 @@ public abstract class GdbServerBackend extends GDBBackend {
 
     // For OpenOCD on AXS10x this port might be different from the one in the launch configuration
     protected String getPortToConnect() {
-        return Configuration.getGdbServerPort(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        return cfgReader.getGdbServerPort();
     }
 
     protected String getHostAddress() {

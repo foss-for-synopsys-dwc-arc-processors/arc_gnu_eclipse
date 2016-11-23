@@ -246,4 +246,9 @@ public class ConfigurationReader {
     }
   }
 
+  public <T> T getOrDefault(final T defaultValue,final T empty,final T actual){
+    if (actual.equals(empty))
+      return defaultValue;
+    return actual;
+  }
 }

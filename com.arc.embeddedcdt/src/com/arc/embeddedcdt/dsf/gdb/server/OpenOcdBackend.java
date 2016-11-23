@@ -18,7 +18,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 public class OpenOcdBackend extends GdbServerBackend {
 
@@ -44,8 +44,9 @@ public class OpenOcdBackend extends GdbServerBackend {
     @Override
     protected String getPortToConnect() {
         int gdbPort = Integer.parseInt(super.getPortToConnect());
-        FtdiDevice ftdiDevice = Configuration.getFtdiDevice(launchConfiguration);
-        FtdiCore ftdiCore = Configuration.getFtdiCore(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        FtdiDevice ftdiDevice = cfgReader.getFtdiDevice();
+        FtdiCore ftdiCore = cfgReader.getFtdiCore();
 
         if ((ftdiDevice == FtdiDevice.AXS101 && ftdiCore == FtdiCore.EM6)
                 || (ftdiDevice == FtdiDevice.AXS102 && ftdiCore == FtdiCore.HS34)
@@ -62,9 +63,10 @@ public class OpenOcdBackend extends GdbServerBackend {
     @Override
     public String getCommandLine() {
 
-        String openOcdPath = Configuration.getOpenOcdPath(launchConfiguration);
-        String gdbPort = Configuration.getGdbServerPort(launchConfiguration);
-        String openOcdConfig = Configuration.getOpenOcdConfig(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        String openOcdPath = cfgReader.getOpenOcdPath();
+        String gdbPort = cfgReader.getGdbServerPort();
+        String openOcdConfig = cfgReader.getOpenOcdConfig();
 
         final File rootDir = new File(openOcdPath).getParentFile().getParentFile();
         final File scriptsDir = new File(rootDir,

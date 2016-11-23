@@ -46,7 +46,7 @@ import org.eclipse.debug.core.ILaunchManager;
 
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.common.ArcGdbServer;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 /**
  * Sequence executed by DSF that has steps to launch GDB and GDB servers, pass arguments to GDB and
@@ -221,7 +221,8 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
 
     @Execute
     public void stepSpecifyFileToDebug(final RequestMonitor rm) {
-        String command = "file " + Configuration.getProgramName(launch.getLaunchConfiguration());
+        ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+        String command = "file " + cfgReader.getProgramName();
         queueCommands(Arrays.asList(command), rm);
     }
 
@@ -229,7 +230,8 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
     @Execute
     public void stepUserInitCommands(final RequestMonitor rm) {
         try {
-            String userCmd = Configuration.getUserInitCommands(launch.getLaunchConfiguration());
+            ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+            String userCmd = cfgReader.getUserInitCommands();
             userCmd = VariablesPlugin.getDefault().getStringVariableManager()
                     .performStringSubstitution(userCmd);
             if (userCmd.length() > 0) {
@@ -301,7 +303,8 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
     @Execute
     public void stepUserDebugCommands(final RequestMonitor rm) {
         try {
-            String userCmd = Configuration.getUserRunCommands(launch.getLaunchConfiguration());
+            ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+            String userCmd = cfgReader.getUserRunCommands();
             if (!userCmd.isEmpty()) {
                 userCmd = VariablesPlugin.getDefault().getStringVariableManager()
                         .performStringSubstitution(userCmd);
@@ -374,9 +377,10 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
             rm.done();
             return;
         }
-        boolean stopAtMain = Configuration.doStopAtMain(launch.getLaunchConfiguration());
+        ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+        boolean stopAtMain = cfgReader.doStopAtMain();
         if (stopAtMain) {
-            String stopSymbol = Configuration.getStopSymbol(launch.getLaunchConfiguration());
+            String stopSymbol = cfgReader.getStopSymbol();
             queueCommands(Arrays.asList("tbreak " + stopSymbol), rm);
         } else {
             rm.done();
@@ -390,9 +394,10 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
 
     @Execute
     public void stepStartTerminal(final RequestMonitor rm) {
-        ArcGdbServer gdbServer = Configuration.getGdbServer(launch.getLaunchConfiguration());
-        String serialPort = Configuration.getComPort(launch.getLaunchConfiguration());
-        if (Configuration.doLaunchTerminal(launch.getLaunchConfiguration())
+        ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+        ArcGdbServer gdbServer = cfgReader.getGdbServer();
+        String serialPort = cfgReader.getComPort();
+        if (cfgReader.doLaunchTerminal()
                 && gdbServer != ArcGdbServer.NSIM && !serialPort.isEmpty()) {
             new TerminalService(session).initialize(rm);
         } else {

@@ -84,6 +84,10 @@ public class ConfigurationWriter {
     setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_USE_DEFAULT_DIRECTORY, value);
   }
 
+  public void setNsimUseNsimHostLink(final boolean value) {
+    setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, value);
+  }
+
   public void setGdbServer(final String value) {
     setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, value);
   }
@@ -182,6 +186,18 @@ public class ConfigurationWriter {
 
   public void setFtdiCore(final String value) {
     setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE, value);
+  }
+
+  public void setGdbServerCommand(final String value) {
+    setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND, value);
+  }
+
+  public void setDoLaunchTerminal(final boolean value){
+    setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, value);
+  }
+
+  public void setNsimDefaultPath(final String value){
+    setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, value);
   }
 
 }

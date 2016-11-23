@@ -16,7 +16,7 @@ import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 public class AshlingBackend extends GdbServerBackend {
 
@@ -33,10 +33,11 @@ public class AshlingBackend extends GdbServerBackend {
     @Override
     public String getCommandLine() {
 
-        String ashlingPath = Configuration.getAshlingPath(launchConfiguration);
-        String gdbServerPort = Configuration.getGdbServerPort(launchConfiguration);
-        String ashlingXmlFile = Configuration.getAshlingXmlPath(launchConfiguration);
-        String jtagFrequency = Configuration.getAshlingJtagFrequency(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        String ashlingPath = cfgReader.getAshlingPath();
+        String gdbServerPort = cfgReader.getGdbServerPort();
+        String ashlingXmlFile = cfgReader.getAshlingXmlPath();
+        String jtagFrequency = cfgReader.getAshlingJtagFrequency();
 
         String commandLine = String.format(commandLineTemplate, ashlingPath, jtagFrequency,
                 gdbServerPort, ashlingXmlFile);
@@ -50,13 +51,15 @@ public class AshlingBackend extends GdbServerBackend {
 
     @Override
     public String getCommandToConnect() {
-        return "set tdesc filename " + Configuration.getAshlingTDescPath(launchConfiguration) + "\n"
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        return "set tdesc filename " + cfgReader.getAshlingTDescPath() + "\n"
                 + super.getCommandToConnect();
     }
 
     @Override
     public File getWorkingDirectory() {
-        return new File(Configuration.getAshlingPath(launchConfiguration)).getParentFile();
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        return new File(cfgReader.getAshlingPath()).getParentFile();
     }
 
 }

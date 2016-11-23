@@ -65,7 +65,7 @@ public interface LaunchConfigurationConstants {
 
     /* This file format number should be incremented when incompatible changes appear in the
        debugger plug-in. */
-    static final int CURRENT_FILE_FORMAT_VERSION = 1;
+    static final int CURRENT_FILE_FORMAT_VERSION = 2;
 
     // Default option values
     static final String DEFAULT_OPENOCD_PORT = "49105";

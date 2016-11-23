@@ -17,7 +17,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 /**
  * This class is intended for checking the debugger's file format version and notifying user if his
@@ -48,11 +48,12 @@ public class LaunchFileFormatVersionChecker {
   }
 
   public void check(final ILaunchConfiguration launchCfg) {
-    final String timestamp = Configuration.getTimeStamp(launchCfg);
-    /* timestamp.isEmpty()_== true means the debug configuration is now creating. */
+    final ConfigurationReader cfgReader = new ConfigurationReader(launchCfg);
+    final String timestamp = cfgReader.getTimeStamp();
+    /* timestamp.isEmpty() == true means the debug configuration is now creating. */
     if (!timestamp.isEmpty() && !seenTimestamps.contains(timestamp)) {
       seenTimestamps.add(timestamp);
-      final int cfgFileVersion = Configuration.getFileFormatVersion(launchCfg);
+      final int cfgFileVersion = cfgReader.getFileFormatVersion();
       if (cfgFileVersion != LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION) {
         warnUser(launchCfg, LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION,
             cfgFileVersion);

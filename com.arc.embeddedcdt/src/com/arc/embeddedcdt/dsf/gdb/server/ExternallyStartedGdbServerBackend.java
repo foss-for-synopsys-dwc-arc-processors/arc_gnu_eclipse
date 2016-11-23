@@ -14,7 +14,7 @@ import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 public class ExternallyStartedGdbServerBackend extends GdbServerBackend {
 
@@ -40,7 +40,8 @@ public class ExternallyStartedGdbServerBackend extends GdbServerBackend {
 
     @Override
     protected String getHostAddress() {
-        return Configuration.getHostAddress(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        return cfgReader.getHostAddress();
     }
 
 }

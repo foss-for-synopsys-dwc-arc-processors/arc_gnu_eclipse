@@ -57,7 +57,8 @@ import org.eclipse.ui.internal.Workbench;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.common.LaunchFileFormatVersionChecker;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
 import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 
@@ -163,7 +164,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
     private Boolean createTabItemCustomGdbBool=false;
 
 
-    protected Label nSIMpropslabel;
+    protected Button nSIMpropslabel;
 
     // This button is for browsing the prop files for nSIM.
     protected Button fnSIMpropslButton;
@@ -175,7 +176,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
     protected Button fLaunchPropsButton;
 
     // This variable is to get external tools current status (Enable/disable).
-    private String fLaunchexternal_nsimprops_Buttonboolean = "true";
+    private boolean fLaunchexternal_nsimprops_Buttonboolean = true;
 
     // This button is for launching the Properties file for nSIM.
     protected Button fLaunchtcfButton;
@@ -195,7 +196,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
     // This button is for launching the Properties file for nSIM Enable Exception.
     protected Button fLaunchEnableExptButton;
 
-    protected Label nSIMtcflabel;
+    protected Button nSIMtcflabel;
 
     // This button is for browsing the TCF files for nSIM.
     protected Button fnSIMtcfButton;
@@ -204,23 +205,23 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
     private String nSIMtcffiles_last = "";
 
     // This variable is to get external tools current status (Enable/disable).
-    private String fLaunchexternal_nsimtcf_Buttonboolean = "true";
+    private boolean fLaunchexternal_nsimtcf_Buttonboolean = true;
 
     // This variable is to get nSIM JIT current status (Enable/disable).
-    private String fLaunchexternal_nsimjit_Buttonboolean = "true";
+    private boolean fLaunchexternal_nsimjit_Buttonboolean = true;
 
     // This variable is to get nSIM GNU hostlink tools current status (Enable/disable).
-    private String fLaunchexternal_nsimhostlink_Buttonboolean = "true";
+    private boolean fLaunchexternal_nsimhostlink_Buttonboolean = true;
 
     // This variable is to get nSIM memory exception tools current status (Enable/disable).
-    private String fLaunchexternal_nsimMemoExceButtonboolean = "true";
+    private boolean fLaunchexternal_nsimMemoExceButtonboolean = true;
 
     // This variable is to get nSIM memory exception tools current status (Enable/disable).
-    private String fLaunchexternal_nsimEnableExceButtonboolean = "true";
+    private boolean fLaunchexternal_nsimEnableExceButtonboolean = true;
 
     // This variable is to get nSIM Invalid Instruction exception tools current status
     // (Enable/disable).
-    private String fLaunchexternal_nsiminvainstruExceButtonboolean = "true";
+    private boolean fLaunchexternal_nsiminvainstruExceButtonboolean = true;
 
     private String externaltools_ashling_path = "";
     private String Ashling_xml_path = "";
@@ -239,32 +240,22 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
     @Override
     public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-        super.setDefaults(configuration);
-        configuration.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND,
-                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
-        configuration.setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT,
-                IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                ArcGdbServer.DEFAULT_GDB_SERVER.toString());
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
-                default_oocd_cfg);
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
-                (String) null);
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, (String) null);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,
-                (String) null);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH,
-                getNsimdrvDefaultPath());
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
-                default_oocd_bin);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
-                LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
-                LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME);
+      super.setDefaults(configuration);
+      ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
+      cfgWriter.setGdbServerCommand(
+          IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
+      cfgWriter.setGdbServerPort(
+          IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
+      cfgWriter.setGdbServer(ArcGdbServer.DEFAULT_GDB_SERVER.toString());
+      cfgWriter.setOpenOcdConfig(default_oocd_cfg);
+      cfgWriter.setAshlingPath("");
+      cfgWriter.setNsimPath("");
+      cfgWriter.setDoLaunchTerminal(false);
+      cfgWriter.setNsimDefaultPath(getNsimdrvDefaultPath());
+      cfgWriter.setOpenOcdPath(default_oocd_bin);
+      cfgWriter.setAshlingJtagFrequency("");
+      cfgWriter.setFtdiDevice(LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME);
+      cfgWriter.setFtdiCore(LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME);
     }
 
     /**
@@ -330,150 +321,97 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
         createTabItemGenericGDBServerBool = false;
         createTabItemCustomGdbBool=false;
         super.initializeFrom(configuration);
+        ConfigurationReader cfgReader = new ConfigurationReader(configuration);
+        gdb_path = cfgReader.getOrDefault(getDefaultGdbPath(), "", cfgReader.getGdbPath());
+        fGDBCommandText.setText(gdb_path);
+        openocd_bin_path = cfgReader.getOrDefault(default_oocd_bin, "", cfgReader.getOpenOcdPath());
+        jtag_frequency = cfgReader.getAshlingJtagFrequency();
+        ftdiDevice = cfgReader.getFtdiDevice();
+        ftdiCore = cfgReader.getFtdiCore();
+        gdbServer = cfgReader.getGdbServer();
+        openocd_cfg_path = cfgReader.getOrDefault(default_oocd_cfg, "", cfgReader.getOpenOcdConfig());
 
-        try {
+        String default_ashling_path = isWindowsOS() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
+                : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
+        externaltools_ashling_path =
+            cfgReader.getOrDefault(default_ashling_path, "", cfgReader.getAshlingPath());
 
-            gdb_path = configuration.getAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
-                    "");
-            if (gdb_path.isEmpty()) {
-                gdb_path = getDefaultGdbPath();
+        String ash_xml_path = new File(default_ashling_path).getParentFile().getPath()
+                + java.io.File.separator + "arc-cpu-em.xml";
+        Ashling_xml_path =
+            cfgReader.getOrDefault(Ashling_xml_path, "", cfgReader.getAshlingXmlPath());
+        String defaultTDescPath = new File(default_ashling_path).getParentFile().getPath()
+                + java.io.File.separator + "opella-arcem-tdesc.xml";
+        ashlingTDescPath =
+            cfgReader.getOrDefault(defaultTDescPath, "", cfgReader.getAshlingTDescPath());
+        externaltools_nsim_path =
+            cfgReader.getOrDefault(getNsimdrvDefaultPath(), "", cfgReader.getNsimPath());
+
+        customGdbPath = cfgReader.getCustomGdbServerPath();
+        customGdbCommandArgs = cfgReader.getCustomGdbServerArgs();
+
+        fWorkingDirectoryBlockNSim.initializeFrom(configuration);
+
+        fLaunchexternal_nsimjit_Buttonboolean = cfgReader.getNsimUseJit();
+        fLaunchexternal_nsimhostlink_Buttonboolean = cfgReader.getNsimUseNsimHostlink();
+        fLaunchexternal_nsimEnableExceButtonboolean = cfgReader.getNsimSimulateExceptions();
+        fLaunchexternal_nsiminvainstruExceButtonboolean =
+            cfgReader.getNsimSimulateInvalidInstructionExceptions();
+        fLaunchexternal_nsimMemoExceButtonboolean = cfgReader.getNsimSimulateMemoryExceptions();
+        fLaunchexternal_nsimprops_Buttonboolean = cfgReader.getNsimUseProps();
+        fLaunchexternal_nsimtcf_Buttonboolean = cfgReader.getNsimUseTcf();
+
+        nSIMpropsfiles_last = cfgReader.getNsimPropsPath();
+        nSIMtcffiles_last = cfgReader.getNsimTcfPath();
+        JITthread = cfgReader.getNsimJitThreads();
+
+        fPrgmArgumentsComboInit.setText(gdbServer.toString());
+
+        if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
+            if (cfgReader.getAshlingJtagFrequency().isEmpty()) {
+                fPrgmArgumentsJTAGFrenCombo.setText(fPrgmArgumentsJTAGFrenCombo.getItem(0));
+            } else
+                fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
+        }
+        if (!fPrgmArgumentsFTDI_DeviceCombo.isDisposed())
+            fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
+
+        if (!fPrgmArgumentsFTDI_CoreCombo.isDisposed())
+            fPrgmArgumentsFTDI_CoreCombo.setText(ftdiCore.toString());
+        // Set host and IP.
+        portnumber = cfgReader.getGdbServerPort();
+        fGDBServerPortNumberText.setText(portnumber);
+        hostname = cfgReader.getHostAddress();
+        if (groupGenericGDBServer != null && !groupGenericGDBServer.isDisposed())
+            fGDBServerIPAddressText.setText(hostname);
+
+        int previous = fPrgmArgumentsComboInit.indexOf(gdbServer.toString());
+        if (previous > -1)
+            fPrgmArgumentsComboInit.remove(previous);
+        /*
+         * Reading gdbServer again from configuration because field gdbServer might have been
+         * changed by event handler called by fPrgmArgumentsComboInit.remove(previous)
+         */
+        gdbServer = cfgReader.getGdbServer();
+        fPrgmArgumentsComboInit.add(gdbServer.toString(), 0);
+        fPrgmArgumentsComboInit.select(0);
+
+        if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
+            if (!jtag_frequency.isEmpty()) {
+                previous = fPrgmArgumentsJTAGFrenCombo.indexOf(jtag_frequency);
+                if (previous > -1)
+                    fPrgmArgumentsJTAGFrenCombo.remove(previous);
+                fPrgmArgumentsJTAGFrenCombo.add(jtag_frequency, 0);
+                fPrgmArgumentsJTAGFrenCombo.select(0);
             }
-
-            fGDBCommandText.setText(gdb_path);
-            openocd_bin_path = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH, default_oocd_bin);
-            jtag_frequency = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "");
-            try {
-                ftdiDevice = FtdiDevice.valueOf(configuration.getAttribute(
-                        LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
-                        LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME));
-            } catch (IllegalArgumentException e) {
-                ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
-            }
-
-            try {
-                ftdiCore = FtdiCore.valueOf(configuration.getAttribute(
-                        LaunchConfigurationConstants.ATTR_FTDI_CORE,
-                        LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME));
-            } catch (IllegalArgumentException e) {
-                ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
-            }
-            gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
-            openocd_cfg_path = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
-                    default_oocd_cfg);
-
-            String default_ashling_path = isWindowsOS() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
-                    : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
-            externaltools_ashling_path = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
-                    default_ashling_path);
-
-            String ash_xml_path = new File(default_ashling_path).getParentFile().getPath()
-                    + java.io.File.separator + "arc-cpu-em.xml";
-            Ashling_xml_path = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH, ash_xml_path);
-
-            String defaultTDescPath = new File(default_ashling_path).getParentFile().getPath()
-                    + java.io.File.separator + "opella-arcem-tdesc.xml";
-            ashlingTDescPath = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_ASHLING_TDESC_PATH, defaultTDescPath);
-
-            externaltools_nsim_path = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,
-                    getNsimdrvDefaultPath());
-
-            customGdbPath = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH, "");
-            customGdbCommandArgs = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND, "");
-
-            fWorkingDirectoryBlockNSim.initializeFrom(configuration);
-            fLaunchexternal_nsimjit_Buttonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT, "false");
-            fLaunchexternal_nsimhostlink_Buttonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK, "true");
-            fLaunchexternal_nsimEnableExceButtonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT, "true");
-            fLaunchexternal_nsiminvainstruExceButtonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT, "true");
-            fLaunchexternal_nsimMemoExceButtonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT, "true");
-            fLaunchexternal_nsimprops_Buttonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS, "true");
-            fLaunchexternal_nsimtcf_Buttonboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF, "true");
-
-            nSIMpropsfiles_last = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE, "");
-            nSIMtcffiles_last = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE, "");
-            JITthread = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD, "1");
-
-            fPrgmArgumentsComboInit.setText(gdbServer.toString());
-
-            if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
-                if (configuration
-                        .getAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY, "")
-                        .isEmpty()) {
-                    fPrgmArgumentsJTAGFrenCombo.setText(fPrgmArgumentsJTAGFrenCombo.getItem(0));
-                } else
-                    fPrgmArgumentsJTAGFrenCombo.setText(jtag_frequency);
-            }
-            if (!fPrgmArgumentsFTDI_DeviceCombo.isDisposed())
-                fPrgmArgumentsFTDI_DeviceCombo.setText(ftdiDevice.toString());
-
-            if (!fPrgmArgumentsFTDI_CoreCombo.isDisposed())
-                fPrgmArgumentsFTDI_CoreCombo.setText(ftdiCore.toString());
-            // Set host and IP.
-            try {
-                portnumber = configuration.getAttribute(
-                        IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, "");
-                fGDBServerPortNumberText.setText(portnumber);
-                hostname = configuration
-                        .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS, "");
-                if (groupGenericGDBServer != null && !groupGenericGDBServer.isDisposed())
-                    fGDBServerIPAddressText.setText(hostname);
-            } catch (CoreException e) {
-            }
-
-            int previous = fPrgmArgumentsComboInit.indexOf(gdbServer.toString());
-            if (previous > -1)
-                fPrgmArgumentsComboInit.remove(previous);
-            /*
-             * Reading gdbServer again from configuration because field gdbServer might have been
-             * changed by event handler called by fPrgmArgumentsComboInit.remove(previous)
-             */
-            gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
-            fPrgmArgumentsComboInit.add(gdbServer.toString(), 0);
-            fPrgmArgumentsComboInit.select(0);
-
-            if (!fPrgmArgumentsJTAGFrenCombo.isDisposed()) {
-                if (!jtag_frequency.isEmpty()) {
-                    previous = fPrgmArgumentsJTAGFrenCombo.indexOf(jtag_frequency);
-                    if (previous > -1)
-                        fPrgmArgumentsJTAGFrenCombo.remove(previous);
-                    fPrgmArgumentsJTAGFrenCombo.add(jtag_frequency, 0);
-                    fPrgmArgumentsJTAGFrenCombo.select(0);
-                }
-            }
-
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 
     @Override
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
         super.performApply(configuration);
-        final String programName = Configuration.getProgramName(configuration);
+        ConfigurationReader cfgReader = new ConfigurationReader(configuration);
+        final String programName = cfgReader.getProgramName();
         configuration.setAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME,
             programName.replace('\\', '/'));
         if (!groupnsim.isDisposed()) {
@@ -481,86 +419,48 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
         }
         String str = fGDBServerPortNumberText.getText();
         str = str.trim();
-        configuration
-                .setAttribute(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT, str);
+
+        ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
+        cfgWriter.setGdbServerPort(str);
         String nsim_default_path = getNsimdrvDefaultPath();
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH,
-                nsim_default_path);
+        cfgWriter.setNsimDefaultPath(nsim_default_path);
         gdb_path = fGDBCommandText.getText();
         if (jtag_frequency != null)
-            configuration.setAttribute(LaunchConfigurationConstants.ATTR_JTAG_FREQUENCY,
-                    getAttributeValueFromString(jtag_frequency));
+            cfgWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtag_frequency));
 
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FILE_FORMAT_VERSION,
-                LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
+        cfgWriter.setFileFormatVersion(LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
         /* Because there is no setAttribute(String, long) method. */
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_TIMESTAMP,
-                String.format("%d", System.currentTimeMillis()));
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_DEVICE,
-                getAttributeValueFromString(ftdiDevice.name()));
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_FTDI_CORE,
-                getAttributeValueFromString(ftdiCore.name()));
-        configuration.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME, gdb_path);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                CommandTab.getAttributeValueFromString(gdbServer.toString()));
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_OPENOCD_PATH,
-                openocd_cfg_path);
-
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_OPENOCD_BIN_PATH,
-                openocd_bin_path);
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_ASHLING_PATH,
-                externaltools_ashling_path);
-
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_ASHLING_XML_PATH,
-                Ashling_xml_path);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_ASHLING_TDESC_PATH,
-                ashlingTDescPath);
-
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH,
-                externaltools_nsim_path);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                getAttributeValueFromString(gdbServer.toString()));
-
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH,
-                customGdbPath);
+        cfgWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
+        cfgWriter.setFtdiDevice(getAttributeValueFromString(ftdiDevice.name()));
+        cfgWriter.setFtdiCore(getAttributeValueFromString(ftdiCore.name()));
+        cfgWriter.setGdbPath(gdb_path);
+        cfgWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
+        cfgWriter.setOpenOcdConfig(openocd_cfg_path);
+        cfgWriter.setOpenOcdPath(openocd_bin_path);
+        cfgWriter.setAshlingPath(externaltools_ashling_path);
+        cfgWriter.setAshlingXmlPath(Ashling_xml_path);
+        cfgWriter.setAshlingTDescPath(ashlingTDescPath);
+        cfgWriter.setNsimPath(externaltools_nsim_path);
+        cfgWriter.setGdbServer(CommandTab.getAttributeValueFromString(gdbServer.toString()));
+        cfgWriter.setCustomGdbServerPath(customGdbPath);
         if (customGdbCommandArgs != null) {
-            configuration.setAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_CUSTOM_GDBSERVER_COMMAND,
-                    customGdbCommandArgs);
+            cfgWriter.setCustomGdbServerArgs(customGdbCommandArgs);
         }
 
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMTCF,
-                getAttributeValueFromString(fLaunchexternal_nsimtcf_Buttonboolean));
-
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJIT,
-                getAttributeValueFromString(fLaunchexternal_nsimjit_Buttonboolean));
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMHOSTLINK,
-                getAttributeValueFromString(fLaunchexternal_nsimhostlink_Buttonboolean));
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMMEMOEXPT,
-                getAttributeValueFromString(fLaunchexternal_nsimMemoExceButtonboolean));
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMENABLEEXPT,
-                getAttributeValueFromString(fLaunchexternal_nsimEnableExceButtonboolean));
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMINVAINSTRUEXPT,
-                getAttributeValueFromString(fLaunchexternal_nsiminvainstruExceButtonboolean));
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMPROPS,
-                getAttributeValueFromString(fLaunchexternal_nsimprops_Buttonboolean));
-
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_USE_NSIMJITTHREAD,
-                getAttributeValueFromString(JITthread));
-
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_PROP_FILE,
-                nSIMpropsfiles_last);
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_NSIM_TCF_FILE,
-                nSIMtcffiles_last);
+        cfgWriter.setNsimUseTcf(fLaunchexternal_nsimtcf_Buttonboolean);
+        cfgWriter.setNsimUseJit(fLaunchexternal_nsimjit_Buttonboolean);
+        cfgWriter.setNsimUseNsimHostLink(fLaunchexternal_nsimhostlink_Buttonboolean);
+        cfgWriter.setNsimSimulateMemoryExceptions(fLaunchexternal_nsimMemoExceButtonboolean);
+        cfgWriter.setNsimSimulateExceptions(fLaunchexternal_nsimEnableExceButtonboolean);
+        cfgWriter.setNsimSimulateInvalidInstructionExceptions(
+            fLaunchexternal_nsiminvainstruExceButtonboolean);
+        cfgWriter.setNsimUseProps(fLaunchexternal_nsimprops_Buttonboolean);
+        cfgWriter.setNsimJitThreads(JITthread);
+        cfgWriter.setNsimPropsPath(nSIMpropsfiles_last);
+        cfgWriter.setNsimTcfPath(nSIMtcffiles_last);
         if (groupGenericGDBServer != null && !groupGenericGDBServer.isDisposed()) {
             hostname = fGDBServerIPAddressText.getText();
-            configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_GDB_ADDRESS,
-                    getAttributeValueFromString(hostname));
+            cfgWriter.setHostAddress(getAttributeValueFromString(hostname));
         }
     }
 
@@ -722,21 +622,18 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
                             groupnsim.dispose();
                         createTabitemnSIM(subComp);
 
-                        fLaunchPropsButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
-                        fLaunchtcfButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
-                        fLaunchJITButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
-                        fLaunchHostlinkButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsimhostlink_Buttonboolean));
-                        fLaunchMemoexptButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsimMemoExceButtonboolean));
-                        fLaunchEnableExptButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
+                        fLaunchPropsButton.setSelection(fLaunchexternal_nsimprops_Buttonboolean);
+                        fLaunchtcfButton.setSelection(fLaunchexternal_nsimtcf_Buttonboolean);
+                        fLaunchJITButton.setSelection(fLaunchexternal_nsimjit_Buttonboolean);
+                        fLaunchHostlinkButton.setSelection(
+                            fLaunchexternal_nsimhostlink_Buttonboolean);
+                        fLaunchMemoexptButton.setSelection(
+                            fLaunchexternal_nsimMemoExceButtonboolean);
+                        fLaunchEnableExptButton.setSelection(
+                            fLaunchexternal_nsimEnableExceButtonboolean);
 
-                        fLaunchInvalid_Instru_ExptButton.setSelection(Boolean
-                                .parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
+                        fLaunchInvalid_Instru_ExptButton.setSelection(
+                            fLaunchexternal_nsiminvainstruExceButtonboolean);
                     }
                     groupnsim.setText(gdbServer.toString());
                     createTabitemCOMBool = false;
@@ -1310,7 +1207,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
         fLaunchtcfButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
         fLaunchtcfButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
-        fLaunchtcfButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean));
+        fLaunchtcfButton.setSelection((fLaunchexternal_nsimtcf_Buttonboolean));
         gd = new GridData(SWT.BEGINNING);
         gd.horizontalSpan = 3;
         fLaunchtcfButton.setLayoutData(gd);
@@ -1327,13 +1224,12 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
                 }
             }
         });
-        fnSIMTCFPath.setEnabled(Boolean.parseBoolean(fLaunchexternal_nsimtcf_Buttonboolean),
+        fnSIMTCFPath.setEnabled(fLaunchexternal_nsimtcf_Buttonboolean,
                 compnSIM);
 
         fLaunchPropsButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
         fLaunchPropsButton.setToolTipText("-propsfile=path");
-        fLaunchPropsButton.setSelection(Boolean
-                .parseBoolean(fLaunchexternal_nsimprops_Buttonboolean));
+        fLaunchPropsButton.setSelection(fLaunchexternal_nsimprops_Buttonboolean);
         gd = new GridData(SWT.BEGINNING);
         gd.horizontalSpan = 3;
         fLaunchPropsButton.setLayoutData(gd);
@@ -1350,17 +1246,17 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
             }
         });
 
-        fnSIMPropsPath.setEnabled(Boolean.parseBoolean(fLaunchexternal_nsimprops_Buttonboolean),
+        fnSIMPropsPath.setEnabled(fLaunchexternal_nsimprops_Buttonboolean,
                 compnSIM);
 
         fLaunchtcfButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchtcfButton.getSelection() == true) {
-                    fLaunchexternal_nsimtcf_Buttonboolean = "true";
+                    fLaunchexternal_nsimtcf_Buttonboolean = true;
                     fnSIMTCFPath.setEnabled(true, compnSIM);
 
                 } else {
-                    fLaunchexternal_nsimtcf_Buttonboolean = "false";
+                    fLaunchexternal_nsimtcf_Buttonboolean = false;
                     fLaunchtcfButton.setSelection(false);
                     fnSIMTCFPath.setEnabled(false, compnSIM);
                 }
@@ -1375,11 +1271,11 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchPropsButton.getSelection() == true) {
-                    fLaunchexternal_nsimprops_Buttonboolean = "true";
+                    fLaunchexternal_nsimprops_Buttonboolean = true;
                     fnSIMPropsPath.setEnabled(true, compnSIM);
 
                 } else {
-                    fLaunchexternal_nsimprops_Buttonboolean = "false";
+                    fLaunchexternal_nsimprops_Buttonboolean = false;
                     fnSIMPropsPath.setEnabled(false, compnSIM);
                 }
                 updateLaunchConfigurationDialog();
@@ -1396,7 +1292,7 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
         gd.horizontalSpan = 3;
 
         fLaunchJITButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
-        fLaunchJITButton.setSelection(Boolean.parseBoolean(fLaunchexternal_nsimjit_Buttonboolean));
+        fLaunchJITButton.setSelection(fLaunchexternal_nsimjit_Buttonboolean);
         fLaunchJITButton.setText("JIT");
         fLaunchJITButton.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
         JIT_threadspinner = new Spinner(compnSIM, SWT.NONE | SWT.BORDER);
@@ -1408,12 +1304,12 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
         fLaunchJITButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchJITButton.getSelection() == true) {
-                    fLaunchexternal_nsimjit_Buttonboolean = "true";
+                    fLaunchexternal_nsimjit_Buttonboolean = true;
                     labeljit.setEnabled(true);
                     JIT_threadspinner.setEnabled(true);
 
                 } else {
-                    fLaunchexternal_nsimjit_Buttonboolean = "false";
+                    fLaunchexternal_nsimjit_Buttonboolean = false;
                     labeljit.setEnabled(false);
                     JIT_threadspinner.setEnabled(false);
                 }
@@ -1427,10 +1323,10 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
         fLaunchJITButton.setLayoutData(gd);
 
-        if (fLaunchexternal_nsimjit_Buttonboolean.equalsIgnoreCase("true")) {
+        if (fLaunchexternal_nsimjit_Buttonboolean == true) {
             labeljit.setEnabled(true);
             JIT_threadspinner.setEnabled(true);
-        } else if (fLaunchexternal_nsimjit_Buttonboolean.equalsIgnoreCase("false")) {
+        } else if (fLaunchexternal_nsimjit_Buttonboolean == false) {
             labeljit.setEnabled(false);
             JIT_threadspinner.setEnabled(false);
         }
@@ -1455,16 +1351,15 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
         fLaunchHostlinkButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
         fLaunchHostlinkButton.setToolTipText("Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property works only if the application that is being simulated is compiled with the ARC GCC compiler.");
-        fLaunchHostlinkButton.setSelection(Boolean
-                .parseBoolean(fLaunchexternal_nsimhostlink_Buttonboolean));
+        fLaunchHostlinkButton.setSelection(fLaunchexternal_nsimhostlink_Buttonboolean);
         fLaunchHostlinkButton.setText("GNU host I/O support");
         fLaunchHostlinkButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchHostlinkButton.getSelection() == true) {
-                    fLaunchexternal_nsimhostlink_Buttonboolean = "true";
+                    fLaunchexternal_nsimhostlink_Buttonboolean = true;
 
                 } else {
-                    fLaunchexternal_nsimhostlink_Buttonboolean = "false";
+                    fLaunchexternal_nsimhostlink_Buttonboolean = false;
                 }
                 updateLaunchConfigurationDialog();
             }
@@ -1478,16 +1373,15 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
         fLaunchMemoexptButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
         fLaunchMemoexptButton.setToolTipText("Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
-        fLaunchMemoexptButton.setSelection(Boolean
-                .parseBoolean(fLaunchexternal_nsimMemoExceButtonboolean));
+        fLaunchMemoexptButton.setSelection(fLaunchexternal_nsimMemoExceButtonboolean);
         fLaunchMemoexptButton.setText("Memory Exception");
         fLaunchMemoexptButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchMemoexptButton.getSelection() == true) {
-                    fLaunchexternal_nsimMemoExceButtonboolean = "true";
+                    fLaunchexternal_nsimMemoExceButtonboolean = true;
 
                 } else {
-                    fLaunchexternal_nsimMemoExceButtonboolean = "false";
+                    fLaunchexternal_nsimMemoExceButtonboolean = false;
                 }
                 updateLaunchConfigurationDialog();
             }
@@ -1500,17 +1394,16 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
         fLaunchMemoexptButton.setLayoutData(gdnsimui);
 
         fLaunchEnableExptButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
-        fLaunchEnableExptButton.setSelection(Boolean
-                .parseBoolean(fLaunchexternal_nsimEnableExceButtonboolean));
+        fLaunchEnableExptButton.setSelection(fLaunchexternal_nsimEnableExceButtonboolean);
         fLaunchEnableExptButton.setText("Enable Exception");
         fLaunchEnableExptButton.setToolTipText("Simulate (1) or break (0) on any exception (-p enable_exceptions={0,1})");
         fLaunchEnableExptButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchEnableExptButton.getSelection() == true) {
-                    fLaunchexternal_nsimEnableExceButtonboolean = "true";
+                    fLaunchexternal_nsimEnableExceButtonboolean = true;
 
                 } else {
-                    fLaunchexternal_nsimEnableExceButtonboolean = "false";
+                    fLaunchexternal_nsimEnableExceButtonboolean = false;
                 }
                 updateLaunchConfigurationDialog();
             }
@@ -1524,16 +1417,15 @@ public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
 
         fLaunchInvalid_Instru_ExptButton = new Button(compnSIM, SWT.CHECK); //$NON-NLS-1$ //6-3
         fLaunchInvalid_Instru_ExptButton.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
-        fLaunchInvalid_Instru_ExptButton.setSelection(Boolean
-                .parseBoolean(fLaunchexternal_nsiminvainstruExceButtonboolean));
+        fLaunchInvalid_Instru_ExptButton.setSelection(fLaunchexternal_nsiminvainstruExceButtonboolean);
         fLaunchInvalid_Instru_ExptButton.setText("Invalid Instruction  Exception");
         fLaunchInvalid_Instru_ExptButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchInvalid_Instru_ExptButton.getSelection() == true) {
-                    fLaunchexternal_nsiminvainstruExceButtonboolean = "true";
+                    fLaunchexternal_nsiminvainstruExceButtonboolean = true;
 
                 } else {
-                    fLaunchexternal_nsiminvainstruExceButtonboolean = "false";
+                    fLaunchexternal_nsiminvainstruExceButtonboolean = false;
                 }
                 updateLaunchConfigurationDialog();
             }

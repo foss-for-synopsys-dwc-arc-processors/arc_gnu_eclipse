@@ -39,9 +39,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
-import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchImages;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
 
 import gnu.io.CommPortIdentifier;
 
@@ -54,7 +55,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
     private boolean fSerialPortAvailable = true;
     public String comPort = ""; // this variable is for launching the COM port chosen by users
     protected Label fPrgmArgumentsLabelCom;// this variable is for showing COM port
-    static String fLaunchTerminalboolean = "true";// this variable is to get external tools current
+    static boolean fLaunchTerminal = true;// this variable is to get external tools current
                                                   // status (Enable/disable)
     private ArcGdbServer gdbServer = null;
 
@@ -90,7 +91,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 
         fPrgmArgumentsComCom = new Combo(argsComp, SWT.READ_ONLY);// 5-2 and 5-3
 
-        fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
+        fPrgmArgumentsComCom.setEnabled(fLaunchTerminal);
         List<String> COM = null;
         try {
             COM = COMserialport();
@@ -114,17 +115,17 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
 
         fPrgmArgumentsComCom.setText(fPrgmArgumentsComCom.getItem(0));
         fLaunchComButton = new Button(argsComp, SWT.CHECK); // $NON-NLS-1$ //6-3
-        fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
+        fLaunchComButton.setSelection(fLaunchTerminal);
 
         fLaunchComButton.setText("Launch Terminal");
         fLaunchComButton.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (fLaunchComButton.getSelection() == true) {
-                    fLaunchTerminalboolean = "true";
+                    fLaunchTerminal = true;
                     fPrgmArgumentsComCom.setEnabled(fSerialPortAvailable);
                     fPrgmArgumentsLabelCom.setEnabled(fSerialPortAvailable);
                 } else {
-                    fLaunchTerminalboolean = "false";
+                    fLaunchTerminal = false;
                     fPrgmArgumentsComCom.setEnabled(false);
                     fPrgmArgumentsLabelCom.setEnabled(false);
                 }
@@ -148,10 +149,9 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
      * ILaunchConfigurationWorkingCopy)
      */
     public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,
-                "true");
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
-                getAttributeValueFromString(comPort));
+        ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
+        cfgWriter.setLaunchTerminal(true);
+        cfgWriter.setComPort(comPort);
     }
 
     /*
@@ -161,37 +161,19 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
      * ILaunchConfiguration)
      */
     public void initializeFrom(ILaunchConfiguration configuration) {
-        try {
-            comPort = configuration
-                    .getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT, "");
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        ConfigurationReader cfgReader = new ConfigurationReader(configuration);
+        comPort = cfgReader.getComPort();
         if (FirstlaunchDialog.value[1] != null) {
             if (!FirstlaunchDialog.value[1].equalsIgnoreCase("")) {
                 comPort = FirstlaunchDialog.value[1];
             }
+        }
+        fLaunchTerminal = cfgReader.doLaunchTerminal();
+        fPrgmArgumentsComCom.setEnabled(fLaunchTerminal);
+        fPrgmArgumentsLabelCom.setEnabled(fLaunchTerminal);
+        fLaunchComButton.setSelection(fLaunchTerminal);
 
-        }
-        try {
-            fLaunchTerminalboolean = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, "true");
-        } catch (CoreException e1) {
-            e1.printStackTrace();
-        }
-        fPrgmArgumentsComCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
-        fPrgmArgumentsLabelCom.setEnabled(Boolean.parseBoolean(fLaunchTerminalboolean));
-        fLaunchComButton.setSelection(Boolean.parseBoolean(fLaunchTerminalboolean));
-
-        try {
-            gdbServer = ArcGdbServer.fromString(configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS,
-                    ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        gdbServer = cfgReader.getGdbServer();
         if (gdbServer == ArcGdbServer.JTAG_OPENOCD || gdbServer == ArcGdbServer.JTAG_ASHLING) {
             if (!comPort.equalsIgnoreCase("")) {
                 // One of the items in the list of COM ports becomes blank
@@ -225,12 +207,11 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
      * ILaunchConfigurationWorkingCopy)
      */
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+        ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
         if (fSerialPortAvailable)
-            configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT,
-                    getAttributeValueFromString(fLaunchTerminalboolean));
+            cfgWriter.setLaunchTerminal(fLaunchTerminal);
 
-        configuration.setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_COM_PORT,
-                getAttributeValueFromString(fPrgmArgumentsComCom.getText()));
+        cfgWriter.setComPort(fPrgmArgumentsComCom.getText());
     }
 
     /*

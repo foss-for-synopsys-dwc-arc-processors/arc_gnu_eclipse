@@ -14,7 +14,7 @@ import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 public class CustomGdbServerBackend extends GdbServerBackend {
 
@@ -24,8 +24,9 @@ public class CustomGdbServerBackend extends GdbServerBackend {
 
     @Override
     public String getCommandLine() {
-        String customGdbServerPath = Configuration.getCustomGdbServerPath(launchConfiguration);
-        String customGdbServerArg = Configuration.getCustomGdbServerArgs(launchConfiguration);
+        ConfigurationReader cfgReader = new ConfigurationReader(launchConfiguration);
+        String customGdbServerPath = cfgReader.getCustomGdbServerPath();
+        String customGdbServerArg = cfgReader.getCustomGdbServerArgs();
         String commandLine = customGdbServerPath + " " + customGdbServerArg;
         return commandLine;
     }

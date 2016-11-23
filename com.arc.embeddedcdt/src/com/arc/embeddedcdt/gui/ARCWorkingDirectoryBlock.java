@@ -36,8 +36,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
 
 /**
  * This class is used to add working directory block to GDB server setting page for nSIM. Other GDB
@@ -57,7 +58,7 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
     private boolean isDefaultWorkingDir = true;
 
     // Working directory path containing unresolved variables
-    private String workingDir = null;
+    private String workingDir = "";
 
     /**
      * A listener to update for text changes and widget selection
@@ -143,7 +144,7 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
         fVariablesButton = createVariablesButton(buttonComp,
                 LaunchMessages.WorkingDirectoryBlock_17, fWorkingDirText);
 
-        if (workingDir != null) {
+        if (!workingDir.isEmpty()) {
             fWorkingDirText.setText(workingDir);
         }
         fUseDefaultWorkingDirButton.setSelection(isDefaultWorkingDir);
@@ -190,19 +191,11 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
         setLaunchConfiguration(configuration);
-        try {
-            workingDir = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, (String) null);
-            isDefaultWorkingDir = configuration.getAttribute(
-                    LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_USE_DEFAULT_DIRECTORY, true);
-            if (workingDir == null) {
-                isDefaultWorkingDir = true;
-            }
-        } catch (CoreException e) {
-            setErrorMessage(
-                    LaunchMessages.WorkingDirectoryBlock_Exception_occurred_reading_configuration_15
-                            + e.getStatus().getMessage());
-            LaunchUIPlugin.log(e);
+        ConfigurationReader cfgReader = new ConfigurationReader(configuration);
+        workingDir = cfgReader.getNsimWorkingDirectoryPath();
+        isDefaultWorkingDir = cfgReader.getNsimUseDefaultDirectory();
+        if (workingDir.isEmpty()) {
+            isDefaultWorkingDir = true;
         }
     }
 
@@ -213,11 +206,9 @@ public class ARCWorkingDirectoryBlock extends WorkingDirectoryBlock {
      */
     @Override
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_WORKING_DIRECTORY, workingDir);
-        configuration.setAttribute(
-                LaunchConfigurationConstants.ATTR_DEBUGGER_NSIM_USE_DEFAULT_DIRECTORY,
-                isDefaultWorkingDir);
+        ConfigurationWriter cfgWriter = new ConfigurationWriter(configuration);
+        cfgWriter.setNsimWorkingDirectoryPath(workingDir);
+        cfgWriter.setNsimUseDefaultDirectory(isDefaultWorkingDir);
     }
 
     /*

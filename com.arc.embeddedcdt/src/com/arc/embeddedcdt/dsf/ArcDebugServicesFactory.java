@@ -22,7 +22,7 @@ import com.arc.embeddedcdt.dsf.gdb.server.CustomGdbServerBackend;
 import com.arc.embeddedcdt.dsf.gdb.server.NsimBackend;
 import com.arc.embeddedcdt.dsf.gdb.server.OpenOcdBackend;
 import com.arc.embeddedcdt.dsf.gdb.server.ExternallyStartedGdbServerBackend;
-import com.arc.embeddedcdt.dsf.utils.Configuration;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 public class ArcDebugServicesFactory extends GdbDebugServicesFactory {
 
@@ -48,7 +48,8 @@ public class ArcDebugServicesFactory extends GdbDebugServicesFactory {
     }
 
     protected GdbServerBackend createGdbServerBackendService(DsfSession session, ILaunchConfiguration arg) {
-        ArcGdbServer gdbServer = Configuration.getGdbServer(arg);
+        ConfigurationReader cfgReader = new ConfigurationReader(arg);
+        ArcGdbServer gdbServer = cfgReader.getGdbServer();
         switch (gdbServer) {
         case JTAG_OPENOCD:
             return new OpenOcdBackend(session, arg);
