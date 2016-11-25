@@ -68,7 +68,7 @@ import com.arc.embeddedcdt.common.FtdiDevice;
  * project is used to accomplish this.
  */
 @SuppressWarnings("restriction")
-public class RemoteGDBDebuggerPage extends GdbDebuggerPage {
+public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private static final String default_oocd_bin;
     private static final String default_oocd_cfg;
     static {

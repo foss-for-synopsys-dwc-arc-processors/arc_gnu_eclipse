@@ -31,7 +31,7 @@ import org.eclipse.ui.PlatformUI;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.gui.FirstlaunchDialog;
-import com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage;
+import com.arc.embeddedcdt.gui.RemoteGdbDebuggerPage;
 
 /**
  * Using "Run As" --> "Node Application" or "Run As" --> "coffee" will lead here
@@ -84,7 +84,7 @@ public class LaunchShortcut extends CApplicationLaunchShortcut implements ILaunc
             wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID,
                     "com.arc.embeddedcdt.RemoteGDBDebugger");
             wc.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
-                    RemoteGDBDebuggerPage.getDefaultGdbPath());
+                    RemoteGdbDebuggerPage.getDefaultGdbPath());
 
             startrunas();
 

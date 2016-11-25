@@ -44,7 +44,7 @@ import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
  * This class is used to add working directory block to GDB server setting page for nSIM. Other GDB
  * servers do not support passing working directory to them, so this block should be there for nSIM
  * only. Need to override some methods of WorkingDirectoryBlock class due to specifics of
- * RemoteGDBDebuggerPage: nSIM group might be disposed, so we might not be able to set (or read)
+ * RemoteGdbDebuggerPage: nSIM group might be disposed, so we might not be able to set (or read)
  * fields' values in IDE directly, as it is done in WorkingDirectoryBlock class. Instead we store
  * fields' values in class fields.
  * 

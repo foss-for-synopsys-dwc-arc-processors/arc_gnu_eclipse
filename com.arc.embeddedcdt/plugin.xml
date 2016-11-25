@@ -60,9 +60,9 @@
    <extension
          point="org.eclipse.cdt.debug.ui.CDebuggerPage">
        <debuggerPage
-            class="com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage"
+            class="com.arc.embeddedcdt.gui.RemoteGdbDebuggerPage"
             debuggerID="com.arc.embeddedcdt.RemoteGDBDebugger"
-            id="com.arc.embeddedcdt.gui.RemoteGDBDebuggerPage">
+            id="com.arc.embeddedcdt.gui.RemoteGdbDebuggerPage">
       </debuggerPage>
    </extension>
 	
