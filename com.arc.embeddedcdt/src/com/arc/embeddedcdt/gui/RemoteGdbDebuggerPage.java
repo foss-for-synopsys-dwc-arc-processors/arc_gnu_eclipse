@@ -339,7 +339,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         String ash_xml_path = new File(default_ashling_path).getParentFile().getPath()
                 + java.io.File.separator + "arc-cpu-em.xml";
         Ashling_xml_path =
-            cfgReader.getOrDefault(Ashling_xml_path, "", cfgReader.getAshlingXmlPath());
+            cfgReader.getOrDefault(ash_xml_path, "", cfgReader.getAshlingXmlPath());
         String defaultTDescPath = new File(default_ashling_path).getParentFile().getPath()
                 + java.io.File.separator + "opella-arcem-tdesc.xml";
         ashlingTDescPath =
