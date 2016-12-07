@@ -10,23 +10,33 @@
 
 package com.arc.embeddedcdt.common;
 
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Text;
+
+import com.arc.embeddedcdt.LaunchConfigurationConstants;
+
 public enum ArcGdbServer {
-    JTAG_OPENOCD("JTAG via OpenOCD"),
-    JTAG_ASHLING("JTAG via Opella-XD"),
-    NSIM("nSIM"),
-    GENERIC_GDBSERVER("Connect to running GDB server"),
-    CUSTOM_GDBSERVER("Custom GDB server");
-
-    private final String string;
+    JTAG_OPENOCD("JTAG via OpenOCD", LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT),
+    JTAG_ASHLING("JTAG via Opella-XD", LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT),
+    NSIM("nSIM", LaunchConfigurationConstants.DEFAULT_NSIM_PORT),
+    GENERIC_GDBSERVER("Connect to running GDB server", null),
+    CUSTOM_GDBSERVER("Custom GDB server", LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
+    
+    private final String stringRepresentation;
     public static final ArcGdbServer DEFAULT_GDB_SERVER = JTAG_OPENOCD;
-
-    private ArcGdbServer(final String text) {
-        this.string = text;
+    private Group guiGroup;
+    private final String defaultPortNumber;
+    private String portNumber = "";
+    protected Text gdbServerPortNumberText;
+    
+    private ArcGdbServer(final String text, final String defaultPortNumber) {
+        stringRepresentation = text;
+        this.defaultPortNumber = defaultPortNumber;
     }
 
     @Override
     public String toString() {
-        return string;
+        return stringRepresentation;
     }
 
     public static ArcGdbServer fromString(final String string) {

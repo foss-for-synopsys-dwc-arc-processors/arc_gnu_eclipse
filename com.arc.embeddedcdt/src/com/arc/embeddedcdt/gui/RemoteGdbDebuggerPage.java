@@ -18,6 +18,7 @@ package com.arc.embeddedcdt.gui;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.eclipse.cdt.dsf.gdb.internal.ui.launching.GdbDebuggerPage;
@@ -64,8 +65,8 @@ import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 
 /**
- * The dynamic debugger tab for remote launches using gdb server. The gdbserver settings are used to
- * start a gdbserver session on the remote and then to connect to it from the host. The DSDP-TM
+ * The dynamic debugger tab for remote launches using gdb server. The pageGui.gdbServer settings are used to
+ * start a pageGui.gdbServer session on the remote and then to connect to it from the host. The DSDP-TM
  * project is used to accomplish this.
  */
 @SuppressWarnings("restriction")
@@ -90,18 +91,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         }
     }
 
-    protected Combo externalToolsCombo;
+    private static RemoteGdbDebuggerPageGui pageGui = new RemoteGdbDebuggerPageGui();
     protected Combo jtagFrequencyCombo;
-    protected Combo ftdiDeviceCombo;
-    protected Combo ftdiCoreCombo;
-    protected Text targetText;
-    protected Text gdbServerPortNumberText;
-    protected Text gdbServerIpAddressText;
-    protected Button searchExternalToolsPathButton;
-    protected Label searchExternalToolsLabel;
-    protected Text externalToolsPathText;
-    private FileFieldEditor openOcdBinPathEditor;
-    private FileFieldEditor openOcdConfigurationPathEditor;
+    
+    
     private FileFieldEditor customGdbBinaryPathEditor;
     private String openOcdBinaryPath;
     private String openOcdConfigurationPath;
@@ -116,26 +109,16 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor ashlingTdescXmlPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private String jtagFrequency = null;
-    private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
-    private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
-    private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    private boolean createTabItemCom = false;
+    //private ArcGdbServer pageGui.gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
+    //private boolean createTabItemCom = false;
     private boolean createTabItemNsim = false;
     private boolean createTabItemGenericGdbServer = false;
     private String gdbPath = null;
     private boolean createTabItemComAshling = false;
     private boolean createTabItemCustomGdb = false;
-    protected Button nsimPropertiesBrowseButton;
     private String nsimPropertiesFilesLast = "";
     protected Button launchTcf;
     private boolean externalNsimPropertiesEnabled = true;
-    protected Button launchTcfPropertiesButton;
-    protected Button launchNsimJitProperties;
-    protected Button launchHostLinkProperties;
-    protected Button launchMemoryExceptionProperties;
-    protected Button launchInvalidInstructionExceptionProperties;
-    protected Button launchEnableExceptionProperties;
-    protected Button nsimTcfBrowseButton;
     private String nsimTcfFilesLast = "";
     private boolean externalNsimTcfToolsEnabled = true;
     private boolean externalNsimJitEnabled = true;
@@ -151,9 +134,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private String hostName = "";
     private String portNumber = "";
 
-    protected Spinner jitThreadSpinner;
     private String jitThread = "1";
-
+    
     @Override
     public String getName() {
         return Messages.Remote_GDB_Debugger_Options;
@@ -209,6 +191,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         }
     }
 
+    public void updateLaunchConfigurationDialogPublic(){
+      updateLaunchConfigurationDialog();
+    }
+    
     public static String getDefaultGdbPath() {
         String gdbPath = "arc-elf32-gdb";
         String predefinedPath = getIdeBinDir();
@@ -236,7 +222,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
         LaunchFileFormatVersionChecker.getInstance().check(configuration);
-        createTabItemCom = false;
         createTabItemComAshling = false;
         createTabItemNsim = false;
         createTabItemGenericGdbServer = false;
@@ -249,9 +234,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         openOcdBinaryPath = configurationReader.getOrDefault(DEFAULT_OOCD_BIN, "",
             configurationReader.getOpenOcdPath());
         jtagFrequency = configurationReader.getAshlingJtagFrequency();
-        ftdiDevice = configurationReader.getFtdiDevice();
-        ftdiCore = configurationReader.getFtdiCore();
-        gdbServer = configurationReader.getGdbServer();
+        pageGui.ftdiDevice = configurationReader.getFtdiDevice();
+        pageGui.ftdiCore = configurationReader.getFtdiCore();
+        pageGui.gdbServer = configurationReader.getGdbServer();
         openOcdConfigurationPath = configurationReader.getOrDefault(DEFAULT_OOCD_CFG, "",
             configurationReader.getOpenOcdConfig());
         String defaultAshlingPath =
@@ -287,7 +272,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         nsimTcfFilesLast = configurationReader.getNsimTcfPath();
         jitThread = configurationReader.getNsimJitThreads();
 
-        externalToolsCombo.setText(gdbServer.toString());
+        pageGui.externalToolsCombo.setText(pageGui.gdbServer.toString());
 
         if (!jtagFrequencyCombo.isDisposed()) {
             if (configurationReader.getAshlingJtagFrequency().isEmpty()) {
@@ -295,28 +280,28 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             } else
                 jtagFrequencyCombo.setText(jtagFrequency);
         }
-        if (!ftdiDeviceCombo.isDisposed())
-            ftdiDeviceCombo.setText(ftdiDevice.toString());
+        if (!pageGui.ftdiDeviceCombo.isDisposed())
+            pageGui.ftdiDeviceCombo.setText(pageGui.ftdiDevice.toString());
 
-        if (!ftdiCoreCombo.isDisposed())
-            ftdiCoreCombo.setText(ftdiCore.toString());
+        if (!pageGui.ftdiCoreCombo.isDisposed())
+            pageGui.ftdiCoreCombo.setText(pageGui.ftdiCore.toString());
         // Set host and IP.
         portNumber = configurationReader.getGdbServerPort();
-        gdbServerPortNumberText.setText(portNumber);
+        pageGui.gdbServerPortNumberText.setText(portNumber);
         hostName = configurationReader.getHostAddress();
-        if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
-            gdbServerIpAddressText.setText(hostName);
+        if (groupGenericGdbServerContainer != null && !groupGenericGdbServerContainer.getGroup().isDisposed())
+            pageGui.gdbServerIpAddressText.setText(hostName);
 
-        int previous = externalToolsCombo.indexOf(gdbServer.toString());
+        int previous = pageGui.externalToolsCombo.indexOf(pageGui.gdbServer.toString());
         if (previous > -1)
-            externalToolsCombo.remove(previous);
+            pageGui.externalToolsCombo.remove(previous);
         /*
-         * Reading gdbServer again from configuration because field gdbServer might have been
+         * Reading pageGui.gdbServer again from configuration because field pageGui.gdbServer might have been
          * changed by event handler called by extTools.remove(previous)
          */
-        gdbServer = configurationReader.getGdbServer();
-        externalToolsCombo.add(gdbServer.toString(), 0);
-        externalToolsCombo.select(0);
+        pageGui.gdbServer = configurationReader.getGdbServer();
+        pageGui.externalToolsCombo.add(pageGui.gdbServer.toString(), 0);
+        pageGui.externalToolsCombo.select(0);
 
         if (!jtagFrequencyCombo.isDisposed()) {
             if (!jtagFrequency.isEmpty()) {
@@ -336,10 +321,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final String programName = configurationReader.getProgramName();
         configuration.setAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME,
             programName.replace('\\', '/'));
-        if (!groupNsim.isDisposed()) {
+        if (!groupNsimContainer.getGroup().isDisposed()) {
             workingDirectoryBlockNsim.performApply(configuration);
         }
-        String str = gdbServerPortNumberText.getText();
+        String str = pageGui.gdbServerPortNumberText.getText();
         str = str.trim();
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
@@ -354,10 +339,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
         /* Because there is no setAttribute(String, long) method. */
         configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
-        configurationWriter.setFtdiDevice(getAttributeValueFromString(ftdiDevice.name()));
-        configurationWriter.setFtdiCore(getAttributeValueFromString(ftdiCore.name()));
+        configurationWriter.setFtdiDevice(getAttributeValueFromString(pageGui.ftdiDevice.name()));
+        configurationWriter.setFtdiCore(getAttributeValueFromString(pageGui.ftdiCore.name()));
         configurationWriter.setGdbPath(gdbPath);
-        configurationWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
+        configurationWriter.setGdbServer(getAttributeValueFromString(pageGui.gdbServer.toString()));
         configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
         configurationWriter.setAshlingPath(externalToolsAshlingPath);
@@ -381,8 +366,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimJitThreads(jitThread);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
-        if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
-            hostName = gdbServerIpAddressText.getText();
+        if (groupGenericGdbServerContainer != null && !groupGenericGdbServerContainer.getGroup().isDisposed()) {
+            hostName = pageGui.gdbServerIpAddressText.getText();
             configurationWriter.setHostAddress(getAttributeValueFromString(hostName));
         }
     }
@@ -400,12 +385,17 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         return isWindowsOs;
     }
 
-    static Group groupCom;
-    static Group groupComAshling;
-    static Group groupNsim;
-    static Group groupGenericGdbServer;
-    static Group groupComCustomGdb;
-
+    static ComGroupContainer groupComContainer = new ComGroupContainer(pageGui);
+    static ComAshlingGroupContainer groupComAshlingContainer = new ComAshlingGroupContainer(pageGui);
+    static NsimGroupContainer groupNsimContainer  = new NsimGroupContainer(pageGui);
+    static GenericGdbServerGroupContainer groupGenericGdbServerContainer =
+        new GenericGdbServerGroupContainer(pageGui);
+    static ComCustomGdbGroupContainer groupComCustomGdbContainer = new ComCustomGdbGroupContainer(pageGui);
+    
+    private static DebuggerGroupManager debuggerGroupManager = new DebuggerGroupManager(
+        Arrays.asList(groupComAshlingContainer, groupComContainer, groupComCustomGdbContainer,
+            groupGenericGdbServerContainer,groupNsimContainer));
+    
     protected void createGdbServerSettingsTab(TabFolder tabFolder) {
         // Lets set minimal width of text field to 2 inches. If more required text fields will
         // stretch.
@@ -436,83 +426,56 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         GridData serverTypeComboGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
         serverTypeComboGridData.horizontalSpan = 4;
         serverTypeComboGridData.minimumWidth = minTextWidth;
-        externalToolsCombo = new Combo(subComp, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
-        externalToolsCombo.setLayoutData(serverTypeComboGridData);
+        pageGui.externalToolsCombo = new Combo(subComp, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
+        pageGui.externalToolsCombo.setLayoutData(serverTypeComboGridData);
         for (ArcGdbServer server: ArcGdbServer.values()) {
-            externalToolsCombo.add(server.toString());
+            pageGui.externalToolsCombo.add(server.toString());
         }
 
 
 
-        externalToolsCombo.addModifyListener(new ModifyListener() {
+        pageGui.externalToolsCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 Combo combo = (Combo) event.widget;
-                gdbServerPortNumberText.getText();
+                pageGui.gdbServerPortNumberText.getText();
                 try {
-                    gdbServer = ArcGdbServer.fromString(combo.getText());
+                    pageGui.gdbServer = ArcGdbServer.fromString(combo.getText());
                 } catch (IllegalArgumentException e) {
-                    gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
+                    pageGui.gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
                 }
-
-                if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
+                if (pageGui.gdbServer == ArcGdbServer.JTAG_OPENOCD) {
+                    groupComContainer.chosenInGui(subComp, RemoteGdbDebuggerPage.this);
+                } else if (pageGui.gdbServer == ArcGdbServer.JTAG_ASHLING) {
                     if (!portNumber.isEmpty())
-                        gdbServerPortNumberText.setText(portNumber);
+                        pageGui.gdbServerPortNumberText.setText(portNumber);
                     else
-                        gdbServerPortNumberText
-                                .setText(LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
-
-                    groupNsim.dispose();
-                    if (groupGenericGdbServer != null) {
-                        groupGenericGdbServer.dispose();
-                    }
-                    groupComAshling.dispose();
-                    groupComCustomGdb.dispose();
-
-                    if (createTabItemCom == false) {
-                        if (!groupCom.isDisposed())
-                            groupCom.dispose();
-
-                        createTabItemCom(subComp);
-                    }
-                    groupCom.setText(gdbServer.toString());
-                    createTabItemNsim = false;
-                    createTabItemComAshling = false;
-                    groupCom.setVisible(true);
-                    createTabItemGenericGdbServer = false;
-                    createTabItemCustomGdb = false;
-
-                } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
-                    if (!portNumber.isEmpty())
-                        gdbServerPortNumberText.setText(portNumber);
-                    else
-                        gdbServerPortNumberText
+                        pageGui.gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
-                    groupNsim.dispose();
-                    if (groupGenericGdbServer != null) {
-                        groupGenericGdbServer.dispose();
+                    groupNsimContainer.getGroup().dispose();
+                    if (groupGenericGdbServerContainer != null) {
+                        groupGenericGdbServerContainer.getGroup().dispose();
                     }
-                    groupCom.dispose();
-                    groupComCustomGdb.dispose();
+                    groupComContainer.guiGroup.dispose();
+                    groupComCustomGdbContainer.getGroup().dispose();
                     createTabItemNsim = false;
                     createTabItemGenericGdbServer = false;
-                    createTabItemCom = false;
                     createTabItemCustomGdb = false;
 
                     if (createTabItemComAshling == false) {
-                        if (!groupComAshling.isDisposed())
-                            groupComAshling.dispose();
+                        if (!groupComAshlingContainer.getGroup().isDisposed())
+                            groupComAshlingContainer.getGroup().dispose();
 
                         createTabItemComAshling(subComp);
                     }
 
-                    groupComAshling.setText(gdbServer.toString());
-                    groupComAshling.setVisible(true);
-                } else if (gdbServer == ArcGdbServer.NSIM) {
+                    groupComAshlingContainer.getGroup().setText(pageGui.gdbServer.toString());
+                    groupComAshlingContainer.getGroup().setVisible(true);
+                } else if (pageGui.gdbServer == ArcGdbServer.NSIM) {
                     if (!portNumber.isEmpty())
-                        gdbServerPortNumberText.setText(portNumber);
+                        pageGui.gdbServerPortNumberText.setText(portNumber);
                     else
-                        gdbServerPortNumberText
+                        pageGui.gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
 
                     if (!CommandTab.initcom.isEmpty())
@@ -535,50 +498,48 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         }
                     }
 
-                    groupCom.dispose();
-                    groupComAshling.dispose();
-                    groupComCustomGdb.dispose();
-                    if (groupGenericGdbServer != null) {
-                        groupGenericGdbServer.dispose();
+                    groupComContainer.guiGroup.dispose();
+                    groupComAshlingContainer.getGroup().dispose();
+                    groupComCustomGdbContainer.getGroup().dispose();
+                    if (groupGenericGdbServerContainer != null) {
+                        groupGenericGdbServerContainer.getGroup().dispose();
                     }
                     if (createTabItemNsim == false) {
-                        if (!groupNsim.isDisposed())
-                            groupNsim.dispose();
+                        if (!groupNsimContainer.getGroup().isDisposed())
+                            groupNsimContainer.getGroup().dispose();
                         createTabItemNsim(subComp);
 
                         launchTcf.setSelection(externalNsimPropertiesEnabled);
-                        launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
-                        launchNsimJitProperties.setSelection(externalNsimJitEnabled);
-                        launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
-                        launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
-                        launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
+                        pageGui.launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+                        pageGui.launchNsimJitProperties.setSelection(externalNsimJitEnabled);
+                        pageGui.launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
+                        pageGui.launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
+                        pageGui.launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
 
-                        launchInvalidInstructionExceptionProperties.setSelection(launchExternalNsimInvalidInstructionException);
+                        pageGui.launchInvalidInstructionExceptionProperties.setSelection(launchExternalNsimInvalidInstructionException);
                     }
-                    groupNsim.setText(gdbServer.toString());
-                    createTabItemCom = false;
+                    groupNsimContainer.getGroup().setText(pageGui.gdbServer.toString());
                     createTabItemComAshling = false;
-                    groupNsim.setVisible(true);
+                    groupNsimContainer.getGroup().setVisible(true);
                     createTabItemGenericGdbServer = false;
                     createTabItemCustomGdb = false;
 
-                } else if (gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
-                    groupCom.dispose();
-                    groupComAshling.dispose();
-                    groupNsim.dispose();
-                    groupComCustomGdb.dispose();
+                } else if (pageGui.gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
+                    groupComContainer.guiGroup.dispose();
+                    groupComAshlingContainer.getGroup().dispose();
+                    groupNsimContainer.getGroup().dispose();
+                    groupComCustomGdbContainer.getGroup().dispose();
                     if (createTabItemGenericGdbServer == false) {
-                        if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
-                            groupGenericGdbServer.dispose();
+                        if (groupGenericGdbServerContainer != null && !groupGenericGdbServerContainer.getGroup().isDisposed())
+                            groupGenericGdbServerContainer.getGroup().dispose();
 
                         createTabItemHostAddress(subComp);
                     }
-                    createTabItemCom = false;
                     createTabItemComAshling = false;
                     createTabItemNsim = false;
                     createTabItemCustomGdb = false;
-                    groupGenericGdbServer.setText(gdbServer.toString());
-                    groupGenericGdbServer.setVisible(true);
+                    groupGenericGdbServerContainer.getGroup().setText(pageGui.gdbServer.toString());
+                    groupGenericGdbServerContainer.getGroup().setVisible(true);
 
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
                             .getActivePage();
@@ -597,41 +558,40 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         }
                     }
 
-                    if (!groupCom.isDisposed())
-                        groupCom.setVisible(false);
-                    if (!groupNsim.isDisposed())
-                        groupNsim.setVisible(false);
-                    if (!groupComAshling.isDisposed())
-                        groupComAshling.setVisible(false);
-                    if (!groupComCustomGdb.isDisposed()) {
-                        groupComCustomGdb.setVisible(false);
+                    if (!groupComContainer.guiGroup.isDisposed())
+                        groupComContainer.guiGroup.setVisible(false);
+                    if (!groupNsimContainer.getGroup().isDisposed())
+                        groupNsimContainer.getGroup().setVisible(false);
+                    if (!groupComAshlingContainer.getGroup().isDisposed())
+                        groupComAshlingContainer.getGroup().setVisible(false);
+                    if (!groupComCustomGdbContainer.getGroup().isDisposed()) {
+                        groupComCustomGdbContainer.getGroup().setVisible(false);
                     }
 
-                } else if (gdbServer == ArcGdbServer.CUSTOM_GDBSERVER) {
+                } else if (pageGui.gdbServer == ArcGdbServer.CUSTOM_GDBSERVER) {
                     if (!portNumber.equals(""))
-                        gdbServerPortNumberText.setText(portNumber);
+                        pageGui.gdbServerPortNumberText.setText(portNumber);
                     else
-                        gdbServerPortNumberText
+                        pageGui.gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
-                    groupNsim.dispose();
-                    groupCom.dispose();
-                    groupComAshling.dispose();
-                    groupGenericGdbServer.dispose();
+                    groupNsimContainer.getGroup().dispose();
+                    groupComContainer.guiGroup.dispose();
+                    groupComAshlingContainer.getGroup().dispose();
+                    groupGenericGdbServerContainer.getGroup().dispose();
                     createTabItemNsim = false;
-                    createTabItemCom = false;
                     createTabItemComAshling = false;
                     createTabItemGenericGdbServer = false;
                     if (createTabItemCustomGdb == false) {
-                        if (!groupComCustomGdb.isDisposed())
-                            groupComCustomGdb.dispose();
+                        if (!groupComCustomGdbContainer.getGroup().isDisposed())
+                            groupComCustomGdbContainer.getGroup().dispose();
 
                         createTabCustomGdb(subComp);
                     }
 
-                    groupComCustomGdb.setText(gdbServer.toString());
-                    if (!groupComCustomGdb.isVisible())
-                        groupComCustomGdb.setVisible(true);
+                    groupComCustomGdbContainer.getGroup().setText(pageGui.gdbServer.toString());
+                    if (!groupComCustomGdbContainer.getGroup().isVisible())
+                        groupComCustomGdbContainer.getGroup().setVisible(true);
                 }
 
                 updateLaunchConfigurationDialog();
@@ -647,38 +607,38 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         label.setLayoutData(gdbPortLabelGridData);
 
         // GDB port text field
-        gdbServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+        pageGui.gdbServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
         GridData gdbPortTextGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
         gdbPortTextGridData.horizontalSpan = 4;
         gdbPortTextGridData.minimumWidth = minTextWidth;
-        gdbServerPortNumberText.setLayoutData(gdbPortTextGridData);
-        gdbServerPortNumberText.addModifyListener(new ModifyListener() {
+        pageGui.gdbServerPortNumberText.setLayoutData(gdbPortTextGridData);
+        pageGui.gdbServerPortNumberText.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 updateLaunchConfigurationDialog();
             }
         });
 
         if (createTabItemNsim == false)
-            createTabItemNsim(subComp);
-        if (createTabItemCom == false)
-            createTabItemCom(subComp);
+          createTabItemNsim(subComp);
         if (createTabItemComAshling == false)
-            createTabItemComAshling(subComp);
+          createTabItemComAshling(subComp);
         if (createTabItemGenericGdbServer == false)
-            createTabItemHostAddress(subComp);
+          createTabItemHostAddress(subComp);
         if (createTabItemCustomGdb == false)
-            createTabCustomGdb(subComp);
+          createTabCustomGdb(subComp);
+        debuggerGroupManager.createTabItemsIfNotCreated(subComp, RemoteGdbDebuggerPage.this);
     }
 
 
     private void createTabCustomGdb(Composite subComp) {
         createTabItemCustomGdb = true;
 
-        groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3,
+        groupComCustomGdbContainer.guiGroup = SWTFactory.createGroup(subComp, pageGui.externalToolsCombo.getItem(0), 3,
                 5, GridData.FILL_HORIZONTAL);
-        final Composite compositeCustomGdb = SWTFactory.createComposite(groupComCustomGdb, 3, 5,
+        DebuggerGroupManager.guiGroupByGdbServer.put(ArcGdbServer.CUSTOM_GDBSERVER, groupComCustomGdbContainer.guiGroup);
+        final Composite compositeCustomGdb = SWTFactory.createComposite(groupComCustomGdbContainer.guiGroup, 3, 5,
                 GridData.FILL_BOTH);
-
+        
         // GDB server executable path
         customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
                 compositeCustomGdb);
@@ -718,24 +678,24 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final int screenPpi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
         final int minTextWidth = 2 * screenPpi;
         createTabItemGenericGdbServer = true;
-        groupGenericGdbServer = SWTFactory.createGroup(subComp,
+        groupGenericGdbServerContainer.guiGroup = SWTFactory.createGroup(subComp,
                 ArcGdbServer.GENERIC_GDBSERVER.toString(), 3, 5, GridData.FILL_HORIZONTAL);
-        final Composite compCOM = SWTFactory.createComposite(groupGenericGdbServer, 3, 5,
+        DebuggerGroupManager.guiGroupByGdbServer.put(ArcGdbServer.GENERIC_GDBSERVER, groupGenericGdbServerContainer.guiGroup);
+        final Composite compCOM = SWTFactory.createComposite(groupGenericGdbServerContainer.guiGroup, 3, 5,
                 GridData.FILL_BOTH);
-
         Label label = new Label(compCOM, SWT.LEFT);
         label.setText("Host Address:");
 
         // GDB host text field
-        gdbServerIpAddressText = new Text(compCOM, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+        pageGui.gdbServerIpAddressText = new Text(compCOM, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
         GridData gdbHostFieldGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
         gdbHostFieldGridData.minimumWidth = minTextWidth;
-        gdbServerIpAddressText.setLayoutData(gdbHostFieldGridData);
+        pageGui.gdbServerIpAddressText.setLayoutData(gdbHostFieldGridData);
         if (hostName.isEmpty())
-            gdbServerIpAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
+            pageGui.gdbServerIpAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
         else
-            gdbServerIpAddressText.setText(hostName);
-        gdbServerIpAddressText.addModifyListener(new ModifyListener() {
+            pageGui.gdbServerIpAddressText.setText(hostName);
+        pageGui.gdbServerIpAddressText.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 updateLaunchConfigurationDialog();
             }
@@ -745,11 +705,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabItemComAshling(Composite subComp) {
         createTabItemComAshling = true;
 
-        groupComAshling = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        groupComAshlingContainer.guiGroup = SWTFactory.createGroup(subComp, pageGui.externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
-        final Composite compositeCom = SWTFactory.createComposite(groupComAshling, 3, 5,
+        debuggerGroupManager.guiGroupByGdbServer.put(ArcGdbServer.JTAG_ASHLING, groupComAshlingContainer.guiGroup);
+        final Composite compositeCom = SWTFactory.createComposite(groupComAshlingContainer.guiGroup, 3, 5,
                 GridData.FILL_BOTH);
-
         // Path to Ashling binary
         ashlingBinaryPathEditor = new FileFieldEditor("ashlingBinaryPath", "Ashling binary path", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
@@ -808,18 +768,18 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         setErrorMessage(null);
         setMessage(null);
 
-        if (gdbServer != null) {
+        if (pageGui.gdbServer != null) {
 
-            switch (gdbServer) {
+            switch (pageGui.gdbServer) {
             case JTAG_OPENOCD:
-                if (groupCom.isDisposed()) {
+                if (groupComContainer.guiGroup.isDisposed()) {
                     return true;
                 }
-                if (!isValidFileFieldEditor(openOcdBinPathEditor)) {
+                if (!isValidFileFieldEditor(pageGui.openOcdBinPathEditor)) {
                     return false;
                 }
-                if (ftdiDevice == FtdiDevice.CUSTOM) {
-                    if (!isValidFileFieldEditor(openOcdConfigurationPathEditor)) {
+                if (pageGui.ftdiDevice == pageGui.ftdiDevice.CUSTOM) {
+                    if (!isValidFileFieldEditor(pageGui.openOcdConfigurationPathEditor)) {
                         return false;
                     }
                 } else {
@@ -827,13 +787,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     if (!configurationFile.exists()) {
                         setErrorMessage(
                                 "Default OpenOCD configuration file for this development system \'"
-                                        + openOcdConfigurationPathEditor + "\' must exist");
+                                        + pageGui.openOcdConfigurationPathEditor + "\' must exist");
                         return false;
                     }
                 }
                 break;
             case JTAG_ASHLING:
-                if (groupComAshling.isDisposed()){
+                if (groupComAshlingContainer.getGroup().isDisposed()){
                     return true;
                 }
                 if (!isValidFileFieldEditor(ashlingBinaryPathEditor)
@@ -843,20 +803,20 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
                 break;
             case NSIM:
-                if (groupNsim.isDisposed()) {
+                if (groupNsimContainer.getGroup().isDisposed()) {
                     return true;
                 }
                 if (!isValidFileFieldEditor(nsimBinaryPathEditor)
                         || (launchTcf.getSelection()
                                 && !isValidFileFieldEditor(nsimTcfPathEditor))
-                        || (launchTcfPropertiesButton.getSelection()
+                        || (pageGui.launchTcfPropertiesButton.getSelection()
                                 && !isValidFileFieldEditor(nsimPropertiesPathEditor))
                         || !workingDirectoryBlockNsim.isValid(configuration)) {
                      return false;
                 }
                 break;
             case CUSTOM_GDBSERVER:
-                if (groupComCustomGdb.isDisposed()) {
+                if (groupComCustomGdbContainer.getGroup().isDisposed()) {
                     return true;
                 }
                 if (!isValidFileFieldEditor(customGdbBinaryPathEditor)) {
@@ -886,166 +846,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         }
         return true;
-    }
-
-    private String getOpenOcdConfigurationPath() {
-        final File rootDirectory = new File(openOcdBinaryPath).getParentFile().getParentFile();
-        final File scriptsDirectory = new File(rootDirectory,
-                "share" + File.separator + "openocd" + File.separator + "scripts");
-        String openOcdConfiguration = scriptsDirectory + File.separator + "board" + File.separator;
-
-        switch (ftdiDevice) {
-        case EM_SK_v1x:
-            openOcdConfiguration += "snps_em_sk_v1.cfg";
-            break;
-        case EM_SK_v21:
-            openOcdConfiguration += "snps_em_sk_v2.1.cfg";
-            break;
-        case EM_SK_v22:
-            openOcdConfiguration += "snps_em_sk_v2.2.cfg";
-            break;
-        case AXS101:
-            openOcdConfiguration += "snps_axs101.cfg";
-            break;
-        case AXS102:
-            openOcdConfiguration += "snps_axs102.cfg";
-            break;
-        case AXS103:
-            if (ftdiCore == FtdiCore.HS36) {
-                openOcdConfiguration += "snps_axs103_hs36.cfg";
-            } else {
-                openOcdConfiguration += "snps_axs103_hs38.cfg";
-            }
-            break;
-        case CUSTOM:
-            break;
-        default:
-            throw new IllegalArgumentException("Unknown enum value has been used");
-        }
-        return openOcdConfiguration;
-    }
-
-    private void createTabItemCom(Composite subComp) {
-        createTabItemCom = true;
-        groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
-                GridData.FILL_HORIZONTAL);
-        final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
-
-        // Path to OpenOCD binary
-        openOcdBinPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
-            false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        openOcdBinPathEditor.setStringValue(openOcdBinaryPath);
-        openOcdBinPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    openOcdBinaryPath = (String) event.getNewValue();
-                    if (ftdiDevice != FtdiDevice.CUSTOM) {
-                        openOcdConfigurationPath = getOpenOcdConfigurationPath();
-                        openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
-                    }
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-        Label label = new Label(compositeCom, SWT.LEFT);
-        label.setText("Development system:");
-        ftdiDeviceCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
-
-        GridData gridDataJtag = new GridData(GridData.BEGINNING);
-        gridDataJtag.widthHint = 220;
-        gridDataJtag.horizontalSpan = 2;
-        ftdiDeviceCombo.setLayoutData(gridDataJtag);
-
-        for (FtdiDevice i : FtdiDevice.values())
-            ftdiDeviceCombo.add(i.toString());
-        ftdiDeviceCombo.setText(ftdiDevice.toString());
-
-        ftdiDeviceCombo.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                Combo combo = (Combo) event.widget;
-                ftdiDevice = FtdiDevice.fromString(combo.getText());
-
-                if (ftdiDevice == FtdiDevice.CUSTOM)
-                    openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
-                else
-                    openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-
-                if (ftdiDevice.getCores().size() <= 1)
-                    ftdiCoreCombo.setEnabled(false);
-                else
-                    ftdiCoreCombo.setEnabled(true);
-
-                updateFtdiCoreCombo();
-                updateLaunchConfigurationDialog();
-            }
-        });
-
-        Label coreLabel = new Label(compositeCom, SWT.LEFT);
-        coreLabel.setText("Target Core");
-        ftdiCoreCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
-        ftdiCoreCombo.setLayoutData(gridDataJtag);
-
-        if (ftdiDevice.getCores().size() <= 1)
-            ftdiCoreCombo.setEnabled(false);
-        else
-            ftdiCoreCombo.setEnabled(true);
-
-        updateFtdiCoreCombo();
-
-        ftdiCoreCombo.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                Combo combo = (Combo) event.widget;
-                if (!combo.getText().isEmpty()) {
-                    ftdiCore = FtdiCore.fromString(combo.getText());
-                    if (ftdiDevice != FtdiDevice.CUSTOM) {
-                        openOcdConfigurationPath = getOpenOcdConfigurationPath();
-                        openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
-                    }
-                }
-                updateLaunchConfigurationDialog();
-            }
-        });
-
-        openOcdConfigurationPathEditor = new FileFieldEditor("openocdConfigurationPathEditor",
-            "OpenOCD configuration file",
-                false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-        openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
-        openOcdConfigurationPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    openOcdConfigurationPath = event.getNewValue().toString();
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-
-        if (openOcdConfigurationPathEditor != null) {
-            if (!ftdiDeviceCombo.getText().equalsIgnoreCase(
-                    FtdiDevice.CUSTOM.toString())) {
-                openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-            } else {
-                openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
-            }
-        }
-    }
-
-    private void updateFtdiCoreCombo() {
-        ftdiCoreCombo.removeAll();
-        java.util.List<FtdiCore> cores = ftdiDevice.getCores();
-        String text = cores.get(0).toString();
-        for (FtdiCore core : cores) {
-            ftdiCoreCombo.add(core.toString());
-            if (ftdiCore == core) {
-                /*
-                 * Should select current ftdiCore if it is present in cores list in order to be able
-                 * to initialize from configuration. Otherwise ftdiCore field will be rewritten to
-                 * the selected core when we initialize FTDI_DeviceCombo
-                 */
-                text = core.toString();
-            }
-        }
-        ftdiCoreCombo.setText(text);
     }
 
     private void createJtagFrequencyCombo(Composite composite) {
@@ -1107,10 +907,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabItemNsim(Composite subComp) {
         createTabItemNsim = true;
 
-        groupNsim = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        groupNsimContainer.guiGroup = SWTFactory.createGroup(subComp, pageGui.externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
-        final Composite compositeNsim = SWTFactory.createComposite(groupNsim, 3, 5, GridData.FILL_BOTH);
-
+        DebuggerGroupManager.guiGroupByGdbServer.put(ArcGdbServer.NSIM, groupNsimContainer.guiGroup);
+        final Composite compositeNsim = SWTFactory.createComposite(groupNsimContainer.getGroup(), 3, 5, GridData.FILL_BOTH);
+        
         GridData gridData = new GridData();
 
         nsimBinaryPathEditor = new FileFieldEditor("nsimBinPath", "nSIM executable", false,
@@ -1126,13 +927,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         });
 
-        launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchTcfPropertiesButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
-        launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+        pageGui.launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        pageGui.launchTcfPropertiesButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
+        pageGui.launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
-        launchTcfPropertiesButton.setLayoutData(gridData);
-        launchTcfPropertiesButton.setText("Use TCF?");
+        pageGui.launchTcfPropertiesButton.setLayoutData(gridData);
+        pageGui.launchTcfPropertiesButton.setText("Use TCF?");
 
         nsimTcfPathEditor = new FileFieldEditor("nsimTcfPath", "nSIM TCF path", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
@@ -1176,7 +977,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                 } else {
                     externalNsimTcfToolsEnabled = false;
-                    launchTcfPropertiesButton.setSelection(false);
+                    pageGui.launchTcfPropertiesButton.setSelection(false);
                     nsimTcfPathEditor.setEnabled(false, compositeNsim);
                 }
                 updateLaunchConfigurationDialog();
@@ -1186,10 +987,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
 
         });
-        launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
+        pageGui.launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
 
             public void widgetSelected(SelectionEvent event) {
-                if (launchTcfPropertiesButton.getSelection() == true) {
+                if (pageGui.launchTcfPropertiesButton.getSelection() == true) {
                     externalNsimPropertiesEnabled = true;
                     nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
                 } else {
@@ -1209,27 +1010,27 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
 
-        launchNsimJitProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchNsimJitProperties.setSelection(externalNsimJitEnabled);
-        launchNsimJitProperties.setText("JIT");
-        launchNsimJitProperties.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
-        jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
-        jitThreadSpinner.setToolTipText("Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
+        pageGui.launchNsimJitProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        pageGui.launchNsimJitProperties.setSelection(externalNsimJitEnabled);
+        pageGui.launchNsimJitProperties.setText("JIT");
+        pageGui.launchNsimJitProperties.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
+        pageGui.jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
+        pageGui.jitThreadSpinner.setToolTipText("Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
         final Label jitLabel = new Label(compositeNsim, SWT.BEGINNING);
         jitLabel.setText("JIT threads");
-        jitThreadSpinner.setValues(1, 1, 100, 10, 1, 0);
+        pageGui.jitThreadSpinner.setValues(1, 1, 100, 10, 1, 0);
 
-        launchNsimJitProperties.addSelectionListener(new SelectionListener() {
+        pageGui.launchNsimJitProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchNsimJitProperties.getSelection() == true) {
+                if (pageGui.launchNsimJitProperties.getSelection() == true) {
                     externalNsimJitEnabled = true;
                     jitLabel.setEnabled(true);
-                    jitThreadSpinner.setEnabled(true);
+                    pageGui.jitThreadSpinner.setEnabled(true);
 
                 } else {
                     externalNsimJitEnabled = false;
                     jitLabel.setEnabled(false);
-                    jitThreadSpinner.setEnabled(false);
+                    pageGui.jitThreadSpinner.setEnabled(false);
                 }
                 updateLaunchConfigurationDialog();
             }
@@ -1239,24 +1040,24 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         });
 
-        launchNsimJitProperties.setLayoutData(gridData);
+        pageGui.launchNsimJitProperties.setLayoutData(gridData);
 
         if (externalNsimJitEnabled == true) {
             jitLabel.setEnabled(true);
-            jitThreadSpinner.setEnabled(true);
+            pageGui.jitThreadSpinner.setEnabled(true);
         } else if (externalNsimJitEnabled == false) {
             jitLabel.setEnabled(false);
-            jitThreadSpinner.setEnabled(false);
+            pageGui.jitThreadSpinner.setEnabled(false);
         }
 
         if (!jitThread.equals("1"))
-            jitThreadSpinner.setSelection(Integer.parseInt(jitThread));
+            pageGui.jitThreadSpinner.setSelection(Integer.parseInt(jitThread));
         else
-            jitThreadSpinner.setSelection(1);
+            pageGui.jitThreadSpinner.setSelection(1);
 
-        jitThreadSpinner.addModifyListener(new ModifyListener() {
+        pageGui.jitThreadSpinner.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
-                jitThread = jitThreadSpinner.getText();
+                jitThread = pageGui.jitThreadSpinner.getText();
                 updateLaunchConfigurationDialog();
             }
         });
@@ -1267,13 +1068,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         GridData gridDataNsim = new GridData(SWT.BEGINNING);
         gridDataNsim.horizontalSpan = 2;
 
-        launchHostLinkProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchHostLinkProperties.setToolTipText("Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property works only if the application that is being simulated is compiled with the ARC GCC compiler.");
-        launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
-        launchHostLinkProperties.setText("GNU host I/O support");
-        launchHostLinkProperties.addSelectionListener(new SelectionListener() {
+        pageGui.launchHostLinkProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        pageGui.launchHostLinkProperties.setToolTipText("Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property works only if the application that is being simulated is compiled with the ARC GCC compiler.");
+        pageGui.launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
+        pageGui.launchHostLinkProperties.setText("GNU host I/O support");
+        pageGui.launchHostLinkProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchHostLinkProperties.getSelection() == true) {
+                if (pageGui.launchHostLinkProperties.getSelection() == true) {
                     externalNsimHostLinkToolsEnabled = true;
 
                 } else {
@@ -1287,15 +1088,15 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         });
 
-        launchHostLinkProperties.setLayoutData(gridDataNsim);
+        pageGui.launchHostLinkProperties.setLayoutData(gridDataNsim);
 
-        launchMemoryExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchMemoryExceptionProperties.setToolTipText("Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
-        launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
-        launchMemoryExceptionProperties.setText("Memory Exception");
-        launchMemoryExceptionProperties.addSelectionListener(new SelectionListener() {
+        pageGui.launchMemoryExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        pageGui.launchMemoryExceptionProperties.setToolTipText("Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
+        pageGui.launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
+        pageGui.launchMemoryExceptionProperties.setText("Memory Exception");
+        pageGui.launchMemoryExceptionProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchMemoryExceptionProperties.getSelection() == true) {
+                if (pageGui.launchMemoryExceptionProperties.getSelection() == true) {
                     externalNsimMemoryExceptionToolsEnabled = true;
 
                 } else {
@@ -1309,15 +1110,15 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         });
 
-        launchMemoryExceptionProperties.setLayoutData(gridDataNsim);
+        pageGui.launchMemoryExceptionProperties.setLayoutData(gridDataNsim);
 
-        launchEnableExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
-        launchEnableExceptionProperties.setText("Enable Exception");
-        launchEnableExceptionProperties.setToolTipText("Simulate (1) or break (0) on any exception (-p enable_exceptions={0,1})");
-        launchEnableExceptionProperties.addSelectionListener(new SelectionListener() {
+        pageGui.launchEnableExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        pageGui.launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
+        pageGui.launchEnableExceptionProperties.setText("Enable Exception");
+        pageGui.launchEnableExceptionProperties.setToolTipText("Simulate (1) or break (0) on any exception (-p enable_exceptions={0,1})");
+        pageGui.launchEnableExceptionProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchEnableExceptionProperties.getSelection() == true) {
+                if (pageGui.launchEnableExceptionProperties.getSelection() == true) {
                     externalNsimEnableExceptionToolsEnabled = true;
 
                 } else {
@@ -1331,15 +1132,15 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         });
 
-        launchEnableExceptionProperties.setLayoutData(gridDataNsim);
+        pageGui.launchEnableExceptionProperties.setLayoutData(gridDataNsim);
 
-        launchInvalidInstructionExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchInvalidInstructionExceptionProperties.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
-        launchInvalidInstructionExceptionProperties.setSelection(launchExternalNsimInvalidInstructionException);
-        launchInvalidInstructionExceptionProperties.setText("Invalid Instruction  Exception");
-        launchInvalidInstructionExceptionProperties.addSelectionListener(new SelectionListener() {
+        pageGui.launchInvalidInstructionExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        pageGui.launchInvalidInstructionExceptionProperties.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
+        pageGui.launchInvalidInstructionExceptionProperties.setSelection(launchExternalNsimInvalidInstructionException);
+        pageGui.launchInvalidInstructionExceptionProperties.setText("Invalid Instruction  Exception");
+        pageGui.launchInvalidInstructionExceptionProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchInvalidInstructionExceptionProperties.getSelection() == true) {
+                if (pageGui.launchInvalidInstructionExceptionProperties.getSelection() == true) {
                     launchExternalNsimInvalidInstructionException = true;
 
                 } else {
@@ -1352,7 +1153,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
 
         });
-        launchInvalidInstructionExceptionProperties.setLayoutData(gridDataNsim);
+        pageGui.launchInvalidInstructionExceptionProperties.setLayoutData(gridDataNsim);
 
         workingDirectoryBlockNsim.createControl(compositeNsim);
     }
@@ -1387,7 +1188,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public String getErrorMessage() {
         String errorMessage = super.getErrorMessage();
-        if (errorMessage == null && !groupNsim.isDisposed()) {
+        if (errorMessage == null && !groupNsimContainer.getGroup().isDisposed()) {
             return workingDirectoryBlockNsim.getErrorMessage();
         }
         return errorMessage;
