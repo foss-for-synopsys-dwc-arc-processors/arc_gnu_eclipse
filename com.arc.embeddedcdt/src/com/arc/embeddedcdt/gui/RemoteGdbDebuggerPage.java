@@ -125,7 +125,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private String gdbPath = null;
     private boolean createTabItemComAshling = false;
     private boolean createTabItemCustomGdb = false;
-    protected Label nsimProperties;
     protected Button nsimPropertiesBrowseButton;
     private String nsimPropertiesFilesLast = "";
     private boolean externalNsimPropertiesEnabled = true;
@@ -135,7 +134,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchMemoryExceptionProperties;
     protected Button launchInvalidInstructionExceptionProperties;
     protected Button launchEnableExceptionProperties;
-    protected Label nsimTcf;
     protected Button nsimTcfBrowseButton;
     private String nsimTcfFilesLast = "";
     private boolean externalNsimTcfToolsEnabled = true;
