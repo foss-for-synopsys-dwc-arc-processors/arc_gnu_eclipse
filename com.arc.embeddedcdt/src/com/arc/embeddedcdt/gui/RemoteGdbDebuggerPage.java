@@ -127,6 +127,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private boolean createTabItemCustomGdb = false;
     protected Button nsimPropertiesBrowseButton;
     private String nsimPropertiesFilesLast = "";
+    protected Button launchTcf;
     private boolean externalNsimPropertiesEnabled = true;
     protected Button launchTcfPropertiesButton;
     protected Button launchNsimJitProperties;
@@ -545,7 +546,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                             groupNsim.dispose();
                         createTabItemNsim(subComp);
 
-                        launchTcfPropertiesButton.setSelection(externalNsimPropertiesEnabled);
+                        launchTcf.setSelection(externalNsimPropertiesEnabled);
                         launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
                         launchNsimJitProperties.setSelection(externalNsimJitEnabled);
                         launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
@@ -846,7 +847,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     return true;
                 }
                 if (!isValidFileFieldEditor(nsimBinaryPathEditor)
-                        || (launchTcfPropertiesButton.getSelection()
+                        || (launchTcf.getSelection()
                                 && !isValidFileFieldEditor(nsimTcfPathEditor))
                         || (launchTcfPropertiesButton.getSelection()
                                 && !isValidFileFieldEditor(nsimPropertiesPathEditor))
@@ -1146,13 +1147,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         });
         nsimTcfPathEditor.setEnabled((externalNsimTcfToolsEnabled), compositeNsim);
 
-        launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchTcfPropertiesButton.setToolTipText("-propsfile=path");
-        launchTcfPropertiesButton.setSelection(externalNsimPropertiesEnabled);
+        launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+        launchTcf.setToolTipText("-propsfile=path");
+        launchTcf.setSelection(externalNsimPropertiesEnabled);
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
-        launchTcfPropertiesButton.setLayoutData(gridData);
-        launchTcfPropertiesButton.setText("Use nSIM properties file?");
+        launchTcf.setLayoutData(gridData);
+        launchTcf.setText("Use nSIM properties file?");
         nsimPropertiesPathEditor = new FileFieldEditor("nsimPropertiesPath", "nSIM properties file", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
         nsimPropertiesPathEditor.setStringValue(nsimPropertiesFilesLast);
@@ -1167,9 +1168,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         nsimPropertiesPathEditor.setEnabled((externalNsimPropertiesEnabled), compositeNsim);
 
-        launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
+        launchTcf.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchTcfPropertiesButton.getSelection() == true) {
+                if (launchTcf.getSelection() == true) {
                     externalNsimTcfToolsEnabled = true;
                     nsimTcfPathEditor.setEnabled(true, compositeNsim);
 
