@@ -71,7 +71,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    protected Combo jtagFrequencyCombo;
     protected Combo ftdiDeviceCombo;
     protected Combo ftdiCoreCombo;
     protected Text targetText;
@@ -95,7 +94,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor ashlingXmlPathEditor;
     private FileFieldEditor ashlingTdescXmlPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
-    private String jtagFrequency = null;
     private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
@@ -175,7 +173,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         fGDBCommandText.setText(gdbPath);
         openOcdBinaryPath = configurationReader.getOrDefault(
             DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
-        jtagFrequency = configurationReader.getAshlingJtagFrequency();
+        debuggerGroupContainer.jtagFrequency = configurationReader.getAshlingJtagFrequency();
         ftdiDevice = configurationReader.getFtdiDevice();
         ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
@@ -215,12 +213,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         jitThread = configurationReader.getNsimJitThreads();
 
         externalToolsCombo.setText(gdbServer.toString());
-
-        if (!jtagFrequencyCombo.isDisposed()) {
-            if (configurationReader.getAshlingJtagFrequency().isEmpty()) {
-                jtagFrequencyCombo.setText(jtagFrequencyCombo.getItem(0));
-            } else
-                jtagFrequencyCombo.setText(jtagFrequency);
+        String jtagFrequency = debuggerGroupContainer.jtagFrequency;
+        if (!debuggerGroupContainer.isJtagFrequencyComboDisposed()) {
+            if (configurationReader.getAshlingJtagFrequency().isEmpty())
+                debuggerGroupContainer.setDefaultTextForJtagFrequencyCombo();
+            else
+                debuggerGroupContainer.setTextForJtagFrequencyCombo(jtagFrequency);
         }
         if (!ftdiDeviceCombo.isDisposed())
             ftdiDeviceCombo.setText(ftdiDevice.toString());
@@ -245,13 +243,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalToolsCombo.add(gdbServer.toString(), 0);
         externalToolsCombo.select(0);
 
-        if (!jtagFrequencyCombo.isDisposed()) {
+        if (!debuggerGroupContainer.isJtagFrequencyComboDisposed()) {
             if (!jtagFrequency.isEmpty()) {
-                previous = jtagFrequencyCombo.indexOf(jtagFrequency);
-                if (previous > -1)
-                    jtagFrequencyCombo.remove(previous);
-                jtagFrequencyCombo.add(jtagFrequency, 0);
-                jtagFrequencyCombo.select(0);
+                debuggerGroupContainer.selectJtagFrequencyInCombo(jtagFrequency);
             }
         }
     }
@@ -274,6 +268,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
         gdbPath = fGDBCommandText.getText();
+        String jtagFrequency = debuggerGroupContainer.jtagFrequency;
         if (jtagFrequency != null)
             configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
 
@@ -963,59 +958,14 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private void createJtagFrequencyCombo(Composite composite) {
-        Label label = new Label(composite, SWT.LEFT);
-        label.setText("JTAG frequency:");
-        jtagFrequencyCombo = new Combo(composite, SWT.None);// 1-2 and 1-3
-
-        GridData gridDataJtag = new GridData(GridData.BEGINNING);
-        gridDataJtag.widthHint = 100;
-        jtagFrequencyCombo.setLayoutData(gridDataJtag);
-
-        jtagFrequencyCombo.add("100MHz");
-        jtagFrequencyCombo.add("90MHz");
-        jtagFrequencyCombo.add("80MHz");
-        jtagFrequencyCombo.add("70MHz");
-        jtagFrequencyCombo.add("60MHz");
-        jtagFrequencyCombo.add("50MHz");
-        jtagFrequencyCombo.add("40MHz");
-        jtagFrequencyCombo.add("30MHz");
-        jtagFrequencyCombo.add("25MHz");
-        jtagFrequencyCombo.add("20MHz");
-        jtagFrequencyCombo.add("18MHz");
-        jtagFrequencyCombo.add("15MHz");
-        jtagFrequencyCombo.add("12MHz");
-        jtagFrequencyCombo.add("10MHz");
-        jtagFrequencyCombo.add("9MHz");
-        jtagFrequencyCombo.add("8MHz");
-        jtagFrequencyCombo.add("7MHz");
-        jtagFrequencyCombo.add("6MHz");
-        jtagFrequencyCombo.add("5MHz");
-        jtagFrequencyCombo.add("4MHz");
-        jtagFrequencyCombo.add("3MHz");
-        jtagFrequencyCombo.add("2500KHz");
-        jtagFrequencyCombo.add("2000KHz");
-        jtagFrequencyCombo.add("1800KHz");
-        jtagFrequencyCombo.add("1500KHz");
-        jtagFrequencyCombo.add("1200KHz");
-        jtagFrequencyCombo.add("1000KHz");
-
-        jtagFrequencyCombo.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                Combo combo = (Combo) event.widget;
-                jtagFrequency = combo.getText();
-                updateLaunchConfigurationDialog();
-
-            }
-        });
-        //Setting text after adding listener to make sure jtagFreq field value is updated
-        if (jtagFrequency != null) {
-            if (jtagFrequencyCombo.getText().isEmpty() && jtagFrequency.isEmpty())
-                jtagFrequencyCombo.setText("10MHz");
-            else if (jtagFrequencyCombo.getText().isEmpty() && !jtagFrequency.isEmpty())
-                jtagFrequencyCombo.setText(jtagFrequency);
-        } else {
-            jtagFrequencyCombo.setText("10MHz");
-        }
+        ModifyListener modifyListener = new ModifyListener() {
+          public void modifyText(ModifyEvent event) {
+              Combo combo = (Combo) event.widget;
+              debuggerGroupContainer.jtagFrequency = combo.getText();
+              updateLaunchConfigurationDialog();
+          }
+        };
+        debuggerGroupContainer.createJtagFrequencyCombo(composite, modifyListener);
     }
 
     private void createTabItemNsim(Composite subComp) {

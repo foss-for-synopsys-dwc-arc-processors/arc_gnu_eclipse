@@ -16,6 +16,13 @@ import java.util.Locale;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
@@ -29,6 +36,77 @@ public class DebuggerGroupContainer {
 
   public static final String DEFAULT_OOCD_BIN;
   public static final String DEFAULT_OOCD_CFG;
+  private Combo jtagFrequencyCombo;
+  public String jtagFrequency = null;
+
+  public boolean isJtagFrequencyComboDisposed(){
+    return jtagFrequencyCombo.isDisposed();
+  }
+
+  public void setTextForJtagFrequencyCombo(String text){
+    jtagFrequencyCombo.setText(text);
+  }
+
+  public void setDefaultTextForJtagFrequencyCombo(){
+    jtagFrequencyCombo.setText(jtagFrequencyCombo.getItem(0));
+  }
+
+  public void selectJtagFrequencyInCombo(String jtagFrequency){
+    int previous = jtagFrequencyCombo.indexOf(jtagFrequency);
+    if (previous > -1)
+        jtagFrequencyCombo.remove(previous);
+    jtagFrequencyCombo.add(jtagFrequency, 0);
+    jtagFrequencyCombo.select(0);
+  }
+
+  public void createJtagFrequencyCombo(Composite composite, ModifyListener modifyListener) {
+    Label label = new Label(composite, SWT.LEFT);
+    label.setText("JTAG frequency:");
+    jtagFrequencyCombo = new Combo(composite, SWT.None);// 1-2 and 1-3
+
+    GridData gridDataJtag = new GridData(GridData.BEGINNING);
+    gridDataJtag.widthHint = 100;
+    jtagFrequencyCombo.setLayoutData(gridDataJtag);
+
+    jtagFrequencyCombo.add("100MHz");
+    jtagFrequencyCombo.add("90MHz");
+    jtagFrequencyCombo.add("80MHz");
+    jtagFrequencyCombo.add("70MHz");
+    jtagFrequencyCombo.add("60MHz");
+    jtagFrequencyCombo.add("50MHz");
+    jtagFrequencyCombo.add("40MHz");
+    jtagFrequencyCombo.add("30MHz");
+    jtagFrequencyCombo.add("25MHz");
+    jtagFrequencyCombo.add("20MHz");
+    jtagFrequencyCombo.add("18MHz");
+    jtagFrequencyCombo.add("15MHz");
+    jtagFrequencyCombo.add("12MHz");
+    jtagFrequencyCombo.add("10MHz");
+    jtagFrequencyCombo.add("9MHz");
+    jtagFrequencyCombo.add("8MHz");
+    jtagFrequencyCombo.add("7MHz");
+    jtagFrequencyCombo.add("6MHz");
+    jtagFrequencyCombo.add("5MHz");
+    jtagFrequencyCombo.add("4MHz");
+    jtagFrequencyCombo.add("3MHz");
+    jtagFrequencyCombo.add("2500KHz");
+    jtagFrequencyCombo.add("2000KHz");
+    jtagFrequencyCombo.add("1800KHz");
+    jtagFrequencyCombo.add("1500KHz");
+    jtagFrequencyCombo.add("1200KHz");
+    jtagFrequencyCombo.add("1000KHz");
+
+    jtagFrequencyCombo.addModifyListener(modifyListener);
+    //Setting text after adding listener to make sure jtagFreq field value is updated
+    if (jtagFrequency != null) {
+        if (jtagFrequencyCombo.getText().isEmpty() && jtagFrequency.isEmpty())
+            jtagFrequencyCombo.setText("10MHz");
+        else if (jtagFrequencyCombo.getText().isEmpty() && !jtagFrequency.isEmpty())
+            jtagFrequencyCombo.setText(jtagFrequency);
+    } else {
+        jtagFrequencyCombo.setText("10MHz");
+    }
+  }
 
   static {
     if (isWindowsOs()) {
