@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Label;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
 
 /**
@@ -43,12 +44,13 @@ public class DebuggerGroupContainer {
     return jtagFrequencyCombo.isDisposed();
   }
 
-  public void setTextForJtagFrequencyCombo(String text){
-    jtagFrequencyCombo.setText(text);
-  }
-
-  public void setDefaultTextForJtagFrequencyCombo(){
-    jtagFrequencyCombo.setText(jtagFrequencyCombo.getItem(0));
+  public void setTextForJtagFrequencyCombo(ConfigurationReader configurationReader){
+    if (!isJtagFrequencyComboDisposed()) {
+      if (configurationReader.getAshlingJtagFrequency().isEmpty())
+        jtagFrequencyCombo.setText(jtagFrequencyCombo.getItem(0));
+      else
+        jtagFrequencyCombo.setText(jtagFrequency);
+    }
   }
 
   public void selectJtagFrequencyInCombo(String jtagFrequency){

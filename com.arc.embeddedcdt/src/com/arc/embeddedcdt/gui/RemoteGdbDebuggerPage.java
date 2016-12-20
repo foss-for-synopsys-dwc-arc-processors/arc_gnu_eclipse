@@ -213,13 +213,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         jitThread = configurationReader.getNsimJitThreads();
 
         externalToolsCombo.setText(gdbServer.toString());
+
         String jtagFrequency = debuggerGroupContainer.jtagFrequency;
-        if (!debuggerGroupContainer.isJtagFrequencyComboDisposed()) {
-            if (configurationReader.getAshlingJtagFrequency().isEmpty())
-                debuggerGroupContainer.setDefaultTextForJtagFrequencyCombo();
-            else
-                debuggerGroupContainer.setTextForJtagFrequencyCombo(jtagFrequency);
-        }
+        debuggerGroupContainer.setTextForJtagFrequencyCombo(configurationReader);
         if (!ftdiDeviceCombo.isDisposed())
             ftdiDeviceCombo.setText(ftdiDevice.toString());
 
