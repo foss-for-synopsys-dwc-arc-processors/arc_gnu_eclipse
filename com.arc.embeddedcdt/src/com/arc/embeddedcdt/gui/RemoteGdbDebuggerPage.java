@@ -70,26 +70,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
  */
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
-    private static final String DEFAULT_OOCD_BIN;
-    private static final String DEFAULT_OOCD_CFG;
-    static {
-        if (isWindowsOs()) {
-            DEFAULT_OOCD_BIN = getIdeRootDirPath() + "\\bin\\openocd.exe";
-            DEFAULT_OOCD_CFG = getIdeRootDirPath()
-                    + "\\share\\openocd\\scripts\\board\\snps_em_sk.cfg";
-        } else {
-            String predefinedPath = getIdeBinDir();
-            // Checking for OpenOCD binary presence in default path
-            if (new File(predefinedPath).isDirectory()) {
-                DEFAULT_OOCD_BIN = predefinedPath + "openocd";
-                DEFAULT_OOCD_CFG = getIdeRootDir() + "share/openocd/scripts/board/snps_em_sk.cfg";
-            } else {
-                DEFAULT_OOCD_BIN = LaunchConfigurationConstants.DEFAULT_OPENOCD_BIN_PATH_LINUX;
-                DEFAULT_OOCD_CFG = LaunchConfigurationConstants.DEFAULT_OPENOCD_CFG_PATH_LINUX;
-            }
-        }
-    }
-
     protected Combo externalToolsCombo;
     protected Combo jtagFrequencyCombo;
     protected Combo ftdiDeviceCombo;
@@ -153,6 +133,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
     protected Spinner jitThreadSpinner;
     private String jitThread = "1";
+    private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
     @Override
     public String getName() {
@@ -162,56 +143,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
       super.setDefaults(configuration);
-      ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
-      configurationWriter.setGdbServerCommand(
-          IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
-      configurationWriter.setGdbServerPort(
-          IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
-      configurationWriter.setGdbServer(ArcGdbServer.DEFAULT_GDB_SERVER.toString());
-      configurationWriter.setOpenOcdConfig(DEFAULT_OOCD_CFG);
-      configurationWriter.setAshlingPath("");
-      configurationWriter.setNsimPath("");
-      configurationWriter.setDoLaunchTerminal(false);
-      configurationWriter.setNsimDefaultPath(getNsimdrvDefaultPath());
-      configurationWriter.setOpenOcdPath(DEFAULT_OOCD_BIN);
-      configurationWriter.setAshlingJtagFrequency("");
-      configurationWriter.setFtdiDevice(LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME);
-      configurationWriter.setFtdiCore(LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME);
-    }
-
-    /**
-     * Get default path to nSIM application nsimdrv.
-     */
-    private static String getNsimdrvDefaultPath() {
-        String nsimHome = System.getenv("NSIM_HOME");
-        if (nsimHome == null)
-            return "";
-        else {
-            String path = nsimHome + java.io.File.separator + "bin" + java.io.File.separator
-                    + "nsimdrv";
-            if (isWindowsOs()) {
-                return path + ".exe";
-            } else {
-                return path;
-            }
-        }
-    }
-
-    private static String getIdeRootDirPath() {
-        String s = System.getProperty("eclipse.home.location");
-        s = s.substring("file:/".length()).replace("/", "\\");
-        String path = s + "\\..";
-        try {
-            return Paths.get(path).toRealPath().toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
+      debuggerGroupContainer.setDefaults(configuration);
     }
 
     public static String getDefaultGdbPath() {
         String gdbPath = "arc-elf32-gdb";
-        String predefinedPath = getIdeBinDir();
+        String predefinedPath = DebuggerGroupContainer.getIdeBinDir();
         File predefinedPathFile = new File(predefinedPath);
 
         if (predefinedPathFile.isDirectory()) {
@@ -221,16 +158,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         }
         return gdbPath;
-    }
-
-    static String getIdeRootDir() {
-        String eclipsehome = Platform.getInstallLocation().getURL().getPath();
-        File predefinedPathToDirectory = new File(eclipsehome).getParentFile();
-        return predefinedPathToDirectory + File.separator;
-    }
-
-    static String getIdeBinDir() {
-        return getIdeRootDir() + "bin" + File.separator;
     }
 
     @Override
@@ -246,16 +173,16 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath());
         fGDBCommandText.setText(gdbPath);
-        openOcdBinaryPath = configurationReader.getOrDefault(DEFAULT_OOCD_BIN, "",
-            configurationReader.getOpenOcdPath());
+        openOcdBinaryPath = configurationReader.getOrDefault(
+            DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
         jtagFrequency = configurationReader.getAshlingJtagFrequency();
         ftdiDevice = configurationReader.getFtdiDevice();
         ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
-        openOcdConfigurationPath = configurationReader.getOrDefault(DEFAULT_OOCD_CFG, "",
-            configurationReader.getOpenOcdConfig());
+        openOcdConfigurationPath = configurationReader.getOrDefault(
+            DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
         String defaultAshlingPath =
-            isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
+            DebuggerGroupContainer.isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
                 : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
         externalToolsAshlingPath =
             configurationReader.getOrDefault(defaultAshlingPath, "",
@@ -268,8 +195,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             + java.io.File.separator + "opella-arcem-tdesc.xml";
         ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
             configurationReader.getAshlingTDescPath());
-        externalToolsNsimPath = configurationReader.getOrDefault(getNsimdrvDefaultPath(), "",
-            configurationReader.getNsimPath());
+        externalToolsNsimPath = configurationReader.getOrDefault(
+            DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath());
         customGdbPath = configurationReader.getCustomGdbServerPath();
         customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
@@ -344,7 +271,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
         configurationWriter.setGdbServerPort(str);
-        String nsimDefaultPath = getNsimdrvDefaultPath();
+        String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
         gdbPath = fGDBCommandText.getText();
         if (jtagFrequency != null)
@@ -385,19 +312,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             hostName = gdbServerIpAddressText.getText();
             configurationWriter.setHostAddress(getAttributeValueFromString(hostName));
         }
-    }
-
-    private static boolean isWindowsOs() {
-        boolean isWindowsOs = false;
-        String osName = System.getProperty("os.name");
-        /* This code may have local issues without "Locale.ENGLISH" specified, e.g. in Turkey,
-         * "I" becomes lower case undotted "i" ("ı"), and "i" becomes upper case dotted "i" ("İ").
-         * So "WINDOWS".toLowerCase().indexOf("win") will return -1 in Turkey.
-         */
-        if (osName != null && osName.toLowerCase(Locale.ENGLISH).indexOf("windows") > -1) {
-            isWindowsOs = true;
-        }
-        return isWindowsOs;
     }
 
     static Group groupCom;
