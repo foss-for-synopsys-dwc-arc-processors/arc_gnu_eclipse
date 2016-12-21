@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Observable;
 
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.Platform;
@@ -33,7 +34,7 @@ import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
  * This class provides the content and control elements for the Gdbserver Settings tab in the
  * Debug Configurations' Debugger tab.
  */
-public class DebuggerGroupContainer {
+public class DebuggerGroupContainer extends Observable{
 
   public static final String DEFAULT_OOCD_BIN;
   public static final String DEFAULT_OOCD_CFG;
@@ -61,7 +62,7 @@ public class DebuggerGroupContainer {
     jtagFrequencyCombo.select(0);
   }
 
-  public void createJtagFrequencyCombo(Composite composite, ModifyListener modifyListener) {
+  public void createJtagFrequencyCombo(Composite composite) {
     Label label = new Label(composite, SWT.LEFT);
     label.setText("JTAG frequency:");
     jtagFrequencyCombo = new Combo(composite, SWT.None);// 1-2 and 1-3
@@ -98,7 +99,15 @@ public class DebuggerGroupContainer {
     jtagFrequencyCombo.add("1200KHz");
     jtagFrequencyCombo.add("1000KHz");
 
-    jtagFrequencyCombo.addModifyListener(modifyListener);
+    jtagFrequencyCombo.addModifyListener(
+        new ModifyListener() {
+          public void modifyText(ModifyEvent event) {
+              Combo combo = (Combo) event.widget;
+              jtagFrequency = combo.getText();
+              setChanged();
+              notifyObservers();
+          }
+        });
     //Setting text after adding listener to make sure jtagFreq field value is updated
     if (jtagFrequency != null) {
         if (jtagFrequencyCombo.getText().isEmpty() && jtagFrequency.isEmpty())

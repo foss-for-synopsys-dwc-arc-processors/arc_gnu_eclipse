@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.eclipse.cdt.dsf.gdb.internal.ui.launching.GdbDebuggerPage;
 import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
@@ -132,6 +134,16 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Spinner jitThreadSpinner;
     private String jitThread = "1";
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
+
+    public RemoteGdbDebuggerPage() {
+      debuggerGroupContainer.addObserver(new Observer() {
+
+        @Override
+        public void update(Observable o, Object arg) {
+          updateLaunchConfigurationDialog();
+        }
+      });
+    }
 
     @Override
     public String getName() {
@@ -700,7 +712,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         });
 
 
-        createJtagFrequencyCombo(compositeCom);
+        debuggerGroupContainer.createJtagFrequencyCombo(compositeCom);
 
     }
 
@@ -951,17 +963,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         }
         ftdiCoreCombo.setText(text);
-    }
-
-    private void createJtagFrequencyCombo(Composite composite) {
-        ModifyListener modifyListener = new ModifyListener() {
-          public void modifyText(ModifyEvent event) {
-              Combo combo = (Combo) event.widget;
-              debuggerGroupContainer.jtagFrequency = combo.getText();
-              updateLaunchConfigurationDialog();
-          }
-        };
-        debuggerGroupContainer.createJtagFrequencyCombo(composite, modifyListener);
     }
 
     private void createTabItemNsim(Composite subComp) {
