@@ -126,7 +126,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
     private String externalToolsAshlingPath = "";
     private String ashlingXmlPath = "";
-    private String ashlingTdescPath = "";
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -199,8 +198,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             configurationReader.getAshlingXmlPath());
         String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
             + java.io.File.separator + "opella-arcem-tdesc.xml";
-        ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
-            configurationReader.getAshlingTDescPath());
+        debuggerGroupContainer.setAshlingTdescPath(configurationReader.getOrDefault(
+            defaultTDescPath, "", configurationReader.getAshlingTDescPath()));
         customGdbPath = configurationReader.getCustomGdbServerPath();
         customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
@@ -276,7 +275,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
         configurationWriter.setAshlingPath(externalToolsAshlingPath);
         configurationWriter.setAshlingXmlPath(ashlingXmlPath);
-        configurationWriter.setAshlingTDescPath(ashlingTdescPath);
         configurationWriter.setCustomGdbServerPath(customGdbPath);
         if (customGdbCommandLineArguments != null) {
             configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
@@ -683,12 +681,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         ashlingTdescXmlPathEditor = new FileFieldEditor("ashlingTdescXmlPath",
                 "Target description XML file", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        ashlingTdescXmlPathEditor.setStringValue(ashlingTdescPath);
+        ashlingTdescXmlPathEditor.setStringValue(debuggerGroupContainer.getAshlingTdescPath());
 
         ashlingTdescXmlPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    ashlingTdescPath = (String) event.getNewValue();
+                    debuggerGroupContainer.setAshlingTdescPath((String) event.getNewValue());
                     updateLaunchConfigurationDialog();
                 }
             }
