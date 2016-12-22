@@ -128,7 +128,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private String ashlingXmlPath = "";
     private String ashlingTdescPath = "";
     private String externalToolsNsimPath = "";
-    private String portNumber = "";
 
     protected Spinner jitThreadSpinner;
     private String jitThread = "1";
@@ -233,8 +232,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         if (!ftdiCoreCombo.isDisposed())
             ftdiCoreCombo.setText(ftdiCore.toString());
         // Set host and IP.
-        portNumber = configurationReader.getGdbServerPort();
-        gdbServerPortNumberText.setText(portNumber);
+        debuggerGroupContainer.setPortNumber(configurationReader.getGdbServerPort());
+        gdbServerPortNumberText.setText(debuggerGroupContainer.getPortNumber());
         debuggerGroupContainer.setHostName(configurationReader.getHostAddress());
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
             gdbServerIpAddressText.setText(debuggerGroupContainer.getHostName());
@@ -372,8 +371,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
 
                 if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
-                    if (!portNumber.isEmpty())
-                        gdbServerPortNumberText.setText(portNumber);
+                    if (!debuggerGroupContainer.getPortNumber().isEmpty())
+                        gdbServerPortNumberText.setText(debuggerGroupContainer.getPortNumber());
                     else
                         gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
@@ -399,8 +398,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     createTabItemCustomGdb = false;
 
                 } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
-                    if (!portNumber.isEmpty())
-                        gdbServerPortNumberText.setText(portNumber);
+                    if (!debuggerGroupContainer.getPortNumber().isEmpty())
+                        gdbServerPortNumberText.setText(debuggerGroupContainer.getPortNumber());
                     else
                         gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
@@ -426,8 +425,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     groupComAshling.setText(gdbServer.toString());
                     groupComAshling.setVisible(true);
                 } else if (gdbServer == ArcGdbServer.NSIM) {
-                    if (!portNumber.isEmpty())
-                        gdbServerPortNumberText.setText(portNumber);
+                    if (!debuggerGroupContainer.getPortNumber().isEmpty())
+                        gdbServerPortNumberText.setText(debuggerGroupContainer.getPortNumber());
                     else
                         gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
@@ -525,8 +524,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     }
 
                 } else if (gdbServer == ArcGdbServer.CUSTOM_GDBSERVER) {
-                    if (!portNumber.equals(""))
-                        gdbServerPortNumberText.setText(portNumber);
+                    if (!debuggerGroupContainer.getPortNumber().equals(""))
+                        gdbServerPortNumberText.setText(debuggerGroupContainer.getPortNumber());
                     else
                         gdbServerPortNumberText
                                 .setText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
