@@ -113,7 +113,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchNsimJitProperties;
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
-    protected Button launchInvalidInstructionExceptionProperties;
     protected Button nsimTcfBrowseButton;
     private String nsimTcfFilesLast = "";
     private boolean externalNsimTcfToolsEnabled = true;
@@ -436,8 +435,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
                         debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
 
-                        launchInvalidInstructionExceptionProperties.setSelection(
-                            debuggerGroupContainer.getLaunchExternalNsimInvalidInstructionException());
                     }
                     groupNsim.setText(gdbServer.toString());
                     createTabItemCom = false;
@@ -1141,24 +1138,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         debuggerGroupContainer.createLaunchEnableExceptionPropertiesButton(compositeNsim,
             gridDataNsim);
-
-        launchInvalidInstructionExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchInvalidInstructionExceptionProperties.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
-        launchInvalidInstructionExceptionProperties.setSelection(
-            debuggerGroupContainer.getLaunchExternalNsimInvalidInstructionException());
-        launchInvalidInstructionExceptionProperties.setText("Invalid Instruction  Exception");
-        launchInvalidInstructionExceptionProperties.addSelectionListener(new SelectionListener() {
-            public void widgetSelected(SelectionEvent event) {
-                debuggerGroupContainer.setLaunchExternalNsimInvalidInstructionException(
-                    launchInvalidInstructionExceptionProperties.getSelection());
-                updateLaunchConfigurationDialog();
-            }
-
-            public void widgetDefaultSelected(SelectionEvent event) {
-            }
-
-        });
-        launchInvalidInstructionExceptionProperties.setLayoutData(gridDataNsim);
 
         workingDirectoryBlockNsim.createControl(compositeNsim);
     }
