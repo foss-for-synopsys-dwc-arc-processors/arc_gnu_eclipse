@@ -43,6 +43,15 @@ public class DebuggerGroupContainer extends Observable{
   private String hostName = "";
   private String portNumber = "";
   private String externalToolsNsimPath = "";
+  private String jitThread = "1";
+
+  public void setJitThread(final String jitThread){
+    this.jitThread = jitThread;
+  }
+
+  public String getJitThread(){
+    return jitThread;
+  }
 
   public void setExternalToolsNsimPath(final String externalToolsNsimPath){
     this.externalToolsNsimPath = externalToolsNsimPath;
