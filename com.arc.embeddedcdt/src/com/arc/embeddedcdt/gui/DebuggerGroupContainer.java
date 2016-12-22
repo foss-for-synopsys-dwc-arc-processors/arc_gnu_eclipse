@@ -42,6 +42,15 @@ public class DebuggerGroupContainer extends Observable{
   public String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
+  private String externalToolsNsimPath = "";
+
+  public void setExternalToolsNsimPath(final String externalToolsNsimPath){
+    this.externalToolsNsimPath = externalToolsNsimPath;
+  }
+
+  public String getExternalToolsNsimPath(){
+    return externalToolsNsimPath;
+  }
 
   public void setPortNumber(final String portNumber){
     this.portNumber = portNumber;

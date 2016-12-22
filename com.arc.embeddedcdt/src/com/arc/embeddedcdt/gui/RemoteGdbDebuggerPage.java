@@ -127,7 +127,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private String externalToolsAshlingPath = "";
     private String ashlingXmlPath = "";
     private String ashlingTdescPath = "";
-    private String externalToolsNsimPath = "";
 
     protected Spinner jitThreadSpinner;
     private String jitThread = "1";
@@ -203,8 +202,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             + java.io.File.separator + "opella-arcem-tdesc.xml";
         ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
             configurationReader.getAshlingTDescPath());
-        externalToolsNsimPath = configurationReader.getOrDefault(
-            DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath());
+        debuggerGroupContainer.setExternalToolsNsimPath(configurationReader.getOrDefault(
+            DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath()));
         customGdbPath = configurationReader.getCustomGdbServerPath();
         customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
@@ -291,7 +290,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setAshlingPath(externalToolsAshlingPath);
         configurationWriter.setAshlingXmlPath(ashlingXmlPath);
         configurationWriter.setAshlingTDescPath(ashlingTdescPath);
-        configurationWriter.setNsimPath(externalToolsNsimPath);
+        configurationWriter.setNsimPath(debuggerGroupContainer.getExternalToolsNsimPath());
         configurationWriter.setCustomGdbServerPath(customGdbPath);
         if (customGdbCommandLineArguments != null) {
             configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
@@ -976,11 +975,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         nsimBinaryPathEditor = new FileFieldEditor("nsimBinPath", "nSIM executable", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
 
-        nsimBinaryPathEditor.setStringValue(externalToolsNsimPath);
+        nsimBinaryPathEditor.setStringValue(debuggerGroupContainer.getExternalToolsNsimPath());
         nsimBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    externalToolsNsimPath = (String) event.getNewValue();
+                    debuggerGroupContainer.setExternalToolsNsimPath((String) event.getNewValue());
                     updateLaunchConfigurationDialog();
                 }
             }
