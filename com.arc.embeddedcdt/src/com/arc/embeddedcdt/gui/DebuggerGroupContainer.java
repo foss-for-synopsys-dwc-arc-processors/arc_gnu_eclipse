@@ -105,6 +105,11 @@ public class DebuggerGroupContainer extends Observable{
     }
   }
 
+  public void performApply(ConfigurationWriter configurationWriter) {
+    configurationWriter.setNsimPath(getExternalToolsNsimPath());
+    configurationWriter.setNsimJitThreads(getJitThread());
+  }
+
   public void selectJtagFrequencyInCombo(String jtagFrequency){
     int previous = jtagFrequencyCombo.indexOf(jtagFrequency);
     if (previous > -1)
