@@ -83,11 +83,8 @@ public class DebuggerGroupContainer extends Observable{
     setHostName(configurationReader.getHostAddress());
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
-    if (!isJtagFrequencyComboDisposed()) {
-      if (!jtagFrequency.isEmpty()) {
-          selectJtagFrequencyInCombo(jtagFrequency);
-      }
-    }
+    if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
+      selectJtagFrequencyInCombo(jtagFrequency);
     setTextForJtagFrequencyCombo(configurationReader);
 
     setExternalToolsNsimPath(configurationReader.getOrDefault(
