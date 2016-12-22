@@ -43,6 +43,7 @@ public class DebuggerGroupContainer extends Observable{
   public static final String DEFAULT_OOCD_CFG;
   private Combo jtagFrequencyCombo;
   protected Button launchEnableExceptionProperties;
+  protected Button launchInvalidInstructionExceptionProperties;
   public String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -54,16 +55,13 @@ public class DebuggerGroupContainer extends Observable{
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
 
+  public void setSelectionForLaunchInvalidInstructionExceptionProperties(){
+    launchInvalidInstructionExceptionProperties.setSelection(
+        launchExternalNsimInvalidInstructionException);
+  }
+
   public void setSelectionForLaunchEnableExceptionPropertiesButton(){
     launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
-  }
-
-  public void setLaunchExternalNsimInvalidInstructionException(final boolean isLaunched){
-    launchExternalNsimInvalidInstructionException = isLaunched;
-  }
-
-  public boolean getLaunchExternalNsimInvalidInstructionException(){
-    return launchExternalNsimInvalidInstructionException;
   }
 
   public void setExternalToolsAshlingPath(final String externalToolsAshlingPath){
@@ -181,6 +179,29 @@ public class DebuggerGroupContainer extends Observable{
     });
 
     launchEnableExceptionProperties.setLayoutData(gridDataNsim);
+  }
+
+  public void createlaunchInvalidInstructionExceptionProperties(final Composite compositeNsim,
+      final GridData gridDataNsim){
+    launchInvalidInstructionExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchInvalidInstructionExceptionProperties.setToolTipText("Simulate (1) or break (0) on"
+        + " invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
+    launchInvalidInstructionExceptionProperties.setSelection(
+        launchExternalNsimInvalidInstructionException);
+    launchInvalidInstructionExceptionProperties.setText("Invalid Instruction  Exception");
+    launchInvalidInstructionExceptionProperties.addSelectionListener(new SelectionListener() {
+        public void widgetSelected(SelectionEvent event) {
+            launchExternalNsimInvalidInstructionException =
+                launchInvalidInstructionExceptionProperties.getSelection();
+            setChanged();
+            notifyObservers();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+    });
+    launchInvalidInstructionExceptionProperties.setLayoutData(gridDataNsim);
   }
 
   public void selectJtagFrequencyInCombo(String jtagFrequency){
