@@ -122,7 +122,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private boolean externalNsimHostLinkToolsEnabled = true;
     private boolean externalNsimMemoryExceptionToolsEnabled = true;
     private boolean externalNsimEnableExceptionToolsEnabled = true;
-    private boolean launchExternalNsimInvalidInstructionException = true;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -203,8 +202,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalNsimJitEnabled = configurationReader.getNsimUseJit();
         externalNsimHostLinkToolsEnabled = configurationReader.getNsimUseNsimHostlink();
         externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
-        launchExternalNsimInvalidInstructionException =
-            configurationReader.getNsimSimulateInvalidInstructionExceptions();
         externalNsimMemoryExceptionToolsEnabled =
             configurationReader.getNsimSimulateMemoryExceptions();
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
@@ -280,8 +277,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimSimulateMemoryExceptions(
             externalNsimMemoryExceptionToolsEnabled);
         configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
-        configurationWriter.setNsimSimulateInvalidInstructionExceptions(
-            launchExternalNsimInvalidInstructionException);
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
@@ -445,7 +440,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
                         launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
 
-                        launchInvalidInstructionExceptionProperties.setSelection(launchExternalNsimInvalidInstructionException);
+                        launchInvalidInstructionExceptionProperties.setSelection(
+                            debuggerGroupContainer.getLaunchExternalNsimInvalidInstructionException());
                     }
                     groupNsim.setText(gdbServer.toString());
                     createTabItemCom = false;
@@ -1171,16 +1167,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchInvalidInstructionExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchInvalidInstructionExceptionProperties.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
-        launchInvalidInstructionExceptionProperties.setSelection(launchExternalNsimInvalidInstructionException);
+        launchInvalidInstructionExceptionProperties.setSelection(
+            debuggerGroupContainer.getLaunchExternalNsimInvalidInstructionException());
         launchInvalidInstructionExceptionProperties.setText("Invalid Instruction  Exception");
         launchInvalidInstructionExceptionProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchInvalidInstructionExceptionProperties.getSelection() == true) {
-                    launchExternalNsimInvalidInstructionException = true;
-
-                } else {
-                    launchExternalNsimInvalidInstructionException = false;
-                }
+                debuggerGroupContainer.setLaunchExternalNsimInvalidInstructionException(
+                    launchInvalidInstructionExceptionProperties.getSelection());
                 updateLaunchConfigurationDialog();
             }
 

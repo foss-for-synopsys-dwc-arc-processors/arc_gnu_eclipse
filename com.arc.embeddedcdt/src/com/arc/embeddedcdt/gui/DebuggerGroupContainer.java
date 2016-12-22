@@ -47,6 +47,15 @@ public class DebuggerGroupContainer extends Observable{
   private String ashlingTdescPath = "";
   private String ashlingXmlPath = "";
   private String externalToolsAshlingPath = "";
+  private boolean launchExternalNsimInvalidInstructionException = true;
+
+  public void setLaunchExternalNsimInvalidInstructionException(final boolean isLaunched){
+    launchExternalNsimInvalidInstructionException = isLaunched;
+  }
+
+  public boolean getLaunchExternalNsimInvalidInstructionException(){
+    return launchExternalNsimInvalidInstructionException;
+  }
 
   public void setExternalToolsAshlingPath(final String externalToolsAshlingPath){
     this.externalToolsAshlingPath = externalToolsAshlingPath;
@@ -113,6 +122,8 @@ public class DebuggerGroupContainer extends Observable{
     setExternalToolsNsimPath(configurationReader.getOrDefault(
         DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath()));
     setJitThread(configurationReader.getNsimJitThreads());
+    launchExternalNsimInvalidInstructionException =
+        configurationReader.getNsimSimulateInvalidInstructionExceptions();
   }
 
   public boolean isJtagFrequencyComboDisposed(){
@@ -131,6 +142,8 @@ public class DebuggerGroupContainer extends Observable{
   public void performApply(ConfigurationWriter configurationWriter) {
     configurationWriter.setNsimPath(getExternalToolsNsimPath());
     configurationWriter.setNsimJitThreads(getJitThread());
+    configurationWriter.setNsimSimulateInvalidInstructionExceptions(
+        launchExternalNsimInvalidInstructionException);
 
     configurationWriter.setAshlingTDescPath(ashlingTdescPath);
     configurationWriter.setAshlingXmlPath(ashlingXmlPath);
