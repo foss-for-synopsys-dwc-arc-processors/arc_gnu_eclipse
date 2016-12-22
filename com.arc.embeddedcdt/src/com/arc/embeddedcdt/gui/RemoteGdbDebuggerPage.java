@@ -129,7 +129,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private String ashlingTdescPath = "";
 
     protected Spinner jitThreadSpinner;
-    private String jitThread = "1";
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
     public RemoteGdbDebuggerPage() {
@@ -219,7 +218,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
         nsimTcfFilesLast = configurationReader.getNsimTcfPath();
-        jitThread = configurationReader.getNsimJitThreads();
+        debuggerGroupContainer.setJitThread(configurationReader.getNsimJitThreads());
 
         externalToolsCombo.setText(gdbServer.toString());
 
@@ -305,7 +304,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimSimulateInvalidInstructionExceptions(
             launchExternalNsimInvalidInstructionException);
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
-        configurationWriter.setNsimJitThreads(jitThread);
+        configurationWriter.setNsimJitThreads(debuggerGroupContainer.getJitThread());
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
@@ -1108,14 +1107,14 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             jitThreadSpinner.setEnabled(false);
         }
 
-        if (!jitThread.equals("1"))
-            jitThreadSpinner.setSelection(Integer.parseInt(jitThread));
+        if (!debuggerGroupContainer.getJitThread().equals("1"))
+            jitThreadSpinner.setSelection(Integer.parseInt(debuggerGroupContainer.getJitThread()));
         else
             jitThreadSpinner.setSelection(1);
 
         jitThreadSpinner.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
-                jitThread = jitThreadSpinner.getText();
+                debuggerGroupContainer.setJitThread(jitThreadSpinner.getText());
                 updateLaunchConfigurationDialog();
             }
         });
