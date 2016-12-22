@@ -20,7 +20,10 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -39,6 +42,7 @@ public class DebuggerGroupContainer extends Observable{
   public static final String DEFAULT_OOCD_BIN;
   public static final String DEFAULT_OOCD_CFG;
   private Combo jtagFrequencyCombo;
+  protected Button launchEnableExceptionProperties;
   public String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -50,12 +54,8 @@ public class DebuggerGroupContainer extends Observable{
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
 
-  public boolean getExternalNsimEnableExceptionToolsEnabled(){
-    return externalNsimEnableExceptionToolsEnabled;
-  }
-
-  public void setExternalNsimEnableExceptionToolsEnabled(final boolean areEnabled){
-    externalNsimEnableExceptionToolsEnabled = areEnabled;
+  public void setSelectionForLaunchEnableExceptionPropertiesButton(){
+    launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
   }
 
   public void setLaunchExternalNsimInvalidInstructionException(final boolean isLaunched){
@@ -159,6 +159,28 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setAshlingTDescPath(ashlingTdescPath);
     configurationWriter.setAshlingXmlPath(ashlingXmlPath);
     configurationWriter.setAshlingPath(externalToolsAshlingPath);
+  }
+
+  public void createLaunchEnableExceptionPropertiesButton(final Composite compositeNsim,
+      final GridData gridDataNsim){
+    launchEnableExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
+    launchEnableExceptionProperties.setText("Enable Exception");
+    launchEnableExceptionProperties.setToolTipText("Simulate (1) or break (0) on any exception "
+        + "(-p enable_exceptions={0,1})");
+    launchEnableExceptionProperties.addSelectionListener(new SelectionListener() {
+        public void widgetSelected(SelectionEvent event) {
+            externalNsimEnableExceptionToolsEnabled = launchEnableExceptionProperties.getSelection();
+            setChanged();
+            notifyObservers();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+    });
+
+    launchEnableExceptionProperties.setLayoutData(gridDataNsim);
   }
 
   public void selectJtagFrequencyInCombo(String jtagFrequency){
