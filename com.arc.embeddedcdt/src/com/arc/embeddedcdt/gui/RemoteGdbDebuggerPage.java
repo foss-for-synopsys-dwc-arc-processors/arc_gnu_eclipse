@@ -255,6 +255,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         str = str.trim();
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
+        debuggerGroupContainer.performApply(configurationWriter);
         configurationWriter.setGdbServerPort(str);
         String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
@@ -276,7 +277,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setAshlingPath(externalToolsAshlingPath);
         configurationWriter.setAshlingXmlPath(ashlingXmlPath);
         configurationWriter.setAshlingTDescPath(ashlingTdescPath);
-        configurationWriter.setNsimPath(debuggerGroupContainer.getExternalToolsNsimPath());
         configurationWriter.setCustomGdbServerPath(customGdbPath);
         if (customGdbCommandLineArguments != null) {
             configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
@@ -291,7 +291,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimSimulateInvalidInstructionExceptions(
             launchExternalNsimInvalidInstructionException);
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
-        configurationWriter.setNsimJitThreads(debuggerGroupContainer.getJitThread());
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
