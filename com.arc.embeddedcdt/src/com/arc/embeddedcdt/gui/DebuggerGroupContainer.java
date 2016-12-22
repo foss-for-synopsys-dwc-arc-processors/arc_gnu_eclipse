@@ -70,10 +70,6 @@ public class DebuggerGroupContainer extends Observable{
     return externalToolsNsimPath;
   }
 
-  public void setPortNumber(final String portNumber){
-    this.portNumber = portNumber;
-  }
-
   public String getPortNumber(){
     return portNumber;
   }
@@ -88,7 +84,7 @@ public class DebuggerGroupContainer extends Observable{
 
   public void initializeFrom(ConfigurationReader configurationReader){
     // Set host and IP.
-    setPortNumber(configurationReader.getGdbServerPort());
+    portNumber = configurationReader.getGdbServerPort();
     setHostName(configurationReader.getHostAddress());
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
