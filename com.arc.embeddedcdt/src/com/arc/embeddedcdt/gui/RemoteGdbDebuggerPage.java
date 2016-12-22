@@ -176,12 +176,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         createTabItemCustomGdb = false;
         super.initializeFrom(configuration);
         ConfigurationReader configurationReader = new ConfigurationReader(configuration);
+        debuggerGroupContainer.initializeFrom(configurationReader);
         gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath());
         fGDBCommandText.setText(gdbPath);
         openOcdBinaryPath = configurationReader.getOrDefault(
             DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
-        debuggerGroupContainer.jtagFrequency = configurationReader.getAshlingJtagFrequency();
         ftdiDevice = configurationReader.getFtdiDevice();
         ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
@@ -201,8 +201,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             + java.io.File.separator + "opella-arcem-tdesc.xml";
         ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
             configurationReader.getAshlingTDescPath());
-        debuggerGroupContainer.setExternalToolsNsimPath(configurationReader.getOrDefault(
-            DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath()));
         customGdbPath = configurationReader.getCustomGdbServerPath();
         customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
@@ -218,21 +216,15 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
         nsimTcfFilesLast = configurationReader.getNsimTcfPath();
-        debuggerGroupContainer.setJitThread(configurationReader.getNsimJitThreads());
 
         externalToolsCombo.setText(gdbServer.toString());
 
-        String jtagFrequency = debuggerGroupContainer.jtagFrequency;
-        debuggerGroupContainer.setTextForJtagFrequencyCombo(configurationReader);
         if (!ftdiDeviceCombo.isDisposed())
             ftdiDeviceCombo.setText(ftdiDevice.toString());
 
         if (!ftdiCoreCombo.isDisposed())
             ftdiCoreCombo.setText(ftdiCore.toString());
-        // Set host and IP.
-        debuggerGroupContainer.setPortNumber(configurationReader.getGdbServerPort());
         gdbServerPortNumberText.setText(debuggerGroupContainer.getPortNumber());
-        debuggerGroupContainer.setHostName(configurationReader.getHostAddress());
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
             gdbServerIpAddressText.setText(debuggerGroupContainer.getHostName());
 
@@ -247,11 +239,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalToolsCombo.add(gdbServer.toString(), 0);
         externalToolsCombo.select(0);
 
-        if (!debuggerGroupContainer.isJtagFrequencyComboDisposed()) {
-            if (!jtagFrequency.isEmpty()) {
-                debuggerGroupContainer.selectJtagFrequencyInCombo(jtagFrequency);
-            }
-        }
     }
 
     @Override
