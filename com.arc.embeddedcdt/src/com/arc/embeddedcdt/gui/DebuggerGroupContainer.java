@@ -40,6 +40,15 @@ public class DebuggerGroupContainer extends Observable{
   public static final String DEFAULT_OOCD_CFG;
   private Combo jtagFrequencyCombo;
   public String jtagFrequency = null;
+  private String hostName = "";
+
+  public void setHostName(final String hostName){
+    this.hostName = hostName;
+  }
+
+  public String getHostName(){
+    return hostName;
+  }
 
   public boolean isJtagFrequencyComboDisposed(){
     return jtagFrequencyCombo.isDisposed();
