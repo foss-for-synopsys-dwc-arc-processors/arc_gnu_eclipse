@@ -128,7 +128,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private String ashlingXmlPath = "";
     private String ashlingTdescPath = "";
     private String externalToolsNsimPath = "";
-    private String hostName = "";
     private String portNumber = "";
 
     protected Spinner jitThreadSpinner;
@@ -236,9 +235,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         // Set host and IP.
         portNumber = configurationReader.getGdbServerPort();
         gdbServerPortNumberText.setText(portNumber);
-        hostName = configurationReader.getHostAddress();
+        debuggerGroupContainer.setHostName(configurationReader.getHostAddress());
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
-            gdbServerIpAddressText.setText(hostName);
+            gdbServerIpAddressText.setText(debuggerGroupContainer.getHostName());
 
         int previous = externalToolsCombo.indexOf(gdbServer.toString());
         if (previous > -1)
@@ -312,8 +311,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
-            hostName = gdbServerIpAddressText.getText();
-            configurationWriter.setHostAddress(getAttributeValueFromString(hostName));
+            debuggerGroupContainer.setHostName(gdbServerIpAddressText.getText());
+            configurationWriter.setHostAddress(getAttributeValueFromString(
+                debuggerGroupContainer.getHostName()));
         }
     }
 
@@ -648,10 +648,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         GridData gdbHostFieldGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
         gdbHostFieldGridData.minimumWidth = minTextWidth;
         gdbServerIpAddressText.setLayoutData(gdbHostFieldGridData);
-        if (hostName.isEmpty())
+        if (debuggerGroupContainer.getHostName().isEmpty())
             gdbServerIpAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
         else
-            gdbServerIpAddressText.setText(hostName);
+            gdbServerIpAddressText.setText(debuggerGroupContainer.getHostName());
         gdbServerIpAddressText.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 updateLaunchConfigurationDialog();
