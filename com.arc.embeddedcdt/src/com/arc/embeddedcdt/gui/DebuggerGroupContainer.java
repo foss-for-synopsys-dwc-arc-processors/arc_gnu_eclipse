@@ -45,6 +45,15 @@ public class DebuggerGroupContainer extends Observable{
   private String externalToolsNsimPath = "";
   private String jitThread = "1";
   private String ashlingTdescPath = "";
+  private String ashlingXmlPath = "";
+
+  public void setAshlingXmlPath(final String ashlingXmlPath){
+    this.ashlingXmlPath = ashlingXmlPath;
+  }
+
+  public String getAshlingXmlPath(){
+    return ashlingXmlPath;
+  }
 
   public void setAshlingTdescPath(final String ashlingTdescPath){
     this.ashlingTdescPath = ashlingTdescPath;
@@ -115,6 +124,7 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setNsimJitThreads(getJitThread());
 
     configurationWriter.setAshlingTDescPath(ashlingTdescPath);
+    configurationWriter.setAshlingXmlPath(ashlingXmlPath);
   }
 
   public void selectJtagFrequencyInCombo(String jtagFrequency){
