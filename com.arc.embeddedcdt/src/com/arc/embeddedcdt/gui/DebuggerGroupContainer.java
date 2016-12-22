@@ -41,6 +41,15 @@ public class DebuggerGroupContainer extends Observable{
   private Combo jtagFrequencyCombo;
   public String jtagFrequency = null;
   private String hostName = "";
+  private String portNumber = "";
+
+  public void setPortNumber(final String portNumber){
+    this.portNumber = portNumber;
+  }
+
+  public String getPortNumber(){
+    return portNumber;
+  }
 
   public void setHostName(final String hostName){
     this.hostName = hostName;
