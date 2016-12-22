@@ -114,7 +114,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
     protected Button launchInvalidInstructionExceptionProperties;
-    protected Button launchEnableExceptionProperties;
     protected Button nsimTcfBrowseButton;
     private String nsimTcfFilesLast = "";
     private boolean externalNsimTcfToolsEnabled = true;
@@ -435,8 +434,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         launchNsimJitProperties.setSelection(externalNsimJitEnabled);
                         launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
                         launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
-                        launchEnableExceptionProperties.setSelection(
-                            debuggerGroupContainer.getExternalNsimEnableExceptionToolsEnabled());
+                        debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
 
                         launchInvalidInstructionExceptionProperties.setSelection(
                             debuggerGroupContainer.getLaunchExternalNsimInvalidInstructionException());
@@ -1141,24 +1139,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchMemoryExceptionProperties.setLayoutData(gridDataNsim);
 
-        launchEnableExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchEnableExceptionProperties.setSelection(
-            debuggerGroupContainer.getExternalNsimEnableExceptionToolsEnabled());
-        launchEnableExceptionProperties.setText("Enable Exception");
-        launchEnableExceptionProperties.setToolTipText("Simulate (1) or break (0) on any exception (-p enable_exceptions={0,1})");
-        launchEnableExceptionProperties.addSelectionListener(new SelectionListener() {
-            public void widgetSelected(SelectionEvent event) {
-                debuggerGroupContainer.setExternalNsimEnableExceptionToolsEnabled(
-                    launchEnableExceptionProperties.getSelection());
-                updateLaunchConfigurationDialog();
-            }
-
-            public void widgetDefaultSelected(SelectionEvent event) {
-            }
-
-        });
-
-        launchEnableExceptionProperties.setLayoutData(gridDataNsim);
+        debuggerGroupContainer.createLaunchEnableExceptionPropertiesButton(compositeNsim,
+            gridDataNsim);
 
         launchInvalidInstructionExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchInvalidInstructionExceptionProperties.setToolTipText("Simulate (1) or break (0) on invalid instruction exception (-p invalid_instruction_interrupt={0,1})");
