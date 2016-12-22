@@ -77,6 +77,22 @@ public class DebuggerGroupContainer extends Observable{
     return hostName;
   }
 
+  public void initializeFrom(ConfigurationReader configurationReader){
+    jtagFrequency = configurationReader.getAshlingJtagFrequency();
+    setExternalToolsNsimPath(configurationReader.getOrDefault(
+        DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath()));
+    setJitThread(configurationReader.getNsimJitThreads());
+    setTextForJtagFrequencyCombo(configurationReader);
+    // Set host and IP.
+    setPortNumber(configurationReader.getGdbServerPort());
+    setHostName(configurationReader.getHostAddress());
+    if (!isJtagFrequencyComboDisposed()) {
+      if (!jtagFrequency.isEmpty()) {
+          selectJtagFrequencyInCombo(jtagFrequency);
+      }
+    }
+  }
+
   public boolean isJtagFrequencyComboDisposed(){
     return jtagFrequencyCombo.isDisposed();
   }
