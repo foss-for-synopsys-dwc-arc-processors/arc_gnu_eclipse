@@ -124,8 +124,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private boolean externalNsimEnableExceptionToolsEnabled = true;
     private boolean launchExternalNsimInvalidInstructionException = true;
 
-    private String externalToolsAshlingPath = "";
-
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
@@ -188,9 +186,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         String defaultAshlingPath =
             DebuggerGroupContainer.isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
                 : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
-        externalToolsAshlingPath =
-            configurationReader.getOrDefault(defaultAshlingPath, "",
-            configurationReader.getAshlingPath());
+        debuggerGroupContainer.setExternalToolsAshlingPath(configurationReader.getOrDefault(
+            defaultAshlingPath, "", configurationReader.getAshlingPath()));
         String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
             + java.io.File.separator + "arc-cpu-em.xml";
         debuggerGroupContainer.setAshlingXmlPath(configurationReader.getOrDefault(ashlingXmlFile, "",
@@ -272,7 +269,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
         configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
-        configurationWriter.setAshlingPath(externalToolsAshlingPath);
         configurationWriter.setCustomGdbServerPath(customGdbPath);
         if (customGdbCommandLineArguments != null) {
             configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
@@ -649,12 +645,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         // Path to Ashling binary
         ashlingBinaryPathEditor = new FileFieldEditor("ashlingBinaryPath", "Ashling binary path", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        ashlingBinaryPathEditor.setStringValue(externalToolsAshlingPath);
+        ashlingBinaryPathEditor.setStringValue(debuggerGroupContainer.getExternalToolsAshlingPath());
 
         ashlingBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    externalToolsAshlingPath = (String) event.getNewValue();
+                    debuggerGroupContainer.setExternalToolsAshlingPath((String) event.getNewValue());
                     updateLaunchConfigurationDialog();
                 }
             }
