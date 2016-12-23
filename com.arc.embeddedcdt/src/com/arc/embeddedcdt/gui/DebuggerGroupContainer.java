@@ -126,6 +126,10 @@ public class DebuggerGroupContainer extends Observable{
     return ashlingTdescXmlPathEditor;
   }
 
+  public FileFieldEditor getAshlingXmlPathEditor(){
+    return ashlingXmlPathEditor;
+  }
+
   public void initializeFrom(ConfigurationReader configurationReader){
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
