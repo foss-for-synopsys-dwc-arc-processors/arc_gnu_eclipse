@@ -81,7 +81,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button searchExternalToolsPathButton;
     protected Label searchExternalToolsLabel;
     protected Text externalToolsPathText;
-    private FileFieldEditor openOcdBinPathEditor;
+    private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
     private FileFieldEditor customGdbBinaryPathEditor;
     private String openOcdBinaryPath;
@@ -654,7 +654,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (groupCom.isDisposed()) {
                     return true;
                 }
-                if (!isValidFileFieldEditor(openOcdBinPathEditor)) {
+                if (!isValidFileFieldEditor(openOcdBinaryPathEditor)) {
                     return false;
                 }
                 if (ftdiDevice == FtdiDevice.CUSTOM) {
@@ -772,10 +772,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
 
         // Path to OpenOCD binary
-        openOcdBinPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
+        openOcdBinaryPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
             false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        openOcdBinPathEditor.setStringValue(openOcdBinaryPath);
-        openOcdBinPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        openOcdBinaryPathEditor.setStringValue(openOcdBinaryPath);
+        openOcdBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
                     openOcdBinaryPath = (String) event.getNewValue();
