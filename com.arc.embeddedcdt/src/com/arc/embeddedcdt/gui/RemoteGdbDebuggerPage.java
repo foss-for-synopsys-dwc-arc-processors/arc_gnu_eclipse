@@ -94,7 +94,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
     private FileFieldEditor ashlingXmlPathEditor;
-    private FileFieldEditor ashlingTdescXmlPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
@@ -647,21 +646,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         debuggerGroupContainer.createTabItemComAshling(compositeCom);
 
-        // Path to ashling target description file
-        ashlingTdescXmlPathEditor = new FileFieldEditor("ashlingTdescXmlPath",
-                "Target description XML file", false,
-                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        ashlingTdescXmlPathEditor.setStringValue(debuggerGroupContainer.getAshlingTdescPath());
-
-        ashlingTdescXmlPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setAshlingTdescPath((String) event.getNewValue());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-
+        debuggerGroupContainer.createAshlingTdescXmlPathEditor(compositeCom);
 
         debuggerGroupContainer.createJtagFrequencyCombo(compositeCom);
 
@@ -706,7 +691,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
                 if (!isValidFileFieldEditor(ashlingBinaryPathEditor)
                         || !isValidFileFieldEditor(ashlingXmlPathEditor)
-                        || !isValidFileFieldEditor(ashlingTdescXmlPathEditor)) {
+                        || !isValidFileFieldEditor(
+                            debuggerGroupContainer.getAshlingTdescXmlPathEditor())) {
                      return false;
                 }
                 break;
