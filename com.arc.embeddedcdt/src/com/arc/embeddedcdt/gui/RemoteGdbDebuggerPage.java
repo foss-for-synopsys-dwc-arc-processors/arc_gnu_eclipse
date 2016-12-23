@@ -75,7 +75,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     protected Combo ftdiDeviceCombo;
     protected Combo ftdiCoreCombo;
-    protected Text gdbServerIpAddressText;
     protected Button searchExternalToolsPathButton;
     protected Label searchExternalToolsLabel;
     protected Text externalToolsPathText;
@@ -209,7 +208,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             ftdiCoreCombo.setText(ftdiCore.toString());
         debuggerGroupContainer.setPortNumberText();
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
-            gdbServerIpAddressText.setText(debuggerGroupContainer.getHostName());
+            debuggerGroupContainer.setTextForGdbServerIpAddressText(
+                debuggerGroupContainer.getHostName());
 
         int previous = externalToolsCombo.indexOf(gdbServer.toString());
         if (previous > -1)
@@ -271,7 +271,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
-            debuggerGroupContainer.setHostName(gdbServerIpAddressText.getText());
+            debuggerGroupContainer.setHostName(
+                debuggerGroupContainer.getTextFromGdbServerIpAddressText());
             configurationWriter.setHostAddress(DebuggerGroupContainer.getAttributeValueFromString(
                 debuggerGroupContainer.getHostName()));
         }
@@ -580,20 +581,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         Label label = new Label(compCOM, SWT.LEFT);
         label.setText("Host Address:");
 
-        // GDB host text field
-        gdbServerIpAddressText = new Text(compCOM, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
-        GridData gdbHostFieldGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
-        gdbHostFieldGridData.minimumWidth = minTextWidth;
-        gdbServerIpAddressText.setLayoutData(gdbHostFieldGridData);
-        if (debuggerGroupContainer.getHostName().isEmpty())
-            gdbServerIpAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
-        else
-            gdbServerIpAddressText.setText(debuggerGroupContainer.getHostName());
-        gdbServerIpAddressText.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                updateLaunchConfigurationDialog();
-            }
-        });
+        debuggerGroupContainer.createGdbServerIpAddressText(compCOM, minTextWidth);
     }
 
     private void createTabItemComAshling(Composite subComp) {

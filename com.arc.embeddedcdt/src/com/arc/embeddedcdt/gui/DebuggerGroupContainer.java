@@ -51,6 +51,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
   private Text gdbServerPortNumberText;
+  private Text gdbServerIpAddressText;
   private Button launchEnableExceptionProperties;
   private Button launchInvalidInstructionExceptionProperties;
   private String jtagFrequency = null;
@@ -110,6 +111,14 @@ public class DebuggerGroupContainer extends Observable{
 
   public String getAshlingTdescPath(){
     return ashlingTdescPath;
+  }
+
+  public void setTextForGdbServerIpAddressText(final String text){
+    gdbServerIpAddressText.setText(text);;
+  }
+
+  public String getTextFromGdbServerIpAddressText(){
+    return gdbServerIpAddressText.getText();
   }
 
   public void setJitThread(final String jitThread){
@@ -179,6 +188,24 @@ public class DebuggerGroupContainer extends Observable{
                 setChanged();
                 notifyObservers();
             }
+        }
+    });
+  }
+
+  public void createGdbServerIpAddressText(Composite compCOM, int minTextWidth){
+    // GDB host text field
+    gdbServerIpAddressText = new Text(compCOM, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+    GridData gdbHostFieldGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+    gdbHostFieldGridData.minimumWidth = minTextWidth;
+    gdbServerIpAddressText.setLayoutData(gdbHostFieldGridData);
+    if (hostName.isEmpty())
+        gdbServerIpAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
+    else
+        gdbServerIpAddressText.setText(getHostName());
+    gdbServerIpAddressText.addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            setChanged();
+            notifyObservers();
         }
     });
   }
