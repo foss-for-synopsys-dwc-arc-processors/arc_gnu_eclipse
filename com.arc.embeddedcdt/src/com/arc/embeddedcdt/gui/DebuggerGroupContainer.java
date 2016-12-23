@@ -67,10 +67,6 @@ public class DebuggerGroupContainer extends Observable{
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
 
-  public void setPortNumberText(){
-    gdbServerPortNumberText.setText(portNumber);
-  }
-
   public void setPortNumberText(String defaultText) {
     if (portNumber.isEmpty())
       gdbServerPortNumberText.setText(defaultText);
@@ -82,37 +78,12 @@ public class DebuggerGroupContainer extends Observable{
     return gdbServerPortNumberText.getText();
   }
 
-  public void setSelectionForLaunchInvalidInstructionExceptionProperties(){
-    launchInvalidInstructionExceptionProperties.setSelection(
-        launchExternalNsimInvalidInstructionException);
-  }
-
   public void setSelectionForLaunchEnableExceptionPropertiesButton(){
     launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
   }
 
-  public void setExternalToolsAshlingPath(final String externalToolsAshlingPath){
-    this.externalToolsAshlingPath = externalToolsAshlingPath;
-  }
-
-  public String getExternalToolsAshlingPath(){
-    return externalToolsAshlingPath;
-  }
-
-  public void setAshlingXmlPath(final String ashlingXmlPath){
-    this.ashlingXmlPath = ashlingXmlPath;
-  }
-
   public String getAshlingXmlPath(){
     return ashlingXmlPath;
-  }
-
-  public void setAshlingTdescPath(final String ashlingTdescPath){
-    this.ashlingTdescPath = ashlingTdescPath;
-  }
-
-  public String getAshlingTdescPath(){
-    return ashlingTdescPath;
   }
 
   public void setTextForGdbServerIpAddressText(final String text){
@@ -162,6 +133,7 @@ public class DebuggerGroupContainer extends Observable{
   public void initializeFrom(ConfigurationReader configurationReader){
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
+    gdbServerPortNumberText.setText(portNumber);
     setHostName(configurationReader.getHostAddress());
     customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
@@ -169,6 +141,19 @@ public class DebuggerGroupContainer extends Observable{
     if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
       selectJtagFrequencyInCombo(jtagFrequency);
     setTextForJtagFrequencyCombo(configurationReader);
+    String defaultAshlingPath =
+        DebuggerGroupContainer.isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
+            : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
+    externalToolsAshlingPath = configurationReader.getOrDefault(defaultAshlingPath, "",
+        configurationReader.getAshlingPath());
+    String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
+        + java.io.File.separator + "arc-cpu-em.xml";
+    ashlingXmlPath = configurationReader.getOrDefault(ashlingXmlFile, "",
+        configurationReader.getAshlingXmlPath());
+    String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
+        + java.io.File.separator + "opella-arcem-tdesc.xml";
+    ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
+        configurationReader.getAshlingTDescPath());
 
     setExternalToolsNsimPath(configurationReader.getOrDefault(
         DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath()));
@@ -291,6 +276,9 @@ public class DebuggerGroupContainer extends Observable{
 
     if (customGdbCommandLineArguments != null)
       configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
+    String str = gdbServerPortNumberText.getText();
+    str = str.trim();
+    configurationWriter.setGdbServerPort(str);
   }
 
   public void createCustomGdbServerArgs(Composite compositeCustomGdb){

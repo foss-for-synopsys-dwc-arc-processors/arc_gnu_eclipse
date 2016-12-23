@@ -171,19 +171,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbServer = configurationReader.getGdbServer();
         openOcdConfigurationPath = configurationReader.getOrDefault(
             DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
-        String defaultAshlingPath =
-            DebuggerGroupContainer.isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
-                : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
-        debuggerGroupContainer.setExternalToolsAshlingPath(configurationReader.getOrDefault(
-            defaultAshlingPath, "", configurationReader.getAshlingPath()));
-        String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
-            + java.io.File.separator + "arc-cpu-em.xml";
-        debuggerGroupContainer.setAshlingXmlPath(configurationReader.getOrDefault(ashlingXmlFile, "",
-            configurationReader.getAshlingXmlPath()));
-        String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
-            + java.io.File.separator + "opella-arcem-tdesc.xml";
-        debuggerGroupContainer.setAshlingTdescPath(configurationReader.getOrDefault(
-            defaultTDescPath, "", configurationReader.getAshlingTDescPath()));
         customGdbPath = configurationReader.getCustomGdbServerPath();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
@@ -203,7 +190,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         if (!ftdiCoreCombo.isDisposed())
             ftdiCoreCombo.setText(ftdiCore.toString());
-        debuggerGroupContainer.setPortNumberText();
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
             debuggerGroupContainer.setTextForGdbServerIpAddressText(
                 debuggerGroupContainer.getHostName());
@@ -231,12 +217,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         if (!groupNsim.isDisposed()) {
             workingDirectoryBlockNsim.performApply(configuration);
         }
-        String str = debuggerGroupContainer.getTextFromGdbServerPortNumberText();
-        str = str.trim();
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
         debuggerGroupContainer.performApply(configurationWriter);
-        configurationWriter.setGdbServerPort(str);
         String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
         gdbPath = fGDBCommandText.getText();
