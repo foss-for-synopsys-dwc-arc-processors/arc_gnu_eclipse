@@ -48,6 +48,7 @@ public class DebuggerGroupContainer extends Observable{
   private Combo jtagFrequencyCombo;
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
+  private FileFieldEditor ashlingBinaryPathEditor;
   protected Button launchEnableExceptionProperties;
   protected Button launchInvalidInstructionExceptionProperties;
   public String jtagFrequency = null;
@@ -130,6 +131,10 @@ public class DebuggerGroupContainer extends Observable{
     return ashlingXmlPathEditor;
   }
 
+  public FileFieldEditor getAshlingBinaryPathEditor(){
+    return ashlingBinaryPathEditor;
+  }
+
   public void initializeFrom(ConfigurationReader configurationReader){
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
@@ -158,6 +163,23 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 ashlingXmlPath = (String) event.getNewValue();
+                setChanged();
+                notifyObservers();
+            }
+        }
+    });
+  }
+
+  public void createAshlingBinaryPathEditor(Composite compositeCom){
+    // Path to Ashling binary
+    ashlingBinaryPathEditor = new FileFieldEditor("ashlingBinaryPath", "Ashling binary path", false,
+            StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
+    ashlingBinaryPathEditor.setStringValue(externalToolsAshlingPath);
+
+    ashlingBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent event) {
+            if (event.getProperty() == "field_editor_value") {
+                externalToolsAshlingPath = (String) event.getNewValue();
                 setChanged();
                 notifyObservers();
             }
