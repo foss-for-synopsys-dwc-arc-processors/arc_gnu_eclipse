@@ -52,6 +52,8 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingBinaryPathEditor;
   private Text gdbServerPortNumberText;
   private Text gdbServerIpAddressText;
+  private Text customGdbCommandLineArgumentsText;
+  private String customGdbCommandLineArguments = null;
   private Button launchEnableExceptionProperties;
   private Button launchInvalidInstructionExceptionProperties;
   private String jtagFrequency = null;
@@ -161,6 +163,7 @@ public class DebuggerGroupContainer extends Observable{
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
     setHostName(configurationReader.getHostAddress());
+    customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
     if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
@@ -285,6 +288,32 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setAshlingTDescPath(ashlingTdescPath);
     configurationWriter.setAshlingXmlPath(ashlingXmlPath);
     configurationWriter.setAshlingPath(externalToolsAshlingPath);
+
+    if (customGdbCommandLineArguments != null)
+      configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
+  }
+
+  public void createCustomGdbServerArgs(Composite compositeCustomGdb){
+    // GDB server command line arguments
+    Label label = new Label(compositeCustomGdb, SWT.LEFT);
+    label.setText("GDB server command line arguments:");
+    customGdbCommandLineArgumentsText = new Text(compositeCustomGdb, SWT.SINGLE | SWT.BORDER |
+        SWT.BEGINNING);
+
+    GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
+    layoutData.widthHint = 220;
+    layoutData.horizontalSpan = 2;
+    customGdbCommandLineArgumentsText.setLayoutData(layoutData);
+    if (customGdbCommandLineArguments != null)
+        customGdbCommandLineArgumentsText.setText(customGdbCommandLineArguments);
+
+    customGdbCommandLineArgumentsText.addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            customGdbCommandLineArguments = customGdbCommandLineArgumentsText.getText();
+            setChanged();
+            notifyObservers();
+        }
+    });
   }
 
   public static String getAttributeValueFromString(String string) {

@@ -83,9 +83,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor customGdbBinaryPathEditor;
     private String openOcdBinaryPath;
     private String openOcdConfigurationPath;
-    private Text customGdbCommandLineArgumentsText;
     private String customGdbPath;
-    private String customGdbCommandLineArguments = null;
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
@@ -187,7 +185,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.setAshlingTdescPath(configurationReader.getOrDefault(
             defaultTDescPath, "", configurationReader.getAshlingTDescPath()));
         customGdbPath = configurationReader.getCustomGdbServerPath();
-        customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
         externalNsimJitEnabled = configurationReader.getNsimUseJit();
@@ -258,9 +255,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
         configurationWriter.setCustomGdbServerPath(customGdbPath);
-        if (customGdbCommandLineArguments != null) {
-            configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
-        }
 
         configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
         configurationWriter.setNsimUseJit(externalNsimJitEnabled);
@@ -544,25 +538,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     customGdbPath = (String) event.getNewValue();
                     updateLaunchConfigurationDialog();
                 }
-            }
-        });
-
-        // GDB server command line arguments
-        Label label = new Label(compositeCustomGdb, SWT.LEFT);
-        label.setText("GDB server command line arguments:");
-        customGdbCommandLineArgumentsText = new Text(compositeCustomGdb, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
-
-        GridData layoutData = new GridData(GridData.FILL_HORIZONTAL);
-        layoutData.widthHint = 220;
-        layoutData.horizontalSpan = 2;
-        customGdbCommandLineArgumentsText.setLayoutData(layoutData);
-        if (customGdbCommandLineArguments != null)
-            customGdbCommandLineArgumentsText.setText(customGdbCommandLineArguments);
-
-        customGdbCommandLineArgumentsText.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                customGdbCommandLineArguments = customGdbCommandLineArgumentsText.getText();
-                updateLaunchConfigurationDialog();
             }
         });
 
