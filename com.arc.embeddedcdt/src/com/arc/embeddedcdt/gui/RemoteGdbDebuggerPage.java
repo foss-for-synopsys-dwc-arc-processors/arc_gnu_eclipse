@@ -106,7 +106,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
     protected Button nsimTcfBrowseButton;
-    private String nsimTcfFilesLast = "";
     private boolean externalNsimTcfToolsEnabled = true;
     private boolean externalNsimJitEnabled = true;
     private boolean externalNsimHostLinkToolsEnabled = true;
@@ -181,7 +180,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
         externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
-        nsimTcfFilesLast = configurationReader.getNsimTcfPath();
 
         externalToolsCombo.setText(gdbServer.toString());
 
@@ -246,7 +244,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             externalNsimMemoryExceptionToolsEnabled);
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
-        configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
             debuggerGroupContainer.setHostName(
                 debuggerGroupContainer.getTextFromGdbServerIpAddressText());
