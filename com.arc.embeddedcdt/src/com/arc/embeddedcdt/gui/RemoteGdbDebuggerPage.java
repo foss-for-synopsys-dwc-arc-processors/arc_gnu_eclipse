@@ -89,7 +89,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private Text customGdbCommandLineArgumentsText;
     private String customGdbPath;
     private String customGdbCommandLineArguments = null;
-    private FileFieldEditor ashlingBinaryPathEditor;
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
@@ -629,19 +628,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final Composite compositeCom = SWTFactory.createComposite(groupComAshling, 3, 5,
                 GridData.FILL_BOTH);
 
-        // Path to Ashling binary
-        ashlingBinaryPathEditor = new FileFieldEditor("ashlingBinaryPath", "Ashling binary path", false,
-                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        ashlingBinaryPathEditor.setStringValue(debuggerGroupContainer.getExternalToolsAshlingPath());
-
-        ashlingBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setExternalToolsAshlingPath((String) event.getNewValue());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
+        debuggerGroupContainer.createAshlingBinaryPathEditor(compositeCom);
 
         debuggerGroupContainer.createTabItemComAshling(compositeCom);
 
@@ -688,7 +675,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (groupComAshling.isDisposed()){
                     return true;
                 }
-                if (!isValidFileFieldEditor(ashlingBinaryPathEditor)
+                if (!isValidFileFieldEditor(debuggerGroupContainer.getAshlingBinaryPathEditor())
                         || !isValidFileFieldEditor(debuggerGroupContainer.getAshlingXmlPathEditor())
                         || !isValidFileFieldEditor(
                             debuggerGroupContainer.getAshlingTdescXmlPathEditor())) {
