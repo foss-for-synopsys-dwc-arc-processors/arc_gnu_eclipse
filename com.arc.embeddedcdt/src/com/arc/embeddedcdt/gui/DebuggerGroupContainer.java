@@ -47,6 +47,7 @@ public class DebuggerGroupContainer extends Observable{
   public static final String DEFAULT_OOCD_CFG;
   private Combo jtagFrequencyCombo;
   private FileFieldEditor ashlingXmlPathEditor;
+  private FileFieldEditor ashlingTdescXmlPathEditor;
   protected Button launchEnableExceptionProperties;
   protected Button launchInvalidInstructionExceptionProperties;
   public String jtagFrequency = null;
@@ -121,6 +122,10 @@ public class DebuggerGroupContainer extends Observable{
     return hostName;
   }
 
+  public FileFieldEditor getAshlingTdescXmlPathEditor(){
+    return ashlingTdescXmlPathEditor;
+  }
+
   public void initializeFrom(ConfigurationReader configurationReader){
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
@@ -149,6 +154,24 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 ashlingXmlPath = (String) event.getNewValue();
+                setChanged();
+                notifyObservers();
+            }
+        }
+    });
+  }
+
+  public void createAshlingTdescXmlPathEditor(Composite compositeCom){
+    // Path to ashling target description file
+    ashlingTdescXmlPathEditor = new FileFieldEditor("ashlingTdescXmlPath",
+            "Target description XML file", false,
+            StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
+    ashlingTdescXmlPathEditor.setStringValue(ashlingTdescPath);
+
+    ashlingTdescXmlPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent event) {
+            if (event.getProperty() == "field_editor_value") {
+                ashlingTdescPath = (String) event.getNewValue();
                 setChanged();
                 notifyObservers();
             }
