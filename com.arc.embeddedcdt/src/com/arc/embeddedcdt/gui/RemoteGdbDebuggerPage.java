@@ -93,7 +93,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
-    private FileFieldEditor ashlingXmlPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
@@ -690,7 +689,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     return true;
                 }
                 if (!isValidFileFieldEditor(ashlingBinaryPathEditor)
-                        || !isValidFileFieldEditor(ashlingXmlPathEditor)
+                        || !isValidFileFieldEditor(debuggerGroupContainer.getAshlingXmlPathEditor())
                         || !isValidFileFieldEditor(
                             debuggerGroupContainer.getAshlingTdescXmlPathEditor())) {
                      return false;
