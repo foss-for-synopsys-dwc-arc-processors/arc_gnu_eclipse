@@ -645,20 +645,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         });
 
-        // Path to Ashling XMl file
-        ashlingXmlPathEditor = new FileFieldEditor("ashlingXmlPathEditor", "Ashling XML File", false,
-                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        ashlingXmlPathEditor.setStringValue(debuggerGroupContainer.getAshlingXmlPath());
-
-        ashlingXmlPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setAshlingXmlPath((String) event.getNewValue());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-
+        debuggerGroupContainer.createTabItemComAshling(compositeCom);
 
         // Path to ashling target description file
         ashlingTdescXmlPathEditor = new FileFieldEditor("ashlingTdescXmlPath",
