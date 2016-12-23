@@ -17,6 +17,10 @@ import java.util.Observable;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.jface.preference.FileFieldEditor;
+import org.eclipse.jface.preference.StringButtonFieldEditor;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -42,6 +46,7 @@ public class DebuggerGroupContainer extends Observable{
   public static final String DEFAULT_OOCD_BIN;
   public static final String DEFAULT_OOCD_CFG;
   private Combo jtagFrequencyCombo;
+  private FileFieldEditor ashlingXmlPathEditor;
   protected Button launchEnableExceptionProperties;
   protected Button launchInvalidInstructionExceptionProperties;
   public String jtagFrequency = null;
@@ -132,6 +137,23 @@ public class DebuggerGroupContainer extends Observable{
     launchExternalNsimInvalidInstructionException =
         configurationReader.getNsimSimulateInvalidInstructionExceptions();
     externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
+  }
+
+  public void createTabItemComAshling(Composite compositeCom){
+    // Path to Ashling XMl file
+    ashlingXmlPathEditor = new FileFieldEditor("ashlingXmlPathEditor", "Ashling XML File", false,
+            StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
+    ashlingXmlPathEditor.setStringValue(ashlingXmlPath);
+
+    ashlingXmlPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent event) {
+            if (event.getProperty() == "field_editor_value") {
+                ashlingXmlPath = (String) event.getNewValue();
+                setChanged();
+                notifyObservers();
+            }
+        }
+    });
   }
 
   public boolean isJtagFrequencyComboDisposed(){
