@@ -75,7 +75,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     protected Combo ftdiDeviceCombo;
     protected Combo ftdiCoreCombo;
-    protected Text targetText;
     protected Text gdbServerPortNumberText;
     protected Text gdbServerIpAddressText;
     protected Button searchExternalToolsPathButton;
