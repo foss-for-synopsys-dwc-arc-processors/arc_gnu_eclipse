@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
@@ -49,6 +50,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
+  protected Text gdbServerPortNumberText;
   protected Button launchEnableExceptionProperties;
   protected Button launchInvalidInstructionExceptionProperties;
   public String jtagFrequency = null;
@@ -61,6 +63,21 @@ public class DebuggerGroupContainer extends Observable{
   private String externalToolsAshlingPath = "";
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
+
+  public void setPortNumberText(){
+    gdbServerPortNumberText.setText(portNumber);
+  }
+
+  public void setPortNumberText(String defaultText) {
+    if (portNumber.isEmpty())
+      gdbServerPortNumberText.setText(defaultText);
+    else
+      gdbServerPortNumberText.setText(portNumber);
+  }
+
+  public String getTextFromGdbServerPortNumberText(){
+    return gdbServerPortNumberText.getText();
+  }
 
   public void setSelectionForLaunchInvalidInstructionExceptionProperties(){
     launchInvalidInstructionExceptionProperties.setSelection(
@@ -109,10 +126,6 @@ public class DebuggerGroupContainer extends Observable{
 
   public String getExternalToolsNsimPath(){
     return externalToolsNsimPath;
-  }
-
-  public String getPortNumber(){
-    return portNumber;
   }
 
   public void setHostName(final String hostName){
@@ -166,6 +179,21 @@ public class DebuggerGroupContainer extends Observable{
                 setChanged();
                 notifyObservers();
             }
+        }
+    });
+  }
+
+  public void createGdbServerPortNumberText(Composite subComp, int minTextWidth){
+    // GDB port text field
+    gdbServerPortNumberText = new Text(subComp, SWT.SINGLE | SWT.BORDER | SWT.BEGINNING);
+    GridData gdbPortTextGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+    gdbPortTextGridData.horizontalSpan = 4;
+    gdbPortTextGridData.minimumWidth = minTextWidth;
+    gdbServerPortNumberText.setLayoutData(gdbPortTextGridData);
+    gdbServerPortNumberText.addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            setChanged();
+            notifyObservers();
         }
     });
   }
