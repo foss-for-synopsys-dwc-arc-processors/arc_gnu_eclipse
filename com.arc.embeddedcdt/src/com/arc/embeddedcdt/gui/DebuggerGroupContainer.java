@@ -50,10 +50,10 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
-  protected Text gdbServerPortNumberText;
-  protected Button launchEnableExceptionProperties;
-  protected Button launchInvalidInstructionExceptionProperties;
-  public String jtagFrequency = null;
+  private Text gdbServerPortNumberText;
+  private Button launchEnableExceptionProperties;
+  private Button launchInvalidInstructionExceptionProperties;
+  private String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
   private String externalToolsNsimPath = "";
@@ -253,9 +253,18 @@ public class DebuggerGroupContainer extends Observable{
         launchExternalNsimInvalidInstructionException);
     configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
 
+    if (jtagFrequency != null)
+        configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
     configurationWriter.setAshlingTDescPath(ashlingTdescPath);
     configurationWriter.setAshlingXmlPath(ashlingXmlPath);
     configurationWriter.setAshlingPath(externalToolsAshlingPath);
+  }
+
+  public static String getAttributeValueFromString(String string) {
+    if (string.length() > 0) {
+      return string;
+    }
+    return null;
   }
 
   public void createLaunchEnableExceptionPropertiesButton(final Composite compositeNsim,

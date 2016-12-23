@@ -243,18 +243,18 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
         gdbPath = fGDBCommandText.getText();
-        String jtagFrequency = debuggerGroupContainer.jtagFrequency;
-        if (jtagFrequency != null)
-            configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
 
         configurationWriter.setFileFormatVersion(
             LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
         /* Because there is no setAttribute(String, long) method. */
         configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
-        configurationWriter.setFtdiDevice(getAttributeValueFromString(ftdiDevice.name()));
-        configurationWriter.setFtdiCore(getAttributeValueFromString(ftdiCore.name()));
+        configurationWriter.setFtdiDevice(
+            DebuggerGroupContainer.getAttributeValueFromString(ftdiDevice.name()));
+        configurationWriter.setFtdiCore(
+            DebuggerGroupContainer.getAttributeValueFromString(ftdiCore.name()));
         configurationWriter.setGdbPath(gdbPath);
-        configurationWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
+        configurationWriter.setGdbServer(
+            DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
         configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
         configurationWriter.setCustomGdbServerPath(customGdbPath);
@@ -272,7 +272,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
             debuggerGroupContainer.setHostName(gdbServerIpAddressText.getText());
-            configurationWriter.setHostAddress(getAttributeValueFromString(
+            configurationWriter.setHostAddress(DebuggerGroupContainer.getAttributeValueFromString(
                 debuggerGroupContainer.getHostName()));
         }
     }
@@ -1088,14 +1088,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     public void createTabs(TabFolder tabFolder) {
         super.createTabs(tabFolder);
         createGdbServerSettingsTab(tabFolder);
-    }
-
-    public static String getAttributeValueFromString(String string) {
-        String content = string;
-        if (content.length() > 0) {
-          return content;
-        }
-        return null;
     }
     
     @Override
