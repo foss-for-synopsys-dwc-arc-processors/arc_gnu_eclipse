@@ -103,7 +103,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
     protected Button nsimTcfBrowseButton;
-    private boolean externalNsimJitEnabled = true;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -167,7 +166,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         customGdbPath = configurationReader.getCustomGdbServerPath();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
-        externalNsimJitEnabled = configurationReader.getNsimUseJit();
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
 
@@ -227,7 +225,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
         configurationWriter.setCustomGdbServerPath(customGdbPath);
 
-        configurationWriter.setNsimUseJit(externalNsimJitEnabled);
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
@@ -378,7 +375,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         launchTcf.setSelection(externalNsimPropertiesEnabled);
                         launchTcfPropertiesButton.setSelection(
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
-                        launchNsimJitProperties.setSelection(externalNsimJitEnabled);
+                        launchNsimJitProperties.setSelection(
+                            debuggerGroupContainer.getExternalNsimJitEnabled());
                         launchHostLinkProperties.setSelection(
                             debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
                         launchMemoryExceptionProperties.setSelection(
@@ -904,7 +902,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gridData.horizontalSpan = 3;
 
         launchNsimJitProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchNsimJitProperties.setSelection(externalNsimJitEnabled);
+        launchNsimJitProperties.setSelection(debuggerGroupContainer.getExternalNsimJitEnabled());
         launchNsimJitProperties.setText("JIT");
         launchNsimJitProperties.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
         jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
@@ -916,12 +914,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         launchNsimJitProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (launchNsimJitProperties.getSelection() == true) {
-                    externalNsimJitEnabled = true;
+                    debuggerGroupContainer.setExternalNsimJitEnabled(true);
                     jitLabel.setEnabled(true);
                     jitThreadSpinner.setEnabled(true);
 
                 } else {
-                    externalNsimJitEnabled = false;
+                    debuggerGroupContainer.setExternalNsimJitEnabled(false);
                     jitLabel.setEnabled(false);
                     jitThreadSpinner.setEnabled(false);
                 }
@@ -935,10 +933,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchNsimJitProperties.setLayoutData(gridData);
 
-        if (externalNsimJitEnabled == true) {
+        if (debuggerGroupContainer.getExternalNsimJitEnabled()) {
             jitLabel.setEnabled(true);
             jitThreadSpinner.setEnabled(true);
-        } else if (externalNsimJitEnabled == false) {
+        }
+        else {
             jitLabel.setEnabled(false);
             jitThreadSpinner.setEnabled(false);
         }
