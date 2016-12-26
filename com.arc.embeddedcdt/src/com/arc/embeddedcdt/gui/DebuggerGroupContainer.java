@@ -68,6 +68,15 @@ public class DebuggerGroupContainer extends Observable{
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
   private boolean externalNsimTcfToolsEnabled = true;
+  private boolean externalNsimMemoryExceptionToolsEnabled = true;
+
+  public boolean getExternalNsimMemoryExceptionToolsEnabled(){
+    return externalNsimMemoryExceptionToolsEnabled;
+  }
+
+  public void setExternalNsimMemoryExceptionToolsEnabled(boolean areEnabled){
+    this.externalNsimMemoryExceptionToolsEnabled = areEnabled;
+  }
 
   public boolean getExternalNsimTcfToolsEnabled(){
     return externalNsimTcfToolsEnabled;
@@ -173,6 +182,8 @@ public class DebuggerGroupContainer extends Observable{
     externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
     nsimTcfFilesLast = configurationReader.getNsimTcfPath();
     setExternalNsimTcfToolsEnabled(configurationReader.getNsimUseTcf());
+    externalNsimMemoryExceptionToolsEnabled =
+        configurationReader.getNsimSimulateMemoryExceptions();
   }
 
   public void createTabItemComAshling(Composite compositeCom){
@@ -281,6 +292,8 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
     configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
     configurationWriter.setNsimUseTcf(getExternalNsimTcfToolsEnabled());
+    configurationWriter.setNsimSimulateMemoryExceptions(
+        externalNsimMemoryExceptionToolsEnabled);
 
     if (jtagFrequency != null)
         configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));

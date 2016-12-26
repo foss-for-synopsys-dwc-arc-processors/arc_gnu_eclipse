@@ -105,7 +105,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button nsimTcfBrowseButton;
     private boolean externalNsimJitEnabled = true;
     private boolean externalNsimHostLinkToolsEnabled = true;
-    private boolean externalNsimMemoryExceptionToolsEnabled = true;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -171,8 +170,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         workingDirectoryBlockNsim.initializeFrom(configuration);
         externalNsimJitEnabled = configurationReader.getNsimUseJit();
         externalNsimHostLinkToolsEnabled = configurationReader.getNsimUseNsimHostlink();
-        externalNsimMemoryExceptionToolsEnabled =
-            configurationReader.getNsimSimulateMemoryExceptions();
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
 
@@ -233,9 +230,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setCustomGdbServerPath(customGdbPath);
 
         configurationWriter.setNsimUseJit(externalNsimJitEnabled);
-        configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
-        configurationWriter.setNsimSimulateMemoryExceptions(
-            externalNsimMemoryExceptionToolsEnabled);
+        configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);   
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
@@ -388,7 +383,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
                         launchNsimJitProperties.setSelection(externalNsimJitEnabled);
                         launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
-                        launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
+                        launchMemoryExceptionProperties.setSelection(
+                            debuggerGroupContainer.getExternalNsimMemoryExceptionToolsEnabled());
                         debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
 
                     }
@@ -991,16 +987,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchMemoryExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchMemoryExceptionProperties.setToolTipText("Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
-        launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
+        launchMemoryExceptionProperties.setSelection(
+            debuggerGroupContainer.getExternalNsimMemoryExceptionToolsEnabled());
         launchMemoryExceptionProperties.setText("Memory Exception");
         launchMemoryExceptionProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchMemoryExceptionProperties.getSelection() == true) {
-                    externalNsimMemoryExceptionToolsEnabled = true;
-
-                } else {
-                    externalNsimMemoryExceptionToolsEnabled = false;
-                }
+                debuggerGroupContainer.setExternalNsimMemoryExceptionToolsEnabled(
+                    launchMemoryExceptionProperties.getSelection());
                 updateLaunchConfigurationDialog();
             }
 
