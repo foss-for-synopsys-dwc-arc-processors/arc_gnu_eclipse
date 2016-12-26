@@ -67,6 +67,15 @@ public class DebuggerGroupContainer extends Observable{
   private String externalToolsAshlingPath = "";
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
+  private boolean externalNsimTcfToolsEnabled = true;
+
+  public boolean getExternalNsimTcfToolsEnabled(){
+    return externalNsimTcfToolsEnabled;
+  }
+
+  public void setExternalNsimTcfToolsEnabled(boolean areEnabled){
+    this.externalNsimTcfToolsEnabled = areEnabled;
+  }
 
   public void setPortNumberText(String defaultText) {
     if (portNumber.isEmpty())
@@ -163,6 +172,7 @@ public class DebuggerGroupContainer extends Observable{
         configurationReader.getNsimSimulateInvalidInstructionExceptions();
     externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
     nsimTcfFilesLast = configurationReader.getNsimTcfPath();
+    setExternalNsimTcfToolsEnabled(configurationReader.getNsimUseTcf());
   }
 
   public void createTabItemComAshling(Composite compositeCom){
@@ -270,6 +280,7 @@ public class DebuggerGroupContainer extends Observable{
         launchExternalNsimInvalidInstructionException);
     configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
     configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
+    configurationWriter.setNsimUseTcf(getExternalNsimTcfToolsEnabled());
 
     if (jtagFrequency != null)
         configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
