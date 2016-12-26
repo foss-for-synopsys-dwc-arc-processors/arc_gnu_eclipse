@@ -103,7 +103,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
     protected Button nsimTcfBrowseButton;
-    private boolean externalNsimTcfToolsEnabled = true;
     private boolean externalNsimJitEnabled = true;
     private boolean externalNsimHostLinkToolsEnabled = true;
     private boolean externalNsimMemoryExceptionToolsEnabled = true;
@@ -175,7 +174,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalNsimMemoryExceptionToolsEnabled =
             configurationReader.getNsimSimulateMemoryExceptions();
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
-        externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
 
         externalToolsCombo.setText(gdbServer.toString());
@@ -234,7 +232,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
         configurationWriter.setCustomGdbServerPath(customGdbPath);
 
-        configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
         configurationWriter.setNsimUseJit(externalNsimJitEnabled);
         configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
         configurationWriter.setNsimSimulateMemoryExceptions(
@@ -387,7 +384,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         createTabItemNsim(subComp);
 
                         launchTcf.setSelection(externalNsimPropertiesEnabled);
-                        launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+                        launchTcfPropertiesButton.setSelection(
+                            debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
                         launchNsimJitProperties.setSelection(externalNsimJitEnabled);
                         launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
                         launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
@@ -828,7 +826,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchTcfPropertiesButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
-        launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+        launchTcfPropertiesButton.setSelection(
+            debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
         launchTcfPropertiesButton.setLayoutData(gridData);
@@ -845,7 +844,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
             }
         });
-        nsimTcfPathEditor.setEnabled((externalNsimTcfToolsEnabled), compositeNsim);
+        nsimTcfPathEditor.setEnabled((debuggerGroupContainer.getExternalNsimTcfToolsEnabled()),
+            compositeNsim);
 
         launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchTcf.setToolTipText("-propsfile=path");
@@ -871,11 +871,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         launchTcf.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
                 if (launchTcf.getSelection() == true) {
-                    externalNsimTcfToolsEnabled = true;
+                    debuggerGroupContainer.setExternalNsimTcfToolsEnabled(true);
                     nsimTcfPathEditor.setEnabled(true, compositeNsim);
 
                 } else {
-                    externalNsimTcfToolsEnabled = false;
+                    debuggerGroupContainer.setExternalNsimTcfToolsEnabled(false);
                     launchTcfPropertiesButton.setSelection(false);
                     nsimTcfPathEditor.setEnabled(false, compositeNsim);
                 }
