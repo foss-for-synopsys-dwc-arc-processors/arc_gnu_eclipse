@@ -104,7 +104,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchMemoryExceptionProperties;
     protected Button nsimTcfBrowseButton;
     private boolean externalNsimJitEnabled = true;
-    private boolean externalNsimHostLinkToolsEnabled = true;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -169,7 +168,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
         externalNsimJitEnabled = configurationReader.getNsimUseJit();
-        externalNsimHostLinkToolsEnabled = configurationReader.getNsimUseNsimHostlink();
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
 
@@ -230,7 +228,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setCustomGdbServerPath(customGdbPath);
 
         configurationWriter.setNsimUseJit(externalNsimJitEnabled);
-        configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);   
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
@@ -382,7 +379,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         launchTcfPropertiesButton.setSelection(
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
                         launchNsimJitProperties.setSelection(externalNsimJitEnabled);
-                        launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
+                        launchHostLinkProperties.setSelection(
+                            debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
                         launchMemoryExceptionProperties.setSelection(
                             debuggerGroupContainer.getExternalNsimMemoryExceptionToolsEnabled());
                         debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
@@ -965,16 +963,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchHostLinkProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchHostLinkProperties.setToolTipText("Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property works only if the application that is being simulated is compiled with the ARC GCC compiler.");
-        launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
+        launchHostLinkProperties.setSelection(
+            debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
         launchHostLinkProperties.setText("GNU host I/O support");
         launchHostLinkProperties.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
-                if (launchHostLinkProperties.getSelection() == true) {
-                    externalNsimHostLinkToolsEnabled = true;
-
-                } else {
-                    externalNsimHostLinkToolsEnabled = false;
-                }
+                debuggerGroupContainer.setExternalNsimHostLinkToolsEnabled(
+                    launchHostLinkProperties.getSelection());
                 updateLaunchConfigurationDialog();
             }
 
