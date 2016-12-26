@@ -75,9 +75,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     protected Combo ftdiDeviceCombo;
     protected Combo ftdiCoreCombo;
-    protected Button searchExternalToolsPathButton;
-    protected Label searchExternalToolsLabel;
-    protected Text externalToolsPathText;
     private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
     private FileFieldEditor customGdbBinaryPathEditor;
