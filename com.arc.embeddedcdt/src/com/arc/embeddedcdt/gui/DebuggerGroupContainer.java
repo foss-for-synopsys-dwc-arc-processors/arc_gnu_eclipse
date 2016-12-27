@@ -67,12 +67,21 @@ public class DebuggerGroupContainer extends Observable{
   private String ashlingXmlPath = "";
   private String externalToolsAshlingPath = "";
   private String customGdbPath;
+  private String openOcdBinaryPath;
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
   private boolean externalNsimTcfToolsEnabled = true;
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public void setOpenOcdBinaryPath(String path){
+    openOcdBinaryPath = path;
+  }
+
+  public String getOpenOcdBinaryPath(){
+    return openOcdBinaryPath;
+  }
 
   public FileFieldEditor getCustomGdbBinaryPathEditor(){
     return customGdbBinaryPathEditor;
@@ -188,6 +197,9 @@ public class DebuggerGroupContainer extends Observable{
     setHostName(configurationReader.getHostAddress());
     customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
     setCustomGdbPath(configurationReader.getCustomGdbServerPath());
+
+    setOpenOcdBinaryPath(configurationReader.getOrDefault(
+        DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath()));
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
     if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
@@ -360,6 +372,8 @@ public class DebuggerGroupContainer extends Observable{
     str = str.trim();
     configurationWriter.setGdbServerPort(str);
     configurationWriter.setCustomGdbServerPath(getCustomGdbPath());
+
+    configurationWriter.setOpenOcdPath(openOcdBinaryPath);
   }
 
   public void createCustomGdbServerArgs(Composite compositeCustomGdb){
