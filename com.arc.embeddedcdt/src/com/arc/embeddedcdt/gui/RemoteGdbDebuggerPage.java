@@ -73,7 +73,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
@@ -560,7 +559,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (groupNsim.isDisposed()) {
                     return true;
                 }
-                if (!isValidFileFieldEditor(nsimBinaryPathEditor)
+                if (!isValidFileFieldEditor(debuggerGroupContainer.getNsimBinaryPathEditor())
                         || (launchTcf.getSelection()
                                 && !isValidFileFieldEditor(nsimTcfPathEditor))
                         || (launchTcfPropertiesButton.getSelection()
@@ -657,18 +656,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         GridData gridData = new GridData();
 
-        nsimBinaryPathEditor = new FileFieldEditor("nsimBinPath", "nSIM executable", false,
-                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
-
-        nsimBinaryPathEditor.setStringValue(debuggerGroupContainer.getExternalToolsNsimPath());
-        nsimBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setExternalToolsNsimPath((String) event.getNewValue());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
+        debuggerGroupContainer.createNsimBinaryPathEditor(compositeNsim);
 
         launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchTcfPropertiesButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
