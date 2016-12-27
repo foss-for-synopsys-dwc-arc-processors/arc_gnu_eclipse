@@ -50,6 +50,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
+  private FileFieldEditor customGdbBinaryPathEditor;
   private Text gdbServerPortNumberText;
   private Text gdbServerIpAddressText;
   private Text customGdbCommandLineArgumentsText;
@@ -72,6 +73,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public FileFieldEditor getCustomGdbBinaryPathEditor(){
+    return customGdbBinaryPathEditor;
+  }
 
   public void setCustomGdbPath(String path){
     customGdbPath = path;
@@ -226,6 +231,22 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 ashlingXmlPath = (String) event.getNewValue();
+                setChanged();
+                notifyObservers();
+            }
+        }
+    });
+  }
+
+  public void createTabCustomGdb(Composite compositeCustomGdb) {
+    // GDB server executable path
+    customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
+            compositeCustomGdb);
+    customGdbBinaryPathEditor.setStringValue(getCustomGdbPath());
+    customGdbBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent event) {
+            if (event.getProperty() == "field_editor_value") {
+                setCustomGdbPath((String) event.getNewValue());
                 setChanged();
                 notifyObservers();
             }

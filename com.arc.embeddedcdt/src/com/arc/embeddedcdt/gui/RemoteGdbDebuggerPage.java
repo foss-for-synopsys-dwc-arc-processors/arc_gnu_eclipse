@@ -77,7 +77,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo ftdiCoreCombo;
     private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
-    private FileFieldEditor customGdbBinaryPathEditor;
     private String openOcdBinaryPath;
     private String openOcdConfigurationPath;
     private FileFieldEditor nsimBinaryPathEditor;
@@ -491,18 +490,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final Composite compositeCustomGdb = SWTFactory.createComposite(groupComCustomGdb, 3, 5,
                 GridData.FILL_BOTH);
 
-        // GDB server executable path
-        customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
-                compositeCustomGdb);
-        customGdbBinaryPathEditor.setStringValue(debuggerGroupContainer.getCustomGdbPath());
-        customGdbBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setCustomGdbPath((String) event.getNewValue());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
+        debuggerGroupContainer.createTabCustomGdb(compositeCustomGdb);
 
     }
 
@@ -601,7 +589,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (groupComCustomGdb.isDisposed()) {
                     return true;
                 }
-                if (!isValidFileFieldEditor(customGdbBinaryPathEditor)) {
+                if (!isValidFileFieldEditor(debuggerGroupContainer.getCustomGdbBinaryPathEditor())) {
                     return false;
                 }
                 break;
