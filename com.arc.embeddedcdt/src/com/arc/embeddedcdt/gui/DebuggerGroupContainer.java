@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
@@ -53,6 +54,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingBinaryPathEditor;
   private FileFieldEditor customGdbBinaryPathEditor;
   private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
+  private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
   private Text gdbServerPortNumberText;
   private Text gdbServerIpAddressText;
   private Text customGdbCommandLineArgumentsText;
@@ -77,6 +79,14 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public FtdiCore getFtdiCore(){
+    return ftdiCore;
+  }
+
+  public void setFtdiCore(FtdiCore core){
+    ftdiCore = core;
+  }
 
   public FtdiDevice getFtdiDevice(){
     return ftdiDevice;
@@ -217,6 +227,7 @@ public class DebuggerGroupContainer extends Observable{
     customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
     setCustomGdbPath(configurationReader.getCustomGdbServerPath());
     ftdiDevice = configurationReader.getFtdiDevice();
+    ftdiCore = configurationReader.getFtdiCore();
 
     setOpenOcdBinaryPath(configurationReader.getOrDefault(
         DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath()));

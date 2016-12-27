@@ -81,7 +81,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
-    private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     private boolean createTabItemCom = false;
     private boolean createTabItemNsim = false;
@@ -150,7 +149,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath());
         fGDBCommandText.setText(gdbPath);
-        ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
@@ -163,7 +161,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             ftdiDeviceCombo.setText(debuggerGroupContainer.getFtdiDevice().toString());
 
         if (!ftdiCoreCombo.isDisposed())
-            ftdiCoreCombo.setText(ftdiCore.toString());
+            ftdiCoreCombo.setText(debuggerGroupContainer.getFtdiCore().toString());
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
             debuggerGroupContainer.setTextForGdbServerIpAddressText(
                 debuggerGroupContainer.getHostName());
@@ -206,7 +204,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             DebuggerGroupContainer.getAttributeValueFromString(
                 debuggerGroupContainer.getFtdiDevice().name()));
         configurationWriter.setFtdiCore(
-            DebuggerGroupContainer.getAttributeValueFromString(ftdiCore.name()));
+            DebuggerGroupContainer.getAttributeValueFromString(
+                debuggerGroupContainer.getFtdiCore().name()));
         configurationWriter.setGdbPath(gdbPath);
         configurationWriter.setGdbServer(
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
@@ -634,7 +633,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             openOcdConfiguration += "snps_axs102.cfg";
             break;
         case AXS103:
-            if (ftdiCore == FtdiCore.HS36) {
+            if (debuggerGroupContainer.getFtdiCore() == FtdiCore.HS36) {
                 openOcdConfiguration += "snps_axs103_hs36.cfg";
             } else {
                 openOcdConfiguration += "snps_axs103_hs38.cfg";
@@ -721,7 +720,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             public void modifyText(ModifyEvent event) {
                 Combo combo = (Combo) event.widget;
                 if (!combo.getText().isEmpty()) {
-                    ftdiCore = FtdiCore.fromString(combo.getText());
+                    debuggerGroupContainer.setFtdiCore(FtdiCore.fromString(combo.getText()));
                     if (debuggerGroupContainer.getFtdiDevice() != FtdiDevice.CUSTOM) {
                         debuggerGroupContainer.setOpenOcdConfigurationPath(
                             getOpenOcdConfigurationPath());
@@ -765,7 +764,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         String text = cores.get(0).toString();
         for (FtdiCore core : cores) {
             ftdiCoreCombo.add(core.toString());
-            if (ftdiCore == core) {
+            if (debuggerGroupContainer.getFtdiCore() == core) {
                 /*
                  * Should select current ftdiCore if it is present in cores list in order to be able
                  * to initialize from configuration. Otherwise ftdiCore field will be rewritten to
