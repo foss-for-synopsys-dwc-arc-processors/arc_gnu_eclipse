@@ -102,7 +102,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Button launchNsimJitProperties;
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
-    protected Button nsimTcfBrowseButton;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
