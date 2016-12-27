@@ -77,7 +77,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo ftdiCoreCombo;
     private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
-    private String openOcdBinaryPath;
     private String openOcdConfigurationPath;
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
@@ -153,8 +152,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath());
         fGDBCommandText.setText(gdbPath);
-        openOcdBinaryPath = configurationReader.getOrDefault(
-            DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
         ftdiDevice = configurationReader.getFtdiDevice();
         ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
@@ -218,7 +215,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setGdbServer(
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
         configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
-        configurationWriter.setOpenOcdPath(openOcdBinaryPath);
 
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
@@ -619,7 +615,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private String getOpenOcdConfigurationPath() {
-        final File rootDirectory = new File(openOcdBinaryPath).getParentFile().getParentFile();
+        final File rootDirectory = new File(debuggerGroupContainer.getOpenOcdBinaryPath())
+            .getParentFile().getParentFile();
         final File scriptsDirectory = new File(rootDirectory,
                 "share" + File.separator + "openocd" + File.separator + "scripts");
         String openOcdConfiguration = scriptsDirectory + File.separator + "board" + File.separator;
@@ -664,11 +661,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         // Path to OpenOCD binary
         openOcdBinaryPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
             false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        openOcdBinaryPathEditor.setStringValue(openOcdBinaryPath);
+        openOcdBinaryPathEditor.setStringValue(debuggerGroupContainer.getOpenOcdBinaryPath());
         openOcdBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    openOcdBinaryPath = (String) event.getNewValue();
+                    debuggerGroupContainer.setOpenOcdBinaryPath((String) event.getNewValue());
                     if (ftdiDevice != FtdiDevice.CUSTOM) {
                         openOcdConfigurationPath = getOpenOcdConfigurationPath();
                         openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
