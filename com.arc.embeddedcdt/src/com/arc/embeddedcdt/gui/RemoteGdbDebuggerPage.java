@@ -81,7 +81,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
-    private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
     private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     private boolean createTabItemCom = false;
@@ -151,7 +150,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath());
         fGDBCommandText.setText(gdbPath);
-        ftdiDevice = configurationReader.getFtdiDevice();
         ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
 
@@ -162,7 +160,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         externalToolsCombo.setText(gdbServer.toString());
 
         if (!ftdiDeviceCombo.isDisposed())
-            ftdiDeviceCombo.setText(ftdiDevice.toString());
+            ftdiDeviceCombo.setText(debuggerGroupContainer.getFtdiDevice().toString());
 
         if (!ftdiCoreCombo.isDisposed())
             ftdiCoreCombo.setText(ftdiCore.toString());
@@ -205,7 +203,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         /* Because there is no setAttribute(String, long) method. */
         configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
         configurationWriter.setFtdiDevice(
-            DebuggerGroupContainer.getAttributeValueFromString(ftdiDevice.name()));
+            DebuggerGroupContainer.getAttributeValueFromString(
+                debuggerGroupContainer.getFtdiDevice().name()));
         configurationWriter.setFtdiCore(
             DebuggerGroupContainer.getAttributeValueFromString(ftdiCore.name()));
         configurationWriter.setGdbPath(gdbPath);
@@ -539,7 +538,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (!isValidFileFieldEditor(openOcdBinaryPathEditor)) {
                     return false;
                 }
-                if (ftdiDevice == FtdiDevice.CUSTOM) {
+                if (debuggerGroupContainer.getFtdiDevice() == FtdiDevice.CUSTOM) {
                     if (!isValidFileFieldEditor(openOcdConfigurationPathEditor)) {
                         return false;
                     }
@@ -618,7 +617,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 "share" + File.separator + "openocd" + File.separator + "scripts");
         String openOcdConfiguration = scriptsDirectory + File.separator + "board" + File.separator;
 
-        switch (ftdiDevice) {
+        switch (debuggerGroupContainer.getFtdiDevice()) {
         case EM_SK_v1x:
             openOcdConfiguration += "snps_em_sk_v1.cfg";
             break;
@@ -663,7 +662,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
                     debuggerGroupContainer.setOpenOcdBinaryPath((String) event.getNewValue());
-                    if (ftdiDevice != FtdiDevice.CUSTOM) {
+                    if (debuggerGroupContainer.getFtdiDevice() != FtdiDevice.CUSTOM) {
                         debuggerGroupContainer.setOpenOcdConfigurationPath(
                             getOpenOcdConfigurationPath());
                         openOcdConfigurationPathEditor.setStringValue(
@@ -684,19 +683,19 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         for (FtdiDevice i : FtdiDevice.values())
             ftdiDeviceCombo.add(i.toString());
-        ftdiDeviceCombo.setText(ftdiDevice.toString());
+        ftdiDeviceCombo.setText(debuggerGroupContainer.getFtdiDevice().toString());
 
         ftdiDeviceCombo.addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 Combo combo = (Combo) event.widget;
-                ftdiDevice = FtdiDevice.fromString(combo.getText());
+                debuggerGroupContainer.setFtdiDevice(FtdiDevice.fromString(combo.getText()));
 
-                if (ftdiDevice == FtdiDevice.CUSTOM)
+                if (debuggerGroupContainer.getFtdiDevice() == FtdiDevice.CUSTOM)
                     openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
                 else
                     openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
 
-                if (ftdiDevice.getCores().size() <= 1)
+                if (debuggerGroupContainer.getFtdiDevice().getCores().size() <= 1)
                     ftdiCoreCombo.setEnabled(false);
                 else
                     ftdiCoreCombo.setEnabled(true);
@@ -711,7 +710,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         ftdiCoreCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
         ftdiCoreCombo.setLayoutData(gridDataJtag);
 
-        if (ftdiDevice.getCores().size() <= 1)
+        if (debuggerGroupContainer.getFtdiDevice().getCores().size() <= 1)
             ftdiCoreCombo.setEnabled(false);
         else
             ftdiCoreCombo.setEnabled(true);
@@ -723,7 +722,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 Combo combo = (Combo) event.widget;
                 if (!combo.getText().isEmpty()) {
                     ftdiCore = FtdiCore.fromString(combo.getText());
-                    if (ftdiDevice != FtdiDevice.CUSTOM) {
+                    if (debuggerGroupContainer.getFtdiDevice() != FtdiDevice.CUSTOM) {
                         debuggerGroupContainer.setOpenOcdConfigurationPath(
                             getOpenOcdConfigurationPath());
                         openOcdConfigurationPathEditor.setStringValue(
@@ -762,7 +761,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
     private void updateFtdiCoreCombo() {
         ftdiCoreCombo.removeAll();
-        java.util.List<FtdiCore> cores = ftdiDevice.getCores();
+        java.util.List<FtdiCore> cores = debuggerGroupContainer.getFtdiDevice().getCores();
         String text = cores.get(0).toString();
         for (FtdiCore core : cores) {
             ftdiCoreCombo.add(core.toString());
