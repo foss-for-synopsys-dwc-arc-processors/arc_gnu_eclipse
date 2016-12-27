@@ -57,6 +57,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor customGdbBinaryPathEditor;
   private FileFieldEditor openOcdBinaryPathEditor;
   private FileFieldEditor openOcdConfigurationPathEditor;
+  private FileFieldEditor nsimBinaryPathEditor;
   private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
   private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
   private Text gdbServerPortNumberText;
@@ -83,6 +84,14 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public FileFieldEditor getNsimBinaryPathEditor(){
+    return nsimBinaryPathEditor;
+  }
+
+  public void setNsimBinaryPathEditor(FileFieldEditor editor){
+    nsimBinaryPathEditor = editor;
+  }
 
   public FileFieldEditor getOpenOcdConfigurationPathEditor(){
     return openOcdConfigurationPathEditor;
@@ -496,6 +505,22 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+  }
+
+  public void createNsimBinaryPathEditor(Composite compositeNsim){
+    nsimBinaryPathEditor = new FileFieldEditor("nsimBinPath", "nSIM executable", false,
+        StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
+
+    nsimBinaryPathEditor.setStringValue(getExternalToolsNsimPath());
+    nsimBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+    public void propertyChange(PropertyChangeEvent event) {
+        if (event.getProperty() == "field_editor_value") {
+            setExternalToolsNsimPath((String) event.getNewValue());
+            setChanged();
+            notifyObservers();
+        }
+    }
+});
   }
 
   public void createOpenOcdBinaryPathEditor(Composite compositeCom){
