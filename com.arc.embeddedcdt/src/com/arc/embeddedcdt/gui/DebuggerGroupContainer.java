@@ -55,6 +55,8 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
   private FileFieldEditor customGdbBinaryPathEditor;
+  private FileFieldEditor openOcdBinaryPathEditor;
+  private FileFieldEditor openOcdConfigurationPathEditor;
   private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
   private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
   private Text gdbServerPortNumberText;
@@ -81,6 +83,22 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public FileFieldEditor getOpenOcdConfigurationPathEditor(){
+    return openOcdConfigurationPathEditor;
+  }
+
+  public void setOpenOcdConfigurationPathEditor(FileFieldEditor editor){
+    openOcdConfigurationPathEditor = editor;
+  }
+
+  public FileFieldEditor getOpenOcdBinaryPathEditor(){
+    return openOcdBinaryPathEditor;
+  }
+
+  public void setOpenOcdBinaryPathEditor(FileFieldEditor editor){
+    openOcdBinaryPathEditor = editor;
+  }
 
   public Combo getFtdiCoreCombo(){
     return ftdiCoreCombo;
@@ -305,6 +323,115 @@ public class DebuggerGroupContainer extends Observable{
     });
   }
 
+  private void updateFtdiCoreCombo() {
+    getFtdiCoreCombo().removeAll();
+    java.util.List<FtdiCore> cores = getFtdiDevice().getCores();
+    String text = cores.get(0).toString();
+    for (FtdiCore core : cores) {
+        getFtdiCoreCombo().add(core.toString());
+        if (getFtdiCore() == core) {
+            /*
+             * Should select current ftdiCore if it is present in cores list in order to be able
+             * to initialize from configuration. Otherwise ftdiCore field will be rewritten to
+             * the selected core when we initialize FTDI_DeviceCombo
+             */
+            text = core.toString();
+        }
+    }
+    getFtdiCoreCombo().setText(text);
+  }
+
+  private void createTabItemCom(final Composite compositeCom) {
+    Label label = new Label(compositeCom, SWT.LEFT);
+    label.setText("Development system:");
+    setFtdiDeviceCombo(new Combo(compositeCom, SWT.None | SWT.READ_ONLY));// 1-2 and 1-3
+
+    GridData gridDataJtag = new GridData(GridData.BEGINNING);
+    gridDataJtag.widthHint = 220;
+    gridDataJtag.horizontalSpan = 2;
+    getFtdiDeviceCombo().setLayoutData(gridDataJtag);
+
+    for (FtdiDevice i : FtdiDevice.values())
+        getFtdiDeviceCombo().add(i.toString());
+    getFtdiDeviceCombo().setText(getFtdiDevice().toString());
+
+    getFtdiDeviceCombo().addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            Combo combo = (Combo) event.widget;
+            setFtdiDevice(FtdiDevice.fromString(combo.getText()));
+
+            if (getFtdiDevice() == FtdiDevice.CUSTOM)
+                getOpenOcdConfigurationPathEditor().setEnabled(true, compositeCom);
+            else
+                getOpenOcdConfigurationPathEditor().setEnabled(false, compositeCom);
+
+            if (getFtdiDevice().getCores().size() <= 1)
+                getFtdiCoreCombo().setEnabled(false);
+            else
+                getFtdiCoreCombo().setEnabled(true);
+
+            updateFtdiCoreCombo();
+            setChanged();
+            notifyObservers();
+        }
+    });
+
+    Label coreLabel = new Label(compositeCom, SWT.LEFT);
+    coreLabel.setText("Target Core");
+    setFtdiCoreCombo(new Combo(compositeCom, SWT.None | SWT.READ_ONLY));
+    getFtdiCoreCombo().setLayoutData(gridDataJtag);
+
+    if (getFtdiDevice().getCores().size() <= 1)
+      getFtdiCoreCombo().setEnabled(false);
+    else
+        getFtdiCoreCombo().setEnabled(true);
+
+    updateFtdiCoreCombo();
+
+    getFtdiCoreCombo().addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            Combo combo = (Combo) event.widget;
+            if (!combo.getText().isEmpty()) {
+                setFtdiCore(FtdiCore.fromString(combo.getText()));
+                if (getFtdiDevice() != FtdiDevice.CUSTOM) {
+                    setOpenOcdConfigurationPath(
+                        getOpenOcdConfigurationPath());
+                    getOpenOcdConfigurationPathEditor().setStringValue(
+                        getOpenOcdConfigurationPath());
+                }
+            }
+            setChanged();
+            notifyObservers();
+        }
+    });
+
+    openOcdConfigurationPathEditor = new FileFieldEditor("openocdConfigurationPathEditor",
+        "OpenOCD configuration file",
+            false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
+    openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
+    openOcdConfigurationPathEditor.setStringValue(
+        getOpenOcdConfigurationPath());
+    openOcdConfigurationPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent event) {
+            if (event.getProperty() == "field_editor_value") {
+                setOpenOcdConfigurationPath(
+                    event.getNewValue().toString());
+                setChanged();
+                notifyObservers();
+            }
+        }
+    });
+
+    if (openOcdConfigurationPathEditor != null) {
+        if (!getFtdiDeviceCombo().getText().equalsIgnoreCase(
+                FtdiDevice.CUSTOM.toString())) {
+            openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
+        } else {
+            openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
+        }
+    }
+  }
+
   public void createTabCustomGdb(Composite compositeCustomGdb) {
     // GDB server executable path
     customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
@@ -364,6 +491,26 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 externalToolsAshlingPath = (String) event.getNewValue();
+                setChanged();
+                notifyObservers();
+            }
+        }
+    });
+  }
+
+  public void createOpenOcdBinaryPathEditor(Composite compositeCom){
+    // Path to OpenOCD binary
+    openOcdBinaryPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
+        false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
+    openOcdBinaryPathEditor.setStringValue(getOpenOcdBinaryPath());
+    openOcdBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+        public void propertyChange(PropertyChangeEvent event) {
+            if (event.getProperty() == "field_editor_value") {
+                setOpenOcdBinaryPath((String) event.getNewValue());
+                if (getFtdiDevice() != FtdiDevice.CUSTOM) {
+                    setOpenOcdConfigurationPath(getOpenOcdConfigurationPath());
+                    openOcdConfigurationPathEditor.setStringValue(getOpenOcdConfigurationPath());
+                }
                 setChanged();
                 notifyObservers();
             }

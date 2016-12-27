@@ -73,8 +73,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    private FileFieldEditor openOcdBinaryPathEditor;
-    private FileFieldEditor openOcdConfigurationPathEditor;
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
@@ -527,11 +525,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (groupCom.isDisposed()) {
                     return true;
                 }
-                if (!isValidFileFieldEditor(openOcdBinaryPathEditor)) {
+                if (!isValidFileFieldEditor(debuggerGroupContainer.getOpenOcdBinaryPathEditor())) {
                     return false;
                 }
                 if (debuggerGroupContainer.getFtdiDevice() == FtdiDevice.CUSTOM) {
-                    if (!isValidFileFieldEditor(openOcdConfigurationPathEditor)) {
+                    if (!isValidFileFieldEditor(
+                        debuggerGroupContainer.getOpenOcdConfigurationPathEditor())) {
                         return false;
                     }
                 } else {
@@ -540,7 +539,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     if (!configurationFile.exists()) {
                         setErrorMessage(
                                 "Default OpenOCD configuration file for this development system \'"
-                                        + openOcdConfigurationPathEditor + "\' must exist");
+                                        + debuggerGroupContainer.getOpenOcdConfigurationPathEditor()
+                                        + "\' must exist");
                         return false;
                     }
                 }
@@ -646,128 +646,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 GridData.FILL_HORIZONTAL);
         final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
 
-        // Path to OpenOCD binary
-        openOcdBinaryPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
-            false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        openOcdBinaryPathEditor.setStringValue(debuggerGroupContainer.getOpenOcdBinaryPath());
-        openOcdBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setOpenOcdBinaryPath((String) event.getNewValue());
-                    if (debuggerGroupContainer.getFtdiDevice() != FtdiDevice.CUSTOM) {
-                        debuggerGroupContainer.setOpenOcdConfigurationPath(
-                            getOpenOcdConfigurationPath());
-                        openOcdConfigurationPathEditor.setStringValue(
-                            debuggerGroupContainer.getOpenOcdConfigurationPath());
-                    }
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-        Label label = new Label(compositeCom, SWT.LEFT);
-        label.setText("Development system:");
-        debuggerGroupContainer.setFtdiDeviceCombo(
-            new Combo(compositeCom, SWT.None | SWT.READ_ONLY));// 1-2 and 1-3
-
-        GridData gridDataJtag = new GridData(GridData.BEGINNING);
-        gridDataJtag.widthHint = 220;
-        gridDataJtag.horizontalSpan = 2;
-        debuggerGroupContainer.getFtdiDeviceCombo().setLayoutData(gridDataJtag);
-
-        for (FtdiDevice i : FtdiDevice.values())
-            debuggerGroupContainer.getFtdiDeviceCombo().add(i.toString());
-        debuggerGroupContainer.getFtdiDeviceCombo().setText(debuggerGroupContainer.getFtdiDevice().toString());
-
-        debuggerGroupContainer.getFtdiDeviceCombo().addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                Combo combo = (Combo) event.widget;
-                debuggerGroupContainer.setFtdiDevice(FtdiDevice.fromString(combo.getText()));
-
-                if (debuggerGroupContainer.getFtdiDevice() == FtdiDevice.CUSTOM)
-                    openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
-                else
-                    openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-
-                if (debuggerGroupContainer.getFtdiDevice().getCores().size() <= 1)
-                    debuggerGroupContainer.getFtdiCoreCombo().setEnabled(false);
-                else
-                    debuggerGroupContainer.getFtdiCoreCombo().setEnabled(true);
-
-                updateFtdiCoreCombo();
-                updateLaunchConfigurationDialog();
-            }
-        });
-
-        Label coreLabel = new Label(compositeCom, SWT.LEFT);
-        coreLabel.setText("Target Core");
-        debuggerGroupContainer.setFtdiCoreCombo(new Combo(compositeCom, SWT.None | SWT.READ_ONLY));
-        debuggerGroupContainer.getFtdiCoreCombo().setLayoutData(gridDataJtag);
-
-        if (debuggerGroupContainer.getFtdiDevice().getCores().size() <= 1)
-          debuggerGroupContainer.getFtdiCoreCombo().setEnabled(false);
-        else
-            debuggerGroupContainer.getFtdiCoreCombo().setEnabled(true);
-
-        updateFtdiCoreCombo();
-
-        debuggerGroupContainer.getFtdiCoreCombo().addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                Combo combo = (Combo) event.widget;
-                if (!combo.getText().isEmpty()) {
-                    debuggerGroupContainer.setFtdiCore(FtdiCore.fromString(combo.getText()));
-                    if (debuggerGroupContainer.getFtdiDevice() != FtdiDevice.CUSTOM) {
-                        debuggerGroupContainer.setOpenOcdConfigurationPath(
-                            getOpenOcdConfigurationPath());
-                        openOcdConfigurationPathEditor.setStringValue(
-                            debuggerGroupContainer.getOpenOcdConfigurationPath());
-                    }
-                }
-                updateLaunchConfigurationDialog();
-            }
-        });
-
-        openOcdConfigurationPathEditor = new FileFieldEditor("openocdConfigurationPathEditor",
-            "OpenOCD configuration file",
-                false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-        openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-        openOcdConfigurationPathEditor.setStringValue(
-            debuggerGroupContainer.getOpenOcdConfigurationPath());
-        openOcdConfigurationPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setOpenOcdConfigurationPath(
-                        event.getNewValue().toString());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-
-        if (openOcdConfigurationPathEditor != null) {
-            if (!debuggerGroupContainer.getFtdiDeviceCombo().getText().equalsIgnoreCase(
-                    FtdiDevice.CUSTOM.toString())) {
-                openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-            } else {
-                openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
-            }
-        }
-    }
-
-    private void updateFtdiCoreCombo() {
-        debuggerGroupContainer.getFtdiCoreCombo().removeAll();
-        java.util.List<FtdiCore> cores = debuggerGroupContainer.getFtdiDevice().getCores();
-        String text = cores.get(0).toString();
-        for (FtdiCore core : cores) {
-            debuggerGroupContainer.getFtdiCoreCombo().add(core.toString());
-            if (debuggerGroupContainer.getFtdiCore() == core) {
-                /*
-                 * Should select current ftdiCore if it is present in cores list in order to be able
-                 * to initialize from configuration. Otherwise ftdiCore field will be rewritten to
-                 * the selected core when we initialize FTDI_DeviceCombo
-                 */
-                text = core.toString();
-            }
-        }
-        debuggerGroupContainer.getFtdiCoreCombo().setText(text);
     }
 
     private void createTabItemNsim(Composite subComp) {
