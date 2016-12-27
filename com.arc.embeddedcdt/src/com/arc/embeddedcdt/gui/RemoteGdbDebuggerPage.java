@@ -73,7 +73,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    protected Combo ftdiDeviceCombo;
     protected Combo ftdiCoreCombo;
     private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
@@ -156,9 +155,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
 
         externalToolsCombo.setText(gdbServer.toString());
-
-        if (!ftdiDeviceCombo.isDisposed())
-            ftdiDeviceCombo.setText(debuggerGroupContainer.getFtdiDevice().toString());
 
         if (!ftdiCoreCombo.isDisposed())
             ftdiCoreCombo.setText(debuggerGroupContainer.getFtdiCore().toString());
@@ -673,18 +669,19 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         });
         Label label = new Label(compositeCom, SWT.LEFT);
         label.setText("Development system:");
-        ftdiDeviceCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
+        debuggerGroupContainer.setFtdiDeviceCombo(
+            new Combo(compositeCom, SWT.None | SWT.READ_ONLY));// 1-2 and 1-3
 
         GridData gridDataJtag = new GridData(GridData.BEGINNING);
         gridDataJtag.widthHint = 220;
         gridDataJtag.horizontalSpan = 2;
-        ftdiDeviceCombo.setLayoutData(gridDataJtag);
+        debuggerGroupContainer.getFtdiDeviceCombo().setLayoutData(gridDataJtag);
 
         for (FtdiDevice i : FtdiDevice.values())
-            ftdiDeviceCombo.add(i.toString());
-        ftdiDeviceCombo.setText(debuggerGroupContainer.getFtdiDevice().toString());
+            debuggerGroupContainer.getFtdiDeviceCombo().add(i.toString());
+        debuggerGroupContainer.getFtdiDeviceCombo().setText(debuggerGroupContainer.getFtdiDevice().toString());
 
-        ftdiDeviceCombo.addModifyListener(new ModifyListener() {
+        debuggerGroupContainer.getFtdiDeviceCombo().addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 Combo combo = (Combo) event.widget;
                 debuggerGroupContainer.setFtdiDevice(FtdiDevice.fromString(combo.getText()));
@@ -749,7 +746,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         });
 
         if (openOcdConfigurationPathEditor != null) {
-            if (!ftdiDeviceCombo.getText().equalsIgnoreCase(
+            if (!debuggerGroupContainer.getFtdiDeviceCombo().getText().equalsIgnoreCase(
                     FtdiDevice.CUSTOM.toString())) {
                 openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
             } else {
