@@ -50,6 +50,7 @@ public class DebuggerGroupContainer extends Observable{
   public static final String DEFAULT_OOCD_CFG;
   private Combo jtagFrequencyCombo;
   private Combo ftdiDeviceCombo;
+  private Combo ftdiCoreCombo;
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
@@ -80,6 +81,14 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public Combo getFtdiCoreCombo(){
+    return ftdiCoreCombo;
+  }
+
+  public void setFtdiCoreCombo(Combo combo){
+    ftdiCoreCombo = combo;
+  }
 
   public Combo getFtdiDeviceCombo(){
     return ftdiDeviceCombo;
@@ -244,6 +253,8 @@ public class DebuggerGroupContainer extends Observable{
         DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
     if (!ftdiDeviceCombo.isDisposed())
       ftdiDeviceCombo.setText(getFtdiDevice().toString());
+    if (!ftdiCoreCombo.isDisposed())
+      ftdiCoreCombo.setText(getFtdiCore().toString());
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
     if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())

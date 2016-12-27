@@ -73,7 +73,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    protected Combo ftdiCoreCombo;
     private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
     private FileFieldEditor nsimBinaryPathEditor;
@@ -156,8 +155,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         externalToolsCombo.setText(gdbServer.toString());
 
-        if (!ftdiCoreCombo.isDisposed())
-            ftdiCoreCombo.setText(debuggerGroupContainer.getFtdiCore().toString());
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
             debuggerGroupContainer.setTextForGdbServerIpAddressText(
                 debuggerGroupContainer.getHostName());
@@ -692,9 +689,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
 
                 if (debuggerGroupContainer.getFtdiDevice().getCores().size() <= 1)
-                    ftdiCoreCombo.setEnabled(false);
+                    debuggerGroupContainer.getFtdiCoreCombo().setEnabled(false);
                 else
-                    ftdiCoreCombo.setEnabled(true);
+                    debuggerGroupContainer.getFtdiCoreCombo().setEnabled(true);
 
                 updateFtdiCoreCombo();
                 updateLaunchConfigurationDialog();
@@ -703,17 +700,17 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         Label coreLabel = new Label(compositeCom, SWT.LEFT);
         coreLabel.setText("Target Core");
-        ftdiCoreCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
-        ftdiCoreCombo.setLayoutData(gridDataJtag);
+        debuggerGroupContainer.setFtdiCoreCombo(new Combo(compositeCom, SWT.None | SWT.READ_ONLY));
+        debuggerGroupContainer.getFtdiCoreCombo().setLayoutData(gridDataJtag);
 
         if (debuggerGroupContainer.getFtdiDevice().getCores().size() <= 1)
-            ftdiCoreCombo.setEnabled(false);
+          debuggerGroupContainer.getFtdiCoreCombo().setEnabled(false);
         else
-            ftdiCoreCombo.setEnabled(true);
+            debuggerGroupContainer.getFtdiCoreCombo().setEnabled(true);
 
         updateFtdiCoreCombo();
 
-        ftdiCoreCombo.addModifyListener(new ModifyListener() {
+        debuggerGroupContainer.getFtdiCoreCombo().addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 Combo combo = (Combo) event.widget;
                 if (!combo.getText().isEmpty()) {
@@ -756,11 +753,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private void updateFtdiCoreCombo() {
-        ftdiCoreCombo.removeAll();
+        debuggerGroupContainer.getFtdiCoreCombo().removeAll();
         java.util.List<FtdiCore> cores = debuggerGroupContainer.getFtdiDevice().getCores();
         String text = cores.get(0).toString();
         for (FtdiCore core : cores) {
-            ftdiCoreCombo.add(core.toString());
+            debuggerGroupContainer.getFtdiCoreCombo().add(core.toString());
             if (debuggerGroupContainer.getFtdiCore() == core) {
                 /*
                  * Should select current ftdiCore if it is present in cores list in order to be able
@@ -770,7 +767,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 text = core.toString();
             }
         }
-        ftdiCoreCombo.setText(text);
+        debuggerGroupContainer.getFtdiCoreCombo().setText(text);
     }
 
     private void createTabItemNsim(Composite subComp) {
