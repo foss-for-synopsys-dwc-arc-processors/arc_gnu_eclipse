@@ -65,12 +65,21 @@ public class DebuggerGroupContainer extends Observable{
   private String ashlingTdescPath = "";
   private String ashlingXmlPath = "";
   private String externalToolsAshlingPath = "";
+  private String customGdbPath;
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
   private boolean externalNsimTcfToolsEnabled = true;
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+
+  public void setCustomGdbPath(String path){
+    customGdbPath = path;
+  }
+
+  public String getCustomGdbPath(){
+    return customGdbPath;
+  }
 
   public boolean getExternalNsimJitEnabled(){
     return externalNsimJitEnabled;
@@ -173,6 +182,7 @@ public class DebuggerGroupContainer extends Observable{
     gdbServerPortNumberText.setText(portNumber);
     setHostName(configurationReader.getHostAddress());
     customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
+    setCustomGdbPath(configurationReader.getCustomGdbServerPath());
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
     if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
@@ -328,6 +338,7 @@ public class DebuggerGroupContainer extends Observable{
     String str = gdbServerPortNumberText.getText();
     str = str.trim();
     configurationWriter.setGdbServerPort(str);
+    configurationWriter.setCustomGdbServerPath(getCustomGdbPath());
   }
 
   public void createCustomGdbServerArgs(Composite compositeCustomGdb){
