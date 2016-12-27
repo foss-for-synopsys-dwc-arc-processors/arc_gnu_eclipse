@@ -80,7 +80,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor customGdbBinaryPathEditor;
     private String openOcdBinaryPath;
     private String openOcdConfigurationPath;
-    private String customGdbPath;
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
@@ -162,7 +161,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbServer = configurationReader.getGdbServer();
         openOcdConfigurationPath = configurationReader.getOrDefault(
             DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
-        customGdbPath = configurationReader.getCustomGdbServerPath();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
@@ -222,7 +220,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
         configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
         configurationWriter.setOpenOcdPath(openOcdBinaryPath);
-        configurationWriter.setCustomGdbServerPath(customGdbPath);
 
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
@@ -497,11 +494,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         // GDB server executable path
         customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
                 compositeCustomGdb);
-        customGdbBinaryPathEditor.setStringValue(customGdbPath);
+        customGdbBinaryPathEditor.setStringValue(debuggerGroupContainer.getCustomGdbPath());
         customGdbBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    customGdbPath = (String) event.getNewValue();
+                    debuggerGroupContainer.setCustomGdbPath((String) event.getNewValue());
                     updateLaunchConfigurationDialog();
                 }
             }
