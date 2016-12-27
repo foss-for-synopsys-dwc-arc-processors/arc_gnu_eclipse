@@ -77,7 +77,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo ftdiCoreCombo;
     private FileFieldEditor openOcdBinaryPathEditor;
     private FileFieldEditor openOcdConfigurationPathEditor;
-    private String openOcdConfigurationPath;
     private FileFieldEditor nsimBinaryPathEditor;
     private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
@@ -155,8 +154,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         ftdiDevice = configurationReader.getFtdiDevice();
         ftdiCore = configurationReader.getFtdiCore();
         gdbServer = configurationReader.getGdbServer();
-        openOcdConfigurationPath = configurationReader.getOrDefault(
-            DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
@@ -214,7 +211,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setGdbPath(gdbPath);
         configurationWriter.setGdbServer(
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
-        configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
 
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
@@ -548,7 +544,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         return false;
                     }
                 } else {
-                    File configurationFile = new File(openOcdConfigurationPath);
+                    File configurationFile = new File(
+                        debuggerGroupContainer.getOpenOcdConfigurationPath());
                     if (!configurationFile.exists()) {
                         setErrorMessage(
                                 "Default OpenOCD configuration file for this development system \'"
@@ -667,8 +664,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (event.getProperty() == "field_editor_value") {
                     debuggerGroupContainer.setOpenOcdBinaryPath((String) event.getNewValue());
                     if (ftdiDevice != FtdiDevice.CUSTOM) {
-                        openOcdConfigurationPath = getOpenOcdConfigurationPath();
-                        openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
+                        debuggerGroupContainer.setOpenOcdConfigurationPath(
+                            getOpenOcdConfigurationPath());
+                        openOcdConfigurationPathEditor.setStringValue(
+                            debuggerGroupContainer.getOpenOcdConfigurationPath());
                     }
                     updateLaunchConfigurationDialog();
                 }
@@ -725,8 +724,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 if (!combo.getText().isEmpty()) {
                     ftdiCore = FtdiCore.fromString(combo.getText());
                     if (ftdiDevice != FtdiDevice.CUSTOM) {
-                        openOcdConfigurationPath = getOpenOcdConfigurationPath();
-                        openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
+                        debuggerGroupContainer.setOpenOcdConfigurationPath(
+                            getOpenOcdConfigurationPath());
+                        openOcdConfigurationPathEditor.setStringValue(
+                            debuggerGroupContainer.getOpenOcdConfigurationPath());
                     }
                 }
                 updateLaunchConfigurationDialog();
@@ -737,11 +738,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             "OpenOCD configuration file",
                 false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
         openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-        openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
+        openOcdConfigurationPathEditor.setStringValue(
+            debuggerGroupContainer.getOpenOcdConfigurationPath());
         openOcdConfigurationPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    openOcdConfigurationPath = event.getNewValue().toString();
+                    debuggerGroupContainer.setOpenOcdConfigurationPath(
+                        event.getNewValue().toString());
                     updateLaunchConfigurationDialog();
                 }
             }
