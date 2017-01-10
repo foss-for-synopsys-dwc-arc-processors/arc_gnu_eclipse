@@ -78,7 +78,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     private String gdbPath = null;
-    private boolean createTabItemComAshling = false;
     private boolean createTabItemCustomGdb = false;
     protected Button nsimPropertiesBrowseButton;
     private String nsimPropertiesFilesLast = "";
@@ -131,7 +130,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     public void initializeFrom(ILaunchConfiguration configuration) {
         LaunchFileFormatVersionChecker.getInstance().check(configuration);
         debuggerGroupContainer.setCreateTabItemCom(false);
-        createTabItemComAshling = false;
+        debuggerGroupContainer.setCreateTabItemComAshling(false);
         debuggerGroupContainer.setCreateTabItemNsim(false);
         debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
         createTabItemCustomGdb = false;
@@ -280,7 +279,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     }
                     groupCom.setText(gdbServer.toString());
                     debuggerGroupContainer.setCreateTabItemNsim(false);
-                    createTabItemComAshling = false;
+                    debuggerGroupContainer.setCreateTabItemComAshling(false);
                     groupCom.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     createTabItemCustomGdb = false;
@@ -300,7 +299,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemCom(false);
                     createTabItemCustomGdb = false;
 
-                    if (createTabItemComAshling == false) {
+                    if (!debuggerGroupContainer.getCreateTabItemComAshling()) {
                         if (!groupComAshling.isDisposed())
                             groupComAshling.dispose();
 
@@ -358,7 +357,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     }
                     groupNsim.setText(gdbServer.toString());
                     debuggerGroupContainer.setCreateTabItemCom(false);
-                    createTabItemComAshling = false;
+                    debuggerGroupContainer.setCreateTabItemComAshling(false);
                     groupNsim.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     createTabItemCustomGdb = false;
@@ -375,7 +374,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         createTabItemHostAddress(subComp);
                     }
                     debuggerGroupContainer.setCreateTabItemCom(false);
-                    createTabItemComAshling = false;
+                    debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     createTabItemCustomGdb = false;
                     groupGenericGdbServer.setText(gdbServer.toString());
@@ -418,7 +417,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     groupGenericGdbServer.dispose();
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemCom(false);
-                    createTabItemComAshling = false;
+                    debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     if (createTabItemCustomGdb == false) {
                         if (!groupComCustomGdb.isDisposed())
@@ -450,7 +449,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             createTabItemNsim(subComp);
         if (!debuggerGroupContainer.getCreateTabItemCom())
             createTabItemCom(subComp);
-        if (createTabItemComAshling == false)
+        if (!debuggerGroupContainer.getCreateTabItemComAshling())
             createTabItemComAshling(subComp);
         if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer())
             createTabItemHostAddress(subComp);
@@ -488,7 +487,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private void createTabItemComAshling(Composite subComp) {
-        createTabItemComAshling = true;
+        debuggerGroupContainer.setCreateTabItemComAshling(true);
 
         groupComAshling = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);

@@ -87,6 +87,15 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemCom = false;
   private boolean createTabItemNsim = false;
   private boolean createTabItemGenericGdbServer = false;
+  private boolean createTabItemComAshling = false;
+
+  public boolean getCreateTabItemComAshling(){
+    return createTabItemComAshling;
+  }
+
+  public void setCreateTabItemComAshling(boolean isCreated){
+    createTabItemComAshling = isCreated;
+  }
 
   public boolean getCreateTabItemGenericGdbServer(){
     return createTabItemGenericGdbServer;
