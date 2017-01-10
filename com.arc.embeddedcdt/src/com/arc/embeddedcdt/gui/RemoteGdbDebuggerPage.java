@@ -77,7 +77,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    private String gdbPath = null;
     protected Button nsimPropertiesBrowseButton;
     private String nsimPropertiesFilesLast = "";
     protected Button launchTcf;
@@ -136,9 +135,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         super.initializeFrom(configuration);
         ConfigurationReader configurationReader = new ConfigurationReader(configuration);
         debuggerGroupContainer.initializeFrom(configurationReader);
-        gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
-            configurationReader.getGdbPath());
-        fGDBCommandText.setText(gdbPath);
+        debuggerGroupContainer.setGdbPath(configurationReader.getOrDefault(getDefaultGdbPath(), "",
+            configurationReader.getGdbPath()));
+        fGDBCommandText.setText(debuggerGroupContainer.getGdbPath());
         gdbServer = configurationReader.getGdbServer();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
@@ -179,7 +178,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.performApply(configurationWriter);
         String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
-        gdbPath = fGDBCommandText.getText();
+        debuggerGroupContainer.setGdbPath(fGDBCommandText.getText());
 
         configurationWriter.setFileFormatVersion(
             LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
@@ -191,7 +190,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setFtdiCore(
             DebuggerGroupContainer.getAttributeValueFromString(
                 debuggerGroupContainer.getFtdiCore().name()));
-        configurationWriter.setGdbPath(gdbPath);
+        configurationWriter.setGdbPath(debuggerGroupContainer.getGdbPath());
         configurationWriter.setGdbServer(
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
 

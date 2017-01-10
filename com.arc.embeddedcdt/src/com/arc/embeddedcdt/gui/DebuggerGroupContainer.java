@@ -78,6 +78,7 @@ public class DebuggerGroupContainer extends Observable{
   private String customGdbPath;
   private String openOcdBinaryPath;
   private String openOcdConfigurationPath;
+  private String gdbPath = null;
   private boolean launchExternalNsimInvalidInstructionException = true;
   private boolean externalNsimEnableExceptionToolsEnabled = true;
   private boolean externalNsimTcfToolsEnabled = true;
@@ -89,6 +90,14 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public String getGdbPath(){
+    return gdbPath;
+  }
+
+  public void setGdbPath(String path){
+    gdbPath = path;
+  }
 
   public boolean getCreateTabItemCustomGdb(){
     return createTabItemCustomGdb;
