@@ -86,6 +86,15 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimJitEnabled = true;
   private boolean createTabItemCom = false;
   private boolean createTabItemNsim = false;
+  private boolean createTabItemGenericGdbServer = false;
+
+  public boolean getCreateTabItemGenericGdbServer(){
+    return createTabItemGenericGdbServer;
+  }
+
+  public void setCreateTabItemGenericGdbServer(boolean isCreated){
+    createTabItemGenericGdbServer = isCreated;
+  }
 
   public boolean getCreateTabItemNsim(){
     return createTabItemNsim;
