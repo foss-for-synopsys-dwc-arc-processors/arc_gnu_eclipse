@@ -78,7 +78,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     private String gdbPath = null;
-    private boolean createTabItemCustomGdb = false;
     protected Button nsimPropertiesBrowseButton;
     private String nsimPropertiesFilesLast = "";
     protected Button launchTcf;
@@ -133,7 +132,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.setCreateTabItemComAshling(false);
         debuggerGroupContainer.setCreateTabItemNsim(false);
         debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
-        createTabItemCustomGdb = false;
+        debuggerGroupContainer.setCreateTabItemCustomGdb(false);
         super.initializeFrom(configuration);
         ConfigurationReader configurationReader = new ConfigurationReader(configuration);
         debuggerGroupContainer.initializeFrom(configurationReader);
@@ -282,8 +281,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     groupCom.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
-                    createTabItemCustomGdb = false;
-
+                    debuggerGroupContainer.setCreateTabItemCustomGdb(false);
                 } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
@@ -297,7 +295,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     debuggerGroupContainer.setCreateTabItemCom(false);
-                    createTabItemCustomGdb = false;
+                    debuggerGroupContainer.setCreateTabItemCustomGdb(false);
 
                     if (!debuggerGroupContainer.getCreateTabItemComAshling()) {
                         if (!groupComAshling.isDisposed())
@@ -360,7 +358,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     groupNsim.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
-                    createTabItemCustomGdb = false;
+                    debuggerGroupContainer.setCreateTabItemCustomGdb(false);
 
                 } else if (gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
                     groupCom.dispose();
@@ -376,7 +374,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemCom(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemNsim(false);
-                    createTabItemCustomGdb = false;
+                    debuggerGroupContainer.setCreateTabItemCustomGdb(false);
                     groupGenericGdbServer.setText(gdbServer.toString());
                     groupGenericGdbServer.setVisible(true);
 
@@ -419,7 +417,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemCom(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
-                    if (createTabItemCustomGdb == false) {
+                    if (!debuggerGroupContainer.getCreateTabItemCustomGdb()) {
                         if (!groupComCustomGdb.isDisposed())
                             groupComCustomGdb.dispose();
 
@@ -453,13 +451,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             createTabItemComAshling(subComp);
         if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer())
             createTabItemHostAddress(subComp);
-        if (createTabItemCustomGdb == false)
+        if (!debuggerGroupContainer.getCreateTabItemCustomGdb())
             createTabCustomGdb(subComp);
     }
 
 
     private void createTabCustomGdb(Composite subComp) {
-        createTabItemCustomGdb = true;
+        debuggerGroupContainer.setCreateTabItemCustomGdb(true);
 
         groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3,
                 5, GridData.FILL_HORIZONTAL);
