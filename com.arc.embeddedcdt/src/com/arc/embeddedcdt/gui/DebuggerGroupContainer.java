@@ -85,6 +85,15 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
   private boolean createTabItemCom = false;
+  private boolean createTabItemNsim = false;
+
+  public boolean getCreateTabItemNsim(){
+    return createTabItemNsim;
+  }
+
+  public void setCreateTabItemNsim(boolean isCreated){
+    createTabItemNsim = isCreated;
+  }
 
   public boolean getCreateTabItemCom(){
     return createTabItemCom;
