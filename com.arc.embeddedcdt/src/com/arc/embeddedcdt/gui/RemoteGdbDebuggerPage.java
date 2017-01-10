@@ -77,7 +77,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    private boolean createTabItemCom = false;
     private boolean createTabItemNsim = false;
     private boolean createTabItemGenericGdbServer = false;
     private String gdbPath = null;
@@ -133,7 +132,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
         LaunchFileFormatVersionChecker.getInstance().check(configuration);
-        createTabItemCom = false;
+        debuggerGroupContainer.setCreateTabItemCom(false);
         createTabItemComAshling = false;
         createTabItemNsim = false;
         createTabItemGenericGdbServer = false;
@@ -275,7 +274,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     groupComAshling.dispose();
                     groupComCustomGdb.dispose();
 
-                    if (createTabItemCom == false) {
+                    if (!debuggerGroupContainer.getCreateTabItemCom()) {
                         if (!groupCom.isDisposed())
                             groupCom.dispose();
 
@@ -300,7 +299,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     groupComCustomGdb.dispose();
                     createTabItemNsim = false;
                     createTabItemGenericGdbServer = false;
-                    createTabItemCom = false;
+                    debuggerGroupContainer.setCreateTabItemCom(false);
                     createTabItemCustomGdb = false;
 
                     if (createTabItemComAshling == false) {
@@ -360,7 +359,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                     }
                     groupNsim.setText(gdbServer.toString());
-                    createTabItemCom = false;
+                    debuggerGroupContainer.setCreateTabItemCom(false);
                     createTabItemComAshling = false;
                     groupNsim.setVisible(true);
                     createTabItemGenericGdbServer = false;
@@ -377,7 +376,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                         createTabItemHostAddress(subComp);
                     }
-                    createTabItemCom = false;
+                    debuggerGroupContainer.setCreateTabItemCom(false);
                     createTabItemComAshling = false;
                     createTabItemNsim = false;
                     createTabItemCustomGdb = false;
@@ -420,7 +419,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     groupComAshling.dispose();
                     groupGenericGdbServer.dispose();
                     createTabItemNsim = false;
-                    createTabItemCom = false;
+                    debuggerGroupContainer.setCreateTabItemCom(false);
                     createTabItemComAshling = false;
                     createTabItemGenericGdbServer = false;
                     if (createTabItemCustomGdb == false) {
@@ -451,7 +450,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         if (createTabItemNsim == false)
             createTabItemNsim(subComp);
-        if (createTabItemCom == false)
+        if (!debuggerGroupContainer.getCreateTabItemCom())
             createTabItemCom(subComp);
         if (createTabItemComAshling == false)
             createTabItemComAshling(subComp);
@@ -640,7 +639,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private void createTabItemCom(Composite subComp) {
-        createTabItemCom = true;
+        debuggerGroupContainer.setCreateTabItemCom(true);
         groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
         final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
