@@ -84,6 +84,15 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+  private boolean createTabItemCom = false;
+
+  public boolean getCreateTabItemCom(){
+    return createTabItemCom;
+  }
+
+  public void setCreateTabItemCom(boolean isCreated){
+    createTabItemCom = isCreated;
+  }
 
   public FileFieldEditor getNsimBinaryPathEditor(){
     return nsimBinaryPathEditor;
