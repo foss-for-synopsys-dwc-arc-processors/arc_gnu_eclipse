@@ -719,7 +719,7 @@ public class DebuggerGroupContainer extends Observable{
   }
 
   public static String getAttributeValueFromString(String string) {
-    if (string.length() > 0) {
+    if (string != null && string.length() > 0) {
       return string;
     }
     return null;
