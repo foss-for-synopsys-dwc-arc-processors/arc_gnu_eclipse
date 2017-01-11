@@ -195,7 +195,9 @@ public class DebuggerGroupContainer extends Observable{
     ftdiDevice = device;
   }
 
-  public String getOpenOcdConfigurationPath(){
+  /* This get-method is called with the word "access" because method
+   * "getOpenOcdConfigurationPath()" already exists. */
+  public String accessOpenOcdConfigurationPath(){
     return openOcdConfigurationPath;
   }
 
@@ -322,20 +324,20 @@ public class DebuggerGroupContainer extends Observable{
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
     gdbServerPortNumberText.setText(portNumber);
-    setHostName(configurationReader.getHostAddress());
+    hostName = configurationReader.getHostAddress();
     customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
-    setCustomGdbPath(configurationReader.getCustomGdbServerPath());
+    customGdbPath = configurationReader.getCustomGdbServerPath();
     ftdiDevice = configurationReader.getFtdiDevice();
     ftdiCore = configurationReader.getFtdiCore();
 
-    setOpenOcdBinaryPath(configurationReader.getOrDefault(
-        DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath()));
+    openOcdBinaryPath = configurationReader.getOrDefault(
+        DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
     openOcdConfigurationPath = configurationReader.getOrDefault(
         DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
     if (!ftdiDeviceCombo.isDisposed())
-      ftdiDeviceCombo.setText(getFtdiDevice().toString());
+      ftdiDeviceCombo.setText(ftdiDevice.toString());
     if (!ftdiCoreCombo.isDisposed())
-      ftdiCoreCombo.setText(getFtdiCore().toString());
+      ftdiCoreCombo.setText(ftdiCore.toString());
 
     jtagFrequency = configurationReader.getAshlingJtagFrequency();
     if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
@@ -355,14 +357,14 @@ public class DebuggerGroupContainer extends Observable{
     ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
         configurationReader.getAshlingTDescPath());
 
-    setExternalToolsNsimPath(configurationReader.getOrDefault(
-        DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath()));
-    setJitThread(configurationReader.getNsimJitThreads());
+    externalToolsNsimPath = configurationReader.getOrDefault(
+        DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath());
+    jitThread = configurationReader.getNsimJitThreads();
     launchExternalNsimInvalidInstructionException =
         configurationReader.getNsimSimulateInvalidInstructionExceptions();
     externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
     nsimTcfFilesLast = configurationReader.getNsimTcfPath();
-    setExternalNsimTcfToolsEnabled(configurationReader.getNsimUseTcf());
+    externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
     externalNsimMemoryExceptionToolsEnabled =
         configurationReader.getNsimSimulateMemoryExceptions();
     externalNsimHostLinkToolsEnabled = configurationReader.getNsimUseNsimHostlink();
@@ -387,12 +389,12 @@ public class DebuggerGroupContainer extends Observable{
   }
 
   private void updateFtdiCoreCombo() {
-    getFtdiCoreCombo().removeAll();
-    java.util.List<FtdiCore> cores = getFtdiDevice().getCores();
+    ftdiCoreCombo.removeAll();
+    java.util.List<FtdiCore> cores = ftdiDevice.getCores();
     String text = cores.get(0).toString();
     for (FtdiCore core : cores) {
-        getFtdiCoreCombo().add(core.toString());
-        if (getFtdiCore() == core) {
+        ftdiCoreCombo.add(core.toString());
+        if (ftdiCore == core) {
             /*
              * Should select current ftdiCore if it is present in cores list in order to be able
              * to initialize from configuration. Otherwise ftdiCore field will be rewritten to
@@ -401,37 +403,76 @@ public class DebuggerGroupContainer extends Observable{
             text = core.toString();
         }
     }
-    getFtdiCoreCombo().setText(text);
+    ftdiCoreCombo.setText(text);
   }
 
-  private void createTabItemCom(final Composite compositeCom) {
+  private String getOpenOcdConfigurationPath() {
+    final File rootDirectory = new File(openOcdBinaryPath)
+        .getParentFile().getParentFile();
+    final File scriptsDirectory = new File(rootDirectory,
+            "share" + File.separator + "openocd" + File.separator + "scripts");
+    String openOcdConfiguration = scriptsDirectory + File.separator + "board" + File.separator;
+
+    switch (ftdiDevice) {
+    case EM_SK_v1x:
+        openOcdConfiguration += "snps_em_sk_v1.cfg";
+        break;
+    case EM_SK_v21:
+        openOcdConfiguration += "snps_em_sk_v2.1.cfg";
+        break;
+    case EM_SK_v22:
+        openOcdConfiguration += "snps_em_sk_v2.2.cfg";
+        break;
+    case AXS101:
+        openOcdConfiguration += "snps_axs101.cfg";
+        break;
+    case AXS102:
+        openOcdConfiguration += "snps_axs102.cfg";
+        break;
+    case AXS103:
+        if (ftdiCore == FtdiCore.HS36) {
+            openOcdConfiguration += "snps_axs103_hs36.cfg";
+        } else {
+            openOcdConfiguration += "snps_axs103_hs38.cfg";
+        }
+        break;
+    case CUSTOM:
+        break;
+    default:
+        throw new IllegalArgumentException("Unknown enum value has been used");
+    }
+    return openOcdConfiguration;
+  }
+
+  public void createTabItemCom(final Composite compositeCom) {
+    createTabItemCom = true;
     Label label = new Label(compositeCom, SWT.LEFT);
     label.setText("Development system:");
-    setFtdiDeviceCombo(new Combo(compositeCom, SWT.None | SWT.READ_ONLY));// 1-2 and 1-3
+    ftdiDeviceCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
 
     GridData gridDataJtag = new GridData(GridData.BEGINNING);
     gridDataJtag.widthHint = 220;
     gridDataJtag.horizontalSpan = 2;
-    getFtdiDeviceCombo().setLayoutData(gridDataJtag);
+    ftdiDeviceCombo.setLayoutData(gridDataJtag);
 
     for (FtdiDevice i : FtdiDevice.values())
-        getFtdiDeviceCombo().add(i.toString());
-    getFtdiDeviceCombo().setText(getFtdiDevice().toString());
+        ftdiDeviceCombo.add(i.toString());
+    ftdiDeviceCombo.setText(ftdiDevice.toString());
 
-    getFtdiDeviceCombo().addModifyListener(new ModifyListener() {
+    ftdiDeviceCombo.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
             Combo combo = (Combo) event.widget;
-            setFtdiDevice(FtdiDevice.fromString(combo.getText()));
+            ftdiDevice = FtdiDevice.fromString(combo.getText());
 
-            if (getFtdiDevice() == FtdiDevice.CUSTOM)
-                getOpenOcdConfigurationPathEditor().setEnabled(true, compositeCom);
+            if (ftdiDevice == FtdiDevice.CUSTOM)
+                openOcdConfigurationPathEditor.setEnabled(true, compositeCom);
             else
-                getOpenOcdConfigurationPathEditor().setEnabled(false, compositeCom);
+                openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
 
-            if (getFtdiDevice().getCores().size() <= 1)
-                getFtdiCoreCombo().setEnabled(false);
+            if (ftdiDevice.getCores().size() <= 1)
+                ftdiCoreCombo.setEnabled(false);
             else
-                getFtdiCoreCombo().setEnabled(true);
+                ftdiCoreCombo.setEnabled(true);
 
             updateFtdiCoreCombo();
             setChanged();
@@ -441,26 +482,24 @@ public class DebuggerGroupContainer extends Observable{
 
     Label coreLabel = new Label(compositeCom, SWT.LEFT);
     coreLabel.setText("Target Core");
-    setFtdiCoreCombo(new Combo(compositeCom, SWT.None | SWT.READ_ONLY));
-    getFtdiCoreCombo().setLayoutData(gridDataJtag);
+    ftdiCoreCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);
+    ftdiCoreCombo.setLayoutData(gridDataJtag);
 
-    if (getFtdiDevice().getCores().size() <= 1)
-      getFtdiCoreCombo().setEnabled(false);
+    if (ftdiDevice.getCores().size() <= 1)
+      ftdiCoreCombo.setEnabled(false);
     else
-        getFtdiCoreCombo().setEnabled(true);
+      ftdiCoreCombo.setEnabled(true);
 
     updateFtdiCoreCombo();
 
-    getFtdiCoreCombo().addModifyListener(new ModifyListener() {
+    ftdiCoreCombo.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
             Combo combo = (Combo) event.widget;
             if (!combo.getText().isEmpty()) {
-                setFtdiCore(FtdiCore.fromString(combo.getText()));
+                ftdiCore = FtdiCore.fromString(combo.getText());
                 if (getFtdiDevice() != FtdiDevice.CUSTOM) {
-                    setOpenOcdConfigurationPath(
-                        getOpenOcdConfigurationPath());
-                    getOpenOcdConfigurationPathEditor().setStringValue(
-                        getOpenOcdConfigurationPath());
+                    openOcdConfigurationPath = getOpenOcdConfigurationPath();
+                    openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
                 }
             }
             setChanged();
@@ -472,13 +511,11 @@ public class DebuggerGroupContainer extends Observable{
         "OpenOCD configuration file",
             false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
     openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
-    openOcdConfigurationPathEditor.setStringValue(
-        getOpenOcdConfigurationPath());
+    openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
     openOcdConfigurationPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
-                setOpenOcdConfigurationPath(
-                    event.getNewValue().toString());
+                openOcdConfigurationPath = event.getNewValue().toString();
                 setChanged();
                 notifyObservers();
             }
@@ -486,7 +523,7 @@ public class DebuggerGroupContainer extends Observable{
     });
 
     if (openOcdConfigurationPathEditor != null) {
-        if (!getFtdiDeviceCombo().getText().equalsIgnoreCase(
+        if (!ftdiDeviceCombo.getText().equalsIgnoreCase(
                 FtdiDevice.CUSTOM.toString())) {
             openOcdConfigurationPathEditor.setEnabled(false, compositeCom);
         } else {
@@ -499,11 +536,11 @@ public class DebuggerGroupContainer extends Observable{
     // GDB server executable path
     customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
             compositeCustomGdb);
-    customGdbBinaryPathEditor.setStringValue(getCustomGdbPath());
+    customGdbBinaryPathEditor.setStringValue(customGdbPath);
     customGdbBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
-                setCustomGdbPath((String) event.getNewValue());
+                customGdbPath = (String) event.getNewValue();
                 setChanged();
                 notifyObservers();
             }
@@ -520,7 +557,7 @@ public class DebuggerGroupContainer extends Observable{
     if (hostName.isEmpty())
         gdbServerIpAddressText.setText(LaunchConfigurationConstants.DEFAULT_GDB_HOST);
     else
-        gdbServerIpAddressText.setText(getHostName());
+        gdbServerIpAddressText.setText(hostName);
     gdbServerIpAddressText.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
             setChanged();
@@ -565,11 +602,11 @@ public class DebuggerGroupContainer extends Observable{
     nsimBinaryPathEditor = new FileFieldEditor("nsimBinPath", "nSIM executable", false,
         StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
 
-    nsimBinaryPathEditor.setStringValue(getExternalToolsNsimPath());
+    nsimBinaryPathEditor.setStringValue(externalToolsNsimPath);
     nsimBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
     public void propertyChange(PropertyChangeEvent event) {
         if (event.getProperty() == "field_editor_value") {
-            setExternalToolsNsimPath((String) event.getNewValue());
+            externalToolsNsimPath = (String) event.getNewValue();
             setChanged();
             notifyObservers();
         }
@@ -581,14 +618,14 @@ public class DebuggerGroupContainer extends Observable{
     // Path to OpenOCD binary
     openOcdBinaryPathEditor = new FileFieldEditor("openocdBinaryPathEditor", "OpenOCD executable",
         false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
-    openOcdBinaryPathEditor.setStringValue(getOpenOcdBinaryPath());
+    openOcdBinaryPathEditor.setStringValue(openOcdBinaryPath);
     openOcdBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
-                setOpenOcdBinaryPath((String) event.getNewValue());
-                if (getFtdiDevice() != FtdiDevice.CUSTOM) {
-                    setOpenOcdConfigurationPath(getOpenOcdConfigurationPath());
-                    openOcdConfigurationPathEditor.setStringValue(getOpenOcdConfigurationPath());
+                openOcdBinaryPath = (String) event.getNewValue();
+                if (ftdiDevice != FtdiDevice.CUSTOM) {
+                    openOcdConfigurationPath = getOpenOcdConfigurationPath();
+                    openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
                 }
                 setChanged();
                 notifyObservers();
@@ -629,13 +666,13 @@ public class DebuggerGroupContainer extends Observable{
   }
 
   public void performApply(ConfigurationWriter configurationWriter) {
-    configurationWriter.setNsimPath(getExternalToolsNsimPath());
-    configurationWriter.setNsimJitThreads(getJitThread());
+    configurationWriter.setNsimPath(externalToolsNsimPath);
+    configurationWriter.setNsimJitThreads(jitThread);
     configurationWriter.setNsimSimulateInvalidInstructionExceptions(
         launchExternalNsimInvalidInstructionException);
     configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
     configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
-    configurationWriter.setNsimUseTcf(getExternalNsimTcfToolsEnabled());
+    configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
     configurationWriter.setNsimSimulateMemoryExceptions(
         externalNsimMemoryExceptionToolsEnabled);
     configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
@@ -652,7 +689,7 @@ public class DebuggerGroupContainer extends Observable{
     String str = gdbServerPortNumberText.getText();
     str = str.trim();
     configurationWriter.setGdbServerPort(str);
-    configurationWriter.setCustomGdbServerPath(getCustomGdbPath());
+    configurationWriter.setCustomGdbServerPath(customGdbPath);
 
     configurationWriter.setOpenOcdPath(openOcdBinaryPath);
     configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
