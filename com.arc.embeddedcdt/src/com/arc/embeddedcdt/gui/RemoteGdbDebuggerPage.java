@@ -16,19 +16,12 @@
 package com.arc.embeddedcdt.gui;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
 import org.eclipse.cdt.dsf.gdb.internal.ui.launching.GdbDebuggerPage;
 import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
-import org.eclipse.cdt.dsf.gdb.IGDBLaunchConfigurationConstants;
 import org.eclipse.cdt.internal.launch.remote.Messages;
-import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
@@ -52,7 +45,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.internal.Workbench;
@@ -62,7 +54,6 @@ import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.common.LaunchFileFormatVersionChecker;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
-import com.arc.embeddedcdt.common.FtdiCore;
 import com.arc.embeddedcdt.common.FtdiDevice;
 
 /**
@@ -527,7 +518,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     }
                 } else {
                     File configurationFile = new File(
-                        debuggerGroupContainer.getOpenOcdConfigurationPath());
+                        debuggerGroupContainer.accessOpenOcdConfigurationPath());
                     if (!configurationFile.exists()) {
                         setErrorMessage(
                                 "Default OpenOCD configuration file for this development system \'"
@@ -594,50 +585,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         return true;
     }
 
-    private String getOpenOcdConfigurationPath() {
-        final File rootDirectory = new File(debuggerGroupContainer.getOpenOcdBinaryPath())
-            .getParentFile().getParentFile();
-        final File scriptsDirectory = new File(rootDirectory,
-                "share" + File.separator + "openocd" + File.separator + "scripts");
-        String openOcdConfiguration = scriptsDirectory + File.separator + "board" + File.separator;
-
-        switch (debuggerGroupContainer.getFtdiDevice()) {
-        case EM_SK_v1x:
-            openOcdConfiguration += "snps_em_sk_v1.cfg";
-            break;
-        case EM_SK_v21:
-            openOcdConfiguration += "snps_em_sk_v2.1.cfg";
-            break;
-        case EM_SK_v22:
-            openOcdConfiguration += "snps_em_sk_v2.2.cfg";
-            break;
-        case AXS101:
-            openOcdConfiguration += "snps_axs101.cfg";
-            break;
-        case AXS102:
-            openOcdConfiguration += "snps_axs102.cfg";
-            break;
-        case AXS103:
-            if (debuggerGroupContainer.getFtdiCore() == FtdiCore.HS36) {
-                openOcdConfiguration += "snps_axs103_hs36.cfg";
-            } else {
-                openOcdConfiguration += "snps_axs103_hs38.cfg";
-            }
-            break;
-        case CUSTOM:
-            break;
-        default:
-            throw new IllegalArgumentException("Unknown enum value has been used");
-        }
-        return openOcdConfiguration;
-    }
-
     private void createTabItemCom(Composite subComp) {
-        debuggerGroupContainer.setCreateTabItemCom(true);
         groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
-        final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
-
+        final Composite compositeCom =
+            SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
+        debuggerGroupContainer.createTabItemCom(compositeCom);
     }
 
     private void createTabItemNsim(Composite subComp) {
