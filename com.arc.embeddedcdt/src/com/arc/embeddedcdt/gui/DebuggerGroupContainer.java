@@ -321,6 +321,12 @@ public class DebuggerGroupContainer extends Observable{
   }
 
   public void initializeFrom(ConfigurationReader configurationReader){
+    createTabItemCom = false;
+    createTabItemComAshling = false;
+    createTabItemNsim = false;
+    createTabItemGenericGdbServer = false;
+    createTabItemCustomGdb = false;
+
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
     gdbServerPortNumberText.setText(portNumber);
@@ -678,6 +684,11 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
     configurationWriter.setNsimUseJit(externalNsimJitEnabled);
 
+    configurationWriter.setFtdiDevice(DebuggerGroupContainer.getAttributeValueFromString(
+        getFtdiDevice().name()));
+    configurationWriter.setFtdiCore(DebuggerGroupContainer.getAttributeValueFromString(
+        getFtdiCore().name()));
+
     if (jtagFrequency != null)
         configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
     configurationWriter.setAshlingTDescPath(ashlingTdescPath);
@@ -690,6 +701,7 @@ public class DebuggerGroupContainer extends Observable{
     str = str.trim();
     configurationWriter.setGdbServerPort(str);
     configurationWriter.setCustomGdbServerPath(customGdbPath);
+    configurationWriter.setGdbPath(getGdbPath());
 
     configurationWriter.setOpenOcdPath(openOcdBinaryPath);
     configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);

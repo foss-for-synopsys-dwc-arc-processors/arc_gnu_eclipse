@@ -118,11 +118,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
         LaunchFileFormatVersionChecker.getInstance().check(configuration);
-        debuggerGroupContainer.setCreateTabItemCom(false);
-        debuggerGroupContainer.setCreateTabItemComAshling(false);
-        debuggerGroupContainer.setCreateTabItemNsim(false);
-        debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
-        debuggerGroupContainer.setCreateTabItemCustomGdb(false);
         super.initializeFrom(configuration);
         ConfigurationReader configurationReader = new ConfigurationReader(configuration);
         debuggerGroupContainer.initializeFrom(configurationReader);
@@ -175,13 +170,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
         /* Because there is no setAttribute(String, long) method. */
         configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
-        configurationWriter.setFtdiDevice(
-            DebuggerGroupContainer.getAttributeValueFromString(
-                debuggerGroupContainer.getFtdiDevice().name()));
-        configurationWriter.setFtdiCore(
-            DebuggerGroupContainer.getAttributeValueFromString(
-                debuggerGroupContainer.getFtdiCore().name()));
-        configurationWriter.setGdbPath(debuggerGroupContainer.getGdbPath());
         configurationWriter.setGdbServer(
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
 
