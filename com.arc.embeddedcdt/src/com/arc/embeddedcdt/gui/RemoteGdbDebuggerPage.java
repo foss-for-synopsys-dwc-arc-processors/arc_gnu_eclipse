@@ -64,7 +64,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    private FileFieldEditor nsimTcfPathEditor;
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
@@ -527,7 +526,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
                 if (!isValidFileFieldEditor(debuggerGroupContainer.getNsimBinaryPathEditor())
                         || (launchTcf.getSelection()
-                                && !isValidFileFieldEditor(nsimTcfPathEditor))
+                                && !isValidFileFieldEditor(
+                                    debuggerGroupContainer.getNsimTcfPathEditor()))
                         || (launchTcfPropertiesButton.getSelection()
                                 && !isValidFileFieldEditor(nsimPropertiesPathEditor))
                         || !workingDirectoryBlockNsim.isValid(configuration)) {
@@ -595,19 +595,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         launchTcfPropertiesButton.setLayoutData(gridData);
         launchTcfPropertiesButton.setText("Use TCF?");
 
-        nsimTcfPathEditor = new FileFieldEditor("nsimTcfPath", "nSIM TCF path", false,
-                StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
-        nsimTcfPathEditor.setStringValue(debuggerGroupContainer.getNsimPropertiesFilesLast());
-        nsimTcfPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                if (event.getProperty() == "field_editor_value") {
-                    debuggerGroupContainer.setNsimPropertiesFilesLast((String) event.getNewValue());
-                    updateLaunchConfigurationDialog();
-                }
-            }
-        });
-        nsimTcfPathEditor.setEnabled((debuggerGroupContainer.getExternalNsimTcfToolsEnabled()),
-            compositeNsim);
+        debuggerGroupContainer.createNsimTcfPathEditor(compositeNsim);
+        debuggerGroupContainer.getNsimTcfPathEditor().setEnabled(
+            debuggerGroupContainer.getExternalNsimTcfToolsEnabled(), compositeNsim);
 
         launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchTcf.setToolTipText("-propsfile=path");
@@ -635,12 +625,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             public void widgetSelected(SelectionEvent event) {
                 if (launchTcf.getSelection() == true) {
                     debuggerGroupContainer.setExternalNsimTcfToolsEnabled(true);
-                    nsimTcfPathEditor.setEnabled(true, compositeNsim);
+                    debuggerGroupContainer.getNsimTcfPathEditor().setEnabled(true, compositeNsim);
 
                 } else {
                     debuggerGroupContainer.setExternalNsimTcfToolsEnabled(false);
                     launchTcfPropertiesButton.setSelection(false);
-                    nsimTcfPathEditor.setEnabled(false, compositeNsim);
+                    debuggerGroupContainer.getNsimTcfPathEditor().setEnabled(false, compositeNsim);
                 }
                 updateLaunchConfigurationDialog();
             }
