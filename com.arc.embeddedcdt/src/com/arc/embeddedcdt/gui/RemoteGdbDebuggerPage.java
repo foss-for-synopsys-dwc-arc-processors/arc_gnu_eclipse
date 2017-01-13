@@ -66,7 +66,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    protected Button launchNsimJitProperties;
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
 
@@ -312,7 +311,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                             debuggerGroupContainer.getExternalNsimPropertiesEnabled());
                         debuggerGroupContainer.getLaunchTcfPropertiesButton().setSelection(
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
-                        launchNsimJitProperties.setSelection(
+                        debuggerGroupContainer.getLaunchNsimJitProperties().setSelection(
                             debuggerGroupContainer.getExternalNsimJitEnabled());
                         launchHostLinkProperties.setSelection(
                             debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
@@ -600,38 +599,14 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
 
-        launchNsimJitProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchNsimJitProperties.setSelection(debuggerGroupContainer.getExternalNsimJitEnabled());
-        launchNsimJitProperties.setText("JIT");
-        launchNsimJitProperties.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
         jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
-        jitThreadSpinner.setToolTipText("Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
+        jitThreadSpinner.setToolTipText(
+            "Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
         final Label jitLabel = new Label(compositeNsim, SWT.BEGINNING);
         jitLabel.setText("JIT threads");
         jitThreadSpinner.setValues(1, 1, 100, 10, 1, 0);
-
-        launchNsimJitProperties.addSelectionListener(new SelectionListener() {
-            public void widgetSelected(SelectionEvent event) {
-                if (launchNsimJitProperties.getSelection() == true) {
-                    debuggerGroupContainer.setExternalNsimJitEnabled(true);
-                    jitLabel.setEnabled(true);
-                    jitThreadSpinner.setEnabled(true);
-
-                } else {
-                    debuggerGroupContainer.setExternalNsimJitEnabled(false);
-                    jitLabel.setEnabled(false);
-                    jitThreadSpinner.setEnabled(false);
-                }
-                updateLaunchConfigurationDialog();
-            }
-
-            public void widgetDefaultSelected(SelectionEvent event) {
-            }
-
-        });
-
-        launchNsimJitProperties.setLayoutData(gridData);
-
+        debuggerGroupContainer.createLaunchNsimJitProperties(compositeNsim, gridData,
+            jitThreadSpinner, jitLabel);
         if (debuggerGroupContainer.getExternalNsimJitEnabled()) {
             jitLabel.setEnabled(true);
             jitThreadSpinner.setEnabled(true);

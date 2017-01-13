@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
@@ -70,6 +71,7 @@ public class DebuggerGroupContainer extends Observable{
   private Button launchInvalidInstructionExceptionProperties;
   private Button launchTcf;
   private Button launchTcfPropertiesButton;
+  private Button launchNsimJitProperties;
   private String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -96,6 +98,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public Button getLaunchNsimJitProperties(){
+    return launchNsimJitProperties;
+  }
 
   public Button getLaunchTcfPropertiesButton(){
     return launchTcfPropertiesButton;
@@ -432,6 +438,36 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+  }
+
+  public void createLaunchNsimJitProperties(Composite compositeNsim, GridData gridData,
+      final Spinner jitThreadSpinner, final Label jitLabel){
+    launchNsimJitProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchNsimJitProperties.setSelection(externalNsimJitEnabled);
+    launchNsimJitProperties.setText("JIT");
+    launchNsimJitProperties.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
+    launchNsimJitProperties.addSelectionListener(new SelectionListener() {
+        public void widgetSelected(SelectionEvent event) {
+            if (launchNsimJitProperties.getSelection() == true) {
+                externalNsimJitEnabled = true;
+                jitLabel.setEnabled(true);
+                jitThreadSpinner.setEnabled(true);
+
+            } else {
+                externalNsimJitEnabled = false;
+                jitLabel.setEnabled(false);
+                jitThreadSpinner.setEnabled(false);
+            }
+            setChanged();
+            notifyObservers();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+    });
+
+    launchNsimJitProperties.setLayoutData(gridData);
   }
 
   public void createLaunchTcf(final Composite compositeNsim, GridData gridData,
