@@ -58,6 +58,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor openOcdBinaryPathEditor;
   private FileFieldEditor openOcdConfigurationPathEditor;
   private FileFieldEditor nsimBinaryPathEditor;
+  private FileFieldEditor nsimTcfPathEditor;
   private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
   private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
   private Text gdbServerPortNumberText;
@@ -92,6 +93,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public FileFieldEditor getNsimTcfPathEditor(){
+    return nsimTcfPathEditor;
+  }
 
   public boolean getExternalNsimPropertiesEnabled(){
     return externalNsimPropertiesEnabled;
@@ -411,6 +416,21 @@ public class DebuggerGroupContainer extends Observable{
                 notifyObservers();
             }
         }
+    });
+  }
+
+  public void createNsimTcfPathEditor(Composite compositeNsim){
+    nsimTcfPathEditor = new FileFieldEditor("nsimTcfPath", "nSIM TCF path", false,
+        StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
+    nsimTcfPathEditor.setStringValue(nsimPropertiesFilesLast);
+    nsimTcfPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+      public void propertyChange(PropertyChangeEvent event) {
+        if (event.getProperty() == "field_editor_value") {
+          nsimPropertiesFilesLast = (String) event.getNewValue();
+          setChanged();
+          notifyObservers();
+        }
+      }
     });
   }
 
