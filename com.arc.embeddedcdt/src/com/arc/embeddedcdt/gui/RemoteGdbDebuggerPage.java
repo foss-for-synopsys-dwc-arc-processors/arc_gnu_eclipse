@@ -69,7 +69,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     protected Button nsimPropertiesBrowseButton;
-    private String nsimPropertiesFilesLast = "";
     protected Button launchTcf;
     private boolean externalNsimPropertiesEnabled = true;
     protected Button launchTcfPropertiesButton;
@@ -128,7 +127,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
         externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
-        nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
 
         externalToolsCombo.setText(gdbServer.toString());
 
@@ -174,7 +172,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
 
         configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
-        configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
             debuggerGroupContainer.setHostName(
                 debuggerGroupContainer.getTextFromGdbServerIpAddressText());
@@ -603,11 +600,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         nsimTcfPathEditor = new FileFieldEditor("nsimTcfPath", "nSIM TCF path", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
-        nsimTcfPathEditor.setStringValue(nsimPropertiesFilesLast);
+        nsimTcfPathEditor.setStringValue(debuggerGroupContainer.getNsimPropertiesFilesLast());
         nsimTcfPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    nsimPropertiesFilesLast = (String) event.getNewValue();
+                    debuggerGroupContainer.setNsimPropertiesFilesLast((String) event.getNewValue());
                     updateLaunchConfigurationDialog();
                 }
             }
@@ -624,11 +621,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         launchTcf.setText("Use nSIM properties file?");
         nsimPropertiesPathEditor = new FileFieldEditor("nsimPropertiesPath", "nSIM properties file", false,
                 StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
-        nsimPropertiesPathEditor.setStringValue(nsimPropertiesFilesLast);
+        nsimPropertiesPathEditor.setStringValue(debuggerGroupContainer.getNsimPropertiesFilesLast());
         nsimPropertiesPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
                 if (event.getProperty() == "field_editor_value") {
-                    nsimPropertiesFilesLast = (String) event.getNewValue();
+                    debuggerGroupContainer.setNsimPropertiesFilesLast((String) event.getNewValue());
                     updateLaunchConfigurationDialog();
                 }
             }

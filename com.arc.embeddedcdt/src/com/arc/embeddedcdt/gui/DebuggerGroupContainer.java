@@ -72,6 +72,7 @@ public class DebuggerGroupContainer extends Observable{
   private String externalToolsNsimPath = "";
   private String jitThread = "1";
   private String nsimTcfFilesLast = "";
+  private String nsimPropertiesFilesLast = "";
   private String ashlingTdescPath = "";
   private String ashlingXmlPath = "";
   private String externalToolsAshlingPath = "";
@@ -90,6 +91,14 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public String getNsimPropertiesFilesLast(){
+    return nsimPropertiesFilesLast;
+  }
+
+  public void setNsimPropertiesFilesLast(String nsimPropertiesFilesLast){
+    this.nsimPropertiesFilesLast = nsimPropertiesFilesLast;
+  }
 
   public String getGdbPath(){
     return gdbPath;
@@ -370,6 +379,7 @@ public class DebuggerGroupContainer extends Observable{
         configurationReader.getNsimSimulateInvalidInstructionExceptions();
     externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
     nsimTcfFilesLast = configurationReader.getNsimTcfPath();
+    nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
     externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
     externalNsimMemoryExceptionToolsEnabled =
         configurationReader.getNsimSimulateMemoryExceptions();
@@ -678,6 +688,7 @@ public class DebuggerGroupContainer extends Observable{
         launchExternalNsimInvalidInstructionException);
     configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
     configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
+    configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
     configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
     configurationWriter.setNsimSimulateMemoryExceptions(
         externalNsimMemoryExceptionToolsEnabled);
