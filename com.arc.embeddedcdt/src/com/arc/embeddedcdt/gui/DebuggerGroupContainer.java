@@ -68,6 +68,7 @@ public class DebuggerGroupContainer extends Observable{
   private String customGdbCommandLineArguments = null;
   private Button launchEnableExceptionProperties;
   private Button launchInvalidInstructionExceptionProperties;
+  private Button launchTcf;
   private String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -94,6 +95,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public Button getLaunchTcf(){
+    return launchTcf;
+  }
 
   public FileFieldEditor getNsimPropertiesPathEditor(){
     return nsimPropertiesPathEditor;
@@ -421,6 +426,35 @@ public class DebuggerGroupContainer extends Observable{
                 notifyObservers();
             }
         }
+    });
+  }
+
+  public void createLaunchTcf(final Composite compositeNsim, GridData gridData,
+      final Button launchTcfPropertiesButton){
+    launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchTcf.setToolTipText("-propsfile=path");
+    launchTcf.setSelection(externalNsimPropertiesEnabled);
+    launchTcf.setLayoutData(gridData);
+    launchTcf.setText("Use nSIM properties file?");
+
+    launchTcf.addSelectionListener(new SelectionListener() {
+        public void widgetSelected(SelectionEvent event) {
+            if (launchTcf.getSelection() == true) {
+                externalNsimTcfToolsEnabled = true;
+                nsimTcfPathEditor.setEnabled(true, compositeNsim);
+
+            } else {
+                externalNsimTcfToolsEnabled = false;
+                launchTcfPropertiesButton.setSelection(false);
+                nsimTcfPathEditor.setEnabled(false, compositeNsim);
+            }
+            setChanged();
+            notifyObservers();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
     });
   }
 
