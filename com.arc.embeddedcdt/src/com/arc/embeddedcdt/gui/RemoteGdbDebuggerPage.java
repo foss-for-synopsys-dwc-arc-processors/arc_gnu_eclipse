@@ -67,7 +67,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     protected Button launchHostLinkProperties;
-    protected Button launchMemoryExceptionProperties;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -315,7 +314,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                             debuggerGroupContainer.getExternalNsimJitEnabled());
                         launchHostLinkProperties.setSelection(
                             debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
-                        launchMemoryExceptionProperties.setSelection(
+                        debuggerGroupContainer.getLaunchMemoryExceptionProperties().setSelection(
                             debuggerGroupContainer.getExternalNsimMemoryExceptionToolsEnabled());
                         debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
 
@@ -653,24 +652,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchHostLinkProperties.setLayoutData(gridDataNsim);
 
-        launchMemoryExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchMemoryExceptionProperties.setToolTipText("Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
-        launchMemoryExceptionProperties.setSelection(
-            debuggerGroupContainer.getExternalNsimMemoryExceptionToolsEnabled());
-        launchMemoryExceptionProperties.setText("Memory Exception");
-        launchMemoryExceptionProperties.addSelectionListener(new SelectionListener() {
-            public void widgetSelected(SelectionEvent event) {
-                debuggerGroupContainer.setExternalNsimMemoryExceptionToolsEnabled(
-                    launchMemoryExceptionProperties.getSelection());
-                updateLaunchConfigurationDialog();
-            }
-
-            public void widgetDefaultSelected(SelectionEvent event) {
-            }
-
-        });
-
-        launchMemoryExceptionProperties.setLayoutData(gridDataNsim);
+        debuggerGroupContainer.createLaunchMemoryExceptionProperties(compositeNsim, gridDataNsim);
 
         debuggerGroupContainer.createLaunchEnableExceptionPropertiesButton(compositeNsim,
             gridDataNsim);

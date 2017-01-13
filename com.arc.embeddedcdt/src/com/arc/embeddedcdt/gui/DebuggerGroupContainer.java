@@ -72,6 +72,7 @@ public class DebuggerGroupContainer extends Observable{
   private Button launchTcf;
   private Button launchTcfPropertiesButton;
   private Button launchNsimJitProperties;
+  private Button launchMemoryExceptionProperties;
   private String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -98,6 +99,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public Button getLaunchMemoryExceptionProperties(){
+    return launchMemoryExceptionProperties;
+  }
 
   public Button getLaunchNsimJitProperties(){
     return launchNsimJitProperties;
@@ -687,6 +692,27 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+  }
+
+  public void createLaunchMemoryExceptionProperties(Composite compositeNsim, GridData gridDataNsim){
+    launchMemoryExceptionProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchMemoryExceptionProperties.setToolTipText(
+        "Simulate (1) or break (0) on memory exception (-p memory_exception_interrupt={0,1})");
+    launchMemoryExceptionProperties.setSelection(externalNsimMemoryExceptionToolsEnabled);
+    launchMemoryExceptionProperties.setText("Memory Exception");
+    launchMemoryExceptionProperties.addSelectionListener(new SelectionListener() {
+        public void widgetSelected(SelectionEvent event) {
+            externalNsimMemoryExceptionToolsEnabled = launchMemoryExceptionProperties.getSelection();
+            setChanged();
+            notifyObservers();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+    });
+
+    launchMemoryExceptionProperties.setLayoutData(gridDataNsim);
   }
 
   public void createLaunchTcfPropertiesButton(final Composite compositeNsim, GridData gridData){
