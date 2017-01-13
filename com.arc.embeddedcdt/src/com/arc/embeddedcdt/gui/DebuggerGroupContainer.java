@@ -86,11 +86,20 @@ public class DebuggerGroupContainer extends Observable{
   private boolean externalNsimMemoryExceptionToolsEnabled = true;
   private boolean externalNsimHostLinkToolsEnabled = true;
   private boolean externalNsimJitEnabled = true;
+  private boolean externalNsimPropertiesEnabled = true;
   private boolean createTabItemCom = false;
   private boolean createTabItemNsim = false;
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public boolean getExternalNsimPropertiesEnabled(){
+    return externalNsimPropertiesEnabled;
+  }
+
+  public void setExternalNsimPropertiesEnabled(boolean areEnabled){
+    externalNsimPropertiesEnabled = areEnabled;
+  }
 
   public String getNsimPropertiesFilesLast(){
     return nsimPropertiesFilesLast;
@@ -380,6 +389,7 @@ public class DebuggerGroupContainer extends Observable{
     externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
     nsimTcfFilesLast = configurationReader.getNsimTcfPath();
     nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
+    externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
     externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
     externalNsimMemoryExceptionToolsEnabled =
         configurationReader.getNsimSimulateMemoryExceptions();
@@ -694,6 +704,7 @@ public class DebuggerGroupContainer extends Observable{
         externalNsimMemoryExceptionToolsEnabled);
     configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
     configurationWriter.setNsimUseJit(externalNsimJitEnabled);
+    configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
 
     configurationWriter.setFtdiDevice(DebuggerGroupContainer.getAttributeValueFromString(
         getFtdiDevice().name()));

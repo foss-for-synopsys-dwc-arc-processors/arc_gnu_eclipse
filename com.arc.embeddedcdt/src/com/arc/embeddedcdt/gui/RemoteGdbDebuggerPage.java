@@ -70,7 +70,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
     protected Button nsimPropertiesBrowseButton;
     protected Button launchTcf;
-    private boolean externalNsimPropertiesEnabled = true;
     protected Button launchTcfPropertiesButton;
     protected Button launchNsimJitProperties;
     protected Button launchHostLinkProperties;
@@ -126,7 +125,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gdbServer = configurationReader.getGdbServer();
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
-        externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
 
         externalToolsCombo.setText(gdbServer.toString());
 
@@ -171,7 +169,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         configurationWriter.setGdbServer(
             DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
 
-        configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
             debuggerGroupContainer.setHostName(
                 debuggerGroupContainer.getTextFromGdbServerIpAddressText());
@@ -316,7 +313,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                             groupNsim.dispose();
                         createTabItemNsim(subComp);
 
-                        launchTcf.setSelection(externalNsimPropertiesEnabled);
+                        launchTcf.setSelection(
+                            debuggerGroupContainer.getExternalNsimPropertiesEnabled());
                         launchTcfPropertiesButton.setSelection(
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
                         launchNsimJitProperties.setSelection(
@@ -614,7 +612,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
         launchTcf.setToolTipText("-propsfile=path");
-        launchTcf.setSelection(externalNsimPropertiesEnabled);
+        launchTcf.setSelection(debuggerGroupContainer.getExternalNsimPropertiesEnabled());
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
         launchTcf.setLayoutData(gridData);
@@ -631,7 +629,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         });
 
-        nsimPropertiesPathEditor.setEnabled((externalNsimPropertiesEnabled), compositeNsim);
+        nsimPropertiesPathEditor.setEnabled(
+            debuggerGroupContainer.getExternalNsimPropertiesEnabled(), compositeNsim);
 
         launchTcf.addSelectionListener(new SelectionListener() {
             public void widgetSelected(SelectionEvent event) {
@@ -655,10 +654,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
             public void widgetSelected(SelectionEvent event) {
                 if (launchTcfPropertiesButton.getSelection() == true) {
-                    externalNsimPropertiesEnabled = true;
+                    debuggerGroupContainer.setExternalNsimPropertiesEnabled(true);
                     nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
                 } else {
-                    externalNsimPropertiesEnabled = false;
+                    debuggerGroupContainer.setExternalNsimPropertiesEnabled(false);
                     nsimPropertiesPathEditor.setEnabled(false, compositeNsim);
                 }
                 updateLaunchConfigurationDialog();
