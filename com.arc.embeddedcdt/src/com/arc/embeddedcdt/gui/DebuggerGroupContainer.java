@@ -59,6 +59,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor openOcdConfigurationPathEditor;
   private FileFieldEditor nsimBinaryPathEditor;
   private FileFieldEditor nsimTcfPathEditor;
+  private FileFieldEditor nsimPropertiesPathEditor;
   private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
   private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
   private Text gdbServerPortNumberText;
@@ -93,6 +94,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public FileFieldEditor getNsimPropertiesPathEditor(){
+    return nsimPropertiesPathEditor;
+  }
 
   public FileFieldEditor getNsimTcfPathEditor(){
     return nsimTcfPathEditor;
@@ -424,6 +429,21 @@ public class DebuggerGroupContainer extends Observable{
         StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
     nsimTcfPathEditor.setStringValue(nsimPropertiesFilesLast);
     nsimTcfPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
+      public void propertyChange(PropertyChangeEvent event) {
+        if (event.getProperty() == "field_editor_value") {
+          nsimPropertiesFilesLast = (String) event.getNewValue();
+          setChanged();
+          notifyObservers();
+        }
+      }
+    });
+  }
+
+  public void createNsimPropertiesPathEditor(Composite compositeNsim){
+    nsimPropertiesPathEditor = new FileFieldEditor("nsimPropertiesPath", "nSIM properties file",
+        false, StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
+    nsimPropertiesPathEditor.setStringValue(nsimPropertiesFilesLast);
+    nsimPropertiesPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
       public void propertyChange(PropertyChangeEvent event) {
         if (event.getProperty() == "field_editor_value") {
           nsimPropertiesFilesLast = (String) event.getNewValue();
