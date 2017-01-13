@@ -69,6 +69,7 @@ public class DebuggerGroupContainer extends Observable{
   private Button launchEnableExceptionProperties;
   private Button launchInvalidInstructionExceptionProperties;
   private Button launchTcf;
+  private Button launchTcfPropertiesButton;
   private String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -95,6 +96,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public Button getLaunchTcfPropertiesButton(){
+    return launchTcfPropertiesButton;
+  }
 
   public Button getLaunchTcf(){
     return launchTcf;
@@ -645,6 +650,34 @@ public class DebuggerGroupContainer extends Observable{
                 notifyObservers();
             }
         }
+    });
+  }
+
+  public void createLaunchTcfPropertiesButton(final Composite compositeNsim, GridData gridData){
+    launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchTcfPropertiesButton.setToolTipText(
+        "Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
+    launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+    launchTcfPropertiesButton.setLayoutData(gridData);
+    launchTcfPropertiesButton.setText("Use TCF?");
+
+    launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
+
+        public void widgetSelected(SelectionEvent event) {
+            if (launchTcfPropertiesButton.getSelection() == true) {
+                externalNsimPropertiesEnabled = true;
+                nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
+            } else {
+                externalNsimPropertiesEnabled = false;
+                nsimPropertiesPathEditor.setEnabled(false, compositeNsim);
+            }
+            setChanged();
+            notifyObservers();
+        }
+
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
     });
   }
 
