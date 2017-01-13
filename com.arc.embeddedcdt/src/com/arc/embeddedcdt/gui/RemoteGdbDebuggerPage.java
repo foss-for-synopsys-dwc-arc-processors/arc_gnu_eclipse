@@ -68,7 +68,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private FileFieldEditor nsimPropertiesPathEditor;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    protected Button nsimPropertiesBrowseButton;
     protected Button launchTcf;
     protected Button launchTcfPropertiesButton;
     protected Button launchNsimJitProperties;
