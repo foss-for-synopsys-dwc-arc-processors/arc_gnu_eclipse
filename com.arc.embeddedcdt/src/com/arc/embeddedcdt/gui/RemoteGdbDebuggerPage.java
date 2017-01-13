@@ -66,7 +66,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    protected Button launchTcfPropertiesButton;
     protected Button launchNsimJitProperties;
     protected Button launchHostLinkProperties;
     protected Button launchMemoryExceptionProperties;
@@ -311,7 +310,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                         debuggerGroupContainer.getLaunchTcf().setSelection(
                             debuggerGroupContainer.getExternalNsimPropertiesEnabled());
-                        launchTcfPropertiesButton.setSelection(
+                        debuggerGroupContainer.getLaunchTcfPropertiesButton().setSelection(
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
                         launchNsimJitProperties.setSelection(
                             debuggerGroupContainer.getExternalNsimJitEnabled());
@@ -526,7 +525,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         || (debuggerGroupContainer.getLaunchTcf().getSelection()
                                 && !isValidFileFieldEditor(
                                     debuggerGroupContainer.getNsimTcfPathEditor()))
-                        || (launchTcfPropertiesButton.getSelection()
+                        || (debuggerGroupContainer.getLaunchTcfPropertiesButton().getSelection()
                                 && !isValidFileFieldEditor(
                                     debuggerGroupContainer.getNsimPropertiesPathEditor()))
                         || !workingDirectoryBlockNsim.isValid(configuration)) {
@@ -584,16 +583,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         GridData gridData = new GridData();
 
         debuggerGroupContainer.createNsimBinaryPathEditor(compositeNsim);
-
-        launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchTcfPropertiesButton.setToolTipText("Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
-        launchTcfPropertiesButton.setSelection(
-            debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
-        gridData = new GridData(SWT.BEGINNING);
-        gridData.horizontalSpan = 3;
-        launchTcfPropertiesButton.setLayoutData(gridData);
-        launchTcfPropertiesButton.setText("Use TCF?");
-
         debuggerGroupContainer.createNsimTcfPathEditor(compositeNsim);
         debuggerGroupContainer.getNsimTcfPathEditor().setEnabled(
             debuggerGroupContainer.getExternalNsimTcfToolsEnabled(), compositeNsim);
@@ -602,27 +591,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             debuggerGroupContainer.getExternalNsimPropertiesEnabled(), compositeNsim);
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
-        debuggerGroupContainer.createLaunchTcf(compositeNsim, gridData, launchTcfPropertiesButton);
-        launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
 
-            public void widgetSelected(SelectionEvent event) {
-                if (launchTcfPropertiesButton.getSelection() == true) {
-                    debuggerGroupContainer.setExternalNsimPropertiesEnabled(true);
-                    debuggerGroupContainer.getNsimPropertiesPathEditor().setEnabled(true,
-                        compositeNsim);
-                } else {
-                    debuggerGroupContainer.setExternalNsimPropertiesEnabled(false);
-                    debuggerGroupContainer.getNsimPropertiesPathEditor().setEnabled(false,
-                        compositeNsim);
-                }
-                updateLaunchConfigurationDialog();
-            }
-
-            public void widgetDefaultSelected(SelectionEvent event) {
-            }
-
-        });
-
+        debuggerGroupContainer.createLaunchTcf(compositeNsim, gridData,
+            debuggerGroupContainer.getLaunchTcfPropertiesButton());
+        debuggerGroupContainer.createLaunchTcfPropertiesButton(compositeNsim, gridData);
         // JIT
 
         gridData = new GridData(SWT.BEGINNING);
