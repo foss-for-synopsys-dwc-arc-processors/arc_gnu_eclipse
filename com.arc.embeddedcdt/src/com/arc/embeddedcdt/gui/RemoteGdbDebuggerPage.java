@@ -66,7 +66,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
-    protected Button launchHostLinkProperties;
 
     protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
@@ -312,7 +311,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                             debuggerGroupContainer.getExternalNsimTcfToolsEnabled());
                         debuggerGroupContainer.getLaunchNsimJitProperties().setSelection(
                             debuggerGroupContainer.getExternalNsimJitEnabled());
-                        launchHostLinkProperties.setSelection(
+                        debuggerGroupContainer.getLaunchHostLinkProperties().setSelection(
                             debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
                         debuggerGroupContainer.getLaunchMemoryExceptionProperties().setSelection(
                             debuggerGroupContainer.getExternalNsimMemoryExceptionToolsEnabled());
@@ -633,24 +632,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         GridData gridDataNsim = new GridData(SWT.BEGINNING);
         gridDataNsim.horizontalSpan = 2;
 
-        launchHostLinkProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-        launchHostLinkProperties.setToolTipText("Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property works only if the application that is being simulated is compiled with the ARC GCC compiler.");
-        launchHostLinkProperties.setSelection(
-            debuggerGroupContainer.getExternalNsimHostLinkToolsEnabled());
-        launchHostLinkProperties.setText("GNU host I/O support");
-        launchHostLinkProperties.addSelectionListener(new SelectionListener() {
-            public void widgetSelected(SelectionEvent event) {
-                debuggerGroupContainer.setExternalNsimHostLinkToolsEnabled(
-                    launchHostLinkProperties.getSelection());
-                updateLaunchConfigurationDialog();
-            }
-
-            public void widgetDefaultSelected(SelectionEvent event) {
-            }
-
-        });
-
-        launchHostLinkProperties.setLayoutData(gridDataNsim);
+        debuggerGroupContainer.createLaunchHostLinkProperties(compositeNsim, gridDataNsim);
 
         debuggerGroupContainer.createLaunchMemoryExceptionProperties(compositeNsim, gridDataNsim);
 
