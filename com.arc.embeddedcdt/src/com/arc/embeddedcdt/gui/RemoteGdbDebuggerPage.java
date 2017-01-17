@@ -67,7 +67,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
     private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
 
-    protected Spinner jitThreadSpinner;
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
     public RemoteGdbDebuggerPage() {
@@ -578,6 +577,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final Composite compositeNsim = SWTFactory.createComposite(groupNsim, 3, 5, GridData.FILL_BOTH);
 
         GridData gridData = new GridData();
+        GridData gridData2 = new GridData();
 
         debuggerGroupContainer.createNsimBinaryPathEditor(compositeNsim);
         debuggerGroupContainer.createNsimTcfPathEditor(compositeNsim);
@@ -597,37 +597,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         gridData = new GridData(SWT.BEGINNING);
         gridData.horizontalSpan = 3;
 
-        jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
-        jitThreadSpinner.setToolTipText(
-            "Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
-        final Label jitLabel = new Label(compositeNsim, SWT.BEGINNING);
-        jitLabel.setText("JIT threads");
-        jitThreadSpinner.setValues(1, 1, 100, 10, 1, 0);
-        debuggerGroupContainer.createLaunchNsimJitProperties(compositeNsim, gridData,
-            jitThreadSpinner, jitLabel);
-        if (debuggerGroupContainer.getExternalNsimJitEnabled()) {
-            jitLabel.setEnabled(true);
-            jitThreadSpinner.setEnabled(true);
-        }
-        else {
-            jitLabel.setEnabled(false);
-            jitThreadSpinner.setEnabled(false);
-        }
+        gridData2 = new GridData(SWT.BEGINNING);
+        gridData2.horizontalSpan = 2;
 
-        if (!debuggerGroupContainer.getJitThread().equals("1"))
-            jitThreadSpinner.setSelection(Integer.parseInt(debuggerGroupContainer.getJitThread()));
-        else
-            jitThreadSpinner.setSelection(1);
-
-        jitThreadSpinner.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                debuggerGroupContainer.setJitThread(jitThreadSpinner.getText());
-                updateLaunchConfigurationDialog();
-            }
-        });
-        gridData = new GridData(SWT.BEGINNING);
-        gridData.horizontalSpan = 2;
-        jitLabel.setLayoutData(gridData);
+        debuggerGroupContainer.createJitThreadSpinner(compositeNsim, gridData, gridData2);
 
         GridData gridDataNsim = new GridData(SWT.BEGINNING);
         gridDataNsim.horizontalSpan = 2;
