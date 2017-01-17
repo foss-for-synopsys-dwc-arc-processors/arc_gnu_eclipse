@@ -73,6 +73,7 @@ public class DebuggerGroupContainer extends Observable{
   private Button launchTcfPropertiesButton;
   private Button launchNsimJitProperties;
   private Button launchMemoryExceptionProperties;
+  private Button launchHostLinkProperties;
   private String jtagFrequency = null;
   private String hostName = "";
   private String portNumber = "";
@@ -99,6 +100,10 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public Button getLaunchHostLinkProperties(){
+    return launchHostLinkProperties;
+  }
 
   public Button getLaunchMemoryExceptionProperties(){
     return launchMemoryExceptionProperties;
@@ -443,6 +448,28 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+  }
+
+  public void createLaunchHostLinkProperties(Composite compositeNsim, GridData gridDataNsim) {
+    launchHostLinkProperties = new Button(compositeNsim, SWT.CHECK); // $NON-NLS-1$ //6-3
+    launchHostLinkProperties.setToolTipText(
+        "Enable or disable nSIM GNU host I/O support (-p nsim_emt={0,1}). The nsim_emt property"
+            + " works only if the application that is being simulated is compiled with the ARC GCC"
+            + " compiler.");
+    launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
+    launchHostLinkProperties.setText("GNU host I/O support");
+    launchHostLinkProperties.addSelectionListener(new SelectionListener() {
+      public void widgetSelected(SelectionEvent event) {
+        externalNsimHostLinkToolsEnabled = launchHostLinkProperties.getSelection();
+        setChanged();
+        notifyObservers();
+      }
+
+      public void widgetDefaultSelected(SelectionEvent event) {}
+
+    });
+
+    launchHostLinkProperties.setLayoutData(gridDataNsim);
   }
 
   public void createLaunchNsimJitProperties(Composite compositeNsim, GridData gridData,
