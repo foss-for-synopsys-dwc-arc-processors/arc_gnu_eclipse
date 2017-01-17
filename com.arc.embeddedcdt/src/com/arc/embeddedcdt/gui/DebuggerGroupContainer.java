@@ -52,6 +52,7 @@ public class DebuggerGroupContainer extends Observable{
   private Combo jtagFrequencyCombo;
   private Combo ftdiDeviceCombo;
   private Combo ftdiCoreCombo;
+  private Spinner jitThreadSpinner;
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
   private FileFieldEditor ashlingBinaryPathEditor;
@@ -448,6 +449,44 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+  }
+
+  public void createJitThreadSpinner(Composite compositeNsim, GridData gridData, GridData gridData2){
+    gridData = new GridData(SWT.BEGINNING);
+    gridData.horizontalSpan = 3;
+
+    jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
+    jitThreadSpinner.setToolTipText(
+        "Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
+    final Label jitLabel = new Label(compositeNsim, SWT.BEGINNING);
+    jitLabel.setText("JIT threads");
+    jitThreadSpinner.setValues(1, 1, 100, 10, 1, 0);
+    createLaunchNsimJitProperties(compositeNsim, gridData, jitThreadSpinner, jitLabel);
+    if (externalNsimJitEnabled) {
+        jitLabel.setEnabled(true);
+        jitThreadSpinner.setEnabled(true);
+    }
+    else {
+        jitLabel.setEnabled(false);
+        jitThreadSpinner.setEnabled(false);
+    }
+
+    if (!jitThread.equals("1"))
+        jitThreadSpinner.setSelection(Integer.parseInt(jitThread));
+    else
+        jitThreadSpinner.setSelection(1);
+
+    jitThreadSpinner.addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            jitThread = jitThreadSpinner.getText();
+            setChanged();
+            notifyObservers();
+        }
+    });
+    
+    gridData2 = new GridData(SWT.BEGINNING);
+    gridData2.horizontalSpan = 2;
+    jitLabel.setLayoutData(gridData2);
   }
 
   public void createLaunchHostLinkProperties(Composite compositeNsim, GridData gridDataNsim) {
