@@ -63,7 +63,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
-    private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
 
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
@@ -107,13 +106,11 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         LaunchFileFormatVersionChecker.getInstance().check(configuration);
         super.initializeFrom(configuration);
         ConfigurationReader configurationReader = new ConfigurationReader(configuration);
-        debuggerGroupContainer.initializeFrom(configurationReader);
+        debuggerGroupContainer.initializeFrom(configurationReader, configuration);
         debuggerGroupContainer.setGdbPath(configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath()));
         fGDBCommandText.setText(debuggerGroupContainer.getGdbPath());
         debuggerGroupContainer.setGdbServer(configurationReader.getGdbServer());
-
-        workingDirectoryBlockNsim.initializeFrom(configuration);
 
         externalToolsCombo.setText(debuggerGroupContainer.getGdbServer().toString());
 
@@ -141,12 +138,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final String programName = configurationReader.getProgramName();
         configuration.setAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME,
             programName.replace('\\', '/'));
-        if (!DebuggerGroupContainer.groupNsim.isDisposed()) {
-            workingDirectoryBlockNsim.performApply(configuration);
-        }
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
-        debuggerGroupContainer.performApply(configurationWriter);
+        debuggerGroupContainer.performApply(configurationWriter, configuration);
         String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
         configurationWriter.setNsimDefaultPath(nsimDefaultPath);
         debuggerGroupContainer.setGdbPath(fGDBCommandText.getText());
@@ -514,7 +508,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         || (debuggerGroupContainer.getLaunchTcfPropertiesButton().getSelection()
                                 && !isValidFileFieldEditor(
                                     debuggerGroupContainer.getNsimPropertiesPathEditor()))
-                        || !workingDirectoryBlockNsim.isValid(configuration)) {
+                        || !debuggerGroupContainer.getWorkingDirectoryBlockNsim().isValid(
+                            configuration)) {
                      return false;
                 }
                 break;
@@ -602,7 +597,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.createLaunchEnableExceptionPropertiesButton(compositeNsim,
             gridDataNsim);
 
-        workingDirectoryBlockNsim.createControl(compositeNsim);
+        debuggerGroupContainer.getWorkingDirectoryBlockNsim().createControl(compositeNsim);
     }
 
     /*
@@ -621,14 +616,14 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public void setLaunchConfigurationDialog(ILaunchConfigurationDialog dialog) {
         super.setLaunchConfigurationDialog(dialog);
-        workingDirectoryBlockNsim.setLaunchConfigurationDialog(dialog);
+        debuggerGroupContainer.getWorkingDirectoryBlockNsim().setLaunchConfigurationDialog(dialog);
     }
 
     @Override
     public String getErrorMessage() {
         String errorMessage = super.getErrorMessage();
         if (errorMessage == null && !DebuggerGroupContainer.groupNsim.isDisposed()) {
-            return workingDirectoryBlockNsim.getErrorMessage();
+            return debuggerGroupContainer.getWorkingDirectoryBlockNsim().getErrorMessage();
         }
         return errorMessage;
     }
