@@ -103,6 +103,7 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+  static Group groupGenericGdbServer;
   static Group groupNsim;
   static Group groupComAshling;
   static Group groupCom;
