@@ -165,7 +165,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         }
     }
 
-    static Group groupCom;
     static Group groupComAshling;
     static Group groupNsim;
     static Group groupGenericGdbServer;
@@ -231,15 +230,15 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     groupComCustomGdb.dispose();
 
                     if (!debuggerGroupContainer.getCreateTabItemCom()) {
-                        if (!groupCom.isDisposed())
-                            groupCom.dispose();
+                        if (!DebuggerGroupContainer.groupCom.isDisposed())
+                            DebuggerGroupContainer.groupCom.dispose();
 
                         createTabItemCom(subComp);
                     }
-                    groupCom.setText(debuggerGroupContainer.getGdbServer().toString());
+                    DebuggerGroupContainer.groupCom.setText(debuggerGroupContainer.getGdbServer().toString());
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
-                    groupCom.setVisible(true);
+                    DebuggerGroupContainer.groupCom.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
                 } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.JTAG_ASHLING) {
@@ -250,7 +249,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     if (groupGenericGdbServer != null) {
                         groupGenericGdbServer.dispose();
                     }
-                    groupCom.dispose();
+                    DebuggerGroupContainer.groupCom.dispose();
                     groupComCustomGdb.dispose();
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
@@ -290,7 +289,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         }
                     }
 
-                    groupCom.dispose();
+                    DebuggerGroupContainer.groupCom.dispose();
                     groupComAshling.dispose();
                     groupComCustomGdb.dispose();
                     if (groupGenericGdbServer != null) {
@@ -322,7 +321,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
 
                 } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.GENERIC_GDBSERVER) {
-                    groupCom.dispose();
+                    DebuggerGroupContainer.groupCom.dispose();
                     groupComAshling.dispose();
                     groupNsim.dispose();
                     groupComCustomGdb.dispose();
@@ -356,8 +355,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         }
                     }
 
-                    if (!groupCom.isDisposed())
-                        groupCom.setVisible(false);
+                    if (!DebuggerGroupContainer.groupCom.isDisposed())
+                        DebuggerGroupContainer.groupCom.setVisible(false);
                     if (!groupNsim.isDisposed())
                         groupNsim.setVisible(false);
                     if (!groupComAshling.isDisposed())
@@ -371,7 +370,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
                     groupNsim.dispose();
-                    groupCom.dispose();
+                    DebuggerGroupContainer.groupCom.dispose();
                     groupComAshling.dispose();
                     groupGenericGdbServer.dispose();
                     debuggerGroupContainer.setCreateTabItemNsim(false);
@@ -476,7 +475,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
             switch (debuggerGroupContainer.getGdbServer()) {
             case JTAG_OPENOCD:
-                if (groupCom.isDisposed()) {
+                if (DebuggerGroupContainer.groupCom.isDisposed()) {
                     return true;
                 }
                 if (!isValidFileFieldEditor(debuggerGroupContainer.getOpenOcdBinaryPathEditor())) {
@@ -559,10 +558,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private void createTabItemCom(Composite subComp) {
-        groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        DebuggerGroupContainer.groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
         final Composite compositeCom =
-            SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
+            SWTFactory.createComposite(DebuggerGroupContainer.groupCom, 3, 5, GridData.FILL_BOTH);
         debuggerGroupContainer.createTabItemCom(compositeCom);
     }
 
