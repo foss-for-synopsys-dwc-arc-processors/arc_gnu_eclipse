@@ -65,7 +65,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     protected Combo externalToolsCombo;
     private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
-    private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
 
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
@@ -113,25 +112,25 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.setGdbPath(configurationReader.getOrDefault(getDefaultGdbPath(), "",
             configurationReader.getGdbPath()));
         fGDBCommandText.setText(debuggerGroupContainer.getGdbPath());
-        gdbServer = configurationReader.getGdbServer();
+        debuggerGroupContainer.setGdbServer(configurationReader.getGdbServer());
 
         workingDirectoryBlockNsim.initializeFrom(configuration);
 
-        externalToolsCombo.setText(gdbServer.toString());
+        externalToolsCombo.setText(debuggerGroupContainer.getGdbServer().toString());
 
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
             debuggerGroupContainer.setTextForGdbServerIpAddressText(
                 debuggerGroupContainer.getHostName());
 
-        int previous = externalToolsCombo.indexOf(gdbServer.toString());
+        int previous = externalToolsCombo.indexOf(debuggerGroupContainer.getGdbServer().toString());
         if (previous > -1)
             externalToolsCombo.remove(previous);
         /*
          * Reading gdbServer again from configuration because field gdbServer might have been
          * changed by event handler called by extTools.remove(previous)
          */
-        gdbServer = configurationReader.getGdbServer();
-        externalToolsCombo.add(gdbServer.toString(), 0);
+        debuggerGroupContainer.setGdbServer(configurationReader.getGdbServer());
+        externalToolsCombo.add(debuggerGroupContainer.getGdbServer().toString(), 0);
         externalToolsCombo.select(0);
 
     }
@@ -157,8 +156,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
         /* Because there is no setAttribute(String, long) method. */
         configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
-        configurationWriter.setGdbServer(
-            DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
 
         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
             debuggerGroupContainer.setHostName(
@@ -217,12 +214,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 Combo combo = (Combo) event.widget;
                 debuggerGroupContainer.getTextFromGdbServerPortNumberText();
                 try {
-                    gdbServer = ArcGdbServer.fromString(combo.getText());
+                    debuggerGroupContainer.setGdbServer(ArcGdbServer.fromString(combo.getText()));
                 } catch (IllegalArgumentException e) {
-                    gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
+                    debuggerGroupContainer.setGdbServer(ArcGdbServer.DEFAULT_GDB_SERVER);
                 }
 
-                if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
+                if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.JTAG_OPENOCD) {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 
@@ -239,13 +236,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                         createTabItemCom(subComp);
                     }
-                    groupCom.setText(gdbServer.toString());
+                    groupCom.setText(debuggerGroupContainer.getGdbServer().toString());
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     groupCom.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
-                } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
+                } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.JTAG_ASHLING) {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
@@ -267,9 +264,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         createTabItemComAshling(subComp);
                     }
 
-                    groupComAshling.setText(gdbServer.toString());
+                    groupComAshling.setText(debuggerGroupContainer.getGdbServer().toString());
                     groupComAshling.setVisible(true);
-                } else if (gdbServer == ArcGdbServer.NSIM) {
+                } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.NSIM) {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
 
@@ -317,14 +314,14 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
 
                     }
-                    groupNsim.setText(gdbServer.toString());
+                    groupNsim.setText(debuggerGroupContainer.getGdbServer().toString());
                     debuggerGroupContainer.setCreateTabItemCom(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     groupNsim.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
 
-                } else if (gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
+                } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.GENERIC_GDBSERVER) {
                     groupCom.dispose();
                     groupComAshling.dispose();
                     groupNsim.dispose();
@@ -339,7 +336,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
-                    groupGenericGdbServer.setText(gdbServer.toString());
+                    groupGenericGdbServer.setText(debuggerGroupContainer.getGdbServer().toString());
                     groupGenericGdbServer.setVisible(true);
 
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
@@ -369,7 +366,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         groupComCustomGdb.setVisible(false);
                     }
 
-                } else if (gdbServer == ArcGdbServer.CUSTOM_GDBSERVER) {
+                } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.CUSTOM_GDBSERVER) {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
@@ -388,7 +385,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         createTabCustomGdb(subComp);
                     }
 
-                    groupComCustomGdb.setText(gdbServer.toString());
+                    groupComCustomGdb.setText(debuggerGroupContainer.getGdbServer().toString());
                     if (!groupComCustomGdb.isVisible())
                         groupComCustomGdb.setVisible(true);
                 }
@@ -475,9 +472,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         setErrorMessage(null);
         setMessage(null);
 
-        if (gdbServer != null) {
+        if (debuggerGroupContainer.getGdbServer() != null) {
 
-            switch (gdbServer) {
+            switch (debuggerGroupContainer.getGdbServer()) {
             case JTAG_OPENOCD:
                 if (groupCom.isDisposed()) {
                     return true;
