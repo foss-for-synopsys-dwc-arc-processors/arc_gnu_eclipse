@@ -40,7 +40,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabFolder;
@@ -165,8 +164,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         }
     }
 
-    static Group groupComCustomGdb;
-
     protected void createGdbServerSettingsTab(TabFolder tabFolder) {
         // Lets set minimal width of text field to 2 inches. If more required text fields will
         // stretch.
@@ -224,7 +221,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     }
                     DebuggerGroupContainer.groupComAshling.dispose();
-                    groupComCustomGdb.dispose();
+                    DebuggerGroupContainer.groupComCustomGdb.dispose();
 
                     if (!debuggerGroupContainer.getCreateTabItemCom()) {
                         if (!DebuggerGroupContainer.groupCom.isDisposed())
@@ -247,7 +244,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     }
                     DebuggerGroupContainer.groupCom.dispose();
-                    groupComCustomGdb.dispose();
+                    DebuggerGroupContainer.groupComCustomGdb.dispose();
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     debuggerGroupContainer.setCreateTabItemCom(false);
@@ -288,7 +285,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                     DebuggerGroupContainer.groupCom.dispose();
                     DebuggerGroupContainer.groupComAshling.dispose();
-                    groupComCustomGdb.dispose();
+                    DebuggerGroupContainer.groupComCustomGdb.dispose();
                     if (DebuggerGroupContainer.groupGenericGdbServer != null) {
                         DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     }
@@ -321,7 +318,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     DebuggerGroupContainer.groupCom.dispose();
                     DebuggerGroupContainer.groupComAshling.dispose();
                     DebuggerGroupContainer.groupNsim.dispose();
-                    groupComCustomGdb.dispose();
+                    DebuggerGroupContainer.groupComCustomGdb.dispose();
                     if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer()) {
                         if (DebuggerGroupContainer.groupGenericGdbServer != null && !DebuggerGroupContainer.groupGenericGdbServer.isDisposed())
                             DebuggerGroupContainer.groupGenericGdbServer.dispose();
@@ -358,8 +355,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         DebuggerGroupContainer.groupNsim.setVisible(false);
                     if (!DebuggerGroupContainer.groupComAshling.isDisposed())
                         DebuggerGroupContainer.groupComAshling.setVisible(false);
-                    if (!groupComCustomGdb.isDisposed()) {
-                        groupComCustomGdb.setVisible(false);
+                    if (!DebuggerGroupContainer.groupComCustomGdb.isDisposed()) {
+                        DebuggerGroupContainer.groupComCustomGdb.setVisible(false);
                     }
 
                 } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.CUSTOM_GDBSERVER) {
@@ -375,15 +372,15 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     if (!debuggerGroupContainer.getCreateTabItemCustomGdb()) {
-                        if (!groupComCustomGdb.isDisposed())
-                            groupComCustomGdb.dispose();
+                        if (!DebuggerGroupContainer.groupComCustomGdb.isDisposed())
+                            DebuggerGroupContainer.groupComCustomGdb.dispose();
 
                         createTabCustomGdb(subComp);
                     }
 
-                    groupComCustomGdb.setText(debuggerGroupContainer.getGdbServer().toString());
-                    if (!groupComCustomGdb.isVisible())
-                        groupComCustomGdb.setVisible(true);
+                    DebuggerGroupContainer.groupComCustomGdb.setText(debuggerGroupContainer.getGdbServer().toString());
+                    if (!DebuggerGroupContainer.groupComCustomGdb.isVisible())
+                        DebuggerGroupContainer.groupComCustomGdb.setVisible(true);
                 }
 
                 updateLaunchConfigurationDialog();
@@ -416,9 +413,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabCustomGdb(Composite subComp) {
         debuggerGroupContainer.setCreateTabItemCustomGdb(true);
 
-        groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3,
+        DebuggerGroupContainer.groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3,
                 5, GridData.FILL_HORIZONTAL);
-        final Composite compositeCustomGdb = SWTFactory.createComposite(groupComCustomGdb, 3, 5,
+        final Composite compositeCustomGdb = SWTFactory.createComposite(DebuggerGroupContainer.groupComCustomGdb, 3, 5,
                 GridData.FILL_BOTH);
 
         debuggerGroupContainer.createTabCustomGdb(compositeCustomGdb);
@@ -522,7 +519,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
                 break;
             case CUSTOM_GDBSERVER:
-                if (groupComCustomGdb.isDisposed()) {
+                if (DebuggerGroupContainer.groupComCustomGdb.isDisposed()) {
                     return true;
                 }
                 if (!isValidFileFieldEditor(debuggerGroupContainer.getCustomGdbBinaryPathEditor())) {
