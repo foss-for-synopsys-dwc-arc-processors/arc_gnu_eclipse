@@ -142,7 +142,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final String programName = configurationReader.getProgramName();
         configuration.setAttribute(ICDTLaunchConfigurationConstants.ATTR_PROGRAM_NAME,
             programName.replace('\\', '/'));
-        if (!groupNsim.isDisposed()) {
+        if (!DebuggerGroupContainer.groupNsim.isDisposed()) {
             workingDirectoryBlockNsim.performApply(configuration);
         }
 
@@ -165,7 +165,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         }
     }
 
-    static Group groupNsim;
     static Group groupGenericGdbServer;
     static Group groupComCustomGdb;
 
@@ -221,7 +220,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 
-                    groupNsim.dispose();
+                    DebuggerGroupContainer.groupNsim.dispose();
                     if (groupGenericGdbServer != null) {
                         groupGenericGdbServer.dispose();
                     }
@@ -244,7 +243,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
-                    groupNsim.dispose();
+                    DebuggerGroupContainer.groupNsim.dispose();
                     if (groupGenericGdbServer != null) {
                         groupGenericGdbServer.dispose();
                     }
@@ -295,8 +294,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         groupGenericGdbServer.dispose();
                     }
                     if (!debuggerGroupContainer.getCreateTabItemNsim()) {
-                        if (!groupNsim.isDisposed())
-                            groupNsim.dispose();
+                        if (!DebuggerGroupContainer.groupNsim.isDisposed())
+                            DebuggerGroupContainer.groupNsim.dispose();
                         createTabItemNsim(subComp);
 
                         debuggerGroupContainer.getLaunchTcf().setSelection(
@@ -312,17 +311,17 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         debuggerGroupContainer.setSelectionForLaunchEnableExceptionPropertiesButton();
 
                     }
-                    groupNsim.setText(debuggerGroupContainer.getGdbServer().toString());
+                    DebuggerGroupContainer.groupNsim.setText(debuggerGroupContainer.getGdbServer().toString());
                     debuggerGroupContainer.setCreateTabItemCom(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
-                    groupNsim.setVisible(true);
+                    DebuggerGroupContainer.groupNsim.setVisible(true);
                     debuggerGroupContainer.setCreateTabItemGenericGdbServer(false);
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
 
                 } else if (debuggerGroupContainer.getGdbServer() == ArcGdbServer.GENERIC_GDBSERVER) {
                     DebuggerGroupContainer.groupCom.dispose();
                     DebuggerGroupContainer.groupComAshling.dispose();
-                    groupNsim.dispose();
+                    DebuggerGroupContainer.groupNsim.dispose();
                     groupComCustomGdb.dispose();
                     if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer()) {
                         if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
@@ -356,8 +355,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
                     if (!DebuggerGroupContainer.groupCom.isDisposed())
                         DebuggerGroupContainer.groupCom.setVisible(false);
-                    if (!groupNsim.isDisposed())
-                        groupNsim.setVisible(false);
+                    if (!DebuggerGroupContainer.groupNsim.isDisposed())
+                        DebuggerGroupContainer.groupNsim.setVisible(false);
                     if (!DebuggerGroupContainer.groupComAshling.isDisposed())
                         DebuggerGroupContainer.groupComAshling.setVisible(false);
                     if (!groupComCustomGdb.isDisposed()) {
@@ -368,7 +367,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setPortNumberText(
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
-                    groupNsim.dispose();
+                    DebuggerGroupContainer.groupNsim.dispose();
                     DebuggerGroupContainer.groupCom.dispose();
                     DebuggerGroupContainer.groupComAshling.dispose();
                     groupGenericGdbServer.dispose();
@@ -509,7 +508,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                 }
                 break;
             case NSIM:
-                if (groupNsim.isDisposed()) {
+                if (DebuggerGroupContainer.groupNsim.isDisposed()) {
                     return true;
                 }
                 if (!isValidFileFieldEditor(debuggerGroupContainer.getNsimBinaryPathEditor())
@@ -567,9 +566,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabItemNsim(Composite subComp) {
         debuggerGroupContainer.setCreateTabItemNsim(true);
 
-        groupNsim = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        DebuggerGroupContainer.groupNsim = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
-        final Composite compositeNsim = SWTFactory.createComposite(groupNsim, 3, 5, GridData.FILL_BOTH);
+        final Composite compositeNsim = SWTFactory.createComposite(DebuggerGroupContainer.groupNsim, 3, 5, GridData.FILL_BOTH);
 
         GridData gridData = new GridData();
         GridData gridData2 = new GridData();
@@ -632,7 +631,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     @Override
     public String getErrorMessage() {
         String errorMessage = super.getErrorMessage();
-        if (errorMessage == null && !groupNsim.isDisposed()) {
+        if (errorMessage == null && !DebuggerGroupContainer.groupNsim.isDisposed()) {
             return workingDirectoryBlockNsim.getErrorMessage();
         }
         return errorMessage;
