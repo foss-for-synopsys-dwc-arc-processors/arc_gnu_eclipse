@@ -52,6 +52,7 @@ public class DebuggerGroupContainer extends Observable{
   private Combo jtagFrequencyCombo;
   private Combo ftdiDeviceCombo;
   private Combo ftdiCoreCombo;
+  private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
   private Spinner jitThreadSpinner;
   private FileFieldEditor ashlingXmlPathEditor;
   private FileFieldEditor ashlingTdescXmlPathEditor;
@@ -101,6 +102,14 @@ public class DebuggerGroupContainer extends Observable{
   private boolean createTabItemGenericGdbServer = false;
   private boolean createTabItemComAshling = false;
   private boolean createTabItemCustomGdb = false;
+
+  public ArcGdbServer getGdbServer(){
+    return gdbServer;
+  }
+
+  public void setGdbServer(ArcGdbServer gdbServer){
+    this.gdbServer = gdbServer;
+  }
 
   public Button getLaunchHostLinkProperties(){
     return launchHostLinkProperties;
@@ -483,7 +492,7 @@ public class DebuggerGroupContainer extends Observable{
             notifyObservers();
         }
     });
-    
+
     gridData2 = new GridData(SWT.BEGINNING);
     gridData2.horizontalSpan = 2;
     jitLabel.setLayoutData(gridData2);
@@ -959,6 +968,8 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setGdbServerPort(str);
     configurationWriter.setCustomGdbServerPath(customGdbPath);
     configurationWriter.setGdbPath(getGdbPath());
+    configurationWriter.setGdbServer(
+        DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
 
     configurationWriter.setOpenOcdPath(openOcdBinaryPath);
     configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
