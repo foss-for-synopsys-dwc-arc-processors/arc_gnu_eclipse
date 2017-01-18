@@ -16,6 +16,7 @@ import java.util.Observable;
 
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.StringButtonFieldEditor;
@@ -108,6 +109,11 @@ public class DebuggerGroupContainer extends Observable{
   static Group groupNsim;
   static Group groupComAshling;
   static Group groupCom;
+  private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
+
+  public ARCWorkingDirectoryBlock getWorkingDirectoryBlockNsim(){
+    return workingDirectoryBlockNsim;
+  }
 
   public ArcGdbServer getGdbServer(){
     return gdbServer;
@@ -390,12 +396,15 @@ public class DebuggerGroupContainer extends Observable{
     return ashlingBinaryPathEditor;
   }
 
-  public void initializeFrom(ConfigurationReader configurationReader){
+  public void initializeFrom(ConfigurationReader configurationReader,
+      ILaunchConfiguration configuration){
     createTabItemCom = false;
     createTabItemComAshling = false;
     createTabItemNsim = false;
     createTabItemGenericGdbServer = false;
     createTabItemCustomGdb = false;
+
+    workingDirectoryBlockNsim.initializeFrom(configuration);
 
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
@@ -941,7 +950,8 @@ public class DebuggerGroupContainer extends Observable{
     }
   }
 
-  public void performApply(ConfigurationWriter configurationWriter) {
+  public void performApply(ConfigurationWriter configurationWriter,
+      ILaunchConfigurationWorkingCopy configuration) {
     configurationWriter.setNsimPath(externalToolsNsimPath);
     configurationWriter.setNsimJitThreads(jitThread);
     configurationWriter.setNsimSimulateInvalidInstructionExceptions(
@@ -955,6 +965,10 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
     configurationWriter.setNsimUseJit(externalNsimJitEnabled);
     configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
+
+    if (!DebuggerGroupContainer.groupNsim.isDisposed()) {
+      workingDirectoryBlockNsim.performApply(configuration);
+    }
 
     configurationWriter.setFtdiDevice(DebuggerGroupContainer.getAttributeValueFromString(
         getFtdiDevice().name()));
