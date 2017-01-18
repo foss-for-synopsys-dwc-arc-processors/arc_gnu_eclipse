@@ -118,7 +118,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         externalToolsCombo.setText(debuggerGroupContainer.getGdbServer().toString());
 
-        if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
+        if (DebuggerGroupContainer.groupGenericGdbServer != null && !DebuggerGroupContainer.groupGenericGdbServer.isDisposed())
             debuggerGroupContainer.setTextForGdbServerIpAddressText(
                 debuggerGroupContainer.getHostName());
 
@@ -157,7 +157,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         /* Because there is no setAttribute(String, long) method. */
         configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
 
-        if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
+        if (DebuggerGroupContainer.groupGenericGdbServer != null && !DebuggerGroupContainer.groupGenericGdbServer.isDisposed()) {
             debuggerGroupContainer.setHostName(
                 debuggerGroupContainer.getTextFromGdbServerIpAddressText());
             configurationWriter.setHostAddress(DebuggerGroupContainer.getAttributeValueFromString(
@@ -165,7 +165,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         }
     }
 
-    static Group groupGenericGdbServer;
     static Group groupComCustomGdb;
 
     protected void createGdbServerSettingsTab(TabFolder tabFolder) {
@@ -221,8 +220,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
 
                     DebuggerGroupContainer.groupNsim.dispose();
-                    if (groupGenericGdbServer != null) {
-                        groupGenericGdbServer.dispose();
+                    if (DebuggerGroupContainer.groupGenericGdbServer != null) {
+                        DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     }
                     DebuggerGroupContainer.groupComAshling.dispose();
                     groupComCustomGdb.dispose();
@@ -244,8 +243,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
 
                     DebuggerGroupContainer.groupNsim.dispose();
-                    if (groupGenericGdbServer != null) {
-                        groupGenericGdbServer.dispose();
+                    if (DebuggerGroupContainer.groupGenericGdbServer != null) {
+                        DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     }
                     DebuggerGroupContainer.groupCom.dispose();
                     groupComCustomGdb.dispose();
@@ -290,8 +289,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     DebuggerGroupContainer.groupCom.dispose();
                     DebuggerGroupContainer.groupComAshling.dispose();
                     groupComCustomGdb.dispose();
-                    if (groupGenericGdbServer != null) {
-                        groupGenericGdbServer.dispose();
+                    if (DebuggerGroupContainer.groupGenericGdbServer != null) {
+                        DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     }
                     if (!debuggerGroupContainer.getCreateTabItemNsim()) {
                         if (!DebuggerGroupContainer.groupNsim.isDisposed())
@@ -324,8 +323,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     DebuggerGroupContainer.groupNsim.dispose();
                     groupComCustomGdb.dispose();
                     if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer()) {
-                        if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
-                            groupGenericGdbServer.dispose();
+                        if (DebuggerGroupContainer.groupGenericGdbServer != null && !DebuggerGroupContainer.groupGenericGdbServer.isDisposed())
+                            DebuggerGroupContainer.groupGenericGdbServer.dispose();
 
                         createTabItemHostAddress(subComp);
                     }
@@ -333,8 +332,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemCustomGdb(false);
-                    groupGenericGdbServer.setText(debuggerGroupContainer.getGdbServer().toString());
-                    groupGenericGdbServer.setVisible(true);
+                    DebuggerGroupContainer.groupGenericGdbServer.setText(debuggerGroupContainer.getGdbServer().toString());
+                    DebuggerGroupContainer.groupGenericGdbServer.setVisible(true);
 
                     IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
                             .getActivePage();
@@ -370,7 +369,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     DebuggerGroupContainer.groupNsim.dispose();
                     DebuggerGroupContainer.groupCom.dispose();
                     DebuggerGroupContainer.groupComAshling.dispose();
-                    groupGenericGdbServer.dispose();
+                    DebuggerGroupContainer.groupGenericGdbServer.dispose();
                     debuggerGroupContainer.setCreateTabItemNsim(false);
                     debuggerGroupContainer.setCreateTabItemCom(false);
                     debuggerGroupContainer.setCreateTabItemComAshling(false);
@@ -431,9 +430,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         final int screenPpi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
         final int minTextWidth = 2 * screenPpi;
         debuggerGroupContainer.setCreateTabItemGenericGdbServer(true);
-        groupGenericGdbServer = SWTFactory.createGroup(subComp,
+        DebuggerGroupContainer.groupGenericGdbServer = SWTFactory.createGroup(subComp,
                 ArcGdbServer.GENERIC_GDBSERVER.toString(), 3, 5, GridData.FILL_HORIZONTAL);
-        final Composite compCOM = SWTFactory.createComposite(groupGenericGdbServer, 3, 5,
+        final Composite compCOM = SWTFactory.createComposite(DebuggerGroupContainer.groupGenericGdbServer, 3, 5,
                 GridData.FILL_BOTH);
 
         Label label = new Label(compCOM, SWT.LEFT);
