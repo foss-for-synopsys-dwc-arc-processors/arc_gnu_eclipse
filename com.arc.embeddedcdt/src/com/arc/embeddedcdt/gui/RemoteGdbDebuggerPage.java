@@ -348,7 +348,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         if (!DebuggerGroupContainer.groupComCustomGdb.isDisposed())
                             DebuggerGroupContainer.groupComCustomGdb.dispose();
 
-                        createTabCustomGdb(subComp);
+                        debuggerGroupContainer.createTabCustomGdb(subComp);
                     }
 
                     DebuggerGroupContainer.groupComCustomGdb.setText(debuggerGroupContainer.getGdbServer().toString());
@@ -379,23 +379,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer())
             createTabItemHostAddress(subComp);
         if (!debuggerGroupContainer.getCreateTabItemCustomGdb())
-            createTabCustomGdb(subComp);
+            debuggerGroupContainer.createTabCustomGdb(subComp);
     }
-
-
-    private void createTabCustomGdb(Composite subComp) {
-        debuggerGroupContainer.setCreateTabItemCustomGdb(true);
-
-        DebuggerGroupContainer.groupComCustomGdb = SWTFactory.createGroup(subComp,
-            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
-              GridData.FILL_HORIZONTAL);
-        final Composite compositeCustomGdb = SWTFactory.createComposite(DebuggerGroupContainer.groupComCustomGdb, 3, 5,
-                GridData.FILL_BOTH);
-
-        debuggerGroupContainer.createTabCustomGdb(compositeCustomGdb);
-
-    }
-
 
     private void createTabItemHostAddress(Composite subComp) {
         final int screenPpi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();

@@ -18,6 +18,7 @@ import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.internal.ui.SWTFactory;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.StringButtonFieldEditor;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -793,10 +794,17 @@ public class DebuggerGroupContainer extends Observable{
     }
   }
 
-  public void createTabCustomGdb(Composite compositeCustomGdb) {
+  public void createTabCustomGdb(Composite subComp) {
+    createTabItemCustomGdb = true;
+
+    groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+          GridData.FILL_HORIZONTAL);
+    final Composite compositeCustomGdb = SWTFactory.createComposite(
+        DebuggerGroupContainer.groupComCustomGdb, 3, 5, GridData.FILL_BOTH);
+
     // GDB server executable path
-    customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path", "GDB server executable path",
-            compositeCustomGdb);
+    customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path",
+        "GDB server executable path", compositeCustomGdb);
     customGdbBinaryPathEditor.setStringValue(customGdbPath);
     customGdbBinaryPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
         public void propertyChange(PropertyChangeEvent event) {
