@@ -227,7 +227,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         if (!DebuggerGroupContainer.groupComAshling.isDisposed())
                             DebuggerGroupContainer.groupComAshling.dispose();
 
-                        createTabItemComAshling(subComp);
+                        debuggerGroupContainer.createTabItemComAshling(subComp);
                     }
 
                     DebuggerGroupContainer.groupComAshling.setText(debuggerGroupContainer.getGdbServer().toString());
@@ -375,7 +375,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         if (!debuggerGroupContainer.getCreateTabItemCom())
             createTabItemCom(subComp);
         if (!debuggerGroupContainer.getCreateTabItemComAshling())
-            createTabItemComAshling(subComp);
+            debuggerGroupContainer.createTabItemComAshling(subComp);
         if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer())
             createTabItemHostAddress(subComp);
         if (!debuggerGroupContainer.getCreateTabItemCustomGdb())
@@ -395,25 +395,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         label.setText("Host Address:");
 
         debuggerGroupContainer.createGdbServerIpAddressText(compCOM, minTextWidth);
-    }
-
-    private void createTabItemComAshling(Composite subComp) {
-        debuggerGroupContainer.setCreateTabItemComAshling(true);
-
-        DebuggerGroupContainer.groupComAshling = SWTFactory.createGroup(subComp,
-            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
-              GridData.FILL_HORIZONTAL);
-        final Composite compositeCom = SWTFactory.createComposite(DebuggerGroupContainer.groupComAshling, 3, 5,
-                GridData.FILL_BOTH);
-
-        debuggerGroupContainer.createAshlingBinaryPathEditor(compositeCom);
-
-        debuggerGroupContainer.createTabItemComAshling(compositeCom);
-
-        debuggerGroupContainer.createAshlingTdescXmlPathEditor(compositeCom);
-
-        debuggerGroupContainer.createJtagFrequencyCombo(compositeCom);
-
     }
 
     /*

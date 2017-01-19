@@ -484,7 +484,16 @@ public class DebuggerGroupContainer extends Observable{
     externalNsimJitEnabled = configurationReader.getNsimUseJit();
   }
 
-  public void createTabItemComAshling(Composite compositeCom){
+  public void createTabItemComAshling(Composite subComp){
+    createTabItemComAshling = true;
+
+    groupComAshling = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        GridData.FILL_HORIZONTAL);
+    final Composite compositeCom = SWTFactory.createComposite(groupComAshling, 3, 5,
+            GridData.FILL_BOTH);
+
+    createAshlingBinaryPathEditor(compositeCom);
+
     // Path to Ashling XMl file
     ashlingXmlPathEditor = new FileFieldEditor("ashlingXmlPathEditor", "Ashling XML File", false,
             StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
@@ -499,6 +508,9 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+
+    createAshlingTdescXmlPathEditor(compositeCom);
+    createJtagFrequencyCombo(compositeCom);
   }
 
   public void createJitThreadSpinner(Composite compositeNsim, GridData gridData, GridData gridData2){
