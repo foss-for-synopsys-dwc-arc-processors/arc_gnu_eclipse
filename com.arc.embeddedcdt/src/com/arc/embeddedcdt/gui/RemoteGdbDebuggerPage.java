@@ -62,7 +62,6 @@ import com.arc.embeddedcdt.common.FtdiDevice;
  */
 @SuppressWarnings("restriction")
 public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
-    protected Combo externalToolsCombo;
 
     private DebuggerGroupContainer debuggerGroupContainer = new DebuggerGroupContainer();
 
@@ -111,24 +110,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             configurationReader.getGdbPath()));
         fGDBCommandText.setText(debuggerGroupContainer.getGdbPath());
         debuggerGroupContainer.setGdbServer(configurationReader.getGdbServer());
-
-        externalToolsCombo.setText(debuggerGroupContainer.getGdbServer().toString());
-
-        if (DebuggerGroupContainer.groupGenericGdbServer != null && !DebuggerGroupContainer.groupGenericGdbServer.isDisposed())
-            debuggerGroupContainer.setTextForGdbServerIpAddressText(
-                debuggerGroupContainer.getHostName());
-
-        int previous = externalToolsCombo.indexOf(debuggerGroupContainer.getGdbServer().toString());
-        if (previous > -1)
-            externalToolsCombo.remove(previous);
-        /*
-         * Reading gdbServer again from configuration because field gdbServer might have been
-         * changed by event handler called by extTools.remove(previous)
-         */
-        debuggerGroupContainer.setGdbServer(configurationReader.getGdbServer());
-        externalToolsCombo.add(debuggerGroupContainer.getGdbServer().toString(), 0);
-        externalToolsCombo.select(0);
-
     }
 
     @Override
@@ -188,15 +169,13 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         GridData serverTypeComboGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
         serverTypeComboGridData.horizontalSpan = 4;
         serverTypeComboGridData.minimumWidth = minTextWidth;
-        externalToolsCombo = new Combo(subComp, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
-        externalToolsCombo.setLayoutData(serverTypeComboGridData);
+        debuggerGroupContainer.setExternalToolsCombo(new Combo(subComp, SWT.None | SWT.READ_ONLY));
+        debuggerGroupContainer.getExternalToolsCombo().setLayoutData(serverTypeComboGridData);
         for (ArcGdbServer server: ArcGdbServer.values()) {
-            externalToolsCombo.add(server.toString());
+            debuggerGroupContainer.getExternalToolsCombo().add(server.toString());
         }
 
-
-
-        externalToolsCombo.addModifyListener(new ModifyListener() {
+        debuggerGroupContainer.getExternalToolsCombo().addModifyListener(new ModifyListener() {
             public void modifyText(ModifyEvent event) {
                 Combo combo = (Combo) event.widget;
                 debuggerGroupContainer.getTextFromGdbServerPortNumberText();
@@ -407,8 +386,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabCustomGdb(Composite subComp) {
         debuggerGroupContainer.setCreateTabItemCustomGdb(true);
 
-        DebuggerGroupContainer.groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3,
-                5, GridData.FILL_HORIZONTAL);
+        DebuggerGroupContainer.groupComCustomGdb = SWTFactory.createGroup(subComp,
+            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
+              GridData.FILL_HORIZONTAL);
         final Composite compositeCustomGdb = SWTFactory.createComposite(DebuggerGroupContainer.groupComCustomGdb, 3, 5,
                 GridData.FILL_BOTH);
 
@@ -435,8 +415,9 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabItemComAshling(Composite subComp) {
         debuggerGroupContainer.setCreateTabItemComAshling(true);
 
-        DebuggerGroupContainer.groupComAshling = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
-                GridData.FILL_HORIZONTAL);
+        DebuggerGroupContainer.groupComAshling = SWTFactory.createGroup(subComp,
+            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
+              GridData.FILL_HORIZONTAL);
         final Composite compositeCom = SWTFactory.createComposite(DebuggerGroupContainer.groupComAshling, 3, 5,
                 GridData.FILL_BOTH);
 
@@ -547,7 +528,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private void createTabItemCom(Composite subComp) {
-        DebuggerGroupContainer.groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        DebuggerGroupContainer.groupCom = SWTFactory.createGroup(subComp,
+            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
         final Composite compositeCom =
             SWTFactory.createComposite(DebuggerGroupContainer.groupCom, 3, 5, GridData.FILL_BOTH);
@@ -557,7 +539,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     private void createTabItemNsim(Composite subComp) {
         debuggerGroupContainer.setCreateTabItemNsim(true);
 
-        DebuggerGroupContainer.groupNsim = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+        DebuggerGroupContainer.groupNsim = SWTFactory.createGroup(subComp,
+            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
                 GridData.FILL_HORIZONTAL);
         final Composite compositeNsim = SWTFactory.createComposite(DebuggerGroupContainer.groupNsim, 3, 5, GridData.FILL_BOTH);
 
