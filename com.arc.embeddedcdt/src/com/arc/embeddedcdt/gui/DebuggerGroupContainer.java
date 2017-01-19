@@ -442,9 +442,9 @@ public class DebuggerGroupContainer extends Observable{
     ftdiCore = configurationReader.getFtdiCore();
 
     openOcdBinaryPath = configurationReader.getOrDefault(
-        DebuggerGroupContainer.DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
+        DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
     openOcdConfigurationPath = configurationReader.getOrDefault(
-        DebuggerGroupContainer.DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
+        DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
     if (!ftdiDeviceCombo.isDisposed())
       ftdiDeviceCombo.setText(ftdiDevice.toString());
     if (!ftdiCoreCombo.isDisposed())
@@ -455,7 +455,7 @@ public class DebuggerGroupContainer extends Observable{
       selectJtagFrequencyInCombo(jtagFrequency);
     setTextForJtagFrequencyCombo(configurationReader);
     String defaultAshlingPath =
-        DebuggerGroupContainer.isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
+        isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
             : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
     externalToolsAshlingPath = configurationReader.getOrDefault(defaultAshlingPath, "",
         configurationReader.getAshlingPath());
@@ -469,7 +469,7 @@ public class DebuggerGroupContainer extends Observable{
         configurationReader.getAshlingTDescPath());
 
     externalToolsNsimPath = configurationReader.getOrDefault(
-        DebuggerGroupContainer.getNsimdrvDefaultPath(), "", configurationReader.getNsimPath());
+        getNsimdrvDefaultPath(), "", configurationReader.getNsimPath());
     jitThread = configurationReader.getNsimJitThreads();
     launchExternalNsimInvalidInstructionException =
         configurationReader.getNsimSimulateInvalidInstructionExceptions();
@@ -718,6 +718,50 @@ public class DebuggerGroupContainer extends Observable{
     return openOcdConfiguration;
   }
 
+  public void createTabItemNsim(Composite subComp) {
+    createTabItemNsim = true;
+
+    groupNsim = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+            GridData.FILL_HORIZONTAL);
+    final Composite compositeNsim = SWTFactory.createComposite(groupNsim, 3, 5, GridData.FILL_BOTH);
+
+    GridData gridData = new GridData();
+    GridData gridData2 = new GridData();
+
+    createNsimBinaryPathEditor(compositeNsim);
+    createNsimTcfPathEditor(compositeNsim);
+    nsimTcfPathEditor.setEnabled(externalNsimTcfToolsEnabled, compositeNsim);
+    createNsimPropertiesPathEditor(compositeNsim);
+    nsimBinaryPathEditor.setEnabled(externalNsimPropertiesEnabled, compositeNsim);
+    gridData = new GridData(SWT.BEGINNING);
+    gridData.horizontalSpan = 3;
+
+    createLaunchTcf(compositeNsim, gridData,
+        getLaunchTcfPropertiesButton());
+    createLaunchTcfPropertiesButton(compositeNsim, gridData);
+    // JIT
+
+    gridData = new GridData(SWT.BEGINNING);
+    gridData.horizontalSpan = 3;
+
+    gridData2 = new GridData(SWT.BEGINNING);
+    gridData2.horizontalSpan = 2;
+
+    createJitThreadSpinner(compositeNsim, gridData, gridData2);
+
+    GridData gridDataNsim = new GridData(SWT.BEGINNING);
+    gridDataNsim.horizontalSpan = 2;
+
+    createLaunchHostLinkProperties(compositeNsim, gridDataNsim);
+
+    createLaunchMemoryExceptionProperties(compositeNsim, gridDataNsim);
+
+    createLaunchEnableExceptionPropertiesButton(compositeNsim,
+        gridDataNsim);
+
+    getWorkingDirectoryBlockNsim().createControl(compositeNsim);
+  }
+
   public void createTabItemCom(final Composite subComp) {
     groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
             GridData.FILL_HORIZONTAL);
@@ -816,7 +860,7 @@ public class DebuggerGroupContainer extends Observable{
     groupComCustomGdb = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
           GridData.FILL_HORIZONTAL);
     final Composite compositeCustomGdb = SWTFactory.createComposite(
-        DebuggerGroupContainer.groupComCustomGdb, 3, 5, GridData.FILL_BOTH);
+        groupComCustomGdb, 3, 5, GridData.FILL_BOTH);
 
     // GDB server executable path
     customGdbBinaryPathEditor = new FileFieldEditor("GDB server executable path",
@@ -1015,13 +1059,13 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setNsimUseJit(externalNsimJitEnabled);
     configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
 
-    if (!DebuggerGroupContainer.groupNsim.isDisposed()) {
+    if (!groupNsim.isDisposed()) {
       workingDirectoryBlockNsim.performApply(configuration);
     }
 
-    configurationWriter.setFtdiDevice(DebuggerGroupContainer.getAttributeValueFromString(
+    configurationWriter.setFtdiDevice(getAttributeValueFromString(
         getFtdiDevice().name()));
-    configurationWriter.setFtdiCore(DebuggerGroupContainer.getAttributeValueFromString(
+    configurationWriter.setFtdiCore(getAttributeValueFromString(
         getFtdiCore().name()));
 
     if (jtagFrequency != null)
@@ -1038,7 +1082,7 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setCustomGdbServerPath(customGdbPath);
     configurationWriter.setGdbPath(getGdbPath());
     configurationWriter.setGdbServer(
-        DebuggerGroupContainer.getAttributeValueFromString(gdbServer.toString()));
+        getAttributeValueFromString(gdbServer.toString()));
 
     configurationWriter.setOpenOcdPath(openOcdBinaryPath);
     configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);

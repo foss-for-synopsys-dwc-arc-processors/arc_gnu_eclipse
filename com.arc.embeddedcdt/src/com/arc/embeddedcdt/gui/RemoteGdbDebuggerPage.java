@@ -265,7 +265,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     if (!debuggerGroupContainer.getCreateTabItemNsim()) {
                         if (!DebuggerGroupContainer.groupNsim.isDisposed())
                             DebuggerGroupContainer.groupNsim.dispose();
-                        createTabItemNsim(subComp);
+                        debuggerGroupContainer.createTabItemNsim(subComp);
 
                         debuggerGroupContainer.getLaunchTcf().setSelection(
                             debuggerGroupContainer.getExternalNsimPropertiesEnabled());
@@ -371,7 +371,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.createGdbServerPortNumberText(subComp, minTextWidth);
 
         if (!debuggerGroupContainer.getCreateTabItemNsim())
-            createTabItemNsim(subComp);
+            debuggerGroupContainer.createTabItemNsim(subComp);
         if (!debuggerGroupContainer.getCreateTabItemCom())
             debuggerGroupContainer.createTabItemCom(subComp);
         if (!debuggerGroupContainer.getCreateTabItemComAshling())
@@ -491,53 +491,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         }
         return true;
-    }
-
-    private void createTabItemNsim(Composite subComp) {
-        debuggerGroupContainer.setCreateTabItemNsim(true);
-
-        DebuggerGroupContainer.groupNsim = SWTFactory.createGroup(subComp,
-            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
-                GridData.FILL_HORIZONTAL);
-        final Composite compositeNsim = SWTFactory.createComposite(DebuggerGroupContainer.groupNsim, 3, 5, GridData.FILL_BOTH);
-
-        GridData gridData = new GridData();
-        GridData gridData2 = new GridData();
-
-        debuggerGroupContainer.createNsimBinaryPathEditor(compositeNsim);
-        debuggerGroupContainer.createNsimTcfPathEditor(compositeNsim);
-        debuggerGroupContainer.getNsimTcfPathEditor().setEnabled(
-            debuggerGroupContainer.getExternalNsimTcfToolsEnabled(), compositeNsim);
-        debuggerGroupContainer.createNsimPropertiesPathEditor(compositeNsim);
-        debuggerGroupContainer.getNsimBinaryPathEditor().setEnabled(
-            debuggerGroupContainer.getExternalNsimPropertiesEnabled(), compositeNsim);
-        gridData = new GridData(SWT.BEGINNING);
-        gridData.horizontalSpan = 3;
-
-        debuggerGroupContainer.createLaunchTcf(compositeNsim, gridData,
-            debuggerGroupContainer.getLaunchTcfPropertiesButton());
-        debuggerGroupContainer.createLaunchTcfPropertiesButton(compositeNsim, gridData);
-        // JIT
-
-        gridData = new GridData(SWT.BEGINNING);
-        gridData.horizontalSpan = 3;
-
-        gridData2 = new GridData(SWT.BEGINNING);
-        gridData2.horizontalSpan = 2;
-
-        debuggerGroupContainer.createJitThreadSpinner(compositeNsim, gridData, gridData2);
-
-        GridData gridDataNsim = new GridData(SWT.BEGINNING);
-        gridDataNsim.horizontalSpan = 2;
-
-        debuggerGroupContainer.createLaunchHostLinkProperties(compositeNsim, gridDataNsim);
-
-        debuggerGroupContainer.createLaunchMemoryExceptionProperties(compositeNsim, gridDataNsim);
-
-        debuggerGroupContainer.createLaunchEnableExceptionPropertiesButton(compositeNsim,
-            gridDataNsim);
-
-        debuggerGroupContainer.getWorkingDirectoryBlockNsim().createControl(compositeNsim);
     }
 
     /*
