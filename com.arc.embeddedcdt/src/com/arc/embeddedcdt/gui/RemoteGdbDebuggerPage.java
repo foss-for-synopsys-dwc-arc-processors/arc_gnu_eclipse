@@ -200,7 +200,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                         if (!DebuggerGroupContainer.groupCom.isDisposed())
                             DebuggerGroupContainer.groupCom.dispose();
 
-                        createTabItemCom(subComp);
+                        debuggerGroupContainer.createTabItemCom(subComp);
                     }
                     DebuggerGroupContainer.groupCom.setText(debuggerGroupContainer.getGdbServer().toString());
                     debuggerGroupContainer.setCreateTabItemNsim(false);
@@ -373,7 +373,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         if (!debuggerGroupContainer.getCreateTabItemNsim())
             createTabItemNsim(subComp);
         if (!debuggerGroupContainer.getCreateTabItemCom())
-            createTabItemCom(subComp);
+            debuggerGroupContainer.createTabItemCom(subComp);
         if (!debuggerGroupContainer.getCreateTabItemComAshling())
             debuggerGroupContainer.createTabItemComAshling(subComp);
         if (!debuggerGroupContainer.getCreateTabItemGenericGdbServer())
@@ -491,15 +491,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             }
         }
         return true;
-    }
-
-    private void createTabItemCom(Composite subComp) {
-        DebuggerGroupContainer.groupCom = SWTFactory.createGroup(subComp,
-            debuggerGroupContainer.getExternalToolsCombo().getItem(0), 3, 5,
-                GridData.FILL_HORIZONTAL);
-        final Composite compositeCom =
-            SWTFactory.createComposite(DebuggerGroupContainer.groupCom, 3, 5, GridData.FILL_BOTH);
-        debuggerGroupContainer.createTabItemCom(compositeCom);
     }
 
     private void createTabItemNsim(Composite subComp) {

@@ -718,7 +718,11 @@ public class DebuggerGroupContainer extends Observable{
     return openOcdConfiguration;
   }
 
-  public void createTabItemCom(final Composite compositeCom) {
+  public void createTabItemCom(final Composite subComp) {
+    groupCom = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
+            GridData.FILL_HORIZONTAL);
+    final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
+
     createTabItemCom = true;
     Label label = new Label(compositeCom, SWT.LEFT);
     label.setText("Development system:");
