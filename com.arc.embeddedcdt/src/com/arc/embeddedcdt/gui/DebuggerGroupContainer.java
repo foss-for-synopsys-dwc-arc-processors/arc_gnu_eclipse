@@ -54,6 +54,7 @@ public class DebuggerGroupContainer extends Observable{
   private Combo jtagFrequencyCombo;
   private Combo ftdiDeviceCombo;
   private Combo ftdiCoreCombo;
+  private Combo externalToolsCombo;
   private ArcGdbServer gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
   private Spinner jitThreadSpinner;
   private FileFieldEditor ashlingXmlPathEditor;
@@ -110,6 +111,14 @@ public class DebuggerGroupContainer extends Observable{
   static Group groupComAshling;
   static Group groupCom;
   private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
+
+  public Combo getExternalToolsCombo(){
+    return externalToolsCombo;
+  }
+
+  public void setExternalToolsCombo(Combo externalToolsCombo){
+    this.externalToolsCombo = externalToolsCombo;
+  }
 
   public ARCWorkingDirectoryBlock getWorkingDirectoryBlockNsim(){
     return workingDirectoryBlockNsim;
@@ -405,6 +414,22 @@ public class DebuggerGroupContainer extends Observable{
     createTabItemCustomGdb = false;
 
     workingDirectoryBlockNsim.initializeFrom(configuration);
+
+    externalToolsCombo.setText(gdbServer.toString());
+
+    if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
+        gdbServerIpAddressText.setText(hostName);
+
+    int previous = externalToolsCombo.indexOf(gdbServer.toString());
+    if (previous > -1)
+        externalToolsCombo.remove(previous);
+    /*
+     * Reading gdbServer again from configuration because field gdbServer might have been
+     * changed by event handler called by extTools.remove(previous)
+     */
+    gdbServer = configurationReader.getGdbServer();
+    externalToolsCombo.add(gdbServer.toString(), 0);
+    externalToolsCombo.select(0);
 
     // Set host and IP.
     portNumber = configurationReader.getGdbServerPort();
