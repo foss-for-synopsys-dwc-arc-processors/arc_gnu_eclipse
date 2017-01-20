@@ -162,18 +162,30 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     }
 
     private boolean isValidFileFieldEditor(FileFieldEditor editor) {
-        if (editor != null) {
-            String label = editor.getLabelText();
-            if (editor.getStringValue().isEmpty()) {
-                setErrorMessage(label + "'s value cannot be empty");
-                return false;
-            }
-            if (!editor.isValid()) {
-                setErrorMessage(label + "'s value must be an existing file");
-                return false;
-            }
+        String validity = checkFileFieldEditorValidity(editor);
+        if (validity == null)
+          return true;
+        else {
+          setErrorMessage(validity);
+          return false;
         }
-        return true;
+    }
+
+    /**
+     *
+     * @return Null if the fileFieldEditor is valid, otherwise error message.
+     */
+    private String checkFileFieldEditorValidity(FileFieldEditor editor) {
+      if (editor != null) {
+          String label = editor.getLabelText();
+          if (editor.getStringValue().isEmpty()) {
+              return label + "'s value cannot be empty";
+          }
+          if (!editor.isValid()) {
+              return label + "'s value must be an existing file";
+          }
+      }
+      return null;
     }
 
     @Override
