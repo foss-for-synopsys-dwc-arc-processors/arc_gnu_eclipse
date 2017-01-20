@@ -106,7 +106,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
                     }
                 } else {
                     File configurationFile = new File(
-                        debuggerGroupContainer.accessOpenOcdConfigurationPath());
+                        debuggerGroupContainer.getOpenOcdConfigurationPath());
                     if (!configurationFile.exists()) {
                         setErrorMessage(
                                 "Default OpenOCD configuration file for this development system \'"
