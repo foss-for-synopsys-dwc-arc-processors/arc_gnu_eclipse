@@ -64,30 +64,12 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
       debuggerGroupContainer.setDefaults(configuration);
     }
 
-    public static String getDefaultGdbPath() {
-        String gdbPath = "arc-elf32-gdb";
-        String predefinedPath = DebuggerGroupContainer.getIdeBinDir();
-        File predefinedPathFile = new File(predefinedPath);
-
-        if (predefinedPathFile.isDirectory()) {
-            File gdbFile = new File(predefinedPath + "arc-elf32-gdb");
-            if (gdbFile.canExecute()) {
-                gdbPath = gdbFile.getAbsolutePath();
-            }
-        }
-        return gdbPath;
-    }
-
     @Override
     public void initializeFrom(ILaunchConfiguration configuration) {
         LaunchFileFormatVersionChecker.getInstance().check(configuration);
         super.initializeFrom(configuration);
-        ConfigurationReader configurationReader = new ConfigurationReader(configuration);
-        debuggerGroupContainer.initializeFrom(configurationReader, configuration);
-        debuggerGroupContainer.setGdbPath(configurationReader.getOrDefault(getDefaultGdbPath(), "",
-            configurationReader.getGdbPath()));
+        debuggerGroupContainer.initializeFrom(configuration);
         fGDBCommandText.setText(debuggerGroupContainer.getGdbPath());
-        debuggerGroupContainer.setGdbServer(configurationReader.getGdbServer());
     }
 
     @Override

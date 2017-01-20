@@ -30,6 +30,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
+import com.arc.embeddedcdt.gui.DebuggerGroupContainer;
 import com.arc.embeddedcdt.gui.FirstlaunchDialog;
 import com.arc.embeddedcdt.gui.RemoteGdbDebuggerPage;
 
@@ -84,7 +85,7 @@ public class LaunchShortcut extends CApplicationLaunchShortcut implements ILaunc
             wc.setAttribute(ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_ID,
                     "com.arc.embeddedcdt.RemoteGDBDebugger");
             wc.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
-                    RemoteGdbDebuggerPage.getDefaultGdbPath());
+                    DebuggerGroupContainer.getDefaultGdbPath());
 
             startrunas();
 
