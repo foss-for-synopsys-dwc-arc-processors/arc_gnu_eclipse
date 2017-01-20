@@ -302,7 +302,12 @@ public class DebuggerGroupContainer extends Observable{
             GridData.FILL_BOTH);
 
     createAshlingBinaryPathEditor(compositeCom);
+    createAshlingXmlPathEditor(compositeCom);
+    createAshlingTdescXmlPathEditor(compositeCom);
+    createJtagFrequencyCombo(compositeCom);
+  }
 
+  private void createAshlingXmlPathEditor(Composite compositeCom){
     // Path to Ashling XMl file
     ashlingXmlPathEditor = new FileFieldEditor("ashlingXmlPathEditor", "Ashling XML File", false,
             StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeCom);
@@ -317,9 +322,6 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
-
-    createAshlingTdescXmlPathEditor(compositeCom);
-    createJtagFrequencyCombo(compositeCom);
   }
 
   public void createJitThreadSpinner(Composite compositeNsim, GridData gridData, GridData gridData2){
