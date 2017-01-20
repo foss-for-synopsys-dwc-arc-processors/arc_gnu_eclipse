@@ -85,11 +85,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
         debuggerGroupContainer.setGdbPath(fGDBCommandText.getText());
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.eclipse.debug.ui.ILaunchConfigurationTab#isValid(org.eclipse.debug.core.ILaunchConfiguration)
-     */
+    @Override
     public boolean isValid(ILaunchConfiguration configuration) {
         setErrorMessage(null);
         setMessage(null);
