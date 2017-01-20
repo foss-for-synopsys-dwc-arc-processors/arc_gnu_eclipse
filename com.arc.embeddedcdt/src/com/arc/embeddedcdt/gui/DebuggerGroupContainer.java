@@ -413,13 +413,32 @@ public class DebuggerGroupContainer extends Observable{
     return ashlingBinaryPathEditor;
   }
 
-  public void initializeFrom(ConfigurationReader configurationReader,
-      ILaunchConfiguration configuration){
+  public static String getDefaultGdbPath() {
+    String gdbPath = "arc-elf32-gdb";
+    String predefinedPath = getIdeBinDir();
+    File predefinedPathFile = new File(predefinedPath);
+
+    if (predefinedPathFile.isDirectory()) {
+        File gdbFile = new File(predefinedPath + "arc-elf32-gdb");
+        if (gdbFile.canExecute()) {
+            gdbPath = gdbFile.getAbsolutePath();
+        }
+    }
+    return gdbPath;
+  }
+
+  public void initializeFrom(ILaunchConfiguration configuration){
+    ConfigurationReader configurationReader = new ConfigurationReader(configuration);
+
     createTabItemCom = false;
     createTabItemComAshling = false;
     createTabItemNsim = false;
     createTabItemGenericGdbServer = false;
     createTabItemCustomGdb = false;
+
+    gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
+        configurationReader.getGdbPath());
+    gdbServer = configurationReader.getGdbServer();
 
     workingDirectoryBlockNsim.initializeFrom(configuration);
 
