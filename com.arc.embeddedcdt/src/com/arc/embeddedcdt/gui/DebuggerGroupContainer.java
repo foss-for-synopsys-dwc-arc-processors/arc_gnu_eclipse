@@ -1330,8 +1330,7 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
     configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
     configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
-    configurationWriter.setNsimSimulateMemoryExceptions(
-        externalNsimMemoryExceptionToolsEnabled);
+    configurationWriter.setNsimSimulateMemoryExceptions(externalNsimMemoryExceptionToolsEnabled);
     configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
     configurationWriter.setNsimUseJit(externalNsimJitEnabled);
     configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
@@ -1340,10 +1339,8 @@ public class DebuggerGroupContainer extends Observable{
       workingDirectoryBlockNsim.performApply(configuration);
     }
 
-    configurationWriter.setFtdiDevice(getAttributeValueFromString(
-        getFtdiDevice().name()));
-    configurationWriter.setFtdiCore(getAttributeValueFromString(
-        getFtdiCore().name()));
+    configurationWriter.setFtdiDevice(getAttributeValueFromString(ftdiDevice.name()));
+    configurationWriter.setFtdiCore(getAttributeValueFromString(ftdiCore.name()));
 
     if (jtagFrequency != null)
         configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
@@ -1357,12 +1354,24 @@ public class DebuggerGroupContainer extends Observable{
     str = str.trim();
     configurationWriter.setGdbServerPort(str);
     configurationWriter.setCustomGdbServerPath(customGdbPath);
-    configurationWriter.setGdbPath(getGdbPath());
-    configurationWriter.setGdbServer(
-        getAttributeValueFromString(gdbServer.toString()));
+    configurationWriter.setGdbPath(gdbPath);
+    configurationWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
 
     configurationWriter.setOpenOcdPath(openOcdBinaryPath);
     configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
+
+    String nsimDefaultPath = getNsimdrvDefaultPath();
+    configurationWriter.setNsimDefaultPath(nsimDefaultPath);
+
+    configurationWriter.setFileFormatVersion(
+        LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
+    /* Because there is no setAttribute(String, long) method. */
+    configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
+
+    if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
+        hostName = gdbServerIpAddressText.getText();
+        configurationWriter.setHostAddress(getAttributeValueFromString(hostName));
+    }
   }
 
   public void createCustomGdbServerArgs(Composite compositeCustomGdb){

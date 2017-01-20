@@ -82,21 +82,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
         debuggerGroupContainer.performApply(configurationWriter, configuration);
-        String nsimDefaultPath = DebuggerGroupContainer.getNsimdrvDefaultPath();
-        configurationWriter.setNsimDefaultPath(nsimDefaultPath);
         debuggerGroupContainer.setGdbPath(fGDBCommandText.getText());
-
-        configurationWriter.setFileFormatVersion(
-            LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
-        /* Because there is no setAttribute(String, long) method. */
-        configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
-
-        if (DebuggerGroupContainer.groupGenericGdbServer != null && !DebuggerGroupContainer.groupGenericGdbServer.isDisposed()) {
-            debuggerGroupContainer.setHostName(
-                debuggerGroupContainer.getTextFromGdbServerIpAddressText());
-            configurationWriter.setHostAddress(DebuggerGroupContainer.getAttributeValueFromString(
-                debuggerGroupContainer.getHostName()));
-        }
     }
 
     /*
