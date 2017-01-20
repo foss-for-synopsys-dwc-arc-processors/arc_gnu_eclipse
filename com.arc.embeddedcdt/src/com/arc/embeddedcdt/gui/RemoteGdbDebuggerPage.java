@@ -27,7 +27,6 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.TabFolder;
-import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.LaunchFileFormatVersionChecker;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
