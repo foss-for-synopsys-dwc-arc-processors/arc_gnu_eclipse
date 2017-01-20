@@ -202,10 +202,6 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
     @Override
     public String getErrorMessage() {
-        String errorMessage = super.getErrorMessage();
-        if (errorMessage == null && !DebuggerGroupContainer.groupNsim.isDisposed()) {
-            return debuggerGroupContainer.getWorkingDirectoryBlockNsim().getErrorMessage();
-        }
-        return errorMessage;
+        return debuggerGroupContainer.getErrorMessage(super.getErrorMessage());
     }
 }
