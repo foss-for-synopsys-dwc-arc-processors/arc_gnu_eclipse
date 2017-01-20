@@ -1374,6 +1374,13 @@ public class DebuggerGroupContainer extends Observable{
     }
   }
 
+  public String getErrorMessage(String errorMessage) {
+    if (errorMessage == null && !groupNsim.isDisposed()) {
+        return workingDirectoryBlockNsim.getErrorMessage();
+    }
+    return errorMessage;
+  }
+
   public void createCustomGdbServerArgs(Composite compositeCustomGdb){
     // GDB server command line arguments
     Label label = new Label(compositeCustomGdb, SWT.LEFT);
