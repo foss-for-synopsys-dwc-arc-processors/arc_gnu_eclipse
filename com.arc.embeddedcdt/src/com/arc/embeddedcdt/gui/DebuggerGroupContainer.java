@@ -55,6 +55,7 @@ import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
  * This class provides the content and control elements for the Gdbserver Settings tab in the
  * Debug Configurations' Debugger tab.
  */
+@SuppressWarnings("restriction")
 public class DebuggerGroupContainer extends Observable{
 
   public static final String DEFAULT_OOCD_BIN;
