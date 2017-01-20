@@ -121,36 +121,12 @@ public class DebuggerGroupContainer extends Observable{
   static Group groupCom;
   private ARCWorkingDirectoryBlock workingDirectoryBlockNsim = new ARCWorkingDirectoryBlock();
 
-  public Combo getExternalToolsCombo(){
-    return externalToolsCombo;
-  }
-
-  public void setExternalToolsCombo(Combo externalToolsCombo){
-    this.externalToolsCombo = externalToolsCombo;
-  }
-
   public ARCWorkingDirectoryBlock getWorkingDirectoryBlockNsim(){
     return workingDirectoryBlockNsim;
   }
 
   public ArcGdbServer getGdbServer(){
     return gdbServer;
-  }
-
-  public void setGdbServer(ArcGdbServer gdbServer){
-    this.gdbServer = gdbServer;
-  }
-
-  public Button getLaunchHostLinkProperties(){
-    return launchHostLinkProperties;
-  }
-
-  public Button getLaunchMemoryExceptionProperties(){
-    return launchMemoryExceptionProperties;
-  }
-
-  public Button getLaunchNsimJitProperties(){
-    return launchNsimJitProperties;
   }
 
   public Button getLaunchTcfPropertiesButton(){
@@ -169,22 +145,6 @@ public class DebuggerGroupContainer extends Observable{
     return nsimTcfPathEditor;
   }
 
-  public boolean getExternalNsimPropertiesEnabled(){
-    return externalNsimPropertiesEnabled;
-  }
-
-  public void setExternalNsimPropertiesEnabled(boolean areEnabled){
-    externalNsimPropertiesEnabled = areEnabled;
-  }
-
-  public String getNsimPropertiesFilesLast(){
-    return nsimPropertiesFilesLast;
-  }
-
-  public void setNsimPropertiesFilesLast(String nsimPropertiesFilesLast){
-    this.nsimPropertiesFilesLast = nsimPropertiesFilesLast;
-  }
-
   public String getGdbPath(){
     return gdbPath;
   }
@@ -193,162 +153,28 @@ public class DebuggerGroupContainer extends Observable{
     gdbPath = path;
   }
 
-  public boolean getCreateTabItemCustomGdb(){
-    return createTabItemCustomGdb;
-  }
-
-  public void setCreateTabItemCustomGdb(boolean isCreated){
-    createTabItemCustomGdb = isCreated;
-  }
-
-  public boolean getCreateTabItemComAshling(){
-    return createTabItemComAshling;
-  }
-
-  public void setCreateTabItemComAshling(boolean isCreated){
-    createTabItemComAshling = isCreated;
-  }
-
-  public boolean getCreateTabItemGenericGdbServer(){
-    return createTabItemGenericGdbServer;
-  }
-
-  public void setCreateTabItemGenericGdbServer(boolean isCreated){
-    createTabItemGenericGdbServer = isCreated;
-  }
-
-  public boolean getCreateTabItemNsim(){
-    return createTabItemNsim;
-  }
-
-  public void setCreateTabItemNsim(boolean isCreated){
-    createTabItemNsim = isCreated;
-  }
-
-  public boolean getCreateTabItemCom(){
-    return createTabItemCom;
-  }
-
-  public void setCreateTabItemCom(boolean isCreated){
-    createTabItemCom = isCreated;
-  }
-
   public FileFieldEditor getNsimBinaryPathEditor(){
     return nsimBinaryPathEditor;
-  }
-
-  public void setNsimBinaryPathEditor(FileFieldEditor editor){
-    nsimBinaryPathEditor = editor;
   }
 
   public FileFieldEditor getOpenOcdConfigurationPathEditor(){
     return openOcdConfigurationPathEditor;
   }
 
-  public void setOpenOcdConfigurationPathEditor(FileFieldEditor editor){
-    openOcdConfigurationPathEditor = editor;
-  }
-
   public FileFieldEditor getOpenOcdBinaryPathEditor(){
     return openOcdBinaryPathEditor;
-  }
-
-  public void setOpenOcdBinaryPathEditor(FileFieldEditor editor){
-    openOcdBinaryPathEditor = editor;
-  }
-
-  public Combo getFtdiCoreCombo(){
-    return ftdiCoreCombo;
-  }
-
-  public void setFtdiCoreCombo(Combo combo){
-    ftdiCoreCombo = combo;
-  }
-
-  public Combo getFtdiDeviceCombo(){
-    return ftdiDeviceCombo;
-  }
-
-  public void setFtdiDeviceCombo(Combo combo){
-    ftdiDeviceCombo = combo;
-  }
-
-  public FtdiCore getFtdiCore(){
-    return ftdiCore;
-  }
-
-  public void setFtdiCore(FtdiCore core){
-    ftdiCore = core;
   }
 
   public FtdiDevice getFtdiDevice(){
     return ftdiDevice;
   }
 
-  public void setFtdiDevice(FtdiDevice device){
-    ftdiDevice = device;
-  }
-
-  /* This get-method is called with the word "access" because method
-   * "getOpenOcdConfigurationPath()" already exists. */
-  public String accessOpenOcdConfigurationPath(){
+  public String getOpenOcdConfigurationPath(){
     return openOcdConfigurationPath;
-  }
-
-  public void setOpenOcdConfigurationPath(String path){
-    openOcdConfigurationPath = path;
-  }
-
-  public void setOpenOcdBinaryPath(String path){
-    openOcdBinaryPath = path;
-  }
-
-  public String getOpenOcdBinaryPath(){
-    return openOcdBinaryPath;
   }
 
   public FileFieldEditor getCustomGdbBinaryPathEditor(){
     return customGdbBinaryPathEditor;
-  }
-
-  public void setCustomGdbPath(String path){
-    customGdbPath = path;
-  }
-
-  public String getCustomGdbPath(){
-    return customGdbPath;
-  }
-
-  public boolean getExternalNsimJitEnabled(){
-    return externalNsimJitEnabled;
-  }
-
-  public void setExternalNsimJitEnabled(boolean isEnabled){
-    this.externalNsimJitEnabled = isEnabled;
-  }
-
-  public boolean getExternalNsimHostLinkToolsEnabled(){
-    return externalNsimHostLinkToolsEnabled;
-  }
-
-  public void setExternalNsimHostLinkToolsEnabled(boolean areEnabled){
-    this.externalNsimHostLinkToolsEnabled = areEnabled;
-  }
-
-  public boolean getExternalNsimMemoryExceptionToolsEnabled(){
-    return externalNsimMemoryExceptionToolsEnabled;
-  }
-
-  public void setExternalNsimMemoryExceptionToolsEnabled(boolean areEnabled){
-    this.externalNsimMemoryExceptionToolsEnabled = areEnabled;
-  }
-
-  public boolean getExternalNsimTcfToolsEnabled(){
-    return externalNsimTcfToolsEnabled;
-  }
-
-  public void setExternalNsimTcfToolsEnabled(boolean areEnabled){
-    this.externalNsimTcfToolsEnabled = areEnabled;
   }
 
   public void setPortNumberText(String defaultText) {
@@ -356,50 +182,6 @@ public class DebuggerGroupContainer extends Observable{
       gdbServerPortNumberText.setText(defaultText);
     else
       gdbServerPortNumberText.setText(portNumber);
-  }
-
-  public String getTextFromGdbServerPortNumberText(){
-    return gdbServerPortNumberText.getText();
-  }
-
-  public void setSelectionForLaunchEnableExceptionPropertiesButton(){
-    launchEnableExceptionProperties.setSelection(externalNsimEnableExceptionToolsEnabled);
-  }
-
-  public String getAshlingXmlPath(){
-    return ashlingXmlPath;
-  }
-
-  public void setTextForGdbServerIpAddressText(final String text){
-    gdbServerIpAddressText.setText(text);;
-  }
-
-  public String getTextFromGdbServerIpAddressText(){
-    return gdbServerIpAddressText.getText();
-  }
-
-  public void setJitThread(final String jitThread){
-    this.jitThread = jitThread;
-  }
-
-  public String getJitThread(){
-    return jitThread;
-  }
-
-  public void setExternalToolsNsimPath(final String externalToolsNsimPath){
-    this.externalToolsNsimPath = externalToolsNsimPath;
-  }
-
-  public String getExternalToolsNsimPath(){
-    return externalToolsNsimPath;
-  }
-
-  public void setHostName(final String hostName){
-    this.hostName = hostName;
-  }
-
-  public String getHostName(){
-    return hostName;
   }
 
   public FileFieldEditor getAshlingTdescXmlPathEditor(){
@@ -707,7 +489,7 @@ public class DebuggerGroupContainer extends Observable{
     ftdiCoreCombo.setText(text);
   }
 
-  private String getOpenOcdConfigurationPath() {
+  private String determineOpenOcdConfigurationPath() {
     final File rootDirectory = new File(openOcdBinaryPath)
         .getParentFile().getParentFile();
     final File scriptsDirectory = new File(rootDirectory,
@@ -1037,7 +819,7 @@ public class DebuggerGroupContainer extends Observable{
     createLaunchEnableExceptionPropertiesButton(compositeNsim,
         gridDataNsim);
 
-    getWorkingDirectoryBlockNsim().createControl(compositeNsim);
+    workingDirectoryBlockNsim.createControl(compositeNsim);
   }
 
   public void createTabItemCom(final Composite subComp) {
@@ -1098,7 +880,7 @@ public class DebuggerGroupContainer extends Observable{
             if (!combo.getText().isEmpty()) {
                 ftdiCore = FtdiCore.fromString(combo.getText());
                 if (getFtdiDevice() != FtdiDevice.CUSTOM) {
-                    openOcdConfigurationPath = getOpenOcdConfigurationPath();
+                    openOcdConfigurationPath = determineOpenOcdConfigurationPath();
                     openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
                 }
             }
@@ -1280,7 +1062,7 @@ public class DebuggerGroupContainer extends Observable{
             if (event.getProperty() == "field_editor_value") {
                 openOcdBinaryPath = (String) event.getNewValue();
                 if (ftdiDevice != FtdiDevice.CUSTOM) {
-                    openOcdConfigurationPath = getOpenOcdConfigurationPath();
+                    openOcdConfigurationPath = determineOpenOcdConfigurationPath();
                     openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
                 }
                 setChanged();
