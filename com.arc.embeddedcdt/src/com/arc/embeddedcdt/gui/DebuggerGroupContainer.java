@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Observable;
 
+import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.cdt.launch.remote.IRemoteConnectionConfigurationConstants;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -29,13 +30,19 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.internal.Workbench;
 
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
@@ -716,6 +723,257 @@ public class DebuggerGroupContainer extends Observable{
         throw new IllegalArgumentException("Unknown enum value has been used");
     }
     return openOcdConfiguration;
+  }
+
+  private void createTabItemHostAddress(Composite subComp) {
+    final int screenPpi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
+    final int minTextWidth = 2 * screenPpi;
+    createTabItemGenericGdbServer = true;
+    groupGenericGdbServer = SWTFactory.createGroup(subComp,
+            ArcGdbServer.GENERIC_GDBSERVER.toString(), 3, 5, GridData.FILL_HORIZONTAL);
+    final Composite compCOM = SWTFactory.createComposite(groupGenericGdbServer, 3, 5,
+            GridData.FILL_BOTH);
+
+    Label label = new Label(compCOM, SWT.LEFT);
+    label.setText("Host Address:");
+
+    createGdbServerIpAddressText(compCOM, minTextWidth);
+  }
+
+  public void createGdbServerSettingsTab(TabFolder tabFolder) {
+    // Lets set minimal width of text field to 2 inches. If more required text fields will
+    // stretch.
+    final int screenPpi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
+    final int minTextWidth = 2 * screenPpi;
+
+    TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+    tabItem.setText(Messages.Gdbserver_Settings_Tab_Name);
+
+    Composite comp = new Composite(tabFolder, SWT.NULL);
+    comp.setLayout(new GridLayout(1, true));
+    comp.setLayoutData(new GridData(GridData.FILL_BOTH));
+    ((GridLayout) comp.getLayout()).makeColumnsEqualWidth = false;
+    comp.setFont(tabFolder.getFont());
+    tabItem.setControl(comp);
+
+    final Composite subComp = new Composite(comp, SWT.NULL);
+    subComp.setLayout(new GridLayout(5, true));
+    subComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+    ((GridLayout) subComp.getLayout()).makeColumnsEqualWidth = false;
+    subComp.setFont(tabFolder.getFont());
+
+    Label label = new Label(subComp, SWT.LEFT);
+    label.setText("ARC GDB Server:");
+    GridData gd = new GridData();
+    label.setLayoutData(gd);
+
+    GridData serverTypeComboGridData = new GridData(SWT.BEGINNING, SWT.BEGINNING, true, false);
+    serverTypeComboGridData.horizontalSpan = 4;
+    serverTypeComboGridData.minimumWidth = minTextWidth;
+    externalToolsCombo = new Combo(subComp, SWT.None | SWT.READ_ONLY);
+    externalToolsCombo.setLayoutData(serverTypeComboGridData);
+    for (ArcGdbServer server: ArcGdbServer.values()) {
+        externalToolsCombo.add(server.toString());
+    }
+
+    externalToolsCombo.addModifyListener(new ModifyListener() {
+        public void modifyText(ModifyEvent event) {
+            Combo combo = (Combo) event.widget;
+            try {
+                gdbServer = ArcGdbServer.fromString(combo.getText());
+            } catch (IllegalArgumentException e) {
+                gdbServer = ArcGdbServer.DEFAULT_GDB_SERVER;
+            }
+
+            if (gdbServer == ArcGdbServer.JTAG_OPENOCD) {
+                setPortNumberText(LaunchConfigurationConstants.DEFAULT_OPENOCD_PORT);
+
+                groupNsim.dispose();
+                if (groupGenericGdbServer != null) {
+                    groupGenericGdbServer.dispose();
+                }
+                groupComAshling.dispose();
+                groupComCustomGdb.dispose();
+
+                if (!createTabItemCom) {
+                    if (!groupCom.isDisposed())
+                        groupCom.dispose();
+
+                    createTabItemCom(subComp);
+                }
+                groupCom.setText(gdbServer.toString());
+                createTabItemNsim = false;
+                createTabItemComAshling = false;
+                groupCom.setVisible(true);
+                createTabItemGenericGdbServer = false;
+                createTabItemCustomGdb = false;
+            } else if (gdbServer == ArcGdbServer.JTAG_ASHLING) {
+                setPortNumberText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
+
+                groupNsim.dispose();
+                if (groupGenericGdbServer != null) {
+                    groupGenericGdbServer.dispose();
+                }
+                groupCom.dispose();
+                groupComCustomGdb.dispose();
+                createTabItemNsim = false;
+                createTabItemGenericGdbServer = false;
+                createTabItemCom = false;
+                createTabItemCustomGdb = false;
+
+                if (!createTabItemComAshling) {
+                    if (!groupComAshling.isDisposed())
+                        groupComAshling.dispose();
+
+                    createTabItemComAshling(subComp);
+                }
+
+                groupComAshling.setText(gdbServer.toString());
+                groupComAshling.setVisible(true);
+            } else if (gdbServer == ArcGdbServer.NSIM) {
+                setPortNumberText(LaunchConfigurationConstants.DEFAULT_NSIM_PORT);
+
+                if (!CommandTab.initcom.isEmpty())
+                    CommandTab.initcom = "";
+
+                IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
+                        .getActivePage();
+
+                String viewId = "org.eclipse.tm.terminal.view.ui.TerminalsView";
+
+                if (page != null) {
+                    IViewReference[] viewReferences = page.getViewReferences();
+                    for (IViewReference ivr : viewReferences) {
+                        if (ivr.getId().equalsIgnoreCase(viewId)
+                                || ivr.getId()
+                                        .equalsIgnoreCase(
+                                                "more view id if you want to close more than one at"
+                                                + " a time")) {
+                            page.hideView(ivr);
+                        }
+                    }
+                }
+
+                groupCom.dispose();
+                groupComAshling.dispose();
+                groupComCustomGdb.dispose();
+                if (groupGenericGdbServer != null) {
+                    groupGenericGdbServer.dispose();
+                }
+                if (!createTabItemNsim) {
+                    if (!groupNsim.isDisposed())
+                        groupNsim.dispose();
+                    createTabItemNsim(subComp);
+
+                    launchTcf.setSelection(externalNsimPropertiesEnabled);
+                    launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+                    launchNsimJitProperties.setSelection(externalNsimJitEnabled);
+                    launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
+                    launchMemoryExceptionProperties.setSelection(
+                        externalNsimMemoryExceptionToolsEnabled);
+                    launchEnableExceptionProperties.setSelection(
+                        externalNsimEnableExceptionToolsEnabled);
+                }
+                groupNsim.setText(gdbServer.toString());
+                createTabItemCom = false;
+                createTabItemComAshling = false;
+                groupNsim.setVisible(true);
+                createTabItemGenericGdbServer = false;
+                createTabItemCustomGdb = false;
+
+            } else if (gdbServer == ArcGdbServer.GENERIC_GDBSERVER) {
+                groupCom.dispose();
+                groupComAshling.dispose();
+                groupNsim.dispose();
+                groupComCustomGdb.dispose();
+                if (!createTabItemGenericGdbServer) {
+                    if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
+                        groupGenericGdbServer.dispose();
+
+                    createTabItemHostAddress(subComp);
+                }
+                createTabItemCom = false;
+                createTabItemComAshling = false;
+                createTabItemNsim = false;
+                createTabItemCustomGdb = false;
+                groupGenericGdbServer.setText(gdbServer.toString());
+                groupGenericGdbServer.setVisible(true);
+
+                IWorkbenchPage page = Workbench.getInstance().getActiveWorkbenchWindow()
+                        .getActivePage();
+
+                String viewId = "org.eclipse.tm.terminal.view.ui.TerminalsView";
+
+                if (page != null) {
+                    IViewReference[] viewReferences = page.getViewReferences();
+                    for (IViewReference ivr : viewReferences) {
+                        if (ivr.getId().equalsIgnoreCase(viewId)
+                                || ivr.getId()
+                                        .equalsIgnoreCase(
+                                                "more view id if you want to close more than one at"
+                                                + " a time")) {
+                            page.hideView(ivr);
+                        }
+                    }
+                }
+
+                if (!groupCom.isDisposed())
+                    groupCom.setVisible(false);
+                if (!groupNsim.isDisposed())
+                    groupNsim.setVisible(false);
+                if (!groupComAshling.isDisposed())
+                    groupComAshling.setVisible(false);
+                if (!groupComCustomGdb.isDisposed()) {
+                    groupComCustomGdb.setVisible(false);
+                }
+
+            } else if (gdbServer == ArcGdbServer.CUSTOM_GDBSERVER) {
+                setPortNumberText(LaunchConfigurationConstants.DEFAULT_OPELLAXD_PORT);
+
+                groupNsim.dispose();
+                groupCom.dispose();
+                groupComAshling.dispose();
+                groupGenericGdbServer.dispose();
+                createTabItemNsim = false;
+                createTabItemCom = false;
+                createTabItemComAshling = false;
+                createTabItemGenericGdbServer = false;
+                if (!createTabItemCustomGdb) {
+                    if (!groupComCustomGdb.isDisposed())
+                        groupComCustomGdb.dispose();
+
+                    createTabCustomGdb(subComp);
+                }
+
+                groupComCustomGdb.setText(gdbServer.toString());
+                if (!groupComCustomGdb.isVisible())
+                    groupComCustomGdb.setVisible(true);
+            }
+
+            setChanged();
+            notifyObservers();
+        }
+    });
+
+    // GDB port label
+    label = new Label(subComp, SWT.LEFT);
+    label.setText(Messages.Port_number_textfield_label);
+    GridData gdbPortLabelGridData = new GridData();
+    gdbPortLabelGridData.horizontalSpan = 1;
+    label.setLayoutData(gdbPortLabelGridData);
+
+    createGdbServerPortNumberText(subComp, minTextWidth);
+
+    if (!createTabItemNsim)
+        createTabItemNsim(subComp);
+    if (!createTabItemCom)
+        createTabItemCom(subComp);
+    if (!createTabItemComAshling)
+        createTabItemComAshling(subComp);
+    if (!createTabItemGenericGdbServer)
+        createTabItemHostAddress(subComp);
+    if (!createTabItemCustomGdb)
+        createTabCustomGdb(subComp);
   }
 
   public void createTabItemNsim(Composite subComp) {
