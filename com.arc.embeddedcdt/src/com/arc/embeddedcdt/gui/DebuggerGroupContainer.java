@@ -767,6 +767,8 @@ public class DebuggerGroupContainer extends Observable{
                         externalNsimMemoryExceptionToolsEnabled);
                     launchEnableExceptionProperties.setSelection(
                         externalNsimEnableExceptionToolsEnabled);
+                    launchInvalidInstructionExceptionProperties.setSelection(
+                        launchExternalNsimInvalidInstructionException);
                 }
                 groupNsim.setText(gdbServer.toString());
                 createTabItemCom = false;
