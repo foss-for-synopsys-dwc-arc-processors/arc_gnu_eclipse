@@ -15,7 +15,6 @@
 
 package com.arc.embeddedcdt.gui;
 
-import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,12 +24,10 @@ import org.eclipse.cdt.internal.launch.remote.Messages;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
-import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.swt.widgets.TabFolder;
 import com.arc.embeddedcdt.common.LaunchFileFormatVersionChecker;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
-import com.arc.embeddedcdt.common.FtdiDevice;
 
 /**
  * The dynamic debugger tab for remote launches using gdb server. The gdbserver settings are used to
@@ -47,7 +44,10 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
 
         @Override
         public void update(Observable o, Object arg) {
-          updateLaunchConfigurationDialog();
+          if (arg == null)
+            updateLaunchConfigurationDialog();
+          else
+            setErrorMessage((String) arg);
         }
       });
     }
@@ -88,104 +88,7 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
     public boolean isValid(ILaunchConfiguration configuration) {
         setErrorMessage(null);
         setMessage(null);
-
-        if (debuggerGroupContainer.getGdbServer() != null) {
-
-            switch (debuggerGroupContainer.getGdbServer()) {
-            case JTAG_OPENOCD:
-                if (DebuggerGroupContainer.groupCom.isDisposed()) {
-                    return true;
-                }
-                if (!isValidFileFieldEditor(debuggerGroupContainer.getOpenOcdBinaryPathEditor())) {
-                    return false;
-                }
-                if (debuggerGroupContainer.getFtdiDevice() == FtdiDevice.CUSTOM) {
-                    if (!isValidFileFieldEditor(
-                        debuggerGroupContainer.getOpenOcdConfigurationPathEditor())) {
-                        return false;
-                    }
-                } else {
-                    File configurationFile = new File(
-                        debuggerGroupContainer.getOpenOcdConfigurationPath());
-                    if (!configurationFile.exists()) {
-                        setErrorMessage(
-                                "Default OpenOCD configuration file for this development system \'"
-                                        + debuggerGroupContainer.getOpenOcdConfigurationPathEditor()
-                                        + "\' must exist");
-                        return false;
-                    }
-                }
-                break;
-            case JTAG_ASHLING:
-                if (DebuggerGroupContainer.groupComAshling.isDisposed()){
-                    return true;
-                }
-                if (!isValidFileFieldEditor(debuggerGroupContainer.getAshlingBinaryPathEditor())
-                        || !isValidFileFieldEditor(debuggerGroupContainer.getAshlingXmlPathEditor())
-                        || !isValidFileFieldEditor(
-                            debuggerGroupContainer.getAshlingTdescXmlPathEditor())) {
-                     return false;
-                }
-                break;
-            case NSIM:
-                if (DebuggerGroupContainer.groupNsim.isDisposed()) {
-                    return true;
-                }
-                if (!isValidFileFieldEditor(debuggerGroupContainer.getNsimBinaryPathEditor())
-                        || (debuggerGroupContainer.getLaunchTcf().getSelection()
-                                && !isValidFileFieldEditor(
-                                    debuggerGroupContainer.getNsimTcfPathEditor()))
-                        || (debuggerGroupContainer.getLaunchTcfPropertiesButton().getSelection()
-                                && !isValidFileFieldEditor(
-                                    debuggerGroupContainer.getNsimPropertiesPathEditor()))
-                        || !debuggerGroupContainer.getWorkingDirectoryBlockNsim().isValid(
-                            configuration)) {
-                     return false;
-                }
-                break;
-            case CUSTOM_GDBSERVER:
-                if (DebuggerGroupContainer.groupComCustomGdb.isDisposed()) {
-                    return true;
-                }
-                if (!isValidFileFieldEditor(debuggerGroupContainer.getCustomGdbBinaryPathEditor())) {
-                    return false;
-                }
-                break;
-            case GENERIC_GDBSERVER:
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown enum value has been used");
-            }
-        }
-
-        return true;
-    }
-
-    private boolean isValidFileFieldEditor(FileFieldEditor editor) {
-        String validity = checkFileFieldEditorValidity(editor);
-        if (validity == null)
-          return true;
-        else {
-          setErrorMessage(validity);
-          return false;
-        }
-    }
-
-    /**
-     *
-     * @return Null if the fileFieldEditor is valid, otherwise error message.
-     */
-    private String checkFileFieldEditorValidity(FileFieldEditor editor) {
-      if (editor != null) {
-          String label = editor.getLabelText();
-          if (editor.getStringValue().isEmpty()) {
-              return label + "'s value cannot be empty";
-          }
-          if (!editor.isValid()) {
-              return label + "'s value must be an existing file";
-          }
-      }
-      return null;
+        return debuggerGroupContainer.isValid(configuration);
     }
 
     @Override
