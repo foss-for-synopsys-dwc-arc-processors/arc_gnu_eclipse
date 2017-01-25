@@ -324,6 +324,100 @@ public class DebuggerGroupContainer extends Observable{
     });
   }
 
+  public boolean isValid(ILaunchConfiguration configuration) {
+    if (gdbServer != null) {
+
+      switch (gdbServer) {
+        case JTAG_OPENOCD:
+          if (groupCom.isDisposed()) {
+            return true;
+          }
+          if (!isValidFileFieldEditor(openOcdBinaryPathEditor)) {
+            return false;
+          }
+          if (ftdiDevice == FtdiDevice.CUSTOM) {
+            if (!isValidFileFieldEditor(openOcdConfigurationPathEditor)) {
+              return false;
+            }
+          } else {
+            File configurationFile = new File(openOcdConfigurationPath);
+            if (!configurationFile.exists()) {
+              setChanged();
+              notifyObservers("Default OpenOCD configuration file for this development system \'"
+                  + openOcdConfigurationPathEditor + "\' must exist");
+              return false;
+            }
+          }
+          break;
+        case JTAG_ASHLING:
+          if (groupComAshling.isDisposed()) {
+            return true;
+          }
+          if (!isValidFileFieldEditor(ashlingBinaryPathEditor)
+              || !isValidFileFieldEditor(ashlingXmlPathEditor)
+              || !isValidFileFieldEditor(ashlingTdescXmlPathEditor)) {
+            return false;
+          }
+          break;
+        case NSIM:
+          if (groupNsim.isDisposed()) {
+            return true;
+          }
+          if (!isValidFileFieldEditor(nsimBinaryPathEditor)
+              || (launchTcf.getSelection()
+                  && !isValidFileFieldEditor(nsimTcfPathEditor))
+              || (launchTcfPropertiesButton.getSelection()
+                  && !isValidFileFieldEditor(nsimPropertiesPathEditor))
+              || !workingDirectoryBlockNsim.isValid(configuration)) {
+            return false;
+          }
+          break;
+        case CUSTOM_GDBSERVER:
+          if (groupComCustomGdb.isDisposed()) {
+            return true;
+          }
+          if (!isValidFileFieldEditor(customGdbBinaryPathEditor)) {
+            return false;
+          }
+          break;
+        case GENERIC_GDBSERVER:
+          break;
+        default:
+          throw new IllegalArgumentException("Unknown enum value has been used");
+      }
+    }
+
+    return true;
+  }
+
+  private boolean isValidFileFieldEditor(FileFieldEditor editor) {
+    String validity = checkFileFieldEditorValidity(editor);
+    if (validity == null)
+      return true;
+    else {
+      setChanged();
+      notifyObservers(validity);
+      return false;
+    }
+  }
+
+  /**
+   *
+   * @return Null if the fileFieldEditor is valid, otherwise error message.
+   */
+  private String checkFileFieldEditorValidity(FileFieldEditor editor) {
+    if (editor != null) {
+      String label = editor.getLabelText();
+      if (editor.getStringValue().isEmpty()) {
+        return label + "'s value cannot be empty";
+      }
+      if (!editor.isValid()) {
+        return label + "'s value must be an existing file";
+      }
+    }
+    return null;
+  }
+
   public void createJitThreadSpinner(Composite compositeNsim, GridData gridData, GridData gridData2){
     gridData = new GridData(SWT.BEGINNING);
     gridData.horizontalSpan = 3;
