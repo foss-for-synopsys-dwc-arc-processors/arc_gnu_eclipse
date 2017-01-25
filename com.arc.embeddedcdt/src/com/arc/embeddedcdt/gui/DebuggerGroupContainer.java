@@ -924,6 +924,8 @@ public class DebuggerGroupContainer extends Observable{
     final Composite compositeCom = SWTFactory.createComposite(groupCom, 3, 5, GridData.FILL_BOTH);
 
     createTabItemCom = true;
+
+    createOpenOcdBinaryPathEditor(compositeCom);
     Label label = new Label(compositeCom, SWT.LEFT);
     label.setText("Development system:");
     ftdiDeviceCombo = new Combo(compositeCom, SWT.None | SWT.READ_ONLY);// 1-2 and 1-3
