@@ -317,11 +317,15 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 ashlingXmlPath = (String) event.getNewValue();
-                setChanged();
-                notifyObservers();
+                sendNotification(null);
             }
         }
     });
+  }
+
+  private void sendNotification(Object argumentToNotifyMethod){
+    setChanged();
+    notifyObservers(argumentToNotifyMethod);
   }
 
   public boolean isValid(ILaunchConfiguration configuration) {
@@ -342,8 +346,7 @@ public class DebuggerGroupContainer extends Observable{
           } else {
             File configurationFile = new File(openOcdConfigurationPath);
             if (!configurationFile.exists()) {
-              setChanged();
-              notifyObservers("Default OpenOCD configuration file for this development system \'"
+              sendNotification("Default OpenOCD configuration file for this development system \'"
                   + openOcdConfigurationPathEditor + "\' must exist");
               return false;
             }
@@ -395,8 +398,7 @@ public class DebuggerGroupContainer extends Observable{
     if (validity == null)
       return true;
     else {
-      setChanged();
-      notifyObservers(validity);
+      sendNotification(validity);
       return false;
     }
   }
@@ -446,8 +448,7 @@ public class DebuggerGroupContainer extends Observable{
     jitThreadSpinner.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
             jitThread = jitThreadSpinner.getText();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
 
@@ -467,8 +468,7 @@ public class DebuggerGroupContainer extends Observable{
     launchHostLinkProperties.addSelectionListener(new SelectionListener() {
       public void widgetSelected(SelectionEvent event) {
         externalNsimHostLinkToolsEnabled = launchHostLinkProperties.getSelection();
-        setChanged();
-        notifyObservers();
+        sendNotification(null);
       }
 
       public void widgetDefaultSelected(SelectionEvent event) {}
@@ -496,8 +496,7 @@ public class DebuggerGroupContainer extends Observable{
                 jitLabel.setEnabled(false);
                 jitThreadSpinner.setEnabled(false);
             }
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {
@@ -527,8 +526,7 @@ public class DebuggerGroupContainer extends Observable{
                 launchTcfPropertiesButton.setSelection(false);
                 nsimTcfPathEditor.setEnabled(false, compositeNsim);
             }
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {
@@ -545,8 +543,7 @@ public class DebuggerGroupContainer extends Observable{
       public void propertyChange(PropertyChangeEvent event) {
         if (event.getProperty() == "field_editor_value") {
           nsimPropertiesFilesLast = (String) event.getNewValue();
-          setChanged();
-          notifyObservers();
+          sendNotification(null);
         }
       }
     });
@@ -560,8 +557,7 @@ public class DebuggerGroupContainer extends Observable{
       public void propertyChange(PropertyChangeEvent event) {
         if (event.getProperty() == "field_editor_value") {
           nsimPropertiesFilesLast = (String) event.getNewValue();
-          setChanged();
-          notifyObservers();
+          sendNotification(null);
         }
       }
     });
@@ -848,8 +844,7 @@ public class DebuggerGroupContainer extends Observable{
                     groupComCustomGdb.setVisible(true);
             }
 
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
 
@@ -955,8 +950,7 @@ public class DebuggerGroupContainer extends Observable{
                 ftdiCoreCombo.setEnabled(true);
 
             updateFtdiCoreCombo();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
 
@@ -982,8 +976,7 @@ public class DebuggerGroupContainer extends Observable{
                     openOcdConfigurationPathEditor.setStringValue(openOcdConfigurationPath);
                 }
             }
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
 
@@ -996,8 +989,7 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 openOcdConfigurationPath = event.getNewValue().toString();
-                setChanged();
-                notifyObservers();
+                sendNotification(null);
             }
         }
     });
@@ -1028,8 +1020,7 @@ public class DebuggerGroupContainer extends Observable{
         public void propertyChange(PropertyChangeEvent event) {
             if (event.getProperty() == "field_editor_value") {
                 customGdbPath = (String) event.getNewValue();
-                setChanged();
-                notifyObservers();
+                sendNotification(null);
             }
         }
     });
@@ -1044,8 +1035,7 @@ public class DebuggerGroupContainer extends Observable{
     launchMemoryExceptionProperties.addSelectionListener(new SelectionListener() {
         public void widgetSelected(SelectionEvent event) {
             externalNsimMemoryExceptionToolsEnabled = launchMemoryExceptionProperties.getSelection();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {
@@ -1074,8 +1064,7 @@ public class DebuggerGroupContainer extends Observable{
                 externalNsimPropertiesEnabled = false;
                 nsimPropertiesPathEditor.setEnabled(false, compositeNsim);
             }
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {
@@ -1096,8 +1085,7 @@ public class DebuggerGroupContainer extends Observable{
         gdbServerIpAddressText.setText(hostName);
     gdbServerIpAddressText.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
   }
@@ -1111,8 +1099,7 @@ public class DebuggerGroupContainer extends Observable{
     gdbServerPortNumberText.setLayoutData(gdbPortTextGridData);
     gdbServerPortNumberText.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
   }
@@ -1143,8 +1130,7 @@ public class DebuggerGroupContainer extends Observable{
     public void propertyChange(PropertyChangeEvent event) {
         if (event.getProperty() == "field_editor_value") {
             externalToolsNsimPath = (String) event.getNewValue();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     }
 });
@@ -1279,8 +1265,7 @@ public class DebuggerGroupContainer extends Observable{
     customGdbCommandLineArgumentsText.addModifyListener(new ModifyListener() {
         public void modifyText(ModifyEvent event) {
             customGdbCommandLineArguments = customGdbCommandLineArgumentsText.getText();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
     });
   }
@@ -1302,8 +1287,7 @@ public class DebuggerGroupContainer extends Observable{
     launchEnableExceptionProperties.addSelectionListener(new SelectionListener() {
         public void widgetSelected(SelectionEvent event) {
             externalNsimEnableExceptionToolsEnabled = launchEnableExceptionProperties.getSelection();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {
@@ -1326,8 +1310,7 @@ public class DebuggerGroupContainer extends Observable{
         public void widgetSelected(SelectionEvent event) {
             launchExternalNsimInvalidInstructionException =
                 launchInvalidInstructionExceptionProperties.getSelection();
-            setChanged();
-            notifyObservers();
+            sendNotification(null);
         }
 
         public void widgetDefaultSelected(SelectionEvent event) {
