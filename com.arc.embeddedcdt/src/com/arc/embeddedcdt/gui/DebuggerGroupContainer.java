@@ -420,17 +420,34 @@ public class DebuggerGroupContainer extends Observable{
     return null;
   }
 
-  public void createJitThreadSpinner(Composite compositeNsim, GridData gridData, GridData gridData2){
-    gridData = new GridData(SWT.BEGINNING);
-    gridData.horizontalSpan = 3;
+  private void addSelectionListenerForLaunchNsimJitProperties(final Label jitLabel) {
+    launchNsimJitProperties.addSelectionListener(new SelectionListener() {
+      public void widgetSelected(SelectionEvent event) {
+        if (launchNsimJitProperties.getSelection() == true) {
+          externalNsimJitEnabled = true;
+          jitLabel.setEnabled(true);
+          jitThreadSpinner.setEnabled(true);
+        } else {
+          externalNsimJitEnabled = false;
+          jitLabel.setEnabled(false);
+          jitThreadSpinner.setEnabled(false);
+        }
+        sendNotification(null);;
+      }
 
+      public void widgetDefaultSelected(SelectionEvent event) {}
+    });
+  }
+
+  public void createJitThreadSpinner(Composite compositeNsim, GridData gridData){
     jitThreadSpinner = new Spinner(compositeNsim, SWT.NONE | SWT.BORDER);
     jitThreadSpinner.setToolTipText(
         "Specify number of threads to use in JIT simulation mode (-p nsim_fast-num-threads=N)");
     final Label jitLabel = new Label(compositeNsim, SWT.BEGINNING);
     jitLabel.setText("JIT threads");
     jitThreadSpinner.setValues(1, 1, 100, 10, 1, 0);
-    createLaunchNsimJitProperties(compositeNsim, gridData, jitThreadSpinner, jitLabel);
+
+    addSelectionListenerForLaunchNsimJitProperties(jitLabel);
     if (externalNsimJitEnabled) {
         jitLabel.setEnabled(true);
         jitThreadSpinner.setEnabled(true);
@@ -452,9 +469,7 @@ public class DebuggerGroupContainer extends Observable{
         }
     });
 
-    gridData2 = new GridData(SWT.BEGINNING);
-    gridData2.horizontalSpan = 2;
-    jitLabel.setLayoutData(gridData2);
+    jitLabel.setLayoutData(createGridData(2));
   }
 
   public void createLaunchHostLinkProperties(Composite compositeNsim, GridData gridDataNsim) {
@@ -478,61 +493,29 @@ public class DebuggerGroupContainer extends Observable{
     launchHostLinkProperties.setLayoutData(gridDataNsim);
   }
 
-  public void createLaunchNsimJitProperties(Composite compositeNsim, GridData gridData,
-      final Spinner jitThreadSpinner, final Label jitLabel){
+  public void createLaunchNsimJitProperties(Composite compositeNsim, GridData gridData){
     launchNsimJitProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
     launchNsimJitProperties.setSelection(externalNsimJitEnabled);
     launchNsimJitProperties.setText("JIT");
     launchNsimJitProperties.setToolTipText("Enable (1) or disable (0) JIT simulation mode (-p nsim_fast={0,1})");
-    launchNsimJitProperties.addSelectionListener(new SelectionListener() {
-        public void widgetSelected(SelectionEvent event) {
-            if (launchNsimJitProperties.getSelection() == true) {
-                externalNsimJitEnabled = true;
-                jitLabel.setEnabled(true);
-                jitThreadSpinner.setEnabled(true);
-
-            } else {
-                externalNsimJitEnabled = false;
-                jitLabel.setEnabled(false);
-                jitThreadSpinner.setEnabled(false);
-            }
-            sendNotification(null);
-        }
-
-        public void widgetDefaultSelected(SelectionEvent event) {
-        }
-
-    });
-
     launchNsimJitProperties.setLayoutData(gridData);
   }
 
-  public void createLaunchTcf(final Composite compositeNsim, GridData gridData,
-      final Button launchTcfPropertiesButton){
+  public void createLaunchTcf(final Composite compositeNsim, GridData gridData){
     launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
     launchTcf.setToolTipText("-propsfile=path");
     launchTcf.setSelection(externalNsimPropertiesEnabled);
     launchTcf.setLayoutData(gridData);
     launchTcf.setText("Use nSIM properties file?");
+  }
 
-    launchTcf.addSelectionListener(new SelectionListener() {
-        public void widgetSelected(SelectionEvent event) {
-            if (launchTcf.getSelection() == true) {
-                externalNsimTcfToolsEnabled = true;
-                nsimTcfPathEditor.setEnabled(true, compositeNsim);
-
-            } else {
-                externalNsimTcfToolsEnabled = false;
-                launchTcfPropertiesButton.setSelection(false);
-                nsimTcfPathEditor.setEnabled(false, compositeNsim);
-            }
-            sendNotification(null);
-        }
-
-        public void widgetDefaultSelected(SelectionEvent event) {
-        }
-
-    });
+  public void createLaunchTcfPropertiesButton(final Composite compositeNsim, GridData gridData){
+    launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchTcfPropertiesButton.setToolTipText(
+        "Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
+    launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+    launchTcfPropertiesButton.setLayoutData(gridData);
+    launchTcfPropertiesButton.setText("Use TCF?");
   }
 
   public void createNsimTcfPathEditor(Composite compositeNsim){
@@ -873,46 +856,67 @@ public class DebuggerGroupContainer extends Observable{
 
   public void createTabItemNsim(Composite subComp) {
     createTabItemNsim = true;
-
     groupNsim = SWTFactory.createGroup(subComp, externalToolsCombo.getItem(0), 3, 5,
             GridData.FILL_HORIZONTAL);
     final Composite compositeNsim = SWTFactory.createComposite(groupNsim, 3, 5, GridData.FILL_BOTH);
-
-    GridData gridData = new GridData();
-    GridData gridData2 = new GridData();
-
     createNsimBinaryPathEditor(compositeNsim);
+    createLaunchTcfPropertiesButton(compositeNsim, createGridData(3));
     createNsimTcfPathEditor(compositeNsim);
-    nsimTcfPathEditor.setEnabled(externalNsimTcfToolsEnabled, compositeNsim);
+    createLaunchTcf(compositeNsim, createGridData(3));
     createNsimPropertiesPathEditor(compositeNsim);
-    nsimBinaryPathEditor.setEnabled(externalNsimPropertiesEnabled, compositeNsim);
-    gridData = new GridData(SWT.BEGINNING);
-    gridData.horizontalSpan = 3;
-
-    createLaunchTcf(compositeNsim, gridData,
-        getLaunchTcfPropertiesButton());
-    createLaunchTcfPropertiesButton(compositeNsim, gridData);
-    // JIT
-
-    gridData = new GridData(SWT.BEGINNING);
-    gridData.horizontalSpan = 3;
-
-    gridData2 = new GridData(SWT.BEGINNING);
-    gridData2.horizontalSpan = 2;
-
-    createJitThreadSpinner(compositeNsim, gridData, gridData2);
-
-    GridData gridDataNsim = new GridData(SWT.BEGINNING);
-    gridDataNsim.horizontalSpan = 2;
-
+    nsimTcfPathEditor.setEnabled(externalNsimTcfToolsEnabled, compositeNsim);
+    addSelectionListenerForLaunchTcf(compositeNsim);
+    addSelectionListenerForLaunchTcfPropertiesButton(compositeNsim);
+    createLaunchNsimJitProperties(compositeNsim, createGridData(3));
+    createJitThreadSpinner(compositeNsim, createGridData(3));
+    GridData gridDataNsim = createGridData(2);
     createLaunchHostLinkProperties(compositeNsim, gridDataNsim);
-
     createLaunchMemoryExceptionProperties(compositeNsim, gridDataNsim);
-
-    createLaunchEnableExceptionPropertiesButton(compositeNsim,
-        gridDataNsim);
-
+    createLaunchEnableExceptionPropertiesButton(compositeNsim, gridDataNsim);
+    createlaunchInvalidInstructionExceptionProperties(compositeNsim, gridDataNsim);
     workingDirectoryBlockNsim.createControl(compositeNsim);
+  }
+
+  private void addSelectionListenerForLaunchTcfPropertiesButton(final Composite compositeNsim) {
+    launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
+      public void widgetSelected(SelectionEvent event) {
+        if (launchTcfPropertiesButton.getSelection()) {
+          externalNsimPropertiesEnabled = true;
+          nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
+        } else {
+          externalNsimPropertiesEnabled = false;
+          nsimPropertiesPathEditor.setEnabled(false, compositeNsim);
+        }
+        sendNotification(null);
+      }
+
+      public void widgetDefaultSelected(SelectionEvent event) {}
+    });
+
+  }
+
+  private void addSelectionListenerForLaunchTcf(final Composite compositeNsim) {
+    launchTcf.addSelectionListener(new SelectionListener() {
+      public void widgetSelected(SelectionEvent event) {
+        if (launchTcf.getSelection()) {
+          externalNsimTcfToolsEnabled = true;
+          nsimTcfPathEditor.setEnabled(true, compositeNsim);
+        } else {
+          externalNsimTcfToolsEnabled = false;
+          launchTcfPropertiesButton.setSelection(false);
+          nsimTcfPathEditor.setEnabled(false, compositeNsim);
+        }
+        sendNotification(null);
+      }
+
+      public void widgetDefaultSelected(SelectionEvent event) {}
+    });
+  }
+
+  private GridData createGridData(int horizontalSpan){
+    GridData gridData = new GridData(SWT.BEGINNING);
+    gridData.horizontalSpan = horizontalSpan;
+    return gridData;
   }
 
   public void createTabItemCom(final Composite subComp) {
@@ -1046,33 +1050,6 @@ public class DebuggerGroupContainer extends Observable{
     });
 
     launchMemoryExceptionProperties.setLayoutData(gridDataNsim);
-  }
-
-  public void createLaunchTcfPropertiesButton(final Composite compositeNsim, GridData gridData){
-    launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-    launchTcfPropertiesButton.setToolTipText(
-        "Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
-    launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
-    launchTcfPropertiesButton.setLayoutData(gridData);
-    launchTcfPropertiesButton.setText("Use TCF?");
-
-    launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
-
-        public void widgetSelected(SelectionEvent event) {
-            if (launchTcfPropertiesButton.getSelection() == true) {
-                externalNsimPropertiesEnabled = true;
-                nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
-            } else {
-                externalNsimPropertiesEnabled = false;
-                nsimPropertiesPathEditor.setEnabled(false, compositeNsim);
-            }
-            sendNotification(null);
-        }
-
-        public void widgetDefaultSelected(SelectionEvent event) {
-        }
-
-    });
   }
 
   public void createGdbServerIpAddressText(Composite compCOM, int minTextWidth){
