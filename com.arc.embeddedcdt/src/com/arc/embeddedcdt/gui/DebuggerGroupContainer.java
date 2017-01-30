@@ -83,8 +83,8 @@ public class DebuggerGroupContainer extends Observable{
   private String customGdbCommandLineArguments = null;
   private Button launchEnableExceptionProperties;
   private Button launchInvalidInstructionExceptionProperties;
+  private Button launchTcfProperties;
   private Button launchTcf;
-  private Button launchTcfPropertiesButton;
   private Button launchNsimJitProperties;
   private Button launchMemoryExceptionProperties;
   private Button launchHostLinkProperties;
@@ -129,12 +129,12 @@ public class DebuggerGroupContainer extends Observable{
     return gdbServer;
   }
 
-  public Button getLaunchTcfPropertiesButton(){
-    return launchTcfPropertiesButton;
-  }
-
   public Button getLaunchTcf(){
     return launchTcf;
+  }
+
+  public Button getLaunchTcfProperties(){
+    return launchTcfProperties;
   }
 
   public FileFieldEditor getNsimPropertiesPathEditor(){
@@ -367,9 +367,9 @@ public class DebuggerGroupContainer extends Observable{
             return true;
           }
           if (!isValidFileFieldEditor(nsimBinaryPathEditor)
-              || (launchTcfPropertiesButton.getSelection()
-                  && !isValidFileFieldEditor(nsimTcfPathEditor))
               || (launchTcf.getSelection()
+                  && !isValidFileFieldEditor(nsimTcfPathEditor))
+              || (launchTcfProperties.getSelection()
                   && !isValidFileFieldEditor(nsimPropertiesPathEditor))
               || !workingDirectoryBlockNsim.isValid(configuration)) {
             return false;
@@ -501,21 +501,21 @@ public class DebuggerGroupContainer extends Observable{
     launchNsimJitProperties.setLayoutData(gridData);
   }
 
-  public void createLaunchTcf(final Composite compositeNsim, GridData gridData){
-    launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-    launchTcf.setToolTipText("-propsfile=path");
-    launchTcf.setSelection(externalNsimPropertiesEnabled);
-    launchTcf.setLayoutData(gridData);
-    launchTcf.setText("Use nSIM properties file?");
+  public void createLaunchTcfPropertiesButton(final Composite compositeNsim, GridData gridData){
+    launchTcfProperties = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchTcfProperties.setToolTipText("-propsfile=path");
+    launchTcfProperties.setSelection(externalNsimPropertiesEnabled);
+    launchTcfProperties.setLayoutData(gridData);
+    launchTcfProperties.setText("Use nSIM properties file?");
   }
 
-  public void createLaunchTcfPropertiesButton(final Composite compositeNsim, GridData gridData){
-    launchTcfPropertiesButton = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
-    launchTcfPropertiesButton.setToolTipText(
+  public void createLaunchTcfButton(final Composite compositeNsim, GridData gridData){
+    launchTcf = new Button(compositeNsim, SWT.CHECK); //$NON-NLS-1$ //6-3
+    launchTcf.setToolTipText(
         "Pass specified TCF file to nSIM for parsing of nSIM properties (-tcf=path)" );
-    launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
-    launchTcfPropertiesButton.setLayoutData(gridData);
-    launchTcfPropertiesButton.setText("Use TCF?");
+    launchTcf.setSelection(externalNsimTcfToolsEnabled);
+    launchTcf.setLayoutData(gridData);
+    launchTcf.setText("Use TCF?");
   }
 
   public void createNsimTcfPathEditor(Composite compositeNsim){
@@ -742,8 +742,8 @@ public class DebuggerGroupContainer extends Observable{
                         groupNsim.dispose();
                     createTabItemNsim(subComp);
 
-                    launchTcf.setSelection(externalNsimPropertiesEnabled);
-                    launchTcfPropertiesButton.setSelection(externalNsimTcfToolsEnabled);
+                    launchTcfProperties.setSelection(externalNsimPropertiesEnabled);
+                    launchTcf.setSelection(externalNsimTcfToolsEnabled);
                     launchNsimJitProperties.setSelection(externalNsimJitEnabled);
                     launchHostLinkProperties.setSelection(externalNsimHostLinkToolsEnabled);
                     launchMemoryExceptionProperties.setSelection(
@@ -860,9 +860,9 @@ public class DebuggerGroupContainer extends Observable{
             GridData.FILL_HORIZONTAL);
     final Composite compositeNsim = SWTFactory.createComposite(groupNsim, 3, 5, GridData.FILL_BOTH);
     createNsimBinaryPathEditor(compositeNsim);
-    createLaunchTcfPropertiesButton(compositeNsim, createGridData(3));
+    createLaunchTcfButton(compositeNsim, createGridData(3));
     createNsimTcfPathEditor(compositeNsim);
-    createLaunchTcf(compositeNsim, createGridData(3));
+    createLaunchTcfPropertiesButton(compositeNsim, createGridData(3));
     createNsimPropertiesPathEditor(compositeNsim);
     nsimTcfPathEditor.setEnabled(externalNsimTcfToolsEnabled, compositeNsim);
     addSelectionListenerForLaunchTcf(compositeNsim);
@@ -878,9 +878,9 @@ public class DebuggerGroupContainer extends Observable{
   }
 
   private void addSelectionListenerForLaunchTcf(final Composite compositeNsim) {
-    launchTcf.addSelectionListener(new SelectionListener() {
+    launchTcfProperties.addSelectionListener(new SelectionListener() {
       public void widgetSelected(SelectionEvent event) {
-        if (launchTcf.getSelection()) {
+        if (launchTcfProperties.getSelection()) {
           externalNsimPropertiesEnabled = true;
           nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
         } else {
@@ -896,14 +896,14 @@ public class DebuggerGroupContainer extends Observable{
   }
 
   private void addSelectionListenerForLaunchTcfPropertiesButton(final Composite compositeNsim) {
-    launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
+    launchTcf.addSelectionListener(new SelectionListener() {
       public void widgetSelected(SelectionEvent event) {
-        if (launchTcfPropertiesButton.getSelection()) {
+        if (launchTcf.getSelection()) {
           externalNsimTcfToolsEnabled = true;
           nsimTcfPathEditor.setEnabled(true, compositeNsim);
         } else {
           externalNsimTcfToolsEnabled = false;
-          launchTcfPropertiesButton.setSelection(false);
+          launchTcf.setSelection(false);
           nsimTcfPathEditor.setEnabled(false, compositeNsim);
         }
         sendNotification(null);
