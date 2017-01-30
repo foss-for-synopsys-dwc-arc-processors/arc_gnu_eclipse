@@ -367,9 +367,9 @@ public class DebuggerGroupContainer extends Observable{
             return true;
           }
           if (!isValidFileFieldEditor(nsimBinaryPathEditor)
-              || (launchTcf.getSelection()
-                  && !isValidFileFieldEditor(nsimTcfPathEditor))
               || (launchTcfPropertiesButton.getSelection()
+                  && !isValidFileFieldEditor(nsimTcfPathEditor))
+              || (launchTcf.getSelection()
                   && !isValidFileFieldEditor(nsimPropertiesPathEditor))
               || !workingDirectoryBlockNsim.isValid(configuration)) {
             return false;
@@ -877,10 +877,10 @@ public class DebuggerGroupContainer extends Observable{
     workingDirectoryBlockNsim.createControl(compositeNsim);
   }
 
-  private void addSelectionListenerForLaunchTcfPropertiesButton(final Composite compositeNsim) {
-    launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
+  private void addSelectionListenerForLaunchTcf(final Composite compositeNsim) {
+    launchTcf.addSelectionListener(new SelectionListener() {
       public void widgetSelected(SelectionEvent event) {
-        if (launchTcfPropertiesButton.getSelection()) {
+        if (launchTcf.getSelection()) {
           externalNsimPropertiesEnabled = true;
           nsimPropertiesPathEditor.setEnabled(true, compositeNsim);
         } else {
@@ -895,10 +895,10 @@ public class DebuggerGroupContainer extends Observable{
 
   }
 
-  private void addSelectionListenerForLaunchTcf(final Composite compositeNsim) {
-    launchTcf.addSelectionListener(new SelectionListener() {
+  private void addSelectionListenerForLaunchTcfPropertiesButton(final Composite compositeNsim) {
+    launchTcfPropertiesButton.addSelectionListener(new SelectionListener() {
       public void widgetSelected(SelectionEvent event) {
-        if (launchTcf.getSelection()) {
+        if (launchTcfPropertiesButton.getSelection()) {
           externalNsimTcfToolsEnabled = true;
           nsimTcfPathEditor.setEnabled(true, compositeNsim);
         } else {
