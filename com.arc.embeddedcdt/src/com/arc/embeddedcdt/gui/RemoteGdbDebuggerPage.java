@@ -80,8 +80,8 @@ public class RemoteGdbDebuggerPage extends GdbDebuggerPage {
             programName.replace('\\', '/'));
 
         ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
-        debuggerGroupContainer.performApply(configurationWriter, configuration);
         debuggerGroupContainer.setGdbPath(fGDBCommandText.getText());
+        debuggerGroupContainer.performApply(configurationWriter, configuration);
     }
 
     @Override
