@@ -1168,52 +1168,47 @@ public class DebuggerGroupContainer extends Observable{
 
   public void performApply(ConfigurationWriter configurationWriter,
       ILaunchConfigurationWorkingCopy configuration) {
-    configurationWriter.setNsimPath(externalToolsNsimPath);
-    configurationWriter.setNsimJitThreads(jitThread);
-    configurationWriter.setNsimSimulateInvalidInstructionExceptions(
-        launchExternalNsimInvalidInstructionException);
-    configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
-    configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
-    configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
-    configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
-    configurationWriter.setNsimSimulateMemoryExceptions(externalNsimMemoryExceptionToolsEnabled);
-    configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
-    configurationWriter.setNsimUseJit(externalNsimJitEnabled);
-    configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
-
     if (!groupNsim.isDisposed()) {
       workingDirectoryBlockNsim.performApply(configuration);
     }
-
-    configurationWriter.setFtdiDevice(getAttributeValueFromString(ftdiDevice.name()));
-    configurationWriter.setFtdiCore(getAttributeValueFromString(ftdiCore.name()));
-
-    if (jtagFrequency != null)
-        configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
-    configurationWriter.setAshlingTDescPath(ashlingTdescPath);
-    configurationWriter.setAshlingXmlPath(ashlingXmlPath);
-    configurationWriter.setAshlingPath(externalToolsAshlingPath);
-
-    if (customGdbCommandLineArguments != null)
-      configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
     String str = gdbServerPortNumberText.getText();
     str = str.trim();
+
     configurationWriter.setGdbServerPort(str);
-    configurationWriter.setCustomGdbServerPath(customGdbPath);
-    configurationWriter.setGdbPath(gdbPath);
-    configurationWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
-
-    configurationWriter.setOpenOcdPath(openOcdBinaryPath);
-    configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
-
     String nsimDefaultPath = getNsimdrvDefaultPath();
     configurationWriter.setNsimDefaultPath(nsimDefaultPath);
+    if (jtagFrequency != null)
+      configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
 
     configurationWriter.setFileFormatVersion(
         LaunchConfigurationConstants.CURRENT_FILE_FORMAT_VERSION);
     /* Because there is no setAttribute(String, long) method. */
     configurationWriter.setTimeStamp(String.format("%d", System.currentTimeMillis()));
+    configurationWriter.setFtdiDevice(getAttributeValueFromString(ftdiDevice.name()));
+    configurationWriter.setFtdiCore(getAttributeValueFromString(ftdiCore.name()));
+    configurationWriter.setGdbPath(gdbPath);
+    configurationWriter.setGdbServer(getAttributeValueFromString(gdbServer.toString()));
+    configurationWriter.setOpenOcdConfig(openOcdConfigurationPath);
+    configurationWriter.setOpenOcdPath(openOcdBinaryPath);
+    configurationWriter.setAshlingPath(externalToolsAshlingPath);
+    configurationWriter.setAshlingXmlPath(ashlingXmlPath);
+    configurationWriter.setAshlingTDescPath(ashlingTdescPath);
+    configurationWriter.setNsimPath(externalToolsNsimPath);
+    configurationWriter.setCustomGdbServerPath(customGdbPath);
+    if (customGdbCommandLineArguments != null)
+      configurationWriter.setCustomGdbServerArgs(customGdbCommandLineArguments);
 
+    configurationWriter.setNsimUseTcf(externalNsimTcfToolsEnabled);
+    configurationWriter.setNsimUseJit(externalNsimJitEnabled);
+    configurationWriter.setNsimUseNsimHostLink(externalNsimHostLinkToolsEnabled);
+    configurationWriter.setNsimSimulateMemoryExceptions(externalNsimMemoryExceptionToolsEnabled);
+    configurationWriter.setNsimSimulateExceptions(externalNsimEnableExceptionToolsEnabled);
+    configurationWriter.setNsimSimulateInvalidInstructionExceptions(
+        launchExternalNsimInvalidInstructionException);
+    configurationWriter.setNsimUseProps(externalNsimPropertiesEnabled);
+    configurationWriter.setNsimJitThreads(jitThread);
+    configurationWriter.setNsimPropsPath(nsimPropertiesFilesLast);
+    configurationWriter.setNsimTcfPath(nsimTcfFilesLast);
     if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed()) {
         hostName = gdbServerIpAddressText.getText();
         configurationWriter.setHostAddress(getAttributeValueFromString(hostName));
