@@ -221,48 +221,14 @@ public class DebuggerGroupContainer extends Observable{
 
     gdbPath = configurationReader.getOrDefault(getDefaultGdbPath(), "",
         configurationReader.getGdbPath());
-    gdbServer = configurationReader.getGdbServer();
-
-    workingDirectoryBlockNsim.initializeFrom(configuration);
-
-    externalToolsCombo.setText(gdbServer.toString());
-
-    if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
-        gdbServerIpAddressText.setText(hostName);
-
-    int previous = externalToolsCombo.indexOf(gdbServer.toString());
-    if (previous > -1)
-        externalToolsCombo.remove(previous);
-    /*
-     * Reading gdbServer again from configuration because field gdbServer might have been
-     * changed by event handler called by extTools.remove(previous)
-     */
-    gdbServer = configurationReader.getGdbServer();
-    externalToolsCombo.add(gdbServer.toString(), 0);
-    externalToolsCombo.select(0);
-
-    // Set host and IP.
-    portNumber = configurationReader.getGdbServerPort();
-    gdbServerPortNumberText.setText(portNumber);
-    hostName = configurationReader.getHostAddress();
-    customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
-    customGdbPath = configurationReader.getCustomGdbServerPath();
-    ftdiDevice = configurationReader.getFtdiDevice();
-    ftdiCore = configurationReader.getFtdiCore();
-
     openOcdBinaryPath = configurationReader.getOrDefault(
         DEFAULT_OOCD_BIN, "", configurationReader.getOpenOcdPath());
+    jtagFrequency = configurationReader.getAshlingJtagFrequency();
+    ftdiDevice = configurationReader.getFtdiDevice();
+    ftdiCore = configurationReader.getFtdiCore();
+    gdbServer = configurationReader.getGdbServer();
     openOcdConfigurationPath = configurationReader.getOrDefault(
         DEFAULT_OOCD_CFG, "", configurationReader.getOpenOcdConfig());
-    if (!ftdiDeviceCombo.isDisposed())
-      ftdiDeviceCombo.setText(ftdiDevice.toString());
-    if (!ftdiCoreCombo.isDisposed())
-      ftdiCoreCombo.setText(ftdiCore.toString());
-
-    jtagFrequency = configurationReader.getAshlingJtagFrequency();
-    if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
-      selectJtagFrequencyInCombo(jtagFrequency);
-    setTextForJtagFrequencyCombo(configurationReader);
     String defaultAshlingPath =
         isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
             : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
@@ -276,21 +242,53 @@ public class DebuggerGroupContainer extends Observable{
         + java.io.File.separator + "opella-arcem-tdesc.xml";
     ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
         configurationReader.getAshlingTDescPath());
-
     externalToolsNsimPath = configurationReader.getOrDefault(
         getNsimdrvDefaultPath(), "", configurationReader.getNsimPath());
-    jitThread = configurationReader.getNsimJitThreads();
+    customGdbPath = configurationReader.getCustomGdbServerPath();
+    customGdbCommandLineArguments = configurationReader.getCustomGdbServerArgs();
+
+    workingDirectoryBlockNsim.initializeFrom(configuration);
+    externalNsimJitEnabled = configurationReader.getNsimUseJit();
+    externalNsimHostLinkToolsEnabled = configurationReader.getNsimUseNsimHostlink();
+    externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
     launchExternalNsimInvalidInstructionException =
         configurationReader.getNsimSimulateInvalidInstructionExceptions();
-    externalNsimEnableExceptionToolsEnabled = configurationReader.getNsimSimulateExceptions();
-    nsimTcfFilesLast = configurationReader.getNsimTcfPath();
-    nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
-    externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
-    externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
     externalNsimMemoryExceptionToolsEnabled =
         configurationReader.getNsimSimulateMemoryExceptions();
-    externalNsimHostLinkToolsEnabled = configurationReader.getNsimUseNsimHostlink();
-    externalNsimJitEnabled = configurationReader.getNsimUseJit();
+    externalNsimPropertiesEnabled = configurationReader.getNsimUseProps();
+    externalNsimTcfToolsEnabled = configurationReader.getNsimUseTcf();
+    nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
+    nsimTcfFilesLast = configurationReader.getNsimTcfPath();
+    jitThread = configurationReader.getNsimJitThreads();
+
+    externalToolsCombo.setText(gdbServer.toString());
+
+    if (!isJtagFrequencyComboDisposed() && !jtagFrequency.isEmpty())
+      selectJtagFrequencyInCombo(jtagFrequency);
+    setTextForJtagFrequencyCombo(configurationReader);
+    if (!ftdiDeviceCombo.isDisposed())
+      ftdiDeviceCombo.setText(ftdiDevice.toString());
+
+    if (!ftdiCoreCombo.isDisposed())
+      ftdiCoreCombo.setText(ftdiCore.toString());
+    // Set host and IP.
+    portNumber = configurationReader.getGdbServerPort();
+    gdbServerPortNumberText.setText(portNumber);
+    hostName = configurationReader.getHostAddress();
+    if (groupGenericGdbServer != null && !groupGenericGdbServer.isDisposed())
+      gdbServerIpAddressText.setText(hostName);
+
+    int previous = externalToolsCombo.indexOf(gdbServer.toString());
+    if (previous > -1)
+        externalToolsCombo.remove(previous);
+    /*
+     * Reading gdbServer again from configuration because field gdbServer might have been
+     * changed by event handler called by extTools.remove(previous)
+     */
+    gdbServer = configurationReader.getGdbServer();
+    externalToolsCombo.add(gdbServer.toString(), 0);
+    externalToolsCombo.select(0);
+
   }
 
   public void createTabItemComAshling(Composite subComp){
