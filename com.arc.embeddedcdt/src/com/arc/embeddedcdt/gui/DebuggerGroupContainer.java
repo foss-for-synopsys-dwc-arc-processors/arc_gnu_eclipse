@@ -860,9 +860,10 @@ public class DebuggerGroupContainer extends Observable{
     createNsimBinaryPathEditor(compositeNsim);
     createLaunchTcfButton(compositeNsim, createGridData(3));
     createNsimTcfPathEditor(compositeNsim);
+    nsimTcfPathEditor.setEnabled(externalNsimTcfToolsEnabled, compositeNsim);
     createLaunchTcfPropertiesButton(compositeNsim, createGridData(3));
     createNsimPropertiesPathEditor(compositeNsim);
-    nsimTcfPathEditor.setEnabled(externalNsimTcfToolsEnabled, compositeNsim);
+    nsimPropertiesPathEditor.setEnabled(externalNsimPropertiesEnabled, compositeNsim);
     addSelectionListenerForLaunchTcf(compositeNsim);
     addSelectionListenerForLaunchTcfPropertiesButton(compositeNsim);
     createLaunchNsimJitProperties(compositeNsim, createGridData(3));
