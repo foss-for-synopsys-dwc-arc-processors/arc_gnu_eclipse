@@ -4,14 +4,24 @@
      <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
            <launchConfigurationType
-            delegate="com.arc.embeddedcdt.dsf.ArcLaunchDelegate"
             public="true"
             name="ARC C/C++ application"
             modes="run,debug"
             id="com.arc.embeddedcdt.idleNative"
+            />
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchDelegates">
+      <launchDelegate
+            delegate="com.arc.embeddedcdt.dsf.ArcLaunchDelegate"
+            delegateDescription="%launchDelegate.jtagDsf.description"
+            id="com.arc.embeddedcdt.idleNativeDelegate"
+            modes="debug"
+            name="ARC C/C++ application"
             sourceLocatorId="org.eclipse.cdt.debug.core.sourceLocator"
             sourcePathComputerId="org.eclipse.cdt.debug.core.sourcePathComputer"
-            />
+            type="com.arc.embeddedcdt.idleNative">
+      </launchDelegate>
    </extension>
    
    <extension
@@ -36,6 +46,92 @@
          </launchMode>
       </launchConfigurationTabGroup>
 	</extension>
+
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabs">
+     <tab
+            class="org.eclipse.cdt.launch.ui.CMainTab2"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.TabGroup.cmaintab.dsf"
+            name="%launchtab.cmaintab.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+      </tab>
+      <tab
+            class="com.arc.embeddedcdt.gui.EmbeddedDebuggerTab2"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.debuggertab.dsf"
+            name="%launchtab.debuggertab.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+         <placement
+               after="org.eclipse.cdt.cdi.launch.mainTab">
+         </placement>
+      </tab>
+      <tab
+            class="com.arc.embeddedcdt.gui.CommandTab"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.commandtab.dsf"
+            name="%launchtab.commandtab.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+         <placement
+               after="com.arc.embeddedcdt.debuggertab.dsf">
+         </placement>
+      </tab>
+      <tab
+            class="org.eclipse.debug.ui.sourcelookup.SourceLookupTab"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.sourceLookup.dsf"
+            name="%launchtab.sourceLookup.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+         <placement
+               after="com.arc.embeddedcdt.commandtab.dsf">
+         </placement>
+      </tab>
+      <tab
+            class="org.eclipse.debug.ui.EnvironmentTab"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.environmentTab.dsf"
+            name="%launchtab.environmentTab.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+         <placement
+               after="org.eclipse.debug.ui.sourceLookupTab">
+         </placement>
+      </tab>
+      <tab
+            class="com.arc.embeddedcdt.gui.ARCTerminalTab"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.arcTerminaTab.dsf"
+            name="%launchtab.arcTerminaTab.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+         <placement
+               after="org.eclipse.debug.ui.environmentTab">
+         </placement>
+      </tab>
+      <tab
+            class="org.eclipse.debug.ui.CommonTab"
+            group="com.arc.embeddedcdt.TabGroup"
+            id="com.arc.embeddedcdt.commonTab.dsf"
+            name="%launchtab.common.name">
+         <associatedDelegate
+               delegate="com.arc.embeddedcdt.idleNativeDelegate">
+         </associatedDelegate>
+         <placement
+               after="com.arc.embeddedcdt.arcTerminaTab.dsf">
+         </placement>
+      </tab>
+
+   </extension>
 
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
