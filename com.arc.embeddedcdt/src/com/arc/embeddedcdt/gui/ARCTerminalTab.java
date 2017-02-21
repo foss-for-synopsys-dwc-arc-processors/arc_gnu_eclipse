@@ -286,4 +286,8 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
         return list;
     }
 
+    @Override
+    public String getId() {
+        return "com.arc.embeddedcdt.arcTerminaTab.dsf";
+    }
 }

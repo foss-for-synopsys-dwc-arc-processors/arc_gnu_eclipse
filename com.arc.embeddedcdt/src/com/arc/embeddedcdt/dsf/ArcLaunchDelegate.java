@@ -79,7 +79,7 @@ public class ArcLaunchDelegate extends GdbLaunchDelegate {
 
         monitor.beginTask(LaunchMessages.getString("GdbLaunchDelegate.0"), 10);
         if (monitor.isCanceled()) {
-            cleanupLaunch();
+            cleanupLaunch(launch);
             return;
         }
         try {
