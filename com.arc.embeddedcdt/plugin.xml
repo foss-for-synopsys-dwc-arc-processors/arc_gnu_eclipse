@@ -143,17 +143,6 @@
    </extension>
    
    <extension
-         point="org.eclipse.cdt.debug.core.CDebugger">
-      <debugger
-            class="org.eclipse.cdt.dsf.gdb.launching.GDBDebugger"
-            cpu="*"
-            id="com.arc.embeddedcdt.RemoteGDBDebugger"
-            modes="run"
-            name="ARC remote gdb/mi"
-            platform="*">
-      </debugger>
-   </extension>
-   <extension
          point="org.eclipse.cdt.debug.ui.CDebuggerPage">
        <debuggerPage
             class="com.arc.embeddedcdt.gui.RemoteGdbDebuggerPage"
