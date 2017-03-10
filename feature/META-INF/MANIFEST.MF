@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
+Bundle-SymbolicName: eclipse-plugin; singleton:=true
+Bundle-Version: 1.0.0.qualifier
 Created-By: 1.6.0_45 (Sun Microsystems Inc.)
 
