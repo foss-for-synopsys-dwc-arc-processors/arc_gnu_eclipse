@@ -202,8 +202,4 @@ public class CommandTab extends CLaunchConfigurationTab {
         return null;
     }
 
-    @Override
-    public String getId() {
-        return "com.arc.embeddedcdt.debuggertab.dsf";
-    }
 }
