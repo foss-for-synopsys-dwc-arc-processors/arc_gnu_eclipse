@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: eclipse-plugin; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0.201703101609
+Archiver-Version: Plexus Archiver
+Built-By: ekatuni
 Created-By: 1.6.0_45 (Sun Microsystems Inc.)
+Build-Jdk: 1.8.0_91
 
