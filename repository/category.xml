@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-    <feature url="feature/target/plugin-2016.9.0.qualifier.jar" id="plugin" version="2016.9.0.qualifier">
+    <feature url="feature/target/" id="plugin" version="0.0.0">
       <category name="com.arc.cdt"/>
    </feature>
    <category-def name="com.arc.cdt" label="ARC GNU Tools Support"/>
