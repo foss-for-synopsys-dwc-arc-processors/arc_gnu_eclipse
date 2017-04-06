@@ -8,6 +8,10 @@
   <modules>
       <module>repository</module>
       <module>feature</module>
+      <module>com.arc.embeddedcdt</module>
+      <module>com.arc.embeddedcdt.rxtx</module>
+      <module>org.eclipse.cdt.cross.arc.gnu</module>
+      <module>org.eclipse.cdt.cross.arc.gnu.uclibc</module>
   </modules>
 
   <repositories>
