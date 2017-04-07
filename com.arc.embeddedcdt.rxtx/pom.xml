@@ -6,6 +6,6 @@
 	<version>0.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>com.arc.embeddedcdt.rxtx</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
+    <version>2016.9.0</version>
     <packaging>eclipse-plugin</packaging>
 </project>

@@ -6,6 +6,6 @@
 	<version>0.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>org.eclipse.cdt.cross.arc.gnu</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
+    <version>2016.9.0</version>
     <packaging>eclipse-plugin</packaging>
 </project>
