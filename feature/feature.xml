@@ -2,7 +2,7 @@
 <feature
       id="com.arc.cdt.feature"
       label="ARC GNU Toolchain Embedded CDT"
-      version="2017.9.0.qualifier"
+      version="2017.9.0"
       provider-name="Synopsys, Inc."
       plugin="org.eclipse.cdt.cross.arc.gnu"
       image="logo_emb_full.png">
@@ -25,12 +25,10 @@ applications for the ARC series of processors.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.cdt.debug.mi.core"/>
       <import plugin="org.eclipse.cdt.launch"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.cdt.core"/>
       <import plugin="org.eclipse.cdt.debug.core"/>
-      <import plugin="org.eclipse.cdt.debug.mi.ui"/>
       <import plugin="org.eclipse.cdt.debug.ui"/>
       <import plugin="org.eclipse.cdt.ui"/>
       <import plugin="org.eclipse.core.variables"/>
