@@ -519,11 +519,11 @@ public class DebuggerGroupContainer extends Observable{
   public void createNsimTcfPathEditor(Composite compositeNsim){
     nsimTcfPathEditor = new FileFieldEditor("nsimTcfPath", "nSIM TCF path", false,
         StringButtonFieldEditor.VALIDATE_ON_KEY_STROKE, compositeNsim);
-    nsimTcfPathEditor.setStringValue(nsimPropertiesFilesLast);
+    nsimTcfPathEditor.setStringValue(nsimTcfFilesLast);
     nsimTcfPathEditor.setPropertyChangeListener(new IPropertyChangeListener() {
       public void propertyChange(PropertyChangeEvent event) {
         if (event.getProperty() == "field_editor_value") {
-          nsimPropertiesFilesLast = (String) event.getNewValue();
+          nsimTcfFilesLast = (String) event.getNewValue();
           sendNotification(null);
         }
       }
