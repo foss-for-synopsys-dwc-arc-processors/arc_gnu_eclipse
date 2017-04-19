@@ -409,40 +409,40 @@
                name="Multiply instructions level (ARC EM)"
                valueType="enumerated">
             <enumeratedOptionValue
-                  command="-mmpy-option=0"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.0"
+                  command="-mmpy-option=none"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.none"
                   isDefault="true"
                   name="none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=1"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.1"
+                  command="-mmpy-option=w"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.w"
                   name="w">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=2"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.2"
+                  command="-mmpy-option=wlh1"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh1"
                   isDefault="false"
                   name="wlh1">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=3"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.3"
+                  command="-mmpy-option=wlh2"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh2"
                   name="wlh2">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.4"
+                  command="-mmpy-option=wlh3"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh3"
                   name="wlh3">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=5"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.5"
+                  command="-mmpy-option=wlh4"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh4"
                   name="wlh4">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=6"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.6"
+                  command="-mmpy-option=wlh5"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh5"
                   name="wlh5">
             </enumeratedOptionValue>
          </option>
@@ -453,30 +453,30 @@
                    name="Multiply instructions level (ARC HS)"
                    valueType="enumerated">
             <enumeratedOptionValue
-                  command="-mmpy-option=0"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.0"
+                  command="-mmpy-option=none"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.none"
                   isDefault="true"
                   name="none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=2"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.2"
+                  command="-mmpy-option=mpy"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.mpy"
                   isDefault="false"
                   name="mpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=7"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.7"
+                  command="-mmpy-option=plus_dmpy"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.plus_dmpy"
                   name="plus_dmpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=8"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.8"
+                  command="-mmpy-option=plus_macd"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.plus_macd"
                   name="plus_macd">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-mmpy-option=9"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.9"
+                  command="-mmpy-option=plus_qmacw"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.plus_qmacw"
                   name="plus_qmacw">
             </enumeratedOptionValue>
          </option>
