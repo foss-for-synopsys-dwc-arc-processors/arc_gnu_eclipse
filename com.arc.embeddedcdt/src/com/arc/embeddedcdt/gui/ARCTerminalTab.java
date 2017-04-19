@@ -228,7 +228,7 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getImage()
      */
     public Image getImage() {
-        return LaunchImages.get(LaunchImages.IMG_VIEW_COMMANDS_TAB);
+        return LaunchImages.get(LaunchImages.IMG_CONSOLE);
     }
 
     /**
