@@ -575,11 +575,6 @@ public class DebuggerGroupContainer extends Observable{
         break;
     case EM_SK_v2:
         openOcdConfiguration += "snps_em_sk.cfg";
-    case EM_SK_v21:
-        openOcdConfiguration += "snps_em_sk_v2.1.cfg";
-        break;
-    case EM_SK_v22:
-        openOcdConfiguration += "snps_em_sk_v2.2.cfg";
         break;
     case AXS101:
         openOcdConfiguration += "snps_axs101.cfg";
