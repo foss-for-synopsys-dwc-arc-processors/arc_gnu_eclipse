@@ -102,7 +102,7 @@ public class CommandInfo {
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
         String line;
         while ((line = br.readLine()) != null) {
-            if (line.indexOf("--with-cpu=archs") > -1)
+            if ((line.indexOf("--with-cpu=archs") > -1) || (line.indexOf("--with-cpu=hs38") > -1))
                 return true;
         }
         return false;
