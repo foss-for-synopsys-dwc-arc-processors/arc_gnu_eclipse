@@ -1029,6 +1029,8 @@ public class DebuggerGroupContainer extends Observable{
             }
         }
     });
+
+    createCustomGdbServerArgs(compositeCustomGdb);
   }
 
   public void createLaunchMemoryExceptionProperties(Composite compositeNsim, GridData gridDataNsim){
@@ -1221,7 +1223,7 @@ public class DebuggerGroupContainer extends Observable{
     return errorMessage;
   }
 
-  public void createCustomGdbServerArgs(Composite compositeCustomGdb){
+  private void createCustomGdbServerArgs(Composite compositeCustomGdb){
     // GDB server command line arguments
     Label label = new Label(compositeCustomGdb, SWT.LEFT);
     label.setText("GDB server command line arguments:");
