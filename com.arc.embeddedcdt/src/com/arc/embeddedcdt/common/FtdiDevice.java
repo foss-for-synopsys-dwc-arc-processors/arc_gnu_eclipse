@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 public enum FtdiDevice {
     EM_SK_v1x("EM Starter Kit v1.x"),
+    EM_SK_v2("EM Starter Kit v2"),
     EM_SK_v21("EM Starter Kit v2.1"),
     EM_SK_v22("EM Starter Kit v2.2"),
     AXS101("AXS101", Arrays.asList(FtdiCore.AS221_1, FtdiCore.AS221_2, FtdiCore.EM6,
