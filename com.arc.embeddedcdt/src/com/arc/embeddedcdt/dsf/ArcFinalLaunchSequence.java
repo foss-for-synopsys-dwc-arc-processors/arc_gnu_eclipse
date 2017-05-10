@@ -211,7 +211,7 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
     public void stepOpenGdbServerConsole(final RequestMonitor rm) {
         try {
             serverBackend.initializeServerConsole();
-        } catch (CoreException e) {
+        } catch (CoreException|InterruptedException e) {
             rm.setStatus(new Status(Status.ERROR, LaunchPlugin.PLUGIN_ID,
                     "Unable to initialize GdbServer console", e));
         } finally {

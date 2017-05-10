@@ -66,6 +66,25 @@ public abstract class GdbServerBackend extends GDBBackend {
         return true;
     }
 
+    /**
+     * Get estimated time in milliseconds that is required for server to startup - before it would
+     * start to listen on a TCP port. This value is passed to Thread.sleep(). Without this delay
+     * there is a risk that GDB will try to connect before server starts to listen so GDB will exit
+     * prematurely.
+     *
+     * This solution is far from perfect because it uses same delay for all cases, so it might not
+     * help in some cases where start is even slower - it would be better to at least make this user
+     * configurable, or even better to scan server output for a line that notifies that it is
+     * listening. Then that could be handled via some asynchronous DSF magic, I presume. However
+     * right we don't have time for fancy solutions, and this gets it working at least in most
+     * cases.
+     *
+     * @return Estimated time in milliseconds for server start listening on TCP socket.
+     */
+    protected int getStartupDelayEstimate() {
+        return 500;
+    }
+
     public String getCommandToConnect() {
         return String.format("\ntarget remote %s:%s\nload\n", getHostAddress(), getPortToConnect());
     }
@@ -117,7 +136,7 @@ public abstract class GdbServerBackend extends GDBBackend {
      * 
      * @throws CoreException
      */
-    public void initializeServerConsole() throws CoreException {
+    public void initializeServerConsole() throws CoreException, InterruptedException {
         if (doLaunchProcess()) {
             IProcess newProcess = addServerProcess(getProcessLabel());
             newProcess.setAttribute(IProcess.ATTR_CMDLINE, getCommandLine());
@@ -132,7 +151,7 @@ public abstract class GdbServerBackend extends GDBBackend {
      * @return process added to the launch
      * @throws CoreException
      */
-    private IProcess addServerProcess(String label) throws CoreException {
+    private IProcess addServerProcess(String label) throws CoreException, InterruptedException {
         Map<String, String> attributes = new HashMap<String, String>();
         attributes.put(IGdbDebugConstants.PROCESS_TYPE_CREATION_ATTR,
                 IGdbDebugConstants.GDB_PROCESS_CREATION_VALUE);
@@ -143,6 +162,11 @@ public abstract class GdbServerBackend extends GDBBackend {
         if (serverProc != null) {
             newProcess = DebugPlugin.newProcess(launch, serverProc, label, attributes);
         }
+
+        if (getStartupDelayEstimate() > 0) {
+            Thread.sleep(getStartupDelayEstimate());
+        }
+
         return newProcess;
     }
 
