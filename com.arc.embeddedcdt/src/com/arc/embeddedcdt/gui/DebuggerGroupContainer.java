@@ -829,6 +829,7 @@ public class DebuggerGroupContainer extends Observable{
                     groupComCustomGdb.setVisible(true);
             }
 
+            subComp.layout();
             sendNotification(null);
         }
     });
