@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.cdt.core;bundle-version="5.0.2",
  org.eclipse.ui.console;bundle-version="3.3.0"
 Bundle-Vendor: Synopsys Inc.
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: bin/
+Bundle-ClassPath: .
 Bundle-Version: 2017.9.0.qualifier
 Bundle-Name: GNU ARC C/C++ Development Support
 Bundle-Activator: org.eclipse.cdt.cross.arc.gnu.uclibc.ARCPlugin
