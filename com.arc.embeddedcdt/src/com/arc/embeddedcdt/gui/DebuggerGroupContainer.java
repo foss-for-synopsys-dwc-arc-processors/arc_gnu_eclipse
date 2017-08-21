@@ -1179,8 +1179,6 @@ public class DebuggerGroupContainer extends Observable{
     str = str.trim();
 
     configurationWriter.setGdbServerPort(str);
-    String nsimDefaultPath = getNsimdrvDefaultPath();
-    configurationWriter.setNsimDefaultPath(nsimDefaultPath);
     if (jtagFrequency != null)
       configurationWriter.setAshlingJtagFrequency(getAttributeValueFromString(jtagFrequency));
 
@@ -1434,22 +1432,39 @@ public class DebuggerGroupContainer extends Observable{
     return getIdeRootDir() + "bin" + File.separator;
   }
 
-  public void setDefaults(ILaunchConfigurationWorkingCopy configuration){
+  public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
     ConfigurationWriter configurationWriter = new ConfigurationWriter(configuration);
     configurationWriter.setGdbServerCommand(
         IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_COMMAND_DEFAULT);
-    configurationWriter.setGdbServerPort(
-        IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
+    configurationWriter
+        .setGdbServerPort(IRemoteConnectionConfigurationConstants.ATTR_GDBSERVER_PORT_DEFAULT);
     configurationWriter.setGdbServer(ArcGdbServer.DEFAULT_GDB_SERVER.toString());
     configurationWriter.setOpenOcdConfig(DEFAULT_OOCD_CFG);
     configurationWriter.setAshlingPath("");
-    configurationWriter.setNsimPath("");
+    configurationWriter.setNsimPath(getNsimdrvDefaultPath());
     configurationWriter.setDoLaunchTerminal(false);
-    configurationWriter.setNsimDefaultPath(getNsimdrvDefaultPath());
     configurationWriter.setOpenOcdPath(DEFAULT_OOCD_BIN);
     configurationWriter.setAshlingJtagFrequency("");
     configurationWriter.setFtdiDevice(LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME);
     configurationWriter.setFtdiCore(LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME);
-  }
 
+    // Following assignments were not needed in Eclipse Mars, as default ARC values would be used.
+    // But startign with Eclipse Neon, generic CDT code assigns default values to those attributes,
+    // so we need to override them with our custom defaults. Probably other ARC code, that assumes
+    // that those defaults might not be set can be removed now, but I leave it as is for now.
+    configurationWriter.setGdbPath(getDefaultGdbPath());
+
+    String defaultAshlingPath =
+        isWindowsOs() ? LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_WINDOWS
+            : LaunchConfigurationConstants.ASHLING_DEFAULT_PATH_LINUX;
+    configurationWriter.setAshlingPath(defaultAshlingPath);
+
+    String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
+        + java.io.File.separator + "arc-cpu-em.xml";
+    configurationWriter.setAshlingXmlPath(ashlingXmlFile);
+
+    String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
+        + java.io.File.separator + "opella-arcem-tdesc.xml";
+    configurationWriter.setAshlingTDescPath(defaultTDescPath);
+  }
 }

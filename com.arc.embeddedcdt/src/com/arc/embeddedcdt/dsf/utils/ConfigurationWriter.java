@@ -195,10 +195,5 @@ public class ConfigurationWriter {
   public void setDoLaunchTerminal(final boolean value){
     setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_TERMINAL_DEFAULT, value);
   }
-
-  public void setNsimDefaultPath(final String value){
-    setAttribute(LaunchConfigurationConstants.ATTR_NSIM_DEFAULT_PATH, value);
-  }
-
 }
 
