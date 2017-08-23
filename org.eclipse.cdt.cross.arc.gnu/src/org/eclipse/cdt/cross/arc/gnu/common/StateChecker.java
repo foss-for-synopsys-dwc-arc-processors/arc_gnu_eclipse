@@ -9,9 +9,6 @@
 package org.eclipse.cdt.cross.arc.gnu.common;
 
 import org.eclipse.cdt.internal.core.WeakHashSet;
-import org.eclipse.cdt.make.core.scannerconfig.IScannerInfoCollector;
-import org.eclipse.cdt.make.core.scannerconfig.InfoContext;
-import org.eclipse.cdt.make.internal.core.scannerconfig2.PerProjectSICollector;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.WorkspaceJob;

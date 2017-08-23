@@ -32,7 +32,6 @@ import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.gui.DebuggerGroupContainer;
 import com.arc.embeddedcdt.gui.FirstlaunchDialog;
-import com.arc.embeddedcdt.gui.RemoteGdbDebuggerPage;
 
 /**
  * Using "Run As" --> "Node Application" or "Run As" --> "coffee" will lead here

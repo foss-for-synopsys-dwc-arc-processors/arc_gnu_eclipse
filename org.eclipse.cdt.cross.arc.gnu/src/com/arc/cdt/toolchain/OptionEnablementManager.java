@@ -11,10 +11,6 @@
  *******************************************************************************/
 package com.arc.cdt.toolchain;
 
-import java.util.ArrayList;
-
-
-
 public class OptionEnablementManager extends AbstractOptionEnablementManager {
 
     private static final String MAP_OPTION_ID = "com.arc.cdt.toolchain.linker.option.map";

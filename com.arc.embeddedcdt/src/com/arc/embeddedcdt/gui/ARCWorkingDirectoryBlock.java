@@ -13,7 +13,6 @@ package com.arc.embeddedcdt.gui;
 import java.io.File;
 
 import org.eclipse.cdt.launch.internal.ui.LaunchMessages;
-import org.eclipse.cdt.launch.internal.ui.LaunchUIPlugin;
 import org.eclipse.cdt.launch.internal.ui.WorkingDirectoryBlock;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.variables.IStringVariableManager;
