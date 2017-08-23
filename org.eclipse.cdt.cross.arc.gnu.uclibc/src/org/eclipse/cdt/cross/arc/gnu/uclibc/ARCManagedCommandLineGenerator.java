@@ -10,8 +10,8 @@
    
 package org.eclipse.cdt.cross.arc.gnu.uclibc;
    
-   import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IManagedCommandLineInfo;
@@ -31,8 +31,7 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
    
      public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern, boolean bFlag)
      {
-     ArrayList oList = new ArrayList();
-     oList.addAll(Arrays.asList(asFlags));
+     List<String> oList = Arrays.asList(asFlags);
 
    
      Object oParent = oTool.getParent();
