@@ -21,9 +21,6 @@ import org.eclipse.cdt.managedbuilder.core.IConfiguration;
  {
    private static boolean ms_bChecked = false;
    private static String ms_sBinGNUARC = null;
-   private static final String REGISTRY_KEY = "SOFTWARE\\GNUARC\\4.8.1";
-   private static final String PATH_NAME = "InstallPath";
-   private static final String DELIMITER_WIN = ";";
  
    public String[] resolveBuildPaths(int pathType, String variableName, String variableValue, IConfiguration configuration)
    {
