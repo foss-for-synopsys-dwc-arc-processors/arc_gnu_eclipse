@@ -68,7 +68,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
    
        String sSyntaxonly = null;
    
-       String sFPUEM = null;
        String sFPUHS = null;
        String smpyhs= null;
        String smpyem= null;
@@ -88,7 +87,7 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
        String smno_dpfp_lrsr= null;
        String smul3216= null;
        String smxy= null;
-       String smlock= null;
+
        for (int i = 0; i < aoOptions.length; i++)
          {
          IOption oOption = aoOptions[i];
@@ -261,8 +260,7 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
        if ((sSyntaxonly != null) && (sSyntaxonly.length() > 0)) {
          oList.add(sSyntaxonly);
        }
-       if ((sFPUEM != null) && (sFPUEM.length() > 0))
-           oList.add(sFPUEM);
+
        if ((sFPUHS != null) && (sFPUHS.length() > 0))
            oList.add(sFPUHS);
        if ((smpyhs != null) && (smpyhs.length() > 0))
@@ -312,9 +310,6 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
            } 
        if ((smul3216 != null) && (smul3216.length() > 0)) {                 
            oList.add(smul3216);                                              
-           } 
-       if ((smlock != null) && (smlock.length() > 0)) {                 
-           oList.add(smlock);                                              
            } 
        if ((smxy != null) && (smxy.length() > 0)) {                 
            oList.add(smxy);                                              
