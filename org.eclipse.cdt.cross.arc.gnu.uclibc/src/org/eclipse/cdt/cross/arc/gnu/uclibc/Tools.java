@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.cdt.core.envvar.IEnvironmentVariable;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
 import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
-import org.eclipse.cdt.managedbuilder.envvar.IEnvironmentVariableProvider;
 import org.eclipse.cdt.managedbuilder.gnu.ui.GnuUIPlugin;
 import org.eclipse.cdt.utils.WindowsRegistry;
 import org.eclipse.cdt.utils.spawner.ProcessFactory;
@@ -16,11 +17,9 @@ import org.eclipse.core.runtime.Status;
 
 public class Tools
 {
-  private static final String PROPERTY_OS_NAME = "os.name";
   public static final String PROPERTY_OS_VALUE_WINDOWS = "windows";
   public static final String PROPERTY_OS_VALUE_LINUX = "linux";
   public static final String PROPERTY_OS_VALUE_MACOSX = "macosx";
-  private static final String SP = " ";
 
   public static boolean isPlatform(String sPlatform)
   {
@@ -96,7 +95,7 @@ public class Tools
         InputStream ein = proc.getInputStream();
         BufferedReader d1 = new BufferedReader(new InputStreamReader(
           ein));
-        ArrayList ls = new ArrayList(10);
+        List<String> ls = new ArrayList<>(10);
         String s;
         while ((s = d1.readLine()) != null)
         {
