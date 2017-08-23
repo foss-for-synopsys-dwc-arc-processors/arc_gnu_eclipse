@@ -26,8 +26,8 @@ import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 public class ArcDebugServicesFactory extends GdbDebugServicesFactory {
 
-    public ArcDebugServicesFactory(String version) {
-        super(version);
+    public ArcDebugServicesFactory(String version, ILaunchConfiguration config) {
+        super(version, config);
     }
 
     public <V> V createService(Class<V> clazz, DsfSession session,

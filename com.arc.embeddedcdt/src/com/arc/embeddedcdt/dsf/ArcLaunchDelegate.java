@@ -35,7 +35,7 @@ public class ArcLaunchDelegate extends GdbLaunchDelegate {
     @Override
     protected IDsfDebugServicesFactory newServiceFactory(ILaunchConfiguration config,
             String version) {
-        return new ArcDebugServicesFactory(version);
+        return new ArcDebugServicesFactory(version, config);
     }
 
     /*
