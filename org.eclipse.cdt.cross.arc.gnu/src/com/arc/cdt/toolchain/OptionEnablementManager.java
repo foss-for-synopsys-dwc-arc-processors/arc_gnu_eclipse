@@ -47,11 +47,6 @@ public class OptionEnablementManager extends AbstractOptionEnablementManager {
         public void onOptionValueChanged (IOptionEnablementManager mgr, String optionId) {
             // If linker map requested or not requested, then enable/disable
             // related options.
-        	 if (optionId.endsWith(".option.target.processor")) { 
-          	   String value = (String) mgr.getValue(optionId);
-          	   //System.out.println("toolchain.OptionEnableManager~~~~~~~~~~~~~~~~~~~~~~~~~~~"+value);
-        
-          }
             if (optionId.equals(MAP_OPTION_ID)){
                 doMapOptions(mgr, optionId);     
             }
