@@ -31,7 +31,12 @@ public class EmbeddedDebuggerTab2 extends CDebuggerTab {
     }
 
     protected void initDebuggerTypes(String selection) {
-        setInitializeDefault(true);
+        /*
+         * Here used to be a setInitializeDefault(true), but that was causing troubles, because as a
+         * result configuration was always reset to ARC defaults. For comparison see
+         * org.eclipse.cdt.dsf.gdb.internal.ui.launching.CDebuggerTab where setInitializeDefault is
+         * called only sometimes.
+         */
         setDebuggerId(EMBEDDED_DEBUGGER_ID);
         updateComboFromSelection();
     }
