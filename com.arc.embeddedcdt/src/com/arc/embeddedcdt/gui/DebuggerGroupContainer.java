@@ -1460,7 +1460,7 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setAshlingPath(defaultAshlingPath);
 
     String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
-        + java.io.File.separator + "arc-cpu-em.xml";
+        + java.io.File.separator + "arc-em-cpu.xml";
     configurationWriter.setAshlingXmlPath(ashlingXmlFile);
 
     String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
