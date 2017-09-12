@@ -235,11 +235,11 @@ public class DebuggerGroupContainer extends Observable{
     externalToolsAshlingPath = configurationReader.getOrDefault(defaultAshlingPath, "",
         configurationReader.getAshlingPath());
     String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
-        + java.io.File.separator + "arc-cpu-em.xml";
+        + java.io.File.separator + LaunchConfigurationConstants.ASHLING_DEFAULT_XML_FILE;
     ashlingXmlPath = configurationReader.getOrDefault(ashlingXmlFile, "",
         configurationReader.getAshlingXmlPath());
     String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
-        + java.io.File.separator + "opella-arcem-tdesc.xml";
+        + java.io.File.separator + LaunchConfigurationConstants.ASHLING_DEFAULT_TDESC_FILE;
     ashlingTdescPath = configurationReader.getOrDefault(defaultTDescPath, "",
         configurationReader.getAshlingTDescPath());
     externalToolsNsimPath = configurationReader.getOrDefault(
@@ -1460,11 +1460,11 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setAshlingPath(defaultAshlingPath);
 
     String ashlingXmlFile = new File(defaultAshlingPath).getParentFile().getPath()
-        + java.io.File.separator + "arc-em-cpu.xml";
+        + java.io.File.separator +  LaunchConfigurationConstants.ASHLING_DEFAULT_XML_FILE;
     configurationWriter.setAshlingXmlPath(ashlingXmlFile);
 
     String defaultTDescPath = new File(defaultAshlingPath).getParentFile().getPath()
-        + java.io.File.separator + "opella-arcem-tdesc.xml";
+        + java.io.File.separator + LaunchConfigurationConstants.ASHLING_DEFAULT_TDESC_FILE;
     configurationWriter.setAshlingTDescPath(defaultTDescPath);
   }
 }

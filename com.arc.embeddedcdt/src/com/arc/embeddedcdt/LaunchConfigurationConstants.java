@@ -77,9 +77,12 @@ public interface LaunchConfigurationConstants {
     static final FtdiCore DEFAULT_FTDI_CORE = DEFAULT_FTDI_DEVICE.getCores().get(0);
     static final String DEFAULT_FTDI_DEVICE_NAME = DEFAULT_FTDI_DEVICE.name();
     static final String DEFAULT_FTDI_CORE_NAME = DEFAULT_FTDI_CORE.name();
-    // Constants
+
+    // Ashling
     static final String ASHLING_DEFAULT_PATH_WINDOWS = "C:\\AshlingOpellaXDforARC\\ash-arc-gdb-server.exe";
     static final String ASHLING_DEFAULT_PATH_LINUX = "/usr/bin/ash-arc-gdb-server";
+    static final String ASHLING_DEFAULT_XML_FILE = "arc-em-cpu.xml";
+    static final String ASHLING_DEFAULT_TDESC_FILE = "opella-arcem-tdesc.xml";
 
     //Custom Gdbserver
     String ATTR_DEBUGGER_CUSTOM_GDBSERVER_BIN_PATH =  LAUNCH_ID + ".debugger_custom_gdbsever_bin_path";
