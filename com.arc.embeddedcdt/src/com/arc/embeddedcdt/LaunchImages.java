@@ -77,12 +77,4 @@ public class LaunchImages {
         }
         return null;
     }
-
-    /**
-     * Helper method to access the image registry from the JavaPlugin class.
-     */
-    static ImageRegistry getImageRegistry() {
-        return imageRegistry;
-    }
-
 }
