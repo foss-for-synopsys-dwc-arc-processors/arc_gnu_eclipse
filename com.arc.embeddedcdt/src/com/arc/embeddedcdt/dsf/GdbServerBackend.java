@@ -152,15 +152,11 @@ public abstract class GdbServerBackend extends GDBBackend {
      * @throws CoreException
      */
     private IProcess addServerProcess(String label) throws CoreException, InterruptedException {
-        Map<String, String> attributes = new HashMap<String, String>();
-        attributes.put(IGdbDebugConstants.PROCESS_TYPE_CREATION_ATTR,
-                IGdbDebugConstants.GDB_PROCESS_CREATION_VALUE);
-
         ILaunch launch = (ILaunch) session.getModelAdapter(ILaunch.class);
         IProcess newProcess = null;
         Process serverProc = getProcess();
         if (serverProc != null) {
-            newProcess = DebugPlugin.newProcess(launch, serverProc, label, attributes);
+            newProcess = DebugPlugin.newProcess(launch, serverProc, label);
         }
 
         if (getStartupDelayEstimate() > 0) {
