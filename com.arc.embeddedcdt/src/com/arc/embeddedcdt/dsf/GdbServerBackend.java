@@ -12,19 +12,16 @@ package com.arc.embeddedcdt.dsf;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Hashtable;
 
 import org.eclipse.cdt.core.parser.util.StringUtil;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitor;
-import org.eclipse.cdt.dsf.gdb.IGdbDebugConstants;
 import org.eclipse.cdt.dsf.gdb.launching.GdbLaunch;
 import org.eclipse.cdt.dsf.gdb.service.GDBBackend;
 import org.eclipse.cdt.dsf.gdb.service.SessionType;
@@ -48,13 +45,9 @@ import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 
 /**
- * DSF service containing GDB server-related logic:
- *                      commands to start a server,
- *                      commands for GDB to connect to the server,
- *                      process label,
- *                      working directory for the server,
- *                      server start and shutdown methods,
- *                      creating console for the server.
+ * DSF service containing GDB server-related logic: commands to start a server, commands for GDB to
+ * connect to the server, process label, working directory for the server, server start and shutdown
+ * methods, creating console for the server.
  */
 public abstract class GdbServerBackend extends GDBBackend {
 
@@ -90,7 +83,8 @@ public abstract class GdbServerBackend extends GDBBackend {
      * @return Estimated time in milliseconds for server start listening on TCP socket.
      */
     protected int getStartupDelayEstimate() {
-        return LaunchPlugin.getDefault().getPreferenceStore().getInt(ILaunchPreferences.SERVER_STARTUP_DELAY);
+        return LaunchPlugin.getDefault().getPreferenceStore()
+                .getInt(ILaunchPreferences.SERVER_STARTUP_DELAY);
     }
 
     /**
@@ -136,8 +130,8 @@ public abstract class GdbServerBackend extends GDBBackend {
 
     @Override
     public void initialize(final RequestMonitor requestMonitor) {
-        register( new String[]{ GdbServerBackend.class.getName() },
-            new Hashtable<String,String>() );
+        register(new String[] { GdbServerBackend.class.getName() },
+                new Hashtable<String, String>());
         if (!doLaunchProcess()) {
             requestMonitor.done();
             return;
@@ -240,10 +234,12 @@ public abstract class GdbServerBackend extends GDBBackend {
     private Process launchGDBProcess(String[] cmdArray, File workingDir) throws CoreException {
         try {
             GdbLaunch launch = (GdbLaunch) session.getModelAdapter(ILaunch.class);
-            return ProcessFactory.getFactory().exec(cmdArray, launch.getLaunchEnvironment(), workingDir);
+            return ProcessFactory.getFactory().exec(cmdArray, launch.getLaunchEnvironment(),
+                    workingDir);
         } catch (IOException e) {
             String message = "Error while launching command: " + StringUtil.join(cmdArray, " ");
-            throw new CoreException(new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, -1, message, e));
+            throw new CoreException(
+                    new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, -1, message, e));
         }
     }
 
