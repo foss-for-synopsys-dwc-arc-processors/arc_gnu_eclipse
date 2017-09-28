@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.net.ConnectException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 import org.eclipse.cdt.core.parser.util.StringUtil;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitor;
@@ -33,6 +39,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.osgi.framework.BundleContext;
 
 import com.arc.embeddedcdt.ILaunchPreferences;
@@ -86,6 +93,18 @@ public abstract class GdbServerBackend extends GDBBackend {
         return LaunchPlugin.getDefault().getPreferenceStore().getInt(ILaunchPreferences.SERVER_STARTUP_DELAY);
     }
 
+    /**
+     * Whether this gdbserver supports reconnection. This is required for adaptive startup delay
+     * because it connects to the target port to check if there is a server. For example, nSIM
+     * without option -reconnect will close after first disconnection, therefore adaptive delay
+     * might not work with all servers.
+     * 
+     * @return
+     */
+    protected boolean hasReconnectSupport() {
+        return false;
+    }
+
     public String getCommandToConnect() {
         return String.format("\ntarget remote %s:%s\nload\n", getHostAddress(), getPortToConnect());
     }
@@ -137,10 +156,54 @@ public abstract class GdbServerBackend extends GDBBackend {
      * 
      * @throws CoreException
      */
-    public void initializeServerConsole() throws CoreException, InterruptedException {
+    public void initializeServerConsole() throws CoreException, InterruptedException, IOException {
         if (doLaunchProcess()) {
             IProcess newProcess = addServerProcess(getProcessLabel());
             newProcess.setAttribute(IProcess.ATTR_CMDLINE, getCommandLine());
+        }
+    }
+
+    /**
+     * Implements an adaptive procedure to start GDBserver and wait until it starts to listen for
+     * clients, thus making sure that client will not attempt to connect before server is ready for
+     * it.
+     *
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    private void waitUntilServerListens() throws InterruptedException, IOException {
+        IPreferenceStore prefs = LaunchPlugin.getDefault().getPreferenceStore();
+
+        int startup_timeout = prefs.getInt(ILaunchPreferences.SERVER_STARTUP_TIMEOUT);
+        int timeout_step = prefs.getInt(ILaunchPreferences.SERVER_STARTUP_TIMEOUT_STEP);
+        Instant start_time = Instant.now();
+
+        boolean keep_trying = true;
+        while (keep_trying) {
+            keep_trying = false;
+            Socket socket = new Socket();
+            SocketAddress addr = new InetSocketAddress(this.getHostAddress(),
+                    Integer.parseInt(this.getPortToConnect()));
+            try {
+                socket.connect(addr, 15000);
+            } catch (ConnectException e) {
+                long time_passed = start_time.until(Instant.now(), ChronoUnit.MILLIS);
+                if (Instant.now().minusMillis(startup_timeout).isBefore(start_time)) {
+                    keep_trying = true;
+                    Thread.sleep(timeout_step);
+                    LaunchPlugin.log(IStatus.INFO, "Error connecting to gdbserver, retrying.");
+                } else {
+                    LaunchPlugin.log(IStatus.INFO,
+                            String.format(
+                                    "Error connecting to gdbserver, will not try anymore, "
+                                            + "max timeout = %d ms, time passed = %d ms.",
+                                    startup_timeout, time_passed));
+                }
+            } finally {
+                if (!socket.isClosed()) {
+                    socket.close();
+                }
+            }
         }
     }
 
@@ -152,7 +215,8 @@ public abstract class GdbServerBackend extends GDBBackend {
      * @return process added to the launch
      * @throws CoreException
      */
-    private IProcess addServerProcess(String label) throws CoreException, InterruptedException {
+    private IProcess addServerProcess(String label)
+            throws CoreException, InterruptedException, IOException {
         ILaunch launch = (ILaunch) session.getModelAdapter(ILaunch.class);
         IProcess newProcess = null;
         Process serverProc = getProcess();
@@ -160,8 +224,14 @@ public abstract class GdbServerBackend extends GDBBackend {
             newProcess = DebugPlugin.newProcess(launch, serverProc, label);
         }
 
-        if (getStartupDelayEstimate() > 0) {
-            Thread.sleep(getStartupDelayEstimate());
+        IPreferenceStore prefs = LaunchPlugin.getDefault().getPreferenceStore();
+        if (this.hasReconnectSupport()
+                && prefs.getBoolean(ILaunchPreferences.SERVER_USE_ADAPTIVE_DELAY)) {
+            this.waitUntilServerListens();
+        } else {
+            if (getStartupDelayEstimate() > 0) {
+                Thread.sleep(getStartupDelayEstimate());
+            }
         }
 
         return newProcess;

@@ -23,7 +23,9 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.osgi.framework.BundleContext;
@@ -108,6 +110,15 @@ public class LaunchPlugin extends AbstractUIPlugin {
      */
     public static void log(CoreException e) {
         StatusManager.getManager().handle(e, LaunchPlugin.getUniqueIdentifier());
+    }
+
+    public static void log(IStatus status) {
+        StatusManager.getManager().handle(status);
+    }
+
+    public static void log(int severity, String message) {
+        IStatus s = new Status(severity, LaunchPlugin.PLUGIN_ID, message);
+        LaunchPlugin.log(s);
     }
 
     public static BundleContext getBundleContext() {

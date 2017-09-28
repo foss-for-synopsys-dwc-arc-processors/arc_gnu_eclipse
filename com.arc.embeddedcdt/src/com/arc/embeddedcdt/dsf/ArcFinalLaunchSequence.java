@@ -10,6 +10,7 @@
 
 package com.arc.embeddedcdt.dsf;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -211,7 +212,7 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
     public void stepOpenGdbServerConsole(final RequestMonitor rm) {
         try {
             serverBackend.initializeServerConsole();
-        } catch (CoreException|InterruptedException e) {
+        } catch (CoreException|InterruptedException|IOException e) {
             rm.setStatus(new Status(Status.ERROR, LaunchPlugin.PLUGIN_ID,
                     "Unable to initialize GdbServer console", e));
         } finally {

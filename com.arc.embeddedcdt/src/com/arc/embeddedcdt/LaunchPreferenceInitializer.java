@@ -15,5 +15,11 @@ public class LaunchPreferenceInitializer extends AbstractPreferenceInitializer {
 
         prefs.setDefault(ILaunchPreferences.SERVER_STARTUP_DELAY,
                 ILaunchPreferences.DEFAULT_SERVER_STARTUP_DELAY);
+        prefs.setDefault(ILaunchPreferences.SERVER_USE_ADAPTIVE_DELAY,
+                ILaunchPreferences.DEFAULT_SERVER_USE_ADAPTIVE_DELAY);
+        prefs.setDefault(ILaunchPreferences.SERVER_STARTUP_TIMEOUT,
+                ILaunchPreferences.DEFAULT_SERVER_STARTUP_TIMEOUT);
+        prefs.setDefault(ILaunchPreferences.SERVER_STARTUP_TIMEOUT_STEP,
+                ILaunchPreferences.DEFAULT_SERVER_STARTUP_TIMEOUT_STEP);
     }
 }
