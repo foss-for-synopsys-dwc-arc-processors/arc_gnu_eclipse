@@ -179,6 +179,12 @@
          </perspective>
       </shortcut>
  </extension>
+    <extension
+          point="org.eclipse.core.runtime.preferences">
+       <initializer
+             class="com.arc.embeddedcdt.LaunchPreferenceInitializer">
+       </initializer>
+    </extension>
    
 </plugin>
 

@@ -35,6 +35,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
 import org.osgi.framework.BundleContext;
 
+import com.arc.embeddedcdt.ILaunchPreferences;
 import com.arc.embeddedcdt.LaunchConfigurationConstants;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
@@ -82,7 +83,7 @@ public abstract class GdbServerBackend extends GDBBackend {
      * @return Estimated time in milliseconds for server start listening on TCP socket.
      */
     protected int getStartupDelayEstimate() {
-        return 500;
+        return LaunchPlugin.getDefault().getPreferenceStore().getInt(ILaunchPreferences.SERVER_STARTUP_DELAY);
     }
 
     public String getCommandToConnect() {
