@@ -21,5 +21,7 @@ public class LaunchPreferenceInitializer extends AbstractPreferenceInitializer {
                 ILaunchPreferences.DEFAULT_SERVER_STARTUP_TIMEOUT);
         prefs.setDefault(ILaunchPreferences.SERVER_STARTUP_TIMEOUT_STEP,
                 ILaunchPreferences.DEFAULT_SERVER_STARTUP_TIMEOUT_STEP);
+        prefs.setDefault(ILaunchPreferences.NSIM_PASS_RECONNECT_OPTION,
+                ILaunchPreferences.DEFAULT_NSIM_PASS_RECONNECT_OPTION);
     }
 }

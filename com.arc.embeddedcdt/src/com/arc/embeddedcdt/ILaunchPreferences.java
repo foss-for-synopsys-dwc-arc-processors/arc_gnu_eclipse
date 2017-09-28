@@ -31,4 +31,10 @@ public interface ILaunchPreferences {
      */
     public static final String SERVER_STARTUP_TIMEOUT_STEP = "gdbserver_startup_delay_step";
     public static final int DEFAULT_SERVER_STARTUP_TIMEOUT_STEP = 1;
+
+    /**
+     * Whether to start nSIM with option -reconnect. This is required for adaptive delay to work with nSIM.
+     */
+    public static final String NSIM_PASS_RECONNECT_OPTION = "nsim_pass_reconnect_option";
+    public static final boolean DEFAULT_NSIM_PASS_RECONNECT_OPTION = true;
 }

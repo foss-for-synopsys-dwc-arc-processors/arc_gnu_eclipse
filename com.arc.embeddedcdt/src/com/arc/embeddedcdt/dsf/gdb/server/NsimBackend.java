@@ -16,8 +16,10 @@ import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.statushandlers.StatusManager;
 
+import com.arc.embeddedcdt.ILaunchPreferences;
 import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.common.InvalidDirectoryPathException;
 import com.arc.embeddedcdt.dsf.GdbServerBackend;
@@ -26,12 +28,17 @@ import com.arc.embeddedcdt.gui.ARCWorkingDirectoryBlock;
 
 public class NsimBackend extends GdbServerBackend {
 
+    private boolean pass_reconnect = false;
+
     private String commandLineTemplate = "%s"
             + " -port %s"
             + " -gdb";
 
     public NsimBackend(DsfSession session, ILaunchConfiguration launchConfiguration) {
         super(session, launchConfiguration);
+
+        IPreferenceStore prefs = LaunchPlugin.getDefault().getPreferenceStore();
+        this.pass_reconnect = prefs.getBoolean(ILaunchPreferences.NSIM_PASS_RECONNECT_OPTION);
     }
 
     @Override
@@ -42,6 +49,10 @@ public class NsimBackend extends GdbServerBackend {
         String gdbServerPort = cfgReader.getGdbServerPort();
         StringBuffer commandLine = new StringBuffer();
         commandLine.append(String.format(commandLineTemplate, nsimPath, gdbServerPort));
+
+        if (this.pass_reconnect) {
+            commandLine.append(" -reconnect");
+        }
 
         boolean simulateMemoryExceptions = cfgReader.getNsimSimulateMemoryExceptions();
         if (!simulateMemoryExceptions) {
@@ -80,6 +91,11 @@ public class NsimBackend extends GdbServerBackend {
             commandLine.append(" -propsfile ").append(propsPath);
         }
         return commandLine.toString();
+    }
+
+    @Override
+    protected boolean hasReconnectSupport() {
+        return this.pass_reconnect;
     }
 
     @Override
