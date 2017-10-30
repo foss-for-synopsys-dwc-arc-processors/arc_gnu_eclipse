@@ -17,12 +17,17 @@ import java.util.Map;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitor;
 import org.eclipse.cdt.dsf.service.AbstractDsfService;
 import org.eclipse.cdt.dsf.service.DsfSession;
+import org.eclipse.cdt.serial.BaudRate;
+import org.eclipse.cdt.serial.ByteSize;
+import org.eclipse.cdt.serial.Parity;
+import org.eclipse.cdt.serial.StopBits;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.tm.internal.terminal.control.ITerminalViewControl;
 import org.eclipse.tm.internal.terminal.provisional.api.ITerminalConnector;
+import org.eclipse.tm.terminal.connector.cdtserial.connector.SerialSettings;
 import org.eclipse.tm.terminal.view.core.TerminalServiceFactory;
 import org.eclipse.tm.terminal.view.core.interfaces.ITerminalService;
 import org.eclipse.tm.terminal.view.core.interfaces.constants.ITerminalsConnectorConstants;
@@ -43,18 +48,16 @@ import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 public class TerminalService extends AbstractDsfService {
 
     private static final String viewId = "org.eclipse.tm.terminal.view.ui.TerminalsView";
-    private static final String delegateId = "org.eclipse.tm.terminal.connector.serial.launcher.serial";
+    private static final String delegateId = "org.eclipse.tm.terminal.connector.cdtserial.launcher.serial";
 
     private Map<String, Object> properties;
     {
         properties = new HashMap<>();
-        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_BAUD_RATE, "115200");
-        properties.put(ITerminalsConnectorConstants.PROP_TIMEOUT, "5");
-        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_DATA_BITS, "8");
-        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_STOP_BITS, "1");
-        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_PARITY, "N");
-        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_FLOW_CONTROL, "XON/XOFF");
-        properties.put(ITerminalsConnectorConstants.PROP_DELEGATE_ID, delegateId);
+        properties.put(SerialSettings.BAUD_RATE_ATTR, BaudRate.B115200);
+        //properties.put(ITerminalsConnectorConstants.PROP_SERIAL_DATA_BITS, "8");
+        properties.put(SerialSettings.STOP_BITS_ATTR, StopBits.S1);
+        properties.put(SerialSettings.PARITY_ATTR, Parity.None);
+        properties.put(SerialSettings.BYTE_SIZE_ATTR, ByteSize.getDefault());
     }
     private ITerminalService terminal = TerminalServiceFactory.getService();
     private ILauncherDelegate delegate = LauncherDelegateManager.getInstance()
@@ -66,7 +69,7 @@ public class TerminalService extends AbstractDsfService {
         ILaunch launch = (ILaunch) session.getModelAdapter(ILaunch.class);
         ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
         String serialPort = cfgReader.getComPort();
-        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_DEVICE, serialPort);
+        properties.put(SerialSettings.PORT_NAME_ATTR, serialPort);
         connector = delegate.createTerminalConnector(properties);
     }
 

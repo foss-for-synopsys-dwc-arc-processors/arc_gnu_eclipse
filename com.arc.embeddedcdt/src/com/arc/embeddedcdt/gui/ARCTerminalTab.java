@@ -14,12 +14,16 @@
  *******************************************************************************/
 package com.arc.embeddedcdt.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import org.eclipse.cdt.launch.ui.CLaunchConfigurationTab;
 import org.eclipse.cdt.launch.ui.ICDTLaunchHelpContextIds;
+import org.eclipse.cdt.serial.SerialPort;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.SWTFactory;
@@ -37,13 +41,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.embeddedcdt.LaunchImages;
+import com.arc.embeddedcdt.LaunchPlugin;
 import com.arc.embeddedcdt.common.ArcGdbServer;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationReader;
 import com.arc.embeddedcdt.dsf.utils.ConfigurationWriter;
-
-import gnu.io.CommPortIdentifier;
 
 public class ARCTerminalTab extends CLaunchConfigurationTab {
     protected Button fLaunchComButton;// this variable is for launching COM port
@@ -265,19 +269,13 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
     public static List COMserialport() {
         List<String> list = new ArrayList<String>();
         try {
-            Enumeration portIdEnum = CommPortIdentifier.getPortIdentifiers();
-            while (portIdEnum.hasMoreElements()) {
-                CommPortIdentifier identifier = (CommPortIdentifier) portIdEnum.nextElement();
-                String strName = identifier.getName();
-                int nPortType = identifier.getPortType();
-
-                if (nPortType == CommPortIdentifier.PORT_SERIAL)
-                    list.add(strName);
+            String[] ports = SerialPort.list();
+            for(String strName : ports) {
+                list.add(strName);
             }
-
-        } catch (IllegalArgumentException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+        } catch (IOException e) {
+        	//TODO createMarker and other stuff
+        	StatusManager.getManager().handle(new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, "Debugger plugin has thrown IOException", e), StatusManager.SHOW);
         }
         if (list.size() < 1) {
             list.add("Please connect to EM Starter Kit");
