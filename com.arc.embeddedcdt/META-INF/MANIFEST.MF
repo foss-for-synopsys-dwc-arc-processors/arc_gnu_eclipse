@@ -22,15 +22,15 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.cdt.debug.ui,
  org.eclipse.core.variables,
  org.eclipse.cdt.launch;bundle-version="7.1.0",
+ org.eclipse.tm.terminal.connector.cdtserial,
  org.eclipse.tm.terminal.control,
- org.eclipse.tm.terminal.connector.serial,
  org.eclipse.tm.terminal.view.ui,
  org.eclipse.tm.terminal.view.core,
  org.eclipse.cdt.dsf.gdb.ui,
  org.eclipse.cdt.dsf,
  org.eclipse.cdt.dsf.gdb,
- org.eclipse.cdt.launch.remote
+ org.eclipse.cdt.launch.remote,
+ org.eclipse.cdt.native.serial
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: com.ibm.icu.text,
- gnu.io
+Import-Package: com.ibm.icu.text
