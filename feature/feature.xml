@@ -2,7 +2,7 @@
 <feature
       id="com.arc.cdt.feature"
       label="ARC GNU Toolchain Embedded CDT"
-      version="2017.9.0"
+      version="2018.3.0"
       provider-name="Synopsys, Inc."
       plugin="org.eclipse.cdt.cross.arc.gnu"
       image="logo_emb_full.png">
@@ -15,7 +15,7 @@ applications for the ARC series of processors.
    </description>
 
    <copyright>
-      Copyright © 2013-2015 Synopsys, Inc.  All rights reserved.
+      Copyright (c) 2013-2017 Synopsys, Inc.  All rights reserved.
    </copyright>
 
    <license url="%licenseURL">
