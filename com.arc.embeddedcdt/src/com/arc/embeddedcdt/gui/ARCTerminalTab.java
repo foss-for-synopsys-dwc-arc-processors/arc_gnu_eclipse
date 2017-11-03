@@ -16,6 +16,7 @@ package com.arc.embeddedcdt.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -269,13 +270,13 @@ public class ARCTerminalTab extends CLaunchConfigurationTab {
     public static List COMserialport() {
         List<String> list = new ArrayList<String>();
         try {
-            String[] ports = SerialPort.list();
-            for(String strName : ports) {
-                list.add(strName);
-            }
+        	Collections.addAll(list, SerialPort.list());
         } catch (IOException e) {
         	//TODO createMarker and other stuff
-        	StatusManager.getManager().handle(new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, "Debugger plugin has thrown IOException", e), StatusManager.SHOW);
+        	StatusManager.getManager().handle(
+        			new Status(IStatus.ERROR, LaunchPlugin.PLUGIN_ID, 
+        					"An error happened when retrieving list of available serial ports.", e), 
+        			StatusManager.SHOW);
         }
         if (list.size() < 1) {
             list.add("Please connect to EM Starter Kit");

@@ -54,7 +54,6 @@ public class TerminalService extends AbstractDsfService {
     {
         properties = new HashMap<>();
         properties.put(SerialSettings.BAUD_RATE_ATTR, BaudRate.B115200);
-        //properties.put(ITerminalsConnectorConstants.PROP_SERIAL_DATA_BITS, "8");
         properties.put(SerialSettings.STOP_BITS_ATTR, StopBits.S1);
         properties.put(SerialSettings.PARITY_ATTR, Parity.None);
         properties.put(SerialSettings.BYTE_SIZE_ATTR, ByteSize.getDefault());
