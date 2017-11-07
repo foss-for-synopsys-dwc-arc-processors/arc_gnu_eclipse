@@ -9,15 +9,17 @@
     <module>repository</module>
     <module>feature</module>
     <module>com.arc.embeddedcdt</module>
-    <module>org.eclipse.cdt.cross.arc.gnu.uclibc</module>
     <module>org.eclipse.cdt.cross.arc.gnu</module>
+    <module>org.eclipse.cdt.cross.arc.gnu.uclibc</module>
   </modules>
 
   <properties>
     <!-- Path to Eclipse p2 repository -->
-    <eclipse.repository>http://download.eclipse.org/releases/neon</eclipse.repository>
+    <!-- <eclipse.repository>http://download.eclipse.org/releases/neon</eclipse.repository> -->
+    <eclipse.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/oxygen/</eclipse.repository>
     <!-- Path to CDT p2 repository -->
-    <cdt.repository>http://download.eclipse.org/tools/cdt/releases/9.2</cdt.repository>
+    <!-- <cdt.repository>http://download.eclipse.org/tools/cdt/releases/9.2</cdt.repository> -->
+    <cdt.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/cdt/releases/9.3/</cdt.repository>
   </properties>
 
   <repositories>
@@ -27,7 +29,7 @@
       <layout>p2</layout>
     </repository>
     <repository>
-      <id>eclipse-neon</id>
+      <id>eclipse-oxygen</id>
       <url>${eclipse.repository}</url>
       <layout>p2</layout>
     </repository>
