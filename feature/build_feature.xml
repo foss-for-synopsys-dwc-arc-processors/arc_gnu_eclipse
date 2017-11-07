@@ -16,11 +16,6 @@
 	</target>
 
 	<target name="all.plugins" depends="init">
-		<ant antfile="build_plugin.xml" dir="../com.arc.embeddedcdt.rxtx" target="${target}">
-			<property name="arch" value="x86_64"/>
-			<property name="ws" value="gtk"/>
-			<property name="os" value="linux"/>
-		</ant>
 		<ant antfile="build_plugin.xml" dir="../org.eclipse.cdt.cross.arc.gnu" target="${target}">
 			<property name="arch" value="x86_64"/>
 			<property name="ws" value="gtk"/>
@@ -98,7 +93,7 @@
 				<include name="logo_emb_full.png"/>
 			</fileset>
 		</copy>
-		<eclipse.idReplacer featureFilePath="${feature.temp.folder}/features/com.arc.cdt.feature_${bundleVersion}/feature.xml"  selfVersion="${bundleVersion}" featureIds="" pluginIds="com.arc.embeddedcdt:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu.uclibc:0.0.0,${bundleVersion},com.arc.embeddedcdt.rxtx:0.0.0,${bundleVersion},"/>
+		<eclipse.idReplacer featureFilePath="${feature.temp.folder}/features/com.arc.cdt.feature_${bundleVersion}/feature.xml"  selfVersion="${bundleVersion}" featureIds="" pluginIds="com.arc.embeddedcdt:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu.uclibc:0.0.0,${bundleVersion},"/>
 		<eclipse.gatherFeature 
 		   metadataRepository="${p2.build.repo}"
 		   artifactRepository="${p2.build.repo}"
@@ -122,7 +117,7 @@
 				<include name="logo_emb_full.png"/>
 			</fileset>
 		</copy>
-		<eclipse.idReplacer featureFilePath="${feature.base}/features/com.arc.cdt.feature_${bundleVersion}/feature.xml"  selfVersion="${bundleVersion}" featureIds="" pluginIds="com.arc.embeddedcdt:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu.uclibc:0.0.0,${bundleVersion},com.arc.embeddedcdt.rxtx:0.0.0,${bundleVersion},"/>
+		<eclipse.idReplacer featureFilePath="${feature.base}/features/com.arc.cdt.feature_${bundleVersion}/feature.xml"  selfVersion="${bundleVersion}" featureIds="" pluginIds="com.arc.embeddedcdt:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu:0.0.0,${bundleVersion},org.eclipse.cdt.cross.arc.gnu.uclibc:0.0.0,${bundleVersion},"/>
 		<antcall target="rootFiles">
 			<param name="rootTarget" value="rootFiles${os}_${ws}_${arch}"/>
 		</antcall>
