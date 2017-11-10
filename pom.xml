@@ -76,6 +76,17 @@
           </environments>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-p2-repository-plugin</artifactId>
+        <version>0.26.0</version>
+        <configuration>
+          <!-- XZ compression is not needed for our purposes. -->
+          <xzCompress>false</xzCompress>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
