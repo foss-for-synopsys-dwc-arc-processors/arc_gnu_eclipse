@@ -7111,60 +7111,6 @@
          </toolChain>
       </template>
       <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_C_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
@@ -7187,24 +7133,6 @@
       </template>
       <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK2_HelloWorld_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_CPP_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
@@ -7246,18 +7174,6 @@
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
       <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_C_Project"
-            location="$nl$/templates/projecttemplates/EMSK_HelloWorld_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK_HelloWorld_CPP_Project"
-            location="$nl$/templates/projecttemplates/EMSK_HelloWorld_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
             filterPattern=".*g\+\+"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK2_HelloWorld_CPP_Project"
             location="$nl$/templates/projecttemplates/EMSK2_HelloWorld_CPP_Project/template.xml"
@@ -7267,42 +7183,6 @@
             filterPattern=".*gcc"
             id="org.eclipse.cdt.cross.arc.gnu.templates.EMSK2_HelloWorld_C_Project"
             location="$nl$/templates/projecttemplates/EMSK2_HelloWorld_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_C_Project"
-            location="$nl$/templates/projecttemplates/EM4_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM4_Empty_CPP_Project"
-            location="$nl$/templates/projecttemplates/EM4_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_C_Project"
-            location="$nl$/templates/projecttemplates/EM5_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM5_Empty_CPP_Project"
-            location="$nl$/templates/projecttemplates/EM5_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_C_Project"
-            location="$nl$/templates/projecttemplates/EM6_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.EM6_Empty_CPP_Project"
-            location="$nl$/templates/projecttemplates/EM6_Empty_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
       </template>
       <template
