@@ -57,6 +57,11 @@ public class TerminalService extends AbstractDsfService {
         properties.put(SerialSettings.STOP_BITS_ATTR, StopBits.S1);
         properties.put(SerialSettings.PARITY_ATTR, Parity.None);
         properties.put(SerialSettings.BYTE_SIZE_ATTR, ByteSize.getDefault());
+        
+        properties.put(ITerminalsConnectorConstants.PROP_TIMEOUT, "5");
+        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_DATA_BITS, "8");
+        properties.put(ITerminalsConnectorConstants.PROP_SERIAL_FLOW_CONTROL, "XON/XOFF");
+        properties.put(ITerminalsConnectorConstants.PROP_DELEGATE_ID, delegateId);
     }
     private ITerminalService terminal = TerminalServiceFactory.getService();
     private ILauncherDelegate delegate = LauncherDelegateManager.getInstance()
