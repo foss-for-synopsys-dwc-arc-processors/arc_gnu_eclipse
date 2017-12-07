@@ -130,8 +130,8 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
                     "stepSetEnvironmentVariables",
                     "stepStartTrackingBreakpoints",
                     "stepStopScript",
-                    "stepResumeScript",
                     "stepUserDebugCommands",
+                    "stepResumeScript",
                     "stepArcCleanup", };
         }
         return super.getExecutionOrder(group);
