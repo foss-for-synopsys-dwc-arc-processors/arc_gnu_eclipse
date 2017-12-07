@@ -100,7 +100,7 @@ public abstract class GdbServerBackend extends GDBBackend {
     }
 
     public String getCommandToConnect() {
-        return String.format("\ntarget remote %s:%s\nload\n", getHostAddress(), getPortToConnect());
+        return String.format("\ntarget remote %s:%s\n", getHostAddress(), getPortToConnect());
     }
 
     // For OpenOCD on AXS10x this port might be different from the one in the launch configuration

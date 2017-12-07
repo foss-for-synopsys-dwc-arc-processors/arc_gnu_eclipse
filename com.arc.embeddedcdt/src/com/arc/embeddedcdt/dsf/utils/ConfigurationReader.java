@@ -130,6 +130,11 @@ public class ConfigurationReader {
             ArcGdbServer.DEFAULT_GDB_SERVER.toString()));
   }
 
+  public boolean getLoadElf() {
+    return getAttribute(LaunchConfigurationConstants.ATTR_LOAD_ELF,
+        LaunchConfigurationConstants.DEFAULT_LOAD_ELF);
+  }
+
   public String getNsimPath() {
     return getAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, "");
   }
