@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.arc.cdt.feature_2017.9.0.qualifier.jar" id="com.arc.cdt.feature" version="2017.9.0.qualifier">
+   <feature url="features/com.arc.cdt.feature_2017.9.1.qualifier.jar" id="com.arc.cdt.feature" version="2017.9.1.qualifier">
       <category name="com.arc.cdt"/>
    </feature>
    <category-def name="com.arc.cdt" label="ARC GNU Tools Support"/>
