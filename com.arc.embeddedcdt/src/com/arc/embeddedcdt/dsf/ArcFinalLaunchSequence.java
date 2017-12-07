@@ -124,6 +124,7 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
                     "stepSpecifyFileToDebug",
                     "stepUserInitCommands",
                     "stepConnectToTarget",
+                    "stepLoadElf",
                     "stepUpdateContainer",
                     "stepInitializeMemory",
                     "stepSetEnvironmentVariables",
@@ -366,6 +367,16 @@ public class ArcFinalLaunchSequence extends FinalLaunchSequence {
     public void stepConnectToTarget(RequestMonitor rm) {
         String command = serverBackend.getCommandToConnect();
         queueCommands(Arrays.asList(command), rm);
+    }
+
+    @Execute
+    public void stepLoadElf(RequestMonitor rm) {
+        ConfigurationReader cfgReader = new ConfigurationReader(launch.getLaunchConfiguration());
+        if (cfgReader.getLoadElf()) {
+            queueCommands(Arrays.asList("-target-download"), rm);
+        } else {
+            rm.done();
+        }
     }
 
     /*

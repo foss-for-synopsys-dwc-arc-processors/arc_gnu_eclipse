@@ -75,6 +75,7 @@ public class DebuggerGroupContainer extends Observable{
   private FileFieldEditor nsimBinaryPathEditor;
   private FileFieldEditor nsimTcfPathEditor;
   private FileFieldEditor nsimPropertiesPathEditor;
+  private Button loadElfButton;
   private FtdiDevice ftdiDevice = LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE;
   private FtdiCore ftdiCore = LaunchConfigurationConstants.DEFAULT_FTDI_CORE;
   private Text gdbServerPortNumberText;
@@ -260,6 +261,8 @@ public class DebuggerGroupContainer extends Observable{
     nsimPropertiesFilesLast = configurationReader.getNsimPropsPath();
     nsimTcfFilesLast = configurationReader.getNsimTcfPath();
     jitThread = configurationReader.getNsimJitThreads();
+
+    this.loadElfButton.setSelection(configurationReader.getLoadElf());
 
     externalToolsCombo.setText(gdbServer.toString());
 
@@ -844,6 +847,19 @@ public class DebuggerGroupContainer extends Observable{
 
     createGdbServerPortNumberText(subComp, minTextWidth);
 
+    // Load elf?
+    this.loadElfButton = new Button(subComp, SWT.CHECK);
+    this.loadElfButton.setText("Load application into target?");
+    this.loadElfButton.addSelectionListener( new SelectionListener() {
+        @Override
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+        @Override
+        public void widgetSelected(SelectionEvent event) {
+            sendNotification(null);
+        }
+    });
+
     if (!createTabItemNsim)
         createTabItemNsim(subComp);
     if (!createTabItemCom)
@@ -1216,6 +1232,8 @@ public class DebuggerGroupContainer extends Observable{
         hostName = gdbServerIpAddressText.getText();
         configurationWriter.setHostAddress(getAttributeValueFromString(hostName));
     }
+
+    configurationWriter.setLoadElf(this.loadElfButton.getSelection());
   }
 
   public String getErrorMessage(String errorMessage) {
@@ -1448,6 +1466,7 @@ public class DebuggerGroupContainer extends Observable{
     configurationWriter.setAshlingJtagFrequency("");
     configurationWriter.setFtdiDevice(LaunchConfigurationConstants.DEFAULT_FTDI_DEVICE_NAME);
     configurationWriter.setFtdiCore(LaunchConfigurationConstants.DEFAULT_FTDI_CORE_NAME);
+    configurationWriter.setLoadElf(LaunchConfigurationConstants.DEFAULT_LOAD_ELF);
 
     // Following assignments were not needed in Eclipse Mars, as default ARC values would be used.
     // But startign with Eclipse Neon, generic CDT code assigns default values to those attributes,

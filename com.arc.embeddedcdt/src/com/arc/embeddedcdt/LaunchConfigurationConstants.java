@@ -60,6 +60,9 @@ public interface LaunchConfigurationConstants {
     String ATTR_FTDI_DEVICE = LAUNCH_ID + ".ftdi_device"; //$NON-NLS-1$
     String ATTR_FTDI_CORE = LAUNCH_ID + ".ftdi_core"; //$NON-NLS-1$
 
+    String ATTR_LOAD_ELF = LAUNCH_ID + ".load_elf";
+    boolean DEFAULT_LOAD_ELF = true;
+
     static final int UNREAL_FILE_FORMAT_VERSION = -1;
 
     /* This file format number should be incremented when incompatible changes appear in the

@@ -92,6 +92,10 @@ public class ConfigurationWriter {
     setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS, value);
   }
 
+  public void setLoadElf(boolean value) {
+    setAttribute(LaunchConfigurationConstants.ATTR_LOAD_ELF, value);
+  }
+
   public void setNsimPath(final String value) {
     setAttribute(LaunchConfigurationConstants.ATTR_DEBUGGER_EXTERNAL_TOOLS_NSIM_PATH, value);
   }
