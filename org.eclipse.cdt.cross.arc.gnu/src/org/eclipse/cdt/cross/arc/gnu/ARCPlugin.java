@@ -12,14 +12,18 @@ package org.eclipse.cdt.cross.arc.gnu;
 
 import org.eclipse.cdt.cross.arc.gnu.common.StateListener;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.variables.IStringVariableManager;
+import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.osgi.framework.BundleContext;
 
  public class ARCPlugin extends Plugin
@@ -27,7 +31,17 @@ import org.osgi.framework.BundleContext;
    public static final String PLUGIN_ID = "org.eclipse.cdt.cross.arc.gnu";
    public static final String DEFAULT_LOG = "ARC Eclipse Plugin Log";
    private static ARCPlugin m_oPlugin;
- 
+
+   public static String safeVariableExpansion(String expression) {
+     IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
+     try {
+       return manager.performStringSubstitution(expression);
+     } catch (CoreException e) {
+       StatusManager.getManager().handle(e, PLUGIN_ID);
+       return expression;
+     }
+   }
+
    public void start(BundleContext oContext)
      throws Exception
    {

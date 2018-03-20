@@ -12,6 +12,7 @@ package com.arc.cdt.toolchain.tcf;
 
 import java.io.File;
 
+import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
@@ -37,7 +38,8 @@ public class TcfValueHandler implements IManagedOptionValueHandler {
                     }
                 }
             }
-            TcfContent.readFile(new File((String) option.getValue()), cpu, StatusManager.BLOCK);
+            File tcf = new File(ARCPlugin.safeVariableExpansion((String) option.getValue()));
+            TcfContent.readFile(tcf, cpu, StatusManager.BLOCK);
             return true;
         }
         return false;

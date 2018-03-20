@@ -348,7 +348,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                  */
                 int showStyle = (oTool.equals(lastTool) && projectBuildPath.equals(lastProject))
                         ? StatusManager.NONE : StatusManager.SHOW;
-                fileContent = TcfContent.readFile(new File(sTCF), sProcessor, showStyle, "\n\nIgnoring TCF.");
+                File tcf = new File(ARCPlugin.safeVariableExpansion(sTCF));
+                fileContent = TcfContent.readFile(tcf, sProcessor, showStyle, "\n\nIgnoring TCF.");
                 if (fileContent != null) {
                     Properties gccOptions = fileContent.getGccOptions();
                     Enumeration<?> e = gccOptions.propertyNames();

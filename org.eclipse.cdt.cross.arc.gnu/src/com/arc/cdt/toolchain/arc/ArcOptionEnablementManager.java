@@ -384,8 +384,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     tcfPath = (String)mgr.getValue(
                             getToolChainSpecificOption(TCF_FILE_OPTION_ID).get(0));
                     if (tcfPath != null && !tcfPath.isEmpty()) {
-                        TcfContent tcfContent = null;
-                        tcfContent = TcfContent.readFile(new File(tcfPath), mcpuFlag, StatusManager.SHOW);
+                        File tcf = new File(ARCPlugin.safeVariableExpansion(tcfPath));
+                        TcfContent tcfContent = TcfContent.readFile(tcf, mcpuFlag, StatusManager.SHOW);
                         if (tcfContent != null) {
                             Properties gccOptions = tcfContent.getGccOptions();
                             setOptionsFromProperties(gccOptions);
