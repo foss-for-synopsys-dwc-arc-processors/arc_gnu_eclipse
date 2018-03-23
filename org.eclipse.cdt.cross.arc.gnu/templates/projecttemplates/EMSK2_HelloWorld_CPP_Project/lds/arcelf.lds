@@ -1,17 +1,20 @@
+/* EM7D and EM9D has 256K of ICCM, but EM11D only 64K. */
+/* EM7D and EM9D has 128K of DCCM, but EM11D only 64K. */
+/* EM9D doesn't have DRAM. */
 MEMORY
 {
-    ICCM : ORIGIN = 0x00000000, LENGTH = 256K
+    ICCM : ORIGIN = 0x00000000, LENGTH = 64K
     DRAM : ORIGIN = 0x10000000, LENGTH = 128M
-    DCCM : ORIGIN = 0x80000000, LENGTH = 128K
+    DCCM : ORIGIN = 0x80000000, LENGTH = 64K
 }
 
 REGION_ALIAS("startup", ICCM)
 REGION_ALIAS("text", ICCM)
-REGION_ALIAS("data", DRAM)
-REGION_ALIAS("sdata", DRAM)
+REGION_ALIAS("data", DCCM)
+REGION_ALIAS("sdata", DCCM)
 
-PROVIDE (__stack_top = (0x17FFFFFF & -4) );
-PROVIDE (__end_heap = (0x17FFFFFF) );
+PROVIDE (__stack_top = (0x8000FFFF & -4) );
+PROVIDE (__end_heap = (0x8000FFFF) );
 
 ENTRY(__start)
 
