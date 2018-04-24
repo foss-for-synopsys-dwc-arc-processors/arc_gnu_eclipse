@@ -679,7 +679,13 @@
             name="Use memory map from TCF"
             valueType="boolean">
       </option>
-
+      <option
+            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            defaultValue="false"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
+            name="Include C defines from TCF"
+            valueType="boolean">
+      </option>
       </tool>
       <builder
             command="make"
@@ -2404,7 +2410,14 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
                valueType="boolean">
          </option>
-
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.includecdefines"
+               name="Include C defines from TCF"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
+               valueType="boolean">
+         </option>
       </toolChain>
       <configuration
             cleanCommand="rm -rf"
@@ -3029,7 +3042,14 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
                valueType="boolean">
          </option>
-
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.includecdefines"
+               name="Include C defines from TCF"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
+               valueType="boolean">
+         </option>
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
@@ -3571,6 +3591,15 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
                valueType="boolean">
          </option>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.includecdefines"
+               name="Include C defines from TCF"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
+               valueType="boolean">
+         </option>
+         
       </toolChain>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
@@ -4801,7 +4830,16 @@
                name=" Use memory map from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
                valueType="boolean">
-         </option>
+          </option>
+          <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.includecdefines"
+               name="Include C defines from TCF"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
+               valueType="boolean">
+          </option>
+          
       </toolChain>
       <configuration
             cleanCommand="rm -rf"
