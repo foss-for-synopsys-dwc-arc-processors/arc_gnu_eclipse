@@ -13,6 +13,7 @@ package org.eclipse.cdt.cross.arc.gnu;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.ArcCpuFamily;
+import com.arc.cdt.toolchain.arc.ArcOptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
@@ -112,6 +114,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        String sTCF= null;
        Boolean tcf_selected= (Boolean) null;
        Boolean tcf_map_selected= (Boolean) null;
+       Boolean tcf_include_c_defines= (Boolean) null;
 
        String projectBuildPath = getProjectBuildPath(oToolChain);
        String tcfMapPath = projectBuildPath + File.separator + "memory.x";
@@ -170,7 +173,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sDebugFormat = sEnumCommand;
            } else if (sID.indexOf(".option.debugging.other") > 0) {
                sDebugOther = sVal;
-           } else if (sID.indexOf(".option.target.filefortcf") > 0) {
+           } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_FILE_OPTION_ID)) {
                sTCF = sVal;
            }
          }
@@ -214,10 +217,12 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     smno_dpfp_lrsr = sCommand;
                 } else if (sID.indexOf(".option.debugging.gprof") > 0) {
                     sDebugGProf = sCommand;
-                } else if (sID.indexOf("option.target.tcf") > 0) {
+                } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_OPTION_ID)) {
                     tcf_selected = true;
-                } else if (sID.indexOf("option.target.maptcf") > 0) {
+                } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_MEMORY_MAP)) {
                     tcf_map_selected = true;
+                } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_INCLUDE_C_DEFINES)) {
+                    tcf_include_c_defines = true;
                 }
              }
         }
@@ -390,6 +395,27 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                             }
                         }
                     }
+
+                    if (oTool.getBaseId().contains("compiler") || oTool.getBaseId().contains("assembler")) {
+                        if (tcf_include_c_defines != null && tcf_include_c_defines) {
+                        	String filePath = projectBuildPath + File.separator + fileContent.getCDefinesFileName();
+                            try {
+                            	if (Files.exists(Paths.get(projectBuildPath)))
+                            	{
+	                                Files.write(Paths.get(filePath), fileContent.getCDefinesText().getBytes(),
+	                                        StandardOpenOption.CREATE);
+                            	}
+                            } catch (IOException e1) {
+                                StatusManager.getManager().handle(
+                                        new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                        StatusManager.SHOW);
+                                e1.printStackTrace();
+                            }
+                            if (Files.exists(Paths.get(projectBuildPath))) {
+                                oList_gcc_options.add("-include " + filePath);
+                            }
+                        }
+                    }
                 }
                 oList_gcc_options.addAll(tcf_properties);
             }
@@ -402,6 +428,10 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                 (String[]) oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName,
                 asInputResources, sCommandLinePattern);
      }
+
+    private boolean tcfOptionIdMatch(String id, String option) {
+        return id.indexOf(".option.target." + option) > 0;
+    }
 
     private String getProjectBuildPath(IToolChain toolChain) {
         // Contains eclipse path variable, needs resolving

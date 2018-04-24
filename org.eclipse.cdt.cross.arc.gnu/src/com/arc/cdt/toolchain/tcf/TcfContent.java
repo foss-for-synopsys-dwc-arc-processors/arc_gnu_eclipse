@@ -14,7 +14,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -40,9 +42,14 @@ public class TcfContent {
 
     public static final String GCC_OPTIONS_SECTION = "gcc_compiler";
     public static final String LINKER_MEMORY_MAP_SECTION = "gnu_linker_command_file";
+    public static final String C_DEFINES_SECTION = "C_defines";
+    public static final List<String> knownSections = 
+            Arrays.asList( GCC_OPTIONS_SECTION, LINKER_MEMORY_MAP_SECTION, C_DEFINES_SECTION );
 
     private Properties gccOptions;
     private String linkerMemoryMap;
+    private String cDefinesText;
+    private String cDefinesFileName;
     private long modTime;
 
     private static Map<File, TcfContent> cache = new HashMap<File, TcfContent>();
@@ -151,8 +158,7 @@ public class TcfContent {
             for (int index = 0; index < attributes.getLength(); index++) {
                 Element e = (Element) attributes.item(index);
                 String elementName = e.getAttribute("name");
-                if (!elementName.equals(GCC_OPTIONS_SECTION)
-                        && !elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
+                if (!knownSections.contains(elementName)) {
                     continue;
                 }
                 NodeList stringList = e.getElementsByTagName("string");
@@ -184,6 +190,10 @@ public class TcfContent {
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
                     tcfContent.linkerMemoryMap = data;
+                }
+                if (elementName.equals(C_DEFINES_SECTION)) {
+                    tcfContent.cDefinesText = data;
+                    tcfContent.cDefinesFileName = e.getAttribute("filename");
                 }
             }
         } catch (SAXException | IOException | ParserConfigurationException e) {
@@ -222,4 +232,11 @@ public class TcfContent {
         return linkerMemoryMap;
     }
 
+    public String getCDefinesText() {
+        return cDefinesText;
+    }
+
+    public String getCDefinesFileName() {
+        return cDefinesFileName;
+    }
 }

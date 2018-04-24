@@ -36,13 +36,15 @@ import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ArcOptionEnablementManager extends OptionEnablementManager {
 
-    private static final String TCF_OPTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf";
-    private static final String TCF_FILE_OPTION_ID = "org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf";
-    private static final String TCF_MEMORY_MAP = "org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf";
+    public static final String TCF_OPTION_ID = "tcf";
+    public static final String TCF_FILE_OPTION_ID = "filefortcf";
+    public static final String TCF_MEMORY_MAP = "maptcf";
+    public static final String TCF_INCLUDE_C_DEFINES = "includecdefines";
 
-    private static final String[] TCF_RELATED_OPTIONS = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP };
-    private static final String[] NOT_ARCHITECTURE_OPTIONS = { TCF_FILE_OPTION_ID, TCF_MEMORY_MAP,
-            TCF_OPTION_ID };
+    private static final String[] TCF_RELATED_OPTIONS = { getTCF(TCF_FILE_OPTION_ID), 
+            getTCF(TCF_MEMORY_MAP), getTCF(TCF_INCLUDE_C_DEFINES) };
+    private static final String[] NOT_ARCHITECTURE_OPTIONS = { getTCF(TCF_FILE_OPTION_ID),  getTCF(TCF_MEMORY_MAP),
+            getTCF(TCF_OPTION_ID),  getTCF(TCF_INCLUDE_C_DEFINES) };
 
     private static final String[] LINKER_SCRIPT_IDS = { "org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile",
             "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" };
@@ -62,6 +64,11 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
         addObserver(observer);
     }
 
+    private static String getTCF(String string) {
+        String target = "org.eclipse.cdt.cross.arc.gnu.base.option.target.";
+        return target + string;
+    }
+
     private boolean useTcf;
     private boolean tcfLinkSelected;
     private String tcfPath = "";
@@ -70,7 +77,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     @Override
     public void initialize(IBuildObject config) {
         super.initialize(config);
-        List<String> tcfOption = getToolChainSpecificOption(TCF_OPTION_ID);
+        List<String> tcfOption = getToolChainSpecificOption(getTCF(TCF_FILE_OPTION_ID));
         if (tcfOption != null && tcfOption.size() > 0) {
             observer.onOptionValueChanged(this, tcfOption.get(0));
         }
@@ -382,7 +389,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     // either by default or when TCF was cancelled.
 
                     tcfPath = (String)mgr.getValue(
-                            getToolChainSpecificOption(TCF_FILE_OPTION_ID).get(0));
+                            getToolChainSpecificOption(getTCF(TCF_FILE_OPTION_ID)).get(0));
                     if (tcfPath != null && !tcfPath.isEmpty()) {
                         File tcf = new File(ARCPlugin.safeVariableExpansion(tcfPath));
                         TcfContent tcfContent = TcfContent.readFile(tcf, mcpuFlag, StatusManager.SHOW);
