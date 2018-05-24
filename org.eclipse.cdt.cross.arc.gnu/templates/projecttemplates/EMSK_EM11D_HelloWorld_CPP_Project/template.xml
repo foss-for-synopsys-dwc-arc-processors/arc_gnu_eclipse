@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <template type="ProjTempl" version="1.0" supplier="Eclipse.org" revision="1.0" author="Bala Torati (Symbian)"
 		copyright="Copyright (c) 2007 Symbian Software Limited and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available athttp://www.eclipse.org/legal/epl-v10.html"
-		id="EMSK2_HelloWorld_CPP_Project" label="%EMSK2_HelloWorld.CCtemplate.label" description="%EMSK2_HelloWorld.CCtemplate.description"
+		id="EMSK_EM11D_HelloWorld_CPP_Project" label="%EMSK_EM11D_HelloWorld.CCtemplate.label" description="%EMSK_EM11D_HelloWorld.CCtemplate.description"
 		 help="help.html">
 
-	<property-group id="basics" label="%EMSK2_HelloWorld.basics.label" description="%EMSK2_HelloWorld.basics.description" type="PAGES-ONLY" help="help.html">
+	<property-group id="basics" label="%EMSK_EM11D_HelloWorld.basics.label" description="%EMSK_EM11D_HelloWorld.basics.description" type="PAGES-ONLY" help="help.html">
 		<property id="author"
-			label="%EMSK2_HelloWorld.author.label"
-			description="%EMSK2_HelloWorld.author.description"
+			label="%EMSK_EM11D_HelloWorld.author.label"
+			description="%EMSK_EM11D_HelloWorld.author.description"
 			type="input"
 			pattern=".*"
 			default=""
 			hidden="false"
 			persist="true"/>
 		<property id="copyright"
-			label="%EMSK2_HelloWorld.copyright.label"
-			description="%EMSK2_HelloWorld.copyright.description"
+			label="%EMSK_EM11D_HelloWorld.copyright.label"
+			description="%EMSK_EM11D_HelloWorld.copyright.description"
 			type="input"
 			pattern=".*"
-			default="%EMSK2_HelloWorld.copyright.default"
+			default="%EMSK_EM11D_HelloWorld.copyright.default"
 			hidden="false"
 			persist="true"/>
 		<property id="messagearc"
-			label="%EMSK2_HelloWorld.message.label"
-			description="%EMSK2_HelloWorld.message.description"
+			label="%EMSK_EM11D_HelloWorld.message.label"
+			description="%EMSK_EM11D_HelloWorld.message.description"
 			type="input"
 			pattern=".*"
-			default="%EMSK2_HelloWorld.message.default"
+			default="%EMSK_EM11D_HelloWorld.message.default"
 			hidden="false"
 			persist="true"/>
 		<property id="sourceDir"
-				label="%EMSK2_HelloWorld.sourceDir.label"
-				description="%EMSK2_HelloWorld.sourceDir.description"
+				label="%EMSK_EM11D_HelloWorld.sourceDir.label"
+				description="%EMSK_EM11D_HelloWorld.sourceDir.description"
 				type="input"
-				default="%EMSK2_HelloWorld.sourceDir.default"
+				default="%EMSK_EM11D_HelloWorld.sourceDir.default"
 				pattern="[a-zA-Z0-9]+"
 				mandatory="false"
 				persist="true"/>
@@ -53,32 +53,11 @@
         <process type="org.eclipse.cdt.core.AddFiles">
                 <simple name="projectName" value="$(projectName)"/>
                 <complex-array name="files">
-                        <element>
-                                <simple name="source" value="lds/arcelf.lds"/>
-                                <simple name="target" value="lds/arcelf.lds"/>
-                                <simple name="replaceable" value="false"/>
-                        </element>
 			<element>
 				<simple name="source" value="src/Basename.cpp"/>
 				<simple name="target" value="$(sourceDir)/$(projectName).cpp"/>
 				<simple name="replaceable" value="true"/>
 			</element>
-			<element>
-				<simple name="source" value="src/starterkit.h"/>
-				<simple name="target" value="$(sourceDir)/starterkit.h"/>
-				<simple name="replaceable" value="true"/>
-			</element>
-                </complex-array>
-        </process>
-
-        <process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
-                <simple name="projectName" value="$(projectName)"/>
-                <complex-array name="resourcePaths">
-                        <element>
-                                <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" />
-                                <simple name="value" value="${workspace_loc:${ProjName}}/lds/arcelf.lds" />
-                                <simple name="path" value="" />
-                        </element>
                 </complex-array>
         </process>
 
@@ -98,6 +77,17 @@
 				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem" />
 				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.2" />
 				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+	
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)"></simple>
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.otherflags"></simple>
+				<simple name="value" value="--specs=emsk_em11d.specs"></simple>
+				<simple name="path" value=""></simple>
 			</element>
 		</complex-array>
 	</process>
