@@ -58,22 +58,22 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
         ArrayList<String> tcf_properties = new ArrayList<String>();
         ArrayList<String> oList = new ArrayList<String>();
 
-         ArrayList<String> oList_gcc_options = new ArrayList<String>();
-         Object oParent = oTool.getParent();
-         while ((oParent != null) && (!(oParent instanceof IToolChain)))
-         {
-             Object oSuper = oTool.getSuperClass();
-             if ((oSuper != null) && ((oSuper instanceof ITool)))
-                 oParent = ((ITool)oSuper).getParent();
-            else {
-                 oParent = null;
-            }
-         }
+        ArrayList<String> oList_gcc_options = new ArrayList<String>();
+        Object oParent = oTool.getParent();
+        while ((oParent != null) && (!(oParent instanceof IToolChain)))
+        {
+           Object oSuper = oTool.getSuperClass();
+           if ((oSuper != null) && ((oSuper instanceof ITool)))
+                oParent = ((ITool)oSuper).getParent();
+           else {
+                oParent = null;
+           }
+        }
    
-        if ((oParent != null) && ((oParent instanceof IToolChain))) {
-        IToolChain oToolChain = (IToolChain)oParent;
+       if ((oParent != null) && ((oParent instanceof IToolChain))) {
+       IToolChain oToolChain = (IToolChain)oParent;
    
-        IOption[] aoOptions = oToolChain.getOptions();
+       IOption[] aoOptions = oToolChain.getOptions();
    
        String sProcessor = null;
                 

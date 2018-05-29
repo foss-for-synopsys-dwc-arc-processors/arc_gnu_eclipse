@@ -47,7 +47,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             getTCF(TCF_OPTION_ID),  getTCF(TCF_INCLUDE_C_DEFINES) };
 
     private static final String[] LINKER_SCRIPT_IDS = { "org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile",
-            "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" };
+            "org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile", 
+            "org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"  };
 
     private List<String> targetOptions;
     private List<String> disabledForCpu = new ArrayList<>();
@@ -438,9 +439,11 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                         setEnabled(getToolChainSpecificOption(option), false);
                     }
                 } else
+                {
                     for (String option : LINKER_SCRIPT_IDS) {
                         setEnabled(getToolChainSpecificOption(option), true);
                     }
+                }
             }
         }
 

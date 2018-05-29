@@ -745,6 +745,16 @@
             useByScannerDiscovery="false"
             valueType="boolean">
       </option>
+      <option
+            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+            browseType="directory"
+            command="-L&quot;${VALUE}&quot;"
+            id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"
+            isAbstract="false"
+            name="Directory with memory.x file"
+            resourceFilter="all"
+            valueType="string">
+      </option>
       </tool>
       <builder
             command="make"
@@ -1705,6 +1715,17 @@
                name="Generate prof information (-p)"
                valueType="boolean">
          </option>
+         <option
+               browseType="file"
+               category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+               command="-L&quot;${VALUE}&quot;"
+               id="org.eclipse.cdt.cross.arc.gnu.c.link.option.memoryx"
+               isAbstract="false"
+               name="Directory with memory.x file"
+               resourceFilter="all"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"
+               valueType="string">
+         </option>
       </tool>
       <tool
             command="arc-elf32-g++"
@@ -1890,6 +1911,13 @@
                </value>
             </property>
          </supportedProperties>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.memoryx"
+               isAbstract="false"
+               name="Directory with memory.x file"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx">
+         </option>
       </tool>
       <tool
             command="arc-elf32-ar"
