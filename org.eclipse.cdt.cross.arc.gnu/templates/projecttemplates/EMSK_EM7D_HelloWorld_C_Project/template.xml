@@ -83,6 +83,11 @@
 				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh1" />
 				<simple name="path" value="" />
 			</element>
+			<element>
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base.option.specs" />
+				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d" />
+				<simple name="path" value="" />
+			</element>
 		</complex-array>
 	</process>
 
@@ -138,18 +143,6 @@
 				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity" />
 				<simple name="value" value="true" />
 				<simple name="path" value="" />
-			</element>
-		</complex-array>
-	</process>
-
-	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
-		<simple name="projectName" value="$(projectName)"></simple>
-		<complex-array name="resourcePaths">
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.c.link.option.otherflags"></simple>
-				<simple name="value" value="--specs=emsk_em9d.specs"></simple>
-				<simple name="path" value="">
-				</simple>
 			</element>
 		</complex-array>
 	</process>

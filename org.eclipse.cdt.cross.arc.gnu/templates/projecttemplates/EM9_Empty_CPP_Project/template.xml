@@ -19,17 +19,6 @@
 		<simple name="path" value="$(sourceDir)"/>
 	</process>
 
-	<process type="org.eclipse.cdt.core.AddFiles">
-		<simple name="projectName" value="$(projectName)"/>
-		<complex-array name="files">
-			<element>
-				<simple name="source" value="lds/arcelf.lds"/>
-				<simple name="target" value="lds/arcelf.lds"/>
-				<simple name="replaceable" value="false"/>
-			</element>
-		</complex-array>
-	</process>
-
 	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
 		<simple name="projectName" value="$(projectName)"/>
 		<complex-array name="resourcePaths">
@@ -48,15 +37,9 @@
 				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all" />
 				<simple name="path" value="" />
 			</element>
-		</complex-array>
-	</process>
-
-	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
-		<simple name="projectName" value="$(projectName)"/>
-		<complex-array name="resourcePaths">
 			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.scriptfile" />
-				<simple name="value" value="${workspace_loc:${ProjName}}/lds/arcelf.lds" />
+				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base.option.specs" />
+				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d" />
 				<simple name="path" value="" />
 			</element>
 		</complex-array>
