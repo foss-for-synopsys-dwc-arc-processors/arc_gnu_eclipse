@@ -48,11 +48,6 @@
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application"
-            name="AXS102 Projects"
-            property="org.eclipse.cdt.build.core.buildArtefactType">
-      </propertyValue>
-      <propertyValue
             id="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
             name="AXS103 Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
@@ -7296,30 +7291,6 @@
          </toolChain>
       </template>
       <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-      </template>
-      <template
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_C_Project">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
@@ -7526,30 +7497,6 @@
             id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_CPP_Project"
             location="$nl$/templates/projecttemplates/AXS101_Empty_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_C_Project"
-            location="$nl$/templates/projecttemplates/AXS102_HS34_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS34_Empty_CPP_Project"
-            location="$nl$/templates/projecttemplates/AXS102_HS34_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_C_Project"
-            location="$nl$/templates/projecttemplates/AXS102_HS36_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS102_HS36_Empty_CPP_Project"
-            location="$nl$/templates/projecttemplates/AXS102_HS36_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs102.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
