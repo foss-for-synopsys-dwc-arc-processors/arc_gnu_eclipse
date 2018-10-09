@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: com.arc.embeddedcdt
 Bundle-ManifestVersion: 2
 Bundle-Name: ARC GNU Toolchain Embedded CDT
 Bundle-SymbolicName: com.arc.embeddedcdt;singleton:=true

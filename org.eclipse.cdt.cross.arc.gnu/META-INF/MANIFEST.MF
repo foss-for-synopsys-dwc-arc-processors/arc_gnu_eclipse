@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.cdt.cross.arc.gnu
 Require-Bundle: org.eclipse.cdt.core;bundle-version="5.0.2",
  org.eclipse.cdt.managedbuilder.core,
  org.eclipse.cdt.managedbuilder.gnu.ui;bundle-version="5.0.0",
@@ -27,6 +28,3 @@ Export-Package: com.arc.cdt.toolchain,
  org.eclipse.cdt.cross.arc.gnu.linux,
  org.eclipse.cdt.cross.arc.gnu.scannerconfig,
  org.eclipse.cdt.cross.arc.gnu.windows
-
-
-
