@@ -15,11 +15,9 @@
 
   <properties>
     <!-- Path to Eclipse p2 repository -->
-    <!-- <eclipse.repository>http://download.eclipse.org/releases/neon</eclipse.repository> -->
-    <eclipse.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/oxygen/</eclipse.repository>
+    <eclipse.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/photon/</eclipse.repository>
     <!-- Path to CDT p2 repository -->
-    <!-- <cdt.repository>http://download.eclipse.org/tools/cdt/releases/9.2</cdt.repository> -->
-    <cdt.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/cdt/releases/9.3/</cdt.repository>
+    <cdt.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/cdt/releases/9.5/</cdt.repository>
   </properties>
 
   <repositories>
@@ -29,7 +27,7 @@
       <layout>p2</layout>
     </repository>
     <repository>
-      <id>eclipse-oxygen</id>
+      <id>eclipse-photon</id>
       <url>${eclipse.repository}</url>
       <layout>p2</layout>
     </repository>
@@ -39,7 +37,7 @@
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-maven-plugin</artifactId>
-        <version>0.26.0</version>
+        <version>1.2.0</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>
@@ -80,7 +78,7 @@
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-p2-repository-plugin</artifactId>
-        <version>0.26.0</version>
+        <version>1.2.0</version>
         <configuration>
           <!-- XZ compression is not needed for our purposes. -->
           <xzCompress>false</xzCompress>

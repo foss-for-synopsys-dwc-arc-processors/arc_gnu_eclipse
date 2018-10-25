@@ -15,7 +15,8 @@ Bundle-Name: ARC GNU Toolchain C/C++ Development Support
 Bundle-Activator: org.eclipse.cdt.cross.arc.gnu.ARCPlugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-10,
+ JavaSE-9
 Import-Package: org.eclipse.cdt.managedbuilder.internal.envvar,
  org.eclipse.core.variables,
  org.eclipse.ui.statushandlers
