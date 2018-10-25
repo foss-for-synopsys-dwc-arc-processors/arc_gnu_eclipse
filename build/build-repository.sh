@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PREREQ=/u/arcgnu_verif/prerequisites
-ECLIPSE_VERSION=oxygen-4.7
+ECLIPSE_VERSION=photon-4.8
 
 MAVEN=$PREREQ/apache-maven-3.3.9/bin/mvn
 MAVEN_LOCAL_REPO=$PREREQ/eclipse/$ECLIPSE_VERSION/maven_local_repo
