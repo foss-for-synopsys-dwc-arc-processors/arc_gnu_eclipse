@@ -604,6 +604,9 @@ public class DebuggerGroupContainer extends Observable{
     case HSDK:
         openOcdConfiguration += "snps_hsdk.cfg";
         break;
+    case IOTDK:
+        openOcdConfiguration += "snps_iotdk.cfg";
+        break;
     case CUSTOM:
         break;
     default:

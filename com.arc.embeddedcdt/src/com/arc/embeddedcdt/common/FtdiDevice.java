@@ -26,6 +26,7 @@ public enum FtdiDevice {
     AXS103("AXS103", Arrays.asList(FtdiCore.HS36, FtdiCore.HS38_0, FtdiCore.HS38_1)),
     HSDK("HS Development Kit",
          Arrays.asList(FtdiCore.HS38_1, FtdiCore.HS38_2, FtdiCore.HS38_3, FtdiCore.HS38_4)),
+    IOTDK("IoT Development Kit"),
     CUSTOM("Custom configuration file");
 
     private final String text;
