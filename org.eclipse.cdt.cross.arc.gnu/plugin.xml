@@ -689,6 +689,7 @@
          <enumeratedOptionValue
                command="--specs=nsim.specs"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nsim"
+               isDefault="true"
                name="nsim">
          </enumeratedOptionValue>
          <enumeratedOptionValue
@@ -708,7 +709,6 @@
          </enumeratedOptionValue>
          <enumeratedOptionValue
                id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.none"
-               isDefault="true"
                name="None">
          </enumeratedOptionValue>
       </option>
