@@ -19,6 +19,9 @@ public enum FtdiCore {
     HS36("HS36"),
     HS38_0("HS38 #0"),
     HS38_1("HS38 #1"),
+    HS38_2("HS38 #2"),
+    HS38_3("HS38 #3"),
+    HS38_4("HS38 #4"),
     DEFAULT_CORE("Default core");
 
     private final String text;

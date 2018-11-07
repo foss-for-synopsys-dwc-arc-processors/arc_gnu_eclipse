@@ -598,6 +598,9 @@ public class DebuggerGroupContainer extends Observable{
             openOcdConfiguration += "snps_axs103_hs38.cfg";
         }
         break;
+    case HSDK:
+        openOcdConfiguration += "snps_hsdk.cfg";
+        break;
     case CUSTOM:
         break;
     default:

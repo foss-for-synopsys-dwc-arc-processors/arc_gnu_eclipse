@@ -50,11 +50,14 @@ public class OpenOcdBackend extends GdbServerBackend {
 
         if ((ftdiDevice == FtdiDevice.AXS101 && ftdiCore == FtdiCore.EM6)
                 || (ftdiDevice == FtdiDevice.AXS102 && ftdiCore == FtdiCore.HS34)
-                || (ftdiDevice == FtdiDevice.AXS103 && ftdiCore == FtdiCore.HS38_0)) {
+                || (ftdiDevice == FtdiDevice.AXS103 && ftdiCore == FtdiCore.HS38_0)
+                || (ftdiDevice == FtdiDevice.HSDK && ftdiCore == FtdiCore.HS38_3)) {
             gdbPort += 1;
-        } else if (ftdiDevice == FtdiDevice.AXS101 && ftdiCore == FtdiCore.AS221_2) {
+        } else if ((ftdiDevice == FtdiDevice.AXS101 && ftdiCore == FtdiCore.AS221_2)
+                || (ftdiDevice == FtdiDevice.HSDK && ftdiCore == FtdiCore.HS38_2)) {
             gdbPort += 2;
-        } else if (ftdiDevice == FtdiDevice.AXS101 && ftdiCore == FtdiCore.AS221_1) {
+        } else if ((ftdiDevice == FtdiDevice.AXS101 && ftdiCore == FtdiCore.AS221_1)
+                || (ftdiDevice == FtdiDevice.HSDK && ftdiCore == FtdiCore.HS38_1)) {
             gdbPort += 3;
         }
         return String.valueOf(gdbPort);
