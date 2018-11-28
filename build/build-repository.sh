@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Supported environment variables:
+#   MAVEN_FLAGS - options to pass to maven.
+
 PREREQ=/u/arcgnu_verif/prerequisites
 ECLIPSE_VERSION=photon-4.8
 
@@ -11,4 +14,5 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 $MAVEN \
 	-Dmaven.repo.local=$MAVEN_LOCAL_REPO \
-	-o clean install
+	$MAVEN_FLAGS \
+	clean install
