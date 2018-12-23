@@ -4,9 +4,9 @@
 #   MAVEN_FLAGS - options to pass to maven.
 
 PREREQ=/u/arcgnu_verif/prerequisites
-ECLIPSE_VERSION=photon-4.8
+ECLIPSE_VERSION=2018-12
 
-MAVEN=$PREREQ/apache-maven-3.3.9/bin/mvn
+MAVEN=/u/arcgnu_verif/prerequisites/debugger/apache-maven-3.5.4/bin/mvn
 MAVEN_LOCAL_REPO=$PREREQ/eclipse/$ECLIPSE_VERSION/maven_local_repo
 
 JAVA_HOME=/depot/java-1.8.0_131
