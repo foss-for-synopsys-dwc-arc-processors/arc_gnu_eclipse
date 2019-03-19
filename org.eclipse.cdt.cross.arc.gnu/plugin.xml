@@ -57,6 +57,11 @@
             name="EM Starter Kit Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
+      <propertyValue
+            id="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
+            name="ARC IoT Development Kit Projects"
+            property="org.eclipse.cdt.build.core.buildArtefactType">
+      </propertyValue>
    </extension>
    
    <!-- eb discovery extensions -->
@@ -7276,6 +7281,39 @@
             </toolChain>
          </configuration>
       </projectType>
+      <projectType
+            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
+            id="c.s.a.gnu.elf.project.iotdk"
+            isAbstract="false">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="c.s.a.gnu.elf.project.iotdk.debug"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="c.s.a.gnu.elf.project.iotdk.debug.toolchain"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="c.s.a.gnu.elf.project.iotdk.release"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="c.s.a.gnu.elf.project.iotdk.release.toolchain"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.iotdk">
+            </toolChain>
+         </configuration>
+      </projectType>
 
 
    </extension>
@@ -7458,6 +7496,24 @@
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
+      <template
+            filterPattern=".*gcc"
+            id="c.s.a.gnu.elf.templates.iotdk_empty_c"
+            location="templates/projecttemplates/iotdk_empty_c/template.xml"
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="c.s.a.gnu.elf.templates.iotdk_empty_cpp"
+            location="templates/projecttemplates/iotdk_empty_cpp/template.xml"
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
+         <toolChain
+               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+         </toolChain>
+      </template>
 
 
       <template
@@ -7501,13 +7557,13 @@
       </provider>
       <provider
             id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuildCommandParser"
-            name="ARC GNU GCC  Build Output Parser"
+            name="ARC GNU GCC Build Output Parser"
             parameter="arc-elf32-gcc"
             prefer-non-shared="true">
       </provider>
       <provider
             id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuildCommandParser"
-            name="ARC GNU GCC  Build Output Parser"
+            name="ARC GNU GCC Build Output Parser"
             parameter="arceb-elf32-gcc"
             prefer-non-shared="true">
       </provider>
