@@ -13,7 +13,6 @@ package org.eclipse.cdt.cross.arc.gnu;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -379,20 +378,21 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 
                     if (oTool.getBaseId().contains("linker")) {
                         if (tcf_map_selected != null && tcf_map_selected) {
-                            String memoryMap = fileContent.getLinkerMemoryMap();
-                            try {
-                                Files.deleteIfExists(Paths.get(tcfMapPath));
-                                Files.write(Paths.get(tcfMapPath), memoryMap.getBytes(),
-                                        StandardOpenOption.CREATE);
-                            } catch (IOException e1) {
-                                StatusManager.getManager().handle(
-                                        new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
-                                        StatusManager.SHOW);
-                                e1.printStackTrace();
+                            // Don't write file if build directory doesn't exist yet.
+                            if (Files.exists(Paths.get(projectBuildPath))) {
+                                String memoryMap = fileContent.getLinkerMemoryMap();
+                                try {
+                                    Files.deleteIfExists(Paths.get(tcfMapPath));
+                                    Files.write(Paths.get(tcfMapPath), memoryMap.getBytes(),
+                                            StandardOpenOption.CREATE);
+                                } catch (IOException e1) {
+                                    StatusManager.getManager().handle(new Status(IStatus.ERROR,
+                                            ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                            StatusManager.SHOW);
+                                    e1.printStackTrace();
+                                }
                             }
-                            if (Files.exists(Paths.get(tcfMapPath))) {
-                                oList_gcc_options.add("-Wl,-marcv2elfx -L " + projectBuildPath);
-                            }
+                            oList_gcc_options.add("-Wl,-marcv2elfx -L " + projectBuildPath);
                         }
                     }
 
