@@ -44,17 +44,17 @@
       </propertyValue>
       <propertyValue
             id="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
-            name="AXS101 Projects"
+            name="ARC AXS101 Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
-            name="AXS103 Projects"
+            name="ARC AXS103 Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="c.s.a.gnu.elf.buildArtefactType.application.emsk"
-            name="EM Starter Kit Projects"
+            name="ARC EM Starter Kit Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
