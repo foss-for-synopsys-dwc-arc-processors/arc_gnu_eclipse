@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <template type="ProjTempl"
   id="HelloWorld_CPP_Project"
-  label="%HelloWorld.CCtemplate.label"
-  description="%HelloWorld.CCtemplate.description"
+  label="%template.label"
+  description="%template.description"
   version="1" revision="2" supplier="Synopsys">
 
   <property-group

@@ -2,8 +2,8 @@
 <template
   type="ProjTempl"
   id="EM11_Empty_C_Project"
-  label="%Emptyem11.Ctemplate.label"
-  description="%Emptyem11.Ctemplate.description"
+  label="%template.label"
+  description="%template.description"
   version="1" revision="2" supplier="Synopsys">
 
   <process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">

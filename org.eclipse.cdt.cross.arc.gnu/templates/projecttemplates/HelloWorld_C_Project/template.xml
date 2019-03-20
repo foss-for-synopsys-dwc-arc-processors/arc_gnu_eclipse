@@ -2,8 +2,8 @@
 <template
   type="ProjTempl"
   id="HelloWorld_C_Project"
-  label="%HelloWorld.Ctemplate.label"
-  description="%HelloWorld.Ctemplate.description"
+  label="%template.label"
+  description="%template.description"
   version="1" revision="2" supplier="Synopsys">
 
   <property-group
