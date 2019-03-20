@@ -10,8 +10,7 @@
     id="basics"
     label="%basics.label"
     description="%basics.description"
-    type="PAGES-ONLY"
-    help="help.html">
+    type="PAGES-ONLY">
     <property
       id="author"
       label="%author.label"
@@ -163,4 +162,3 @@
     </complex-array>
   </process>
 </template>
-
