@@ -1,104 +1,102 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0"?>
 <template
-    type="ProjTempl" version="1.0" supplier="Eclipse.org" revision="1.0"
-    author="Bala Torati (Symbian), Synopsys Inc."
-    copyright="Copyright (c) 2007 Symbian Software Limited and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available athttp://www.eclipse.org/legal/epl-v10.html"
-    id="EM9_Empty_CPP_Project"
-    label="%Emptyem9.CCtemplate.label" description="%Emptyem9.CCtemplate.description"
-    help="help.html">
+  type="ProjTempl"
+  id="EM9_Empty_CPP_Project"
+  label="%Emptyem9.CCtemplate.label"
+  description="%Emptyem9.CCtemplate.description"
+  version="1" revision="2" supplier="Synopsys">
 
+  <process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
+    <simple name="name" value="$(projectName)" />
+    <simple name="artifactExtension" value="elf" />
+    <simple name="isCProject" value="true" />
+  </process>
 
-	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
-		<simple name="name" value="$(projectName)" />
-		<simple name="artifactExtension" value="elf" />
-		<simple name="isCProject" value="true" />
-	</process>
+  <process type="org.eclipse.cdt.core.CreateSourceFolder">
+    <simple name="projectName" value="$(projectName)" />
+    <simple name="path" value="src" />
+  </process>
 
-	<process type="org.eclipse.cdt.core.CreateSourceFolder">
-		<simple name="projectName" value="$(projectName)"/>
-		<simple name="path" value="src"/>
-	</process>
+  <process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="resourcePaths">
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh1" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base.option.specs" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d" />
+        <simple name="path" value="" />
+      </element>
+    </complex-array>
+  </process>
 
-	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
-		<simple name="projectName" value="$(projectName)"/>
-		<complex-array name="resourcePaths">
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor" />
-				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem" />
-				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh1" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem" />
-				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base.option.specs" />
-				<simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d" />
-				<simple name="path" value="" />
-			</element>
-		</complex-array>
-	</process>
-
-	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
-		<simple name="projectName" value="$(projectName)"/>
-		<complex-array name="resourcePaths">
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.barrelshifter" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.divide" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-			<element>
-				<simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity" />
-				<simple name="value" value="true" />
-				<simple name="path" value="" />
-			</element>
-		</complex-array>
-	</process>
+  <process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="resourcePaths">
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.barrelshifter" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.divide" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+    </complex-array>
+  </process>
 </template>
 
