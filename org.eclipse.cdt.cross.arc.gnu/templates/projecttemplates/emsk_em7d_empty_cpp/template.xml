@@ -16,7 +16,7 @@
 
 	<process type="org.eclipse.cdt.core.CreateSourceFolder">
 		<simple name="projectName" value="$(projectName)"/>
-		<simple name="path" value="$(sourceDir)"/>
+		<simple name="path" value="src"/>
 	</process>
 
 	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
