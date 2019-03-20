@@ -53,7 +53,7 @@
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application"
+            id="c.s.a.gnu.elf.buildArtefactType.application.emsk"
             name="EM Starter Kit Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
@@ -6787,131 +6787,6 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application"
-            id="org.eclipse.cdt.cross.arc.gnu.linux.elf.emsk"
-            isAbstract="true">
-         <configuration
-               artifactExtension="elf"
-               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.emsk"
-               name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
-            <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.linux.emsk.elf.toolchain.debug"
-                  isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.debug.emsk;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.debug.emsk">
-               <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base">
-               </targetPlatform>
-               <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.debug.emsk"
-                     isAbstract="false"
-                     isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base">
-               </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.compiler.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createflash.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createlisting.debug.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base">
-               </tool>
-            </toolChain>
-         </configuration>
-         <configuration
-               artifactExtension="elf"
-               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.release.emsk"
-               name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
-            <toolChain
-                  id="org.eclipse.cdt.cross.arc.gnu.linux.emsk.elf.toolchain.release"
-                  isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.release.emsk;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.emsk">
-               <targetPlatform
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.platform.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base">
-               </targetPlatform>
-               <builder
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.builder.release.emsk"
-                     isAbstract="false"
-                     isVariableCaseSensitive="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base">
-               </builder>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.assembler.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.compiler.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.compiler.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.c.linker.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createflash.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base">
-               </tool>
-               <tool
-                     id="org.eclipse.cdt.cross.arc.gnu.linux.elf.createlisting.release.emsk"
-                     isAbstract="false"
-                     superClass="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base">
-               </tool>
-            </toolChain>
-         </configuration>
-      </projectType>
-      <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
             id="org.eclipse.cdt.cross.arc.gnu.700.linux.elf.axs101"
             isAbstract="true">
@@ -7287,6 +7162,39 @@
          </configuration>
       </projectType>
       <projectType
+            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.emsk"
+            id="c.s.a.gnu.elf.project.emsk"
+            isAbstract="true">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.debug.emsk"
+               name="Debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.linux.emsk.elf.toolchain.debug"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.eclipse.cdt.cross.arc.gnu.linux.elf.release.emsk"
+               name="Release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="org.eclipse.cdt.cross.arc.gnu.linux.emsk.elf.toolchain.release"
+                  isAbstract="false"
+                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
             id="c.s.a.gnu.elf.project.iotdk"
             isAbstract="false">
@@ -7425,54 +7333,54 @@
 
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf32.templates.emsk_em7d_HelloWorld_c"
+            id="c.s.a.gnu.elf.templates.emsk_em7d_HelloWorld_c"
             location="templates/projecttemplates/emsk_em7d_HelloWorld_c/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf32.templates.emsk_em9d_HelloWorld_c"
+            id="c.s.a.gnu.elf.templates.emsk_em9d_HelloWorld_c"
             location="templates/projecttemplates/emsk_em9d_HelloWorld_c/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf32.templates.emsk_em11d_HelloWorld_c"
+            id="c.s.a.gnu.elf.templates.emsk_em11d_HelloWorld_c"
             location="templates/projecttemplates/emsk_em11d_HelloWorld_c/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf32.templates.emsk_em7d_empty_c"
+            id="c.s.a.gnu.elf.templates.emsk_em7d_empty_c"
             location="templates/projecttemplates/emsk_em7d_empty_c/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf32.templates.emsk_em9d_empty_c"
+            id="c.s.a.gnu.elf.templates.emsk_em9d_empty_c"
             location="templates/projecttemplates/emsk_em9d_empty_c/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf32.templates.emsk_em11d_empty_c"
+            id="c.s.a.gnu.elf.templates.emsk_em11d_empty_c"
             location="templates/projecttemplates/emsk_em11d_empty_c/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
@@ -7482,54 +7390,54 @@
 
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf32.templates.emsk_em7d_empty_cpp"
+            id="c.s.a.gnu.elf.templates.emsk_em7d_empty_cpp"
             location="templates/projecttemplates/emsk_em7d_HelloWorld_cpp/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf32.templates.emsk_em9d_empty_cpp"
+            id="c.s.a.gnu.elf.templates.emsk_em9d_empty_cpp"
             location="templates/projecttemplates/emsk_em9d_HelloWorld_cpp/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf32.templates.emsk_em11d_empty_cpp"
+            id="c.s.a.gnu.elf.templates.emsk_em11d_empty_cpp"
             location="templates/projecttemplates/emsk_em11d_HelloWorld_cpp/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf32.templates.emsk_em7d_HelloWorld_cpp"
+            id="c.s.a.gnu.elf.templates.emsk_em7d_HelloWorld_cpp"
             location="templates/projecttemplates/emsk_em7d_empty_cpp/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf32.templates.emsk_em9d_HelloWorld_cpp"
+            id="c.s.a.gnu.elf.templates.emsk_em9d_HelloWorld_cpp"
             location="templates/projecttemplates/emsk_em9d_empty_cpp/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf32.templates.emsk_em11d_HelloWorld_cpp"
+            id="c.s.a.gnu.elf.templates.emsk_em11d_HelloWorld_cpp"
             location="templates/projecttemplates/emsk_em11d_empty_cpp/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.emsk.buildArtefactType.application">
+            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
                id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
          </toolChain>
