@@ -8,14 +8,14 @@
 
   <property-group
     id="basics"
-    label="%HelloWorld.basics.label"
-    description="%HelloWorld.basics.description"
+    label="%basics.label"
+    description="%basics.description"
     type="PAGES-ONLY"
     help="help.html">
     <property
       id="author"
-      label="%HelloWorld.author.label"
-      description="%HelloWorld.author.description"
+      label="%author.label"
+      description="%author.description"
       type="input"
       pattern=".*"
       default=""
@@ -23,28 +23,28 @@
       persist="true" />
     <property
       id="copyright"
-      label="%HelloWorld.copyright.label"
-      description="%HelloWorld.copyright.description"
+      label="%copyright.label"
+      description="%copyright.description"
       type="input"
       pattern=".*"
-      default="%HelloWorld.copyright.default"
+      default="%copyright.default"
       hidden="false"
       persist="true" />
     <property
       id="messagearc"
-      label="%HelloWorld.message.label"
-      description="%HelloWorld.message.description"
+      label="%message.label"
+      description="%message.description"
       type="input"
       pattern=".*"
-      default="%HelloWorld.message.default"
+      default="%message.default"
       hidden="false"
       persist="true" />
     <property
       id="sourceDir"
-      label="%HelloWorld.sourceDir.label"
-      description="%HelloWorld.sourceDir.description"
+      label="%sourceDir.label"
+      description="%sourceDir.description"
       type="input"
-      default="%HelloWorld.sourceDir.default"
+      default="%sourceDir.default"
       pattern="[a-zA-Z0-9]+"
       mandatory="false"
       persist="true" />
