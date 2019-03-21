@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<template type="ProjTempl"
+  id="emsdp_empty_c_project"
+  label="%template.label"
+  description="%template.description"
+  version="1" revision="2" supplier="Synopsys">
+
+  <process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
+    <simple name="name" value="$(projectName)" />
+    <simple name="artifactExtension" value="elf" />
+    <simple name="isCProject" value="true" />
+  </process>
+
+  <process type="org.eclipse.cdt.core.AddFiles">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="files">
+      <element>
+        <simple name="source" value="arc.tcf" />
+        <simple name="target" value="arc.tcf" />
+        <simple name="replaceable" value="true" />
+      </element>
+    </complex-array>
+  </process>
+
+  <process type="org.eclipse.cdt.core.CreateSourceFolder">
+    <simple name="projectName" value="$(projectName)" />
+    <simple name="path" value="src" />
+  </process>
+
+  <process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="resourcePaths">
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.filefortcf" />
+        <simple name="value" value="${workspace_loc:/$(projectName)/arc.tcf}" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpyem.wlh1" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_all" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base.option.specs" />
+        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nosys" />
+        <simple name="path" value="" />
+      </element>
+
+    </complex-array>
+  </process>
+
+  <process type="org.eclipse.cdt.managedbuilder.core.AppendToMBSStringListOptionValues">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="resourcePaths">
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.c.link.option.ldflags" />
+        <simple-array name="values">
+          <element value="--defsym=ivtbase_addr=0x0" />
+        </simple-array>
+        <simple name="path" value="" />
+      </element>
+    </complex-array>
+  </process>
+
+  <process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="resourcePaths">
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.tcf" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+    </complex-array>
+  </process>
+</template>
