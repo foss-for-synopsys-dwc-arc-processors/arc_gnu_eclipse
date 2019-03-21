@@ -64,7 +64,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="files">
       <element>
-        <simple name="source" value="src/Basename.c" />
+        <simple name="source" value="src/main.c" />
         <simple name="target" value="$(sourceDir)/$(projectName).c" />
         <simple name="replaceable" value="true" />
       </element>
