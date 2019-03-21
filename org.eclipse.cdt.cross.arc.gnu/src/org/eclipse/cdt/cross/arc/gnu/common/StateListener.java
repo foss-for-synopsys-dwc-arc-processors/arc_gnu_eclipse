@@ -35,7 +35,7 @@ public class StateListener implements IResourceChangeListener {
   @Override
   public void resourceChanged(IResourceChangeEvent event) {
     final IResourceDelta delta = event.getDelta();
-    if (delta.getKind() == IResourceDelta.CHANGED) {
+    if (delta != null && delta.getKind() == IResourceDelta.CHANGED) {
       IResourceDelta[] addedResources = delta.getAffectedChildren(IResourceDelta.ADDED);
       IResourceDelta[] changedResources = delta.getAffectedChildren(IResourceDelta.CHANGED);
       for (IResourceDelta resourceDelta : changedResources) {
