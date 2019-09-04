@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.arc.cdt</groupId>
     <artifactId>plugin</artifactId>
-    <version>2019.3.0-SNAPSHOT</version>
+    <version>2019.9.0-SNAPSHOT</version>
   </parent>
   <artifactId>com.arc.embeddedcdt</artifactId>
   <packaging>eclipse-plugin</packaging>

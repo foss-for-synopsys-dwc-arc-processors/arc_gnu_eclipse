@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: eclipse-plugin; singleton:=true
-Bundle-Version: 2019.3.0.qualifier
+Bundle-Version: 2019.9.0.qualifier
 Created-By: 1.6.0_45 (Sun Microsystems Inc.)
 
