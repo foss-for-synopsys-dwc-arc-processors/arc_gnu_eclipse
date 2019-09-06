@@ -7634,39 +7634,6 @@
       </scannerInfoProvider>
    </extension>
    <extension
-         point="org.eclipse.cdt.make.ui.DiscoveryProfilePage">
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (C)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (C EB)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC">
-      </profilePage>
-       <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (C++)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="Managed Build System - per project scanner info profile (C++ EB)"
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerProjectSCDProfilePage"
-            name="GCC per project scanner info profile "
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerProjectProfile">
-      </profilePage>
-      <profilePage
-            class="org.eclipse.cdt.make.ui.dialogs.GCCPerFileSCDProfilePage"
-            name="GCC per file scanner info profile "
-            profileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile">
-      </profilePage>
-   </extension>
-   <extension
          id="ARC_GCCManagedMakePerProjectProfileCXX"
          name="ARC GNU C/C++ managed make per project SCD profile"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
