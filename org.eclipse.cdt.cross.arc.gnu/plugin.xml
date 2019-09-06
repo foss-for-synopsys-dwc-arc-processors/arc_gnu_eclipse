@@ -13,22 +13,6 @@
     <!--#################################################################################-->
     <!---->
    <extension
-         id="ARC_GCC_ContentTypes"
-         name="Content Types"
-         point="org.eclipse.core.runtime.contentTypes">
-      <content-type
-            base-type="org.eclipse.core.runtime.text"
-            file-extensions="hex"
-            id="org.eclipse.cdt.cross.arc.gnu.content-type.hex"
-            name="FLASH Hex file"
-            priority="normal">
-      </content-type>
-      <file-association
-            content-type="org.eclipse.cdt.core.asmSource"
-            file-extensions="s,S,asm">
-      </file-association>
-   </extension>
-   <extension
          id="ARC_GCC_BuildProperties"
          name="Build Properties"
          point="org.eclipse.cdt.managedbuilder.core.buildProperties">
