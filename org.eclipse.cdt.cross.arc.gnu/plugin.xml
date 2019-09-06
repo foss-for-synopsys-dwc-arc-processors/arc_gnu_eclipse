@@ -2860,7 +2860,6 @@
       </configuration>
       <toolChain
             archList="all"
-            configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
@@ -4731,7 +4730,6 @@
       </toolChain>
       <toolChain
             archList="all"
-            configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
@@ -5264,7 +5262,6 @@
       </projectType>
       <toolChain
             archList="all"
-            configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
@@ -5667,7 +5664,6 @@
       </projectType>
       <toolChain
             archList="all"
-            configurationEnvironmentSupplier="org.eclipse.cdt.cross.arc.gnu.eb.linux.ConfigurationEnvironmentSupplier"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
