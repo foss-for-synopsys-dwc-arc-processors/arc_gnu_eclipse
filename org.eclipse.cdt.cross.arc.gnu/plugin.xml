@@ -7542,46 +7542,6 @@
       </template>
    </extension>
    <extension
-         point="org.eclipse.cdt.core.LanguageSettingsProvider">
-            <provider
-            id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuiltinSpecsDetector"
-            name="ARC GNU GCC Built-in Compiler Settings"
-            parameter="arc-elf32-gcc -E -P -v -dD &quot;${INPUTS}&quot;"
-            prefer-non-shared="true">
-         <language-scope
-               id="org.eclipse.cdt.core.gcc">
-         </language-scope>
-         <language-scope
-               id="org.eclipse.cdt.core.g++">
-         </language-scope>
-      </provider>
-      <provider
-            id="com.arc.cdt.toolchain.arc.language.settings.providers.ArcgnugccBuildCommandParser"
-            name="ARC GNU GCC Build Output Parser"
-            parameter="arc-elf32-gcc"
-            prefer-non-shared="true">
-      </provider>
-      <provider
-            id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuildCommandParser"
-            name="ARC GNU GCC Build Output Parser"
-            parameter="arceb-elf32-gcc"
-            prefer-non-shared="true">
-      </provider>
-      <provider
-            id="com.arc.cdt.toolchain.arc.language.settings.providers.eb.ArcgnugccBuiltinSpecsDetector"
-            name="ARC GNU GCC Built-in Compiler Settings"
-            parameter="arceb-elf32-gcc -E -P -v -dD &quot;${INPUTS}&quot;"
-            prefer-non-shared="true">
-         <language-scope
-               id="org.eclipse.cdt.core.gcc">
-         </language-scope>
-         <language-scope
-               id="org.eclipse.cdt.core.g++">
-         </language-scope>
-      </provider>
-      
-   </extension>
-   <extension
          id="ARC_GCCManagedMakePerProjectProfileC"
          name="ARC GNU C/C++ managed make per project SCD profile"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
