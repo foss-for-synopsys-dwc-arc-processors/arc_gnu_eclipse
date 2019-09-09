@@ -7146,34 +7146,25 @@
       </projectType>
       <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.hsdk"
-            id="c.s.a.gnu.elf.project.hsdk"
-            isAbstract="false">
+            id="com.synopsys.arc.gnu.elf.project.hsdk">
          <configuration
-               artifactExtension="elf"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="c.s.a.gnu.elf.project.hsdk.debug"
-               name="Debug"
+               id="com.synopsys.arc.gnu.elf.project.hsdk.debug"
+               name="%debug"
                parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
-                  id="c.s.a.gnu.elf.project.hsdk.debug.toolchain"
-                  isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+                  id="com.synopsys.arc.gnu.elf.project.hsdk.debug.toolchain"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="elf"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="c.s.a.gnu.elf.project.hsdk.release"
-               name="Release"
+               id="com.synopsys.arc.gnu.elf.project.hsdk.release"
+               name="%release"
                parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
-                  id="c.s.a.gnu.elf.project.hsdk.release.toolchain"
-                  isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+                  id="com.synopsys.arc.gnu.elf.project.hsdk.release.toolchain"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
             </toolChain>
          </configuration>
       </projectType>
