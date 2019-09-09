@@ -2525,6 +2525,7 @@
          </option>
       </toolChain>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base"
             name="GNU Toolchain for ARC EM Configuration"
@@ -2829,6 +2830,7 @@
             superClass="org.eclipse.cdt.cross.arc.gnu.builder">
       </builder>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
             name="GNU Toolchain for ARC EM (big-endian) Configuration"
@@ -3410,6 +3412,7 @@
             superClass="org.eclipse.cdt.cross.arc.gnu.builder">
       </builder>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.hs.linux.configuration.base"
             name="GNU Toolchain for ARC HS Configuration"
@@ -4270,6 +4273,7 @@
          </configuration>
       </projectType>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base"
             name="GNU Toolchain for ARC 600 Configuration"
@@ -4411,6 +4415,7 @@
          </configuration>
       </projectType>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.700.linux.configuration.base"
             name="GNU Toolchain for ARC 700 Configuration"
@@ -5015,6 +5020,7 @@
           
       </toolChain>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.hs.linux.configuration.base"
             name="GNU Toolchain for ARC HS (big-endian) Configuration"
@@ -5136,6 +5142,7 @@
          </configuration>
       </projectType>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.700.linux.configuration.base"
             name="GNU Toolchain for ARC 700 (big-endian) Configuration"
@@ -5964,6 +5971,7 @@
          </option>
       </toolChain>
       <configuration
+            artifactExtension="elf"
             cleanCommand="rm -rf"
             id="org.eclipse.cdt.cross.arc.gnu.eb.600.linux.configuration.base"
             name="GNU Toolchain for ARC 600 (big-endian) Configuration"
