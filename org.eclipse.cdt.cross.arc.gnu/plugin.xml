@@ -7079,39 +7079,6 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
-            id="c.s.a.gnu.elf.project.iotdk"
-            isAbstract="false">
-         <configuration
-               artifactExtension="elf"
-               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="c.s.a.gnu.elf.project.iotdk.debug"
-               name="Debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
-            <toolChain
-                  id="c.s.a.gnu.elf.project.iotdk.debug.toolchain"
-                  isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
-            </toolChain>
-         </configuration>
-         <configuration
-               artifactExtension="elf"
-               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="c.s.a.gnu.elf.project.iotdk.release"
-               name="Release"
-               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
-            <toolChain
-                  id="c.s.a.gnu.elf.project.iotdk.release.toolchain"
-                  isAbstract="false"
-                  secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.linux.elf.cpp.linker.release.iotdk">
-            </toolChain>
-         </configuration>
-      </projectType>
-      <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.emsdp"
             id="com.synopsys.arc.gnu.elf.project.emsdp">
          <configuration
@@ -7131,6 +7098,30 @@
                parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.emsdp.release.toolchain"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
+            id="com.synopsys.arc.gnu.elf.project.iotdk">
+         <configuration
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="com.synopsys.arc.gnu.elf.project.iotdk.debug"
+               name="%debug"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="com.synopsys.arc.gnu.elf.project.iotdk.debug.toolchain"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+            </toolChain>
+         </configuration>
+         <configuration
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="com.synopsys.arc.gnu.elf.project.iotdk.release"
+               name="%release"
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
+            <toolChain
+                  id="com.synopsys.arc.gnu.elf.project.iotdk.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
             </toolChain>
          </configuration>
