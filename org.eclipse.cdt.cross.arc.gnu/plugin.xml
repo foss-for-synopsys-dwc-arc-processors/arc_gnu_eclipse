@@ -2240,7 +2240,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC EM "
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
@@ -2848,7 +2850,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC EM (big-endian)"
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
@@ -3427,7 +3431,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC HS "
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
@@ -3858,7 +3864,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 600"
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF" 
@@ -4424,7 +4432,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 700"
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
@@ -4718,7 +4728,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC HS (big-endian)"
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
@@ -5250,7 +5262,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 700 (big-endian)"
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
@@ -5652,7 +5666,9 @@
             isAbstract="false"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 600 (big-endian)"
-            osList="linux,win32">
+            osList="linux,win32"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base">
          <targetPlatform
                archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
