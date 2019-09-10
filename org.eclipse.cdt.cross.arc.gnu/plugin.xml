@@ -2552,23 +2552,6 @@
             </checkBuildProperty>
          </enablement>
       </configuration>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.700.linux.configuration.base"
-            name="GNU Toolchain for ARC 700 Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.configuration.base.700">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
       <toolChain
             archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
@@ -3169,40 +3152,6 @@
           </option>
           
       </toolChain>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.hs.linux.configuration.base"
-            name="GNU Toolchain for ARC HS (big-endian) Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.eb.configuration.base.hs">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.700.linux.configuration.base"
-            name="GNU Toolchain for ARC 700 (big-endian) Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.eb.configuration.base.700">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
       <toolChain
             archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
@@ -3817,40 +3766,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
       </toolChain>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.600.linux.configuration.base"
-            name="GNU Toolchain for ARC 600 (big-endian) Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.eb.configuration.base.600">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base"
-            name="GNU Toolchain for ARC 600 Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.configuration.base.600">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
       <toolChain
             archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
@@ -4219,23 +4134,6 @@
             isVariableCaseSensitive="false"
             superClass="org.eclipse.cdt.cross.arc.gnu.builder">
       </builder>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base"
-            name="GNU Toolchain for ARC EM (big-endian) Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.eb.configuration.base">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
       <toolChain
             archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
@@ -4603,23 +4501,6 @@
             isVariableCaseSensitive="false"
             superClass="org.eclipse.cdt.cross.arc.gnu.builder">
       </builder>
-      <configuration
-            artifactExtension="elf"
-            cleanCommand="rm -rf"
-            id="org.eclipse.cdt.cross.arc.gnu.hs.linux.configuration.base"
-            name="GNU Toolchain for ARC HS Configuration"
-            parent="org.eclipse.cdt.cross.arc.gnu.configuration.base.hs">
-         <enablement
-               attribute="artifactExtension"
-               extensionAdjustment="false"
-               type="CONTAINER_ATTRIBUTE"
-               value="a">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-      </configuration>
       <toolChain
             archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
@@ -5019,7 +4900,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.elf32.arc600.debug"
                name="%debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
@@ -5029,7 +4910,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.elf32.arc600.release"
                name="%release"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
@@ -5043,7 +4924,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.elf32.emb.debug"
                name="%debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.emb.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base">
@@ -5053,7 +4934,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.elf32.emb.release"
                name="%release"
-               parent="org.eclipse.cdt.cross.arc.gnu.eb.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.emb.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base">
@@ -5115,7 +4996,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.debug"
                name="%debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600">
@@ -5125,7 +5006,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.release"
                name="%release"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600">
@@ -5163,7 +5044,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.axs101.arc600.debug"
                name="%debug"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.arc600.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
@@ -5173,7 +5054,7 @@
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.axs101.arc600.release"
                name="%release"
-               parent="org.eclipse.cdt.cross.arc.gnu.600.linux.configuration.base">
+               parent="org.eclipse.cdt.cross.arc.gnu.linux.configuration.base">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.arc600.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
