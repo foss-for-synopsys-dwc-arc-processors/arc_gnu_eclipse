@@ -5550,54 +5550,6 @@
       </projectType>
    </extension>
    <extension
-         point="org.eclipse.cdt.core.templateAssociations">
-      <template
-            id="org.eclipse.cdt.build.core.templates.EmptyProject">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700">
-         </toolChain>
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_C_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-      </template>
-      <template
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_CPP_Project">
-         <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
-         </toolChain>
-      </template>
-   </extension>
-   <extension
          point="org.eclipse.cdt.core.templates">
 
        <!-- Generic Hello world -->
