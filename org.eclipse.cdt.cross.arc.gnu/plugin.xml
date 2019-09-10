@@ -2490,6 +2490,17 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"></checkBuildProperty>
+            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3700,6 +3711,18 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.addtools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4071,6 +4094,18 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.600.linux.option.addtools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
          </tool>
                   <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4641,6 +4676,18 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.700.linux.option.addtools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -5476,6 +5523,18 @@
                isAbstract="false"
                name="ARC ELF32 GNU Print Size "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
+                     optionId="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.addtools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
