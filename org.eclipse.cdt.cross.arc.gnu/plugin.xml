@@ -4815,7 +4815,7 @@
                value="a">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
             </checkBuildProperty>
          </enablement>
       </configuration>
@@ -5207,7 +5207,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.em">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.em.debug"
                name="%debug"
@@ -5219,7 +5218,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.em.release"
                name="%release"
@@ -5235,7 +5233,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.emb">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.emb.debug"
                name="%debug"
@@ -5247,7 +5244,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.emb.release"
                name="%release"
@@ -5263,7 +5259,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.hs">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.hs.debug"
                name="%debug"
@@ -5275,7 +5270,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.hs.release"
                name="%release"
@@ -5291,7 +5285,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.hsb">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.hsb.debug"
                name="%debug"
@@ -5303,7 +5296,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.hsb.release"
                name="%release"
@@ -5319,7 +5311,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.arc700">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.arc700.debug"
                name="%debug"
@@ -5331,7 +5322,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.arc700.release"
                name="%release"
@@ -5347,7 +5337,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.arc700b">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.arc700b.debug"
                name="%debug"
@@ -5359,7 +5348,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.arc700b.release"
                name="%release"
@@ -5375,7 +5363,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.arc600">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.arc600.debug"
                name="%debug"
@@ -5387,7 +5374,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.arc600.release"
                name="%release"
@@ -5403,7 +5389,6 @@
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
             id="com.synopsys.arc.gnu.elf.project.liba.arc600b">
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="com.synopsys.arc.gnu.elf.project.liba.arc600b.debug"
                name="%debug"
@@ -5415,7 +5400,6 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="com.synopsys.arc.gnu.elf.project.liba.arc600b.release"
                name="%release"
