@@ -751,26 +751,11 @@
       </option>
       </tool>
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC EM (big-endian)"
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
                name="Target Processor">
@@ -2549,26 +2534,11 @@
       </tool>
 
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC EM "
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                name="Target Processor">
@@ -2846,26 +2816,11 @@
          </option>
       </toolChain>
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 700"
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
                name="Target Processor">
@@ -3150,26 +3105,11 @@
          </option>
       </toolChain>
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC HS (big-endian)"
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
                name="Target Processor">
@@ -3438,26 +3378,11 @@
           
       </toolChain>
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 700 (big-endian)"
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
                name="Target Processor">
@@ -3745,26 +3670,11 @@
          </option>
       </toolChain>
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 600 (big-endian)"
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
                name="Target Processor">
@@ -4044,26 +3954,11 @@
          </option>
       </toolChain>
       <toolChain
-            archList="all"
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
             name="GNU Toolchain for ARC 600"
-            osList="linux,win32"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
-         <targetPlatform
-               archList="all"
-               binaryParser="org.eclipse.cdt.core.GNU_ELF" 
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.platform.base"
-               isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
-         </targetPlatform>
-         <builder
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.builder.base"
-               superClass="cdt.managedbuild.target.gnu.builder">
-         </builder>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
                name="Target Processor">
@@ -4401,26 +4296,26 @@
             superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
       </tool>
       <toolChain
-            archList="all"
-            id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-            isAbstract="false"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported"
-            name="GNU Toolchain for ARC HS "
-            osList="linux,win32"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+            id="com.synopsys.arc.gnu.elf.toolchain.base"
+            isAbstract="true"
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported">
          <targetPlatform
-               archList="all"
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.platform.base"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.targetPlatform"
                isAbstract="false"
-               name="All Platform"
-               osList="linux,win32">
+               name="ARC platform">
          </targetPlatform>
          <builder
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.builder.base"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.builder"
                superClass="cdt.managedbuild.target.gnu.builder">
          </builder>
+      </toolChain>
+      <toolChain
+            id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+            name="GNU Toolchain for ARC HS "
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
                name="Target Processor">
