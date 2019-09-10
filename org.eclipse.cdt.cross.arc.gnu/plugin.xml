@@ -5553,17 +5553,17 @@
          point="org.eclipse.cdt.core.templates">
 
        <!-- Generic Hello world -->
+      <template
+            filterPattern=".*gcc"
+            id="com.synopsys.arc.gnu.elf.templates.helloWorld_c"
+            location="templates/projecttemplates/HelloWorld_C_Project/template.xml"
+            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+      </template>
 
        <template
             filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.HelloWorld_CPP_Project"
+            id="com.synopsys.arc.gnu.elf.templates.helloWorld_cpp"
             location="templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.HelloWorld_C_Project"
-            location="templates/projecttemplates/HelloWorld_C_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
       </template>
 
@@ -5571,7 +5571,7 @@
 
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsk_em7d_HelloWorld_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_helloWorld_c"
             location="templates/projecttemplates/emsk_em7d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5580,7 +5580,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsk_em9d_HelloWorld_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_helloWorld_c"
             location="templates/projecttemplates/emsk_em9d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5589,7 +5589,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsk_em11d_HelloWorld_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_helloWorld_c"
             location="templates/projecttemplates/emsk_em11d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5598,7 +5598,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsk_em7d_empty_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_empty_c"
             location="templates/projecttemplates/emsk_em7d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5607,7 +5607,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsk_em9d_empty_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_empty_c"
             location="templates/projecttemplates/emsk_em9d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5616,7 +5616,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsk_em11d_empty_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_empty_c"
             location="templates/projecttemplates/emsk_em11d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5628,7 +5628,7 @@
 
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsk_em7d_empty_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_empty_cpp"
             location="templates/projecttemplates/emsk_em7d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5637,7 +5637,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsk_em9d_empty_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_empty_cpp"
             location="templates/projecttemplates/emsk_em9d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5646,7 +5646,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsk_em11d_empty_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_empty_cpp"
             location="templates/projecttemplates/emsk_em11d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5655,7 +5655,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsk_em7d_HelloWorld_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_helloWorld_cpp"
             location="templates/projecttemplates/emsk_em7d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5664,7 +5664,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsk_em9d_HelloWorld_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_helloWorld_cpp"
             location="templates/projecttemplates/emsk_em9d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5673,7 +5673,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsk_em11d_HelloWorld_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_helloWorld_cpp"
             location="templates/projecttemplates/emsk_em11d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
@@ -5682,7 +5682,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.iotdk_empty_c"
+            id="com.synopsys.arc.gnu.elf.templates.iotdk_empty_c"
             location="templates/projecttemplates/iotdk_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
          <toolChain
@@ -5691,7 +5691,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.iotdk_empty_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.iotdk_empty_cpp"
             location="templates/projecttemplates/iotdk_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
          <toolChain
@@ -5700,7 +5700,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.emsdp_empty_c"
+            id="com.synopsys.arc.gnu.elf.templates.emsdp_empty_c"
             location="templates/projecttemplates/emsdp_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
          <toolChain
@@ -5709,7 +5709,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.emsdp_empty_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.emsdp_empty_cpp"
             location="templates/projecttemplates/emsdp_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
          <toolChain
@@ -5718,7 +5718,7 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="c.s.a.gnu.elf.templates.hsdk_empty_c"
+            id="com.synopsys.arc.gnu.elf.templates.hsdk_empty_c"
             location="templates/projecttemplates/hsdk_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
          <toolChain
@@ -5727,7 +5727,7 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="c.s.a.gnu.elf.templates.hsdk_empty_cpp"
+            id="com.synopsys.arc.gnu.elf.templates.hsdk_empty_cpp"
             location="templates/projecttemplates/hsdk_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
          <toolChain
@@ -5738,25 +5738,25 @@
 
       <template
             filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_C_Project"
+            id="com.synopsys.arc.gnu.elf.templates.axs101_empty_c"
             location="$nl$/templates/projecttemplates/AXS101_Empty_C_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS101_Empty_CPP_Project"
+            id="com.synopsys.arc.gnu.elf.templates.axs101_empty_cpp"
             location="$nl$/templates/projecttemplates/AXS101_Empty_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_C_Project"
+            id="com.synopsys.arc.gnu.elf.templates.axs103_empty_c"
             location="$nl$/templates/projecttemplates/AXS103_Empty_C_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application">
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="org.eclipse.cdt.cross.arc.gnu.templates.AXS103_Empty_CPP_Project"
+            id="com.synopsys.arc.gnu.elf.templates.axs103_empty_cpp"
             location="$nl$/templates/projecttemplates/AXS103_Empty_CPP_Project/template.xml"
             projectType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application">
       </template>
