@@ -2366,9 +2366,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.em.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -2628,9 +2626,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.emb.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -2913,9 +2909,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.hs.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -3193,9 +3187,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id=".com.synopsys.arc.gnu.elf.tool.hsb.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -3465,9 +3457,7 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.arc700.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -3713,9 +3703,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.arc700b.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -3984,9 +3972,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.arc600.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -4242,9 +4228,7 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.archiver.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC Archiver"
+               id="com.synopsys.arc.gnu.elf.tool.arc600b.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
