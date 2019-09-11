@@ -174,48 +174,6 @@
             </enablement>
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.processor"
-               name="Processor (-mcpu)"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-mcpu=arcem"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=arcem)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em"
-                  isDefault="true"
-                  name="ARC EM (-mcpu=em)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4_dmips"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4_dmips)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4_fpus"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4_fpus)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4_fpuda"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4_fpuda)">
-            </enumeratedOptionValue>
-         </option>
-         <option
                id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format"
                name="Debug Format"
                valueType="enumerated">
@@ -2321,6 +2279,18 @@
                id="com.synopsys.arc.gnu.elf.toolchain.base.builder"
                superClass="cdt.managedbuild.target.gnu.builder">
          </builder>
+         <optionCategory
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               name="%option.target">
+         </optionCategory>
+         <option
+               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+               name="Processor (-mcpu)"
+               valueType="enumerated">
+         </option>
       </toolChain>
 
       <toolChain
@@ -2427,19 +2397,49 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor"
-               name="ARC EM (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
+            <enumeratedOptionValue
+                  command="-mcpu=arcem"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=arcem)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em"
+                  isDefault="true"
+                  name="ARC EM (-mcpu=em)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_dmips"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4_dmips)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_fpus"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4_fpus)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_fpuda"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda"
+                  isDefault="false"
+                  name="ARC EM (-mcpu=em4_fpuda)">
+            </enumeratedOptionValue>
          </option>
-         <option category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+         <option category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                  id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.endiannes"
                  isAbstract="false"
                  name="Endianness"
@@ -2447,7 +2447,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem"
                name="Multiply instructions (ARC EM)"
@@ -2455,7 +2455,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem"
                isAbstract="false"
@@ -2517,13 +2517,13 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity"
                name="Code density (-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
@@ -2531,28 +2531,28 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.tcf"
                name="TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
@@ -2560,7 +2560,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.filefortcf"
                name="TCF path"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
@@ -2568,7 +2568,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf"
                name=" Use memory map from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
@@ -2576,7 +2576,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.includecdefines"
                name="Include C defines from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
@@ -2689,18 +2689,13 @@
                </and>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.processor"
-               name="ARC EM (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+               superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -2712,13 +2707,13 @@
             </enumeratedOptionValue>
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpyem"
                name="Multiply instructions (ARC EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpuem"
                isAbstract="false"
                name="FPU Type (ARC EM)"
@@ -2779,35 +2774,35 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity"
                name="Code density(-mcode-density)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
@@ -2834,7 +2829,7 @@
          </tool>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.tcf"
                name="TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
@@ -2843,7 +2838,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.filefortcf"
                name="TCF path"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
@@ -2851,7 +2846,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.maptcf"
                name=" Use memory map from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
@@ -2859,7 +2854,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.includecdefines"
                name="Include C defines from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
@@ -2970,17 +2965,10 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor"
-               name="ARC HS (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
             <enumeratedOptionValue
                   command="-mcpu=archs"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs"
@@ -3013,7 +3001,7 @@
             </enumeratedOptionValue>
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -3021,7 +3009,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs"
                name="Multiply instructions (ARC HS)"
@@ -3029,7 +3017,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs"
                isAbstract="false"
@@ -3090,28 +3078,28 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64"
                name="64-bit load/store instructions(-mll64)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf"
                name="TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
@@ -3120,7 +3108,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf"
                name="TCF path"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
@@ -3128,7 +3116,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.maptcf"
                name=" Use memory map from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
@@ -3136,7 +3124,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.includecdefines"
                name="Include C defines from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
@@ -3250,18 +3238,13 @@
                </and>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.processor"
-               name="ARC HS (-mcpu)"
                superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -3273,13 +3256,13 @@
             </enumeratedOptionValue>
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.mpyhs"
                name="Multiply instructions (ARC HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.fpuhs"
                isAbstract="false"
                name="FPU Type (ARC HS)"
@@ -3334,21 +3317,21 @@
          </optionCategory>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.ll64"
                name="64-bit load/store instructions (-mll64)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -3361,7 +3344,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.tcf"
                name="TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
@@ -3370,7 +3353,7 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                browseType="file"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.filefortcf"
                name="TCF path"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
@@ -3378,7 +3361,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.maptcf"
                name=" Use memory map from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
@@ -3386,7 +3369,7 @@
           </option>
           <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.includecdefines"
                name="Include C defines from TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
@@ -3498,17 +3481,11 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.processor"
-               name="ARC 700 (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
             <enumeratedOptionValue
                   command="-mcpu=arc700"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
@@ -3517,7 +3494,7 @@
             </enumeratedOptionValue>
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -3577,7 +3554,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.fpi"
                isAbstract="false"
@@ -3601,7 +3578,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
@@ -3609,7 +3586,7 @@
          </option>
           <option
                 applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-                category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                 id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.swap"
                 name="Swap instruction (-mswap)"
                 superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
@@ -3617,7 +3594,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
@@ -3625,21 +3602,21 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.ea"
                name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
@@ -3647,14 +3624,14 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
@@ -3764,23 +3741,13 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.processor"
-               name="ARC 700 (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=arc700"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
-                  name="ARC 700 (-mcpu=arc700)">
-            </enumeratedOptionValue>
+               superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.processor">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -3846,7 +3813,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.fpi"
                isAbstract="false"
@@ -3870,7 +3837,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
@@ -3878,14 +3845,14 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
@@ -3894,21 +3861,21 @@
 
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.ea"
                name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
@@ -3916,14 +3883,14 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
@@ -4033,17 +4000,11 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.processor"
-               name="ARC 600 (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
+               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
             <enumeratedOptionValue
                   command="-mcpu=arc600"
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
@@ -4052,7 +4013,7 @@
             </enumeratedOptionValue>
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -4112,7 +4073,7 @@
          </option>
                   <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.fpi"
                isAbstract="false"
@@ -4136,7 +4097,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
@@ -4144,42 +4105,42 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.ea"
                name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.mul3216"
                name="DSP 32x16 MPY (-mmul32x16)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
@@ -4291,23 +4252,13 @@
                </and>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
-               name="Target Processor">
-         </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.processor"
-               name="ARC 600 (-mcpu)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.processor">
-            <enumeratedOptionValue
-                  command="-mcpu=arc600"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
-                  name="ARC 600 (-mcpu=arc600)">
-            </enumeratedOptionValue>
+               superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.processor">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.endiannes"
                isAbstract="false"
                name="Endianness"
@@ -4373,7 +4324,7 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.fpi"
                isAbstract="false"
@@ -4397,21 +4348,21 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.barrelshifter"
                name="Barrel shifter (-mbarrel-shifter)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm) "
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
@@ -4419,28 +4370,28 @@
         
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.ea"
                name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.mul3216"
                name="DSP 32x16 MPY (-mmul32x16)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
