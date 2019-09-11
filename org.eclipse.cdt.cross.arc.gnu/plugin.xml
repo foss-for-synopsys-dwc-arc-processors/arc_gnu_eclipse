@@ -756,6 +756,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.emb.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.emb.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.emb.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.target"
                name="Target Processor">
@@ -844,21 +856,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base"
                isAbstract="false"
@@ -2524,6 +2521,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.em.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.em.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.em.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.linux.category.target"
                name="Target Processor">
@@ -2612,21 +2621,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base"
                isAbstract="false"
@@ -2788,6 +2782,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc700.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc700.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc700.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.category.target"
                name="Target Processor">
@@ -2865,21 +2871,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base"
                isAbstract="false"
@@ -3059,6 +3050,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.hsb.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.hsb.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.hsb.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.target"
                name="Target Processor">
@@ -3141,21 +3144,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
                name="Additional Tools">
          </optionCategory>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base"
                isAbstract="false"
@@ -3314,6 +3302,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc700b.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc700b.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc700b.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.target"
                name="Target Processor">
@@ -3394,21 +3394,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base"
                isAbstract="false"
@@ -3588,6 +3573,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc600b.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc600b.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc600b.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.target"
                name="Target Processor">
@@ -3668,21 +3665,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base"
                isAbstract="false"
@@ -3854,6 +3836,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc600.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc600.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.arc600.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.category.target"
                name="Target Processor">
@@ -3931,21 +3925,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base"
                isAbstract="false"
@@ -4208,6 +4187,18 @@
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.hsb.asm"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.hsb.gcc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.hsb.gxx"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+         </tool>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.target"
                name="Target Processor">
@@ -4326,21 +4317,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.assembler.base"
-               name="ARC ELF32 GCC Assembler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.compiler.base"
-               name="ARC ELF32 GCC C Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.compiler.base"
-               name="ARC ELF32 GCC C++ Compiler"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base"
                isAbstract="false"
