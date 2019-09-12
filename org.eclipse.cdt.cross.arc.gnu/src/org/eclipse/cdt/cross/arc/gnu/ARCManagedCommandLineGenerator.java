@@ -85,8 +85,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        String sSwap = null;           //Customized for ARC GNU swap
        String sEa = null;           //Customized for ARC GNU ea
    
-       String sProcessorEndiannes = null;
-   
        String sSyntaxonly = null;
    
        String sFPUEM = null;
@@ -152,8 +150,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sProcessor = sEnumCommand;
            } else if (sID.indexOf(".option.target.core700") > 0) { //Customized for ARC GNU core 700
                sCore700 = sEnumCommand;
-           } else if (sID.indexOf(".option.target.endiannes") > 0) {
-               sProcessorEndiannes = sEnumCommand;
            } else if (sID.indexOf(".option.warnings.syntax") > 0) {
                sSyntaxonly = sEnumCommand;
            } else if (sID.indexOf(".option.target.fpuem") > 0) {
@@ -231,8 +227,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                 oList_gcc_options.add(sProcessor);
             if (sCore700 != null && !sCore700.isEmpty())
                 oList.add(sCore700);
-            if (sProcessorEndiannes != null && !sProcessorEndiannes.isEmpty())
-                oList_gcc_options.add(sProcessorEndiannes);
             if (sSyntaxonly != null && !sSyntaxonly.isEmpty()) {
                 oList.add(sSyntaxonly);
             }
