@@ -41,8 +41,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static ITool lastTool;
     private static String lastProject;
 
-    private static final String MMPY_OPTION_EM = "org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyem";
-    private static final String MMPY_OPTION_HS = "org.eclipse.cdt.cross.arc.gnu.base.option.target.mpyhs";
+    private static final String MMPY_OPTION_EM = "org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem";
+    private static final String MMPY_OPTION_HS = "org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs";
     private static final String MMPY_OPTION_FOR_REPLACEMENT = "-mmpy-option=2";
 
     public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName,
