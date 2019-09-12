@@ -467,57 +467,6 @@
       </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem"
-            name="FPU Type (ARC EM)"
-            valueType="enumerated">
-         <enumeratedOptionValue
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
-               isDefault="true"
-               name="None">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="-mfpu=fpus"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
-               name="SP FPU (-mfpu=fpus)">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="-mfpu=fpus_div"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
-               name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="-mfpu=fpus_fma"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_fma"
-               name="SP FPU with fused instructions (-mfpu=fpus_fma)">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="-mfpu=fpus_all"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all"
-               name="SP FPU with all instructions (-mfpu=fpus_all)">
-         </enumeratedOptionValue>
-		 <enumeratedOptionValue
-               command="-mfpu=fpuda"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda"
-               name="FPU with DP assist instructions (-mfpu=fpuda)">
-         </enumeratedOptionValue>
-   <enumeratedOptionValue
-         command="-mfpu=fpuda_div"
-         id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_div"
-         name="FPU with DP assist instructions and DIV/SQRT extensions (-mfpu=fpuda_div)">
-   </enumeratedOptionValue>
-   <enumeratedOptionValue
-         command="-mfpu=fpuda_fma"
-         id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_fma"
-         name="FPU with DP assist instructions and fused extensions (-mfpu=fpuda_fma)">
-   </enumeratedOptionValue>
-   <enumeratedOptionValue
-         command="-mfpu=fpuda_all"
-         id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_all"
-         name="FPU with DP assist instructions and all extensions (-mfpu=fpuda_all)">
-   </enumeratedOptionValue>
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             defaultValue="false"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
             name="TCF"
@@ -2401,9 +2350,53 @@
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem"
-               isAbstract="false"
                name="FPU Type (ARC EM)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
+                  isDefault="true"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
+                  name="SP FPU (-mfpu=fpus)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_div"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
+                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_fma"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_fma"
+                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_all"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all"
+                  name="SP FPU with all instructions (-mfpu=fpus_all)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda"
+                  name="FPU with DP assist instructions (-mfpu=fpuda)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda_div"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_div"
+                  name="FPU with DP assist instructions and DIV/SQRT extensions (-mfpu=fpuda_div)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda_fma"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_fma"
+                  name="FPU with DP assist instructions and fused extensions (-mfpu=fpuda_fma)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda_all"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_all"
+                  name="FPU with DP assist instructions and all extensions (-mfpu=fpuda_all)">
+            </enumeratedOptionValue>
          </option>
         
          <optionCategory
@@ -2646,9 +2639,8 @@
          <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpuem"
-               isAbstract="false"
                name="FPU Type (ARC EM)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuem">
+               superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
