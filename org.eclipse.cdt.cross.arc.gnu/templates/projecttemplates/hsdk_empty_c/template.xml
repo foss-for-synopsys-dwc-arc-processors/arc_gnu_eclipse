@@ -85,11 +85,6 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-      <element>
         <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf" />
         <simple name="value" value="true" />
         <simple name="path" value="" />

@@ -80,14 +80,4 @@
       </element>
     </complex-array>
   </process>
-  <process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
-    <simple name="projectName" value="$(projectName)" />
-    <complex-array name="resourcePaths">
-      <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-    </complex-array>
-  </process>
 </template>

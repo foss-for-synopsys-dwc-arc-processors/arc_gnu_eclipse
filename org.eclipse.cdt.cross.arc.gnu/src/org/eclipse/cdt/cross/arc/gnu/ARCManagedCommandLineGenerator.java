@@ -44,6 +44,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String NORMALIZE_OPTION = ".target.norm";
     private static final String SWAP_OPTION = ".target.swap";
     private static final String LL64_OPTION = ".target.ll64";
+    private static final String ATOMIC_OPTION = ".target.atomic";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -211,7 +212,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     smul3216 = sCommand;
                 } else if (sID.indexOf(".option.target.xy") > 0) {
                     smxy = sCommand;
-                } else if (sID.indexOf(".option.target.atomic") > 0) {
+                } else if (sID.indexOf(ATOMIC_OPTION) > 0) {
                     satomic = sCommand;
                 } else if (sID.indexOf(LL64_OPTION) > 0) {
                     sll64 = sCommand;
@@ -318,14 +319,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                         oList_gcc_options.add("-mno-barrel-shifter");
                     } else {
                         int i = oList_gcc_options.indexOf(sBarrelshifter);
-                        oList_gcc_options.remove(i);
-                    }
-                }
-                if (ArcCpu.fromCommand(sProcessor).getToolChain().equals(ArcCpuFamily.ARCHS)) {
-                    if (oList_gcc_options.indexOf(satomic) < 0) {
-                        oList_gcc_options.add("-mno-atomic");
-                    } else {
-                        int i = oList_gcc_options.indexOf(satomic);
                         oList_gcc_options.remove(i);
                     }
                 }

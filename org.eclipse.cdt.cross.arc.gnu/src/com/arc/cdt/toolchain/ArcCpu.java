@@ -91,7 +91,6 @@ public enum ArcCpu {
                 + "-mdiv-rem\n"
                 + "-mmpy-option=mpy\n"
                 + "-mll64\n"
-                + "-matomic\n"
             ));
             SET_OPTIONS.get(HS).load(new StringReader(
                 "-mcpu=hs\n"
@@ -100,21 +99,18 @@ public enum ArcCpu {
             SET_OPTIONS.get(HS34).load(new StringReader(
                 "-mcpu=hs34\n"
                 + "-mmpy-option=mpy\n"
-                + "-matomic\n"
             ));
             SET_OPTIONS.get(HS38).load(new StringReader(
                 "-mcpu=hs38\n"
                 + "-mdiv-rem\n"
                 + "-mmpy-option=plus_qmacw\n"
                 + "-mll64\n"
-                + "-matomic\n"
             ));
             SET_OPTIONS.get(HS38_LINUX).load(new StringReader(
                 "-mcpu=hs38_linux\n"
                 + "-mdiv-rem\n"
                 + "-mmpy-option=plus_qmacw\n"
                 + "-mll64\n"
-                + "-matomic\n"
                 + "-mfpu=fpud_all\n"
             ));
         } catch (IOException e) {
