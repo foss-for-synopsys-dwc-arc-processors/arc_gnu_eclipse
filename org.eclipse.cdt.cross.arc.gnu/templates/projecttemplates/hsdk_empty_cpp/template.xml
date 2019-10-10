@@ -31,11 +31,6 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf" />
-        <simple name="value" value="${workspace_loc:/$(projectName)/archs38_c1.tcf}" />
-        <simple name="path" value="" />
-      </element>
-      <element>
         <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor" />
         <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux" />
         <simple name="path" value="" />
@@ -53,6 +48,11 @@
       <element>
         <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base.option.specs" />
         <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nosys" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf" />
+        <simple name="value" value="${workspace_loc:/$(projectName)/archs38_c1.tcf}" />
         <simple name="path" value="" />
       </element>
     </complex-array>
