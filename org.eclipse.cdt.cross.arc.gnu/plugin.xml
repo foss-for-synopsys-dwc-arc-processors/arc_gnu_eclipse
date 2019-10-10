@@ -305,13 +305,6 @@
                name="Other debugging flags"
                valueType="string">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mdiv-rem"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               valueType="boolean">
-         </option>
       <option
              applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
              command="-mno-dpfp-lrsr"
@@ -2143,6 +2136,60 @@
          </option>
          <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mdiv-rem"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem"
+               name="%option.divrem"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty></or>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                command="-mcode-density"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity"
                name="%option.code_density"
@@ -2655,13 +2702,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.tcf"
                name="TCF"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
@@ -2867,13 +2907,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.addtools.printsize"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
          </option>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
@@ -3166,13 +3199,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64"
                name="64-bit load/store instructions(-mll64)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
@@ -3390,13 +3416,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
                name="Additional Tools">
          </optionCategory>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.divide"
-               name="Integer divide instructions (-mdiv-rem)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"

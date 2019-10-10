@@ -38,6 +38,7 @@ import com.arc.cdt.toolchain.arc.ArcOptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
+    private static final String DIVREM_OPTION = ".target.divrem";
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
     private static final String NORMALIZE_OPTION = ".target.norm";
@@ -195,7 +196,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sBarrelshifter = sCommand; // Customized for ARC GNU barrelshifter
                 } else if (sID.indexOf(CODEDENSITY_OPTION) > 0) {
                     sCodedensity = sCommand; // Customized for ARC GNU codedensity
-                } else if (sID.indexOf(".option.target.divide") > 0) {
+                } else if (sID.indexOf(DIVREM_OPTION) > 0) {
                     sDivide = sCommand; // Customized for ARC GNU divide
                 } else if (sID.indexOf(NORMALIZE_OPTION) > 0) {
                     sNormalize = sCommand; // Customized for ARC GNU normalize

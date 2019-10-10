@@ -80,7 +80,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
