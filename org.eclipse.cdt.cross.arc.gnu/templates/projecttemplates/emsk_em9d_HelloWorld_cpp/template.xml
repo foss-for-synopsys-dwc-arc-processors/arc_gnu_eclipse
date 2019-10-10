@@ -112,7 +112,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.barrelshifter" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
@@ -132,7 +132,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

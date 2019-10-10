@@ -307,13 +307,6 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mbarrel-shifter"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mcode-density"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
                name="Code density(-mcode-density)"
@@ -2169,6 +2162,69 @@
                name="Processor (-mcpu)"
                valueType="enumerated">
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
+               command="-mbarrel-shifter"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter"
+               name="%option.barrel_shifter"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <not>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty>
+               </not>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           isRegex="false"
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+            <enablement
+                  attribute="defaultValue"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="true">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+         </option>
       </toolChain>
 
       <toolChain
@@ -2469,13 +2525,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
-         </option>
-         <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity"
                name="Code density (-mcode-density)"
@@ -2711,13 +2760,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.addtools.printsize"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -3516,14 +3558,6 @@
                   name="Double Precision FPX (-mdpfp)">
             </enumeratedOptionValue>
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               value="true">
-         </option>
           <option
                 applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                 category="com.synopsys.arc.gnu.elf.toolchain.base.target"
@@ -3762,14 +3796,6 @@
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
                   name="Double Precision FPX (-mdpfp)">
             </enumeratedOptionValue>
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               value="true">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -4018,14 +4044,6 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.normalize"
                name="Bitscan instruction (-mnorm)"
@@ -4254,13 +4272,6 @@
                   id="org.eclipse.cdt.cross.arc.gnu.base.option.fpi.dpfp"
                   name="Double Precision FPX (-mdpfp)">
             </enumeratedOptionValue>
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.barrelshifter"
-               name="Barrel shifter (-mbarrel-shifter)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.barrelshifter">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
