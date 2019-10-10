@@ -56,14 +56,31 @@
             name="ARC EM SDP Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
+      <propertyType
+            id="com.synopsys.arc.gnu.elf.properties.cpu"
+            name="ARC CPU family">
+      </propertyType>
+      <propertyValue
+            id="com.synopsys.arc.gnu.elf.properties.cpu.em"
+            name="ARC EM CPU"
+            property="com.synopsys.arc.gnu.elf.properties.cpu">
+      </propertyValue>
+      <propertyValue
+            id="com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            name="ARC HS CPU"
+            property="com.synopsys.arc.gnu.elf.properties.cpu">
+      </propertyValue>
+      <propertyValue
+            id="com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            name="ARC700 CPU"
+            property="com.synopsys.arc.gnu.elf.properties.cpu">
+      </propertyValue>
+      <propertyValue
+            id="com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            name="ARC600 CPU"
+            property="com.synopsys.arc.gnu.elf.properties.cpu">
+      </propertyValue>
    </extension>
-   
-   <!-- eb discovery extensions -->
-    
-   
-   <!-- -->
-    <!-- -->
-
     <extension
          id="ARC_GCC_BuildDefinitions"
          name="Managed Build Definitions"
@@ -4306,6 +4323,7 @@
       </configuration>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.elf32.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4330,6 +4348,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="com.synopsys.arc.gnu.elf.project.elf32.hs">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4354,6 +4373,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="com.synopsys.arc.gnu.elf.project.elf32.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4378,6 +4398,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="com.synopsys.arc.gnu.elf.project.elf32.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4402,6 +4423,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.elf32.emb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4426,6 +4448,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="com.synopsys.arc.gnu.elf.project.elf32.hsb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4450,6 +4473,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="com.synopsys.arc.gnu.elf.project.elf32.arc700b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4474,6 +4498,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="com.synopsys.arc.gnu.elf.project.elf32.arc600b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4498,6 +4523,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="com.synopsys.arc.gnu.elf.project.axs101.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4522,6 +4548,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="com.synopsys.arc.gnu.elf.project.axs101.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4546,6 +4573,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.axs101.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4570,6 +4598,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="com.synopsys.arc.gnu.elf.project.axs103">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4594,6 +4623,7 @@
       </projectType>
       <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.emsdp"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.emsdp">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4618,6 +4648,7 @@
       </projectType>
       <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.emsk"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.emsk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4642,6 +4673,7 @@
       </projectType>
       <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.iotdk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4666,6 +4698,7 @@
       </projectType>
       <projectType
             buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.hsdk"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="com.synopsys.arc.gnu.elf.project.hsdk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4690,6 +4723,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.liba.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4716,6 +4750,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="com.synopsys.arc.gnu.elf.project.liba.emb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4742,6 +4777,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="com.synopsys.arc.gnu.elf.project.liba.hs">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4768,6 +4804,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="com.synopsys.arc.gnu.elf.project.liba.hsb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4794,6 +4831,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="com.synopsys.arc.gnu.elf.project.liba.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4820,6 +4858,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="com.synopsys.arc.gnu.elf.project.liba.arc700b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4846,6 +4885,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="com.synopsys.arc.gnu.elf.project.liba.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -4872,6 +4912,7 @@
       </projectType>
       <projectType
             buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="com.synopsys.arc.gnu.elf.project.liba.arc600b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
