@@ -80,7 +80,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.ll64" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

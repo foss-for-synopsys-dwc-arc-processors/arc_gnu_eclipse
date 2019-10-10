@@ -314,13 +314,6 @@
        </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mll64"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64"
-               name="64-bit load/store instructions(-mll64)"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-matomic"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic"
                name="Atomic functions (-matomic)"
@@ -2400,6 +2393,43 @@
                </checkBuildProperty>
             </enablement>
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mll64"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.ll64"
+               name="%option.ll64"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+         </option>
       </toolChain>
 
       <toolChain
@@ -3199,13 +3229,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.ll64"
-               name="64-bit load/store instructions(-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.atomic"
                name="Atomic functions (-matomic)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.atomic">
@@ -3416,13 +3439,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
                name="Additional Tools">
          </optionCategory>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.ll64"
-               name="64-bit load/store instructions (-mll64)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ll64">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"

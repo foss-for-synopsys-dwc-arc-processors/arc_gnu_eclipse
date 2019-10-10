@@ -43,6 +43,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
     private static final String NORMALIZE_OPTION = ".target.norm";
     private static final String SWAP_OPTION = ".target.swap";
+    private static final String LL64_OPTION = ".target.ll64";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -212,7 +213,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     smxy = sCommand;
                 } else if (sID.indexOf(".option.target.atomic") > 0) {
                     satomic = sCommand;
-                } else if (sID.indexOf(".option.target.ll64") > 0) {
+                } else if (sID.indexOf(LL64_OPTION) > 0) {
                     sll64 = sCommand;
                 } else if (sID.indexOf(".option.target.mno-dpfp-lrsr") > 0) {
                     smno_dpfp_lrsr = sCommand;
