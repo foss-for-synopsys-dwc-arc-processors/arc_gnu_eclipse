@@ -41,6 +41,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
     private static final String NORMALIZE_OPTION = ".target.norm";
+    private static final String SWAP_OPTION = ".target.swap";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -200,7 +201,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sNormalize = sCommand; // Customized for ARC GNU normalize
                 } else if (sID.indexOf(".option.target.mpy") > 0) {
                     sMPY = sCommand;
-                } else if (sID.indexOf(".option.target.swap") > 0) {
+                } else if (sID.indexOf(SWAP_OPTION) > 0) {
                     sSwap = sCommand; // Customized for ARC GNU swap
                 } else if (sID.indexOf(".option.target.ea") > 0) {
                     sEa = sCommand; // Customized for ARC GNU ea
