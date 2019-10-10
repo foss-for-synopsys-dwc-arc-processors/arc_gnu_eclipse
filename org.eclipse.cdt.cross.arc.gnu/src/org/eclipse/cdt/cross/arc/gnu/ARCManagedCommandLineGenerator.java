@@ -40,6 +40,7 @@ import com.arc.cdt.toolchain.tcf.TcfContent;
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
+    private static final String NORMALIZE_OPTION = ".target.norm";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -195,7 +196,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sCodedensity = sCommand; // Customized for ARC GNU codedensity
                 } else if (sID.indexOf(".option.target.divide") > 0) {
                     sDivide = sCommand; // Customized for ARC GNU divide
-                } else if (sID.indexOf(".option.target.normalize") > 0) {
+                } else if (sID.indexOf(NORMALIZE_OPTION) > 0) {
                     sNormalize = sCommand; // Customized for ARC GNU normalize
                 } else if (sID.indexOf(".option.target.mpy") > 0) {
                     sMPY = sCommand;

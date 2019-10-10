@@ -314,13 +314,6 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mnorm"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               name="Bitscan instruction (-mnorm)"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mswap"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap"
                name="Swap instruction (-mswap)"
@@ -2263,6 +2256,58 @@
                </or>
             </enablement>
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mnorm"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.norm"
+               name="%option.norm"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <not>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty>
+               </not>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           isRegex="false"
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                     </checkOption>
+                     <checkOption
+                           isRegex="false"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+            <enablement
+                  attribute="defaultValue"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="true">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+               </checkBuildProperty>
+            </enablement>
+         </option>
       </toolChain>
 
       <toolChain
@@ -2572,13 +2617,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
@@ -2805,13 +2843,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
@@ -3593,14 +3624,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.ea"
                name="Extended Arithmetic Instruction (-mEA)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
@@ -3827,14 +3850,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize"
-               value="true">
          </option>
 
          <option
@@ -4069,13 +4084,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
@@ -4303,13 +4311,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.swap"
                name="Swap instruction (-mswap)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.swap">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.normalize"
-               name="Bitscan instruction (-mnorm) "
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.normalize">
          </option>
         
          <option
