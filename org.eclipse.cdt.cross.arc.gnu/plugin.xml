@@ -307,13 +307,6 @@
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               command="-mcode-density"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               valueType="boolean"> 
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                command="-mdiv-rem"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.divide"
                name="Integer divide instructions (-mdiv-rem)"
@@ -2163,7 +2156,52 @@
                valueType="enumerated">
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.optionCategory.cpu"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mcode-density"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity"
+               name="%option.code_density"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                command="-mbarrel-shifter"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter"
                name="%option.barrel_shifter"
@@ -2525,13 +2563,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity"
-               name="Code density (-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity"
-               valueType="boolean">
-         </option>
-         <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.divide"
@@ -2760,13 +2791,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.addtools.printsize"
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity"
-               name="Code density(-mcode-density)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.codedensity">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"

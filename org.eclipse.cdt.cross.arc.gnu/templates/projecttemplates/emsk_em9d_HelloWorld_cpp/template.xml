@@ -152,12 +152,12 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.codedensity" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.codedensity" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

@@ -38,6 +38,7 @@ import com.arc.cdt.toolchain.arc.ArcOptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
+    private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
 
     private static ITool lastTool;
@@ -190,7 +191,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sDebugProf = sCommand;
                 } else if (sID.indexOf(BARRELSHIFTER_OPTION) > 0) {
                     sBarrelshifter = sCommand; // Customized for ARC GNU barrelshifter
-                } else if (sID.indexOf(".option.target.codedensity") > 0) {
+                } else if (sID.indexOf(CODEDENSITY_OPTION) > 0) {
                     sCodedensity = sCommand; // Customized for ARC GNU codedensity
                 } else if (sID.indexOf(".option.target.divide") > 0) {
                     sDivide = sCommand; // Customized for ARC GNU divide
