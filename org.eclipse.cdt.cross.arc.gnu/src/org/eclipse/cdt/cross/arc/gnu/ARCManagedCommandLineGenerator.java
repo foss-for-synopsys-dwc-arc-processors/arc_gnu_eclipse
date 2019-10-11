@@ -46,6 +46,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String LL64_OPTION = ".target.ll64";
     private static final String ATOMIC_OPTION = ".target.atomic";
     private static final String EA_OPTION = ".target.ea";
+    private static final String XY_OPTION = ".target.xy";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -211,7 +212,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sEa = sCommand; // Customized for ARC GNU ea
                 } else if (sID.indexOf(".option.target.mul3216") > 0) {
                     smul3216 = sCommand;
-                } else if (sID.indexOf(".option.target.xy") > 0) {
+                } else if (sID.indexOf(XY_OPTION) > 0) {
                     smxy = sCommand;
                 } else if (sID.indexOf(ATOMIC_OPTION) > 0) {
                     satomic = sCommand;

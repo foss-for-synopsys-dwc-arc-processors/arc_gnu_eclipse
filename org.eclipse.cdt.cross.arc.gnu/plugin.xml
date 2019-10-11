@@ -414,13 +414,6 @@
       </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mxy"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy"
-            name="DSP XY memory (-mxy)"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             command="-mmpy"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
             name="MPY instructions (-mmpy)"
@@ -2444,6 +2437,27 @@
                </checkBuildProperty>
             </enablement>
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mxy"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.xy"
+               name="%option.xy"
+               tip="%option.xy.tip"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+         </option>
       </toolChain>
 
       <toolChain
@@ -3682,13 +3696,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.xy"
-               name="DSP XY memory (-mxy)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.mpy"
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
@@ -3889,13 +3896,6 @@
             </enumeratedOptionValue>
          </option>
 
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.xy"
-               name="DSP XY memory (-mxy)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
@@ -4114,13 +4114,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.xy"
-               name="DSP XY memory (-mxy)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.mno-dpfp-lrsr"
                name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
@@ -4321,13 +4314,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.mul3216"
                name="DSP 32x16 MPY (-mmul32x16)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.xy"
-               name="DSP XY memory (-mxy)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
          </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
