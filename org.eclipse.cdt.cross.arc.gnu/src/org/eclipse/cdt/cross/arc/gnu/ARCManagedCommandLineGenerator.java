@@ -38,6 +38,8 @@ import com.arc.cdt.toolchain.arc.ArcOptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
+    private static final String FPUEM_OPTION = ".target.fpuem";
+    private static final String FPUHS_OPTION = ".target.fpuhs";
     private static final String DIVREM_OPTION = ".target.divrem";
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
@@ -163,9 +165,9 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sCore700 = sEnumCommand;
            } else if (sID.indexOf(".option.warnings.syntax") > 0) {
                sSyntaxonly = sEnumCommand;
-           } else if (sID.indexOf(".option.target.fpuem") > 0) {
+           } else if (sID.indexOf(FPUEM_OPTION) > 0) {
                sFPUEM = sEnumCommand;
-           } else if (sID.indexOf(".option.target.fpuhs") > 0) {
+           } else if (sID.indexOf(FPUHS_OPTION) > 0) {
                sFPUHS = sEnumCommand;
            } else if (sID.indexOf(".option.target.mpyhs") > 0) {
                smpyhs = sEnumCommand;

@@ -94,8 +94,8 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem" />
-        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem" />
+        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpus_all" />
         <simple name="path" value="" />
       </element>
       <element>

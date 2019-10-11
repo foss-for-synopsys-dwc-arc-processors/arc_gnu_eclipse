@@ -305,57 +305,6 @@
                name="Other debugging flags"
                valueType="string">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs"
-               name="FPU Type (ARC HS)"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
-                  isDefault="true"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
-                  name="SP FPU (-mfpu=fpus)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_div"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
-                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_fma"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_fma"
-                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_all"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all"
-                  name="SP FPU with all instructions (-mfpu=fpus_all)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpud"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud"
-                  name="DP FPU (-mfpu=fpud)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpud_div"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_dis"
-                  name="DP FPU with DIV/SQRT instructions (-mfpu=fpud_div)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpud_fma"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_fma"
-                  name="DP FPU with fused instructions (-mfpu=fpud_fma)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpud_all"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_all"
-                  name="DP FPU with all instructions (-mfpu=fpud_all)">
-            </enumeratedOptionValue>
-         </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
@@ -2101,6 +2050,156 @@
          </option>
          <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem"
+               name="%option.fpu"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.none"
+                  isDefault="true"
+                  name="None (-mfpu=none)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpus"
+                  name="SP FPU (-mfpu=fpus)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_div"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpus_dis"
+                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_fma"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpus_fma"
+                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_all"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpus_all"
+                  name="SP FPU with all instructions (-mfpu=fpus_all)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpuda"
+                  name="FPU with DP assist instructions (-mfpu=fpuda)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda_div"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpuda_div"
+                  name="FPU with DP assist instructions and DIV/SQRT extensions (-mfpu=fpuda_div)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda_fma"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpuda_fma"
+                  name="FPU with DP assist instructions and fused extensions (-mfpu=fpuda_fma)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpuda_all"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpuda_all"
+                  name="FPU with DP assist instructions and all extensions (-mfpu=fpuda_all)">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs"
+               name="%option.fpu"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.none"
+                  isDefault="true"
+                  name="None (-mfpu=none)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpus"
+                  name="SP FPU (-mfpu=fpus)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_div"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpus_dis"
+                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_fma"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpus_fma"
+                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus_all"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpus_all"
+                  name="SP FPU with all instructions (-mfpu=fpus_all)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpud"
+                  name="DP FPU (-mfpu=fpud)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud_div"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpud_dis"
+                  name="DP FPU with DIV/SQRT instructions (-mfpu=fpud_div)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud_fma"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpud_fma"
+                  name="DP FPU with fused instructions (-mfpu=fpud_fma)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud_all"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpud_all"
+                  name="DP FPU with all instructions (-mfpu=fpud_all)">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <not>
+                  <or>
+                     <checkOption
+                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           value="true">
+                     </checkOption>
+                     <checkOption
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
+                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                     </checkOption>
+                  </or>
+               </not>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                command="-mdiv-rem"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem"
                name="%option.divrem"
@@ -2664,59 +2763,6 @@
                   name="wlh5">
             </enumeratedOptionValue>
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem"
-               name="FPU Type (ARC EM)"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.none"
-                  isDefault="true"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus"
-                  name="SP FPU (-mfpu=fpus)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_div"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_dis"
-                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_fma"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_fma"
-                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpus_all"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpus_all"
-                  name="SP FPU with all instructions (-mfpu=fpus_all)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpuda"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda"
-                  name="FPU with DP assist instructions (-mfpu=fpuda)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpuda_div"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_div"
-                  name="FPU with DP assist instructions and DIV/SQRT extensions (-mfpu=fpuda_div)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpuda_fma"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_fma"
-                  name="FPU with DP assist instructions and fused extensions (-mfpu=fpuda_fma)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mfpu=fpuda_all"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpuda_all"
-                  name="FPU with DP assist instructions and all extensions (-mfpu=fpuda_all)">
-            </enumeratedOptionValue>
-         </option>
         
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
@@ -2919,12 +2965,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.mpyem"
                name="Multiply instructions (ARC EM)"
                superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem">
-         </option>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.target.fpuem"
-               name="FPU Type (ARC EM)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuem">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
@@ -3206,15 +3246,6 @@
                   name="plus_qmacw">
             </enumeratedOptionValue>
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs"
-               isAbstract="false"
-               name="FPU Type (ARC HS)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
                name="Debugging">
@@ -3418,13 +3449,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.mpyhs"
                name="Multiply instructions (ARC HS)"
                superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs">
-         </option>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.fpuhs"
-               isAbstract="false"
-               name="FPU Type (ARC HS)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"

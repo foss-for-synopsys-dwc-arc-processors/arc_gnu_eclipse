@@ -53,8 +53,8 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.fpuhs" />
-        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.fpu.fpud_all" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs" />
+        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpud_all" />
         <simple name="path" value="" />
       </element>
     </complex-array>
