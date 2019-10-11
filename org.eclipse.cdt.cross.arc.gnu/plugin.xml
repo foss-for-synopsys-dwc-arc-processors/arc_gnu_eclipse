@@ -307,13 +307,6 @@
          </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mmul32x16"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216"
-            name="DSP 32x16 MPY (-mmul32x16)"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             command="-mmpy"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
             name="MPY instructions (-mmpy)"
@@ -2353,6 +2346,34 @@
          </option>
          <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpy600"
+               name="%option.mpy"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpy600.none"
+                  isDefault="true"
+                  name="none">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mmul32x16"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpy600.mul32x16"
+                  name="mul32x16">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mmul64"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpy600.mul64"
+                  name="mul64">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                command="-mdiv-rem"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem"
                name="%option.divrem"
@@ -4117,13 +4138,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
@@ -4290,13 +4304,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
         
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.mul3216"
-               name="DSP 32x16 MPY (-mmul32x16)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
       </toolChain>
       <configuration
             artifactExtension="elf"

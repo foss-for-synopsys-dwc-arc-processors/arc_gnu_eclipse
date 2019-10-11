@@ -43,6 +43,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String FPX_OPTION = ".target.fpx";
     private static final String MPYEM_OPTION = ".target.mpyem";
     private static final String MPYHS_OPTION = ".target.mpyhs";
+    private static final String MPY600_OPTION = ".target.mpy600";
     private static final String DIVREM_OPTION = ".target.divrem";
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
@@ -107,6 +108,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        String sFPUHS = null;
        String smpyhs= null;
        String smpyem= null;
+       String smpy600 = null;
    
        String sDebugLevel = null;
    
@@ -121,7 +123,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        String sll64 = null;
        String smfpi= null;
        String smno_dpfp_lrsr= null;
-       String smul3216= null;
        String smxy= null;
 
        String sTCF= null;
@@ -176,6 +177,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                smpyhs = sEnumCommand;
            } else if (sID.indexOf(MPYEM_OPTION) > 0) {
                smpyem = sEnumCommand;
+           } else if (sID.indexOf(MPY600_OPTION) > 0) {
+               smpy600 = sEnumCommand;
            } else if (sID.indexOf(FPX_OPTION) > 0) {
                smfpi = sEnumCommand;  //Customized for ARC GNU
            } else if (sID.indexOf(".option.debugging.level") > 0) {
@@ -216,8 +219,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sSwap = sCommand; // Customized for ARC GNU swap
                 } else if (sID.indexOf(EA_OPTION) > 0) {
                     sEa = sCommand; // Customized for ARC GNU ea
-                } else if (sID.indexOf(".option.target.mul3216") > 0) {
-                    smul3216 = sCommand;
                 } else if (sID.indexOf(XY_OPTION) > 0) {
                     smxy = sCommand;
                 } else if (sID.indexOf(ATOMIC_OPTION) > 0) {
@@ -254,6 +255,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                 oList_gcc_options.add(smpyhs);
             if (smpyem != null && !smpyem.isEmpty())
                 oList_gcc_options.add(smpyem);
+            if (smpy600 != null && !smpy600.isEmpty())
+                oList_gcc_options.add(smpy600);
             if (sDebugLevel != null && !sDebugLevel.isEmpty()) {
                 oList.add(sDebugLevel);
                 if (sDebugFormat != null && !sDebugFormat.isEmpty())
@@ -293,9 +296,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 
             if (sEa != null && !sEa.isEmpty()) {
                 oList_gcc_options.add(sEa);
-            }
-            if (smul3216 != null && !smul3216.isEmpty()) {
-                oList_gcc_options.add(smul3216);
             }
             if (smxy != null && !smxy.isEmpty()) {
                 oList_gcc_options.add(smxy);
