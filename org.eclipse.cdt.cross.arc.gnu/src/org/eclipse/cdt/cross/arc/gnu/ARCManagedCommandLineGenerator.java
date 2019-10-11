@@ -40,6 +40,7 @@ import com.arc.cdt.toolchain.tcf.TcfContent;
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
     private static final String FPUEM_OPTION = ".target.fpuem";
     private static final String FPUHS_OPTION = ".target.fpuhs";
+    private static final String FPX_OPTION = ".target.fpx";
     private static final String DIVREM_OPTION = ".target.divrem";
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
@@ -173,7 +174,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                smpyhs = sEnumCommand;
            } else if (sID.indexOf(".option.target.mpyem") > 0) {
                smpyem = sEnumCommand;
-           } else if (sID.indexOf(".option.target.fpi") > 0) {
+           } else if (sID.indexOf(FPX_OPTION) > 0) {
                smfpi = sEnumCommand;  //Customized for ARC GNU
            } else if (sID.indexOf(".option.debugging.level") > 0) {
                sDebugLevel = sEnumCommand;
