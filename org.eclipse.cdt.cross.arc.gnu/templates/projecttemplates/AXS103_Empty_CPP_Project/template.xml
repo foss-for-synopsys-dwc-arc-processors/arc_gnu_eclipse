@@ -48,8 +48,8 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs" />
-        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mpy.plus_qmacw" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs" />
+        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs.plus_qmacw" />
         <simple name="path" value="" />
       </element>
       <element>

@@ -41,6 +41,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String FPUEM_OPTION = ".target.fpuem";
     private static final String FPUHS_OPTION = ".target.fpuhs";
     private static final String FPX_OPTION = ".target.fpx";
+    private static final String MPYEM_OPTION = ".target.mpyem";
+    private static final String MPYHS_OPTION = ".target.mpyhs";
     private static final String DIVREM_OPTION = ".target.divrem";
     private static final String CODEDENSITY_OPTION = ".target.codedensity";
     private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
@@ -55,8 +57,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static ITool lastTool;
     private static String lastProject;
 
-    private static final String MMPY_OPTION_EM = "org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyem";
-    private static final String MMPY_OPTION_HS = "org.eclipse.cdt.cross.arc.gnu.linux.option.target.mpyhs";
+    private static final String MMPY_OPTION_EM = "com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem";
+    private static final String MMPY_OPTION_HS = "com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs";
     private static final String MMPY_OPTION_FOR_REPLACEMENT = "-mmpy-option=2";
 
     public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName,
@@ -170,9 +172,9 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sFPUEM = sEnumCommand;
            } else if (sID.indexOf(FPUHS_OPTION) > 0) {
                sFPUHS = sEnumCommand;
-           } else if (sID.indexOf(".option.target.mpyhs") > 0) {
+           } else if (sID.indexOf(MPYHS_OPTION) > 0) {
                smpyhs = sEnumCommand;
-           } else if (sID.indexOf(".option.target.mpyem") > 0) {
+           } else if (sID.indexOf(MPYEM_OPTION) > 0) {
                smpyem = sEnumCommand;
            } else if (sID.indexOf(FPX_OPTION) > 0) {
                smfpi = sEnumCommand;  //Customized for ARC GNU
