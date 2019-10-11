@@ -305,13 +305,6 @@
                name="Other debugging flags"
                valueType="string">
          </option>
-      <option
-             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-             command="-mno-dpfp-lrsr"
-             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr"
-             name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-             valueType="boolean">
-       </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.target.fpuhs"
@@ -2458,6 +2451,26 @@
                </or>
             </enablement>
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mno-dpfp-lrsr"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.dpfplrsr"
+               name="%option.dpfplrsr"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+         </option>
       </toolChain>
 
       <toolChain
@@ -3701,13 +3714,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
                value="true">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
@@ -3903,13 +3909,6 @@
                name="MPY instructions (-mmpy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mpy"
                value="true">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
       </toolChain>
       <toolChain
@@ -4111,13 +4110,6 @@
                name="DSP 32x16 MPY (-mmul32x16)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
@@ -4314,13 +4306,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.mul3216"
                name="DSP 32x16 MPY (-mmul32x16)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.mno-dpfp-lrsr"
-               name="Forbid LR and SR to use FPX registers (-mno-dpfp-lrsr)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mno-dpfp-lrsr">
          </option>
       </toolChain>
       <configuration

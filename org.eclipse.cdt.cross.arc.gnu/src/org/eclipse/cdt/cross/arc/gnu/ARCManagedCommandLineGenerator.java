@@ -47,6 +47,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String ATOMIC_OPTION = ".target.atomic";
     private static final String EA_OPTION = ".target.ea";
     private static final String XY_OPTION = ".target.xy";
+    private static final String NO_DPFP_LRSR_OPTION = ".target.dpfplrsr";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -218,7 +219,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     satomic = sCommand;
                 } else if (sID.indexOf(LL64_OPTION) > 0) {
                     sll64 = sCommand;
-                } else if (sID.indexOf(".option.target.mno-dpfp-lrsr") > 0) {
+                } else if (sID.indexOf(NO_DPFP_LRSR_OPTION) > 0) {
                     smno_dpfp_lrsr = sCommand;
                 } else if (sID.indexOf(".option.debugging.gprof") > 0) {
                     sDebugGProf = sCommand;
