@@ -23,8 +23,7 @@ public class OptionEnablementManager extends AbstractOptionEnablementManager {
         PREFIX + ".tables",
         PREFIX + ".symbols",
         PREFIX + ".functions",
-        "org.eclipse.cdt.cross.arc.gnu.windows.option.target.ea", // yunlu add for em disable 
-        "org.eclipse.cdt.cross.arc.gnu.linux.option.target.ea", // yunlu add for em disable 
+        "com.synopsys.arc.gnu.elf.toolchain.base.target.ea",
     };
     
     private static final String ANSI_MODE = "arc.compiler.options.ansi";

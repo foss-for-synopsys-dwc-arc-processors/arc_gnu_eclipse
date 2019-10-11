@@ -407,13 +407,6 @@
       </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            command="-mEA"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea"
-            name="Extended Arithmetic Instruction (-mEA)"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             command="-mmul32x16"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216"
             name="DSP 32x16 MPY (-mmul32x16)"
@@ -2437,6 +2430,20 @@
                </checkBuildProperty>
             </enablement>
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               command="-mea"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.ea"
+               name="%option.ea"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+               </checkBuildProperty>
+            </enablement>
+         </option>
       </toolChain>
 
       <toolChain
@@ -3675,13 +3682,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.xy"
                name="DSP XY memory (-mxy)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.xy">
@@ -3889,13 +3889,6 @@
             </enumeratedOptionValue>
          </option>
 
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
@@ -4114,13 +4107,6 @@
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.mul3216"
                name="DSP 32x16 MPY (-mmul32x16)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.mul3216">
@@ -4329,13 +4315,6 @@
             </enumeratedOptionValue>
          </option>
         
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.ea"
-               name="Extended Arithmetic Instruction (-mEA)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.ea">
-         </option>
          <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"

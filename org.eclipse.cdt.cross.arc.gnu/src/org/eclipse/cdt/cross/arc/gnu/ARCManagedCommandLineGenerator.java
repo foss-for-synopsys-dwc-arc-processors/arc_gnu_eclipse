@@ -45,6 +45,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String SWAP_OPTION = ".target.swap";
     private static final String LL64_OPTION = ".target.ll64";
     private static final String ATOMIC_OPTION = ".target.atomic";
+    private static final String EA_OPTION = ".target.ea";
 
     private static ITool lastTool;
     private static String lastProject;
@@ -206,7 +207,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sMPY = sCommand;
                 } else if (sID.indexOf(SWAP_OPTION) > 0) {
                     sSwap = sCommand; // Customized for ARC GNU swap
-                } else if (sID.indexOf(".option.target.ea") > 0) {
+                } else if (sID.indexOf(EA_OPTION) > 0) {
                     sEa = sCommand; // Customized for ARC GNU ea
                 } else if (sID.indexOf(".option.target.mul3216") > 0) {
                     smul3216 = sCommand;
