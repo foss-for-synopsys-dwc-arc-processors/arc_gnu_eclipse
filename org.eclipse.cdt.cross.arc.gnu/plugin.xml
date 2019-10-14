@@ -144,117 +144,6 @@
             </enumeratedOptionValue>
          </option>
          <option
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level"
-               name="Debug Level"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none"
-                  isDefault="false"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-g1"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.minimal"
-                  name="Minimal (-g1)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-g"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.default"
-                  isDefault="true"
-                  name="Default (-g)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-g3"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max"
-                  isDefault="false"
-                  name="Maximum (-g3)">
-            </enumeratedOptionValue>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-         </option>
-         <option
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format"
-               name="Debug Format"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-gdwarf-2"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2"
-                  name="dwarf-2">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gdwarf-4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf4"
-                  name="dwarf-4">
-            </enumeratedOptionValue>            
-            <enumeratedOptionValue
-                  command="-gstabs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabs"
-                  name="stabs">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gstabs+"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabsplus"
-                  name="stabs+">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-ggdb"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.gdb"
-                  name="gdb">
-            </enumeratedOptionValue>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.default">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-         </option>
-         <option
-               command="-p"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof"
-               name="Generate prof information (-p)"
-               valueType="boolean">
-         </option>
-         <option
-               command="-pg"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof"
-               name="Generate gprof information (-pg)"
-               valueType="boolean">
-         </option>
-         <option
                command="-Xlinker --cref"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.other.cref"
@@ -280,11 +169,6 @@
                defaultValue="-adhlns=&quot;$@.lst&quot;"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename"
                name="Assembler Listing"
-               valueType="string">
-         </option>
-         <option
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other"
-               name="Other debugging flags"
                valueType="string">
          </option>
       <option
@@ -675,6 +559,131 @@
                valueType="string">
          </option>
          <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging"
+               name="%option.debugging">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging.level"
+               name="Debug Level"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none"
+                  isDefault="false"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g1"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.minimal"
+                  name="Minimal (-g1)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.default"
+                  isDefault="true"
+                  name="Default (-g)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g3"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max"
+                  isDefault="false"
+                  name="Maximum (-g3)">
+            </enumeratedOptionValue>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging.format"
+               name="Debug Format"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-gdwarf-2"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2"
+                  name="dwarf-2">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-gdwarf-4"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf4"
+                  name="dwarf-4">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-gstabs"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabs"
+                  name="stabs">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-gstabs+"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabsplus"
+                  name="stabs+">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-ggdb"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.gdb"
+                  name="gdb">
+            </enumeratedOptionValue>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.default">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging.other"
+               name="Other debugging flags"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging"
+               command="-p"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging.prof"
+               name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging"
+               command="-pg"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging.gprof"
+               name="Generate gprof information (-pg)"
+               valueType="boolean">
+         </option>
+         <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.c.compiler.category.warnings"
                name="Warnings"
                owner="org.eclipse.cdt.cross.arc.gnu.c.compiler">
@@ -960,6 +969,131 @@
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.flags"
                name="Other optimization flags"
                valueType="string">
+         </option>
+         <optionCategory
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
+               name="%option.debugging">
+         </optionCategory>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.level"
+               name="Debug Level"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none"
+                  isDefault="false"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g1"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.minimal"
+                  name="Minimal (-g1)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.default"
+                  isDefault="true"
+                  name="Default (-g)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g3"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max"
+                  isDefault="false"
+                  name="Maximum (-g3)">
+            </enumeratedOptionValue>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.format"
+               name="Debug Format"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-gdwarf-2"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2"
+                  name="dwarf-2">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-gdwarf-4"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf4"
+                  name="dwarf-4">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-gstabs"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabs"
+                  name="stabs">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-gstabs+"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabsplus"
+                  name="stabs+">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-ggdb"
+                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.gdb"
+                  name="gdb">
+            </enumeratedOptionValue>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.default">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.other"
+               name="Other debugging flags"
+               valueType="string">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
+               command="-p"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.prof"
+               name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
+               command="-pg"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.gprof"
+               name="Generate gprof information (-pg)"
+               valueType="boolean">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
@@ -3034,49 +3168,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-        
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnue.em.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
@@ -3184,49 +3275,6 @@
                </and>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
-         </option>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
                isAbstract="false"
@@ -3352,48 +3400,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
@@ -3501,49 +3507,6 @@
                </and>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
@@ -3649,48 +3612,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
@@ -3796,49 +3717,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
@@ -3944,48 +3822,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
@@ -4093,49 +3929,6 @@
                </and>
             </enablement>
          </tool>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
-               name="Debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.debugging.level"
-               name="Debug level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.debugging.format"
-               name="Debug format"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format">
-            <enablement
-                  type="UI_ENABLEMENT|CMD_USAGE">
-               <not>
-                  <checkOption
-                        optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.debugging.level"
-                        value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-                  </checkOption>
-               </not>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.debugging.other"
-               name="Other debugging flags"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.other">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.debugging.prof"
-               name="Generate prof information (-p)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.debugging.gprof"
-               name="Generate gprof information (-pg)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
-         </option>
       </toolChain>
       <configuration
             artifactExtension="elf"
