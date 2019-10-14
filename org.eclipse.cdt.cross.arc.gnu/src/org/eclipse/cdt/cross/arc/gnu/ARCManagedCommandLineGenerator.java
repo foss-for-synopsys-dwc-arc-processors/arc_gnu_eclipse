@@ -98,7 +98,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        String sCodedensity = null;    //Customized for ARC GNU codedensity
        String sDivide = null;         //Customized for ARC GNU divide
        String sNormalize = null;      //Customized for ARC GNU normalize
-       String sMPY=null;
        String sSwap = null;           //Customized for ARC GNU swap
        String sEa = null;           //Customized for ARC GNU ea
    
@@ -213,8 +212,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     sDivide = sCommand; // Customized for ARC GNU divide
                 } else if (sID.indexOf(NORMALIZE_OPTION) > 0) {
                     sNormalize = sCommand; // Customized for ARC GNU normalize
-                } else if (sID.indexOf(".option.target.mpy") > 0) {
-                    sMPY = sCommand;
                 } else if (sID.indexOf(SWAP_OPTION) > 0) {
                     sSwap = sCommand; // Customized for ARC GNU swap
                 } else if (sID.indexOf(EA_OPTION) > 0) {
@@ -281,9 +278,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
             if (sNormalize != null && !sNormalize.isEmpty()) {
                 oList_gcc_options.add(sNormalize); // Customized for ARC GNU normalize
             }
-            if (sMPY != null && !sMPY.isEmpty()) {
-                oList_gcc_options.add(sMPY); // Customized for ARC GNU mpy
-            }
             if (sSwap != null && !sSwap.isEmpty()) {
                 oList_gcc_options.add(sSwap); // Customized for ARC GNU swap
             }
@@ -311,12 +305,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
             }
             if (sProcessor != null) {
                 if (ArcCpu.fromCommand(sProcessor).getToolChain().equals(ArcCpuFamily.ARC700)) {
-                    if (oList_gcc_options.indexOf(sMPY) < 0) {
-                        oList_gcc_options.add("-mno-mpy");
-                    } else {
-                        int i = oList_gcc_options.indexOf(sMPY);
-                        oList_gcc_options.remove(i);
-                    }
                     if (oList_gcc_options.indexOf(sNormalize) < 0) {
                         oList_gcc_options.add("-mno-norm");
                     } else {
