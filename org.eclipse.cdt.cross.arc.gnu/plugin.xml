@@ -307,40 +307,6 @@
          </option>
       <option
             applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            defaultValue="false"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
-            name="TCF"
-            resourceFilter="all"
-            style="radio"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            browseFilterExtensions="*.tcf"
-            browseType="file"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
-            isAbstract="false"
-            name="TCF path"
-            resourceFilter="all"
-            valueHandler="com.arc.cdt.toolchain.tcf.TcfValueHandler"
-            valueType="string">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            defaultValue="false"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
-            name="Use memory map from TCF"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            defaultValue="false"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
-            name="Include C defines from TCF"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem"
             name="Use GCC specs file (ARC EM)"
             valueType="enumerated">
@@ -1985,6 +1951,110 @@
                name="%option.target">
          </optionCategory>
          <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               defaultValue="false"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
+               name="%option.use_tcf"
+               style="radio"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+         </option>
+         <option
+               browseFilterExtensions="*.tcf"
+               browseType="file"
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_path"
+               name="%option.tcf_path"
+               valueHandler="com.arc.cdt.toolchain.tcf.TcfValueHandler"
+               valueType="string">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <checkOption
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
+                     value="true">
+               </checkOption>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               defaultValue="false"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_map"
+               name="%option.tcf_map"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <checkOption
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
+                     value="true">
+               </checkOption>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               defaultValue="false"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_cinclude"
+               name="%option.tcf_cinclude"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <or>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                  </checkBuildProperty>
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                  </checkBuildProperty>
+               </or>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <checkOption
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
+                     value="true">
+               </checkOption>
+            </enablement>
+         </option>
+         <option
                applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
                commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
@@ -2054,7 +2124,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2131,7 +2201,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2249,7 +2319,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2314,7 +2384,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2388,7 +2458,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2437,7 +2507,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2485,7 +2555,7 @@
                   <or>
                      <checkOption
                            isRegex="false"
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2548,7 +2618,7 @@
                   <or>
                      <checkOption
                            isRegex="false"
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2600,7 +2670,7 @@
                   <or>
                      <checkOption
                            isRegex="false"
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2649,7 +2719,7 @@
                <not>
                   <or>
                      <checkOption
-                           optionId="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                            value="true">
                      </checkOption>
                      <checkOption
@@ -2938,38 +3008,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.tcf"
-               name="TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.filefortcf"
-               name="TCF path"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
-               valueType="string">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf"
-               name=" Use memory map from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.includecdefines"
-               name="Include C defines from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
-               valueType="boolean">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
@@ -3155,39 +3193,6 @@
                </and>
             </enablement>
          </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.tcf"
-               name="TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               browseType="file"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.filefortcf"
-               name="TCF path"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
-               valueType="string">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.maptcf"
-               name=" Use memory map from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.includecdefines"
-               name="Include C defines from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
-               valueType="boolean">
-         </option>
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
@@ -3380,39 +3385,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.tcf"
-               name="TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               browseType="file"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.filefortcf"
-               name="TCF path"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
-               valueType="string">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.maptcf"
-               name=" Use memory map from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.includecdefines"
-               name="Include C defines from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
-               valueType="boolean">
-         </option>
          
       </toolChain>
       <toolChain
@@ -3579,39 +3551,6 @@
                name="Print Size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.tcf"
-               name="TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.tcf"
-               valueType="boolean">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               browseType="file"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.filefortcf"
-               name="TCF path"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.filefortcf"
-               valueType="string">
-         </option>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.maptcf"
-               name=" Use memory map from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.maptcf"
-               valueType="boolean">
-          </option>
-          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.includecdefines"
-               name="Include C defines from TCF"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.target.includecdefines"
-               valueType="boolean">
-          </option>
           
       </toolChain>
       <toolChain

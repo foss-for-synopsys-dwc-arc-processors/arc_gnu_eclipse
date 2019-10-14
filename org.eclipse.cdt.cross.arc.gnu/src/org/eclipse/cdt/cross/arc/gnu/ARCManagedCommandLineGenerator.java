@@ -34,10 +34,14 @@ import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.ArcCpuFamily;
-import com.arc.cdt.toolchain.arc.ArcOptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
+    public static final String USE_TCF_OPTION = ".target.use_tcf";
+    public static final String TCF_PATH_OPTION = ".target.tcf_path";
+    public static final String TCF_MAP_OPTION = ".target.tcf_map";
+    public static final String TCF_CINCLUDE_OPTION = ".target.tcf_cinclude";
+
     private static final String FPUEM_OPTION = ".target.fpuem";
     private static final String FPUHS_OPTION = ".target.fpuhs";
     private static final String FPX_OPTION = ".target.fpx";
@@ -186,7 +190,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                sDebugFormat = sEnumCommand;
            } else if (sID.indexOf(".option.debugging.other") > 0) {
                sDebugOther = sVal;
-           } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_FILE_OPTION_ID)) {
+           } else if (sID.indexOf(TCF_PATH_OPTION) > 0) {
                sTCF = sVal;
            }
          }
@@ -226,11 +230,11 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     smno_dpfp_lrsr = sCommand;
                 } else if (sID.indexOf(".option.debugging.gprof") > 0) {
                     sDebugGProf = sCommand;
-                } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_OPTION_ID)) {
+                } else if (sID.indexOf(USE_TCF_OPTION) > 0) {
                     tcf_selected = true;
-                } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_MEMORY_MAP)) {
+                } else if (sID.indexOf(TCF_MAP_OPTION) > 0) {
                     tcf_map_selected = true;
-                } else if (tcfOptionIdMatch(sID, ArcOptionEnablementManager.TCF_INCLUDE_C_DEFINES)) {
+                } else if (sID.indexOf(TCF_CINCLUDE_OPTION) > 0) {
                     tcf_include_c_defines = true;
                 }
              }
@@ -386,7 +390,11 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                         }
                     }
 
-                    if (oTool.getBaseId().contains("compiler") || oTool.getBaseId().contains("assembler")) {
+                    // Apply this option to compiler and asm invocations. The way how this code
+                    // identifies if tools is gcc or gas is very bad, though.
+                    if (oTool.getBaseId().contains("compiler") || oTool.getBaseId().contains("assembler")
+                        || oTool.getBaseId().contains("gcc") || oTool.getBaseId().contains("gxx")
+                        || oTool.getBaseId().contains("asm")) {
                         if (tcf_include_c_defines != null && tcf_include_c_defines) {
                         	String filePath = projectBuildPath + File.separator + fileContent.getCDefinesFileName();
                             try {
@@ -418,10 +426,6 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                 (String[]) oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName,
                 asInputResources, sCommandLinePattern);
      }
-
-    private boolean tcfOptionIdMatch(String id, String option) {
-        return id.indexOf(".option.target." + option) > 0;
-    }
 
     private String getProjectBuildPath(IToolChain toolChain) {
         // Contains eclipse path variable, needs resolving

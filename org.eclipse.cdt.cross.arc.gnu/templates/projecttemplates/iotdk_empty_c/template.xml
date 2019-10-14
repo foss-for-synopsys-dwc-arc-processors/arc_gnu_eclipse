@@ -51,7 +51,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.filefortcf" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_path" />
         <simple name="value" value="${workspace_loc:/$(projectName)/arcem9d.tcf}" />
         <simple name="path" value="" />
       </element>
@@ -100,12 +100,17 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.tcf" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.option.target.maptcf" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_map" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_cinclude" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

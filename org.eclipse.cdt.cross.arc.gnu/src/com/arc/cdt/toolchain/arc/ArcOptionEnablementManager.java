@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator;
 import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
@@ -36,10 +37,10 @@ import com.arc.cdt.toolchain.tcf.TcfContent;
 
 public class ArcOptionEnablementManager extends OptionEnablementManager {
 
-    public static final String TCF_OPTION_ID = "tcf";
-    public static final String TCF_FILE_OPTION_ID = "filefortcf";
-    public static final String TCF_MEMORY_MAP = "maptcf";
-    public static final String TCF_INCLUDE_C_DEFINES = "includecdefines";
+    public static final String TCF_OPTION_ID = "use_tcf";
+    public static final String TCF_FILE_OPTION_ID = "tcf_path";
+    public static final String TCF_MEMORY_MAP = "tcf_map";
+    public static final String TCF_INCLUDE_C_DEFINES = "tcf_cinclude";
 
     private static final String[] TCF_RELATED_OPTIONS = { getTCF(TCF_FILE_OPTION_ID), 
             getTCF(TCF_MEMORY_MAP), getTCF(TCF_INCLUDE_C_DEFINES) };
@@ -66,7 +67,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     }
 
     private static String getTCF(String string) {
-        String target = "org.eclipse.cdt.cross.arc.gnu.base.option.target.";
+        String target = "com.synopsys.arc.gnu.elf.toolchain.base.target.";
         return target + string;
     }
 
@@ -343,6 +344,11 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
          * @param optionId
          */
         public void onOptionValueChanged(IOptionEnablementManager mgr, String optionId) {
+            // Ensure that target options is not null.
+            if (targetOptions == null) {
+                readTargetOptions();
+            }
+
             // `contains()` because sometimes this options has numeric suffix in the end.
             if (optionId.contains("option.target.processor")) {
                 mcpuFlag = null;
@@ -374,7 +380,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                 int showStyle = useTcf ? StatusManager.LOG : StatusManager.BLOCK;
                 checkOptionIsCorrect(optionId, !useTcf, showStyle);
             }
-            if (optionId.contains("option.target.tcf")) {
+            if (optionId.contains(ARCManagedCommandLineGenerator.USE_TCF_OPTION)) {
                 useTcf = (Boolean) mgr.getValue(optionId);
                 if (useTcf) {
                     setEnabled(targetOptions, false);
@@ -419,7 +425,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     }
                 }
             }
-            if (optionId.contains("option.target.filefortcf")) {
+            if (optionId.contains(ARCManagedCommandLineGenerator.TCF_PATH_OPTION)) {
                 tcfPath = (String)mgr.getValue(optionId);
                 if (useTcf) {
                     TcfContent tcfContent = null;
@@ -432,7 +438,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     }
                 }
             }
-            if (optionId.contains("option.target.maptcf")) {
+            if (optionId.contains(ARCManagedCommandLineGenerator.TCF_MAP_OPTION)) {
                 tcfLinkSelected = (Boolean) mgr.getValue(optionId);
                 if (tcfLinkSelected && useTcf) {
                     for (String option : LINKER_SCRIPT_IDS) {
