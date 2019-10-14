@@ -177,7 +177,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
          * disable dropdown lists.
          */
         for (String setOptionId : options) {
-            if (setOptionId.contains("target.processor")) {
+            if (setOptionId.contains(ARCManagedCommandLineGenerator.CPU_OPTION)) {
                 continue;
             }
             IOption setOption = (IOption)(getOption(setOptionId)[1]);
@@ -350,7 +350,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
             }
 
             // `contains()` because sometimes this options has numeric suffix in the end.
-            if (optionId.contains("option.target.processor")) {
+            if (optionId.contains(ARCManagedCommandLineGenerator.CPU_OPTION)) {
                 mcpuFlag = null;
                 try {
                     Object[] optLookup = getOption(optionId);

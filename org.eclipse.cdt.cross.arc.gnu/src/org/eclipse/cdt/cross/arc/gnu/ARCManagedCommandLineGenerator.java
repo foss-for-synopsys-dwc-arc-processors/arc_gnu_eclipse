@@ -21,6 +21,7 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 import org.eclipse.cdt.managedbuilder.core.BuildException;
+import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IManagedCommandLineInfo;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
@@ -41,6 +42,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     public static final String TCF_PATH_OPTION = ".target.tcf_path";
     public static final String TCF_MAP_OPTION = ".target.tcf_map";
     public static final String TCF_CINCLUDE_OPTION = ".target.tcf_cinclude";
+    public static final String CPU_OPTION = ".target.cpu";
 
     private static final String FPUEM_OPTION = ".target.fpuem";
     private static final String FPUHS_OPTION = ".target.fpuhs";
@@ -92,6 +94,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
    
        if ((oParent != null) && ((oParent instanceof IToolChain))) {
        IToolChain oToolChain = (IToolChain)oParent;
+       IBuildObject configuration = oToolChain.getParent();
    
        IOption[] aoOptions = oToolChain.getOptions();
    
@@ -140,6 +143,14 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
        {
          IOption oOption = aoOptions[i];
          String sID = oOption.getId();
+
+         // Should be checking if option is used in command line, but this filter is not
+         // really correct right now in custom ARC implementation, so using visibility.
+         var applicability = oOption.getApplicabilityCalculator();
+         if (applicability != null
+             && !applicability.isOptionVisible(configuration, oTool, oOption) ) {
+             continue;
+         }
    
          Object oValue = oOption.getValue();
    
@@ -164,9 +175,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                //yunluz String sEnumCommand;
              sEnumCommand = null;
              }
-   
 
-           if (sID.indexOf(".option.target.processor") > 0) {
+           if (sID.indexOf(CPU_OPTION) > 0) {
                sProcessor = sEnumCommand;
            } else if (sID.indexOf(".option.target.core700") > 0) { //Customized for ARC GNU core 700
                sCore700 = sEnumCommand;

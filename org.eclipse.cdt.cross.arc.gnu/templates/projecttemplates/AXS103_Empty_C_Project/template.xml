@@ -43,8 +43,8 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor" />
-        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs" />
+        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38" />
         <simple name="path" value="" />
       </element>
       <element>

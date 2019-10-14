@@ -21,8 +21,8 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor" />
-        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem" />
+        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips" />
         <simple name="path" value="" />
       </element>
       <element>
@@ -61,7 +61,6 @@
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
-      ">
       <element>
         <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter" />
         <simple name="value" value="true" />
@@ -77,7 +76,6 @@
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
-      name="resourcePaths">
       <element>
         <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.swap" />
         <simple name="value" value="true" />

@@ -2055,12 +2055,139 @@
             </enablement>
          </option>
          <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               commandGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-               name="Processor (-mcpu)"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+               name="%option.cpu"
                valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mcpu=arcem"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.arcem"
+                  name="-mcpu=arcem">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em"
+                  isDefault="true"
+                  name="-mcpu=em">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4"
+                  name="-mcpu=em4">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_dmips"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips"
+                  name="-mcpu=em4_dmips">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_fpus"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus"
+                  name="-mcpu=em4_fpus">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=em4_fpuda"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda"
+                  name="-mcpu=em4_fpuda">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <checkOption
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
+                     value="false">
+               </checkOption>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+               name="%option.cpu"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mcpu=archs"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.archs"
+                  name="-mcpu=archs">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs"
+                  isDefault="true"
+                  name="-mcpu=hs">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs34"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs34"
+                  name="-mcpu=hs34">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs38"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38"
+                  name="-mcpu=hs38">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs38_linux"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38_linux"
+                  name="-mcpu=hs38_linux">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  type="UI_ENABLEMENT">
+               <checkOption
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
+                     value="false">
+               </checkOption>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu700"
+               name="%option.cpu"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mcpu=arc700"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu700.arc700"
+                  isDefault="true"
+                  name="-mcpu=arc700">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu600"
+               name="%option.cpu"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mcpu=arc600"
+                  id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu600.arc600"
+                  isDefault="true"
+                  name="-mcpu=arc600">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+               </checkBuildProperty>
+            </enablement>
          </option>
          <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.target"
@@ -2128,12 +2255,12 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                   </or>
                </not>
@@ -2205,8 +2332,8 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38_linux">
                      </checkOption>
                   </or>
                </not>
@@ -2323,20 +2450,20 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.arcem">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                   </or>
                </not>
@@ -2388,20 +2515,20 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs34">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs34">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.archs">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38_linux">
                      </checkOption>
                   </or>
                </not>
@@ -2462,28 +2589,28 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.archs">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38_linux">
                      </checkOption>
                   </or>
                </not>
@@ -2511,24 +2638,24 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.arcem">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                   </or>
                </not>
@@ -2560,23 +2687,23 @@
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.arcem">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                   </or>
                </not>
@@ -2623,18 +2750,18 @@
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                   </or>
                </not>
@@ -2675,18 +2802,18 @@
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_dmips">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus">
                      </checkOption>
                      <checkOption
                            isRegex="false"
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda">
                      </checkOption>
                   </or>
                </not>
@@ -2723,16 +2850,16 @@
                            value="true">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.archs">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38">
                      </checkOption>
                      <checkOption
-                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu"
-                           value="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux">
+                           optionId="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
+                           value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38_linux">
                      </checkOption>
                   </or>
                </not>
@@ -2913,48 +3040,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor"
-               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
-            <enumeratedOptionValue
-                  command="-mcpu=arcem"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arcem"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=arcem)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em"
-                  isDefault="true"
-                  name="ARC EM (-mcpu=em)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4_dmips"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_dmips"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4_dmips)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4_fpus"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpus"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4_fpus)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=em4_fpuda"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.em4_fpuda"
-                  isDefault="false"
-                  name="ARC EM (-mcpu=em4_fpuda)">
-            </enumeratedOptionValue>
-         </option>
         
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
@@ -3115,11 +3200,6 @@
                </and>
             </enablement>
          </tool>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.target.processor"
-               superClass="org.eclipse.cdt.cross.arc.gnu.linux.option.target.processor">
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.debugging"
                name="Debugging">
@@ -3298,41 +3378,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor"
-               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
-            <enumeratedOptionValue
-                  command="-mcpu=archs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.archs"
-                  isDefault="false"
-                  name="ARC HS (-mcpu=archs)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=hs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs"
-                  isDefault="true"
-                  name="ARC HS (-mcpu=hs)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=hs34"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs34"
-                  isDefault="false"
-                  name="ARC HS (-mcpu=hs34)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=hs38"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38"
-                  isDefault="false"
-                  name="ARC HS (-mcpu=hs38)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-mcpu=hs38_linux"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.hs38_linux"
-                  isDefault="false"
-                  name="ARC HS (-mcpu=hs38_linux)">
-            </enumeratedOptionValue>
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.debugging"
                name="Debugging">
@@ -3493,11 +3538,6 @@
                </and>
             </enablement>
          </tool>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.target.processor"
-               superClass="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.processor">
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.debugging"
                name="Debugging">
@@ -3657,18 +3697,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.processor"
-               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
-            <enumeratedOptionValue
-                  command="-mcpu=arc700"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc700"
-                  isDefault="true"
-                  name="ARC 700 (-mcpu=arc700)">
-            </enumeratedOptionValue>
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
                name="Debugging">
@@ -3826,11 +3854,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.target.processor"
-               superClass="org.eclipse.cdt.cross.arc.gnu.700.linux.option.target.processor">
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.debugging"
                name="Debugging">
@@ -3989,18 +4012,6 @@
                </checkBuildProperty>
             </enablement>
          </tool>
-         <option
-               applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.processor"
-               superClass="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu">
-            <enumeratedOptionValue
-                  command="-mcpu=arc600"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.mcpu.arc600"
-                  isDefault="true"
-                  name="ARC 600 (-mcpu=arc600)">
-            </enumeratedOptionValue>
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
                name="Debugging">
@@ -4160,11 +4171,6 @@
                </and>
             </enablement>
          </tool>
-         <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.target.processor"
-               superClass="org.eclipse.cdt.cross.arc.gnu.600.linux.option.target.processor">
-         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.debugging"
                name="Debugging">
