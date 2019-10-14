@@ -241,24 +241,6 @@
             </enablement>
          </option>
          <option
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize"
-               name="Print Size"
-               value="true"
-               valueHandler="org.eclipse.cdt.cross.arc.gnu.ARCAdditionalToolsManagedOptionValueHandler"
-               valueType="boolean">
-            <supportedProperties>
-               <property
-                     id="org.eclipse.cdt.build.core.buildType">
-                  <value
-                        id="org.eclipse.cdt.build.core.buildType.debug">
-                  </value>
-                  <value
-                        id="org.eclipse.cdt.build.core.buildType.release">
-                  </value>
-               </property>
-            </supportedProperties>
-         </option>
-         <option
                command="-p"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.prof"
@@ -2934,6 +2916,18 @@
                </or>
             </enablement>
          </option>
+         <optionCategory
+               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               name="%option.extratools">
+         </optionCategory>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               defaultValue="true"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
+               name="%option.printsize"
+               valueHandler="org.eclipse.cdt.cross.arc.gnu.ARCAdditionalToolsManagedOptionValueHandler"
+               valueType="boolean">
+         </option>
       </toolChain>
 
       <toolChain
@@ -3031,7 +3025,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -3082,16 +3076,6 @@
                category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.debugging"
                id="org.eclipse.cdt.cross.arc.gnu.em.linux.option.debugging.gprof"
                name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
       </toolChain>
       <toolChain
@@ -3189,7 +3173,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <and>
@@ -3243,16 +3227,6 @@
                name="Generate gprof information (-pg)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
          </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
          <tool
                id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
                isAbstract="false"
@@ -3262,7 +3236,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <and>
@@ -3369,7 +3343,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -3420,17 +3394,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.debugging.gprof"
                name="Generate gprof information (-pg)">
          </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
-         
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
@@ -3527,7 +3490,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <and>
@@ -3581,17 +3544,6 @@
                name="Generate gprof information (-pg)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
          </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
-          
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
@@ -3688,7 +3640,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -3738,16 +3690,6 @@
                category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.debugging"
                id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.debugging.gprof"
                name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
       </toolChain>
       <toolChain
@@ -3845,7 +3787,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -3896,16 +3838,6 @@
                id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.debugging.gprof"
                name="Generate gprof information (-pg)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
       </toolChain>
       <toolChain
@@ -4003,7 +3935,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.600.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -4053,16 +3985,6 @@
                category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.debugging"
                id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.debugging.gprof"
                name="Generate gprof information (-pg)">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
          </option>
       </toolChain>
       <toolChain
@@ -4160,7 +4082,7 @@
                   type="ALL">
                <checkOption
                      holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.addtools.printsize"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
                <and>
@@ -4214,17 +4136,6 @@
                name="Generate gprof information (-pg)"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.gprof">
          </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.addtools"
-               name="Additional Tools">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.category.addtools"
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.option.addtools.printsize"
-               name="Print Size"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.addtools.printsize">
-         </option>
-        
       </toolChain>
       <configuration
             artifactExtension="elf"
