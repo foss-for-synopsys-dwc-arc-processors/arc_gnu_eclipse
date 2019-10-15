@@ -15,9 +15,9 @@
 
   <properties>
     <!-- Path to Eclipse p2 repository -->
-    <eclipse.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/2018-12/</eclipse.repository>
+    <eclipse.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/2019-09/</eclipse.repository>
     <!-- Path to CDT p2 repository -->
-    <cdt.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/cdt/releases/9.6/</cdt.repository>
+    <cdt.repository>http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/cdt/releases/9.9/</cdt.repository>
     <tycho-version>1.3.0</tycho-version>
   </properties>
 
