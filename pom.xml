@@ -24,15 +24,16 @@
   <repositories>
     <repository>
       <id>cdt</id>
-      <url>${cdt.repository}</url>
+      <url>https://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/cdt/releases/9.9/</url>
       <layout>p2</layout>
     </repository>
     <repository>
-      <id>eclipse-photon</id>
-      <url>${eclipse.repository}</url>
+      <id>eclipse</id>
+      <url>https://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/2019-09/</url>
       <layout>p2</layout>
     </repository>
   </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>tycho-snapshots</id>
