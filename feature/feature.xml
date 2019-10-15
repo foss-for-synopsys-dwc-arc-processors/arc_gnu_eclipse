@@ -25,15 +25,14 @@ applications for the ARC series of processors.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.cdt.core" version="5.0.2" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.cdt.managedbuilder.core"/>
-      <import plugin="org.eclipse.cdt.managedbuilder.gnu.ui" version="5.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface"/>
-      <import plugin="org.eclipse.ui.console" version="3.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables" version="3.4.600" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.114.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.cdt.core" version="6.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.cdt.managedbuilder.core" version="8.7.200" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.cdt.managedbuilder.gnu.ui" version="8.3.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.13.500" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.16.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.console" version="3.8.600" match="greaterOrEqual"/>
    </requires>
 
    <plugin
