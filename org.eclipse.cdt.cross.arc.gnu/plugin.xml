@@ -172,9 +172,8 @@
                valueType="string">
          </option>
       <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem"
-            name="Use GCC specs file (ARC EM)"
+            name="Use GCC specs file"
             valueType="enumerated">
          <enumeratedOptionValue
                command="--specs=nsim.specs"
@@ -201,9 +200,15 @@
                id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.none"
                name="None">
          </enumeratedOptionValue>
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="com.synopsys.arc.gnu.elf.properties.cpu"
+                  value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+            </checkBuildProperty>
+         </enablement>
       </option>
       <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
             id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs"
             name="Use GCC specs file"
             valueType="enumerated">
@@ -222,6 +227,15 @@
                id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.none"
                name="None">
          </enumeratedOptionValue>
+         <enablement
+               type="ALL">
+            <not>
+               <checkBuildProperty
+                     property="com.synopsys.arc.gnu.elf.properties.cpu"
+                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+               </checkBuildProperty>
+            </not>
+         </enablement>
       </option>
       <option
             command="--specs=nano.specs"
@@ -1340,6 +1354,16 @@
                name="Enable nano.specs to use standard libraries optimized for code size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.nano">
          </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+               id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specsem"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+               id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specs"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
+         </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.c.link.category.libs"
                name="Libraries"
@@ -1524,6 +1548,16 @@
                id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.nano"
                name="Enable nano.specs to use standard libraries optimized for code size"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.nano">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.specsem"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.specs"
+               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
          </option>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.libs"
@@ -3105,7 +3139,7 @@
             name="GNU Toolchain for ARC EM "
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
@@ -3119,28 +3153,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.em"
@@ -3164,7 +3182,7 @@
             name="GNU Toolchain for ARC EM (big-endian)"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
@@ -3178,28 +3196,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.emb"
@@ -3223,7 +3225,7 @@
             name="GNU Toolchain for ARC HS "
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
@@ -3237,28 +3239,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.hs"
@@ -3282,7 +3268,7 @@
             name="GNU Toolchain for ARC HS (big-endian)"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
@@ -3296,28 +3282,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.hsb"
@@ -3341,7 +3311,7 @@
             name="GNU Toolchain for ARC 700"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
@@ -3355,28 +3325,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.arc700"
@@ -3400,7 +3354,7 @@
             name="GNU Toolchain for ARC 700 (big-endian)"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
@@ -3414,28 +3368,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.arc700b"
@@ -3459,7 +3397,7 @@
             name="GNU Toolchain for ARC 600"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
@@ -3473,28 +3411,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.arc600"
@@ -3518,7 +3440,7 @@
             name="GNU Toolchain for ARC 600 (big-endian)"
             secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base">
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.assembler.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
@@ -3532,28 +3454,12 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C Linker"
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base"
-               isAbstract="false"
-               name="ARC ELF32 GCC C++ Linker"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.cpp.link.category.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base.option.specs"
-                  name="Use GCC specs file"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
-            </option>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.archiver.arc600b"
