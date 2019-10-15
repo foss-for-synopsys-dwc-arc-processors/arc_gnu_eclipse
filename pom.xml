@@ -33,6 +33,12 @@
       <layout>p2</layout>
     </repository>
   </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>tycho-snapshots</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
   <build>
     <plugins>
       <plugin>
@@ -52,6 +58,7 @@
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho-version}</version>
         <configuration>
+                    <pomDependencies>consider</pomDependencies>
           <environments>
             <environment>
               <os>linux</os>
