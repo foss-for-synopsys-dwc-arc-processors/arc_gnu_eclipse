@@ -1969,6 +1969,18 @@
                </value>
             </property>
          </supportedProperties>
+         <enablement
+               type="ALL">
+            <checkOption
+                  holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                  optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
+                  value="true">
+            </checkOption>
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
       </tool>
       <tool
             command="arceb-elf32-gcc"
@@ -3151,22 +3163,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size"
+               id="com.synopsys.arc.gnu.elf.tool.printsize.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3256,44 +3254,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size "
+               id="com.synopsys.arc.gnu.elf.tool.printsize.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
-               id="org.eclipse.cdt.cross.arc.gnu.eb.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size "
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3383,22 +3345,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size"
+               id="com.synopsys.arc.gnu.elf.tool.printsize.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3488,24 +3436,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size "
+               id="com.synopsys.arc.gnu.elf.tool.printsize.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3595,22 +3527,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size"
+               id="com.synopsys.arc.gnu.elf.tool.printsize.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3700,22 +3618,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size "
+               id="com.synopsys.arc.gnu.elf.tool.printsize.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3805,22 +3709,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size"
+               id="com.synopsys.arc.gnu.elf.tool.printsize.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
          </tool>
       </toolChain>
       <toolChain
@@ -3910,24 +3800,9 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.printsize.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Print Size "
+               id="com.synopsys.arc.gnu.elf.tool.printsize.arc600b"
+               name=" "
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
       </toolChain>
       <configuration
