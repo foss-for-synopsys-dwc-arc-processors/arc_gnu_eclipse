@@ -2330,15 +2330,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.em.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.em.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.em.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
@@ -2592,15 +2592,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.em.eb.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.emb.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.emb.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.emb.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
@@ -2877,15 +2877,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hsb.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hsb.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hsb.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
@@ -3157,15 +3157,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hsb.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hsb.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hsb.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
@@ -3409,15 +3409,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
@@ -3677,15 +3677,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.700.eb.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700b.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700b.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700b.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
@@ -3948,15 +3948,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
          </tool>
          <tool
@@ -4206,15 +4206,15 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.c.linker.base;org.eclipse.cdt.cross.arc.gnu.600.eb.linux.cpp.linker.base">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600b.asm"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600b.gcc"
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600b.gxx"
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
          </tool>
          <tool
