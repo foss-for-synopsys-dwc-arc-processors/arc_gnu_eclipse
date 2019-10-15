@@ -1852,13 +1852,6 @@
             name="ARC ELF32 Create Listing"
             natureFilter="both"
             outputFlag="&gt;">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.createlisting.general"
                name="General"
@@ -1889,6 +1882,18 @@
                value="${BuildArtifactFileName}"
                valueType="string">
          </option>
+         <enablement
+               type="ALL">
+            <checkOption
+                  holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                  optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
+                  value="true">
+            </checkOption>
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
       </tool>
       <tool
             command="arc-elf32-size"
@@ -3068,6 +3073,13 @@
          </optionCategory>
          <option
                category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               defaultValue="false"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
+               name="%option.listing"
+               valueType="boolean">
+         </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
                defaultValue="true"
                id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                name="%option.printsize"
@@ -3143,24 +3155,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing"
+               id="com.synopsys.arc.gnu.elf.tool.listing.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.em"
@@ -3234,24 +3230,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing "
+               id="com.synopsys.arc.gnu.elf.tool.listing.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.emb"
@@ -3325,24 +3305,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing"
+               id="com.synopsys.arc.gnu.elf.tool.listing.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.hs"
@@ -3416,24 +3380,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing "
+               id="com.synopsys.arc.gnu.elf.tool.listing.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.hsb"
@@ -3507,24 +3455,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing"
+               id="com.synopsys.arc.gnu.elf.tool.listing.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.arc700"
@@ -3598,24 +3530,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing "
+               id="com.synopsys.arc.gnu.elf.tool.listing.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.arc700b"
@@ -3689,24 +3605,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing"
+               id="com.synopsys.arc.gnu.elf.tool.listing.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.arc600"
@@ -3780,24 +3680,8 @@
             </enablement>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.createlisting.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Listing "
+               id="com.synopsys.arc.gnu.elf.tool.listing.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createlisting"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.printsize.arc600b"
