@@ -1720,13 +1720,6 @@
             id="org.eclipse.cdt.cross.arc.gnu.createflash"
             name="ARC ELF32 Create Flash Image"
             natureFilter="both">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
          <optionCategory
                id="org.eclipse.cdt.cross.arc.gnu.createflash.out"
                name="Output"
@@ -1845,6 +1838,18 @@
                value="${BuildArtifactFileName}"
                valueType="string">
          </option>
+         <enablement
+               type="ALL">
+            <checkOption
+                  holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                  optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
+                  value="true">
+            </checkOption>
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
       </tool>
       <tool
             command="arc-elf32-objdump"
@@ -3086,6 +3091,13 @@
                valueHandler="org.eclipse.cdt.cross.arc.gnu.ARCAdditionalToolsManagedOptionValueHandler"
                valueType="boolean">
          </option>
+         <option
+               category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               defaultValue="false"
+               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
+               name="%option.flash"
+               valueType="boolean">
+         </option>
       </toolChain>
 
       <toolChain
@@ -3135,24 +3147,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image"
+               id="com.synopsys.arc.gnu.elf.tool.flash.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.em"
@@ -3210,24 +3206,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image "
+               id="com.synopsys.arc.gnu.elf.tool.flash.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.emb"
@@ -3285,24 +3265,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image"
+               id="com.synopsys.arc.gnu.elf.tool.flash.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.hs"
@@ -3360,24 +3324,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image "
+               id="com.synopsys.arc.gnu.elf.tool.flash.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.hsb"
@@ -3431,28 +3379,12 @@
             </option>
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
-         </tool>
-         <tool
                id="com.synopsys.arc.gnu.elf.tool.arc700.ar"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.flash.arc700"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.arc700"
@@ -3510,24 +3442,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image "
+               id="com.synopsys.arc.gnu.elf.tool.flash.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.arc700b"
@@ -3585,24 +3501,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image"
+               id="com.synopsys.arc.gnu.elf.tool.flash.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.linux.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.arc600"
@@ -3660,24 +3560,8 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
-               id="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.createflash.base"
-               isAbstract="false"
-               name="ARC ELF32 GNU Create Flash Image "
+               id="com.synopsys.arc.gnu.elf.tool.flash.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="org.eclipse.cdt.cross.arc.gnu.eb.windows.toolchain.base"
-                     optionId="org.eclipse.cdt.cross.arc.gnu.eb.windows.option.addtools.createflash"
-                     value="true">
-               </checkOption>
-               <and>
-                  <checkBuildProperty
-                        property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-                  </checkBuildProperty>
-               </and>
-            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.listing.arc600b"
