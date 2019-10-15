@@ -5,7 +5,9 @@ Require-Bundle: org.eclipse.cdt.core;bundle-version="5.0.2",
  org.eclipse.cdt.managedbuilder.gnu.ui;bundle-version="5.0.0",
  org.eclipse.core.resources;bundle-version="3.4.0",
  org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.core.variables;bundle-version="3.4.600",
  org.eclipse.jface,
+ org.eclipse.ui;bundle-version="3.114.0",
  org.eclipse.ui.console;bundle-version="3.3.0"
 Bundle-Vendor: Synopsys, Inc.
 Bundle-ActivationPolicy: lazy
@@ -17,9 +19,6 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true
 Bundle-RequiredExecutionEnvironment: JavaSE-11,
  JavaSE-9
-Import-Package: org.eclipse.cdt.managedbuilder.internal.envvar,
- org.eclipse.core.variables,
- org.eclipse.ui.statushandlers
 Export-Package: com.arc.cdt.toolchain,
  com.arc.cdt.toolchain.arc,
  org.eclipse.cdt.cross.arc.gnu,
