@@ -40,6 +40,11 @@
         <artifactId>tycho-maven-plugin</artifactId>
         <version>${tycho-version}</version>
         <extensions>true</extensions>
+        <configuration>
+          <dependency-resolution>
+            <optionalDependencies>ignore</optionalDependencies>
+          </dependency-resolution>
+        </configuration>
       </plugin>
 
       <plugin>
@@ -69,12 +74,19 @@
 
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-p2-repository-plugin</artifactId>
+        <artifactId>tycho-versions-plugin</artifactId>
         <version>${tycho-version}</version>
         <configuration>
-          <!-- XZ compression is not needed for our purposes. -->
-          <xzCompress>false</xzCompress>
+          <dependency-resolution>
+            <optionalDependencies>ignore</optionalDependencies>
+          </dependency-resolution>
         </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <version>${tycho-version}</version>
       </plugin>
 
     </plugins>

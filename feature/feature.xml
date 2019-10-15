@@ -25,18 +25,6 @@ applications for the ARC series of processors.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.cdt.launch"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.cdt.core"/>
-      <import plugin="org.eclipse.cdt.debug.core"/>
-      <import plugin="org.eclipse.cdt.debug.ui"/>
-      <import plugin="org.eclipse.cdt.ui"/>
-      <import plugin="org.eclipse.core.variables"/>
-      <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="com.ibm.icu"/>
       <import plugin="org.eclipse.cdt.core" version="5.0.2" match="greaterOrEqual"/>
       <import plugin="org.eclipse.cdt.managedbuilder.core"/>
       <import plugin="org.eclipse.cdt.managedbuilder.gnu.ui" version="5.0.0" match="greaterOrEqual"/>
@@ -44,24 +32,12 @@ applications for the ARC series of processors.
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.ui.console" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.variables" version="3.4.600" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.114.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="com.arc.embeddedcdt"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.cdt.cross.arc.gnu"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.cdt.cross.arc.gnu.uclibc"
          download-size="0"
          install-size="0"
          version="0.0.0"
