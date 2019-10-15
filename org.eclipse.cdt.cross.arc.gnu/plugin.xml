@@ -3143,7 +3143,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.em.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.em"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -3202,7 +3202,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.emb.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.emb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -3261,7 +3261,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.hs.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.hs"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -3320,7 +3320,7 @@
             </option>
          </tool>
          <tool
-               id=".com.synopsys.arc.gnu.elf.tool.hsb.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.hsb"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -3379,7 +3379,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.arc700"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -3438,7 +3438,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc700b.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.arc700b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -3497,7 +3497,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.arc600"
                superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
@@ -3556,7 +3556,7 @@
             </option>
          </tool>
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.arc600b.ar"
+               id="com.synopsys.arc.gnu.elf.tool.archiver.arc600b"
                superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
          </tool>
          <tool
@@ -4000,7 +4000,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.em.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.em">
             </toolChain>
          </configuration>
          <configuration
@@ -4011,7 +4011,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.em.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -4027,7 +4027,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.emb.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.emb">
             </toolChain>
          </configuration>
          <configuration
@@ -4038,7 +4038,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.emb.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.emb">
             </toolChain>
          </configuration>
       </projectType>
@@ -4054,7 +4054,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hs.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -4065,7 +4065,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hs.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -4081,7 +4081,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hsb.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hsb">
             </toolChain>
          </configuration>
          <configuration
@@ -4092,7 +4092,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hsb.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.hs.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hsb">
             </toolChain>
          </configuration>
       </projectType>
@@ -4108,7 +4108,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700">
             </toolChain>
          </configuration>
          <configuration
@@ -4119,7 +4119,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700">
             </toolChain>
          </configuration>
       </projectType>
@@ -4135,7 +4135,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700b.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700b">
             </toolChain>
          </configuration>
          <configuration
@@ -4146,7 +4146,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700b.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.700.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700b">
             </toolChain>
          </configuration>
       </projectType>
@@ -4162,7 +4162,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600">
             </toolChain>
          </configuration>
          <configuration
@@ -4173,7 +4173,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600">
             </toolChain>
          </configuration>
       </projectType>
@@ -4189,7 +4189,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600b.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600b">
             </toolChain>
          </configuration>
          <configuration
@@ -4200,7 +4200,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600b.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                  targetTool="org.eclipse.cdt.cross.arc.gnu.600.eb.linux.archiver.base">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600b">
             </toolChain>
          </configuration>
       </projectType>
