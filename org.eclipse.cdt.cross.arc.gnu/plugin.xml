@@ -3221,43 +3221,43 @@
       </toolChain>
 
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-            name="GNU Toolchain for ARC EM "
+            id="com.synopsys.arc.gnu.elf.toolchain.em"
+            name="%toolchain.em"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-            name="GNU Toolchain for ARC EM (big-endian)"
+            id="com.synopsys.arc.gnu.elf.toolchain.emeb"
+            name="%toolchain.emeb"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-            name="GNU Toolchain for ARC HS "
+            id="com.synopsys.arc.gnu.elf.toolchain.hs"
+            name="%toolchain.hs"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-            name="GNU Toolchain for ARC HS (big-endian)"
+            id="com.synopsys.arc.gnu.elf.toolchain.hseb"
+            name="%toolchain.hseb"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-            name="GNU Toolchain for ARC 700"
+            id="com.synopsys.arc.gnu.elf.toolchain.arc700"
+            name="%toolchain.arc700"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-            name="GNU Toolchain for ARC 700 (big-endian)"
+            id="com.synopsys.arc.gnu.elf.toolchain.arc700eb"
+            name="%toolchain.arc700eb"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-            name="GNU Toolchain for ARC 600"
+            id="com.synopsys.arc.gnu.elf.toolchain.arc600"
+            name="%toolchain.arc600"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-            name="GNU Toolchain for ARC 600 (big-endian)"
+            id="com.synopsys.arc.gnu.elf.toolchain.arc600eb"
+            name="%toolchain.arc600eb"
             superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <configuration
@@ -3286,7 +3286,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.em.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -3296,7 +3296,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.em.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -3311,7 +3311,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.hs.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -3321,7 +3321,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.hs.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -3336,7 +3336,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc700.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
          <configuration
@@ -3346,7 +3346,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc700.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
       </projectType>
@@ -3361,7 +3361,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
          <configuration
@@ -3371,7 +3371,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
       </projectType>
@@ -3386,7 +3386,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.emb.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb">
             </toolChain>
          </configuration>
          <configuration
@@ -3396,7 +3396,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.emb.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb">
             </toolChain>
          </configuration>
       </projectType>
@@ -3411,7 +3411,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.hsb.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb">
             </toolChain>
          </configuration>
          <configuration
@@ -3421,7 +3421,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.hsb.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb">
             </toolChain>
          </configuration>
       </projectType>
@@ -3436,7 +3436,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc700b.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb">
             </toolChain>
          </configuration>
          <configuration
@@ -3446,7 +3446,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc700b.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb">
             </toolChain>
          </configuration>
       </projectType>
@@ -3461,7 +3461,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb">
             </toolChain>
          </configuration>
          <configuration
@@ -3471,7 +3471,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb">
             </toolChain>
          </configuration>
       </projectType>
@@ -3486,7 +3486,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.arc700.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
          <configuration
@@ -3496,7 +3496,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.arc700.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
       </projectType>
@@ -3511,7 +3511,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.arc600.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
          <configuration
@@ -3521,7 +3521,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.arc600.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
       </projectType>
@@ -3536,7 +3536,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.em.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -3546,7 +3546,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs101.em.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -3561,7 +3561,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs103.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -3571,7 +3571,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.axs103.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -3586,7 +3586,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.emsdp.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -3596,7 +3596,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.emsdp.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -3611,7 +3611,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.emsk.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -3621,7 +3621,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.emsk.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -3636,7 +3636,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.iotdk.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -3646,7 +3646,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.iotdk.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -3661,7 +3661,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.hsdk.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -3671,7 +3671,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.hsdk.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -3686,7 +3686,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.em.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3697,7 +3697,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.em.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.em"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3713,7 +3713,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.emb.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3724,7 +3724,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.emb.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3740,7 +3740,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hs.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3751,7 +3751,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hs.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3767,7 +3767,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hsb.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3778,7 +3778,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hsb.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3794,7 +3794,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3805,7 +3805,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3821,7 +3821,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700b.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3832,7 +3832,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700b.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3848,7 +3848,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3859,7 +3859,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -3875,7 +3875,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600b.debug.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3886,7 +3886,7 @@
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600b.release.toolchain"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
+                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -3918,7 +3918,7 @@
             location="templates/projecttemplates/emsk_em7d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3927,7 +3927,7 @@
             location="templates/projecttemplates/emsk_em9d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3936,7 +3936,7 @@
             location="templates/projecttemplates/emsk_em11d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3945,7 +3945,7 @@
             location="templates/projecttemplates/emsk_em7d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3954,7 +3954,7 @@
             location="templates/projecttemplates/emsk_em9d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3963,7 +3963,7 @@
             location="templates/projecttemplates/emsk_em11d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
 
@@ -3975,7 +3975,7 @@
             location="templates/projecttemplates/emsk_em7d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3984,7 +3984,7 @@
             location="templates/projecttemplates/emsk_em9d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -3993,7 +3993,7 @@
             location="templates/projecttemplates/emsk_em11d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4002,7 +4002,7 @@
             location="templates/projecttemplates/emsk_em7d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4011,7 +4011,7 @@
             location="templates/projecttemplates/emsk_em9d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4020,7 +4020,7 @@
             location="templates/projecttemplates/emsk_em11d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4029,7 +4029,7 @@
             location="templates/projecttemplates/iotdk_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4038,7 +4038,7 @@
             location="templates/projecttemplates/iotdk_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4047,7 +4047,7 @@
             location="templates/projecttemplates/emsdp_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4056,7 +4056,7 @@
             location="templates/projecttemplates/emsdp_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base">
+               id="com.synopsys.arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -4065,7 +4065,7 @@
             location="templates/projecttemplates/hsdk_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+               id="com.synopsys.arc.gnu.elf.toolchain.hs">
          </toolChain>
       </template>
       <template
@@ -4074,7 +4074,7 @@
             location="templates/projecttemplates/hsdk_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
          <toolChain
-               id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs">
+               id="com.synopsys.arc.gnu.elf.toolchain.hs">
          </toolChain>
       </template>
 
