@@ -52,7 +52,7 @@ public class OptionEnablementManager extends AbstractOptionEnablementManager {
             else
             // If -pg, then turn corresponding linker option
             if (optionId.endsWith(".call_graph")){
-                setOptionValue("arc.link.options.profiling",mgr.getValue(optionId));
+                setOptionValue("com.synopsys.arc.gnu.elf.tool.c.linker.arc.prof",mgr.getValue(optionId));
             }
             else if (optionId.endsWith(".keepasm")){
                 // -keepasm enabled -Hanno

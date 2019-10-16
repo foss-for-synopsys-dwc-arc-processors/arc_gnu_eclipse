@@ -2550,14 +2550,14 @@
                   variableList="LIBRARY_PATH">
             </envVarBuildPath>
             <optionCategory
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   name="General"
                   owner="com.synopsys.arc.gnu.elf.tool.c.linker.arc">
             </optionCategory>
             <option
                   applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                   browseType="file"
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   command="-T&quot;${VALUE}&quot;"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile"
                   isAbstract="false"
@@ -2566,162 +2566,44 @@
                   valueType="string">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  command="-nostartfiles"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nostart"
-                  name="Do not use standard start files (-nostartfiles)"
-                  valueType="boolean">
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.nostart"
+                  superClass="gnu.c.link.option.nostart">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  command="-nodefaultlibs"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nodeflibs"
-                  name="Do not use default libraries (-nodefaultlibs)"
-                  valueType="boolean">
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.nodeflibs"
+                  superClass="gnu.c.link.option.nodeflibs">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  command="-nostdlib"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nostdlibs"
-                  name="No startup or default libs (-nostdlib)"
-                  valueType="boolean">
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.nostdlibs"
+                  superClass="gnu.c.link.option.nostdlibs">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
-                  command="-s"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.strip"
-                  name="Omit all symbol information (-s)"
-                  valueType="boolean">
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.strip"
+                  superClass="gnu.c.link.option.strip">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nano"
                   name="Enable nano.specs to use standard libraries optimized for code size"
                   superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.nano">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specsem"
                   superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
             </option>
             <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specs"
                   superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
             </option>
-            <optionCategory
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.category.libs"
-                  name="Libraries"
-                  owner="com.synopsys.arc.gnu.elf.tool.c.linker.arc">
-            </optionCategory>
-            <option
-                  browseType="none"
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.libs"
-                  command="-l"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.libs"
-                  name="Libraries (-l)"
-                  valueType="libs">
-            </option>
-            <option
-                  browseType="directory"
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.libs"
-                  command="-L"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.paths"
-                  name="Library search path (-L)"
-                  valueType="libPaths">
-            </option>
-            <optionCategory
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  name="Miscellaneous"
-                  owner="com.synopsys.arc.gnu.elf.tool.c.linker.arc">
-            </optionCategory>
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  command="-Xlinker ${VALUE}"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.ldflags"
-                  name="Linker flags (-Xlinker [option])"
-                  valueType="stringList">
-            </option>
             <option
                   browseType="file"
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.otherobjs"
-                  name="Other objects"
-                  valueType="userObjs">
-            </option>
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.mapfilename"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.mapfilename">
-            </option>
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.cref"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.cref">
-            </option>
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.printmap"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.printmap">
-            </option>
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  command="-v"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.linker.option.other.verbose"
-                  name="Verbose (-v)"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.other"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.otherflags"
-                  name="Other flags"
-                  valueType="string">
-            </option>
-            <inputType
-                  buildVariable="OBJS"
-                  dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.linker.input"
-                  multipleOfType="true"
-                  sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
-                  sources="o">
-               <additionalInput
-                     kind="additionalinputdependency"
-                     paths="$(USER_OBJS)">
-               </additionalInput>
-               <additionalInput
-                     kind="additionalinput"
-                     paths="$(LIBS)">
-               </additionalInput>
-            </inputType>
-            <outputType
-                  buildVariable="EXECUTABLES"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.linker.output"
-                  nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
-            </outputType>
-            <option
-                  applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.GprofAppCalculator"
-                  command="-pg"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.debugging.gprof"
-                  name="Generate gprof information (-pg)"
-                  valueType="boolean">
-            </option>
-            <option
-                  applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.ProfAppCalculator"
-                  command="-p"
-                  defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.debugging.prof"
-                  name="Generate prof information (-p)"
-                  valueType="boolean">
-            </option>
-            <option
-                  browseType="file"
-                  category="org.eclipse.cdt.cross.arc.gnu.c.link.category.general"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   command="-L&quot;${VALUE}&quot;"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.memoryx"
                   isAbstract="false"
@@ -2730,6 +2612,99 @@
                   superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"
                   valueType="string">
             </option>
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
+                  name="Libraries"
+                  owner="com.synopsys.arc.gnu.elf.tool.c.linker.arc">
+            </optionCategory>
+            <option
+                  browseType="none"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
+                  command="-l"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs.libs"
+                  superClass="gnu.c.link.option.libs"
+                  valueType="libs">
+            </option>
+            <option
+                  browseType="directory"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
+                  command="-L"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs.paths"
+                  superClass="gnu.c.link.option.paths"
+                  valueType="libPaths">
+            </option>
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  name="Miscellaneous"
+                  owner="com.synopsys.arc.gnu.elf.tool.c.linker.arc">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  command="-Wl,${VALUE}"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.ldflags"
+                  superClass="gnu.c.link.option.other">
+            </option>
+            <option
+                  browseType="file"
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.otherobjs"
+                  superClass="gnu.c.link.option.userobjs"
+                  valueType="userObjs">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.mapfilename"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.mapfilename">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.cref"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.cref">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.printmap"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.printmap">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  command="-v"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.verbose"
+                  name="Verbose (-v)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.otherflags"
+                  name="Other flags"
+                  valueType="string">
+            </option>
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.input"
+                  superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+            </inputType>
+            <outputType
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.output"
+                  nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
+            </outputType>
+            <option
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.prof"
+                  superClass="gnu.c.link.option.debugging.prof">
+            </option>
+            <option
+                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.gprof"
+                  superClass="gnu.c.link.option.debugging.gprof">
+            </option>
+            <enablement
+                  type="ALL">
+               <not>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
+                  </checkBuildProperty>
+               </not>
+            </enablement>
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc"
