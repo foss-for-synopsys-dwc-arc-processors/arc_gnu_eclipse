@@ -1684,71 +1684,6 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx">
          </option>
       </tool>
-      <tool
-            command="arc-elf32-ar"
-            id="org.eclipse.cdt.cross.arc.gnu.archiver"
-            isAbstract="false"
-            name="ARC ELF32 GCC Archiver"
-            natureFilter="both">
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
-            </checkBuildProperty>
-         </enablement>
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildArtefactType">
-               <value
-                     id="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
-               </value>
-            </property>
-         </supportedProperties>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.archiver.category.general"
-               name="General"
-               owner="org.eclipse.cdt.cross.arc.gnu.archiver">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.archiver.category.general"
-               defaultValue="-r"
-               id="org.eclipse.cdt.cross.arc.gnu.archiver.option.flags"
-               name="Archiver flags"
-               valueType="string">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.archiver.category.general"
-               command="-v"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.archiver.option.verbose"
-               name="Verbose (-v)"
-               valueType="boolean">
-         </option>
-         <inputType
-               buildVariable="OBJS"
-               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
-               id="org.eclipse.cdt.cross.arc.gnu.archiver.input"
-               multipleOfType="true"
-               sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
-               sources="o">
-            <additionalInput
-                  kind="additionalinputdependency"
-                  paths="$(USER_OBJS)">
-            </additionalInput>
-            <additionalInput
-                  kind="additionalinput"
-                  paths="$(LIBS)">
-            </additionalInput>
-         </inputType>
-         <outputType
-               buildVariable="ARCHIVES"
-               id="org.eclipse.cdt.cross.arc.gnu.archiver.output"
-               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
-               outputPrefix="lib"
-               outputs="a">
-         </outputType>
-      </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
             isAbstract="true"
@@ -2805,8 +2740,17 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          </tool>
          <tool
+               command="arc-elf32-ar"
                id="com.synopsys.arc.gnu.elf.tool.archiver.arc"
-               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
+               name="%tool.archiver"
+               superClass="cdt.managedbuild.tool.gnu.archiver">
+            <enablement
+                  type="ALL">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
+               </checkBuildProperty>
+            </enablement>
          </tool>
          <tool
                command="arc-elf32-objcopy"
@@ -3129,7 +3073,7 @@
                command="arceb-elf32-ar"
                id="com.synopsys.arc.gnu.elf.tool.archiver.arceb"
                name="%tool.archiver_eb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
+               superClass="com.synopsys.arc.gnu.elf.tool.archiver.arc">
          </tool>
          <tool
                command="arceb-elf32-objdump"
