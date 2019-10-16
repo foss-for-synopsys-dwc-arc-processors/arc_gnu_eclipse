@@ -1934,98 +1934,6 @@
             </checkBuildProperty>
          </enablement>
       </tool>
-      <tool
-            command="arc-elf32-size"
-            commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
-            id="org.eclipse.cdt.cross.arc.gnu.printsize"
-            name="ARC ELF32 GNU Print Size"
-            natureFilter="both">
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.general"
-               name="General"
-               owner="org.eclipse.cdt.cross.arc.gnu.printsize">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.printsize.general"
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.format"
-               name="Size Format"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="--format=berkeley"
-                  id="org.eclipse.cdt.cross.arc.gnu.printsize.general.format.berkeley"
-                  isDefault="true"
-                  name="Berkeley">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="--format=sysv"
-                  id="org.eclipse.cdt.cross.arc.printsize.size.general.format.sysv"
-                  name="SysV">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.printsize.general"
-               command="-x"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.hex"
-               name="Hex"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.printsize.general"
-               command="-t"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.totals"
-               name="Show Totals"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.printsize.general"
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.general.otherflags"
-               name="Other flags"
-               valueType="string">
-         </option>
-         <outputType
-               buildVariable="SECONDARY_SIZE"
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.output"
-               outputNames="${BuildArtifactFileBaseName}.siz"
-               outputs="siz">
-         </outputType>
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.input"
-               multipleOfType="true"
-               option="org.eclipse.cdt.cross.arc.gnu.printsize.InFileName"
-               sources="elf">
-         </inputType>
-         <option
-               id="org.eclipse.cdt.cross.arc.gnu.printsize.InFileName"
-               resourceFilter="all"
-               value="${BuildArtifactFileName}"
-               valueType="string">
-         </option>
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildType">
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.debug">
-               </value>
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.release">
-               </value>
-            </property>
-         </supportedProperties>
-         <enablement
-               type="ALL">
-            <checkOption
-                  holderId="com.synopsys.arc.gnu.elf.toolchain.base"
-                  optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                  value="true">
-            </checkOption>
-            <checkBuildProperty
-                  property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-            </checkBuildProperty>
-         </enablement>
-      </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
             isAbstract="true"
@@ -3058,7 +2966,7 @@
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.arc"
             isAbstract="true"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
@@ -3094,14 +3002,90 @@
                superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
          </tool>
          <tool
+               command="arc-elf32-size"
+               commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
                id="com.synopsys.arc.gnu.elf.tool.printsize.arc"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+               name="%tool.printsize">
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  name="General"
+                  owner="com.synopsys.arc.gnu.elf.tool.printsize.arc">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format"
+                  name="Size Format"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="--format=berkeley"
+                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.berkeley"
+                     isDefault="true"
+                     name="Berkeley">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--format=sysv"
+                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.sysv"
+                     name="SysV">
+               </enumeratedOptionValue>
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  command="-x"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.hex"
+                  name="Hex"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  command="-t"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.totals"
+                  name="Show Totals"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.otherflags"
+                  name="Other flags"
+                  valueType="string">
+            </option>
+            <outputType
+                  buildVariable="SECONDARY_SIZE"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
+                  outputNames="${BuildArtifactFileBaseName}.siz"
+                  outputs="siz">
+            </outputType>
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.input"
+                  multipleOfType="true"
+                  option="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
+                  sources="elf">
+            </inputType>
+            <option
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
+                  resourceFilter="all"
+                  value="${BuildArtifactFileName}"
+                  valueType="string">
+            </option>
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
          </tool>
       </toolChain>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.arceb"
             isAbstract="true"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
@@ -3171,7 +3155,7 @@
                command="arceb-elf32-size"
                id="com.synopsys.arc.gnu.elf.tool.printsize.arceb"
                name="ARC GNU Print Size (EB)"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+               superClass="com.synopsys.arc.gnu.elf.tool.printsize.arc">
          </tool>
       </toolChain>
 
