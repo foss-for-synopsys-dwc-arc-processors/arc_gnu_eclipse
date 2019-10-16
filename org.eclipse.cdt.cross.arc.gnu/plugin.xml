@@ -2026,84 +2026,6 @@
             </checkBuildProperty>
          </enablement>
       </tool>
-      <tool
-            command="arceb-elf32-gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.assembler"
-            isAbstract="false"
-            name="ARC GCC Assembler (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.eb.assembler.input"
-               scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler.input">
-         </inputType>
-      </tool>
-      <tool
-            command="arceb-elf32-gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler"
-            isAbstract="false"
-            name="ARC GCC C Compiler (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler.input"
-               scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
-         </inputType>
-      </tool>
-      <tool
-            command="arceb-elf32-g++"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler"
-            isAbstract="false"
-            name="ARC GCC C++ Compiler (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler.input"
-               scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
-         </inputType>
-      </tool>
-      <tool
-            command="arceb-elf32-gcc"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.c.linker"
-            isAbstract="false"
-            name="ARC GCC C Linker (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-      </tool>
-      <tool
-            command="arceb-elf32-g++"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker"
-            isAbstract="false"
-            name="ARC GCC C++ Linker (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-      </tool>
-      <tool
-            command="arceb-elf32-ar"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.archiver"
-            isAbstract="false"
-            name="ARC GCC Archiver (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
-      </tool>
-      <tool
-            command="arceb-elf32-objcopy"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.createflash"
-            isAbstract="false"
-            name="ARC GNU Create Flash Image (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-      </tool>
-      <tool
-            command="arceb-elf32-objdump"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.createlisting"
-            isAbstract="false"
-            name="ARC GNU Create Listing (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-      </tool>
-      <tool
-            command="arceb-elf32-size"
-            id="org.eclipse.cdt.cross.arc.gnu.eb.printsize"
-            isAbstract="false"
-            name="ARC GNU Print Size (EB)"
-            superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-      </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
             isAbstract="true"
@@ -3183,40 +3105,73 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          <tool
+               command="arceb-elf32-gcc"
                id="com.synopsys.arc.gnu.elf.tool.assembler.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
+               name="%tool.assembler_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.assembler.arceb.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.assembler.input">
+            </inputType>
          </tool>
          <tool
+               command="arceb-elf32-gcc"
                id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
+               name="%tool.c.compiler_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
+            </inputType>
          </tool>
          <tool
+               command="arceb-elf32-g++"
                id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
+               name="%tool.cpp.compiler_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
+            </inputType>
          </tool>
          <tool
+               command="arceb-elf32-gcc"
                id="com.synopsys.arc.gnu.elf.tool.c.linker.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
+               name="%tool.c.linker_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
          </tool>
          <tool
+               command="arceb-elf32-g++"
                id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
+               name="%tool.cpp.linker_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
          </tool>
          <tool
+               command="arceb-elf32-ar"
                id="com.synopsys.arc.gnu.elf.tool.archiver.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
+               name="%tool.archiver_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
          </tool>
          <tool
+               command="arceb-elf32-objcopy"
                id="com.synopsys.arc.gnu.elf.tool.flash.arceb"
+               name="%tool.c.linker_eb"
                superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
          </tool>
          <tool
+               command="arceb-elf32-objdump"
                id="com.synopsys.arc.gnu.elf.tool.listing.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
+               name="%tool.listing_eb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
          </tool>
          <tool
+               command="arceb-elf32-size"
                id="com.synopsys.arc.gnu.elf.tool.printsize.arceb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
+               name="ARC GNU Print Size (EB)"
+               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
          </tool>
       </toolChain>
 
