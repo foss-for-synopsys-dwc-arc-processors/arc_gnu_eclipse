@@ -3133,351 +3133,132 @@
                valueType="boolean">
          </option>
       </toolChain>
+      <toolChain
+            id="com.synopsys.arc.gnu.elf.toolchain.arc"
+            isAbstract="true"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.archiver.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.flash.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.listing.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.printsize.arc"
+               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
+         </tool>
+      </toolChain>
+      <toolChain
+            id="com.synopsys.arc.gnu.elf.toolchain.arceb"
+            isAbstract="true"
+            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
+            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
+            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.c.linker.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.archiver.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.flash.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.listing.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
+         </tool>
+         <tool
+               id="com.synopsys.arc.gnu.elf.tool.printsize.arceb"
+               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
+         </tool>
+      </toolChain>
 
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
             name="GNU Toolchain for ARC EM "
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.em"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
             name="GNU Toolchain for ARC EM (big-endian)"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.emb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
             name="GNU Toolchain for ARC HS "
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.hs"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
             name="GNU Toolchain for ARC HS (big-endian)"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.hsb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
             name="GNU Toolchain for ARC 700"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.arc700"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
             name="GNU Toolchain for ARC 700 (big-endian)"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.arc700b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
             name="GNU Toolchain for ARC 600"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.arc600"
-               superClass="org.eclipse.cdt.cross.arc.gnu.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
             id="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
             name="GNU Toolchain for ARC 600 (big-endian)"
-            secondaryOutputs="org.eclipse.cdt.cross.arc.gnu.createflash.output;org.eclipse.cdt.cross.arc.gnu.createlisting.output;org.eclipse.cdt.cross.arc.gnu.printsize.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
-            targetTool="org.eclipse.cdt.cross.arc.gnu.c.linker;org.eclipse.cdt.cross.arc.gnu.cpp.linker">
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.assembler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.compiler">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.c.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.cpp.linker">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.archiver.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.archiver">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.flash.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createflash">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.listing.arc600b"
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.createlisting">
-         </tool>
-         <tool
-               id="com.synopsys.arc.gnu.elf.tool.printsize.arc600b"
-               name=" "
-               superClass="org.eclipse.cdt.cross.arc.gnu.eb.printsize">
-         </tool>
+            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <configuration
             artifactExtension="elf"
@@ -3906,7 +3687,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.em.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.em">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -3917,7 +3698,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.em.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.em">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -3933,7 +3714,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.emb.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.emb">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -3944,7 +3725,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.emb.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.em.eb.linux.toolchain.base"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.emb">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
@@ -3960,7 +3741,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hs.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hs">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -3971,7 +3752,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hs.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.hs"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hs">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -3987,7 +3768,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hsb.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hsb">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -3998,7 +3779,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.hsb.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.hs"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.hsb">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
@@ -4014,7 +3795,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -4025,7 +3806,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.700"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -4041,7 +3822,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700b.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700b">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -4052,7 +3833,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc700b.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.700"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc700b">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
@@ -4068,7 +3849,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -4079,7 +3860,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.linux.toolchain.base.600"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -4095,7 +3876,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600b.debug.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600b">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -4106,7 +3887,7 @@
             <toolChain
                   id="com.synopsys.arc.gnu.elf.project.liba.arc600b.release.toolchain"
                   superClass="org.eclipse.cdt.cross.arc.gnu.eb.linux.toolchain.base.600"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc600b">
+                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
