@@ -447,223 +447,6 @@
                superClass="cdt.managedbuild.tool.gnu.assembler.output">
          </outputType>
       </tool>
-      <tool
-            command="arc-elf32-gcc"
-            commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-            id="org.eclipse.cdt.cross.arc.gnu.c.compiler"
-            name="%tool.c.compiler"
-            natureFilter="cnature"
-            superClass="cdt.managedbuild.tool.gnu.c.compiler">
-         <envVarBuildPath
-               pathType="buildpathInclude"
-               variableList="CPATH,C_INCLUDE_PATH">
-         </envVarBuildPath>
-         <option
-               category="gnu.c.compiler.category.optimization"
-               command="-fpack-struct"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.optimization.packstruct"
-               name="Pack structures (-fpack-struct)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.optimization"
-               command="-fshort-enums"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.optimization.shortenums"
-               name="Short enumerations (-fshort-enums)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.optimization"
-               command="-ffunction-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.optimization.functionsections"
-               name="Function sections (-ffunction-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.optimization"
-               command="-fdata-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.optimization.datasections"
-               name="Data sections (-fdata-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.debug"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.debugging.format"
-               name="Debug Format"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-gdwarf-2"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2"
-                  name="dwarf-2">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gdwarf-4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf4"
-                  name="dwarf-4">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gstabs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabs"
-                  name="stabs">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gstabs+"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabsplus"
-                  name="stabs+">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-ggdb"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.gdb"
-                  name="gdb">
-            </enumeratedOptionValue>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.default">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-         </option>
-         <option
-               category="gnu.c.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.misc.lstfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
-         </option>
-         <option
-               category="gnu.c.compiler.category.other"
-               command="-fno-inline-functions"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.misc.noinlinefunctions"
-               name="Do not inline functions (-fno-inline-functions)"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.other"
-               command="-fsigned-char"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.misc.signedchar"
-               name="&apos;char&apos; is signed (-fsigned-char)"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.other"
-               command="-funsigned-bitfields"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.option.misc.unsignedbitfields"
-               name="Bitfields are unsigned (-funsigned-bitfields)"
-               valueType="boolean">
-         </option>
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.c.compiler.input"
-               scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-               superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
-         </inputType>
-      </tool>
-      <tool
-            command="arc-elf32-g++"
-            id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler"
-            name="%tool.cpp.compiler"
-            natureFilter="ccnature"
-            superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
-         <envVarBuildPath
-               pathType="buildpathInclude"
-               variableList="CPATH,CPLUS_INCLUDE_PATH">
-         </envVarBuildPath>
-         <option
-               category="gnu.c.compiler.category.dialect"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.dialect.std"
-               name="Language Standard"
-               superClass="gnu.c.compiler.option.dialect.std"
-               useByScannerDiscovery="true"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  id="gnu.cpp.compiler.dialect.default"
-                  name=" ">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=c++98"
-                  id="gnu.cpp.compiler.dialect.c++98"
-                  name="ISO C++98 (-std=c++98)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=c++0x"
-                  id="gnu.cpp.compiler.dialect.c++11"
-                  name="ISO C++11 (-std=c++0x)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=c++1y"
-                  id="gnu.cpp.compiler.dialect.c++1y"
-                  name="ISO C++1y (-std=c++1y)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="gnu.c.compiler.category.preprocessor"
-               command="-nostdinc++"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.nostdincpp"
-               name="Do not search system C++ directories (-nostdinc++)"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.warnings"
-               command="-Wabi"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.abi"
-               name="ABI warnings (-Wabi)"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.warnings"
-               command="-Weffc++"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.effc"
-               name="Effective C++ warnings (-Weffc++)"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.other"
-               command="-fno-exceptions"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.noexceptions"
-               name="Do not use exceptions (-fno-exceptions)"
-               valueType="boolean">
-         </option>
-         <option
-               category="gnu.c.compiler.category.other"
-               command="-fno-rtti"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.nortti"
-               name="Do not use RTTI (-fno-rtti)"
-               valueType="boolean">
-         </option>
-         <inputType
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input"
-               scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-               superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
-         </inputType>
-      </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
             isAbstract="true"
@@ -1695,6 +1478,134 @@
          <tool
                command="arc-elf32-gcc"
                commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               id="com.synopsys.arc.gnu.elf.tool.base.compiler.arc"
+               isAbstract="true"
+               natureFilter="both"
+               superClass="cdt.managedbuild.tool.gnu.c.compiler">
+            <envVarBuildPath
+                  pathType="buildpathInclude"
+                  variableList="CPATH,C_INCLUDE_PATH">
+            </envVarBuildPath>
+            <option
+                  category="gnu.c.compiler.category.optimization"
+                  command="-fpack-struct"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.packstruct"
+                  name="Pack structures (-fpack-struct)"
+                  resourceFilter="all"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.optimization"
+                  command="-fshort-enums"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.shortenums"
+                  name="Short enumerations (-fshort-enums)"
+                  resourceFilter="all"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.optimization"
+                  command="-ffunction-sections"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.functionsections"
+                  name="Function sections (-ffunction-sections)"
+                  resourceFilter="all"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.optimization"
+                  command="-fdata-sections"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.datasections"
+                  name="Data sections (-fdata-sections)"
+                  resourceFilter="all"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.debug"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format"
+                  name="Debug Format"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="-gdwarf-2"
+                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.dwarf2"
+                     name="dwarf-2">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-gdwarf-4"
+                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.dwarf4"
+                     name="dwarf-4">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-gstabs"
+                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.stabs"
+                     name="stabs">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-gstabs+"
+                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.stabsplus"
+                     name="stabs+">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-ggdb"
+                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.gdb"
+                     name="gdb">
+               </enumeratedOptionValue>
+               <enablement
+                     attribute="value"
+                     extensionAdjustment="false"
+                     type="CONTAINER_ATTRIBUTE"
+                     value="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.default">
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildType"
+                        value="org.eclipse.cdt.build.core.buildType.release">
+                  </checkBuildProperty>
+               </enablement>
+               <enablement
+                     attribute="value"
+                     extensionAdjustment="false"
+                     type="CONTAINER_ATTRIBUTE"
+                     value="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.dwarf2">
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildType"
+                        value="org.eclipse.cdt.build.core.buildType.debug">
+                  </checkBuildProperty>
+               </enablement>
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.lstfilename"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-fno-inline-functions"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.noinlinefunctions"
+                  name="Do not inline functions (-fno-inline-functions)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-fsigned-char"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.signedchar"
+                  name="&apos;char&apos; is signed (-fsigned-char)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-funsigned-bitfields"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.unsignedbitfields"
+                  name="Bitfields are unsigned (-funsigned-bitfields)"
+                  valueType="boolean">
+            </option>
+         </tool>
+         <tool
+               command="arc-elf32-gcc"
+               commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GLDErrorParser"
                id="com.synopsys.arc.gnu.elf.tool.base.linker.arc"
                isAbstract="true"
@@ -1874,11 +1785,98 @@
          </tool>
          <tool
                id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+               name="%tool.c.compiler"
+               natureFilter="cnature"
+               superClass="com.synopsys.arc.gnu.elf.tool.base.compiler.arc">
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
+            </inputType>
          </tool>
          <tool
+               command="arc-elf32-g++"
                id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+               name="%tool.cpp.compiler"
+               natureFilter="ccnature"
+               superClass="com.synopsys.arc.gnu.elf.tool.base.compiler.arc">
+            <envVarBuildPath
+                  pathType="buildpathInclude"
+                  variableList="CPATH,CPLUS_INCLUDE_PATH">
+            </envVarBuildPath>
+            <option
+                  category="gnu.c.compiler.category.dialect"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std"
+                  name="Language Standard"
+                  superClass="gnu.c.compiler.option.dialect.std"
+                  useByScannerDiscovery="true"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.none"
+                     name=" ">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-std=c++98"
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++98"
+                     name="ISO C++98 (-std=c++98)">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-std=c++0x"
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++11"
+                     name="ISO C++11 (-std=c++0x)">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-std=c++1y"
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++1y"
+                     name="ISO C++1y (-std=c++1y)">
+               </enumeratedOptionValue>
+            </option>
+            <option
+                  category="gnu.c.compiler.category.preprocessor"
+                  command="-nostdinc++"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.preprocessor.nostdincpp"
+                  name="Do not search system C++ directories (-nostdinc++)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.warnings"
+                  command="-Wabi"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.warnings.abi"
+                  name="ABI warnings (-Wabi)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.warnings"
+                  command="-Weffc++"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.warnings.effc"
+                  name="Effective C++ warnings (-Weffc++)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-fno-exceptions"
+                  defaultValue="true"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.misc.noexceptions"
+                  name="Do not use exceptions (-fno-exceptions)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-fno-rtti"
+                  defaultValue="true"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.misc.nortti"
+                  name="Do not use RTTI (-fno-rtti)"
+                  valueType="boolean">
+            </option>
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.input"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
+            </inputType>
          </tool>
          <tool
                command="arc-elf32-gcc"
@@ -2194,22 +2192,22 @@
                command="arceb-elf32-gcc"
                id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb"
                name="%tool.c.compiler_eb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
+               superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.arc">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler.input">
+                  superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.input">
             </inputType>
          </tool>
          <tool
                command="arceb-elf32-g++"
                id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb"
                name="%tool.cpp.compiler_eb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
+               superClass="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input">
+                  superClass="com.synopsys.arc.gnu.elf.tool.cpp.compiler.input">
             </inputType>
          </tool>
          <tool
