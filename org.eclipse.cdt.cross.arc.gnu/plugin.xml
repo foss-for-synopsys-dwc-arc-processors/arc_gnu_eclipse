@@ -582,43 +582,44 @@
       </tool>
       <tool
             command="arc-elf32-g++"
-            commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-            errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler"
-            isAbstract="false"
-            name="ARC ELF32 GCC C++ Compiler"
-            natureFilter="both"
-            outputFlag="-o">
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildType">
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.debug">
-               </value>
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.release">
-               </value>
-            </property>
-         </supportedProperties>
+            name="%tool.cpp.compiler"
+            natureFilter="ccnature"
+            superClass="org.eclipse.cdt.cross.arc.gnu.c.compiler">
          <envVarBuildPath
                pathType="buildpathInclude"
                variableList="CPATH,CPLUS_INCLUDE_PATH">
          </envVarBuildPath>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.preprocessor"
-               name="Preprocessor"
-               owner="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </optionCategory>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.preprocessor"
-               command="-nostdinc"
+               category="gnu.c.compiler.category.dialect"
                defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.nostdinc"
-               name="Do not search system directories (-nostdinc)"
-               valueType="boolean">
+               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.dialect.std"
+               name="Language Standard"
+               superClass="gnu.c.compiler.option.dialect.std"
+               useByScannerDiscovery="true"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="gnu.cpp.compiler.dialect.default"
+                  name=" ">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-std=c++98"
+                  id="gnu.cpp.compiler.dialect.c++98"
+                  name="ISO C++98 (-std=c++98)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-std=c++0x"
+                  id="gnu.cpp.compiler.dialect.c++11"
+                  name="ISO C++11 (-std=c++0x)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-std=c++1y"
+                  id="gnu.cpp.compiler.dialect.c++1y"
+                  name="ISO C++1y (-std=c++1y)">
+            </enumeratedOptionValue>
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.preprocessor"
+               category="gnu.c.compiler.category.preprocessor"
                command="-nostdinc++"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.nostdincpp"
@@ -626,273 +627,7 @@
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.preprocessor"
-               command="-E"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.preprocess"
-               name="Preprocess only (-E)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.preprocessor"
-               command="-D"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.def"
-               name="Defined symbols (-D)"
-               valueType="definedSymbols">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.preprocessor"
-               command="-U"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.preprocessor.undef"
-               name="Undefined symbols (-U)"
-               valueType="undefDefinedSymbols">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.dirs"
-               name="Directories"
-               owner="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </optionCategory>
-         <option
-               browseType="directory"
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.dirs"
-               command="-I"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.include.paths"
-               name="Include paths (-I)"
-               valueType="includePath">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               name="Optimization"
-               owner="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.level"
-               name="Optimization level"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               command="-fpack-struct"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.packstruct"
-               name="Pack structures (-fpack-struct)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               command="-fshort-enums"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.shortenums"
-               name="Short enumerations (-fshort-enums)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               command="-ffunction-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.functionsections"
-               name="Function sections (-ffunction-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               command="-fdata-sections"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.datasections"
-               name="Data sections (-fdata-sections)"
-               resourceFilter="all"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.optimization"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.optimization.flags"
-               name="Other optimization flags"
-               valueType="string">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
-               name="%option.debugging">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.level"
-               name="Debug Level"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none"
-                  isDefault="false"
-                  name="None">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-g1"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.minimal"
-                  name="Minimal (-g1)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-g"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.default"
-                  isDefault="true"
-                  name="Default (-g)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-g3"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max"
-                  isDefault="false"
-                  name="Maximum (-g3)">
-            </enumeratedOptionValue>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.none">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.level.max">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.format"
-               name="Debug Format"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-gdwarf-2"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2"
-                  name="dwarf-2">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gdwarf-4"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf4"
-                  name="dwarf-4">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gstabs"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabs"
-                  name="stabs">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-gstabs+"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.stabsplus"
-                  name="stabs+">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-ggdb"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.gdb"
-                  name="gdb">
-            </enumeratedOptionValue>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.default">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.debugging.format.dwarf2">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.other"
-               name="Other debugging flags"
-               valueType="string">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
-               command="-p"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.prof"
-               name="Generate prof information (-p)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging"
-               command="-pg"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.debugging.gprof"
-               name="Generate gprof information (-pg)"
-               valueType="boolean">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               name="Warnings"
-               owner="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-fno-common"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.nocommon"
-               name="No common (-fno-common)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-pedantic"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.pedantic"
-               name="Pedantic (-pedantic)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-pedantic-errors"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.pedantic.error"
-               name="Pedantic warnings as errors (-pedantic-errors)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-w"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.nowarn"
-               name="Inhibit all warnings (-w)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-Wall"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.allwarn"
-               name="All warnings (-Wall)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-Wextra"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.extrawarn"
-               name="Extra warnings (-Wextra)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
+               category="gnu.c.compiler.category.warnings"
                command="-Wabi"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.abi"
@@ -900,7 +635,7 @@
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
+               category="gnu.c.compiler.category.warnings"
                command="-Weffc++"
                defaultValue="false"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.effc"
@@ -908,59 +643,7 @@
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.warnings"
-               command="-Werror"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.warnings.toerrors"
-               name="Warnings as errors (-Werror)"
-               valueType="boolean">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               name="Miscellaneous"
-               owner="org.eclipse.cdt.cross.arc.gnu.cpp.compiler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.std"
-               name="Language Standard"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  command="-ansi"
-                  id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.std.ansi"
-                  name="ISO 1998 C++ incl. amendments (-ansi)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.std.default"
-                  isDefault="true"
-                  name="Compiler Default (ISO 1998 C++ with GNU extensions)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=c++0x"
-                  id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.std.cpp0x"
-                  name="ISO 2009 C++ (-std=c++0x)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-std=gnu++0x"
-                  id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.std.gnucpp0x"
-                  name="ISO 2009 C++ with GNU Extensions (-std=gnu++0x)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.lstfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               command="-fno-inline-functions"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.noinlinefunctions"
-               name="Do not inline functions (-fno-inline-functions)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
+               category="gnu.c.compiler.category.other"
                command="-fno-exceptions"
                defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.noexceptions"
@@ -968,53 +651,18 @@
                valueType="boolean">
          </option>
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
+               category="gnu.c.compiler.category.other"
                command="-fno-rtti"
                defaultValue="true"
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.nortti"
                name="Do not use RTTI (-fno-rtti)"
                valueType="boolean">
          </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               command="-fsigned-char"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.signedchar"
-               name="&apos;char&apos; is signed (-fsigned-char)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               command="-funsigned-bitfields"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.misc.unsignedbitfields"
-               name="Bitfields are unsigned (-funsigned-bitfields)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               command="-v"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.other.verbose"
-               name="Verbose (-v)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.category.other"
-               defaultValue="-c -fmessage-length=0"
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.option.other.otherflags"
-               name="Other flags"
-               valueType="string">
-         </option>
          <inputType
                id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.input"
                scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
                superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
          </inputType>
-         <outputType
-               id="org.eclipse.cdt.cross.arc.gnu.cpp.compiler.output"
-               superClass="cdt.managedbuild.tool.gnu.cpp.compiler.output">
-         </outputType>
       </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
