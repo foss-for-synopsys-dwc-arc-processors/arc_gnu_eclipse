@@ -263,171 +263,12 @@
             isAbstract="false"
             name="ARC ELF32 GCC Assembler"
             natureFilter="both"
-            outputFlag="-o">
-         <supportedProperties>
-            <property
-                  id="org.eclipse.cdt.build.core.buildType">
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.debug">
-               </value>
-               <value
-                     id="org.eclipse.cdt.build.core.buildType.release">
-               </value>
-            </property>
-         </supportedProperties>
-         <envVarBuildPath
-               pathType="buildpathInclude"
-               variableList="CPATH,C_INCLUDE_PATH">
-         </envVarBuildPath>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.category.preprocessor"
-               name="Preprocessor"
-               owner="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </optionCategory>
+            outputFlag="-o"
+            superClass="cdt.managedbuild.tool.gnu.assembler">
          <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.preprocessor"
-               command="-x assembler-with-cpp"
-               commandFalse="-x assembler"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.usecpp"
-               name="Use preprocessor"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.preprocessor"
-               command="-nostdinc"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.nostdinc"
-               name="Do not search system directories (-nostdinc)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.preprocessor"
-               command="-E"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.preprocess"
-               name="Preprocess only (-E)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.preprocessor"
-               command="-D"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.def"
-               name="Defined symbols (-D)"
-               valueType="definedSymbols">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.preprocessor"
-               command="-U"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.preprocessor.undef"
-               name="Undefined symbols (-U)"
-               valueType="undefDefinedSymbols">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.category.dirs"
-               name="Directories"
-               owner="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </optionCategory>
-         <option
-               browseType="directory"
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.dirs"
-               command="-I"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.include.paths"
-               name="Include paths (-I)"
-               valueType="includePath">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               name="Warnings"
-               owner="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               command="-pedantic"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.warnings.pedantic"
-               name="Pedantic (-pedantic)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               command="-pedantic-errors"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.warnings.pedantic.error"
-               name="Pedantic warnings as errors (-pedantic-errors)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               command="-w"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.warnings.nowarn"
-               name="Inhibit all warnings (-w)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               command="-Wall"
-               defaultValue="true"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.warnings.allwarn"
-               name="All warnings (-Wall)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               command="-Wextra"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.warnings.extrawarn"
-               name="Extra warnings (-Wextra)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.warnings"
-               command="-Werror"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.warnings.toerrors"
-               name="Warnings as errors (-Werror)"
-               valueType="boolean">
-         </option>
-         <optionCategory
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.category.other"
-               name="Miscellaneous"
-               owner="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </optionCategory>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.other"
-               command="-Xassembler ${VALUE}"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.xflags"
-               name="Assembler flags"
-               valueType="stringList">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.other"
+               category="gnu.asm.category.general"
                id="org.eclipse.cdt.cross.arc.gnu.assembler.option.misc.lstfilename"
                superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.other"
-               command="-ansi"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.misc.ansi"
-               name="Support ANSI programs (-ansi)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.other"
-               command="-v"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.other.verbose"
-               name="Verbose (-v)"
-               valueType="boolean">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.arc.gnu.assembler.category.other"
-               defaultValue="-c -fmessage-length=0"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.other.other"
-               name="Other flags"
-               valueType="string">
          </option>
          <inputType
                dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
@@ -442,10 +283,18 @@
          </inputType>
          <outputType
                buildVariable="OBJS"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.output"
+               id="cdt.managedbuild.tool.gnu.assembler.output"
                outputs="o"
                superClass="cdt.managedbuild.tool.gnu.assembler.output">
          </outputType>
+         <option
+               category="gnu.asm.category.general"
+               id="org.eclipse.cdt.cross.arc.gnu.assembler.flags"
+               name="Assembler flags"
+               superClass="gnu.both.asm.option.flags"
+               value="-c"
+               valueType="string">
+         </option>
       </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
