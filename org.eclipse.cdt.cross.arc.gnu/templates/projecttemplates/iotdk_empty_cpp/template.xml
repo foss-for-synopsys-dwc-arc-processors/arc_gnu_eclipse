@@ -46,7 +46,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.cpp.linker.base.option.specs" />
+        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base.option.specs" />
         <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nosys" />
         <simple name="path" value="" />
       </element>
@@ -62,7 +62,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.cpp.link.option.ldflags" />
+        <simple name="id" value="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.ldflags" />
         <simple-array name="values">
           <element value="--defsym=ivtbase_addr=0x0" />
         </simple-array>
