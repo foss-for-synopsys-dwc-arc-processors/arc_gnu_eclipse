@@ -255,47 +255,6 @@
             valueType="string">
       </option>
       </tool>
-      <tool
-            command="arc-elf32-gcc"
-            commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-            errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
-            id="org.eclipse.cdt.cross.arc.gnu.assembler"
-            isAbstract="false"
-            name="ARC ELF32 GCC Assembler"
-            natureFilter="both"
-            outputFlag="-o"
-            superClass="cdt.managedbuild.tool.gnu.assembler">
-         <option
-               category="gnu.asm.category.general"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.option.misc.lstfilename"
-               superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
-         </option>
-         <inputType
-               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
-               dependencyContentType="org.eclipse.cdt.core.cHeader"
-               dependencyExtensions="h"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.input"
-               languageId="org.eclipse.cdt.core.assembly"
-               scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-               sourceContentType="org.eclipse.cdt.core.asmSource"
-               sources="s,S,asm"
-               superClass="cdt.managedbuild.tool.gnu.assembler.input">
-         </inputType>
-         <outputType
-               buildVariable="OBJS"
-               id="cdt.managedbuild.tool.gnu.assembler.output"
-               outputs="o"
-               superClass="cdt.managedbuild.tool.gnu.assembler.output">
-         </outputType>
-         <option
-               category="gnu.asm.category.general"
-               id="org.eclipse.cdt.cross.arc.gnu.assembler.flags"
-               name="Assembler flags"
-               superClass="gnu.both.asm.option.flags"
-               value="-c"
-               valueType="string">
-         </option>
-      </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
             isAbstract="true"
@@ -1629,10 +1588,6 @@
             superClass="com.synopsys.arc.gnu.elf.toolchain.base"
             targetTool="com.synopsys.arc.gnu.elf.tool.c.linker.arc;com.synopsys.arc.gnu.elf.tool.cpp.linker.arc">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arc"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
-         </tool>
-         <tool
                id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc"
                name="%tool.c.compiler"
                natureFilter="cnature"
@@ -1726,6 +1681,47 @@
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
                   superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
             </inputType>
+         </tool>
+         <tool
+               command="arc-elf32-gcc"
+               commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
+               id="com.synopsys.arc.gnu.elf.tool.assembler.arc"
+               isAbstract="true"
+               name="%tool.assembler"
+               natureFilter="both"
+               outputFlag="-o"
+               superClass="cdt.managedbuild.tool.gnu.assembler">
+            <option
+                  category="gnu.asm.category.general"
+                  id="com.synopsys.arc.gnu.elf.tool.assembler.option.misc.lstfilename"
+                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
+            </option>
+            <option
+                  category="gnu.asm.category.general"
+                  id="com.synopsys.arc.gnu.elf.tool.assembler.option.flags"
+                  name="%option.assembler.flags"
+                  superClass="gnu.both.asm.option.flags"
+                  value="-c"
+                  valueType="string">
+            </option>
+            <inputType
+                  dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
+                  dependencyContentType="org.eclipse.cdt.core.cHeader"
+                  dependencyExtensions="h"
+                  id="com.synopsys.arc.gnu.elf.tool.assembler.input"
+                  languageId="org.eclipse.cdt.core.assembly"
+                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  sourceContentType="org.eclipse.cdt.core.asmSource"
+                  sources="s,S,asm"
+                  superClass="cdt.managedbuild.tool.gnu.assembler.input">
+            </inputType>
+            <outputType
+                  buildVariable="OBJS"
+                  id="com.synopsys.arc.gnu.elf.tool.assembler.output"
+                  outputs="o"
+                  superClass="cdt.managedbuild.tool.gnu.assembler.output">
+            </outputType>
          </tool>
          <tool
                command="arc-elf32-gcc"
@@ -2030,11 +2026,11 @@
                command="arceb-elf32-gcc"
                id="com.synopsys.arc.gnu.elf.tool.assembler.arceb"
                name="%tool.assembler_eb"
-               superClass="org.eclipse.cdt.cross.arc.gnu.assembler">
+               superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.arc">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.assembler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.assembler.input">
+                  superClass="com.synopsys.arc.gnu.elf.tool.assembler.input">
             </inputType>
          </tool>
          <tool
