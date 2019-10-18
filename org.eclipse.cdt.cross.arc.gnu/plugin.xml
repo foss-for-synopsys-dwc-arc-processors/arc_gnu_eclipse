@@ -92,13 +92,6 @@
             id="org.eclipse.cdt.cross.arc.gnu.base"
             isAbstract="true"
             name="Options Placeholder">
-         <option
-               command="-Wa,"
-               defaultValue="-adhlns=&quot;$@.lst&quot;"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename"
-               name="Assembler Listing"
-               valueType="string">
-         </option>
       <option
             id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem"
             name="Use GCC specs file"
@@ -1294,8 +1287,11 @@
             </option>
             <option
                   category="gnu.c.compiler.category.other"
+                  command="-Wa,"
+                  defaultValue="-adhlns=&quot;$@.lst&quot;"
                   id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.lstfilename"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
+                  name="Assembler Listing"
+                  valueType="string">
             </option>
             <option
                   category="gnu.c.compiler.category.other"
@@ -1617,7 +1613,7 @@
             <option
                   category="gnu.asm.category.general"
                   id="com.synopsys.arc.gnu.elf.tool.assembler.option.misc.lstfilename"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename">
+                  superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.lstfilename">
             </option>
             <option
                   category="gnu.asm.category.general"
