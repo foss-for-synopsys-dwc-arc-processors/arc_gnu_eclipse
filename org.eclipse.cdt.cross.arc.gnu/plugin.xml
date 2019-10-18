@@ -1787,6 +1787,85 @@
                </checkBuildProperty>
             </enablement>
          </tool>
+         <tool
+               command="arc-elf32-size"
+               commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
+               id="arc.gnu.elf.tool.printsize.base">
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  name="General"
+                  owner="arc.gnu.elf.tool.printsize.base">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format"
+                  name="Size Format"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="--format=berkeley"
+                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.berkeley"
+                     isDefault="true"
+                     name="Berkeley">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--format=sysv"
+                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.sysv"
+                     name="SysV">
+               </enumeratedOptionValue>
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  command="-x"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.hex"
+                  name="Hex"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  command="-t"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.totals"
+                  name="Show Totals"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.otherflags"
+                  name="Other flags"
+                  valueType="string">
+            </option>
+            <outputType
+                  buildVariable="SECONDARY_SIZE"
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
+                  outputNames="${BuildArtifactFileBaseName}.siz"
+                  outputs="siz">
+            </outputType>
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.input"
+                  multipleOfType="true"
+                  option="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
+                  sources="elf">
+            </inputType>
+            <option
+                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
+                  resourceFilter="all"
+                  value="${BuildArtifactFileName}"
+                  valueType="string">
+            </option>
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="arc.gnu.elf.toolchain.base"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
+         </tool>
       </toolChain>
       <toolChain
             id="arc.gnu.elf.toolchain.arc"
@@ -1875,81 +1954,8 @@
                command="arc-elf32-size"
                commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
                id="arc.gnu.elf.tool.printsize.arc"
-               name="%tool.printsize">
-            <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  name="General"
-                  owner="arc.gnu.elf.tool.printsize.arc">
-            </optionCategory>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format"
-                  name="Size Format"
-                  valueType="enumerated">
-               <enumeratedOptionValue
-                     command="--format=berkeley"
-                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.berkeley"
-                     isDefault="true"
-                     name="Berkeley">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="--format=sysv"
-                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.sysv"
-                     name="SysV">
-               </enumeratedOptionValue>
-            </option>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  command="-x"
-                  defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.hex"
-                  name="Hex"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  command="-t"
-                  defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.totals"
-                  name="Show Totals"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.otherflags"
-                  name="Other flags"
-                  valueType="string">
-            </option>
-            <outputType
-                  buildVariable="SECONDARY_SIZE"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
-                  outputNames="${BuildArtifactFileBaseName}.siz"
-                  outputs="siz">
-            </outputType>
-            <inputType
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.input"
-                  multipleOfType="true"
-                  option="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
-                  sources="elf">
-            </inputType>
-            <option
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
-                  resourceFilter="all"
-                  value="${BuildArtifactFileName}"
-                  valueType="string">
-            </option>
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="arc.gnu.elf.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
+               name="%tool.printsize"
+               superClass="arc.gnu.elf.tool.printsize.base">
          </tool>
       </toolChain>
       <toolChain
@@ -2026,8 +2032,8 @@
          <tool
                command="arceb-elf32-size"
                id="arc.gnu.elf.tool.printsize.arceb"
-               name="ARC GNU Print Size (EB)"
-               superClass="arc.gnu.elf.tool.printsize.arc">
+               name="%tool.printsize_eb"
+               superClass="arc.gnu.elf.tool.printsize.base">
          </tool>
       </toolChain>
 
