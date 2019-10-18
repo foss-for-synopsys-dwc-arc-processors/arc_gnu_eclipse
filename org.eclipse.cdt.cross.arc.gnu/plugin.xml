@@ -1119,7 +1119,7 @@
          <tool
                command="arc-elf32-gcc"
                commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
-               id="com.synopsys.arc.gnu.elf.tool.base.compiler.arc"
+               id="arc.gnu.elf.tool.c.compiler.base"
                isAbstract="true"
                natureFilter="both"
                superClass="cdt.managedbuild.tool.gnu.c.compiler">
@@ -1251,7 +1251,7 @@
                command="arc-elf32-gcc"
                commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GLDErrorParser"
-               id="com.synopsys.arc.gnu.elf.tool.base.linker.arc"
+               id="arc.gnu.elf.tool.c.linker.base"
                isAbstract="true"
                natureFilter="cnature"
                outputFlag="-o">
@@ -1262,7 +1262,7 @@
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   name="General"
-                  owner="com.synopsys.arc.gnu.elf.tool.base.linker.arc">
+                  owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
                   applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
@@ -1385,7 +1385,7 @@
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
                   name="Libraries"
-                  owner="com.synopsys.arc.gnu.elf.tool.base.linker.arc">
+                  owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
                   browseType="none"
@@ -1406,7 +1406,7 @@
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
                   name="Miscellaneous"
-                  owner="com.synopsys.arc.gnu.elf.tool.base.linker.arc">
+                  owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
@@ -1489,14 +1489,14 @@
       <toolChain
             id="arc.gnu.elf.toolchain.arc"
             isAbstract="true"
-            secondaryOutputs="com.synopsys.arc.gnu.elf.tool.flash.arc.output;com.synopsys.arc.gnu.elf.tool.listing.arc.output;com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
+            secondaryOutputs="arc.gnu.elf.tool.flash.arc.output;arc.gnu.elf.tool.listing.arc.output;arc.gnu.elf.tool.printsize.arc.output"
             superClass="arc.gnu.elf.toolchain.base"
-            targetTool="com.synopsys.arc.gnu.elf.tool.c.linker.arc;com.synopsys.arc.gnu.elf.tool.cpp.linker.arc">
+            targetTool="arc.gnu.elf.tool.c.linker.arc;arc.gnu.elf.tool.cpp.linker.arc">
          <tool
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc"
+               id="arc.gnu.elf.tool.c.compiler.arc"
                name="%tool.c.compiler"
                natureFilter="cnature"
-               superClass="com.synopsys.arc.gnu.elf.tool.base.compiler.arc">
+               superClass="arc.gnu.elf.tool.c.compiler.base">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.c.compiler.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
@@ -1505,10 +1505,10 @@
          </tool>
          <tool
                command="arc-elf32-g++"
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc"
+               id="arc.gnu.elf.tool.cpp.compiler.arc"
                name="%tool.cpp.compiler"
                natureFilter="ccnature"
-               superClass="com.synopsys.arc.gnu.elf.tool.base.compiler.arc">
+               superClass="arc.gnu.elf.tool.c.compiler.base">
             <envVarBuildPath
                   pathType="buildpathInclude"
                   variableList="CPATH,CPLUS_INCLUDE_PATH">
@@ -1591,7 +1591,7 @@
                command="arc-elf32-gcc"
                commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arc"
+               id="arc.gnu.elf.tool.assembler.arc"
                isAbstract="true"
                name="%tool.assembler"
                natureFilter="both"
@@ -1630,21 +1630,21 @@
          </tool>
          <tool
                command="arc-elf32-gcc"
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.arc"
+               id="arc.gnu.elf.tool.c.linker.arc"
                name="%tool.c.linker"
                natureFilter="cnature"
-               superClass="com.synopsys.arc.gnu.elf.tool.base.linker.arc">
+               superClass="arc.gnu.elf.tool.c.linker.base">
          </tool>
          <tool
                command="arc-elf32-g++"
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc"
+               id="arc.gnu.elf.tool.cpp.linker.arc"
                name="%tool.cpp.linker"
                natureFilter="ccnature"
-               superClass="com.synopsys.arc.gnu.elf.tool.base.linker.arc">
+               superClass="arc.gnu.elf.tool.c.linker.base">
          </tool>
          <tool
                command="arc-elf32-ar"
-               id="com.synopsys.arc.gnu.elf.tool.archiver.arc"
+               id="arc.gnu.elf.tool.archiver.arc"
                name="%tool.archiver"
                superClass="cdt.managedbuild.tool.gnu.archiver">
             <enablement
@@ -1657,13 +1657,13 @@
          </tool>
          <tool
                command="arc-elf32-objcopy"
-               id="com.synopsys.arc.gnu.elf.tool.flash.arc"
+               id="arc.gnu.elf.tool.flash.arc"
                name="%tool.flash"
                natureFilter="both">
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.flash.arc.out"
                   name="Output"
-                  owner="com.synopsys.arc.gnu.elf.tool.flash.arc">
+                  owner="arc.gnu.elf.tool.flash.arc">
             </optionCategory>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.flash.arc.out"
@@ -1719,7 +1719,7 @@
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
                   name="Section"
-                  owner="com.synopsys.arc.gnu.elf.tool.flash.arc">
+                  owner="arc.gnu.elf.tool.flash.arc">
             </optionCategory>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
@@ -1751,7 +1751,7 @@
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.flash.arc.misc"
                   name="Miscellaneous"
-                  owner="com.synopsys.arc.gnu.elf.tool.flash.arc">
+                  owner="arc.gnu.elf.tool.flash.arc">
             </optionCategory>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.flash.arc.misc"
@@ -1793,14 +1793,14 @@
          </tool>
          <tool
                command="arc-elf32-objdump"
-               id="com.synopsys.arc.gnu.elf.tool.listing.arc"
+               id="arc.gnu.elf.tool.listing.arc"
                name="%tool.listing"
                natureFilter="both"
                outputFlag="&gt;">
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
                   name="General"
-                  owner="com.synopsys.arc.gnu.elf.tool.listing.arc">
+                  owner="arc.gnu.elf.tool.listing.arc">
             </optionCategory>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
@@ -1843,12 +1843,12 @@
          <tool
                command="arc-elf32-size"
                commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
-               id="com.synopsys.arc.gnu.elf.tool.printsize.arc"
+               id="arc.gnu.elf.tool.printsize.arc"
                name="%tool.printsize">
             <optionCategory
                   id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
                   name="General"
-                  owner="com.synopsys.arc.gnu.elf.tool.printsize.arc">
+                  owner="arc.gnu.elf.tool.printsize.arc">
             </optionCategory>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
@@ -1924,14 +1924,14 @@
       <toolChain
             id="arc.gnu.elf.toolchain.arceb"
             isAbstract="true"
-            secondaryOutputs="com.synopsys.arc.gnu.elf.tool.flash.arc.output;com.synopsys.arc.gnu.elf.tool.listing.arc.output;com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
+            secondaryOutputs="arc.gnu.elf.tool.flash.arc.output;arc.gnu.elf.tool.listing.arc.output;arc.gnu.elf.tool.printsize.arc.output"
             superClass="arc.gnu.elf.toolchain.base"
-            targetTool="com.synopsys.arc.gnu.elf.tool.c.linker.arc;com.synopsys.arc.gnu.elf.tool.cpp.linker.arc">
+            targetTool="arc.gnu.elf.tool.c.linker.arc;arc.gnu.elf.tool.cpp.linker.arc">
          <tool
                command="arceb-elf32-gcc"
-               id="com.synopsys.arc.gnu.elf.tool.assembler.arceb"
+               id="arc.gnu.elf.tool.assembler.arceb"
                name="%tool.assembler_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.arc">
+               superClass="arc.gnu.elf.tool.assembler.arc">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.assembler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
@@ -1940,9 +1940,9 @@
          </tool>
          <tool
                command="arceb-elf32-gcc"
-               id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb"
+               id="arc.gnu.elf.tool.c.compiler.arceb"
                name="%tool.c.compiler_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.arc">
+               superClass="arc.gnu.elf.tool.c.compiler.arc">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
@@ -1951,9 +1951,9 @@
          </tool>
          <tool
                command="arceb-elf32-g++"
-               id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb"
+               id="arc.gnu.elf.tool.cpp.compiler.arceb"
                name="%tool.cpp.compiler_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arc">
+               superClass="arc.gnu.elf.tool.cpp.compiler.arc">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
@@ -1962,39 +1962,39 @@
          </tool>
          <tool
                command="arceb-elf32-gcc"
-               id="com.synopsys.arc.gnu.elf.tool.c.linker.arceb"
+               id="arc.gnu.elf.tool.c.linker.arceb"
                name="%tool.c.linker_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.c.linker.arc">
+               superClass="arc.gnu.elf.tool.c.linker.arc">
          </tool>
          <tool
                command="arceb-elf32-g++"
-               id="com.synopsys.arc.gnu.elf.tool.cpp.linker.arceb"
+               id="arc.gnu.elf.tool.cpp.linker.arceb"
                name="%tool.cpp.linker_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.cpp.linker.arc">
+               superClass="arc.gnu.elf.tool.cpp.linker.arc">
          </tool>
          <tool
                command="arceb-elf32-ar"
-               id="com.synopsys.arc.gnu.elf.tool.archiver.arceb"
+               id="arc.gnu.elf.tool.archiver.arceb"
                name="%tool.archiver_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+               superClass="arc.gnu.elf.tool.archiver.arc">
          </tool>
          <tool
                command="arceb-elf32-objdump"
-               id="com.synopsys.arc.gnu.elf.tool.flash.arceb"
+               id="arc.gnu.elf.tool.flash.arceb"
                name="%tool.flash_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.flash.arc">
+               superClass="arc.gnu.elf.tool.flash.arc">
          </tool>
          <tool
                command="arceb-elf32-objdump"
-               id="com.synopsys.arc.gnu.elf.tool.listing.arceb"
+               id="arc.gnu.elf.tool.listing.arceb"
                name="%tool.listing_eb"
-               superClass="com.synopsys.arc.gnu.elf.tool.listing.arc">
+               superClass="arc.gnu.elf.tool.listing.arc">
          </tool>
          <tool
                command="arceb-elf32-size"
-               id="com.synopsys.arc.gnu.elf.tool.printsize.arceb"
+               id="arc.gnu.elf.tool.printsize.arceb"
                name="ARC GNU Print Size (EB)"
-               superClass="com.synopsys.arc.gnu.elf.tool.printsize.arc">
+               superClass="arc.gnu.elf.tool.printsize.arc">
          </tool>
       </toolChain>
 
@@ -2465,7 +2465,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.em.debug"
                   superClass="arc.gnu.elf.toolchain.em"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -2476,7 +2476,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.em.release"
                   superClass="arc.gnu.elf.toolchain.em"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -2492,7 +2492,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.emeb.debug"
                   superClass="arc.gnu.elf.toolchain.emeb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -2503,7 +2503,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.emeb.release"
                   superClass="arc.gnu.elf.toolchain.emeb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2519,7 +2519,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hs.debug"
                   superClass="arc.gnu.elf.toolchain.hs"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -2530,7 +2530,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hs.release"
                   superClass="arc.gnu.elf.toolchain.hs"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -2546,7 +2546,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hseb.debug"
                   superClass="arc.gnu.elf.toolchain.hseb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -2557,7 +2557,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hseb.release"
                   superClass="arc.gnu.elf.toolchain.hseb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2573,7 +2573,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700.debug"
                   superClass="arc.gnu.elf.toolchain.arc700"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -2584,7 +2584,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700.release"
                   superClass="arc.gnu.elf.toolchain.arc700"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -2600,7 +2600,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700eb.debug"
                   superClass="arc.gnu.elf.toolchain.arc700eb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -2611,7 +2611,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700eb.release"
                   superClass="arc.gnu.elf.toolchain.arc700eb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2627,7 +2627,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600.debug"
                   superClass="arc.gnu.elf.toolchain.arc600"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
          <configuration
@@ -2638,7 +2638,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600.release"
                   superClass="arc.gnu.elf.toolchain.arc600"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
+                  targetTool="arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
       </projectType>
@@ -2654,7 +2654,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600eb.debug"
                   superClass="arc.gnu.elf.toolchain.arc600eb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
          <configuration
@@ -2665,7 +2665,7 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600eb.release"
                   superClass="arc.gnu.elf.toolchain.arc600eb"
-                  targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
+                  targetTool="arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
       </projectType>
