@@ -1980,13 +1980,15 @@
                command="arceb-elf32-gcc"
                id="arc.gnu.elf.tool.c.linker.arceb"
                name="%tool.c.linker_eb"
-               superClass="arc.gnu.elf.tool.c.linker.arc">
+               natureFilter="cnature"
+               superClass="arc.gnu.elf.tool.c.linker.base">
          </tool>
          <tool
                command="arceb-elf32-g++"
                id="arc.gnu.elf.tool.cpp.linker.arceb"
                name="%tool.cpp.linker_eb"
-               superClass="arc.gnu.elf.tool.cpp.linker.arc">
+               natureFilter="ccnature"
+               superClass="arc.gnu.elf.tool.c.linker.base">
          </tool>
          <tool
                command="arceb-elf32-ar"
