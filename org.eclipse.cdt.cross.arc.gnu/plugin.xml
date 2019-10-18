@@ -93,78 +93,6 @@
             isAbstract="true"
             name="Options Placeholder">
          <option
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level"
-               name="Optimization Level"
-               valueType="enumerated">
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.size">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.release">
-               </checkBuildProperty>
-            </enablement>
-            <enablement
-                  attribute="value"
-                  extensionAdjustment="false"
-                  type="CONTAINER_ATTRIBUTE"
-                  value="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.none">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildType"
-                     value="org.eclipse.cdt.build.core.buildType.debug">
-               </checkBuildProperty>
-            </enablement>
-            <enumeratedOptionValue
-                  command="-O0"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.none"
-                  name="None (-O0)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-O1"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.optimize"
-                  name="Optimize (-O1)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-O2"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.more"
-                  isDefault="true"
-                  name="Optimize more (-O2)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-O3"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.most"
-                  name="Optimize most (-O3)">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-Os"
-                  id="org.eclipse.cdt.cross.arc.gnu.base.option.optimization.level.size"
-                  name="Optimize size (-Os)">
-            </enumeratedOptionValue>
-         </option>
-         <option
-               command="-Xlinker --cref"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.other.cref"
-               name="Cross Reference (-Xlinker --cref)"
-               valueType="boolean">
-         </option>
-         <option
-               command="-Xlinker --print-map"
-               defaultValue="false"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.other.printmap"
-               name="Print link map (-Xlinker --print-map)"
-               valueType="boolean">
-         </option>
-         <option
-               command="-Wl,-Map,"
-               defaultValue="${BuildArtifactFileBaseName}.map"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.other.mapfilename"
-               name="Map Filename"
-               valueType="string">
-         </option>
-         <option
                command="-Wa,"
                defaultValue="-adhlns=&quot;$@.lst&quot;"
                id="org.eclipse.cdt.cross.arc.gnu.base.option.other.lstfilename"
@@ -236,23 +164,6 @@
                </checkBuildProperty>
             </not>
          </enablement>
-      </option>
-      <option
-            command="--specs=nano.specs"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.nano"
-            name="Enable nano.specs to use standard libraries optimized for code size"
-            useByScannerDiscovery="false"
-            valueType="boolean">
-      </option>
-      <option
-            applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-            browseType="directory"
-            command="-L&quot;${VALUE}&quot;"
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"
-            isAbstract="false"
-            name="Directory with memory.x file"
-            resourceFilter="all"
-            valueType="string">
       </option>
       </tool>
       <toolChain
@@ -1461,9 +1372,11 @@
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  command="--specs=nano.specs"
+                  defaultValue="false"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nano"
                   name="Enable nano.specs to use standard libraries optimized for code size"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.nano">
+                  valueType="boolean">
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
@@ -1476,14 +1389,14 @@
                   superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
             </option>
             <option
-                  browseType="file"
+                  applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+                  browseType="directory"
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   command="-L&quot;${VALUE}&quot;"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.memoryx"
                   isAbstract="false"
                   name="Directory with memory.x file"
                   resourceFilter="all"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"
                   valueType="string">
             </option>
             <optionCategory
@@ -1527,18 +1440,27 @@
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  command="-Wl,-Map,"
+                  defaultValue="${BuildArtifactFileBaseName}.map"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.mapfilename"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.mapfilename">
+                  name="Map Filename"
+                  valueType="string">
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  command="-Xlinker --cref"
+                  defaultValue="false"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.cref"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.cref">
+                  name="Cross Reference (-Xlinker --cref)"
+                  valueType="boolean">
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  command="-Xlinker --print-map"
+                  defaultValue="false"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.printmap"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.other.printmap">
+                  name="Print link map (-Xlinker --print-map)"
+                  valueType="boolean">
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
