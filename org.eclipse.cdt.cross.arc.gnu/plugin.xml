@@ -1604,6 +1604,141 @@
                </checkBuildProperty>
             </enablement>
          </tool>
+         <tool
+               command="arc-elf32-objcopy"
+               id="arc.gnu.elf.tool.flash.base"
+               natureFilter="both">
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.out"
+                  name="Output"
+                  owner="arc.gnu.elf.tool.flash.base">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.out"
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice"
+                  name="Output file format (-O)"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="-O ihex"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.ihex"
+                     name="ihex">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O elf32-littlearc"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-littlearc"
+                     name="elf32-littlearc">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O elf32-bigarc"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-bigarc"
+                     name="elf32-bigarc">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O elf32-little"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-little"
+                     name="elf32-little">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O elf32-big"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-big"
+                     name="elf32-bit">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O srec"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.srec"
+                     name="srec">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O symbolsrec"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.symbolsrec"
+                     name="symbolsrec">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O tekhex"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.tekhex"
+                     name="tekhex">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-O binary"
+                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.binary"
+                     name="binary">
+               </enumeratedOptionValue>
+            </option>
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
+                  name="Section"
+                  owner="arc.gnu.elf.tool.flash.base">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
+                  command="-j .text"
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section.text"
+                  isAbstract="false"
+                  name="Section: -j .text"
+                  resourceFilter="all"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
+                  command="-j .data"
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section.data"
+                  isAbstract="false"
+                  name="Section: -j .data"
+                  resourceFilter="all"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
+                  command="-j "
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section.other"
+                  isAbstract="false"
+                  name="Other (-j)"
+                  resourceFilter="all"
+                  valueType="stringList">
+            </option>
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.misc"
+                  name="Miscellaneous"
+                  owner="arc.gnu.elf.tool.flash.base">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.misc"
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.misc.otheropt"
+                  name="Other options"
+                  valueType="string">
+            </option>
+            <outputType
+                  buildVariable="SECONDARY_FLASH"
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.output"
+                  outputContentType="org.eclipse.cdt.cross.arc.gnu.content-type.hex"
+                  outputNames="${BuildArtifactFileBaseName}.hex"
+                  outputs="hex">
+            </outputType>
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.input"
+                  multipleOfType="true"
+                  option="com.synopsys.arc.gnu.elf.tool.flash.arc.InFileName"
+                  sources="elf">
+            </inputType>
+            <option
+                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.InFileName"
+                  resourceFilter="all"
+                  value="${BuildArtifactFileName}"
+                  valueType="string">
+            </option>
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="arc.gnu.elf.toolchain.base"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
+         </tool>
       </toolChain>
       <toolChain
             id="arc.gnu.elf.toolchain.arc"
@@ -1680,137 +1815,7 @@
                command="arc-elf32-objcopy"
                id="arc.gnu.elf.tool.flash.arc"
                name="%tool.flash"
-               natureFilter="both">
-            <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.out"
-                  name="Output"
-                  owner="arc.gnu.elf.tool.flash.arc">
-            </optionCategory>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.out"
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice"
-                  name="Output file format (-O)"
-                  valueType="enumerated">
-               <enumeratedOptionValue
-                     command="-O ihex"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.ihex"
-                     name="ihex">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O elf32-littlearc"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-littlearc"
-                     name="elf32-littlearc">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O elf32-bigarc"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-bigarc"
-                     name="elf32-bigarc">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O elf32-little"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-little"
-                     name="elf32-little">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O elf32-big"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.elf32-big"
-                     name="elf32-bit">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O srec"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.srec"
-                     name="srec">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O symbolsrec"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.symbolsrec"
-                     name="symbolsrec">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O tekhex"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.tekhex"
-                     name="tekhex">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-O binary"
-                     id="com.synopsys.arc.gnu.elf.tool.flash.arc.out.choice.binary"
-                     name="binary">
-               </enumeratedOptionValue>
-            </option>
-            <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
-                  name="Section"
-                  owner="arc.gnu.elf.tool.flash.arc">
-            </optionCategory>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
-                  command="-j .text"
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section.text"
-                  isAbstract="false"
-                  name="Section: -j .text"
-                  resourceFilter="all"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
-                  command="-j .data"
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section.data"
-                  isAbstract="false"
-                  name="Section: -j .data"
-                  resourceFilter="all"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.section"
-                  command="-j "
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.section.other"
-                  isAbstract="false"
-                  name="Other (-j)"
-                  resourceFilter="all"
-                  valueType="stringList">
-            </option>
-            <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.misc"
-                  name="Miscellaneous"
-                  owner="arc.gnu.elf.tool.flash.arc">
-            </optionCategory>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.flash.arc.misc"
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.misc.otheropt"
-                  name="Other options"
-                  valueType="string">
-            </option>
-            <outputType
-                  buildVariable="SECONDARY_FLASH"
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.output"
-                  outputContentType="org.eclipse.cdt.cross.arc.gnu.content-type.hex"
-                  outputNames="${BuildArtifactFileBaseName}.hex"
-                  outputs="hex">
-            </outputType>
-            <inputType
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.input"
-                  multipleOfType="true"
-                  option="com.synopsys.arc.gnu.elf.tool.flash.arc.InFileName"
-                  sources="elf">
-            </inputType>
-            <option
-                  id="com.synopsys.arc.gnu.elf.tool.flash.arc.InFileName"
-                  resourceFilter="all"
-                  value="${BuildArtifactFileName}"
-                  valueType="string">
-            </option>
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="arc.gnu.elf.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
+               superClass="arc.gnu.elf.tool.flash.base">
          </tool>
          <tool
                command="arc-elf32-objdump"
@@ -2005,7 +2010,7 @@
                command="arceb-elf32-objdump"
                id="arc.gnu.elf.tool.flash.arceb"
                name="%tool.flash_eb"
-               superClass="arc.gnu.elf.tool.flash.arc">
+               superClass="arc.gnu.elf.tool.flash.base">
          </tool>
          <tool
                command="arceb-elf32-objdump"
