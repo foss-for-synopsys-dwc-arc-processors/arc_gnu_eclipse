@@ -96,18 +96,19 @@
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="arc.gnu.elf.toolchain.base.targetPlatform"
                isAbstract="false"
-               name="ARC platform">
+               name="%base.platform">
          </targetPlatform>
          <builder
                id="arc.gnu.elf.toolchain.base.builder"
+               name="%base.builder"
                superClass="cdt.managedbuild.target.gnu.builder">
          </builder>
          <optionCategory
-               id="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               id="arc.gnu.elf.category.target"
                name="%option.target">
          </optionCategory>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                defaultValue="false"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf"
                name="%option.use_tcf"
@@ -130,7 +131,7 @@
          <option
                browseFilterExtensions="*.tcf"
                browseType="file"
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_path"
                name="%option.tcf_path"
                valueHandler="com.arc.cdt.toolchain.tcf.TcfValueHandler"
@@ -157,7 +158,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                defaultValue="false"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_map"
                name="%option.tcf_map"
@@ -184,7 +185,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                defaultValue="false"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_cinclude"
                name="%option.tcf_cinclude"
@@ -211,7 +212,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem"
                name="%option.cpu"
                valueType="enumerated">
@@ -262,7 +263,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs"
                name="%option.cpu"
                valueType="enumerated">
@@ -308,7 +309,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu700"
                name="%option.cpu"
                valueType="enumerated">
@@ -327,7 +328,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.cpu600"
                name="%option.cpu"
                valueType="enumerated">
@@ -346,7 +347,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem"
                name="%option.fpu"
                valueType="enumerated">
@@ -423,7 +424,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs"
                name="%option.fpu"
                valueType="enumerated">
@@ -496,7 +497,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.fpx"
                name="%option.fpu"
                valueType="enumerated">
@@ -550,7 +551,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem"
                name="%option.mpy"
                valueType="enumerated">
@@ -626,7 +627,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs"
                name="%option.mpy"
                valueType="enumerated">
@@ -691,7 +692,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.mpy600"
                name="%option.mpy"
                valueType="enumerated">
@@ -719,7 +720,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mdiv-rem"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem"
                name="%option.divrem"
@@ -773,7 +774,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mcode-density"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity"
                name="%option.code_density"
@@ -818,7 +819,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mbarrel-shifter"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter"
                name="%option.barrel_shifter"
@@ -881,7 +882,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mnorm"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.norm"
                name="%option.norm"
@@ -933,7 +934,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mswap"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.swap"
                name="%option.swap"
@@ -985,7 +986,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mll64"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.ll64"
                name="%option.ll64"
@@ -1022,7 +1023,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-matomic"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.atomic"
                name="%option.atomic"
@@ -1036,7 +1037,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mea"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.ea"
                name="%option.ea"
@@ -1050,7 +1051,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mxy"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.xy"
                name="%option.xy"
@@ -1071,7 +1072,7 @@
             </enablement>
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.target"
+               category="arc.gnu.elf.category.target"
                command="-mno-dpfp-lrsr"
                id="com.synopsys.arc.gnu.elf.toolchain.base.target.dpfplrsr"
                name="%option.dpfplrsr"
@@ -1091,18 +1092,18 @@
             </enablement>
          </option>
          <optionCategory
-               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               id="arc.gnu.elf.category.extratoolstarget"
                name="%option.extratools">
          </optionCategory>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               category="arc.gnu.elf.category.extratoolstarget"
                defaultValue="false"
                id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
                name="%option.listing"
                valueType="boolean">
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               category="arc.gnu.elf.category.extratoolstarget"
                defaultValue="true"
                id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                name="%option.printsize"
@@ -1110,7 +1111,7 @@
                valueType="boolean">
          </option>
          <option
-               category="com.synopsys.arc.gnu.elf.toolchain.base.extratools"
+               category="arc.gnu.elf.category.extratoolstarget"
                defaultValue="false"
                id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
                name="%option.flash"
