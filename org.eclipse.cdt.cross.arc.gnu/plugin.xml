@@ -1248,6 +1248,84 @@
             </option>
          </tool>
          <tool
+               command="arc-elf32-g++"
+               id="arc.gnu.elf.tool.cpp.compiler.base"
+               natureFilter="ccnature"
+               superClass="arc.gnu.elf.tool.c.compiler.base">
+            <envVarBuildPath
+                  pathType="buildpathInclude"
+                  variableList="CPATH,CPLUS_INCLUDE_PATH">
+            </envVarBuildPath>
+            <option
+                  category="gnu.c.compiler.category.dialect"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std"
+                  name="Language Standard"
+                  superClass="gnu.c.compiler.option.dialect.std"
+                  useByScannerDiscovery="true"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.none"
+                     name=" ">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-std=c++98"
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++98"
+                     name="ISO C++98 (-std=c++98)">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-std=c++0x"
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++11"
+                     name="ISO C++11 (-std=c++0x)">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-std=c++1y"
+                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++1y"
+                     name="ISO C++1y (-std=c++1y)">
+               </enumeratedOptionValue>
+            </option>
+            <option
+                  category="gnu.c.compiler.category.preprocessor"
+                  command="-nostdinc++"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.preprocessor.nostdincpp"
+                  name="Do not search system C++ directories (-nostdinc++)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.warnings"
+                  command="-Wabi"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.warnings.abi"
+                  name="ABI warnings (-Wabi)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.warnings"
+                  command="-Weffc++"
+                  defaultValue="false"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.warnings.effc"
+                  name="Effective C++ warnings (-Weffc++)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-fno-exceptions"
+                  defaultValue="true"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.misc.noexceptions"
+                  name="Do not use exceptions (-fno-exceptions)"
+                  valueType="boolean">
+            </option>
+            <option
+                  category="gnu.c.compiler.category.other"
+                  command="-fno-rtti"
+                  defaultValue="true"
+                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.misc.nortti"
+                  name="Do not use RTTI (-fno-rtti)"
+                  valueType="boolean">
+            </option>
+         </tool>
+         <tool
                command="arc-elf32-gcc"
                commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
@@ -1537,79 +1615,7 @@
                id="arc.gnu.elf.tool.cpp.compiler.arc"
                name="%tool.cpp.compiler"
                natureFilter="ccnature"
-               superClass="arc.gnu.elf.tool.c.compiler.base">
-            <envVarBuildPath
-                  pathType="buildpathInclude"
-                  variableList="CPATH,CPLUS_INCLUDE_PATH">
-            </envVarBuildPath>
-            <option
-                  category="gnu.c.compiler.category.dialect"
-                  defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std"
-                  name="Language Standard"
-                  superClass="gnu.c.compiler.option.dialect.std"
-                  useByScannerDiscovery="true"
-                  valueType="enumerated">
-               <enumeratedOptionValue
-                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.none"
-                     name=" ">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-std=c++98"
-                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++98"
-                     name="ISO C++98 (-std=c++98)">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-std=c++0x"
-                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++11"
-                     name="ISO C++11 (-std=c++0x)">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="-std=c++1y"
-                     id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.dialect.std.c++1y"
-                     name="ISO C++1y (-std=c++1y)">
-               </enumeratedOptionValue>
-            </option>
-            <option
-                  category="gnu.c.compiler.category.preprocessor"
-                  command="-nostdinc++"
-                  defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.preprocessor.nostdincpp"
-                  name="Do not search system C++ directories (-nostdinc++)"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="gnu.c.compiler.category.warnings"
-                  command="-Wabi"
-                  defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.warnings.abi"
-                  name="ABI warnings (-Wabi)"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="gnu.c.compiler.category.warnings"
-                  command="-Weffc++"
-                  defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.warnings.effc"
-                  name="Effective C++ warnings (-Weffc++)"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="gnu.c.compiler.category.other"
-                  command="-fno-exceptions"
-                  defaultValue="true"
-                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.misc.noexceptions"
-                  name="Do not use exceptions (-fno-exceptions)"
-                  valueType="boolean">
-            </option>
-            <option
-                  category="gnu.c.compiler.category.other"
-                  command="-fno-rtti"
-                  defaultValue="true"
-                  id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.option.misc.nortti"
-                  name="Do not use RTTI (-fno-rtti)"
-                  valueType="boolean">
-            </option>
+               superClass="arc.gnu.elf.tool.cpp.compiler.base">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
@@ -1941,7 +1947,7 @@
                command="arceb-elf32-gcc"
                id="arc.gnu.elf.tool.c.compiler.arceb"
                name="%tool.c.compiler_eb"
-               superClass="arc.gnu.elf.tool.c.compiler.arc">
+               superClass="arc.gnu.elf.tool.c.compiler.base">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.c.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
@@ -1952,7 +1958,7 @@
                command="arceb-elf32-g++"
                id="arc.gnu.elf.tool.cpp.compiler.arceb"
                name="%tool.cpp.compiler_eb"
-               superClass="arc.gnu.elf.tool.cpp.compiler.arc">
+               superClass="arc.gnu.elf.tool.cpp.compiler.base">
             <inputType
                   id="com.synopsys.arc.gnu.elf.tool.cpp.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
