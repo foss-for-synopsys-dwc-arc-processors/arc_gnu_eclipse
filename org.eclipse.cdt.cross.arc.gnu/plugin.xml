@@ -1739,6 +1739,54 @@
                </checkBuildProperty>
             </enablement>
          </tool>
+         <tool
+               command="arc-elf32-objdump"
+               id="arc.gnu.elf.tool.listing.base"
+               natureFilter="both"
+               outputFlag="&gt;">
+            <optionCategory
+                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
+                  name="General"
+                  owner="arc.gnu.elf.tool.listing.base">
+            </optionCategory>
+            <option
+                  category="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
+                  defaultValue="-h -S"
+                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.general.otherflags"
+                  name="Other flags"
+                  valueType="string">
+            </option>
+            <outputType
+                  buildVariable="SECONDARY_LIST"
+                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.output"
+                  outputNames="${BuildArtifactFileBaseName}.lst"
+                  outputs="lst">
+            </outputType>
+            <inputType
+                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.input"
+                  multipleOfType="true"
+                  option="com.synopsys.arc.gnu.elf.tool.listing.arc.InFileName"
+                  sources="elf">
+            </inputType>
+            <option
+                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.InFileName"
+                  resourceFilter="all"
+                  value="${BuildArtifactFileName}"
+                  valueType="string">
+            </option>
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="arc.gnu.elf.toolchain.base"
+                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
+                     value="true">
+               </checkOption>
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
+         </tool>
       </toolChain>
       <toolChain
             id="arc.gnu.elf.toolchain.arc"
@@ -1821,50 +1869,7 @@
                command="arc-elf32-objdump"
                id="arc.gnu.elf.tool.listing.arc"
                name="%tool.listing"
-               natureFilter="both"
-               outputFlag="&gt;">
-            <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
-                  name="General"
-                  owner="arc.gnu.elf.tool.listing.arc">
-            </optionCategory>
-            <option
-                  category="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
-                  defaultValue="-h -S"
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.general.otherflags"
-                  name="Other flags"
-                  valueType="string">
-            </option>
-            <outputType
-                  buildVariable="SECONDARY_LIST"
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.output"
-                  outputNames="${BuildArtifactFileBaseName}.lst"
-                  outputs="lst">
-            </outputType>
-            <inputType
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.input"
-                  multipleOfType="true"
-                  option="com.synopsys.arc.gnu.elf.tool.listing.arc.InFileName"
-                  sources="elf">
-            </inputType>
-            <option
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.InFileName"
-                  resourceFilter="all"
-                  value="${BuildArtifactFileName}"
-                  valueType="string">
-            </option>
-            <enablement
-                  type="ALL">
-               <checkOption
-                     holderId="arc.gnu.elf.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
-                     value="true">
-               </checkOption>
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
-               </checkBuildProperty>
-            </enablement>
+               superClass="arc.gnu.elf.tool.listing.base">
          </tool>
          <tool
                command="arc-elf32-size"
@@ -2016,7 +2021,7 @@
                command="arceb-elf32-objdump"
                id="arc.gnu.elf.tool.listing.arceb"
                name="%tool.listing_eb"
-               superClass="arc.gnu.elf.tool.listing.arc">
+               superClass="arc.gnu.elf.tool.listing.base">
          </tool>
          <tool
                command="arceb-elf32-size"
