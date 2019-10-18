@@ -89,17 +89,17 @@
             fileVersion="4.0.0">
       </managedBuildRevision>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.base"
+            id="arc.gnu.elf.toolchain.base"
             isAbstract="true"
             isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported">
          <targetPlatform
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
-               id="com.synopsys.arc.gnu.elf.toolchain.base.targetPlatform"
+               id="arc.gnu.elf.toolchain.base.targetPlatform"
                isAbstract="false"
                name="ARC platform">
          </targetPlatform>
          <builder
-               id="com.synopsys.arc.gnu.elf.toolchain.base.builder"
+               id="arc.gnu.elf.toolchain.base.builder"
                superClass="cdt.managedbuild.target.gnu.builder">
          </builder>
          <optionCategory
@@ -1487,10 +1487,10 @@
          </tool>
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.arc"
+            id="arc.gnu.elf.toolchain.arc"
             isAbstract="true"
             secondaryOutputs="com.synopsys.arc.gnu.elf.tool.flash.arc.output;com.synopsys.arc.gnu.elf.tool.listing.arc.output;com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
+            superClass="arc.gnu.elf.toolchain.base"
             targetTool="com.synopsys.arc.gnu.elf.tool.c.linker.arc;com.synopsys.arc.gnu.elf.tool.cpp.linker.arc">
          <tool
                id="com.synopsys.arc.gnu.elf.tool.c.compiler.arc"
@@ -1781,7 +1781,7 @@
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                     holderId="arc.gnu.elf.toolchain.base"
                      optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
                      value="true">
                </checkOption>
@@ -1830,7 +1830,7 @@
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                     holderId="arc.gnu.elf.toolchain.base"
                      optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
                      value="true">
                </checkOption>
@@ -1910,7 +1910,7 @@
             <enablement
                   type="ALL">
                <checkOption
-                     holderId="com.synopsys.arc.gnu.elf.toolchain.base"
+                     holderId="arc.gnu.elf.toolchain.base"
                      optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
                      value="true">
                </checkOption>
@@ -1922,10 +1922,10 @@
          </tool>
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.arceb"
+            id="arc.gnu.elf.toolchain.arceb"
             isAbstract="true"
             secondaryOutputs="com.synopsys.arc.gnu.elf.tool.flash.arc.output;com.synopsys.arc.gnu.elf.tool.listing.arc.output;com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.base"
+            superClass="arc.gnu.elf.toolchain.base"
             targetTool="com.synopsys.arc.gnu.elf.tool.c.linker.arc;com.synopsys.arc.gnu.elf.tool.cpp.linker.arc">
          <tool
                command="arceb-elf32-gcc"
@@ -1999,44 +1999,44 @@
       </toolChain>
 
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.em"
+            id="arc.gnu.elf.toolchain.em"
             name="%toolchain.em"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
+            superClass="arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.emeb"
+            id="arc.gnu.elf.toolchain.emeb"
             name="%toolchain.emeb"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
+            superClass="arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.hs"
+            id="arc.gnu.elf.toolchain.hs"
             name="%toolchain.hs"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
+            superClass="arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.hseb"
+            id="arc.gnu.elf.toolchain.hseb"
             name="%toolchain.hseb"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
+            superClass="arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.arc700"
+            id="arc.gnu.elf.toolchain.arc700"
             name="%toolchain.arc700"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
+            superClass="arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.arc700eb"
+            id="arc.gnu.elf.toolchain.arc700eb"
             name="%toolchain.arc700eb"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
+            superClass="arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.arc600"
+            id="arc.gnu.elf.toolchain.arc600"
             name="%toolchain.arc600"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arc">
+            superClass="arc.gnu.elf.toolchain.arc">
       </toolChain>
       <toolChain
-            id="com.synopsys.arc.gnu.elf.toolchain.arc600eb"
+            id="arc.gnu.elf.toolchain.arc600eb"
             name="%toolchain.arc600eb"
-            superClass="com.synopsys.arc.gnu.elf.toolchain.arceb">
+            superClass="arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <configuration
             artifactExtension="elf"
@@ -2063,8 +2063,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.em.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.elf32.em.debug"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -2073,8 +2073,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.em.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.elf32.em.release"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -2088,8 +2088,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.hs.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
+                  id="arc.gnu.elf.toolchain.elf32.hs.debug"
+                  superClass="arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -2098,8 +2098,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.hs.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
+                  id="arc.gnu.elf.toolchain.elf32.hs.release"
+                  superClass="arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -2113,8 +2113,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc700.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
+                  id="arc.gnu.elf.toolchain.elf32.arc700.debug"
+                  superClass="arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
          <configuration
@@ -2123,8 +2123,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc700.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
+                  id="arc.gnu.elf.toolchain.elf32.arc700.release"
+                  superClass="arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
       </projectType>
@@ -2138,8 +2138,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc600.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
+                  id="arc.gnu.elf.toolchain.elf32.arc600.debug"
+                  superClass="arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
          <configuration
@@ -2148,8 +2148,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc600.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
+                  id="arc.gnu.elf.toolchain.elf32.arc600.release"
+                  superClass="arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
       </projectType>
@@ -2163,8 +2163,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.emb.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb">
+                  id="arc.gnu.elf.toolchain.elf32.emeb.debug"
+                  superClass="arc.gnu.elf.toolchain.emeb">
             </toolChain>
          </configuration>
          <configuration
@@ -2173,8 +2173,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.emb.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb">
+                  id="arc.gnu.elf.toolchain.elf32.emeb.release"
+                  superClass="arc.gnu.elf.toolchain.emeb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2188,8 +2188,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.hsb.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb">
+                  id="arc.gnu.elf.toolchain.elf32.hseb.debug"
+                  superClass="arc.gnu.elf.toolchain.hseb">
             </toolChain>
          </configuration>
          <configuration
@@ -2198,8 +2198,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.hsb.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb">
+                  id="arc.gnu.elf.toolchain.elf32.hseb.release"
+                  superClass="arc.gnu.elf.toolchain.hseb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2213,8 +2213,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc700b.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb">
+                  id="arc.gnu.elf.toolchain.elf32.arc700eb.debug"
+                  superClass="arc.gnu.elf.toolchain.arc700eb">
             </toolChain>
          </configuration>
          <configuration
@@ -2223,8 +2223,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc700b.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb">
+                  id="arc.gnu.elf.toolchain.elf32.arc700eb.release"
+                  superClass="arc.gnu.elf.toolchain.arc700eb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2238,8 +2238,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb">
+                  id="arc.gnu.elf.toolchain.elf32.arc600eb.debug"
+                  superClass="arc.gnu.elf.toolchain.arc600eb">
             </toolChain>
          </configuration>
          <configuration
@@ -2248,8 +2248,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb">
+                  id="arc.gnu.elf.toolchain.elf32.arc600eb.release"
+                  superClass="arc.gnu.elf.toolchain.arc600eb">
             </toolChain>
          </configuration>
       </projectType>
@@ -2263,8 +2263,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs101.arc700.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
+                  id="arc.gnu.elf.toolchain.axs101.arc700.debug"
+                  superClass="arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
          <configuration
@@ -2273,8 +2273,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs101.arc700.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700">
+                  id="arc.gnu.elf.toolchain.axs101.arc700.release"
+                  superClass="arc.gnu.elf.toolchain.arc700">
             </toolChain>
          </configuration>
       </projectType>
@@ -2288,8 +2288,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs101.arc600.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
+                  id="arc.gnu.elf.toolchain.axs101.arc600.debug"
+                  superClass="arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
          <configuration
@@ -2298,8 +2298,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs101.arc600.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600">
+                  id="arc.gnu.elf.toolchain.axs101.arc600.release"
+                  superClass="arc.gnu.elf.toolchain.arc600">
             </toolChain>
          </configuration>
       </projectType>
@@ -2313,8 +2313,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs101.em.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.axs101.em.debug"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -2323,8 +2323,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs101.em.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.axs101.em.release"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -2338,8 +2338,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs103.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
+                  id="arc.gnu.elf.toolchain.axs103.debug"
+                  superClass="arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -2348,8 +2348,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.axs103.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
+                  id="arc.gnu.elf.toolchain.axs103.release"
+                  superClass="arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -2363,8 +2363,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.emsdp.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.emsdp.debug"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -2373,8 +2373,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.emsdp.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.emsdp.release"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -2388,8 +2388,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.emsk.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.emsk.debug"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -2398,8 +2398,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.emsk.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.emsk.release"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -2413,8 +2413,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.iotdk.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.iotdk.debug"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
          <configuration
@@ -2423,8 +2423,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.iotdk.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em">
+                  id="arc.gnu.elf.toolchain.iotdk.release"
+                  superClass="arc.gnu.elf.toolchain.em">
             </toolChain>
          </configuration>
       </projectType>
@@ -2438,8 +2438,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.hsdk.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
+                  id="arc.gnu.elf.toolchain.hsdk.debug"
+                  superClass="arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
          <configuration
@@ -2448,8 +2448,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.hsdk.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs">
+                  id="arc.gnu.elf.toolchain.hsdk.release"
+                  superClass="arc.gnu.elf.toolchain.hs">
             </toolChain>
          </configuration>
       </projectType>
@@ -2463,8 +2463,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.em.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em"
+                  id="arc.gnu.elf.toolchain.liba.em.debug"
+                  superClass="arc.gnu.elf.toolchain.em"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2474,8 +2474,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.em.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.em"
+                  id="arc.gnu.elf.toolchain.liba.em.release"
+                  superClass="arc.gnu.elf.toolchain.em"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2490,8 +2490,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.emb.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb"
+                  id="arc.gnu.elf.toolchain.liba.emeb.debug"
+                  superClass="arc.gnu.elf.toolchain.emeb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2501,8 +2501,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.emb.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.emeb"
+                  id="arc.gnu.elf.toolchain.liba.emeb.release"
+                  superClass="arc.gnu.elf.toolchain.emeb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2517,8 +2517,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.hs.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs"
+                  id="arc.gnu.elf.toolchain.liba.hs.debug"
+                  superClass="arc.gnu.elf.toolchain.hs"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2528,8 +2528,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.hs.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hs"
+                  id="arc.gnu.elf.toolchain.liba.hs.release"
+                  superClass="arc.gnu.elf.toolchain.hs"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2544,8 +2544,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.hsb.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb"
+                  id="arc.gnu.elf.toolchain.liba.hseb.debug"
+                  superClass="arc.gnu.elf.toolchain.hseb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2555,8 +2555,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.hsb.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.hseb"
+                  id="arc.gnu.elf.toolchain.liba.hseb.release"
+                  superClass="arc.gnu.elf.toolchain.hseb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2571,8 +2571,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc700.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700"
+                  id="arc.gnu.elf.toolchain.liba.arc700.debug"
+                  superClass="arc.gnu.elf.toolchain.arc700"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2582,8 +2582,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc700.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700"
+                  id="arc.gnu.elf.toolchain.liba.arc700.release"
+                  superClass="arc.gnu.elf.toolchain.arc700"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2598,8 +2598,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc700b.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb"
+                  id="arc.gnu.elf.toolchain.liba.arc700eb.debug"
+                  superClass="arc.gnu.elf.toolchain.arc700eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2609,8 +2609,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc700b.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc700eb"
+                  id="arc.gnu.elf.toolchain.liba.arc700eb.release"
+                  superClass="arc.gnu.elf.toolchain.arc700eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2625,8 +2625,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc600.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600"
+                  id="arc.gnu.elf.toolchain.liba.arc600.debug"
+                  superClass="arc.gnu.elf.toolchain.arc600"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2636,8 +2636,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc600.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600"
+                  id="arc.gnu.elf.toolchain.liba.arc600.release"
+                  superClass="arc.gnu.elf.toolchain.arc600"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arc">
             </toolChain>
          </configuration>
@@ -2652,8 +2652,8 @@
                name="%debug"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc600b.debug.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb"
+                  id="arc.gnu.elf.toolchain.liba.arc600eb.debug"
+                  superClass="arc.gnu.elf.toolchain.arc600eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2663,8 +2663,8 @@
                name="%release"
                parent="com.synopsys.arc.gnu.elf.configuration">
             <toolChain
-                  id="com.synopsys.arc.gnu.elf.project.liba.arc600b.release.toolchain"
-                  superClass="com.synopsys.arc.gnu.elf.toolchain.arc600eb"
+                  id="arc.gnu.elf.toolchain.liba.arc600eb.release"
+                  superClass="arc.gnu.elf.toolchain.arc600eb"
                   targetTool="com.synopsys.arc.gnu.elf.tool.archiver.arceb">
             </toolChain>
          </configuration>
@@ -2696,7 +2696,7 @@
             location="templates/projecttemplates/emsk_em7d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2705,7 +2705,7 @@
             location="templates/projecttemplates/emsk_em9d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2714,7 +2714,7 @@
             location="templates/projecttemplates/emsk_em11d_HelloWorld_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2723,7 +2723,7 @@
             location="templates/projecttemplates/emsk_em7d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2732,7 +2732,7 @@
             location="templates/projecttemplates/emsk_em9d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2741,7 +2741,7 @@
             location="templates/projecttemplates/emsk_em11d_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
 
@@ -2753,7 +2753,7 @@
             location="templates/projecttemplates/emsk_em7d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2762,7 +2762,7 @@
             location="templates/projecttemplates/emsk_em9d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2771,7 +2771,7 @@
             location="templates/projecttemplates/emsk_em11d_HelloWorld_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2780,7 +2780,7 @@
             location="templates/projecttemplates/emsk_em7d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2789,7 +2789,7 @@
             location="templates/projecttemplates/emsk_em9d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2798,7 +2798,7 @@
             location="templates/projecttemplates/emsk_em11d_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2807,7 +2807,7 @@
             location="templates/projecttemplates/iotdk_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2816,7 +2816,7 @@
             location="templates/projecttemplates/iotdk_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2825,7 +2825,7 @@
             location="templates/projecttemplates/emsdp_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2834,7 +2834,7 @@
             location="templates/projecttemplates/emsdp_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.em">
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
       <template
@@ -2843,7 +2843,7 @@
             location="templates/projecttemplates/hsdk_empty_c/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.hs">
+               id="arc.gnu.elf.toolchain.hs">
          </toolChain>
       </template>
       <template
@@ -2852,7 +2852,7 @@
             location="templates/projecttemplates/hsdk_empty_cpp/template.xml"
             projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
          <toolChain
-               id="com.synopsys.arc.gnu.elf.toolchain.hs">
+               id="arc.gnu.elf.toolchain.hs">
          </toolChain>
       </template>
 
