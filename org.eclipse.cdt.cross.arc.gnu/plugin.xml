@@ -1592,6 +1592,18 @@
                </not>
             </enablement>
          </tool>
+         <tool
+               command="arc-elf32-ar"
+               id="arc.gnu.elf.tool.archiver.base"
+               superClass="cdt.managedbuild.tool.gnu.archiver">
+            <enablement
+                  type="ALL">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
+               </checkBuildProperty>
+            </enablement>
+         </tool>
       </toolChain>
       <toolChain
             id="arc.gnu.elf.toolchain.arc"
@@ -1662,14 +1674,7 @@
                command="arc-elf32-ar"
                id="arc.gnu.elf.tool.archiver.arc"
                name="%tool.archiver"
-               superClass="cdt.managedbuild.tool.gnu.archiver">
-            <enablement
-                  type="ALL">
-               <checkBuildProperty
-                     property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
-               </checkBuildProperty>
-            </enablement>
+               superClass="arc.gnu.elf.tool.archiver.base">
          </tool>
          <tool
                command="arc-elf32-objcopy"
@@ -1994,7 +1999,7 @@
                command="arceb-elf32-ar"
                id="arc.gnu.elf.tool.archiver.arceb"
                name="%tool.archiver_eb"
-               superClass="arc.gnu.elf.tool.archiver.arc">
+               superClass="arc.gnu.elf.tool.archiver.base">
          </tool>
          <tool
                command="arceb-elf32-objdump"
