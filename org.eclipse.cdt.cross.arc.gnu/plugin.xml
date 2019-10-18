@@ -88,77 +88,6 @@
       <managedBuildRevision
             fileVersion="4.0.0">
       </managedBuildRevision>
-      <tool
-            id="org.eclipse.cdt.cross.arc.gnu.base"
-            isAbstract="true"
-            name="Options Placeholder">
-      <option
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem"
-            name="Use GCC specs file"
-            valueType="enumerated">
-         <enumeratedOptionValue
-               command="--specs=nsim.specs"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nsim"
-               isDefault="true"
-               name="nsim">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="--specs=emsk_em9d.specs"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d"
-               name="emsk_em9d">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="--specs=emsk_em11d.specs"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em11d"
-               name="emsk_em11d">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="--specs=nosys.specs"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nosys"
-               name="nosys">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.none"
-               name="None">
-         </enumeratedOptionValue>
-         <enablement
-               type="ALL">
-            <checkBuildProperty
-                  property="com.synopsys.arc.gnu.elf.properties.cpu"
-                  value="com.synopsys.arc.gnu.elf.properties.cpu.em">
-            </checkBuildProperty>
-         </enablement>
-      </option>
-      <option
-            id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs"
-            name="Use GCC specs file"
-            valueType="enumerated">
-         <enumeratedOptionValue
-               command="--specs=nsim.specs"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nsim"
-               isDefault="true"
-               name="nsim">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               command="--specs=nosys.specs"
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nosys"
-               name="nosys">
-         </enumeratedOptionValue>
-         <enumeratedOptionValue
-               id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.none"
-               name="None">
-         </enumeratedOptionValue>
-         <enablement
-               type="ALL">
-            <not>
-               <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
-               </checkBuildProperty>
-            </not>
-         </enablement>
-      </option>
-      </tool>
       <toolChain
             id="com.synopsys.arc.gnu.elf.toolchain.base"
             isAbstract="true"
@@ -1377,12 +1306,70 @@
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specsem"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem">
+                  name="Use GCC specs file"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="--specs=nsim.specs"
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nsim"
+                     isDefault="true"
+                     name="nsim">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--specs=emsk_em9d.specs"
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d"
+                     name="emsk_em9d">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--specs=emsk_em11d.specs"
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em11d"
+                     name="emsk_em11d">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--specs=nosys.specs"
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nosys"
+                     name="nosys">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.none"
+                     name="None">
+               </enumeratedOptionValue>
+               <enablement
+                     type="ALL">
+                  <checkBuildProperty
+                        property="com.synopsys.arc.gnu.elf.properties.cpu"
+                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                  </checkBuildProperty>
+               </enablement>
             </option>
             <option
                   category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
                   id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specs"
-                  superClass="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs">
+                  name="Use GCC specs file"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="--specs=nsim.specs"
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nsim"
+                     isDefault="true"
+                     name="nsim">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--specs=nosys.specs"
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nosys"
+                     name="nosys">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.none"
+                     name="None">
+               </enumeratedOptionValue>
+               <enablement
+                     type="ALL">
+                  <not>
+                     <checkBuildProperty
+                           property="com.synopsys.arc.gnu.elf.properties.cpu"
+                           value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                     </checkBuildProperty>
+                  </not>
+               </enablement>
             </option>
             <option
                   applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
