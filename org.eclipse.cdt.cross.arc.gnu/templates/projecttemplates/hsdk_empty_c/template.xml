@@ -31,18 +31,18 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuhs.hs38_linux" />
+        <simple name="id" value="arc.gnu.elf.option.target.cpuhs" />
+        <simple name="value" value="arc.gnu.elf.option.target.cpuhs.hs38_linux" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs.plus_qmacw" />
+        <simple name="id" value="arc.gnu.elf.option.target.mpyhs" />
+        <simple name="value" value="arc.gnu.elf.option.target.mpyhs.plus_qmacw" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuhs.fpud_all" />
+        <simple name="id" value="arc.gnu.elf.option.target.fpuhs" />
+        <simple name="value" value="arc.gnu.elf.option.target.fpuhs.fpud_all" />
         <simple name="path" value="" />
       </element>
       <element>
@@ -51,7 +51,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_path" />
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_path" />
         <simple name="value" value="${workspace_loc:/$(projectName)/archs38_c1.tcf}" />
         <simple name="path" value="" />
       </element>
@@ -80,22 +80,22 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.ll64" />
+        <simple name="id" value="arc.gnu.elf.option.target.ll64" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf" />
+        <simple name="id" value="arc.gnu.elf.option.target.use_tcf" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_map" />
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_map" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_cinclude" />
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_cinclude" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

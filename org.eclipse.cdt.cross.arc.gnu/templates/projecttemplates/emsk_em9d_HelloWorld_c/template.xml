@@ -84,18 +84,18 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpus" />
+        <simple name="id" value="arc.gnu.elf.option.target.cpuem" />
+        <simple name="value" value="arc.gnu.elf.option.target.cpuem.em4_fpus" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem.wlh1" />
+        <simple name="id" value="arc.gnu.elf.option.target.mpyem" />
+        <simple name="value" value="arc.gnu.elf.option.target.mpyem.wlh1" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpus_all" />
+        <simple name="id" value="arc.gnu.elf.option.target.fpuem" />
+        <simple name="value" value="arc.gnu.elf.option.target.fpuem.fpus_all" />
         <simple name="path" value="" />
       </element>
       <element>
@@ -110,52 +110,27 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter" />
+        <simple name="id" value="arc.gnu.elf.option.target.barrel_shifter" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem" />
+        <simple name="id" value="arc.gnu.elf.option.target.divrem" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.norm" />
+        <simple name="id" value="arc.gnu.elf.option.target.norm" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.swap" />
+        <simple name="id" value="arc.gnu.elf.option.target.swap" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-      <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-      <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.norm" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-      <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.swap" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-      <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity" />
-        <simple name="value" value="true" />
-        <simple name="path" value="" />
-      </element>
-      <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity" />
+        <simple name="id" value="arc.gnu.elf.option.target.code_density" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

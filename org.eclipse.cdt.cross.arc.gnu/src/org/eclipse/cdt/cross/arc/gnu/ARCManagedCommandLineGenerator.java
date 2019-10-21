@@ -51,8 +51,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static final String MPYHS_OPTION = ".target.mpyhs";
     private static final String MPY600_OPTION = ".target.mpy600";
     private static final String DIVREM_OPTION = ".target.divrem";
-    private static final String CODEDENSITY_OPTION = ".target.codedensity";
-    private static final String BARRELSHIFTER_OPTION = ".target.barrelshifter";
+    private static final String CODEDENSITY_OPTION = ".target.code_density";
+    private static final String BARRELSHIFTER_OPTION = ".target.barrel_shifter";
     private static final String NORMALIZE_OPTION = ".target.norm";
     private static final String SWAP_OPTION = ".target.swap";
     private static final String LL64_OPTION = ".target.ll64";
@@ -64,8 +64,8 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
     private static ITool lastTool;
     private static String lastProject;
 
-    private static final String MMPY_OPTION_EM = "com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem";
-    private static final String MMPY_OPTION_HS = "com.synopsys.arc.gnu.elf.toolchain.base.target.mpyhs";
+    private static final String MMPY_OPTION_EM = "arc.gnu.elf.option.target.mpyem";
+    private static final String MMPY_OPTION_HS = "arc.gnu.elf.option.target.mpyhs";
     private static final String MMPY_OPTION_FOR_REPLACEMENT = "-mmpy-option=2";
 
     public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName,

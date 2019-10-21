@@ -31,18 +31,18 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.cpuem.em4_fpuda" />
+        <simple name="id" value="arc.gnu.elf.option.target.cpuem" />
+        <simple name="value" value="arc.gnu.elf.option.target.cpuem.em4_fpuda" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.mpyem.wlh1" />
+        <simple name="id" value="arc.gnu.elf.option.target.mpyem" />
+        <simple name="value" value="arc.gnu.elf.option.target.mpyem.wlh1" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem" />
-        <simple name="value" value="com.synopsys.arc.gnu.elf.toolchain.base.target.fpuem.fpuda_all" />
+        <simple name="id" value="arc.gnu.elf.option.target.fpuem" />
+        <simple name="value" value="arc.gnu.elf.option.target.fpuem.fpuda_all" />
         <simple name="path" value="" />
       </element>
       <element>
@@ -51,7 +51,7 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_path" />
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_path" />
         <simple name="value" value="${workspace_loc:/$(projectName)/arcem9d.tcf}" />
         <simple name="path" value="" />
       </element>
@@ -75,42 +75,42 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.barrelshifter" />
+        <simple name="id" value="arc.gnu.elf.option.target.barrel_shifter" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.divrem" />
+        <simple name="id" value="arc.gnu.elf.option.target.divrem" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.norm" />
+        <simple name="id" value="arc.gnu.elf.option.target.norm" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.swap" />
+        <simple name="id" value="arc.gnu.elf.option.target.swap" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.codedensity" />
+        <simple name="id" value="arc.gnu.elf.option.target.code_density" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.use_tcf" />
+        <simple name="id" value="arc.gnu.elf.option.target.use_tcf" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_map" />
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_map" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="com.synopsys.arc.gnu.elf.toolchain.base.target.tcf_cinclude" />
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_cinclude" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

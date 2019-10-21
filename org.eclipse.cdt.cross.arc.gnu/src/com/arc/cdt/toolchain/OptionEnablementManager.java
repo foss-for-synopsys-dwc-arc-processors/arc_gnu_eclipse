@@ -23,7 +23,7 @@ public class OptionEnablementManager extends AbstractOptionEnablementManager {
         PREFIX + ".tables",
         PREFIX + ".symbols",
         PREFIX + ".functions",
-        "com.synopsys.arc.gnu.elf.toolchain.base.target.ea",
+        "arc.gnu.elf.option.target.ea",
     };
     
     private static final String ANSI_MODE = "arc.compiler.options.ansi";

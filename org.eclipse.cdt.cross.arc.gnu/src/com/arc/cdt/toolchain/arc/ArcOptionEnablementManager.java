@@ -66,8 +66,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     }
 
     private static String getTCF(String string) {
-        String target = "com.synopsys.arc.gnu.elf.toolchain.base.target.";
-        return target + string;
+        return "arc.gnu.elf.option.target." + string;
     }
 
     private boolean useTcf;
