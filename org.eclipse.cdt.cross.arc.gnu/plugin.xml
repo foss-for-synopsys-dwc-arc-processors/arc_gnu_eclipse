@@ -1085,14 +1085,14 @@
          <option
                category="arc.gnu.elf.category.extratoolstarget"
                defaultValue="false"
-               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
+               id="arc.gnu.elf.option.extratools.listing"
                name="%option.listing"
                valueType="boolean">
          </option>
          <option
                category="arc.gnu.elf.category.extratoolstarget"
                defaultValue="true"
-               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
+               id="arc.gnu.elf.option.extratools.printsize"
                name="%option.printsize"
                valueHandler="org.eclipse.cdt.cross.arc.gnu.ARCAdditionalToolsManagedOptionValueHandler"
                valueType="boolean">
@@ -1100,7 +1100,7 @@
          <option
                category="arc.gnu.elf.category.extratoolstarget"
                defaultValue="false"
-               id="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
+               id="arc.gnu.elf.option.extratools.flash"
                name="%option.flash"
                valueType="boolean">
          </option>
@@ -1718,7 +1718,7 @@
                   type="ALL">
                <checkOption
                      holderId="arc.gnu.elf.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.flash"
+                     optionId="arc.gnu.elf.option.extratools.flash"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -1766,7 +1766,7 @@
                   type="ALL">
                <checkOption
                      holderId="arc.gnu.elf.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.listing"
+                     optionId="arc.gnu.elf.option.extratools.listing"
                      value="true">
                </checkOption>
                <checkBuildProperty
@@ -1845,7 +1845,7 @@
                   type="ALL">
                <checkOption
                      holderId="arc.gnu.elf.toolchain.base"
-                     optionId="com.synopsys.arc.gnu.elf.toolchain.base.extratools.printsize"
+                     optionId="arc.gnu.elf.option.extratools.printsize"
                      value="true">
                </checkOption>
                <checkBuildProperty
