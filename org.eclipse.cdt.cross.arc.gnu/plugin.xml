@@ -1355,77 +1355,77 @@
                   variableList="LIBRARY_PATH">
             </envVarBuildPath>
             <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  id="arc.gnu.elf.c.linker.category.general"
                   name="General"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
                   applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                   browseType="file"
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  category="arc.gnu.elf.c.linker.category.general"
                   command="-T&quot;${VALUE}&quot;"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile"
+                  id="arc.gnu.elf.c.linker.option.scriptfile"
                   isAbstract="false"
                   name="Script file (-T)"
                   resourceFilter="all"
                   valueType="string">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.nostart"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.nostart"
                   superClass="gnu.c.link.option.nostart">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.nodeflibs"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.nodeflibs"
                   superClass="gnu.c.link.option.nodeflibs">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.nostdlibs"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.nostdlibs"
                   superClass="gnu.c.link.option.nostdlibs">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general.strip"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.strip"
                   superClass="gnu.c.link.option.strip">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  category="arc.gnu.elf.c.linker.category.general"
                   command="--specs=nano.specs"
                   defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.nano"
+                  id="arc.gnu.elf.c.linker.option.nano"
                   name="Enable nano.specs to use standard libraries optimized for code size"
                   valueType="boolean">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specsem"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.specsem"
                   name="Use GCC specs file"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="--specs=nsim.specs"
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nsim"
+                     id="arc.gnu.elf.c.linker.option.specsem.nsim"
                      isDefault="true"
                      name="nsim">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=emsk_em9d.specs"
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d"
+                     id="arc.gnu.elf.c.linker.option.specsem.emsk_em9d"
                      name="emsk_em9d">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=emsk_em11d.specs"
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em11d"
+                     id="arc.gnu.elf.c.linker.option.specsem.emsk_em11d"
                      name="emsk_em11d">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=nosys.specs"
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.nosys"
+                     id="arc.gnu.elf.c.linker.option.specsem.nosys"
                      name="nosys">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.none"
+                     id="arc.gnu.elf.c.linker.option.specsem.none"
                      name="None">
                </enumeratedOptionValue>
                <enablement
@@ -1437,23 +1437,23 @@
                </enablement>
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.specs"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.specs"
                   name="Use GCC specs file"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="--specs=nsim.specs"
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nsim"
+                     id="arc.gnu.elf.c.linker.option.specs.nsim"
                      isDefault="true"
                      name="nsim">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=nosys.specs"
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.nosys"
+                     id="arc.gnu.elf.c.linker.option.specs.nosys"
                      name="nosys">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     id="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specs.none"
+                     id="arc.gnu.elf.c.linker.option.specs.none"
                      name="None">
                </enumeratedOptionValue>
                <enablement
@@ -1469,105 +1469,105 @@
             <option
                   applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
                   browseType="directory"
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.general"
+                  category="arc.gnu.elf.c.linker.category.general"
                   command="-L&quot;${VALUE}&quot;"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.memoryx"
+                  id="arc.gnu.elf.c.linker.option.memoryx"
                   isAbstract="false"
                   name="Directory with memory.x file"
                   resourceFilter="all"
                   valueType="string">
             </option>
             <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
+                  id="arc.gnu.elf.c.linker.category.libs"
                   name="Libraries"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
                   browseType="none"
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
+                  category="arc.gnu.elf.c.linker.category.libs"
                   command="-l"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs.libs"
+                  id="arc.gnu.elf.c.linker.option.libs"
                   superClass="gnu.c.link.option.libs"
                   valueType="libs">
             </option>
             <option
                   browseType="directory"
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs"
+                  category="arc.gnu.elf.c.linker.category.libs"
                   command="-L"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.libs.paths"
+                  id="arc.gnu.elf.c.linker.option.paths"
                   superClass="gnu.c.link.option.paths"
                   valueType="libPaths">
             </option>
             <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  id="arc.gnu.elf.c.linker.category.other"
                   name="Miscellaneous"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  category="arc.gnu.elf.c.linker.category.other"
                   command="-Wl,${VALUE}"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.ldflags"
+                  id="arc.gnu.elf.c.linker.option.ldflags"
                   superClass="gnu.c.link.option.other">
             </option>
             <option
                   browseType="file"
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.otherobjs"
+                  category="arc.gnu.elf.c.linker.category.other"
+                  id="arc.gnu.elf.c.linker.option.otherobjs"
                   superClass="gnu.c.link.option.userobjs"
                   valueType="userObjs">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  category="arc.gnu.elf.c.linker.category.other"
                   command="-Wl,-Map,"
                   defaultValue="${BuildArtifactFileBaseName}.map"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.mapfilename"
+                  id="arc.gnu.elf.c.linker.option.mapfilename"
                   name="Map Filename"
                   valueType="string">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  category="arc.gnu.elf.c.linker.category.other"
                   command="-Xlinker --cref"
                   defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.cref"
+                  id="arc.gnu.elf.c.linker.option.cref"
                   name="Cross Reference (-Xlinker --cref)"
                   valueType="boolean">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  category="arc.gnu.elf.c.linker.category.other"
                   command="-Xlinker --print-map"
                   defaultValue="false"
-                  id="org.eclipse.cdt.cross.arc.gnu.c.link.option.other.printmap"
+                  id="arc.gnu.elf.c.linker.option.printmap"
                   name="Print link map (-Xlinker --print-map)"
                   valueType="boolean">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
+                  category="arc.gnu.elf.c.linker.category.other"
                   command="-v"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.verbose"
+                  id="arc.gnu.elf.c.linker.option.verbose"
                   name="Verbose (-v)"
                   valueType="boolean">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other"
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.other.otherflags"
+                  category="arc.gnu.elf.c.linker.category.other"
+                  id="arc.gnu.elf.c.linker.option.otherflags"
                   name="Other flags"
                   valueType="string">
             </option>
             <inputType
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.input"
+                  id="arc.gnu.elf.c.linker.input"
                   superClass="cdt.managedbuild.tool.gnu.c.linker.input">
             </inputType>
             <outputType
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.output"
+                  id="arc.gnu.elf.c.linker.output"
                   nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
             </outputType>
             <option
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.prof"
+                  id="arc.gnu.elf.c.linker.option.prof"
                   superClass="gnu.c.link.option.debugging.prof">
             </option>
             <option
-                  id="com.synopsys.arc.gnu.elf.tool.c.linker.arc.gprof"
+                  id="arc.gnu.elf.c.linker.option.gprof"
                   superClass="gnu.c.link.option.debugging.gprof">
             </option>
             <enablement

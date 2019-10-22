@@ -47,8 +47,8 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
     private static final String[] NOT_ARCHITECTURE_OPTIONS = { getTCF(TCF_FILE_OPTION_ID),  getTCF(TCF_MEMORY_MAP),
             getTCF(TCF_OPTION_ID),  getTCF(TCF_INCLUDE_C_DEFINES) };
 
-    private static final String[] LINKER_SCRIPT_IDS = { "org.eclipse.cdt.cross.arc.gnu.c.link.option.scriptfile",
-            "org.eclipse.cdt.cross.arc.gnu.base.option.linker.memoryx"  };
+    private static final String[] LINKER_SCRIPT_IDS = { "arc.gnu.elf.c.linker.option.scriptfile",
+            "arc.gnu.elf.c.linker.option.memoryx"  };
 
     private List<String> targetOptions;
     private List<String> disabledForCpu = new ArrayList<>();

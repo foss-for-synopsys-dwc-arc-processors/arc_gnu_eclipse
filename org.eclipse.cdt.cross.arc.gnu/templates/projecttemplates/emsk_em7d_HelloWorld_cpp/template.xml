@@ -95,7 +95,7 @@
       </element>
       <element>
         <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.em.linux.c.linker.base.option.specs" />
-        <simple name="value" value="org.eclipse.cdt.cross.arc.gnu.base.option.linker.specsem.emsk_em9d" />
+        <simple name="value" value="arc.gnu.elf.c.linker.option.specsem.emsk_em9d" />
         <simple name="path" value="" />
       </element>
     </complex-array>
