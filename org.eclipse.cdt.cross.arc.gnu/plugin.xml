@@ -1119,7 +1119,7 @@
                   category="gnu.c.compiler.category.optimization"
                   command="-fpack-struct"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.packstruct"
+                  id="arc.gnu.elf.c.compiler.option.packstruct"
                   name="Pack structures (-fpack-struct)"
                   resourceFilter="all"
                   valueType="boolean">
@@ -1128,7 +1128,7 @@
                   category="gnu.c.compiler.category.optimization"
                   command="-fshort-enums"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.shortenums"
+                  id="arc.gnu.elf.c.compiler.option.shortenums"
                   name="Short enumerations (-fshort-enums)"
                   resourceFilter="all"
                   valueType="boolean">
@@ -1137,7 +1137,7 @@
                   category="gnu.c.compiler.category.optimization"
                   command="-ffunction-sections"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.functionsections"
+                  id="arc.gnu.elf.c.compiler.option.function_sections"
                   name="Function sections (-ffunction-sections)"
                   resourceFilter="all"
                   valueType="boolean">
@@ -1146,46 +1146,46 @@
                   category="gnu.c.compiler.category.optimization"
                   command="-fdata-sections"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.optimization.datasections"
+                  id="arc.gnu.elf.c.compiler.option.data_sections"
                   name="Data sections (-fdata-sections)"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
             <option
                   category="gnu.c.compiler.category.debug"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format"
+                  id="arc.gnu.elf.c.compiler.option.debug_format"
                   name="Debug Format"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="-gdwarf-2"
-                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.dwarf2"
+                     id="arc.gnu.elf.c.compiler.option.debug_format.dwarf2"
                      name="dwarf-2">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-gdwarf-4"
-                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.dwarf4"
+                     id="arc.gnu.elf.c.compiler.option.debug_format.dwarf4"
                      name="dwarf-4">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-gstabs"
-                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.stabs"
+                     id="arc.gnu.elf.c.compiler.option.debug_format.stabs"
                      name="stabs">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-gstabs+"
-                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.stabsplus"
+                     id="arc.gnu.elf.c.compiler.option.debug_format.stabsplus"
                      name="stabs+">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-ggdb"
-                     id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.gdb"
+                     id="arc.gnu.elf.c.compiler.option.debug_format.gdb"
                      name="gdb">
                </enumeratedOptionValue>
                <enablement
                      attribute="value"
                      extensionAdjustment="false"
                      type="CONTAINER_ATTRIBUTE"
-                     value="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.default">
+                     value="arc.gnu.elf.c.compiler.option.debug_format.default">
                   <checkBuildProperty
                         property="org.eclipse.cdt.build.core.buildType"
                         value="org.eclipse.cdt.build.core.buildType.release">
@@ -1195,7 +1195,7 @@
                      attribute="value"
                      extensionAdjustment="false"
                      type="CONTAINER_ATTRIBUTE"
-                     value="com.synopsys.arc.gnu.elf.tool.c.compiler.option.debugging.format.dwarf2">
+                     value="arc.gnu.elf.c.compiler.option.debug_format.dwarf2">
                   <checkBuildProperty
                         property="org.eclipse.cdt.build.core.buildType"
                         value="org.eclipse.cdt.build.core.buildType.debug">
@@ -1206,7 +1206,7 @@
                   category="gnu.c.compiler.category.other"
                   command="-Wa,"
                   defaultValue="-adhlns=&quot;$@.lst&quot;"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.lstfilename"
+                  id="arc.gnu.elf.c.compiler.option.lstfilename"
                   name="Assembler Listing"
                   valueType="string">
             </option>
@@ -1214,7 +1214,7 @@
                   category="gnu.c.compiler.category.other"
                   command="-fno-inline-functions"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.noinlinefunctions"
+                  id="arc.gnu.elf.c.compiler.option.no_inline_functions"
                   name="Do not inline functions (-fno-inline-functions)"
                   valueType="boolean">
             </option>
@@ -1222,7 +1222,7 @@
                   category="gnu.c.compiler.category.other"
                   command="-fsigned-char"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.signedchar"
+                  id="arc.gnu.elf.c.compiler.option.signed_char"
                   name="&apos;char&apos; is signed (-fsigned-char)"
                   valueType="boolean">
             </option>
@@ -1230,7 +1230,7 @@
                   category="gnu.c.compiler.category.other"
                   command="-funsigned-bitfields"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.unsignedbitfields"
+                  id="arc.gnu.elf.c.compiler.option.unsigned_bitfields"
                   name="Bitfields are unsigned (-funsigned-bitfields)"
                   valueType="boolean">
             </option>
@@ -1325,7 +1325,7 @@
             <option
                   category="gnu.asm.category.general"
                   id="com.synopsys.arc.gnu.elf.tool.assembler.option.misc.lstfilename"
-                  superClass="com.synopsys.arc.gnu.elf.tool.c.compiler.option.misc.lstfilename">
+                  superClass="arc.gnu.elf.c.compiler.option.lstfilename">
             </option>
             <option
                   category="gnu.asm.category.general"
