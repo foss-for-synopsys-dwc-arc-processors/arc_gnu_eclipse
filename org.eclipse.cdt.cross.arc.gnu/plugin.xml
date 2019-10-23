@@ -17,42 +17,42 @@
          name="Build Properties"
          point="org.eclipse.cdt.managedbuilder.core.buildProperties">
       <propertyValue
-            id="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            id="arc.gnu.elf.property.buildArtifactType.application"
             name="ARC Cross ELF32 Target Application"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            id="arc.gnu.elf.property.buildArtifactType.staticLib"
             name="ARC Cross ELF32 Target Static Library"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            id="arc.gnu.elf.property.buildArtifactType.axs101"
             name="ARC AXS101 Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
+            id="arc.gnu.elf.property.buildArtifactType.axs103"
             name="ARC AXS103 Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="c.s.a.gnu.elf.buildArtefactType.application.emsk"
+            id="arc.gnu.elf.property.buildArtifactType.emsk"
             name="ARC EM Starter Kit Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
+            id="arc.gnu.elf.property.buildArtifactType.iotdk"
             name="ARC IoT Development Kit Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="c.s.a.gnu.elf.buildArtefactType.application.hsdk"
+            id="arc.gnu.elf.property.buildArtifactType.hsdk"
             name="ARC HS Development Kit Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="c.s.a.gnu.elf.buildArtefactType.application.emsdp"
+            id="arc.gnu.elf.property.buildArtifactType.emsdp"
             name="ARC EM SDP Projects"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
@@ -1575,7 +1575,7 @@
                <not>
                   <checkBuildProperty
                         property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
+                        value="arc.gnu.elf.property.buildArtifactType.staticLib">
                   </checkBuildProperty>
                </not>
             </enablement>
@@ -1588,7 +1588,7 @@
                   type="ALL">
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
+                     value="arc.gnu.elf.property.buildArtifactType.staticLib">
                </checkBuildProperty>
             </enablement>
          </tool>
@@ -1722,7 +1722,7 @@
                </checkOption>
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+                     value="arc.gnu.elf.property.buildArtifactType.application">
                </checkBuildProperty>
             </enablement>
          </tool>
@@ -1770,7 +1770,7 @@
                </checkOption>
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+                     value="arc.gnu.elf.property.buildArtifactType.application">
                </checkBuildProperty>
             </enablement>
          </tool>
@@ -1849,7 +1849,7 @@
                </checkOption>
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+                     value="arc.gnu.elf.property.buildArtifactType.application">
                </checkBuildProperty>
             </enablement>
          </tool>
@@ -2075,12 +2075,12 @@
                value="a">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib">
+                  value="arc.gnu.elf.property.buildArtifactType.staticLib">
             </checkBuildProperty>
          </enablement>
       </configuration>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.elf32.em">
          <configuration
@@ -2105,7 +2105,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="arc.gnu.elf.configuration.elf32.hs">
          <configuration
@@ -2130,7 +2130,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="arc.gnu.elf.configuration.elf32.arc700">
          <configuration
@@ -2155,7 +2155,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="arc.gnu.elf.configuration.elf32.arc600">
          <configuration
@@ -2180,7 +2180,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.elf32.emeb">
          <configuration
@@ -2205,7 +2205,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="arc.gnu.elf.configuration.elf32.hseb">
          <configuration
@@ -2230,7 +2230,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="arc.gnu.elf.configuration.elf32.arc700eb">
          <configuration
@@ -2255,7 +2255,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="arc.gnu.elf.configuration.elf32.arc600eb">
          <configuration
@@ -2280,7 +2280,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs101"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="arc.gnu.elf.configuration.axs101.arc700">
          <configuration
@@ -2305,7 +2305,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs101"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="arc.gnu.elf.configuration.axs101.arc600">
          <configuration
@@ -2330,7 +2330,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs101"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.axs101.em">
          <configuration
@@ -2355,7 +2355,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs103"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="arc.gnu.elf.configuration.axs103">
          <configuration
@@ -2380,7 +2380,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.emsdp"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.emsdp"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.emsdp">
          <configuration
@@ -2405,7 +2405,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.emsk"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.emsk"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.emsk">
          <configuration
@@ -2430,7 +2430,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.iotdk"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.iotdk"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.iotdk">
          <configuration
@@ -2455,7 +2455,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="c.s.a.gnu.elf.buildArtefactType.application.hsdk"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.hsdk"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="arc.gnu.elf.configuration.hsdk">
          <configuration
@@ -2480,7 +2480,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.liba.em">
          <configuration
@@ -2507,7 +2507,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
             id="arc.gnu.elf.configuration.liba.emeb">
          <configuration
@@ -2534,7 +2534,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="arc.gnu.elf.configuration.liba.hs">
          <configuration
@@ -2561,7 +2561,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
             id="arc.gnu.elf.configuration.liba.hseb">
          <configuration
@@ -2588,7 +2588,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="arc.gnu.elf.configuration.liba.arc700">
          <configuration
@@ -2615,7 +2615,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
             id="arc.gnu.elf.configuration.liba.arc700eb">
          <configuration
@@ -2642,7 +2642,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="arc.gnu.elf.configuration.liba.arc600">
          <configuration
@@ -2669,7 +2669,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.staticLib"
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
             buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
             id="arc.gnu.elf.configuration.liba.arc600eb">
          <configuration
@@ -2704,14 +2704,14 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.helloWorld_c"
             location="templates/projecttemplates/HelloWorld_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="arc.gnu.elf.property.buildArtifactType.application">
       </template>
 
        <template
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.helloWorld_cpp"
             location="templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.buildArtefactType.application">
+            projectType="arc.gnu.elf.property.buildArtifactType.application">
       </template>
 
       <!-- EM Starter Kit C projects -->
@@ -2720,7 +2720,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_helloWorld_c"
             location="templates/projecttemplates/emsk_em7d_HelloWorld_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2729,7 +2729,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_helloWorld_c"
             location="templates/projecttemplates/emsk_em9d_HelloWorld_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2738,7 +2738,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_helloWorld_c"
             location="templates/projecttemplates/emsk_em11d_HelloWorld_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2747,7 +2747,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_empty_c"
             location="templates/projecttemplates/emsk_em7d_empty_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2756,7 +2756,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_empty_c"
             location="templates/projecttemplates/emsk_em9d_empty_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2765,7 +2765,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_empty_c"
             location="templates/projecttemplates/emsk_em11d_empty_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2777,7 +2777,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_empty_cpp"
             location="templates/projecttemplates/emsk_em7d_HelloWorld_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2786,7 +2786,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_empty_cpp"
             location="templates/projecttemplates/emsk_em9d_HelloWorld_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2795,7 +2795,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_empty_cpp"
             location="templates/projecttemplates/emsk_em11d_HelloWorld_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2804,7 +2804,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_helloWorld_cpp"
             location="templates/projecttemplates/emsk_em7d_empty_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2813,7 +2813,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_helloWorld_cpp"
             location="templates/projecttemplates/emsk_em9d_empty_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2822,7 +2822,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_helloWorld_cpp"
             location="templates/projecttemplates/emsk_em11d_empty_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsk">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2831,7 +2831,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.iotdk_empty_c"
             location="templates/projecttemplates/iotdk_empty_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
+            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2840,7 +2840,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.iotdk_empty_cpp"
             location="templates/projecttemplates/iotdk_empty_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.iotdk">
+            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2849,7 +2849,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.emsdp_empty_c"
             location="templates/projecttemplates/emsdp_empty_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2858,7 +2858,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.emsdp_empty_cpp"
             location="templates/projecttemplates/emsdp_empty_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.emsdp">
+            projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
@@ -2867,7 +2867,7 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.hsdk_empty_c"
             location="templates/projecttemplates/hsdk_empty_c/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
+            projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
          <toolChain
                id="arc.gnu.elf.toolchain.hs">
          </toolChain>
@@ -2876,7 +2876,7 @@
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.hsdk_empty_cpp"
             location="templates/projecttemplates/hsdk_empty_cpp/template.xml"
-            projectType="c.s.a.gnu.elf.buildArtefactType.application.hsdk">
+            projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
          <toolChain
                id="arc.gnu.elf.toolchain.hs">
          </toolChain>
@@ -2887,25 +2887,25 @@
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.axs101_empty_c"
             location="$nl$/templates/projecttemplates/AXS101_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
+            projectType="arc.gnu.elf.property.buildArtifactType.axs101">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.axs101_empty_cpp"
             location="$nl$/templates/projecttemplates/AXS101_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs101.buildArtefactType.application">
+            projectType="arc.gnu.elf.property.buildArtifactType.axs101">
       </template>
       <template
             filterPattern=".*gcc"
             id="com.synopsys.arc.gnu.elf.templates.axs103_empty_c"
             location="$nl$/templates/projecttemplates/AXS103_Empty_C_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application">
+            projectType="arc.gnu.elf.property.buildArtifactType.axs103">
       </template>
       <template
             filterPattern=".*g\+\+"
             id="com.synopsys.arc.gnu.elf.templates.axs103_empty_cpp"
             location="$nl$/templates/projecttemplates/AXS103_Empty_CPP_Project/template.xml"
-            projectType="org.eclipse.cdt.cross.arc.gnu.axs103.buildArtefactType.application">
+            projectType="arc.gnu.elf.property.buildArtifactType.axs103">
       </template>
    </extension>
    <extension
