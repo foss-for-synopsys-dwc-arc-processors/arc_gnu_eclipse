@@ -2067,7 +2067,7 @@
       <configuration
             artifactExtension="elf"
             cleanCommand="rm -rf"
-            id="com.synopsys.arc.gnu.elf.configuration">
+            id="arc.gnu.elf.configuration.base">
          <enablement
                attribute="artifactExtension"
                extensionAdjustment="false"
@@ -2085,9 +2085,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.em.debug"
+               id="arc.gnu.elf.configuration.elf32.em.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.em.debug"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2095,9 +2095,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.em.release"
+               id="arc.gnu.elf.configuration.elf32.em.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.em.release"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2110,9 +2110,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.hs">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.hs.debug"
+               id="arc.gnu.elf.configuration.elf32.hs.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hs.debug"
                   superClass="arc.gnu.elf.toolchain.hs">
@@ -2120,9 +2120,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.hs.release"
+               id="arc.gnu.elf.configuration.elf32.hs.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hs.release"
                   superClass="arc.gnu.elf.toolchain.hs">
@@ -2135,9 +2135,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc700.debug"
+               id="arc.gnu.elf.configuration.elf32.arc700.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700.debug"
                   superClass="arc.gnu.elf.toolchain.arc700">
@@ -2145,9 +2145,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc700.release"
+               id="arc.gnu.elf.configuration.elf32.arc700.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700.release"
                   superClass="arc.gnu.elf.toolchain.arc700">
@@ -2160,9 +2160,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc600.debug"
+               id="arc.gnu.elf.configuration.elf32.arc600.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600.debug"
                   superClass="arc.gnu.elf.toolchain.arc600">
@@ -2170,9 +2170,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc600.release"
+               id="arc.gnu.elf.configuration.elf32.arc600.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600.release"
                   superClass="arc.gnu.elf.toolchain.arc600">
@@ -2185,9 +2185,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.emb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.emb.debug"
+               id="arc.gnu.elf.configuration.elf32.emb.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.emeb.debug"
                   superClass="arc.gnu.elf.toolchain.emeb">
@@ -2195,9 +2195,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.emb.release"
+               id="arc.gnu.elf.configuration.elf32.emb.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.emeb.release"
                   superClass="arc.gnu.elf.toolchain.emeb">
@@ -2210,9 +2210,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.hsb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.hsb.debug"
+               id="arc.gnu.elf.configuration.elf32.hsb.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hseb.debug"
                   superClass="arc.gnu.elf.toolchain.hseb">
@@ -2220,9 +2220,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.hsb.release"
+               id="arc.gnu.elf.configuration.elf32.hsb.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hseb.release"
                   superClass="arc.gnu.elf.toolchain.hseb">
@@ -2235,9 +2235,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.arc700b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc700b.debug"
+               id="arc.gnu.elf.configuration.elf32.arc700b.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700eb.debug"
                   superClass="arc.gnu.elf.toolchain.arc700eb">
@@ -2245,9 +2245,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc700b.release"
+               id="arc.gnu.elf.configuration.elf32.arc700b.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700eb.release"
                   superClass="arc.gnu.elf.toolchain.arc700eb">
@@ -2260,9 +2260,9 @@
             id="com.synopsys.arc.gnu.elf.project.elf32.arc600b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.debug"
+               id="arc.gnu.elf.configuration.elf32.arc600b.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600eb.debug"
                   superClass="arc.gnu.elf.toolchain.arc600eb">
@@ -2270,9 +2270,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.elf32.arc600b.release"
+               id="arc.gnu.elf.configuration.elf32.arc600b.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600eb.release"
                   superClass="arc.gnu.elf.toolchain.arc600eb">
@@ -2285,9 +2285,9 @@
             id="com.synopsys.arc.gnu.elf.project.axs101.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.axs101.arc700.debug"
+               id="arc.gnu.elf.configuration.axs101.arc700.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc700.debug"
                   superClass="arc.gnu.elf.toolchain.arc700">
@@ -2295,9 +2295,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.axs101.arc700.release"
+               id="arc.gnu.elf.configuration.axs101.arc700.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc700.release"
                   superClass="arc.gnu.elf.toolchain.arc700">
@@ -2310,9 +2310,9 @@
             id="com.synopsys.arc.gnu.elf.project.axs101.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.axs101.arc600.debug"
+               id="arc.gnu.elf.configuration.axs101.arc600.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc600.debug"
                   superClass="arc.gnu.elf.toolchain.arc600">
@@ -2320,9 +2320,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.axs101.arc600.release"
+               id="arc.gnu.elf.configuration.axs101.arc600.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc600.release"
                   superClass="arc.gnu.elf.toolchain.arc600">
@@ -2335,9 +2335,9 @@
             id="com.synopsys.arc.gnu.elf.project.axs101.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.axs101.em.debug"
+               id="arc.gnu.elf.configuration.axs101.em.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.em.debug"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2345,9 +2345,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.axs101.em.release"
+               id="arc.gnu.elf.configuration.axs101.em.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.em.release"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2360,9 +2360,9 @@
             id="com.synopsys.arc.gnu.elf.project.axs103">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.axs103.debug"
+               id="arc.gnu.elf.configuration.axs103.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs103.debug"
                   superClass="arc.gnu.elf.toolchain.hs">
@@ -2370,9 +2370,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.axs103.release"
+               id="arc.gnu.elf.configuration.axs103.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs103.release"
                   superClass="arc.gnu.elf.toolchain.hs">
@@ -2385,9 +2385,9 @@
             id="com.synopsys.arc.gnu.elf.project.emsdp">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.emsdp.debug"
+               id="arc.gnu.elf.configuration.emsdp.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsdp.debug"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2395,9 +2395,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.emsdp.release"
+               id="arc.gnu.elf.configuration.emsdp.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsdp.release"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2410,9 +2410,9 @@
             id="com.synopsys.arc.gnu.elf.project.emsk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.emsk.debug"
+               id="arc.gnu.elf.configuration.emsk.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsk.debug"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2420,9 +2420,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.emsk.release"
+               id="arc.gnu.elf.configuration.emsk.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsk.release"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2435,9 +2435,9 @@
             id="com.synopsys.arc.gnu.elf.project.iotdk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.iotdk.debug"
+               id="arc.gnu.elf.configuration.iotdk.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.iotdk.debug"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2445,9 +2445,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.iotdk.release"
+               id="arc.gnu.elf.configuration.iotdk.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.iotdk.release"
                   superClass="arc.gnu.elf.toolchain.em">
@@ -2460,9 +2460,9 @@
             id="com.synopsys.arc.gnu.elf.project.hsdk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.hsdk.debug"
+               id="arc.gnu.elf.configuration.hsdk.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.hsdk.debug"
                   superClass="arc.gnu.elf.toolchain.hs">
@@ -2470,9 +2470,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.hsdk.release"
+               id="arc.gnu.elf.configuration.hsdk.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.hsdk.release"
                   superClass="arc.gnu.elf.toolchain.hs">
@@ -2485,9 +2485,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.em.debug"
+               id="arc.gnu.elf.configuration.liba.em.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.em.debug"
                   superClass="arc.gnu.elf.toolchain.em"
@@ -2496,9 +2496,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.em.release"
+               id="arc.gnu.elf.configuration.liba.em.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.em.release"
                   superClass="arc.gnu.elf.toolchain.em"
@@ -2512,9 +2512,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.emb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.emb.debug"
+               id="arc.gnu.elf.configuration.liba.emb.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.emeb.debug"
                   superClass="arc.gnu.elf.toolchain.emeb"
@@ -2523,9 +2523,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.emb.release"
+               id="arc.gnu.elf.configuration.liba.emb.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.emeb.release"
                   superClass="arc.gnu.elf.toolchain.emeb"
@@ -2539,9 +2539,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.hs">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.hs.debug"
+               id="arc.gnu.elf.configuration.liba.hs.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hs.debug"
                   superClass="arc.gnu.elf.toolchain.hs"
@@ -2550,9 +2550,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.hs.release"
+               id="arc.gnu.elf.configuration.liba.hs.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hs.release"
                   superClass="arc.gnu.elf.toolchain.hs"
@@ -2566,9 +2566,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.hsb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.hsb.debug"
+               id="arc.gnu.elf.configuration.liba.hsb.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hseb.debug"
                   superClass="arc.gnu.elf.toolchain.hseb"
@@ -2577,9 +2577,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.hsb.release"
+               id="arc.gnu.elf.configuration.liba.hsb.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hseb.release"
                   superClass="arc.gnu.elf.toolchain.hseb"
@@ -2593,9 +2593,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc700.debug"
+               id="arc.gnu.elf.configuration.liba.arc700.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700.debug"
                   superClass="arc.gnu.elf.toolchain.arc700"
@@ -2604,9 +2604,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc700.release"
+               id="arc.gnu.elf.configuration.liba.arc700.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700.release"
                   superClass="arc.gnu.elf.toolchain.arc700"
@@ -2620,9 +2620,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.arc700b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc700b.debug"
+               id="arc.gnu.elf.configuration.liba.arc700b.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700eb.debug"
                   superClass="arc.gnu.elf.toolchain.arc700eb"
@@ -2631,9 +2631,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc700b.release"
+               id="arc.gnu.elf.configuration.liba.arc700b.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700eb.release"
                   superClass="arc.gnu.elf.toolchain.arc700eb"
@@ -2647,9 +2647,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc600.debug"
+               id="arc.gnu.elf.configuration.liba.arc600.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600.debug"
                   superClass="arc.gnu.elf.toolchain.arc600"
@@ -2658,9 +2658,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc600.release"
+               id="arc.gnu.elf.configuration.liba.arc600.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600.release"
                   superClass="arc.gnu.elf.toolchain.arc600"
@@ -2674,9 +2674,9 @@
             id="com.synopsys.arc.gnu.elf.project.liba.arc600b">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc600b.debug"
+               id="arc.gnu.elf.configuration.liba.arc600b.debug"
                name="%debug"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600eb.debug"
                   superClass="arc.gnu.elf.toolchain.arc600eb"
@@ -2685,9 +2685,9 @@
          </configuration>
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
-               id="com.synopsys.arc.gnu.elf.project.liba.arc600b.release"
+               id="arc.gnu.elf.configuration.liba.arc600b.release"
                name="%release"
-               parent="com.synopsys.arc.gnu.elf.configuration">
+               parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600eb.release"
                   superClass="arc.gnu.elf.toolchain.arc600eb"
