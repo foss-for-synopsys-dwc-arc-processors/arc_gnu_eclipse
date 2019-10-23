@@ -57,28 +57,28 @@
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyType
-            id="com.synopsys.arc.gnu.elf.properties.cpu"
+            id="arc.gnu.elf.property.cpu"
             name="ARC CPU family">
       </propertyType>
       <propertyValue
-            id="com.synopsys.arc.gnu.elf.properties.cpu.em"
+            id="arc.gnu.elf.property.cpu.em"
             name="ARC EM CPU"
-            property="com.synopsys.arc.gnu.elf.properties.cpu">
+            property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
-            id="com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            id="arc.gnu.elf.property.cpu.hs"
             name="ARC HS CPU"
-            property="com.synopsys.arc.gnu.elf.properties.cpu">
+            property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
-            id="com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            id="arc.gnu.elf.property.cpu.arc700"
             name="ARC700 CPU"
-            property="com.synopsys.arc.gnu.elf.properties.cpu">
+            property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
-            id="com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            id="arc.gnu.elf.property.cpu.arc600"
             name="ARC600 CPU"
-            property="com.synopsys.arc.gnu.elf.properties.cpu">
+            property="arc.gnu.elf.property.cpu">
       </propertyValue>
    </extension>
     <extension
@@ -118,12 +118,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.em">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -140,12 +140,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.em">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -167,12 +167,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.em">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -194,12 +194,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.em">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -250,8 +250,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.em">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -296,8 +296,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -322,8 +322,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc700">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -341,8 +341,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc600">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -399,8 +399,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.em">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -476,8 +476,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -540,12 +540,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc700">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc600">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -594,8 +594,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.em">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -659,8 +659,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -714,8 +714,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc600">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -729,12 +729,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.em">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty></or>
             </enablement>
             <enablement
@@ -782,8 +782,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.em">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -828,8 +828,8 @@
                   type="UI_VISIBILITY">
                <not>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </not>
             </enablement>
@@ -866,12 +866,12 @@
                   value="true">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc700">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc600">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -886,8 +886,8 @@
                   type="UI_VISIBILITY">
                <not>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </not>
             </enablement>
@@ -919,8 +919,8 @@
                   type="CONTAINER_ATTRIBUTE"
                   value="true">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc700">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -934,8 +934,8 @@
                   type="UI_VISIBILITY">
                <not>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs">
                   </checkBuildProperty>
                </not>
             </enablement>
@@ -967,8 +967,8 @@
                   type="CONTAINER_ATTRIBUTE"
                   value="true">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc700">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -981,8 +981,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.hs">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs">
                </checkBuildProperty>
             </enablement>
             <enablement
@@ -1018,8 +1018,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc700">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -1032,8 +1032,8 @@
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
-                     property="com.synopsys.arc.gnu.elf.properties.cpu"
-                     value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.arc700">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -1048,12 +1048,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc700">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc600">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -1068,12 +1068,12 @@
                   type="UI_VISIBILITY">
                <or>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc700">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc700">
                   </checkBuildProperty>
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.arc600">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.arc600">
                   </checkBuildProperty>
                </or>
             </enablement>
@@ -1431,8 +1431,8 @@
                <enablement
                      type="ALL">
                   <checkBuildProperty
-                        property="com.synopsys.arc.gnu.elf.properties.cpu"
-                        value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.em">
                   </checkBuildProperty>
                </enablement>
             </option>
@@ -1460,8 +1460,8 @@
                      type="ALL">
                   <not>
                      <checkBuildProperty
-                           property="com.synopsys.arc.gnu.elf.properties.cpu"
-                           value="com.synopsys.arc.gnu.elf.properties.cpu.em">
+                           property="arc.gnu.elf.property.cpu"
+                           value="arc.gnu.elf.property.cpu.em">
                      </checkBuildProperty>
                   </not>
                </enablement>
@@ -2081,7 +2081,7 @@
       </configuration>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.elf32.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2106,7 +2106,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs"
             id="arc.gnu.elf.configuration.elf32.hs">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2131,7 +2131,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc700"
             id="arc.gnu.elf.configuration.elf32.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2156,7 +2156,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc600"
             id="arc.gnu.elf.configuration.elf32.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2181,7 +2181,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.elf32.emeb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2206,7 +2206,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs"
             id="arc.gnu.elf.configuration.elf32.hseb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2231,7 +2231,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc700"
             id="arc.gnu.elf.configuration.elf32.arc700eb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2256,7 +2256,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc600"
             id="arc.gnu.elf.configuration.elf32.arc600eb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2281,7 +2281,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs101"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc700"
             id="arc.gnu.elf.configuration.axs101.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2306,7 +2306,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs101"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc600"
             id="arc.gnu.elf.configuration.axs101.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2331,7 +2331,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs101"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.axs101.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2356,7 +2356,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.axs103"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs"
             id="arc.gnu.elf.configuration.axs103">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2381,7 +2381,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.emsdp"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.emsdp">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2406,7 +2406,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.emsk"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.emsk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2431,7 +2431,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.iotdk"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.iotdk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2456,7 +2456,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.hsdk"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs"
             id="arc.gnu.elf.configuration.hsdk">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2481,7 +2481,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.liba.em">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2508,7 +2508,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.em"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.em"
             id="arc.gnu.elf.configuration.liba.emeb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2535,7 +2535,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs"
             id="arc.gnu.elf.configuration.liba.hs">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2562,7 +2562,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.hs"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs"
             id="arc.gnu.elf.configuration.liba.hseb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2589,7 +2589,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc700"
             id="arc.gnu.elf.configuration.liba.arc700">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2616,7 +2616,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc700"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc700"
             id="arc.gnu.elf.configuration.liba.arc700eb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2643,7 +2643,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc600"
             id="arc.gnu.elf.configuration.liba.arc600">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
@@ -2670,7 +2670,7 @@
       </projectType>
       <projectType
             buildArtefactType="arc.gnu.elf.property.buildArtifactType.staticLib"
-            buildProperties="com.synopsys.arc.gnu.elf.properties.cpu=com.synopsys.arc.gnu.elf.properties.cpu.arc600"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.arc600"
             id="arc.gnu.elf.configuration.liba.arc600eb">
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
