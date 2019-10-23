@@ -2706,153 +2706,23 @@
        <!-- Generic Hello world -->
       <template
             filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.helloWorld_c"
-            location="templates/projecttemplates/HelloWorld_C_Project/template.xml"
+            id="arc.gnu.elf.template.hello_world_c"
+            location="templates/hello_world/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.application">
       </template>
 
        <template
             filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.helloWorld_cpp"
-            location="templates/projecttemplates/HelloWorld_CPP_Project/template.xml"
+            id="arc.gnu.elf.template.hello_world_cpp"
+            location="templates/hello_world_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.application">
       </template>
 
       <!-- EM Starter Kit C projects -->
-
       <template
             filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_helloWorld_c"
-            location="templates/projecttemplates/emsk_em7d_HelloWorld_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_helloWorld_c"
-            location="templates/projecttemplates/emsk_em9d_HelloWorld_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_helloWorld_c"
-            location="templates/projecttemplates/emsk_em11d_HelloWorld_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_empty_c"
-            location="templates/projecttemplates/emsk_em7d_empty_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_empty_c"
-            location="templates/projecttemplates/emsk_em9d_empty_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_empty_c"
-            location="templates/projecttemplates/emsk_em11d_empty_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-
-      <!-- EM Starter Kit C++ Projects -->
-
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_empty_cpp"
-            location="templates/projecttemplates/emsk_em7d_HelloWorld_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_empty_cpp"
-            location="templates/projecttemplates/emsk_em9d_HelloWorld_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_empty_cpp"
-            location="templates/projecttemplates/emsk_em11d_HelloWorld_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em7d_helloWorld_cpp"
-            location="templates/projecttemplates/emsk_em7d_empty_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em9d_helloWorld_cpp"
-            location="templates/projecttemplates/emsk_em9d_empty_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsk_em11d_helloWorld_cpp"
-            location="templates/projecttemplates/emsk_em11d_empty_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.iotdk_empty_c"
-            location="templates/projecttemplates/iotdk_empty_c/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.iotdk_empty_cpp"
-            location="templates/projecttemplates/iotdk_empty_cpp/template.xml"
-            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
-         <toolChain
-               id="arc.gnu.elf.toolchain.em">
-         </toolChain>
-      </template>
-      <template
-            filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.emsdp_empty_c"
-            location="templates/projecttemplates/emsdp_empty_c/template.xml"
+            id="arc.gnu.elf.template.emsdp_empty_c"
+            location="templates/emsdp_empty_c/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
@@ -2860,8 +2730,8 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.emsdp_empty_cpp"
-            location="templates/projecttemplates/emsdp_empty_cpp/template.xml"
+            id="arc.gnu.elf.template.emsdp_empty_cpp"
+            location="templates/emsdp_empty_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
@@ -2869,8 +2739,116 @@
       </template>
       <template
             filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.hsdk_empty_c"
-            location="templates/projecttemplates/hsdk_empty_c/template.xml"
+            id="arc.gnu.elf.template.emsk_em7d_empty_c"
+            location="templates/emsk_em7d_empty_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsk_em7d_empty_cpp"
+            location="templates/emsk_em7d_empty_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.emsk_em7d_hello_world_c"
+            location="templates/emsk_em7d_hello_world_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsk_em7d_hello_world_cpp"
+            location="templates/emsk_em7d_hello_world_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.emsk_em9d_empty_c"
+            location="templates/emsk_em9d_empty_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsk_em9d_empty_cpp"
+            location="templates/emsk_em9d_empty_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.emsk_em9d_hello_world_c"
+            location="templates/emsk_em9d_hello_world_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsk_em9d_hello_world_cpp"
+            location="templates/emsk_em9d_hello_world_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.emsk_em11d_empty_c"
+            location="templates/emsk_em11d_empty_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsk_em11d_empty_cpp"
+            location="templates/emsk_em11d_empty_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.emsk_em11d_hello_world_c"
+            location="templates/emsk_em11d_hello_world_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsk_em11d_hello_world_cpp"
+            location="templates/emsk_em11d_hello_world_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.hsdk_empty_c"
+            location="templates/hsdk_empty_c/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
          <toolChain
                id="arc.gnu.elf.toolchain.hs">
@@ -2878,37 +2856,55 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.hsdk_empty_cpp"
-            location="templates/projecttemplates/hsdk_empty_cpp/template.xml"
+            id="arc.gnu.elf.template.hsdk_empty_cpp"
+            location="templates/hsdk_empty_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
          <toolChain
                id="arc.gnu.elf.toolchain.hs">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.iotdk_empty_c"
+            location="templates/iotdk_empty_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.iotdk_empty_cpp"
+            location="templates/iotdk_empty_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
 
 
       <template
             filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.axs101_empty_c"
-            location="$nl$/templates/projecttemplates/AXS101_Empty_C_Project/template.xml"
+            id="arc.gnu.elf.template.axs101_empty_c"
+            location="templates/axs101_empty_c/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.axs101">
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.axs101_empty_cpp"
-            location="$nl$/templates/projecttemplates/AXS101_Empty_CPP_Project/template.xml"
+            id="arc.gnu.elf.template.axs101_empty_cpp"
+            location="templates/axs101_empty_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.axs101">
       </template>
       <template
             filterPattern=".*gcc"
-            id="com.synopsys.arc.gnu.elf.templates.axs103_empty_c"
-            location="$nl$/templates/projecttemplates/AXS103_Empty_C_Project/template.xml"
+            id="arc.gnu.elf.template.axs103_empty_c"
+            location="templates/axs103_empty_c/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.axs103">
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="com.synopsys.arc.gnu.elf.templates.axs103_empty_cpp"
-            location="$nl$/templates/projecttemplates/AXS103_Empty_CPP_Project/template.xml"
+            id="arc.gnu.elf.template.axs103_empty_cpp"
+            location="templates/axs103_empty_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.axs103">
       </template>
    </extension>
