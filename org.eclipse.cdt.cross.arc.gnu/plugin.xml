@@ -1867,7 +1867,7 @@
                superClass="arc.gnu.elf.tool.c.compiler.base">
             <inputType
                   id="arc.gnu.elf.c.compiler.arc.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arc"
                   superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
             </inputType>
          </tool>
@@ -1879,7 +1879,7 @@
                superClass="arc.gnu.elf.tool.cpp.compiler.base">
             <inputType
                   id="arc.gnu.elf.cpp.compiler.arc.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.cpp.arc"
                   superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
             </inputType>
          </tool>
@@ -1899,7 +1899,7 @@
                   dependencyExtensions="h"
                   id="arc.gnu.elf.assembler.arc.input"
                   languageId="org.eclipse.cdt.core.assembly"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arc"
                   sourceContentType="org.eclipse.cdt.core.asmSource"
                   sources="s,S,asm"
                   superClass="cdt.managedbuild.tool.gnu.assembler.input">
@@ -1958,7 +1958,7 @@
                superClass="arc.gnu.elf.tool.c.compiler.base">
             <inputType
                   id="arc.gnu.elf.c.compiler.arceb.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arceb"
                   superClass="arc.gnu.elf.c.compiler.arc.input">
             </inputType>
          </tool>
@@ -1969,7 +1969,7 @@
                superClass="arc.gnu.elf.tool.cpp.compiler.base">
             <inputType
                   id="arc.gnu.elf.cpp.compiler.arceb.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileCXX|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.cpp.arceb"
                   superClass="arc.gnu.elf.cpp.compiler.arc.input">
             </inputType>
          </tool>
@@ -1980,7 +1980,7 @@
                superClass="arc.gnu.elf.tool.assembler.base">
             <inputType
                   id="arc.gnu.elf.assembler.arceb.input"
-                  scannerConfigDiscoveryProfileId="org.eclipse.cdt.cross.arc.gnu.ARC_EB_GCCManagedMakePerProjectProfileC|org.eclipse.cdt.cross.arc.gnu.ARC_GCCStandardMakePerFileProfile"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arceb"
                   superClass="arc.gnu.elf.assembler.arc.input">
             </inputType>
          </tool>
@@ -2909,8 +2909,8 @@
       </template>
    </extension>
    <extension
-         id="ARC_GCCManagedMakePerProjectProfileC"
-         name="ARC GNU C/C++ managed make per project SCD profile"
+         id="arc.gnu.elf.scdprofile.c.arc"
+         name="ARC GNU C managed make per project SCD profile"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
       <scannerInfoCollector
             class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
@@ -2935,8 +2935,8 @@
       </scannerInfoProvider>
    </extension>
    <extension
-         id="ARC_EB_GCCManagedMakePerProjectProfileC"
-         name="ARC GNU C/C++ managed make per project SCD profile (EB)"
+         id="arc.gnu.elf.scdprofile.c.arceb"
+         name="ARC GNU C managed make per project SCD profile (EB)"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
       <scannerInfoCollector
             class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
@@ -2961,8 +2961,8 @@
       </scannerInfoProvider>
    </extension>
    <extension
-         id="ARC_GCCManagedMakePerProjectProfileCXX"
-         name="ARC GNU C/C++ managed make per project SCD profile"
+         id="arc.gnu.elf.scdprofile.cpp.arc"
+         name="ARC GNU C++ managed make per project SCD profile"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
       <scannerInfoCollector
             class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
@@ -2987,8 +2987,8 @@
       </scannerInfoProvider>
    </extension>
    <extension
-         id="ARC_EB_GCCManagedMakePerProjectProfileCXX"
-         name="ARC GNU C/C++ managed make per project SCD profile (EB)"
+         id="arc.gnu.elf.scdprofile.cpp.arceb"
+         name="ARC GNU C++ managed make per project SCD profile (EB)"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
       <scannerInfoCollector
             class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
