@@ -1880,7 +1880,9 @@
             <inputType
                   id="arc.gnu.elf.cpp.compiler.arc.input"
                   scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.cpp.arc"
-                  superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input">
+                  sourceContentType="org.eclipse.cdt.core.cxxSource"
+                  sources="c,C,cc,cxx,cpp,cp,CPP"
+                  superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -1959,7 +1961,7 @@
             <inputType
                   id="arc.gnu.elf.c.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arceb"
-                  superClass="arc.gnu.elf.c.compiler.arc.input">
+                  superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
@@ -1970,7 +1972,9 @@
             <inputType
                   id="arc.gnu.elf.cpp.compiler.arceb.input"
                   scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.cpp.arceb"
-                  superClass="arc.gnu.elf.cpp.compiler.arc.input">
+                  sourceContentType="org.eclipse.cdt.core.cxxSource"
+                  sources="c,C,cc,cxx,cpp,cp,CPP"
+                  superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
             </inputType>
          </tool>
          <tool
