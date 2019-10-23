@@ -1324,12 +1324,12 @@
                superClass="cdt.managedbuild.tool.gnu.assembler">
             <option
                   category="gnu.asm.category.general"
-                  id="com.synopsys.arc.gnu.elf.tool.assembler.option.misc.lstfilename"
+                  id="arc.gnu.elf.assembler.option.lstfilename"
                   superClass="arc.gnu.elf.c.compiler.option.lstfilename">
             </option>
             <option
                   category="gnu.asm.category.general"
-                  id="com.synopsys.arc.gnu.elf.tool.assembler.option.flags"
+                  id="arc.gnu.elf.assembler.option.flags"
                   name="%option.assembler.flags"
                   superClass="gnu.both.asm.option.flags"
                   value="-c"
@@ -1337,7 +1337,7 @@
             </option>
             <outputType
                   buildVariable="OBJS"
-                  id="com.synopsys.arc.gnu.elf.tool.assembler.output"
+                  id="arc.gnu.elf.assembler.output"
                   outputs="o"
                   superClass="cdt.managedbuild.tool.gnu.assembler.output">
             </outputType>
@@ -1732,31 +1732,31 @@
                natureFilter="both"
                outputFlag="&gt;">
             <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
+                  id="arc.gnu.elf.listing.category.general"
                   name="General"
                   owner="arc.gnu.elf.tool.listing.base">
             </optionCategory>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.listing.arc.general"
+                  category="arc.gnu.elf.listing.category.general"
                   defaultValue="-h -S"
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.general.otherflags"
+                  id="arc.gnu.elf.listing.option.other"
                   name="Other flags"
                   valueType="string">
             </option>
+            <inputType
+                  id="arc.gnu.elf.listing.input"
+                  multipleOfType="true"
+                  option="arc.gnu.elf.listing.option.in_file_name"
+                  sources="elf">
+            </inputType>
             <outputType
                   buildVariable="SECONDARY_LIST"
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.output"
+                  id="arc.gnu.elf.listing.output"
                   outputNames="${BuildArtifactFileBaseName}.lst"
                   outputs="lst">
             </outputType>
-            <inputType
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.input"
-                  multipleOfType="true"
-                  option="com.synopsys.arc.gnu.elf.tool.listing.arc.InFileName"
-                  sources="elf">
-            </inputType>
             <option
-                  id="com.synopsys.arc.gnu.elf.tool.listing.arc.InFileName"
+                  id="arc.gnu.elf.listing.option.in_file_name"
                   resourceFilter="all"
                   value="${BuildArtifactFileName}"
                   valueType="string">
@@ -1779,63 +1779,63 @@
                commandLinePattern="${COMMAND} ${INPUTS} ${FLAGS}"
                id="arc.gnu.elf.tool.printsize.base">
             <optionCategory
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  id="arc.gnu.elf.printsize.category.general"
                   name="General"
                   owner="arc.gnu.elf.tool.printsize.base">
             </optionCategory>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format"
+                  category="arc.gnu.elf.printsize.category.general"
+                  id="arc.gnu.elf.printsize.option.format"
                   name="Size Format"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="--format=berkeley"
-                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.berkeley"
+                     id="arc.gnu.elf.printsize.option.format.berkeley"
                      isDefault="true"
                      name="Berkeley">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--format=sysv"
-                     id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.format.sysv"
+                     id="arc.gnu.elf.printsize.option.format.sysv"
                      name="SysV">
                </enumeratedOptionValue>
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  category="arc.gnu.elf.printsize.category.general"
                   command="-x"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.hex"
+                  id="arc.gnu.elf.printsize.option.hex"
                   name="Hex"
                   valueType="boolean">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
+                  category="arc.gnu.elf.printsize.category.general"
                   command="-t"
                   defaultValue="false"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.totals"
+                  id="arc.gnu.elf.printsize.option.totals"
                   name="Show Totals"
                   valueType="boolean">
             </option>
             <option
-                  category="com.synopsys.arc.gnu.elf.tool.printsize.arc.general"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.general.otherflags"
+                  category="arc.gnu.elf.printsize.category.general"
+                  id="arc.gnu.elf.printsize.option.other"
                   name="Other flags"
                   valueType="string">
             </option>
+            <inputType
+                  id="arc.gnu.elf.printsize.input"
+                  multipleOfType="true"
+                  option="arc.gnu.elf.printsize.option.in_file_name"
+                  sources="elf">
+            </inputType>
             <outputType
                   buildVariable="SECONDARY_SIZE"
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.output"
+                  id="arc.gnu.elf.printsize.output"
                   outputNames="${BuildArtifactFileBaseName}.siz"
                   outputs="siz">
             </outputType>
-            <inputType
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.input"
-                  multipleOfType="true"
-                  option="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
-                  sources="elf">
-            </inputType>
             <option
-                  id="com.synopsys.arc.gnu.elf.tool.printsize.arc.InFileName"
+                  id="arc.gnu.elf.printsize.option.in_file_name"
                   resourceFilter="all"
                   value="${BuildArtifactFileName}"
                   valueType="string">
@@ -1857,7 +1857,7 @@
       <toolChain
             id="arc.gnu.elf.toolchain.arc"
             isAbstract="true"
-            secondaryOutputs="arc.gnu.elf.flash.output;arc.gnu.elf.tool.listing.arc.output;arc.gnu.elf.tool.printsize.arc.output"
+            secondaryOutputs="arc.gnu.elf.flash.output;arc.gnu.elf.listing.output;arc.gnu.elf.printsize.output"
             superClass="arc.gnu.elf.toolchain.base"
             targetTool="arc.gnu.elf.tool.c.linker.arc;arc.gnu.elf.tool.cpp.linker.arc">
          <tool
@@ -1948,7 +1948,7 @@
       <toolChain
             id="arc.gnu.elf.toolchain.arceb"
             isAbstract="true"
-            secondaryOutputs="arc.gnu.elf.flash.output;arc.gnu.elf.tool.listing.arc.output;arc.gnu.elf.tool.printsize.arc.output"
+            secondaryOutputs="arc.gnu.elf.flash.output;arc.gnu.elf.listing.output;arc.gnu.elf.printsize.output"
             superClass="arc.gnu.elf.toolchain.base"
             targetTool="arc.gnu.elf.tool.c.linker.arc;arc.gnu.elf.tool.cpp.linker.arc">
          <tool
