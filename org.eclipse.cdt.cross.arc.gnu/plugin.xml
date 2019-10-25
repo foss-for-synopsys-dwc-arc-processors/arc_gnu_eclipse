@@ -2926,7 +2926,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
+               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
                command="arc-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -2952,7 +2952,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
+               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
                command="arceb-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
@@ -2978,7 +2978,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
+               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
                command="arc-elf32-g++">
          </run>
          <scannerInfoConsoleParser
@@ -3004,7 +3004,7 @@
             providerId="specsFile">
          <run
                arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="org.eclipse.cdt.cross.arc.gnu.common.ARCGCCSpecsRunSIProvider"
+               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
                command="arceb-elf32-g++">
          </run>
          <scannerInfoConsoleParser

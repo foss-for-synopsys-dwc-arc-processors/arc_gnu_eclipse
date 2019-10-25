@@ -22,6 +22,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11,
  JavaSE-9
 Export-Package: com.arc.cdt.toolchain,
  com.arc.cdt.toolchain.arc,
+ com.synopsys.arc.gnu.elf.scannerconfig;x-internal:=true,
  org.eclipse.cdt.cross.arc.gnu,
  org.eclipse.cdt.cross.arc.gnu.common,
  org.eclipse.cdt.cross.arc.gnu.linux,
