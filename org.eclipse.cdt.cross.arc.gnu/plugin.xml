@@ -1879,7 +1879,7 @@
                superClass="arc.gnu.elf.tool.cpp.compiler.base">
             <inputType
                   id="arc.gnu.elf.cpp.compiler.arc.input"
-                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.cpp.arc"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arc"
                   sourceContentType="org.eclipse.cdt.core.cxxSource"
                   sources="c,C,cc,cxx,cpp,cp,CPP"
                   superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
@@ -1960,7 +1960,7 @@
                superClass="arc.gnu.elf.tool.c.compiler.base">
             <inputType
                   id="arc.gnu.elf.c.compiler.arceb.input"
-                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arceb"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arc"
                   superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
             </inputType>
          </tool>
@@ -1971,7 +1971,7 @@
                superClass="arc.gnu.elf.tool.cpp.compiler.base">
             <inputType
                   id="arc.gnu.elf.cpp.compiler.arceb.input"
-                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.cpp.arceb"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arc"
                   sourceContentType="org.eclipse.cdt.core.cxxSource"
                   sources="c,C,cc,cxx,cpp,cp,CPP"
                   superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
@@ -1984,7 +1984,7 @@
                superClass="arc.gnu.elf.tool.assembler.base">
             <inputType
                   id="arc.gnu.elf.assembler.arceb.input"
-                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arceb"
+                  scannerConfigDiscoveryProfileId="arc.gnu.elf.scdprofile.c.arc"
                   superClass="arc.gnu.elf.assembler.arc.input">
             </inputType>
          </tool>
@@ -2925,7 +2925,7 @@
       <scannerInfoProvider
             providerId="specsFile">
          <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
+               arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}"
                class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
                command="arc-elf32-gcc">
          </run>
@@ -2934,83 +2934,4 @@
          </scannerInfoConsoleParser>
       </scannerInfoProvider>
    </extension>
-   <extension
-         id="arc.gnu.elf.scdprofile.c.arceb"
-         name="ARC GNU C managed make per project SCD profile (EB)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.c"
-               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
-               command="arceb-elf32-gcc">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="arc.gnu.elf.scdprofile.cpp.arc"
-         name="ARC GNU C++ managed make per project SCD profile"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
-               command="arc-elf32-g++">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-   <extension
-         id="arc.gnu.elf.scdprofile.cpp.arceb"
-         name="ARC GNU C++ managed make per project SCD profile (EB)"
-         point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
-      <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
-            scope="project">
-      </scannerInfoCollector>
-      <buildOutputProvider>
-         <open></open>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
-         </scannerInfoConsoleParser>
-      </buildOutputProvider>
-      <scannerInfoProvider
-            providerId="specsFile">
-         <run
-               arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp"
-               class="com.synopsys.arc.gnu.elf.scannerconfig.ArcScannerInfoRunProvider"
-               command="arceb-elf32-g++">
-         </run>
-         <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
-         </scannerInfoConsoleParser>
-      </scannerInfoProvider>
-   </extension>
-
 </plugin>
