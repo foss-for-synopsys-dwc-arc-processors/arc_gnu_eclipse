@@ -2913,13 +2913,13 @@
          name="ARC GNU C managed make per project SCD profile"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
       <scannerInfoCollector
-            class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCGCCScannerInfoCollector"
+            class="com.synopsys.arc.gnu.elf.scannerconfig.ProjectScannerInfoCollector"
             scope="project">
       </scannerInfoCollector>
       <buildOutputProvider>
          <open></open>
          <scannerInfoConsoleParser
-               class="org.eclipse.cdt.cross.arc.gnu.scannerconfig.ARCManagedGCCScannerInfoConsoleParser">
+               class="com.synopsys.arc.gnu.elf.scannerconfig.ScannerInfoConsoleParser">
          </scannerInfoConsoleParser>
       </buildOutputProvider>
       <scannerInfoProvider
@@ -2930,7 +2930,7 @@
                command="arc-elf32-gcc">
          </run>
          <scannerInfoConsoleParser
-               class="org.eclipse.cdt.make.internal.core.scannerconfig.gnu.GCCSpecsConsoleParser">
+               class="com.synopsys.arc.gnu.elf.scannerconfig.GccSpecsConsoleParser">
          </scannerInfoConsoleParser>
       </scannerInfoProvider>
    </extension>

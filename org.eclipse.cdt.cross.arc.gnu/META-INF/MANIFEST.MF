@@ -25,5 +25,4 @@ Export-Package: com.arc.cdt.toolchain,
  com.synopsys.arc.gnu.elf.scannerconfig;x-internal:=true,
  org.eclipse.cdt.cross.arc.gnu,
  org.eclipse.cdt.cross.arc.gnu.common,
- org.eclipse.cdt.cross.arc.gnu.linux,
- org.eclipse.cdt.cross.arc.gnu.scannerconfig
+ org.eclipse.cdt.cross.arc.gnu.linux
