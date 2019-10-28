@@ -33,7 +33,7 @@ public abstract class IsToolChainSupported implements
     }
 
     public boolean isSupportedImpl(IToolChain oToolChain, Version oVersion,
-            String sInstance, IsToolchainData oStaticData) {
+            String sInstance) {
         ITool[] tools = oToolChain.getTools();
         for (ITool tool : tools) {
             String extensions[] = tool.getAllOutputExtensions();
