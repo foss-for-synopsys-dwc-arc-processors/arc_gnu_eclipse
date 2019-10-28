@@ -19,17 +19,12 @@ import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleManager;
-import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.osgi.framework.BundleContext;
 
  public class ARCPlugin extends Plugin
  {
    public static final String PLUGIN_ID = "org.eclipse.cdt.cross.arc.gnu";
-   public static final String DEFAULT_LOG = "ARC Eclipse Plugin Log";
    private static ARCPlugin m_oPlugin;
 
    public static String safeVariableExpansion(String expression) {
@@ -80,24 +75,5 @@ import org.osgi.framework.BundleContext;
      getDefault().getLog().log(
        new Status(4, "org.eclipse.cdt.cross.arc.gnu", sMsg, 
        oException));
-   }
- 
-   public MessageConsole getDefaultConsole() {
-     return getConsole("ARC Eclipse Plugin Log");
-   }
- 
-   public MessageConsole getConsole(String sName)
-   {
-     IConsoleManager oConMan = ConsolePlugin.getDefault().getConsoleManager();
-     IConsole[] aoConsoles = oConMan.getConsoles();
-     for (IConsole oConsole : aoConsoles) {
-       if (oConsole.getName().equals(sName)) {
-         return (MessageConsole)oConsole;
-       }
-     }
- 
-     MessageConsole oNewConsole = new MessageConsole(sName, null);
-     oConMan.addConsoles(new IConsole[] { oNewConsole });
-     return oNewConsole;
    }
  }
