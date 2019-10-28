@@ -21,16 +21,6 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Version;
 
 public final class IsToolChainSupported implements IManagedIsToolChainSupported {
-    static final boolean DEBUG = false;
-
-    public String getCompilerName() {
-        return "arc-elf32-gcc";
-    }
-
-    public String getPlatform() {
-        return "linux";
-    }
-
     @Override
     public boolean isSupported(IToolChain oToolChain, Version oVersion,
             String sInstance) {
