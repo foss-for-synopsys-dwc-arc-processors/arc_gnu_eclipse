@@ -112,7 +112,6 @@
                defaultValue="false"
                id="arc.gnu.elf.option.target.use_tcf"
                name="%option.target.use_tcf"
-               style="radio"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
