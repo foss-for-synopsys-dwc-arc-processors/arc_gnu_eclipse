@@ -14,7 +14,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-Version: 2019.9.0.qualifier
 Bundle-Name: ARC GNU Toolchain C/C++ Development Support
-Bundle-Activator: org.eclipse.cdt.cross.arc.gnu.ARCPlugin
+Bundle-Activator: com.synopsys.arc.gnu.elf.ArcGnuElfPlugin
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true
 Bundle-Localization: gnu.elf
@@ -22,6 +22,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11,
  JavaSE-9
 Export-Package: com.arc.cdt.toolchain,
  com.arc.cdt.toolchain.arc,
+ com.synopsys.arc.gnu.elf;x-internal:=true,
  com.synopsys.arc.gnu.elf.scannerconfig;x-internal:=true,
  org.eclipse.cdt.cross.arc.gnu,
  org.eclipse.cdt.cross.arc.gnu.common

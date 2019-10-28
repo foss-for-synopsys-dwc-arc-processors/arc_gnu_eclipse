@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator;
-import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IOption;
@@ -34,6 +33,7 @@ import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.IOptionEnablementManager;
 import com.arc.cdt.toolchain.OptionEnablementManager;
 import com.arc.cdt.toolchain.tcf.TcfContent;
+import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 
 public class ArcOptionEnablementManager extends OptionEnablementManager {
 
@@ -297,7 +297,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     + optionValueName + "\" and CPU value \"" + ArcCpu.fromCommand(mcpuFlag)
                     + "\" is not valid." + postfix;
             StatusManager.getManager().handle(
-                    new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, errorMessage),
+                    new Status(IStatus.ERROR, ArcGnuElfPlugin.PLUGIN_ID, errorMessage),
                     showStyle);
         }
     }
@@ -396,7 +396,7 @@ public class ArcOptionEnablementManager extends OptionEnablementManager {
                     tcfPath = (String)mgr.getValue(
                             getToolChainSpecificOption(getTCF(TCF_FILE_OPTION_ID)).get(0));
                     if (tcfPath != null && !tcfPath.isEmpty()) {
-                        File tcf = new File(ARCPlugin.safeVariableExpansion(tcfPath));
+                        File tcf = new File(ArcGnuElfPlugin.safeVariableExpansion(tcfPath));
                         TcfContent tcfContent = TcfContent.readFile(tcf, mcpuFlag, StatusManager.SHOW);
                         if (tcfContent != null) {
                             Properties gccOptions = tcfContent.getGccOptions();

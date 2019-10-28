@@ -36,6 +36,7 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.ArcCpuFamily;
 import com.arc.cdt.toolchain.tcf.TcfContent;
+import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 
 public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator {
     public static final String USE_TCF_OPTION = ".target.use_tcf";
@@ -356,7 +357,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                  */
                 int showStyle = (oTool.equals(lastTool) && projectBuildPath.equals(lastProject))
                         ? StatusManager.NONE : StatusManager.SHOW;
-                File tcf = new File(ARCPlugin.safeVariableExpansion(sTCF));
+                File tcf = new File(ArcGnuElfPlugin.safeVariableExpansion(sTCF));
                 fileContent = TcfContent.readFile(tcf, sProcessor, showStyle, "\n\nIgnoring TCF.");
                 if (fileContent != null) {
                     Properties gccOptions = fileContent.getGccOptions();
@@ -372,7 +373,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                                     gcc_option = getMultiplyOption(gcc_option, oToolChain, sProcessor);
                                 } catch (BuildException e1) {
                                     StatusManager.getManager().handle(
-                                            new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                            new Status(IStatus.ERROR, ArcGnuElfPlugin.PLUGIN_ID, e1.getMessage()),
                                             StatusManager.LOG);
                                 }
                             }
@@ -391,7 +392,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                                             StandardOpenOption.CREATE);
                                 } catch (IOException e1) {
                                     StatusManager.getManager().handle(new Status(IStatus.ERROR,
-                                            ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                            ArcGnuElfPlugin.PLUGIN_ID, e1.getMessage()),
                                             StatusManager.SHOW);
                                     e1.printStackTrace();
                                 }
@@ -415,7 +416,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                             	}
                             } catch (IOException e1) {
                                 StatusManager.getManager().handle(
-                                        new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, e1.getMessage()),
+                                        new Status(IStatus.ERROR, ArcGnuElfPlugin.PLUGIN_ID, e1.getMessage()),
                                         StatusManager.SHOW);
                                 e1.printStackTrace();
                             }
@@ -445,7 +446,7 @@ public class ARCManagedCommandLineGenerator extends ManagedCommandLineGenerator 
                     .performStringSubstitution(projectBuildPath);
         } catch (CoreException e) {
             StatusManager.getManager()
-                    .handle(new Status(IStatus.WARNING, ARCPlugin.PLUGIN_ID,
+                    .handle(new Status(IStatus.WARNING, ArcGnuElfPlugin.PLUGIN_ID,
                             "Can not save memory map from TCF in project directory, using temp"),
                     StatusManager.SHOW);
             projectBuildPath = System.getProperty("java.io.tmpdir");

@@ -24,7 +24,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.statushandlers.StatusManager;
@@ -37,6 +36,7 @@ import org.xml.sax.SAXException;
 
 import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.ArcCpuFamily;
+import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 
 public class TcfContent {
 
@@ -119,7 +119,7 @@ public class TcfContent {
                 builder.append(message);
             }
             String message = builder.toString();
-            StatusManager.getManager().handle(new Status(IStatus.ERROR, ARCPlugin.PLUGIN_ID, message), showStyle);
+            StatusManager.getManager().handle(new Status(IStatus.ERROR, ArcGnuElfPlugin.PLUGIN_ID, message), showStyle);
         }
         return tcfContent;
     }

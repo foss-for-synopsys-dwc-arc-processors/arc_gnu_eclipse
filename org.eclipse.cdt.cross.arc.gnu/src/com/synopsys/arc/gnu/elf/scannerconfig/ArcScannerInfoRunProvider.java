@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import org.eclipse.cdt.core.CCProjectNature;
 import org.eclipse.cdt.core.model.CoreModel;
-import org.eclipse.cdt.cross.arc.gnu.ARCPlugin;
 import org.eclipse.cdt.cross.arc.gnu.common.CommandInfo;
 import org.eclipse.cdt.make.internal.core.scannerconfig2.GCCSpecsRunSIProvider;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
@@ -20,6 +19,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+
+import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 
 @SuppressWarnings("restriction")
 public final class ArcScannerInfoRunProvider extends GCCSpecsRunSIProvider
@@ -86,7 +87,7 @@ public final class ArcScannerInfoRunProvider extends GCCSpecsRunSIProvider
             try {
                 isCPlusPlus = project.hasNature(CCProjectNature.CC_NATURE_ID);
             } catch (CoreException err) {
-                ARCPlugin.log("Failed to get project nature.", err);
+                ArcGnuElfPlugin.getDefault().logError("Failed to get project nature.", err);
                 return Optional.empty();
             }
         }
