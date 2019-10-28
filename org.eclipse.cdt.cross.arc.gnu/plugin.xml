@@ -1076,6 +1076,23 @@
                   </checkBuildProperty>
                </or>
             </enablement>
+            <enablement
+                  type="UI_ENABLEMENT|CMD_USAGE">
+               <or>
+                  <checkOption
+                        optionId="arc.gnu.elf.option.target.fpx"
+                        value="arc.gnu.elf.option.target.fpx.dpfp">
+                  </checkOption>
+                  <checkOption
+                        optionId="arc.gnu.elf.option.target.fpx"
+                        value="arc.gnu.elf.option.target.fpx.dpfp_fast">
+                  </checkOption>
+                  <checkOption
+                        optionId="arc.gnu.elf.option.target.fpx"
+                        value="arc.gnu.elf.option.target.fpx.dpfp_compact">
+                  </checkOption>
+               </or>
+            </enablement>
          </option>
          <optionCategory
                id="arc.gnu.elf.category.extratoolstarget"
