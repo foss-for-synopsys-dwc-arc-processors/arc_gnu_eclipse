@@ -91,7 +91,7 @@
       <toolChain
             id="arc.gnu.elf.toolchain.base"
             isAbstract="true"
-            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.linux.IsToolChainSupported">
+            isToolChainSupported="org.eclipse.cdt.cross.arc.gnu.common.IsToolChainSupported">
          <targetPlatform
                binaryParser="org.eclipse.cdt.core.GNU_ELF"
                id="arc.gnu.elf.toolchain.base.targetPlatform"

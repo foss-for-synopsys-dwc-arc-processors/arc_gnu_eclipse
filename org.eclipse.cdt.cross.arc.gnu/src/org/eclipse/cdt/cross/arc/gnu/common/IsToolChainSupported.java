@@ -20,8 +20,7 @@ import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Version;
 
-public abstract class IsToolChainSupported implements
-        IManagedIsToolChainSupported {
+public final class IsToolChainSupported implements IManagedIsToolChainSupported {
     static final boolean DEBUG = false;
 
     public String getCompilerName() {
@@ -32,7 +31,8 @@ public abstract class IsToolChainSupported implements
         return "linux";
     }
 
-    public boolean isSupportedImpl(IToolChain oToolChain, Version oVersion,
+    @Override
+    public boolean isSupported(IToolChain oToolChain, Version oVersion,
             String sInstance) {
         ITool[] tools = oToolChain.getTools();
         for (ITool tool : tools) {
