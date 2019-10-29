@@ -52,6 +52,8 @@ public class TcfContent {
     private String cDefinesText;
     private String cDefinesFileName;
     private long modTime;
+    private final Map<String, String> sectionNames = new HashMap<>();
+    private final Map<String, String> sectionContent = new HashMap<>();
 
     private static Map<File, TcfContent> cache = new HashMap<File, TcfContent>();
 
@@ -179,6 +181,8 @@ public class TcfContent {
                      */
                     tcfContent.gccOptions = new OrderedProperties();
                     tcfContent.gccOptionsString = data;
+                    tcfContent.sectionContent.put(GCC_OPTIONS_SECTION, data);
+                    tcfContent.sectionNames.put(GCC_OPTIONS_SECTION, e.getAttribute("filename"));
                     /*
                      * Need to escape whitespaces here because in java.util.Properties key termination
                      * characters are '=', ':' and whitespace. So if our TCF has several option like
@@ -192,10 +196,14 @@ public class TcfContent {
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
                     tcfContent.linkerMemoryMap = data;
+                    tcfContent.sectionContent.put(LINKER_MEMORY_MAP_SECTION, data);
+                    tcfContent.sectionNames.put(LINKER_MEMORY_MAP_SECTION, e.getAttribute("filename"));
                 }
                 if (elementName.equals(C_DEFINES_SECTION)) {
                     tcfContent.cDefinesText = data;
                     tcfContent.cDefinesFileName = e.getAttribute("filename");
+                    tcfContent.sectionContent.put(C_DEFINES_SECTION, data);
+                    tcfContent.sectionNames.put(C_DEFINES_SECTION, e.getAttribute("filename"));
                 }
             }
         } catch (SAXException | IOException | ParserConfigurationException e) {
@@ -245,5 +253,20 @@ public class TcfContent {
 
     public String getCDefinesFileName() {
         return cDefinesFileName;
+    }
+
+    public long getLastModifiedTime()
+    {
+        return modTime;
+    }
+
+    public String getSectionFilename(String sectionId)
+    {
+        return sectionNames.get(sectionId);
+    }
+
+    public String getSectionContent(String sectionId)
+    {
+        return sectionContent.get(sectionId);
     }
 }

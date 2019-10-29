@@ -38,7 +38,7 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
         String commandLinePattern)
     {
         var newFlags = BuildUtils.getParentToolchain(Optional.of(tool))
-            .map(this::getTargetFlags)
+            .map(toolchain -> getTargetFlags(tool, toolchain))
             .map(options -> Stream.concat(options, Arrays.stream(flags)))
             .map(options -> options.toArray(String[]::new));
         newFlags.map(Arrays::toString)
@@ -55,13 +55,13 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
             commandLinePattern);
     }
 
-    private Stream<String> getTargetFlags(IToolChain toolchain)
+    private Stream<String> getTargetFlags(ITool tool, IToolChain toolchain)
     {
         var tcfPath = BuildUtils.getTcfPath(toolchain);
         if (tcfPath.isPresent()) {
             var cpuOption = BuildUtils.getCurrentCpu(toolchain.getParent(), toolchain);
             if (cpuOption.isPresent()) {
-                return getTcfFlags(tcfPath.get(), cpuOption.get());
+                return getTcfFlags(tool, toolchain, tcfPath.get(), cpuOption.get());
             }
         }
 
@@ -97,14 +97,20 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
     /**
      * Read GCC options from the TCF.
      */
-    private Stream<String> getTcfFlags(Path tcfPath, String cpuOption)
+    private Stream<String> getTcfFlags(
+        ITool tool,
+        IToolChain toolchain,
+        Path tcfPath,
+        String cpuOption)
     {
-        return Optional.ofNullable(
+        var tcf = Optional.ofNullable(
             TcfContent.readFile(
                 tcfPath.toFile(),
                 cpuOption,
                 StatusManager.SHOW,
-                "Ignoring TCF."))
+                "Ignoring TCF."));
+
+        var compilerOptions = tcf
             .map(TcfContent::getGccOptionsString)
             .map(CommandLineUtil::argumentsToArray)
             .map(Arrays::stream)
@@ -112,5 +118,31 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
             // Filter out endianness options.
             .filter(option -> !option.equals("-mlittle-endian"))
             .filter(option -> !option.equals("-mbig-endian"));
+
+        var buildPath = BuildUtils.getProjectBuildPath(toolchain);
+        if (buildPath == null) {
+            return compilerOptions;
+        }
+
+        // C includes file.
+        if ((BuildUtils.isCompilerTool(tool) || BuildUtils.isAssemblerTool(tool))
+            && BuildUtils.useTcfCinclude(toolchain)) {
+            compilerOptions = Stream.concat(compilerOptions,
+                tcf.flatMap(
+                    t -> BuildUtils.createTcfFile(t, TcfContent.C_DEFINES_SECTION, buildPath))
+                    .map(path -> Stream.of("-include ", path.toString()))
+                    .orElse(Stream.empty()));
+        }
+        // memory.x
+        if (BuildUtils.isLinkerTool(tool) && BuildUtils.useTcfMemoryX(toolchain)) {
+            compilerOptions = Stream.concat(compilerOptions,
+                tcf.flatMap(
+                    t -> BuildUtils.createTcfFile(t, TcfContent.LINKER_MEMORY_MAP_SECTION,
+                        buildPath))
+                    .map(path -> Stream.of("-Wl,-marcv2elfx -L ", path.getParent().toString()))
+                    .orElse(Stream.empty()));
+        }
+
+        return compilerOptions;
     }
 }
