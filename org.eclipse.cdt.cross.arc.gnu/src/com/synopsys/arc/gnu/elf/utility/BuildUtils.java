@@ -9,11 +9,14 @@ import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IOption;
+import org.eclipse.cdt.managedbuilder.core.ITool;
+import org.eclipse.cdt.managedbuilder.core.IToolChain;
 
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 
 public final class BuildUtils
 {
+    private static final String ARC_TARGET_CATEGORY = "arc.gnu.elf.category.target";
     private static final String ARCEM_CPU_OPTION = "arc.gnu.elf.option.target.cpuem";
     private static final String ARCHS_CPU_OPTION = "arc.gnu.elf.option.target.cpuhs";
     private static final String ARC700_CPU_OPTION = "arc.gnu.elf.option.target.cpu700";
@@ -48,6 +51,32 @@ public final class BuildUtils
     }
 
     /**
+     * Return a toolchain that owns the given tool.
+     *
+     * @param tool The tool for which to return the owning toolchain.
+     * @return An {@link Optional} with the parent toolchain of the {code tool} or
+     *         {@link Optional#empty()} if tool is not owned by a toolchain.
+     */
+    public static Optional<IToolChain> getParentToolchain(Optional<ITool> tool)
+    {
+        return tool.map(ITool::getParent)
+            .filter(parent -> parent instanceof IToolChain)
+            .map(parent -> (IToolChain) parent);
+    }
+
+    /**
+     * A predicate whether the given {@code option} is an ARC "Target" option and should be passed
+     * to the GCC as an {@code -m} flag.
+     *
+     * @param option The option for which to perform the check.
+     * @return {@code true} if option is not null and is owned by the ARC Target category.
+     */
+    public static boolean isArcTargetOption(IOption option)
+    {
+        return option != null && option.getCategory().getBaseId().equals(ARC_TARGET_CATEGORY);
+    }
+
+    /**
      * Return true if give {@code option} is one of the valid CPU options.
      */
     public static boolean isCpuOption(IOption option)
@@ -75,6 +104,22 @@ public final class BuildUtils
         }
 
         return option.getApplicabilityCalculator().isOptionVisible(configuration, holder, option);
+    }
+
+    /**
+     * Whether the given {@code option} should be used in command line of the given context.
+     */
+    public static boolean isOptionUsedInCommandLine(
+        IBuildObject configuration,
+        IHoldsOptions holder,
+        IOption option)
+    {
+        if (configuration == null || holder == null || option == null) {
+            return false;
+        }
+
+        return option.getApplicabilityCalculator()
+            .isOptionUsedInCommandLine(configuration, holder, option);
     }
 
     /* Static class. */
