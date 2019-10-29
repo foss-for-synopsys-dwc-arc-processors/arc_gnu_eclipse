@@ -47,6 +47,7 @@ public class TcfContent {
             Arrays.asList( GCC_OPTIONS_SECTION, LINKER_MEMORY_MAP_SECTION, C_DEFINES_SECTION );
 
     private Properties gccOptions;
+    private String gccOptionsString;
     private String linkerMemoryMap;
     private String cDefinesText;
     private String cDefinesFileName;
@@ -177,6 +178,7 @@ public class TcfContent {
                      * -mcpu option.
                      */
                     tcfContent.gccOptions = new OrderedProperties();
+                    tcfContent.gccOptionsString = data;
                     /*
                      * Need to escape whitespaces here because in java.util.Properties key termination
                      * characters are '=', ':' and whitespace. So if our TCF has several option like
@@ -227,6 +229,11 @@ public class TcfContent {
     public Properties getGccOptions() {
         return gccOptions;
     }
+
+    public String getGccOptionsString() {
+        return gccOptionsString;
+    }
+
 
     public String getLinkerMemoryMap() {
         return linkerMemoryMap;

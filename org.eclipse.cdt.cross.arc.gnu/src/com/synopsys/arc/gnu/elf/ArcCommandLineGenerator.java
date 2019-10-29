@@ -2,6 +2,7 @@
 
 package com.synopsys.arc.gnu.elf;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -14,7 +15,10 @@ import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
+import org.eclipse.cdt.utils.CommandLineUtil;
+import org.eclipse.ui.statushandlers.StatusManager;
 
+import com.arc.cdt.toolchain.tcf.TcfContent;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
 @SuppressWarnings("restriction")
@@ -53,6 +57,19 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
 
     private Stream<String> getTargetFlags(IToolChain toolchain)
     {
+        var tcfPath = BuildUtils.getTcfPath(toolchain);
+        if (tcfPath.isPresent()) {
+            var cpuOption = BuildUtils.getCurrentCpu(toolchain.getParent(), toolchain);
+            if (cpuOption.isPresent()) {
+                return getTcfFlags(tcfPath.get(), cpuOption.get());
+            }
+        }
+
+        return getProjectFlags(toolchain);
+    }
+
+    private Stream<String> getProjectFlags(IToolChain toolchain)
+    {
         IConfiguration configuration = toolchain.getParent();
         return Arrays.stream(toolchain.getOptions())
             .filter(BuildUtils::isArcTargetOption)
@@ -75,5 +92,25 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
                 }
             })
             .filter(s -> !(s == null || s.isBlank()));
+    }
+
+    /**
+     * Read GCC options from the TCF.
+     */
+    private Stream<String> getTcfFlags(Path tcfPath, String cpuOption)
+    {
+        return Optional.ofNullable(
+            TcfContent.readFile(
+                tcfPath.toFile(),
+                cpuOption,
+                StatusManager.SHOW,
+                "Ignoring TCF."))
+            .map(TcfContent::getGccOptionsString)
+            .map(CommandLineUtil::argumentsToArray)
+            .map(Arrays::stream)
+            .orElse(Stream.empty())
+            // Filter out endianness options.
+            .filter(option -> !option.equals("-mlittle-endian"))
+            .filter(option -> !option.equals("-mbig-endian"));
     }
 }

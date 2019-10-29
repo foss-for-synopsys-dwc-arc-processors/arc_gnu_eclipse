@@ -2,6 +2,8 @@
 
 package com.synopsys.arc.gnu.elf.utility;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 public final class BuildUtils
 {
     private static final String ARC_TARGET_CATEGORY = "arc.gnu.elf.category.target";
+    private static final String USE_TCF_OPTION = "arc.gnu.elf.option.target.use_tcf";
+    private static final String TCF_PATH_OPTION = "arc.gnu.elf.option.target.tcf_path";
     private static final String ARCEM_CPU_OPTION = "arc.gnu.elf.option.target.cpuem";
     private static final String ARCHS_CPU_OPTION = "arc.gnu.elf.option.target.cpuhs";
     private static final String ARC700_CPU_OPTION = "arc.gnu.elf.option.target.cpu700";
@@ -62,6 +66,22 @@ public final class BuildUtils
         return tool.map(ITool::getParent)
             .filter(parent -> parent instanceof IToolChain)
             .map(parent -> (IToolChain) parent);
+    }
+
+    /**
+     * Return a path to a TCF specified in the toolchain options if path is specified and usage of
+     * TCF is enabled.
+     *
+     * @param toolchain The toolchain with ARC Target options. Maybe {@code null}.
+     */
+    public static Optional<Path> getTcfPath(IHoldsOptions toolchain)
+    {
+        return Optional.ofNullable(toolchain)
+            .flatMap(tc -> readBooleanOption(tc, USE_TCF_OPTION))
+            .filter(Boolean::booleanValue)
+            .flatMap(ignored -> readStringOption(toolchain, TCF_PATH_OPTION))
+            .flatMap(ArcGnuElfPlugin::variableExpansion)
+            .map(Paths::get);
     }
 
     /**
@@ -120,6 +140,62 @@ public final class BuildUtils
 
         return option.getApplicabilityCalculator()
             .isOptionUsedInCommandLine(configuration, holder, option);
+    }
+
+    /**
+     * Read a boolean value of the option specified by its super's ID from the given holder.
+     *
+     * @param holder The toolchain that holds the option.
+     * @param optionId The ID of the super class of the option.
+     * @return An {@link Optional} with the option value if neither argument is null, if option
+     *         exists and is a boolean value, otherwise {@link Optional#empty()}.
+     *
+     */
+    private static Optional<Boolean> readBooleanOption(IHoldsOptions holder, String optionId)
+    {
+        if (holder == null || optionId == null) {
+            return Optional.empty();
+        }
+
+        var option = holder.getOptionBySuperClassId(optionId);
+        try {
+            if (IOption.BOOLEAN == option.getBasicValueType()) {
+                return Optional.of(option.getBooleanValue());
+            } else {
+                return Optional.empty();
+            }
+        } catch (BuildException err) {
+            ArcGnuElfPlugin.getDefault().showError("Failed to read bool option " + optionId, err);
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Read a string value of the option specified by its super's ID from the given holder.
+     *
+     * @param holder The toolchain that holds the option. Maybe {@code null}.
+     * @param optionId The ID of the super class of the option.
+     * @return An {@link Optional} with the option value if neither argument is null, if option
+     *         exists and has a string value, otherwise {@link Optional#empty()}.
+     *
+     */
+    private static Optional<String> readStringOption(IHoldsOptions holder, String optionId)
+    {
+        if (holder == null || optionId == null) {
+            return Optional.empty();
+        }
+
+        IOption option = holder.getOptionBySuperClassId(optionId);
+        try {
+            if (IOption.STRING == option.getBasicValueType()) {
+                return Optional.of(option.getStringValue());
+            } else {
+                return Optional.empty();
+            }
+        } catch (BuildException err) {
+            ArcGnuElfPlugin.getDefault().showError("Failed to read string option " + optionId, err);
+            return Optional.empty();
+        }
     }
 
     /* Static class. */

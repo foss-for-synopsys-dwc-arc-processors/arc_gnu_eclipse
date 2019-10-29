@@ -2,6 +2,8 @@
 
 package com.synopsys.arc.gnu.elf;
 
+import java.util.Optional;
+
 import org.eclipse.cdt.cross.arc.gnu.common.StateListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -37,6 +39,25 @@ public final class ArcGnuElfPlugin extends Plugin
             var status = new Status(IStatus.WARNING, PLUGIN_ID, e.getLocalizedMessage(), e);
             StatusManager.getManager().handle(status, StatusManager.SHOW);
             return expression;
+        }
+    }
+
+    /**
+     * Expand variable string without throwing an exception - in case of error it will be logged and
+     * original string will be returned.
+     */
+    public static Optional<String> variableExpansion(String expression)
+    {
+        if (expression == null) {
+            return Optional.empty();
+        }
+        try {
+            var manager = VariablesPlugin.getDefault().getStringVariableManager();
+            return Optional.of(manager.performStringSubstitution(expression));
+        } catch (CoreException e) {
+            var status = new Status(IStatus.WARNING, PLUGIN_ID, e.getLocalizedMessage(), e);
+            StatusManager.getManager().handle(status, StatusManager.SHOW);
+            return Optional.empty();
         }
     }
 
