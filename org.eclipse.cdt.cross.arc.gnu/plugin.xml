@@ -1376,17 +1376,6 @@
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
-                  applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
-                  browseType="file"
-                  category="arc.gnu.elf.c.linker.category.general"
-                  command="-T&quot;${VALUE}&quot;"
-                  id="arc.gnu.elf.c.linker.option.scriptfile"
-                  isAbstract="false"
-                  name="Script file (-T)"
-                  resourceFilter="all"
-                  valueType="string">
-            </option>
-            <option
                   category="arc.gnu.elf.c.linker.category.general"
                   id="arc.gnu.elf.c.linker.option.nostart"
                   superClass="gnu.c.link.option.nostart">
@@ -1483,7 +1472,24 @@
                </enablement>
             </option>
             <option
-                  applicabilityCalculator="com.arc.cdt.toolchain.arc.ArcApplicabilityCalculator"
+                  browseType="file"
+                  category="arc.gnu.elf.c.linker.category.general"
+                  command="-T&quot;${VALUE}&quot;"
+                  id="arc.gnu.elf.c.linker.option.scriptfile"
+                  isAbstract="false"
+                  name="Script file (-T)"
+                  resourceFilter="all"
+                  valueType="string">
+               <enablement
+                     type="UI_ENABLEMENT|CMD_USAGE">
+                  <checkOption
+                        holderId="arc.gnu.elf.toolchain.base"
+                        optionId="arc.gnu.elf.option.target.use_tcf"
+                        value="false">
+                  </checkOption>
+               </enablement>
+            </option>
+            <option
                   browseType="directory"
                   category="arc.gnu.elf.c.linker.category.general"
                   command="-L&quot;${VALUE}&quot;"
@@ -1492,6 +1498,14 @@
                   name="Directory with memory.x file"
                   resourceFilter="all"
                   valueType="string">
+               <enablement
+                     type="UI_ENABLEMENT|CMD_USAGE">
+                  <checkOption
+                        holderId="arc.gnu.elf.toolchain.base"
+                        optionId="arc.gnu.elf.option.target.use_tcf"
+                        value="false">
+                  </checkOption>
+               </enablement>
             </option>
             <optionCategory
                   id="arc.gnu.elf.c.linker.category.libs"
