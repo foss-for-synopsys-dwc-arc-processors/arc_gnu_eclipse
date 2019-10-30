@@ -1110,7 +1110,6 @@
                defaultValue="true"
                id="arc.gnu.elf.option.extratools.printsize"
                name="%option.printsize"
-               valueHandler="org.eclipse.cdt.cross.arc.gnu.ARCAdditionalToolsManagedOptionValueHandler"
                valueType="boolean">
          </option>
          <option
