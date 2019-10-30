@@ -1122,7 +1122,7 @@
          </option>
          <tool
                command="arc-elf32-gcc"
-               commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               commandLineGenerator="com.synopsys.arc.gnu.elf.ArcCommandLineGenerator"
                id="arc.gnu.elf.tool.c.compiler.base"
                isAbstract="true"
                natureFilter="both"
@@ -1331,7 +1331,7 @@
          </tool>
          <tool
                command="arc-elf32-gcc"
-               commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               commandLineGenerator="com.synopsys.arc.gnu.elf.ArcCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
                id="arc.gnu.elf.tool.assembler.base"
                isAbstract="true"
@@ -1360,7 +1360,7 @@
          </tool>
          <tool
                command="arc-elf32-gcc"
-               commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
+               commandLineGenerator="com.synopsys.arc.gnu.elf.ArcCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GLDErrorParser"
                id="arc.gnu.elf.tool.c.linker.base"
                isAbstract="true"
@@ -1903,7 +1903,6 @@
          </tool>
          <tool
                command="arc-elf32-gcc"
-               commandLineGenerator="org.eclipse.cdt.cross.arc.gnu.ARCManagedCommandLineGenerator"
                errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
                id="arc.gnu.elf.tool.assembler.arc"
                isAbstract="true"
