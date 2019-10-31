@@ -2,7 +2,6 @@
 
 package com.synopsys.arc.gnu.elf.scannerconfig;
 
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -33,10 +32,10 @@ public final class ArcScannerInfoRunProvider extends GCCSpecsRunSIProvider
         }
 
         var tool = getCompilerTool(this.resource.getProject());
-        this.fCompileCommand = expandCommand(
-            tool.map(ITool::getToolCommand)
-                .<IPath>map(Path::new)
-                .orElse(this.fCompileCommand));
+        this.fCompileCommand = tool.map(ITool::getToolCommand)
+            .flatMap(CommandInfo::resolveCommand)
+            .<IPath>map(p -> new Path(p.toString()))
+            .orElse(this.fCompileCommand);
         this.fCompileArguments = Stream.concat(
             Arrays.stream(this.fCompileArguments),
             getCompilerOptions(tool.orElse(null)))
@@ -100,24 +99,5 @@ public final class ArcScannerInfoRunProvider extends GCCSpecsRunSIProvider
         return Arrays.stream(configuration.getTools())
             .filter(t -> t.getId().contains(toolId))
             .findFirst();
-    }
-
-    /**
-     * If given {@command} exists in the GNU IDE installation path, then expand command to include
-     * an absolute path to the tool.
-     */
-    private IPath expandCommand(IPath command)
-    {
-        assert command != null;
-
-        /* Do nothing if command is already an absolute path. */
-        if (!command.isAbsolute()) {
-            var osCommand = CommandInfo.normalizeCommand(command.toOSString());
-            var predefinedPath = CommandInfo.getGnuIdeBinPath().resolve(osCommand);
-            if (Files.isExecutable(predefinedPath)) {
-                return new Path(predefinedPath.toString());
-            }
-        }
-        return command;
     }
 }
