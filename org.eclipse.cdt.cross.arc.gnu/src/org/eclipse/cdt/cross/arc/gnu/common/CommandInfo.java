@@ -14,6 +14,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.Platform;
 
@@ -87,6 +88,63 @@ public class CommandInfo {
             return Path.of(eclipseHome).getParent().resolve("bin");
         } catch (URISyntaxException e) {
             return Path.of(Platform.getLocation().toOSString()).getParent().resolve("bin");
+        }
+    }
+
+    /**
+     * Determine whether given {@code command} is a valid command in the current environment.
+     */
+    public static boolean isValidCommand(String command)
+    {
+        return resolveCommand(command).isPresent();
+    }
+
+    /**
+     * Return a valid path to a GNU tool with the specified {@code command}.
+     *
+     * @return
+     *         <ol>
+     *         <li>{@code command} if it is an absolute path;</li>
+     *         <li>an absolute path to a command if it exists in the GNU IDE installation path;</li>
+     *         <li>{@code command} if it exists in the {@code PATH}.
+     *         </ol>
+     *         An {@code .exe} extension is appended on Windows, unless it is already present in
+     *         {@code command}.
+     */
+    public static Optional<Path> resolveCommand(String command)
+    {
+        if (command == null) {
+            return Optional.empty();
+        }
+
+        var commandPath = Optional.of(command).map(CommandInfo::appendExe).map(Path::of);
+
+        /* Do nothing if command is already an absolute path. */
+        if (commandPath.get().isAbsolute()) {
+            return commandPath;
+        }
+
+        return commandPath
+            .map(getGnuIdeBinPath()::resolve)
+            .filter(Files::isExecutable)
+            .or(() -> commandPath
+                .filter(p -> CommandInfo.commandExistsInSystemPath(p.toString())));
+    }
+
+    /**
+     * Add {@code .exe} file extension on Windows hosts if it is not already present in
+     * {@code command}.
+     *
+     * @param command The path to an executable, can be absolute or relative.
+     */
+    private static String appendExe(String command)
+    {
+        if (command != null
+            && Platform.WS_WIN32.equals(Platform.getOS())
+            && !command.endsWith(".exe")) {
+            return command + ".exe";
+        } else {
+            return command;
         }
     }
 
