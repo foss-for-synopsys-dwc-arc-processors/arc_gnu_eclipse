@@ -100,7 +100,7 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
     {
         Optional<TcfContent> tcf;
         try {
-            tcf = Optional.of(TcfContent.readFile(tcfPath.toFile()));
+            tcf = Optional.of(TcfContent.readFile(tcfPath));
         } catch (TcfContentException err) {
             ArcGnuElfPlugin.getDefault().showError("Failed to parse TCF.", err);
             return Stream.empty();

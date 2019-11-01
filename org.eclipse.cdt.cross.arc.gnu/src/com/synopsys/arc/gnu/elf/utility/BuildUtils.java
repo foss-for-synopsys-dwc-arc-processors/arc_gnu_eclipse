@@ -132,12 +132,12 @@ public final class BuildUtils
             return Optional.of(filePath);
         }
 
-        var fileObj = filePath.toFile();
-        if (fileObj.isFile() && fileObj.lastModified() > tcf.getLastModifiedTime()) {
-            return Optional.of(filePath);
-        }
-
         try {
+            if (Files.exists(filePath)
+                && Files.getLastModifiedTime(filePath).compareTo(tcf.getLastModifiedTime()) > 0) {
+                return Optional.of(filePath);
+            }
+
             return Optional.of(Files.write(
                 filePath,
                 tcf.getSectionContent(sectionName).getBytes(),

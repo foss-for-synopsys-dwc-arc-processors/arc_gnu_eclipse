@@ -10,9 +10,10 @@
 
 package com.arc.cdt.toolchain.tcf;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 
+import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IManagedOptionValueHandler;
@@ -22,20 +23,24 @@ import com.arc.cdt.toolchain.ArcCpu;
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
-public class TcfValueHandler implements IManagedOptionValueHandler {
-
+public class TcfValueHandler implements IManagedOptionValueHandler
+{
     @Override
-    public boolean handleValue(IBuildObject configuration, IHoldsOptions holder, IOption option,
-            String extraArgument, int event) {
-        if (event == IManagedOptionValueHandler.EVENT_APPLY &&
-                option.getApplicabilityCalculator().isOptionEnabled(configuration, holder, option)) {
+    public boolean handleValue(
+        IBuildObject configuration,
+        IHoldsOptions holder,
+        IOption option,
+        String extraArgument,
+        int event)
+    {
+        if (event == IManagedOptionValueHandler.EVENT_APPLY
+            && option.getApplicabilityCalculator().isOptionEnabled(configuration, holder, option)) {
 
             TcfContent tcfContent;
             try {
-                File tcf =
-                    new File(ArcGnuElfPlugin.safeVariableExpansion((String) option.getValue()));
-                tcfContent = TcfContent.readFile(tcf);
-            } catch (TcfContentException err) {
+                var tcfPath = ArcGnuElfPlugin.safeVariableExpansion(option.getStringValue());
+                tcfContent = TcfContent.readFile(Path.of(tcfPath));
+            } catch (TcfContentException | BuildException err) {
                 ArcGnuElfPlugin.getDefault().showError("Failed to parse TCF.", err);
                 return false;
             }
@@ -60,14 +65,15 @@ public class TcfValueHandler implements IManagedOptionValueHandler {
 
     @Override
     public boolean isDefaultValue(IBuildObject configuration, IHoldsOptions holder, IOption option,
-            String extraArgument) {
+            String extraArgument)
+    {
         return false;
     }
 
     @Override
     public boolean isEnumValueAppropriate(IBuildObject configuration, IHoldsOptions holder,
-            IOption option, String extraArgument, String enumValue) {
+            IOption option, String extraArgument, String enumValue)
+    {
         return false;
     }
-
 }

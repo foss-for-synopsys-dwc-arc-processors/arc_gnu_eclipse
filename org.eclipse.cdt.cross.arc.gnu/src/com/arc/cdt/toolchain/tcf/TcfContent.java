@@ -10,9 +10,10 @@
 
 package com.arc.cdt.toolchain.tcf;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,26 +45,13 @@ public class TcfContent {
             Arrays.asList( GCC_OPTIONS_SECTION, LINKER_MEMORY_MAP_SECTION, C_DEFINES_SECTION );
 
     private String[] gccOptionsArray;
-    private long modTime;
+    private FileTime lastModificationTime;
     private final Map<String, String> sectionNames = new HashMap<>();
     private final Map<String, String> sectionContent = new HashMap<>();
 
-    private static Map<File, TcfContent> cache = new HashMap<File, TcfContent>();
+    private static Map<String, TcfContent> cache = new HashMap<>();
 
     private TcfContent() {
-    }
-
-    private static void checkNameNotEmpty(File f) throws FileNotFoundException {
-        if (f.getAbsolutePath().isEmpty()) {
-            throw new FileNotFoundException("TCF path's value must not be empty.");
-        }
-    }
-
-    private static void checkFileExists(File f) throws FileNotFoundException {
-        if (!f.exists()) {
-            throw new FileNotFoundException(
-                    "File " + f.getAbsolutePath() + " does not exist in the system.");
-        }
     }
 
     /**
@@ -71,27 +59,36 @@ public class TcfContent {
      * same processor. If cannot read file or some of the checks fail, throws
      * <code>TcfContentException</code>.
      * 
-     * @param f
-     *            TCF to read
-     * @return TcfContent or null if cannot read
-     * @throws TcfContentException
+     * @param path The path to a TCF to read.
+     * @throws TcfContentException if file at the {@code path} doesn't exist or can't be read.
      */
-    public static TcfContent readFile(File f) throws TcfContentException {
+    public static TcfContent readFile(Path path) throws TcfContentException
+    {
+        if (!Files.isReadable(path)) {
+            throw new TcfContentException(MessageFormat.format(
+                "File {} does not exist in the system or can't be read.",
+                path.toAbsolutePath()));
+        }
 
-        TcfContent tcfContent = cache.get(f);
-        if (tcfContent != null && tcfContent.modTime == f.lastModified()) {
+        FileTime tcfModificationTime;
+        try {
+            tcfModificationTime = Files.getLastModifiedTime(path);
+        } catch (IOException err) {
+            throw new TcfContentException("Failed to read last modification time of TCF.", err);
+        }
+
+        TcfContent tcfContent = cache.get(path.toString());
+        if (tcfContent != null
+            && tcfContent.lastModificationTime.equals(tcfModificationTime)) {
             return tcfContent;
         }
 
         try {
-            checkNameNotEmpty(f);
-            checkFileExists(f);
-
             tcfContent = new TcfContent();
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Document document = builder.parse(f);
+            Document document = builder.parse(path.toFile());
             Element root = document.getDocumentElement();
             NodeList attributes = root.getElementsByTagName("configuration");
             for (int index = 0; index < attributes.getLength(); index++) {
@@ -114,7 +111,8 @@ public class TcfContent {
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
                     tcfContent.sectionContent.put(LINKER_MEMORY_MAP_SECTION, data);
-                    tcfContent.sectionNames.put(LINKER_MEMORY_MAP_SECTION, e.getAttribute("filename"));
+                    tcfContent.sectionNames.put(LINKER_MEMORY_MAP_SECTION,
+                        e.getAttribute("filename"));
                 }
                 if (elementName.equals(C_DEFINES_SECTION)) {
                     tcfContent.sectionContent.put(C_DEFINES_SECTION, data);
@@ -137,8 +135,8 @@ public class TcfContent {
                 "Malformed TCF: doesn't have valid GCC -mcpu option value.");
         }
 
-        tcfContent.modTime = f.lastModified();
-        cache.put(f, tcfContent);
+        tcfContent.lastModificationTime = tcfModificationTime;
+        cache.put(path.toString(), tcfContent);
         return tcfContent;
     }
 
@@ -174,9 +172,9 @@ public class TcfContent {
         return gccOptionsArray;
     }
 
-    public long getLastModifiedTime()
+    public FileTime getLastModifiedTime()
     {
-        return modTime;
+        return lastModificationTime;
     }
 
     public String getSectionFilename(String sectionId)
