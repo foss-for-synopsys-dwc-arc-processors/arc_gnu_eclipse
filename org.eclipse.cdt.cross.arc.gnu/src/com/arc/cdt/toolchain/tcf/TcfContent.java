@@ -14,16 +14,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.eclipse.cdt.utils.CommandLineUtil;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.statushandlers.StatusManager;
@@ -48,6 +51,7 @@ public class TcfContent {
 
     private Properties gccOptions;
     private String gccOptionsString;
+    private String[] gccOptionsArray;
     private long modTime;
     private final Map<String, String> sectionNames = new HashMap<>();
     private final Map<String, String> sectionContent = new HashMap<>();
@@ -71,35 +75,12 @@ public class TcfContent {
     }
 
     /**
-     * Check that TCF file and used tool chain are for the same processor
-     * @param cpuFlag  processor value from tool chain in "-mcpu=" form
-     * @throws TcfContentException
-     */
-    private void checkArchitecture(String cpuFlag)
-            throws TcfContentException {
-        String tcfCpuOption = "-mcpu";
-        String value = gccOptions.getProperty(tcfCpuOption);
-        if (value.isEmpty()) {
-            throw new TcfContentException("Invalid option in TCF: " + tcfCpuOption + ".");
-        }
-        tcfCpuOption = tcfCpuOption + "=" + value;
-        ArcCpuFamily expectedArch = ArcCpu.fromCommand(cpuFlag).getToolChain();
-        ArcCpuFamily tcfArch = ArcCpu.fromCommand(tcfCpuOption).getToolChain();
-        if (!expectedArch.equals(tcfArch)) {
-            throw new TcfContentException("TCF describes " + tcfArch
-                    + " architecture, but selected tool chain is for " + expectedArch + ".");
-        }
-    }
-
-    /**
      * Checks that file exists, then reads it and checks that TCF and used tool chain are for the
      * same processor. If cannot read file or some of the checks fail, shows or logs the error or
      * does nothing depending on the value of <code>showStyle</code>.
      * 
      * @param f
      *            TCF to read
-     * @param cpuFlag
-     *            processor value from tool chain in "-mcpu=" form
      * @param showStyle
      *            style indicating what should be done in case exception occurred while reading.
      *            Applicable values are <code>StatusManager.NONE</code>,
@@ -109,10 +90,10 @@ public class TcfContent {
      *            Additional messages to display
      * @return TcfContent, if reading was successful, and null otherwise
      */
-    public static TcfContent readFile(File f, String cpuFlag, int showStyle, String... messages) {
+    public static TcfContent readFile(File f, int showStyle, String... messages) {
         TcfContent tcfContent = null;
         try {
-            tcfContent = readFile(f, cpuFlag);
+            tcfContent = readFile(f);
         } catch (TcfContentException e) {
             StringBuilder builder = new StringBuilder(e.getMessage());
             for (String message: messages) {
@@ -131,16 +112,13 @@ public class TcfContent {
      * 
      * @param f
      *            TCF to read
-     * @param cpuFlag
-     *            processor value from tool chain in "-mcpu=" form
      * @return TcfContent or null if cannot read
      * @throws TcfContentException
      */
-    public static TcfContent readFile(File f, String cpuFlag) throws TcfContentException {
+    public static TcfContent readFile(File f) throws TcfContentException {
 
         TcfContent tcfContent = cache.get(f);
         if (tcfContent != null && tcfContent.modTime == f.lastModified()) {
-            tcfContent.checkArchitecture(cpuFlag);
             return tcfContent;
         }
 
@@ -178,6 +156,7 @@ public class TcfContent {
                      */
                     tcfContent.gccOptions = new OrderedProperties();
                     tcfContent.gccOptionsString = data;
+                    tcfContent.gccOptionsArray = CommandLineUtil.argumentsToArray(data);
                     tcfContent.sectionContent.put(GCC_OPTIONS_SECTION, data);
                     tcfContent.sectionNames.put(GCC_OPTIONS_SECTION, e.getAttribute("filename"));
                     /*
@@ -189,7 +168,6 @@ public class TcfContent {
                      */
                     data = data.replace(" ", "\\ ");
                     tcfContent.gccOptions.load(new StringReader(data));
-                    tcfContent.checkArchitecture(cpuFlag);
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
                     tcfContent.sectionContent.put(LINKER_MEMORY_MAP_SECTION, data);
@@ -203,6 +181,7 @@ public class TcfContent {
         } catch (SAXException | IOException | ParserConfigurationException e) {
             throw new TcfContentException("Couldn't read TCF: " + e.getMessage(), e);
         }
+
         for (var sectionName : knownSections) {
             if (!tcfContent.sectionContent.containsKey(sectionName)) {
                 throw new TcfContentException(MessageFormat
@@ -210,9 +189,27 @@ public class TcfContent {
             }
         }
 
+        if (tcfContent.getCpuFamily().isEmpty()) {
+            throw new TcfContentException(
+                "Malformed TCF: doesn't have valid GCC -mcpu option value.");
+        }
+
         tcfContent.modTime = f.lastModified();
         cache.put(f, tcfContent);
         return tcfContent;
+    }
+
+    /**
+     * Return the target CPU family of the TCF.
+     */
+    public Optional<ArcCpuFamily> getCpuFamily()
+    {
+        return Arrays.stream(gccOptionsArray)
+            .map(String::strip)
+            .filter(s -> s.startsWith("-mcpu="))
+            .findFirst()
+            .map(ArcCpu::fromCommand)
+            .map(ArcCpu::getToolChain);
     }
 
     private static String getCharacterDataFromElement(Element e) throws TcfContentException {
@@ -229,11 +226,13 @@ public class TcfContent {
                 "Malformed TCF: Couldn't get character data from element " + e.getNodeName());
     }
 
-    public Properties getGccOptions() {
-        return gccOptions;
+    public String[] getGccOptions()
+    {
+        return gccOptionsArray;
     }
 
-    public String getGccOptionsString() {
+    public String getGccOptionsString()
+    {
         return gccOptionsString;
     }
 

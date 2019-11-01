@@ -11,6 +11,7 @@
 package com.arc.cdt.toolchain.tcf;
 
 import java.io.File;
+import java.text.MessageFormat;
 
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
@@ -18,6 +19,7 @@ import org.eclipse.cdt.managedbuilder.core.IManagedOptionValueHandler;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.ui.statushandlers.StatusManager;
 
+import com.arc.cdt.toolchain.ArcCpu;
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
@@ -28,9 +30,21 @@ public class TcfValueHandler implements IManagedOptionValueHandler {
             String extraArgument, int event) {
         if (event == IManagedOptionValueHandler.EVENT_APPLY &&
                 option.getApplicabilityCalculator().isOptionEnabled(configuration, holder, option)) {
-            var cpu = BuildUtils.getCurrentCpu(configuration, holder).get();
             File tcf = new File(ArcGnuElfPlugin.safeVariableExpansion((String) option.getValue()));
-            TcfContent.readFile(tcf, cpu, StatusManager.BLOCK);
+            var expectedArch = BuildUtils.getCurrentCpu(configuration, holder)
+                .map(ArcCpu::fromCommand)
+                .map(ArcCpu::getToolChain);
+            var tcfArch = TcfContent.readFile(tcf, StatusManager.BLOCK).getCpuFamily();
+
+            if (!tcfArch.get().equals(expectedArch.get())) {
+                ArcGnuElfPlugin.getDefault()
+                    .showError(MessageFormat.format(
+                        "TCF describes {} architecture, but selected tool chain is for {}.",
+                        tcfArch,
+                        expectedArch));
+                return false;
+            }
+
             return true;
         }
         return false;

@@ -15,7 +15,6 @@ import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
-import org.eclipse.cdt.utils.CommandLineUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.cdt.toolchain.tcf.TcfContent;
@@ -59,10 +58,7 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
     {
         var tcfPath = BuildUtils.getTcfPath(toolchain);
         if (tcfPath.isPresent()) {
-            var cpuOption = BuildUtils.getCurrentCpu(toolchain.getParent(), toolchain);
-            if (cpuOption.isPresent()) {
-                return getTcfFlags(tool, toolchain, tcfPath.get(), cpuOption.get());
-            }
+            return getTcfFlags(tool, toolchain, tcfPath.get());
         }
 
         return getProjectFlags(toolchain);
@@ -100,19 +96,16 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
     private Stream<String> getTcfFlags(
         ITool tool,
         IToolChain toolchain,
-        Path tcfPath,
-        String cpuOption)
+        Path tcfPath)
     {
         var tcf = Optional.ofNullable(
             TcfContent.readFile(
                 tcfPath.toFile(),
-                cpuOption,
                 StatusManager.SHOW,
                 "Ignoring TCF."));
 
         var compilerOptions = tcf
-            .map(TcfContent::getGccOptionsString)
-            .map(CommandLineUtil::argumentsToArray)
+            .map(TcfContent::getGccOptions)
             .map(Arrays::stream)
             .orElse(Stream.empty())
             // Filter out endianness options.

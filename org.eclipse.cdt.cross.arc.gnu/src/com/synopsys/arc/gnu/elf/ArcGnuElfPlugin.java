@@ -73,6 +73,12 @@ public final class ArcGnuElfPlugin extends Plugin
         StatusManager.getManager().handle(status, StatusManager.LOG);
     }
 
+    public void showError(String message)
+    {
+        var status = new Status(IStatus.ERROR, PLUGIN_ID, message);
+        StatusManager.getManager().handle(status, StatusManager.SHOW);
+    }
+
     public void showError(String message, Exception err)
     {
         var status = new Status(IStatus.ERROR, PLUGIN_ID, message, err);
