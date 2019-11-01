@@ -74,7 +74,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="org.eclipse.cdt.cross.arc.gnu.hs.linux.option.target.divide" />
+        <simple name="id" value="arc.gnu.elf.option.target.divrem" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
