@@ -13,23 +13,18 @@ package com.arc.cdt.toolchain.tcf;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.StringReader;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.cdt.utils.CommandLineUtil;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,7 +34,6 @@ import org.xml.sax.SAXException;
 
 import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.ArcCpuFamily;
-import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 
 public class TcfContent {
 
@@ -70,37 +64,6 @@ public class TcfContent {
             throw new FileNotFoundException(
                     "File " + f.getAbsolutePath() + " does not exist in the system.");
         }
-    }
-
-    /**
-     * Checks that file exists, then reads it and checks that TCF and used tool chain are for the
-     * same processor. If cannot read file or some of the checks fail, shows or logs the error or
-     * does nothing depending on the value of <code>showStyle</code>.
-     * 
-     * @param f
-     *            TCF to read
-     * @param showStyle
-     *            style indicating what should be done in case exception occurred while reading.
-     *            Applicable values are <code>StatusManager.NONE</code>,
-     *            <code>StatusManager.LOG</code>, <code>StatusManager.SHOW</code> and
-     *            <code>StatusManager.BLOCK</code>.
-     * @param messages
-     *            Additional messages to display
-     * @return TcfContent, if reading was successful, and null otherwise
-     */
-    public static TcfContent readFile(File f, int showStyle, String... messages) {
-        TcfContent tcfContent = null;
-        try {
-            tcfContent = readFile(f);
-        } catch (TcfContentException e) {
-            StringBuilder builder = new StringBuilder(e.getMessage());
-            for (String message: messages) {
-                builder.append(message);
-            }
-            String message = builder.toString();
-            StatusManager.getManager().handle(new Status(IStatus.ERROR, ArcGnuElfPlugin.PLUGIN_ID, message), showStyle);
-        }
-        return tcfContent;
     }
 
     /**

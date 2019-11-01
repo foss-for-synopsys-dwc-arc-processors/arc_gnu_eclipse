@@ -15,9 +15,9 @@ import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
-import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.arc.cdt.toolchain.tcf.TcfContent;
+import com.arc.cdt.toolchain.tcf.TcfContentException;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
 @SuppressWarnings("restriction")
@@ -98,11 +98,13 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
         IToolChain toolchain,
         Path tcfPath)
     {
-        var tcf = Optional.ofNullable(
-            TcfContent.readFile(
-                tcfPath.toFile(),
-                StatusManager.SHOW,
-                "Ignoring TCF."));
+        Optional<TcfContent> tcf;
+        try {
+            tcf = Optional.of(TcfContent.readFile(tcfPath.toFile()));
+        } catch (TcfContentException err) {
+            ArcGnuElfPlugin.getDefault().showError("Failed to parse TCF.", err);
+            return Stream.empty();
+        }
 
         var compilerOptions = tcf
             .map(TcfContent::getGccOptions)
