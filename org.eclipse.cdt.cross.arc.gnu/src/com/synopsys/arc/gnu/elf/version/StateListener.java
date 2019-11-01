@@ -11,42 +11,49 @@ import org.eclipse.core.resources.IResourceDelta;
 /**
  * This class is intended for tracking the projects' changes and notifying StateChecker.
  */
-public class StateListener implements IResourceChangeListener {
+public final class StateListener implements IResourceChangeListener
+{
+    private static StateListener INSTANCE = null;
 
-  private static StateListener INSTANCE = null;
-
-  private StateChecker checker = StateChecker.getInstance();
-  public synchronized static StateListener getInstance() {
-    if (INSTANCE == null) {
-      INSTANCE = new StateListener();
-    }
-    return INSTANCE;
-  }
-
-  private StateListener() {
-  }
-
-  @Override
-  public void resourceChanged(IResourceChangeEvent event) {
-    final IResourceDelta delta = event.getDelta();
-    if (delta != null && delta.getKind() == IResourceDelta.CHANGED) {
-      IResourceDelta[] addedResources = delta.getAffectedChildren(IResourceDelta.ADDED);
-      IResourceDelta[] changedResources = delta.getAffectedChildren(IResourceDelta.CHANGED);
-      for (IResourceDelta resourceDelta : changedResources) {
-        final IResource resource = resourceDelta.getResource();
-        if (resource instanceof IProject) {
-          final IProject project = (IProject) resource;
-          checker.checkPluginVersions(project, false);
+    /**
+     * Return the only instance of this class.
+     */
+    public static synchronized StateListener getInstance()
+    {
+        if (INSTANCE == null) {
+            INSTANCE = new StateListener();
         }
-      }
-      for (IResourceDelta resourceDelta : addedResources) {
-        final IResource resource = resourceDelta.getResource();
-        if (resource instanceof IProject) {
-          final IProject project = (IProject) resource;
-          checker.checkPluginVersions(project, true);
-        }
-      }
+        return INSTANCE;
     }
-  }
+
+    private final StateChecker checker = StateChecker.getInstance();
+
+    private StateListener()
+    {
+    }
+
+    @Override
+    public void resourceChanged(IResourceChangeEvent event)
+    {
+        final IResourceDelta delta = event.getDelta();
+        if (delta != null && delta.getKind() == IResourceDelta.CHANGED) {
+            IResourceDelta[] addedResources = delta.getAffectedChildren(IResourceDelta.ADDED);
+            IResourceDelta[] changedResources = delta.getAffectedChildren(IResourceDelta.CHANGED);
+            for (IResourceDelta resourceDelta : changedResources) {
+                final IResource resource = resourceDelta.getResource();
+                if (resource instanceof IProject) {
+                    final IProject project = (IProject) resource;
+                    checker.checkPluginVersions(project, false);
+                }
+            }
+            for (IResourceDelta resourceDelta : addedResources) {
+                final IResource resource = resourceDelta.getResource();
+                if (resource instanceof IProject) {
+                    final IProject project = (IProject) resource;
+                    checker.checkPluginVersions(project, true);
+                }
+            }
+        }
+    }
 
 }
