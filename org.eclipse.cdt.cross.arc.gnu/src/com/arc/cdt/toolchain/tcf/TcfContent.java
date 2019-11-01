@@ -49,8 +49,6 @@ public class TcfContent {
     public static final List<String> knownSections = 
             Arrays.asList( GCC_OPTIONS_SECTION, LINKER_MEMORY_MAP_SECTION, C_DEFINES_SECTION );
 
-    private Properties gccOptions;
-    private String gccOptionsString;
     private String[] gccOptionsArray;
     private long modTime;
     private final Map<String, String> sectionNames = new HashMap<>();
@@ -147,27 +145,9 @@ public class TcfContent {
                 }
                 String data = getCharacterDataFromElement((Element) stringList.item(0));
                 if (elementName.equals(GCC_OPTIONS_SECTION)) {
-                    /*
-                     * Should use OrderedProperties instead of Properties here because if several
-                     * values for the same option are specified, the last one should be used. The
-                     * order of options is important not only if several values of the same options
-                     * are set in TCF explicitly, but also when options values are set implicitly by
-                     * -mcpu option.
-                     */
-                    tcfContent.gccOptions = new OrderedProperties();
-                    tcfContent.gccOptionsString = data;
                     tcfContent.gccOptionsArray = CommandLineUtil.argumentsToArray(data);
                     tcfContent.sectionContent.put(GCC_OPTIONS_SECTION, data);
                     tcfContent.sectionNames.put(GCC_OPTIONS_SECTION, e.getAttribute("filename"));
-                    /*
-                     * Need to escape whitespaces here because in java.util.Properties key termination
-                     * characters are '=', ':' and whitespace. So if our TCF has several option like
-                     * "--param ...", --param will be considered a key and therefore Properties will
-                     * load only one of these options. If we escape a whitespace, it will be considered
-                     * part of a key.
-                     */
-                    data = data.replace(" ", "\\ ");
-                    tcfContent.gccOptions.load(new StringReader(data));
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
                     tcfContent.sectionContent.put(LINKER_MEMORY_MAP_SECTION, data);
@@ -229,11 +209,6 @@ public class TcfContent {
     public String[] getGccOptions()
     {
         return gccOptionsArray;
-    }
-
-    public String getGccOptionsString()
-    {
-        return gccOptionsString;
     }
 
     public long getLastModifiedTime()
