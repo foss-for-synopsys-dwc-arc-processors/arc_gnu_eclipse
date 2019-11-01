@@ -23,9 +23,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.arc.cdt.toolchain.ArcCpu;
-import com.arc.cdt.toolchain.ArcCpuFamily;
-
 public final class TcfContent
 {
     public static final String GCC_OPTIONS_SECTION = "gcc_compiler";
@@ -158,8 +155,7 @@ public final class TcfContent
             .map(String::strip)
             .filter(s -> s.startsWith("-mcpu="))
             .findFirst()
-            .map(ArcCpu::fromCommand)
-            .map(ArcCpu::getToolChain);
+            .flatMap(ArcCpuFamily::fromMcpuOption);
     }
 
     public String[] getGccOptions()

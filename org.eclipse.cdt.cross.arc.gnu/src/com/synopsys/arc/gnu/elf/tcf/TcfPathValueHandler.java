@@ -11,7 +11,6 @@ import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IManagedOptionValueHandler;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 
-import com.arc.cdt.toolchain.ArcCpu;
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
@@ -39,8 +38,7 @@ public class TcfPathValueHandler implements IManagedOptionValueHandler
 
             var tcfArch = tcfContent.getCpuFamily();
             var expectedArch = BuildUtils.getCurrentCpu(configuration, holder)
-                .map(ArcCpu::fromCommand)
-                .map(ArcCpu::getToolChain);
+                .flatMap(ArcCpuFamily::fromMcpuOption);
             if (!tcfArch.get().equals(expectedArch.get())) {
                 ArcGnuElfPlugin.getDefault()
                     .showError(MessageFormat.format(

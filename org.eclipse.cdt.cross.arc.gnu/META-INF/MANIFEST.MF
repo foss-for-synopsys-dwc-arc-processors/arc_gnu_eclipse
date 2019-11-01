@@ -20,8 +20,7 @@ Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true
 Bundle-Localization: gnu.elf
 Bundle-RequiredExecutionEnvironment: JavaSE-11,
  JavaSE-9
-Export-Package: com.arc.cdt.toolchain,
- com.synopsys.arc.gnu.elf;x-internal:=true,
+Export-Package: com.synopsys.arc.gnu.elf;x-internal:=true,
  com.synopsys.arc.gnu.elf.scannerconfig;x-internal:=true,
  com.synopsys.arc.gnu.elf.tcf;x-internal:=true,
  com.synopsys.arc.gnu.elf.utility;x-internal:=true,
