@@ -3,8 +3,8 @@
 package com.synopsys.arc.gnu.elf.version;
 
 import java.text.MessageFormat;
+import java.util.WeakHashMap;
 
-import org.eclipse.cdt.internal.core.WeakHashSet;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
@@ -100,8 +100,8 @@ final class StateChecker
         job.schedule();
     }
 
-    /* Set is used to identify the projects which are already handled. */
-    private final WeakHashSet<IProject> seenProjects = new WeakHashSet<>();
+    /** Set is used to identify the projects which are already handled. */
+    private final WeakHashMap<IProject, IProject> seenProjects = new WeakHashMap<>();
 
     private StateChecker()
     {
@@ -113,7 +113,7 @@ final class StateChecker
      */
     void checkPluginVersions(final IProject project, boolean isNew)
     {
-        if (seenProjects.contains(project)) {
+        if (seenProjects.containsKey(project)) {
             return;
         }
         var projectState = getPreference(PREFS_FILE_NAME_PREFIX, project, STATE_KEY, UNREAL_STATE);
@@ -130,7 +130,7 @@ final class StateChecker
                 warnUser(project, CURRENT_STATE, UNREAL_STATE);
             }
         }
-        seenProjects.add(project);
+        seenProjects.put(project, project);
     }
 
     private void warnUser(final IProject project, final String currentState, String projectState)
