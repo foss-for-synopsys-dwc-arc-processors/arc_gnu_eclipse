@@ -48,9 +48,6 @@ public class TcfContent {
 
     private Properties gccOptions;
     private String gccOptionsString;
-    private String linkerMemoryMap;
-    private String cDefinesText;
-    private String cDefinesFileName;
     private long modTime;
     private final Map<String, String> sectionNames = new HashMap<>();
     private final Map<String, String> sectionContent = new HashMap<>();
@@ -195,26 +192,24 @@ public class TcfContent {
                     tcfContent.checkArchitecture(cpuFlag);
                 }
                 if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
-                    tcfContent.linkerMemoryMap = data;
                     tcfContent.sectionContent.put(LINKER_MEMORY_MAP_SECTION, data);
                     tcfContent.sectionNames.put(LINKER_MEMORY_MAP_SECTION, e.getAttribute("filename"));
                 }
                 if (elementName.equals(C_DEFINES_SECTION)) {
-                    tcfContent.cDefinesText = data;
-                    tcfContent.cDefinesFileName = e.getAttribute("filename");
                     tcfContent.sectionContent.put(C_DEFINES_SECTION, data);
                     tcfContent.sectionNames.put(C_DEFINES_SECTION, e.getAttribute("filename"));
                 }
             }
         } catch (SAXException | IOException | ParserConfigurationException e) {
-            throw new TcfContentException("Couldn't read TCF:  " + e.getMessage(), e);
+            throw new TcfContentException("Couldn't read TCF: " + e.getMessage(), e);
         }
-        if (tcfContent.gccOptions == null || tcfContent.linkerMemoryMap == null) {
-            String sectionName = tcfContent.getGccOptions() == null ? GCC_OPTIONS_SECTION
-                    : LINKER_MEMORY_MAP_SECTION;
-            throw new TcfContentException(
-                    "Malformed TCF: " + sectionName + " configuration is missing");
+        for (var sectionName : knownSections) {
+            if (!tcfContent.sectionContent.containsKey(sectionName)) {
+                throw new TcfContentException(MessageFormat
+                    .format("Malformed TCF: {} configuration is missing.", sectionName));
+            }
         }
+
         tcfContent.modTime = f.lastModified();
         cache.put(f, tcfContent);
         return tcfContent;
@@ -240,19 +235,6 @@ public class TcfContent {
 
     public String getGccOptionsString() {
         return gccOptionsString;
-    }
-
-
-    public String getLinkerMemoryMap() {
-        return linkerMemoryMap;
-    }
-
-    public String getCDefinesText() {
-        return cDefinesText;
-    }
-
-    public String getCDefinesFileName() {
-        return cDefinesFileName;
     }
 
     public long getLastModifiedTime()
