@@ -17,17 +17,15 @@ import java.nio.file.attribute.FileTime;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.cdt.utils.CommandLineUtil;
 import org.w3c.dom.CharacterData;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -36,15 +34,17 @@ import org.xml.sax.SAXException;
 import com.arc.cdt.toolchain.ArcCpu;
 import com.arc.cdt.toolchain.ArcCpuFamily;
 
-public class TcfContent {
-
+public final class TcfContent
+{
     public static final String GCC_OPTIONS_SECTION = "gcc_compiler";
     public static final String LINKER_MEMORY_MAP_SECTION = "gnu_linker_command_file";
     public static final String C_DEFINES_SECTION = "C_defines";
-    public static final List<String> knownSections = 
-            Arrays.asList( GCC_OPTIONS_SECTION, LINKER_MEMORY_MAP_SECTION, C_DEFINES_SECTION );
 
-    private static final Map<String, TcfContent> cache = new HashMap<>();
+    private static final Set<String> KNOWN_SECTIONS = Set.of(
+        GCC_OPTIONS_SECTION,
+        LINKER_MEMORY_MAP_SECTION,
+        C_DEFINES_SECTION);
+    private static final Map<String, TcfContent> CACHE = new HashMap<>();
 
     private final Map<String, String> sectionsFilenames;
     private final Map<String, String> sectionsContent;
@@ -75,7 +75,7 @@ public class TcfContent {
         }
 
         // Check if file is already in the cache.
-        TcfContent cachedTcf = cache.get(path.toString());
+        TcfContent cachedTcf = CACHE.get(path.toString());
         if (cachedTcf != null
             && cachedTcf.lastModificationTime.equals(tcfModificationTime)) {
             return cachedTcf;
@@ -88,28 +88,21 @@ public class TcfContent {
                 .newDocumentBuilder()
                 .parse(path.toFile())
                 .getDocumentElement();
-            NodeList attributes = root.getElementsByTagName("configuration");
+            var attributes = root.getElementsByTagName("configuration");
             for (int index = 0; index < attributes.getLength(); index++) {
-                Element e = (Element) attributes.item(index);
-                String sectionName = e.getAttribute("name");
-                if (!knownSections.contains(sectionName)) {
+                var e = (Element) attributes.item(index);
+                var sectionName = e.getAttribute("name");
+                if (!KNOWN_SECTIONS.contains(sectionName)) {
                     continue;
                 }
-                NodeList stringList = e.getElementsByTagName("string");
-                if (stringList == null || stringList.item(0) == null) {
-                    throw new TcfContentException(
-                            "Malformed TCF:  No 'string' element in "
-                                    + e.getAttribute("name") + " configuration");
-                }
-                var sectionData = getCharacterDataFromElement((Element) stringList.item(0));
-                sectionsContent.put(sectionName, sectionData);
+                sectionsContent.put(sectionName, getConfigurationContent(e));
                 sectionsFiles.put(sectionName, e.getAttribute("filename"));
             }
         } catch (SAXException | IOException | ParserConfigurationException e) {
             throw new TcfContentException("Couldn't read TCF: " + e.getMessage(), e);
         }
 
-        for (var sectionName : knownSections) {
+        for (var sectionName : KNOWN_SECTIONS) {
             if (!sectionsContent.containsKey(sectionName)) {
                 throw new TcfContentException(MessageFormat
                     .format("Malformed TCF: {} configuration is missing.", sectionName));
@@ -122,8 +115,34 @@ public class TcfContent {
                 "Malformed TCF: doesn't have valid GCC -mcpu option value.");
         }
 
-        cache.put(path.toString(), tcfContent);
+        CACHE.put(path.toString(), tcfContent);
         return tcfContent;
+    }
+
+    private static String getCharacterDataFromElement(Element e) throws TcfContentException
+    {
+        Node child = e.getFirstChild();
+        if (child == null) {
+            throw new TcfContentException(
+                "Malformed TCF: Couldn't get character data from element " + e.getNodeName());
+        }
+        if (child instanceof CharacterData) {
+            CharacterData data = (CharacterData) child;
+            return data.getData();
+        }
+        throw new TcfContentException(
+            "Malformed TCF: Couldn't get character data from element " + e.getNodeName());
+    }
+
+    private static String getConfigurationContent(Element e) throws TcfContentException
+    {
+        NodeList stringList = e.getElementsByTagName("string");
+        if (stringList == null || stringList.item(0) == null) {
+            throw new TcfContentException(MessageFormat.format(
+                "Malformed TCF: No 'string' element in {} configuration.",
+                e.getAttribute("name")));
+        }
+        return getCharacterDataFromElement((Element) stringList.item(0));
     }
 
     private TcfContent(
@@ -149,20 +168,6 @@ public class TcfContent {
             .findFirst()
             .map(ArcCpu::fromCommand)
             .map(ArcCpu::getToolChain);
-    }
-
-    private static String getCharacterDataFromElement(Element e) throws TcfContentException {
-        Node child = e.getFirstChild();
-        if (child == null) {
-            throw new TcfContentException(
-                    "Malformed TCF: Couldn't get character data from element " + e.getNodeName());
-        }
-        if (child instanceof CharacterData) {
-            CharacterData data = (CharacterData) child;
-            return data.getData();
-        }
-        throw new TcfContentException(
-                "Malformed TCF: Couldn't get character data from element " + e.getNodeName());
     }
 
     public String[] getGccOptions()

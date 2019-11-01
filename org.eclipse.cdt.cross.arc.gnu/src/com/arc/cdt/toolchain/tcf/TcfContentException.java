@@ -10,15 +10,17 @@
 
 package com.arc.cdt.toolchain.tcf;
 
-public class TcfContentException extends Exception {
-
+public class TcfContentException extends Exception
+{
     private static final long serialVersionUID = -8130268668081957392L;
 
-    public TcfContentException(String message) {
+    public TcfContentException(String message)
+    {
         super(message);
     }
 
-    public TcfContentException(String message, Throwable cause) {
+    public TcfContentException(String message, Throwable cause)
+    {
         super(message, cause);
     }
 }

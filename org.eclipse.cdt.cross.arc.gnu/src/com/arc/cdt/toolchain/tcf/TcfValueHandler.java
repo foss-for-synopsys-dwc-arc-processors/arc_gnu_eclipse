@@ -64,15 +64,22 @@ public class TcfValueHandler implements IManagedOptionValueHandler
     }
 
     @Override
-    public boolean isDefaultValue(IBuildObject configuration, IHoldsOptions holder, IOption option,
-            String extraArgument)
+    public boolean isDefaultValue(
+        IBuildObject configuration,
+        IHoldsOptions holder,
+        IOption option,
+        String extraArgument)
     {
         return false;
     }
 
     @Override
-    public boolean isEnumValueAppropriate(IBuildObject configuration, IHoldsOptions holder,
-            IOption option, String extraArgument, String enumValue)
+    public boolean isEnumValueAppropriate(
+        IBuildObject configuration,
+        IHoldsOptions holder,
+        IOption option,
+        String extraArgument,
+        String enumValue)
     {
         return false;
     }
