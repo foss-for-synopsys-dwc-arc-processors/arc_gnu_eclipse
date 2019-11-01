@@ -44,15 +44,12 @@ public class TcfContent {
     public static final List<String> knownSections = 
             Arrays.asList( GCC_OPTIONS_SECTION, LINKER_MEMORY_MAP_SECTION, C_DEFINES_SECTION );
 
-    private String[] gccOptionsArray;
-    private FileTime lastModificationTime;
-    private final Map<String, String> sectionNames = new HashMap<>();
-    private final Map<String, String> sectionContent = new HashMap<>();
+    private static final Map<String, TcfContent> cache = new HashMap<>();
 
-    private static Map<String, TcfContent> cache = new HashMap<>();
-
-    private TcfContent() {
-    }
+    private final Map<String, String> sectionsFilenames;
+    private final Map<String, String> sectionsContent;
+    private final String[] gccOptionsArray;
+    private final FileTime lastModificationTime;
 
     /**
      * Checks that file exists, then reads it and checks that TCF and used tool chain are for the
@@ -77,24 +74,25 @@ public class TcfContent {
             throw new TcfContentException("Failed to read last modification time of TCF.", err);
         }
 
-        TcfContent tcfContent = cache.get(path.toString());
-        if (tcfContent != null
-            && tcfContent.lastModificationTime.equals(tcfModificationTime)) {
-            return tcfContent;
+        // Check if file is already in the cache.
+        TcfContent cachedTcf = cache.get(path.toString());
+        if (cachedTcf != null
+            && cachedTcf.lastModificationTime.equals(tcfModificationTime)) {
+            return cachedTcf;
         }
 
+        var sectionsContent = new HashMap<String, String>();
+        var sectionsFiles = new HashMap<String, String>();
         try {
-            tcfContent = new TcfContent();
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-
-            Document document = builder.parse(path.toFile());
-            Element root = document.getDocumentElement();
+            var root = DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder()
+                .parse(path.toFile())
+                .getDocumentElement();
             NodeList attributes = root.getElementsByTagName("configuration");
             for (int index = 0; index < attributes.getLength(); index++) {
                 Element e = (Element) attributes.item(index);
-                String elementName = e.getAttribute("name");
-                if (!knownSections.contains(elementName)) {
+                String sectionName = e.getAttribute("name");
+                if (!knownSections.contains(sectionName)) {
                     continue;
                 }
                 NodeList stringList = e.getElementsByTagName("string");
@@ -103,41 +101,41 @@ public class TcfContent {
                             "Malformed TCF:  No 'string' element in "
                                     + e.getAttribute("name") + " configuration");
                 }
-                String data = getCharacterDataFromElement((Element) stringList.item(0));
-                if (elementName.equals(GCC_OPTIONS_SECTION)) {
-                    tcfContent.gccOptionsArray = CommandLineUtil.argumentsToArray(data);
-                    tcfContent.sectionContent.put(GCC_OPTIONS_SECTION, data);
-                    tcfContent.sectionNames.put(GCC_OPTIONS_SECTION, e.getAttribute("filename"));
-                }
-                if (elementName.equals(LINKER_MEMORY_MAP_SECTION)) {
-                    tcfContent.sectionContent.put(LINKER_MEMORY_MAP_SECTION, data);
-                    tcfContent.sectionNames.put(LINKER_MEMORY_MAP_SECTION,
-                        e.getAttribute("filename"));
-                }
-                if (elementName.equals(C_DEFINES_SECTION)) {
-                    tcfContent.sectionContent.put(C_DEFINES_SECTION, data);
-                    tcfContent.sectionNames.put(C_DEFINES_SECTION, e.getAttribute("filename"));
-                }
+                var sectionData = getCharacterDataFromElement((Element) stringList.item(0));
+                sectionsContent.put(sectionName, sectionData);
+                sectionsFiles.put(sectionName, e.getAttribute("filename"));
             }
         } catch (SAXException | IOException | ParserConfigurationException e) {
             throw new TcfContentException("Couldn't read TCF: " + e.getMessage(), e);
         }
 
         for (var sectionName : knownSections) {
-            if (!tcfContent.sectionContent.containsKey(sectionName)) {
+            if (!sectionsContent.containsKey(sectionName)) {
                 throw new TcfContentException(MessageFormat
                     .format("Malformed TCF: {} configuration is missing.", sectionName));
             }
         }
 
+        var tcfContent = new TcfContent(sectionsContent, sectionsFiles, tcfModificationTime);
         if (tcfContent.getCpuFamily().isEmpty()) {
             throw new TcfContentException(
                 "Malformed TCF: doesn't have valid GCC -mcpu option value.");
         }
 
-        tcfContent.lastModificationTime = tcfModificationTime;
         cache.put(path.toString(), tcfContent);
         return tcfContent;
+    }
+
+    private TcfContent(
+        Map<String, String> sectionsContent,
+        Map<String, String> sectionsFiles,
+        FileTime lastModificationTime)
+    {
+        this.sectionsContent = sectionsContent;
+        this.sectionsFilenames = sectionsFiles;
+        this.lastModificationTime = lastModificationTime;
+        this.gccOptionsArray =
+            CommandLineUtil.argumentsToArray(sectionsContent.get(GCC_OPTIONS_SECTION));
     }
 
     /**
@@ -179,11 +177,11 @@ public class TcfContent {
 
     public String getSectionFilename(String sectionId)
     {
-        return sectionNames.get(sectionId);
+        return sectionsFilenames.get(sectionId);
     }
 
     public String getSectionContent(String sectionId)
     {
-        return sectionContent.get(sectionId);
+        return sectionsContent.get(sectionId);
     }
 }
