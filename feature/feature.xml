@@ -4,7 +4,7 @@
       label="ARC GNU Toolchain Embedded CDT"
       version="2019.9.0.qualifier"
       provider-name="Synopsys, Inc."
-      plugin="org.eclipse.cdt.cross.arc.gnu"
+      plugin="com.synopsys.arc.gnu.elf"
       image="logo_emb_full.png">
 
    <description>
@@ -54,14 +54,14 @@ applications for the ARC series of processors.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.cdt.cross.arc.gnu"
+         id="org.eclipse.cdt.cross.arc.gnu.uclibc"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.cdt.cross.arc.gnu.uclibc"
+         id="com.synopsys.arc.gnu.elf"
          download-size="0"
          install-size="0"
          version="0.0.0"

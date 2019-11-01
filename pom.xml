@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.arc.cdt</groupId>
+  <groupId>com.synopsys.arc.gnu</groupId>
   <artifactId>plugin</artifactId>
   <version>2019.9.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -9,7 +9,7 @@
     <module>repository</module>
     <module>feature</module>
     <module>com.arc.embeddedcdt</module>
-    <module>org.eclipse.cdt.cross.arc.gnu</module>
+    <module>gnu.elf</module>
     <module>org.eclipse.cdt.cross.arc.gnu.uclibc</module>
   </modules>
 

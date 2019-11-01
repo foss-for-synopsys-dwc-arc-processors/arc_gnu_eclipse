@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: org.eclipse.cdt.cross.arc.gnu
+Automatic-Module-Name: com.synopsys.arc.gnu.elf
 Require-Bundle: org.eclipse.cdt.core;bundle-version="5.0.2",
  org.eclipse.cdt.managedbuilder.core,
  org.eclipse.cdt.managedbuilder.gnu.ui;bundle-version="5.0.0",
@@ -16,7 +16,7 @@ Bundle-Version: 2019.9.0.qualifier
 Bundle-Name: ARC GNU Toolchain C/C++ Development Support
 Bundle-Activator: com.synopsys.arc.gnu.elf.ArcGnuElfPlugin
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.eclipse.cdt.cross.arc.gnu;singleton:=true
+Bundle-SymbolicName: com.synopsys.arc.gnu.elf;singleton:=true
 Bundle-Localization: gnu.elf
 Bundle-RequiredExecutionEnvironment: JavaSE-11,
  JavaSE-9
