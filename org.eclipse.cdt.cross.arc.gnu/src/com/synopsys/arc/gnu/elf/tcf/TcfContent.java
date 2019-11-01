@@ -1,14 +1,6 @@
-/*******************************************************************************
- * This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Synopsys, Inc. - ARC GNU Toolchain support
- *******************************************************************************/
+// SPDX-License-Identifier: EPL-2.0
 
-package com.arc.cdt.toolchain.tcf;
+package com.synopsys.arc.gnu.elf.tcf;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -55,7 +47,7 @@ public final class TcfContent
      * Checks that file exists, then reads it and checks that TCF and used tool chain are for the
      * same processor. If cannot read file or some of the checks fail, throws
      * <code>TcfContentException</code>.
-     * 
+     *
      * @param path The path to a TCF to read.
      * @throws TcfContentException if file at the {@code path} doesn't exist or can't be read.
      */

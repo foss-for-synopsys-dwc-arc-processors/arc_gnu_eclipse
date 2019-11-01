@@ -19,8 +19,8 @@ import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.variables.VariablesPlugin;
 
-import com.arc.cdt.toolchain.tcf.TcfContent;
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
+import com.synopsys.arc.gnu.elf.tcf.TcfContent;
 
 public final class BuildUtils
 {

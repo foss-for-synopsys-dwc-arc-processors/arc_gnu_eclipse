@@ -1,14 +1,6 @@
-/*******************************************************************************
- * This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Synopsys, Inc. - ARC GNU Toolchain support
- *******************************************************************************/
+// SPDX-License-Identifier: EPL-2.0
 
-package com.arc.cdt.toolchain.tcf;
+package com.synopsys.arc.gnu.elf.tcf;
 
 import java.nio.file.Path;
 import java.text.MessageFormat;
@@ -23,7 +15,7 @@ import com.arc.cdt.toolchain.ArcCpu;
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
-public class TcfValueHandler implements IManagedOptionValueHandler
+public class TcfPathValueHandler implements IManagedOptionValueHandler
 {
     @Override
     public boolean handleValue(

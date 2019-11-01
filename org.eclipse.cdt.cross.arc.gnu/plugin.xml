@@ -133,7 +133,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.tcf_path"
                name="%option.target.tcf_path"
-               valueHandler="com.arc.cdt.toolchain.tcf.TcfValueHandler"
+               valueHandler="com.synopsys.arc.gnu.elf.tcf.TcfPathValueHandler"
                valueType="string">
             <enablement
                   type="UI_VISIBILITY">

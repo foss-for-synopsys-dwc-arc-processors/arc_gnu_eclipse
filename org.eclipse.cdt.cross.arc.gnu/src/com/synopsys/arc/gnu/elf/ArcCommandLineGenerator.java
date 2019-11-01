@@ -16,8 +16,8 @@ import org.eclipse.cdt.managedbuilder.core.ITool;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
 
-import com.arc.cdt.toolchain.tcf.TcfContent;
-import com.arc.cdt.toolchain.tcf.TcfContentException;
+import com.synopsys.arc.gnu.elf.tcf.TcfContent;
+import com.synopsys.arc.gnu.elf.tcf.TcfContentException;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
 
 @SuppressWarnings("restriction")
