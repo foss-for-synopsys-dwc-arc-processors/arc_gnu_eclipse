@@ -4,7 +4,6 @@ package com.synopsys.arc.gnu.elf;
 
 import java.util.Optional;
 
-import org.eclipse.cdt.cross.arc.gnu.common.StateListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -14,6 +13,8 @@ import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.osgi.framework.BundleContext;
+
+import com.synopsys.arc.gnu.elf.version.StateListener;
 
 public final class ArcGnuElfPlugin extends Plugin
 {

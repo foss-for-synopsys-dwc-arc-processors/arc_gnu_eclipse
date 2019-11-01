@@ -1,12 +1,6 @@
-/*******************************************************************************
- * This program and the accompanying materials are made available under the terms of the Common
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/cpl-v10.html
- *
- * Copyright (c) 2016 Synopsys, Inc.
- *******************************************************************************/
+// SPDX-License-Identifier: EPL-2.0
 
-package org.eclipse.cdt.cross.arc.gnu.common;
+package com.synopsys.arc.gnu.elf.version;
 
 import org.eclipse.cdt.internal.core.WeakHashSet;
 import org.eclipse.core.resources.IMarker;
