@@ -1253,36 +1253,36 @@
                   category="gnu.c.compiler.category.dialect"
                   defaultValue="false"
                   id="arc.gnu.elf.cpp.compiler.option.lang_std"
-                  name="Language Standard"
+                  name="%cpp.compiler.option.lang_std"
                   superClass="gnu.c.compiler.option.dialect.std"
                   useByScannerDiscovery="true"
                   valueType="enumerated">
                <enumeratedOptionValue
                      id="arc.gnu.elf.cpp.compiler.option.lang_std.none"
-                     name=" ">
+                     name="%cpp.compiler.option.lang_std.none">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-std=c++98"
                      id="arc.gnu.elf.cpp.compiler.option.lang_std.c++98"
-                     name="ISO C++98 (-std=c++98)">
+                     name="%cpp.compiler.option.lang_std.cpp98">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-std=c++0x"
                      id="arc.gnu.elf.cpp.compiler.option.lang_std.c++11"
-                     name="ISO C++11 (-std=c++0x)">
+                     name="%cpp.compiler.option.lang_std.cpp11">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-std=c++1y"
                      id="arc.gnu.elf.cpp.compiler.option.lang_std.c++1y"
-                     name="ISO C++1y (-std=c++1y)">
+                     name="%cpp.compiler.option.lang_std.cpp1y">
                </enumeratedOptionValue>
             </option>
             <option
                   category="gnu.c.compiler.category.preprocessor"
                   command="-nostdinc++"
                   defaultValue="false"
-                  id="arc.gnu.elf.cpp.compiler.option.nostdincpp"
-                  name="Do not search system C++ directories (-nostdinc++)"
+                  id="arc.gnu.elf.cpp.compiler.option.nostdinccpp"
+                  name="%cpp.compiler.option.nostdinccpp"
                   valueType="boolean">
             </option>
             <option
@@ -1290,7 +1290,7 @@
                   command="-Wabi"
                   defaultValue="false"
                   id="arc.gnu.elf.cpp.compiler.option.wabi"
-                  name="ABI warnings (-Wabi)"
+                  name="%cpp.compiler.option.wabi"
                   valueType="boolean">
             </option>
             <option
@@ -1298,7 +1298,7 @@
                   command="-Weffc++"
                   defaultValue="false"
                   id="arc.gnu.elf.cpp.compiler.option.weffcpp"
-                  name="Effective C++ warnings (-Weffc++)"
+                  name="%cpp.compiler.option.weffcpp"
                   valueType="boolean">
             </option>
             <option
@@ -1306,7 +1306,7 @@
                   command="-fno-exceptions"
                   defaultValue="true"
                   id="arc.gnu.elf.cpp.compiler.option.noexceptions"
-                  name="Do not use exceptions (-fno-exceptions)"
+                  name="%cpp.compiler.option.noexceptions"
                   valueType="boolean">
             </option>
             <option
@@ -1314,7 +1314,7 @@
                   command="-fno-rtti"
                   defaultValue="true"
                   id="arc.gnu.elf.cpp.compiler.option.nortti"
-                  name="Do not use RTTI (-fno-rtti)"
+                  name="%cpp.compiler.option.nortti"
                   valueType="boolean">
             </option>
          </tool>
