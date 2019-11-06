@@ -1519,7 +1519,7 @@
             </option>
             <optionCategory
                   id="arc.gnu.elf.c.linker.category.other"
-                  name="%linker.category.misc"
+                  name="%category.misc"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
@@ -1617,63 +1617,63 @@
                natureFilter="both">
             <optionCategory
                   id="arc.gnu.elf.flash.category.output"
-                  name="Output"
+                  name="%category.output"
                   owner="arc.gnu.elf.tool.flash.base">
             </optionCategory>
             <option
                   category="arc.gnu.elf.flash.category.output"
                   id="arc.gnu.elf.flash.option.output"
-                  name="Output file format (-O)"
+                  name="%flash.option.output"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="-O ihex"
                      id="arc.gnu.elf.flash.option.output.ihex"
-                     name="ihex">
+                     name="%flash.option.output.ihex">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O elf32-littlearc"
                      id="arc.gnu.elf.flash.option.output.elf32-littlearc"
-                     name="elf32-littlearc">
+                     name="%flash.option.output.elf32_littlearc">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O elf32-bigarc"
                      id="arc.gnu.elf.flash.option.output.elf32-bigarc"
-                     name="elf32-bigarc">
+                     name="%flash.option.output.elf32_bigarc">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O elf32-little"
                      id="arc.gnu.elf.flash.option.output.elf32-little"
-                     name="elf32-little">
+                     name="%flash.option.output.elf32_little">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O elf32-big"
                      id="arc.gnu.elf.flash.option.output.elf32-big"
-                     name="elf32-bit">
+                     name="%flash.option.output.elf32_big">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O srec"
                      id="arc.gnu.elf.flash.option.output.srec"
-                     name="srec">
+                     name="%flash.option.output.srec">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O symbolsrec"
                      id="arc.gnu.elf.flash.option.output.symbolsrec"
-                     name="symbolsrec">
+                     name="%flash.option.output.symbolsrec">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O tekhex"
                      id="arc.gnu.elf.flash.option.output.tekhex"
-                     name="tekhex">
+                     name="%flash.option.output.tekhex">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-O binary"
                      id="arc.gnu.elf.flash.option.output.binary"
-                     name="binary">
+                     name="%flash.option.output.binary">
                </enumeratedOptionValue>
             </option>
             <optionCategory
                   id="arc.gnu.elf.flash.category.section"
-                  name="Section"
+                  name="%flash.category.section"
                   owner="arc.gnu.elf.tool.flash.base">
             </optionCategory>
             <option
@@ -1681,7 +1681,7 @@
                   command="-j .text"
                   id="arc.gnu.elf.flash.option.section_text"
                   isAbstract="false"
-                  name="Section: -j .text"
+                  name="%flash.option.section_text"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
@@ -1690,7 +1690,7 @@
                   command="-j .data"
                   id="arc.gnu.elf.flash.option.section_data"
                   isAbstract="false"
-                  name="Section: -j .data"
+                  name="%flash.option.section_data"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
@@ -1699,19 +1699,19 @@
                   command="-j "
                   id="arc.gnu.elf.flash.option.section_other"
                   isAbstract="false"
-                  name="Other (-j)"
+                  name="%flash.option.section_other"
                   resourceFilter="all"
                   valueType="stringList">
             </option>
             <optionCategory
                   id="arc.gnu.elf.flash.category.misc"
-                  name="Miscellaneous"
+                  name="%category.misc"
                   owner="arc.gnu.elf.tool.flash.base">
             </optionCategory>
             <option
                   category="arc.gnu.elf.flash.category.misc"
                   id="arc.gnu.elf.flash.option.other"
-                  name="Other options"
+                  name="%flash.option.other"
                   valueType="string">
             </option>
             <outputType
