@@ -1752,14 +1752,14 @@
                outputFlag="&gt;">
             <optionCategory
                   id="arc.gnu.elf.listing.category.general"
-                  name="General"
+                  name="%category.general"
                   owner="arc.gnu.elf.tool.listing.base">
             </optionCategory>
             <option
                   category="arc.gnu.elf.listing.category.general"
                   defaultValue="-h -S"
                   id="arc.gnu.elf.listing.option.other"
-                  name="Other flags"
+                  name="%listing.option.other"
                   valueType="string">
             </option>
             <inputType
@@ -1799,24 +1799,24 @@
                id="arc.gnu.elf.tool.printsize.base">
             <optionCategory
                   id="arc.gnu.elf.printsize.category.general"
-                  name="General"
+                  name="%category.general"
                   owner="arc.gnu.elf.tool.printsize.base">
             </optionCategory>
             <option
                   category="arc.gnu.elf.printsize.category.general"
                   id="arc.gnu.elf.printsize.option.format"
-                  name="Size Format"
+                  name="%printsize.option.format"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="--format=berkeley"
                      id="arc.gnu.elf.printsize.option.format.berkeley"
                      isDefault="true"
-                     name="Berkeley">
+                     name="%printsize.option.format.berkeley">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--format=sysv"
                      id="arc.gnu.elf.printsize.option.format.sysv"
-                     name="SysV">
+                     name="%printsize.option.format.sysv">
                </enumeratedOptionValue>
             </option>
             <option
@@ -1824,7 +1824,7 @@
                   command="-x"
                   defaultValue="false"
                   id="arc.gnu.elf.printsize.option.hex"
-                  name="Hex"
+                  name="%printsize.option.hex"
                   valueType="boolean">
             </option>
             <option
@@ -1832,13 +1832,13 @@
                   command="-t"
                   defaultValue="false"
                   id="arc.gnu.elf.printsize.option.totals"
-                  name="Show Totals"
+                  name="%printsize.option.totals"
                   valueType="boolean">
             </option>
             <option
                   category="arc.gnu.elf.printsize.category.general"
                   id="arc.gnu.elf.printsize.option.other"
-                  name="Other flags"
+                  name="%printsize.option.other"
                   valueType="string">
             </option>
             <inputType
