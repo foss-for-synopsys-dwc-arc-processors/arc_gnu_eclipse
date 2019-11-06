@@ -1335,7 +1335,7 @@
             <option
                   category="gnu.asm.category.general"
                   id="arc.gnu.elf.assembler.option.flags"
-                  name="%option.assembler.flags"
+                  name="%assembler.option.flags"
                   superClass="gnu.both.asm.option.flags"
                   value="-c"
                   valueType="string">
@@ -1361,7 +1361,7 @@
             </envVarBuildPath>
             <optionCategory
                   id="arc.gnu.elf.c.linker.category.general"
-                  name="General"
+                  name="%category.general"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
@@ -1389,38 +1389,38 @@
                   command="--specs=nano.specs"
                   defaultValue="false"
                   id="arc.gnu.elf.c.linker.option.nano"
-                  name="Enable nano.specs to use standard libraries optimized for code size"
+                  name="%linker.option.nano"
                   valueType="boolean">
             </option>
             <option
                   category="arc.gnu.elf.c.linker.category.general"
                   id="arc.gnu.elf.c.linker.option.specsem"
-                  name="Use GCC specs file"
+                  name="%linker.option.specs"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="--specs=nsim.specs"
                      id="arc.gnu.elf.c.linker.option.specsem.nsim"
                      isDefault="true"
-                     name="nsim">
+                     name="%linker.option.specs.nsim">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=emsk_em9d.specs"
                      id="arc.gnu.elf.c.linker.option.specsem.emsk_em9d"
-                     name="emsk_em9d">
+                     name="%linker.option.specsem.emsk_em9d">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=emsk_em11d.specs"
                      id="arc.gnu.elf.c.linker.option.specsem.emsk_em11d"
-                     name="emsk_em11d">
+                     name="%linker.option.specsem.emsk_em11d">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=nosys.specs"
                      id="arc.gnu.elf.c.linker.option.specsem.nosys"
-                     name="nosys">
+                     name="%linker.option.specs.nosys">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      id="arc.gnu.elf.c.linker.option.specsem.none"
-                     name="None">
+                     name="%linker.option.specs.none">
                </enumeratedOptionValue>
                <enablement
                      type="ALL">
@@ -1433,22 +1433,22 @@
             <option
                   category="arc.gnu.elf.c.linker.category.general"
                   id="arc.gnu.elf.c.linker.option.specs"
-                  name="Use GCC specs file"
+                  name="%linker.option.specs"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="--specs=nsim.specs"
                      id="arc.gnu.elf.c.linker.option.specs.nsim"
                      isDefault="true"
-                     name="nsim">
+                     name="%linker.option.specs.nsim">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="--specs=nosys.specs"
                      id="arc.gnu.elf.c.linker.option.specs.nosys"
-                     name="nosys">
+                     name="%linker.option.specs.nosys">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      id="arc.gnu.elf.c.linker.option.specs.none"
-                     name="None">
+                     name="%linker.option.specs.none">
                </enumeratedOptionValue>
                <enablement
                      type="ALL">
@@ -1466,7 +1466,7 @@
                   command="-T&quot;${VALUE}&quot;"
                   id="arc.gnu.elf.c.linker.option.scriptfile"
                   isAbstract="false"
-                  name="Script file (-T)"
+                  name="%linker.option.scriptfile"
                   resourceFilter="all"
                   valueType="string">
                <enablement
@@ -1484,7 +1484,7 @@
                   command="-L&quot;${VALUE}&quot;"
                   id="arc.gnu.elf.c.linker.option.memoryx"
                   isAbstract="false"
-                  name="Directory with memory.x file"
+                  name="%linker.option.memoryx"
                   resourceFilter="all"
                   valueType="string">
                <enablement
@@ -1498,7 +1498,7 @@
             </option>
             <optionCategory
                   id="arc.gnu.elf.c.linker.category.libs"
-                  name="Libraries"
+                  name="%linker.category.libs"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
@@ -1519,7 +1519,7 @@
             </option>
             <optionCategory
                   id="arc.gnu.elf.c.linker.category.other"
-                  name="Miscellaneous"
+                  name="%linker.category.misc"
                   owner="arc.gnu.elf.tool.c.linker.base">
             </optionCategory>
             <option
@@ -1540,7 +1540,7 @@
                   command="-Wl,-Map,"
                   defaultValue="${BuildArtifactFileBaseName}.map"
                   id="arc.gnu.elf.c.linker.option.mapfilename"
-                  name="Map Filename"
+                  name="%linker.option.mapfilename"
                   valueType="string">
             </option>
             <option
@@ -1548,7 +1548,7 @@
                   command="-Xlinker --cref"
                   defaultValue="false"
                   id="arc.gnu.elf.c.linker.option.cref"
-                  name="Cross Reference (-Xlinker --cref)"
+                  name="%linker.option.cref"
                   valueType="boolean">
             </option>
             <option
@@ -1556,7 +1556,7 @@
                   command="-Xlinker --print-map"
                   defaultValue="false"
                   id="arc.gnu.elf.c.linker.option.printmap"
-                  name="Print link map (-Xlinker --print-map)"
+                  name="%linker.option.printmap"
                   valueType="boolean">
             </option>
             <option
@@ -1564,13 +1564,13 @@
                   command="-v"
                   defaultValue="false"
                   id="arc.gnu.elf.c.linker.option.verbose"
-                  name="Verbose (-v)"
+                  name="%linker.option.verbose"
                   valueType="boolean">
             </option>
             <option
                   category="arc.gnu.elf.c.linker.category.other"
                   id="arc.gnu.elf.c.linker.option.otherflags"
-                  name="Other flags"
+                  name="%linker.option.otherflags"
                   valueType="string">
             </option>
             <inputType
