@@ -3,77 +3,77 @@
 <plugin>
    <!-- SPDX-License-Identifier: EPL-2.0 -->
    <extension
-         id="ARC_GCC_BuildProperties"
-         name="Build Properties"
+         id="com.synopsys.arc.gnu.elf.buildProperties"
+         name="%extension.name"
          point="org.eclipse.cdt.managedbuilder.core.buildProperties">
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.application"
-            name="ARC Cross ELF32 Target Application"
+            name="%buildArtifactType.application"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.staticLib"
-            name="ARC Cross ELF32 Target Static Library"
+            name="%buildArtifactType.staticLib"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.axs101"
-            name="ARC AXS101 Projects"
+            name="%buildArtifactType.axs101"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.axs103"
-            name="ARC AXS103 Projects"
+            name="%buildArtifactType.axs103"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.emsk"
-            name="ARC EM Starter Kit Projects"
+            name="%buildArtifactType.emsk"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.iotdk"
-            name="ARC IoT Development Kit Projects"
+            name="%buildArtifactType.iotdk"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.hsdk"
-            name="ARC HS Development Kit Projects"
+            name="%buildArtifactType.hsdk"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.buildArtifactType.emsdp"
-            name="ARC EM SDP Projects"
+            name="%buildArtifactType.emsdp"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyType
             id="arc.gnu.elf.property.cpu"
-            name="ARC CPU family">
+            name="%property.cpu">
       </propertyType>
       <propertyValue
             id="arc.gnu.elf.property.cpu.em"
-            name="ARC EM CPU"
+            name="%property.cpu.em"
             property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.cpu.hs"
-            name="ARC HS CPU"
+            name="%property.cpu.hs"
             property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.cpu.arc700"
-            name="ARC700 CPU"
+            name="%property.cpu.arc700"
             property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
             id="arc.gnu.elf.property.cpu.arc600"
-            name="ARC600 CPU"
+            name="%property.cpu.arc600"
             property="arc.gnu.elf.property.cpu">
       </propertyValue>
    </extension>
     <extension
-         id="ARC_GCC_BuildDefinitions"
-         name="Managed Build Definitions"
+         id="com.synopsys.arc.gnu.elf.buildDefinitions"
+         name="%extension.buildDefinitions"
          point="org.eclipse.cdt.managedbuilder.core.buildDefinitions">
       <managedBuildRevision
             fileVersion="4.0.0">
@@ -208,33 +208,33 @@
             <enumeratedOptionValue
                   command="-mcpu=arcem"
                   id="arc.gnu.elf.option.target.cpuem.arcem"
-                  name="-mcpu=arcem">
+                  name="%option.target.cpuem.arcem">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=em"
                   id="arc.gnu.elf.option.target.cpuem.em"
                   isDefault="true"
-                  name="-mcpu=em">
+                  name="%option.target.cpuem.em">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=em4"
                   id="arc.gnu.elf.option.target.cpuem.em4"
-                  name="-mcpu=em4">
+                  name="%option.target.cpuem.em4">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=em4_dmips"
                   id="arc.gnu.elf.option.target.cpuem.em4_dmips"
-                  name="-mcpu=em4_dmips">
+                  name="%option.target.cpuem.em4_dmips">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=em4_fpus"
                   id="arc.gnu.elf.option.target.cpuem.em4_fpus"
-                  name="-mcpu=em4_fpus">
+                  name="%option.target.cpuem.em4_fpus">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=em4_fpuda"
                   id="arc.gnu.elf.option.target.cpuem.em4_fpuda"
-                  name="-mcpu=em4_fpuda">
+                  name="%option.target.cpuem.em4_fpuda">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -259,28 +259,28 @@
             <enumeratedOptionValue
                   command="-mcpu=archs"
                   id="arc.gnu.elf.option.target.cpuhs.archs"
-                  name="-mcpu=archs">
+                  name="%option.target.cpuhs.archs">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=hs"
                   id="arc.gnu.elf.option.target.cpuhs.hs"
                   isDefault="true"
-                  name="-mcpu=hs">
+                  name="%option.target.cpuhs.hs">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=hs34"
                   id="arc.gnu.elf.option.target.cpuhs.hs34"
-                  name="-mcpu=hs34">
+                  name="%option.target.cpuhs.hs34">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=hs38"
                   id="arc.gnu.elf.option.target.cpuhs.hs38"
-                  name="-mcpu=hs38">
+                  name="%option.target.cpuhs.hs38">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mcpu=hs38_linux"
                   id="arc.gnu.elf.option.target.cpuhs.hs38_linux"
-                  name="-mcpu=hs38_linux">
+                  name="%option.target.cpuhs.hs38_linux">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -306,7 +306,7 @@
                   command="-mcpu=arc700"
                   id="arc.gnu.elf.option.target.cpu700.arc700"
                   isDefault="true"
-                  name="-mcpu=arc700">
+                  name="%option.target.cpu700.arc700">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -325,7 +325,7 @@
                   command="-mcpu=arc600"
                   id="arc.gnu.elf.option.target.cpu600.arc600"
                   isDefault="true"
-                  name="-mcpu=arc600">
+                  name="%option.target.cpu600.arc600">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -343,47 +343,47 @@
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.fpuem.none"
                   isDefault="true"
-                  name="None (-mfpu=none)">
+                  name="%option.target.fpuem.none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus"
                   id="arc.gnu.elf.option.target.fpuem.fpus"
-                  name="SP FPU (-mfpu=fpus)">
+                  name="%option.target.fpuem.fpus">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_div"
-                  id="arc.gnu.elf.option.target.fpuem.fpus_dis"
-                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
+                  id="arc.gnu.elf.option.target.fpuem.fpus_div"
+                  name="%option.target.fpuem.fpus_div">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_fma"
                   id="arc.gnu.elf.option.target.fpuem.fpus_fma"
-                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
+                  name="%option.target.fpuem.fpus_fma">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_all"
                   id="arc.gnu.elf.option.target.fpuem.fpus_all"
-                  name="SP FPU with all instructions (-mfpu=fpus_all)">
+                  name="%option.target.fpuem.fpus_all">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpuda"
                   id="arc.gnu.elf.option.target.fpuem.fpuda"
-                  name="FPU with DP assist instructions (-mfpu=fpuda)">
+                  name="%option.target.fpuem.fpuda">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpuda_div"
                   id="arc.gnu.elf.option.target.fpuem.fpuda_div"
-                  name="FPU with DP assist instructions and DIV/SQRT extensions (-mfpu=fpuda_div)">
+                  name="%option.target.fpuem.fpuda_div">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpuda_fma"
                   id="arc.gnu.elf.option.target.fpuem.fpuda_fma"
-                  name="FPU with DP assist instructions and fused extensions (-mfpu=fpuda_fma)">
+                  name="%option.target.fpuem.fpuda_fma">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpuda_all"
                   id="arc.gnu.elf.option.target.fpuem.fpuda_all"
-                  name="FPU with DP assist instructions and all extensions (-mfpu=fpuda_all)">
+                  name="%option.target.fpuem.fpuda_all">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -420,47 +420,47 @@
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.fpuhs.none"
                   isDefault="true"
-                  name="None (-mfpu=none)">
+                  name="%option.target.fpuhs.none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus"
                   id="arc.gnu.elf.option.target.fpuhs.fpus"
-                  name="SP FPU (-mfpu=fpus)">
+                  name="%option.target.fpuhs.fpus">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_div"
-                  id="arc.gnu.elf.option.target.fpuhs.fpus_dis"
-                  name="SP FPU with DIV/SQRT instructions (-mfpu=fpus_div)">
+                  id="arc.gnu.elf.option.target.fpuhs.fpus_div"
+                  name="%option.target.fpuhs.fpus_div">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_fma"
                   id="arc.gnu.elf.option.target.fpuhs.fpus_fma"
-                  name="SP FPU with fused instructions (-mfpu=fpus_fma)">
+                  name="%option.target.fpuhs.fpus_fma">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpus_all"
                   id="arc.gnu.elf.option.target.fpuhs.fpus_all"
-                  name="SP FPU with all instructions (-mfpu=fpus_all)">
+                  name="%option.target.fpuhs.fpus_all">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpud"
                   id="arc.gnu.elf.option.target.fpuhs.fpud"
-                  name="DP FPU (-mfpu=fpud)">
+                  name="%option.target.fpuhs.fpud">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpud_div"
-                  id="arc.gnu.elf.option.target.fpuhs.fpud_dis"
-                  name="DP FPU with DIV/SQRT instructions (-mfpu=fpud_div)">
+                  id="arc.gnu.elf.option.target.fpuhs.fpud_div"
+                  name="%option.target.fpuhs.fpud_div">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpud_fma"
                   id="arc.gnu.elf.option.target.fpuhs.fpud_fma"
-                  name="DP FPU with fused instructions (-mfpu=fpud_fma)">
+                  name="%option.target.fpuhs.fpud_fma">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mfpu=fpud_all"
                   id="arc.gnu.elf.option.target.fpuhs.fpud_all"
-                  name="DP FPU with all instructions (-mfpu=fpud_all)">
+                  name="%option.target.fpuhs.fpud_all">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -493,37 +493,37 @@
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.fpx.none"
                   isDefault="true"
-                  name="None">
+                  name="%option.target.fpx.none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mspfp"
                   id="arc.gnu.elf.option.target.fpx.spfp"
-                  name="Single Precision FPX (-mspfp)">
+                  name="%option.target.fpx.spfp">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mspfp-fast"
                   id="arc.gnu.elf.option.target.fpx.spfp_fast"
-                  name="Single Precision FPX, fast (-mspfp-fast)">
+                  name="%option.target.fpx.spfp_fast">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mspfp-compact"
                   id="arc.gnu.elf.option.target.fpx.spfp_compact"
-                  name="Single Precision FPX, compact (-mspfp-compact)">
+                  name="%option.target.fpx.spfp_compact">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mdpfp"
                   id="arc.gnu.elf.option.target.fpx.dpfp"
-                  name="Double Precision FPX (-mdpfp)">
+                  name="%option.target.fpx.dpfp">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mdpfp-fast"
                   id="arc.gnu.elf.option.target.fpx.dpfp_fast"
-                  name="Double Precision FPX, fast (-mdpfp-fast)">
+                  name="%option.target.fpx.dpfp_fast">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mdpfp-compact"
                   id="arc.gnu.elf.option.target.fpx.dpfp_compact"
-                  name="Double Precision FPX, compact (-mdpfp-compact)">
+                  name="%option.target.fpx.dpfp_compact">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -547,38 +547,38 @@
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.mpyem.none"
                   isDefault="true"
-                  name="none">
+                  name="%option.target.mpyem.none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=w"
                   id="arc.gnu.elf.option.target.mpyem.w"
-                  name="w">
+                  name="%option.target.mpyem.w">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=wlh1"
                   id="arc.gnu.elf.option.target.mpyem.wlh1"
                   isDefault="false"
-                  name="wlh1">
+                  name="%option.target.mpyem.wlh1">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=wlh2"
                   id="arc.gnu.elf.option.target.mpyem.wlh2"
-                  name="wlh2">
+                  name="%option.target.mpyem.wlh2">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=wlh3"
                   id="arc.gnu.elf.option.target.mpyem.wlh3"
-                  name="wlh3">
+                  name="%option.target.mpyem.wlh3">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=wlh4"
                   id="arc.gnu.elf.option.target.mpyem.wlh4"
-                  name="wlh4">
+                  name="%option.target.mpyem.wlh4">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=wlh5"
                   id="arc.gnu.elf.option.target.mpyem.wlh5"
-                  name="wlh5">
+                  name="%option.target.mpyem.wlh5">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -623,27 +623,27 @@
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.mpyhs.none"
                   isDefault="true"
-                  name="none">
+                  name="%option.target.mpyhs.none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=mpy"
                   id="arc.gnu.elf.option.target.mpyhs.mpy"
-                  name="mpy">
+                  name="%option.target.mpyhs.mpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=plus_dmpy"
                   id="arc.gnu.elf.option.target.mpyhs.plus_dmpy"
-                  name="plus_dmpy">
+                  name="%option.target.mpyhs.plus_dmpy">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=plus_macd"
                   id="arc.gnu.elf.option.target.mpyhs.plus_macd"
-                  name="plus_macd">
+                  name="%option.target.mpyhs.plus_macd">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmpy-option=plus_qmacw"
                   id="arc.gnu.elf.option.target.mpyhs.plus_qmacw"
-                  name="plus_qmacw">
+                  name="%option.target.mpyhs.plus_qmacw">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -688,17 +688,17 @@
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.mpy600.none"
                   isDefault="true"
-                  name="none">
+                  name="%option.target.mpy600.none">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmul32x16"
                   id="arc.gnu.elf.option.target.mpy600.mul32x16"
-                  name="mul32x16">
+                  name="%option.target.mpy600.mul32x16">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-mmul64"
                   id="arc.gnu.elf.option.target.mpy600.mul64"
-                  name="mul64">
+                  name="%option.target.mpy600.mul64">
             </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
@@ -2108,7 +2108,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.em.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.em.debug"
@@ -2118,7 +2118,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.em.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.em.release"
@@ -2133,7 +2133,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.hs.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hs.debug"
@@ -2143,7 +2143,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.hs.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hs.release"
@@ -2158,7 +2158,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.arc700.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700.debug"
@@ -2168,7 +2168,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.arc700.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700.release"
@@ -2183,7 +2183,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.arc600.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600.debug"
@@ -2193,7 +2193,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.arc600.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600.release"
@@ -2208,7 +2208,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.emb.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.emeb.debug"
@@ -2218,7 +2218,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.emb.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.emeb.release"
@@ -2233,7 +2233,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.hsb.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hseb.debug"
@@ -2243,7 +2243,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.hsb.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hseb.release"
@@ -2258,7 +2258,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.arc700b.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700eb.debug"
@@ -2268,7 +2268,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.arc700b.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc700eb.release"
@@ -2283,7 +2283,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.elf32.arc600b.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600eb.debug"
@@ -2293,7 +2293,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.elf32.arc600b.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.arc600eb.release"
@@ -2308,7 +2308,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.axs101.arc700.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc700.debug"
@@ -2318,7 +2318,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.axs101.arc700.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc700.release"
@@ -2333,7 +2333,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.axs101.arc600.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc600.debug"
@@ -2343,7 +2343,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.axs101.arc600.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.arc600.release"
@@ -2358,7 +2358,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.axs101.em.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.em.debug"
@@ -2368,7 +2368,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.axs101.em.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs101.em.release"
@@ -2383,7 +2383,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.axs103.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs103.debug"
@@ -2393,7 +2393,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.axs103.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.axs103.release"
@@ -2408,7 +2408,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.emsdp.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsdp.debug"
@@ -2418,7 +2418,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.emsdp.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsdp.release"
@@ -2433,7 +2433,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.emsk.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsk.debug"
@@ -2443,7 +2443,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.emsk.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.emsk.release"
@@ -2458,7 +2458,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.iotdk.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.iotdk.debug"
@@ -2468,7 +2468,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.iotdk.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.iotdk.release"
@@ -2483,7 +2483,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.hsdk.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.hsdk.debug"
@@ -2493,7 +2493,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.hsdk.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.hsdk.release"
@@ -2508,7 +2508,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.em.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.em.debug"
@@ -2519,7 +2519,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.em.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.em.release"
@@ -2535,7 +2535,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.emb.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.emeb.debug"
@@ -2546,7 +2546,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.emb.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.emeb.release"
@@ -2562,7 +2562,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.hs.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hs.debug"
@@ -2573,7 +2573,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.hs.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hs.release"
@@ -2589,7 +2589,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.hsb.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hseb.debug"
@@ -2600,7 +2600,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.hsb.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.hseb.release"
@@ -2616,7 +2616,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.arc700.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700.debug"
@@ -2627,7 +2627,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.arc700.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700.release"
@@ -2643,7 +2643,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.arc700b.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700eb.debug"
@@ -2654,7 +2654,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.arc700b.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc700eb.release"
@@ -2670,7 +2670,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.arc600.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600.debug"
@@ -2681,7 +2681,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.arc600.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600.release"
@@ -2697,7 +2697,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="arc.gnu.elf.configuration.liba.arc600b.debug"
-               name="%debug"
+               name="%configuration.debug"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600eb.debug"
@@ -2708,7 +2708,7 @@
          <configuration
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="arc.gnu.elf.configuration.liba.arc600b.release"
-               name="%release"
+               name="%configuration.release"
                parent="arc.gnu.elf.configuration.base">
             <toolChain
                   id="arc.gnu.elf.toolchain.liba.arc600eb.release"
@@ -2928,7 +2928,7 @@
    </extension>
    <extension
          id="arc.gnu.elf.scdprofile.c.arc"
-         name="ARC GNU C managed make per project SCD profile"
+         name="%extension.scdprofile.c.arc"
          point="org.eclipse.cdt.make.core.ScannerConfigurationDiscoveryProfile">
       <scannerInfoCollector
             class="com.synopsys.arc.gnu.elf.scannerconfig.ProjectScannerInfoCollector"
