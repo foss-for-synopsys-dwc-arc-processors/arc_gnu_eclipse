@@ -1125,7 +1125,7 @@
                   command="-fpack-struct"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.packstruct"
-                  name="Pack structures (-fpack-struct)"
+                  name="%c.compiler.option.packstruct"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
@@ -1134,7 +1134,7 @@
                   command="-fshort-enums"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.shortenums"
-                  name="Short enumerations (-fshort-enums)"
+                  name="%c.compiler.option.shortenums"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
@@ -1143,7 +1143,7 @@
                   command="-ffunction-sections"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.function_sections"
-                  name="Function sections (-ffunction-sections)"
+                  name="%c.compiler.option.function_sections"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
@@ -1152,39 +1152,39 @@
                   command="-fdata-sections"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.data_sections"
-                  name="Data sections (-fdata-sections)"
+                  name="%c.compiler.option.data_sections"
                   resourceFilter="all"
                   valueType="boolean">
             </option>
             <option
                   category="gnu.c.compiler.category.debug"
                   id="arc.gnu.elf.c.compiler.option.debug_format"
-                  name="Debug Format"
+                  name="%c.compiler.option.debug_format"
                   valueType="enumerated">
                <enumeratedOptionValue
                      command="-gdwarf-2"
                      id="arc.gnu.elf.c.compiler.option.debug_format.dwarf2"
-                     name="dwarf-2">
+                     name="%c.compiler.option.debug_format.dwarf2">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-gdwarf-4"
                      id="arc.gnu.elf.c.compiler.option.debug_format.dwarf4"
-                     name="dwarf-4">
+                     name="%c.compiler.option.debug_format.dwarf4">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-gstabs"
                      id="arc.gnu.elf.c.compiler.option.debug_format.stabs"
-                     name="stabs">
+                     name="%c.compiler.option.debug_format.stabs">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-gstabs+"
                      id="arc.gnu.elf.c.compiler.option.debug_format.stabsplus"
-                     name="stabs+">
+                     name="%c.compiler.option.debug_format.stabsplus">
                </enumeratedOptionValue>
                <enumeratedOptionValue
                      command="-ggdb"
                      id="arc.gnu.elf.c.compiler.option.debug_format.gdb"
-                     name="gdb">
+                     name="%c.compiler.option.debug_format.gdb">
                </enumeratedOptionValue>
                <enablement
                      attribute="value"
@@ -1212,7 +1212,7 @@
                   command="-Wa,"
                   defaultValue="-adhlns=&quot;$@.lst&quot;"
                   id="arc.gnu.elf.c.compiler.option.lstfilename"
-                  name="Assembler Listing"
+                  name="%c.compiler.option.lstfilename"
                   valueType="string">
             </option>
             <option
@@ -1220,7 +1220,7 @@
                   command="-fno-inline-functions"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.no_inline_functions"
-                  name="Do not inline functions (-fno-inline-functions)"
+                  name="%c.compiler.option.no_inline_functions"
                   valueType="boolean">
             </option>
             <option
@@ -1228,7 +1228,7 @@
                   command="-fsigned-char"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.signed_char"
-                  name="&apos;char&apos; is signed (-fsigned-char)"
+                  name="%c.compiler.option.signed_char"
                   valueType="boolean">
             </option>
             <option
@@ -1236,7 +1236,7 @@
                   command="-funsigned-bitfields"
                   defaultValue="false"
                   id="arc.gnu.elf.c.compiler.option.unsigned_bitfields"
-                  name="Bitfields are unsigned (-funsigned-bitfields)"
+                  name="%c.compiler.option.unsugned_bitfields"
                   valueType="boolean">
             </option>
          </tool>
