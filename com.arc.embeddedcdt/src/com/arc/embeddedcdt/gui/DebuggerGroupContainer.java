@@ -597,8 +597,12 @@ public class DebuggerGroupContainer extends Observable{
     case AXS103:
         if (ftdiCore == FtdiCore.HS36) {
             openOcdConfiguration += "snps_axs103_hs36.cfg";
-        } else {
+        } else if (ftdiCore == FtdiCore.HS38_0 || ftdiCore == FtdiCore.HS38_1) {
             openOcdConfiguration += "snps_axs103_hs38.cfg";
+        } else if (ftdiCore == FtdiCore.HS47D) {
+            openOcdConfiguration += "snps_axs103_hs47D.cfg";
+        } else {
+            openOcdConfiguration += "snps_axs103_hs48.cfg";
         }
         break;
     case HSDK:
