@@ -1970,7 +1970,7 @@
             isAbstract="true"
             secondaryOutputs="arc.gnu.elf.flash.output;arc.gnu.elf.listing.output;arc.gnu.elf.printsize.output"
             superClass="arc.gnu.elf.toolchain.base"
-            targetTool="arc.gnu.elf.tool.c.linker.arc;arc.gnu.elf.tool.cpp.linker.arc">
+            targetTool="arc.gnu.elf.tool.c.linker.arceb;arc.gnu.elf.tool.cpp.linker.arceb">
          <tool
                command="arceb-elf32-gcc"
                id="arc.gnu.elf.tool.c.compiler.arceb"
