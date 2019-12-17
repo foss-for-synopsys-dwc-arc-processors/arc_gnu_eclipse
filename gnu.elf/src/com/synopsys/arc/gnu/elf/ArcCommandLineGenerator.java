@@ -40,8 +40,10 @@ public final class ArcCommandLineGenerator implements IManagedCommandLineGenerat
             .map(toolchain -> getTargetFlags(tool, toolchain))
             .map(options -> Stream.concat(options, Arrays.stream(flags)))
             .map(options -> options.toArray(String[]::new));
-        newFlags.map(Arrays::toString)
-            .ifPresent(ArcGnuElfPlugin.getDefault()::log);
+        if (ArcGnuElfPlugin.getDefault().isDebugging()) {
+            newFlags.map(Arrays::toString)
+                .ifPresent(ArcGnuElfPlugin.getDefault()::log);
+        }
 
         return parent.generateCommandLineInfo(
             tool,
