@@ -10,6 +10,7 @@ import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IManagedOptionValueHandler;
 import org.eclipse.cdt.managedbuilder.core.IOption;
+import org.eclipse.cdt.managedbuilder.core.IToolChain;
 
 import com.synopsys.arc.gnu.elf.ArcGnuElfPlugin;
 import com.synopsys.arc.gnu.elf.utility.BuildUtils;
@@ -36,16 +37,22 @@ public class TcfPathValueHandler implements IManagedOptionValueHandler
                 return false;
             }
 
-            var tcfArch = tcfContent.getCpuFamily();
+            var tcfArch = tcfContent.getCpuFamily().get();
             var expectedArch = BuildUtils.getCurrentCpu(configuration, holder)
-                .flatMap(ArcCpuFamily::fromMcpuOption);
-            if (!tcfArch.get().equals(expectedArch.get())) {
+                .flatMap(ArcCpuFamily::fromMcpuOption)
+                .get();
+            if (!tcfArch.equals(expectedArch)) {
                 ArcGnuElfPlugin.getDefault()
                     .showError(MessageFormat.format(
-                        "TCF describes {} architecture, but selected tool chain is for {}.",
+                        "TCF describes {0} architecture, but selected tool chain is for {1}.",
                         tcfArch,
                         expectedArch));
                 return false;
+            }
+
+            // Rebuild the target.
+            if (holder instanceof IToolChain) {
+                ((IToolChain) holder).getParent().setRebuildState(true);
             }
 
             return true;

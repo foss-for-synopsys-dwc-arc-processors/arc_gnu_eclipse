@@ -102,6 +102,8 @@
                defaultValue="false"
                id="arc.gnu.elf.option.target.use_tcf"
                name="%option.target.use_tcf"
+               useByScannerDiscovery="false"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -151,6 +153,7 @@
                defaultValue="false"
                id="arc.gnu.elf.option.target.tcf_map"
                name="%option.target.tcf_map"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -178,6 +181,7 @@
                defaultValue="false"
                id="arc.gnu.elf.option.target.tcf_cinclude"
                name="%option.target.tcf_cinclude"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -204,6 +208,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.cpuem"
                name="%option.target.cpu"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mcpu=arcem"
@@ -255,6 +260,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.cpuhs"
                name="%option.target.cpu"
+               valueHandlerExtraArgument="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mcpu=archs"
@@ -301,6 +307,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.cpu700"
                name="%option.target.cpu"
+               valueHandlerExtraArgument="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mcpu=arc700"
@@ -320,6 +327,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.cpu600"
                name="%option.target.cpu"
+               valueHandlerExtraArgument="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   command="-mcpu=arc600"
@@ -339,6 +347,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.fpuem"
                name="%option.target.fpu"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.fpuem.none"
@@ -416,6 +425,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.fpuhs"
                name="%option.target.fpu"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.fpuhs.none"
@@ -489,6 +499,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.fpx"
                name="%option.target.fpu"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.fpx.none"
@@ -543,6 +554,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.mpyem"
                name="%option.target.mpy"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.mpyem.none"
@@ -619,6 +631,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.mpyhs"
                name="%option.target.mpy"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.mpyhs.none"
@@ -684,6 +697,7 @@
                category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.mpy600"
                name="%option.target.mpy"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="enumerated">
             <enumeratedOptionValue
                   id="arc.gnu.elf.option.target.mpy600.none"
@@ -713,6 +727,7 @@
                command="-mdiv-rem"
                id="arc.gnu.elf.option.target.divrem"
                name="%option.target.divrem"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -767,6 +782,7 @@
                command="-mcode-density"
                id="arc.gnu.elf.option.target.code_density"
                name="%option.target.code_density"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -812,6 +828,7 @@
                command="-mbarrel-shifter"
                id="arc.gnu.elf.option.target.barrel_shifter"
                name="%option.target.barrel_shifter"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -870,6 +887,7 @@
                command="-mnorm"
                id="arc.gnu.elf.option.target.norm"
                name="%option.target.norm"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -918,6 +936,7 @@
                command="-mswap"
                id="arc.gnu.elf.option.target.swap"
                name="%option.target.swap"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -966,6 +985,7 @@
                command="-mll64"
                id="arc.gnu.elf.option.target.ll64"
                name="%option.target.ll64"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -1003,6 +1023,7 @@
                command="-matomic"
                id="arc.gnu.elf.option.target.atomic"
                name="%option.target.atomic"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -1017,6 +1038,7 @@
                command="-mea"
                id="arc.gnu.elf.option.target.ea"
                name="%option.target.ea"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -1032,6 +1054,7 @@
                id="arc.gnu.elf.option.target.xy"
                name="%option.target.xy"
                tip="%option.target.xy.tip"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
@@ -1052,6 +1075,7 @@
                command="-mno-dpfp-lrsr"
                id="arc.gnu.elf.option.target.dpfplrsr"
                name="%option.target.dpfplrsr"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
                valueType="boolean">
             <enablement
                   type="UI_VISIBILITY">
