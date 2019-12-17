@@ -81,7 +81,7 @@ final class StateChecker
             projectScope.getNode(nodeNamePrefix);
         prefs.put(name, preference);
         final WorkspaceJob job = new WorkspaceJob(
-            MessageFormat.format("Write {} for the {}", nodeNamePrefix, project.getName()))
+            MessageFormat.format("Write {0} for the {1}", nodeNamePrefix, project.getName()))
         {
 
             @Override
