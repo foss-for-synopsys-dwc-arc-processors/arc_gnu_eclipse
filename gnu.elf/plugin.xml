@@ -288,6 +288,16 @@
                   id="arc.gnu.elf.option.target.cpuhs.hs38_linux"
                   name="%option.target.cpuhs.hs38_linux">
             </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs4x"
+                  id="arc.gnu.elf.option.target.cpuhs.hs4x"
+                  name="%option.target.cpuhs.hs4x">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcpu=hs4xd"
+                  id="arc.gnu.elf.option.target.cpuhs.hs4xd"
+                  name="%option.target.cpuhs.hs4xd">
+            </enumeratedOptionValue>
             <enablement
                   type="UI_VISIBILITY">
                <checkBuildProperty
@@ -689,6 +699,14 @@
                            optionId="arc.gnu.elf.option.target.cpuhs"
                            value="arc.gnu.elf.option.target.cpuhs.hs38_linux">
                      </checkOption>
+                     <checkOption
+                           optionId="arc.gnu.elf.option.target.cpuhs"
+                           value="arc.gnu.elf.option.target.cpuhs.hs4x">
+                     </checkOption>
+                     <checkOption
+                           optionId="arc.gnu.elf.option.target.cpuhs"
+                           value="arc.gnu.elf.option.target.cpuhs.hs4xd">
+                     </checkOption>
                   </or>
                </not>
             </enablement>
@@ -772,6 +790,14 @@
                      <checkOption
                            optionId="arc.gnu.elf.option.target.cpuhs"
                            value="arc.gnu.elf.option.target.cpuhs.hs38_linux">
+                     </checkOption>
+                     <checkOption
+                           optionId="arc.gnu.elf.option.target.cpuhs"
+                           value="arc.gnu.elf.option.target.cpuhs.hs4x">
+                     </checkOption>
+                     <checkOption
+                           optionId="arc.gnu.elf.option.target.cpuhs"
+                           value="arc.gnu.elf.option.target.cpuhs.hs4xd">
                      </checkOption>
                   </or>
                </not>
@@ -1013,6 +1039,14 @@
                      <checkOption
                            optionId="arc.gnu.elf.option.target.cpuhs"
                            value="arc.gnu.elf.option.target.cpuhs.hs38_linux">
+                     </checkOption>
+                     <checkOption
+                           optionId="arc.gnu.elf.option.target.cpuhs"
+                           value="arc.gnu.elf.option.target.cpuhs.hs4x">
+                     </checkOption>
+                     <checkOption
+                           optionId="arc.gnu.elf.option.target.cpuhs"
+                           value="arc.gnu.elf.option.target.cpuhs.hs4xd">
                      </checkOption>
                   </or>
                </not>
