@@ -10,7 +10,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -64,7 +63,7 @@ final class StateChecker
     {
         final ProjectScope projectScope = new ProjectScope(project);
         final IEclipsePreferences prefs = projectScope.getNode(nodeNamePrefix);
-        return prefs.get(name, "");
+        return prefs.get(name, preference);
     }
 
     /**
@@ -113,15 +112,11 @@ final class StateChecker
      */
     void checkPluginVersions(final IProject project, boolean isNew)
     {
-        if (seenProjects.containsKey(project)) {
+        if (seenProjects.containsKey(project) && !isNew) {
             return;
         }
         var projectState = getPreference(PREFS_FILE_NAME_PREFIX, project, STATE_KEY, UNREAL_STATE);
-        final IPath workspaceLocation = project.getWorkspace().getRoot().getLocation();
-        final IPath projectLocation = project.getLocation().removeLastSegments(1);
-        boolean isImported = !projectLocation.equals(workspaceLocation);
-        if (!projectState.equals(CURRENT_STATE)
-            && (!projectState.equals(UNREAL_STATE) || isImported)) {
+        if (!projectState.equals(CURRENT_STATE) && !projectState.equals(UNREAL_STATE)) {
             warnUser(project, CURRENT_STATE, projectState);
         } else if (projectState.equals(UNREAL_STATE)) {
             if (isNew) {
