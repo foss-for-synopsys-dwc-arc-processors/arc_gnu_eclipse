@@ -54,13 +54,6 @@ applications for the ARC series of processors.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.cdt.cross.arc.gnu.uclibc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.synopsys.arc.gnu.elf"
          download-size="0"
          install-size="0"

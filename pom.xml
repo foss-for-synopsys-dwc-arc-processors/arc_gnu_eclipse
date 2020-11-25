@@ -10,7 +10,6 @@
     <module>feature</module>
     <module>com.arc.embeddedcdt</module>
     <module>gnu.elf</module>
-    <module>org.eclipse.cdt.cross.arc.gnu.uclibc</module>
   </modules>
 
   <properties>
