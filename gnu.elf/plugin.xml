@@ -61,6 +61,11 @@
             property="arc.gnu.elf.property.cpu">
       </propertyValue>
       <propertyValue
+            id="arc.gnu.elf.property.cpu.hs6x"
+            name="%property.cpu.hs6x"
+            property="arc.gnu.elf.property.cpu">
+      </propertyValue>
+      <propertyValue
             id="arc.gnu.elf.property.cpu.arc700"
             name="%property.cpu.arc700"
             property="arc.gnu.elf.property.cpu">
@@ -355,6 +360,36 @@
          </option>
          <option
                category="arc.gnu.elf.category.target"
+               id="arc.gnu.elf.option.target.mcmodel"
+               name="%option.target.mcmodel"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mcmodel=small"
+                  id="arc.gnu.elf.option.target.mcmodel.small"
+                  isDefault="true"
+                  name="%option.target.mcmodel.small">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcmodel=medium"
+                  id="arc.gnu.elf.option.target.mcmodel.medium"
+                  name="%option.target.mcmodel.medium">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mcmodel=large"
+                  id="arc.gnu.elf.option.target.mcmodel.large"
+                  name="%option.target.mcmodel.large">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs6x">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               category="arc.gnu.elf.category.target"
                id="arc.gnu.elf.option.target.fpuem"
                name="%option.target.fpu"
                valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
@@ -503,6 +538,35 @@
                      </checkOption>
                   </or>
                </not>
+            </enablement>
+         </option>
+         <option
+               category="arc.gnu.elf.category.target"
+               id="arc.gnu.elf.option.target.fpuhs6x"
+               name="%option.target.fpu"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="arc.gnu.elf.option.target.fpuhs.none"
+                  isDefault="true"
+                  name="%option.target.fpuhs.none">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpus"
+                  id="arc.gnu.elf.option.target.fpuhs.fpus"
+                  name="%option.target.fpuhs.fpus">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mfpu=fpud"
+                  id="arc.gnu.elf.option.target.fpuhs.fpud"
+                  name="%option.target.fpuhs.fpud">
+            </enumeratedOptionValue>
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs6x">
+               </checkBuildProperty>
             </enablement>
          </option>
          <option
@@ -859,10 +923,16 @@
             <enablement
                   type="UI_VISIBILITY">
                <not>
-                  <checkBuildProperty
-                        property="arc.gnu.elf.property.cpu"
-                        value="arc.gnu.elf.property.cpu.hs">
-                  </checkBuildProperty>
+                  <or>
+                     <checkBuildProperty
+                           property="arc.gnu.elf.property.cpu"
+                           value="arc.gnu.elf.property.cpu.hs">
+                     </checkBuildProperty>
+                     <checkBuildProperty
+                           property="arc.gnu.elf.property.cpu"
+                           value="arc.gnu.elf.property.cpu.hs6x">
+                     </checkBuildProperty>
+                  </or>
                </not>
             </enablement>
             <enablement
@@ -918,10 +988,16 @@
             <enablement
                   type="UI_VISIBILITY">
                <not>
-                  <checkBuildProperty
-                        property="arc.gnu.elf.property.cpu"
-                        value="arc.gnu.elf.property.cpu.hs">
-                  </checkBuildProperty>
+                  <or>
+                     <checkBuildProperty
+                           property="arc.gnu.elf.property.cpu"
+                           value="arc.gnu.elf.property.cpu.hs">
+                     </checkBuildProperty>
+                     <checkBuildProperty
+                           property="arc.gnu.elf.property.cpu"
+                           value="arc.gnu.elf.property.cpu.hs6x">
+                     </checkBuildProperty>
+                  </or>
                </not>
             </enablement>
             <enablement
@@ -967,10 +1043,16 @@
             <enablement
                   type="UI_VISIBILITY">
                <not>
-                  <checkBuildProperty
-                        property="arc.gnu.elf.property.cpu"
-                        value="arc.gnu.elf.property.cpu.hs">
-                  </checkBuildProperty>
+                  <or>
+                    <checkBuildProperty
+                          property="arc.gnu.elf.property.cpu"
+                          value="arc.gnu.elf.property.cpu.hs">
+                    </checkBuildProperty>
+                    <checkBuildProperty
+                          property="arc.gnu.elf.property.cpu"
+                          value="arc.gnu.elf.property.cpu.hs6x">
+                    </checkBuildProperty>
+                  </or>
                </not>
             </enablement>
             <enablement
@@ -1050,6 +1132,21 @@
                      </checkOption>
                   </or>
                </not>
+            </enablement>
+         </option>
+         <option
+               category="arc.gnu.elf.category.target"
+               command="-m128"
+               id="arc.gnu.elf.option.target.m128"
+               name="%option.target.m128"
+               valueHandler="com.synopsys.arc.gnu.elf.TargetValueHandler"
+               valueType="boolean">
+            <enablement
+                  type="UI_VISIBILITY">
+               <checkBuildProperty
+                     property="arc.gnu.elf.property.cpu"
+                     value="arc.gnu.elf.property.cpu.hs6x">
+               </checkBuildProperty>
             </enablement>
          </option>
          <option
@@ -1452,6 +1549,34 @@
             </option>
             <option
                   category="arc.gnu.elf.c.linker.category.general"
+                  id="arc.gnu.elf.c.linker.option.specshs6x"
+                  name="%linker.option.specshs6x"
+                  valueType="enumerated">
+               <enumeratedOptionValue
+                     command="--specs=qemu.specs"
+                     id="arc.gnu.elf.c.linker.option.specshs6x.qemu"
+                     isDefault="true"
+                     name="%linker.option.specshs6x.qemu">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="--specs=hl.specs"
+                     id="arc.gnu.elf.c.linker.option.specshs6x.hl"
+                     name="%linker.option.specshs6x.hl">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     id="arc.gnu.elf.c.linker.option.specshs6x.none"
+                     name="%linker.option.specs.none">
+               </enumeratedOptionValue>
+               <enablement
+                     type="ALL">
+                  <checkBuildProperty
+                        property="arc.gnu.elf.property.cpu"
+                        value="arc.gnu.elf.property.cpu.hs6x">
+                  </checkBuildProperty>
+               </enablement>
+            </option>
+            <option
+                  category="arc.gnu.elf.c.linker.category.general"
                   id="arc.gnu.elf.c.linker.option.specsem"
                   name="%linker.option.specs"
                   valueType="enumerated">
@@ -1511,10 +1636,16 @@
                <enablement
                      type="ALL">
                   <not>
-                     <checkBuildProperty
-                           property="arc.gnu.elf.property.cpu"
-                           value="arc.gnu.elf.property.cpu.em">
-                     </checkBuildProperty>
+                  	<or>
+                        <checkBuildProperty
+                              property="arc.gnu.elf.property.cpu"
+                              value="arc.gnu.elf.property.cpu.em">
+                        </checkBuildProperty>
+                        <checkBuildProperty
+                              property="arc.gnu.elf.property.cpu"
+                              value="arc.gnu.elf.property.cpu.hs6x">
+                        </checkBuildProperty>
+                     </or>
                   </not>
                </enablement>
             </option>
@@ -2125,6 +2256,57 @@
             superClass="arc.gnu.elf.toolchain.arceb">
       </toolChain>
       <toolChain
+            id="arc.gnu.elf.toolchain.hs6x"
+            name="%toolchain.hs6x"
+            superClass="arc.gnu.elf.toolchain.arc"
+            targetTool="arc.gnu.elf.tool.c.linker.hs6x;arc.gnu.elf.tool.cpp.linker.hs6x">
+         <tool
+         	   command="arc64-elf-gcc"
+               id="arc.gnu.elf.tool.c.compiler.hs6x"
+               superClass="arc.gnu.elf.tool.c.compiler.arc">
+         </tool>
+         <tool
+               command="arc64-elf-g++"
+               id="arc.gnu.elf.tool.cpp.compiler.hs6x"
+               superClass="arc.gnu.elf.tool.cpp.compiler.arc">
+         </tool>
+         <tool
+               command="arc64-elf-gcc"
+               id="arc.gnu.elf.tool.assembler.hs6x"
+               superClass="arc.gnu.elf.tool.assembler.arc">
+         </tool>
+         <tool
+               command="arc64-elf-gcc"
+               id="arc.gnu.elf.tool.c.linker.hs6x"
+               superClass="arc.gnu.elf.tool.c.linker.arc">
+         </tool>
+         <tool
+               command="arc64-elf-g++"
+               id="arc.gnu.elf.tool.cpp.linker.hs6x"
+               superClass="arc.gnu.elf.tool.c.linker.arc">
+         </tool>
+         <tool
+               command="arc64-elf-ar"
+               id="arc.gnu.elf.tool.archiver.hs6x"
+               superClass="arc.gnu.elf.tool.archiver.arc">
+         </tool>
+         <tool
+               command="arc64-elf-objcopy"
+               id="arc.gnu.elf.tool.flash.hs6x"
+               superClass="arc.gnu.elf.tool.flash.arc">
+         </tool>
+         <tool
+               command="arc64-elf-objdump"
+               id="arc.gnu.elf.tool.listing.hs6x"
+               superClass="arc.gnu.elf.tool.listing.arc">
+         </tool>
+         <tool
+               command="arc64-elf-size"
+               id="arc.gnu.elf.tool.printsize.hs6x"
+               superClass="arc.gnu.elf.tool.printsize.arc">
+         </tool>
+      </toolChain>
+      <toolChain
             id="arc.gnu.elf.toolchain.arc700"
             name="%toolchain.arc700"
             superClass="arc.gnu.elf.toolchain.arc">
@@ -2206,6 +2388,31 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.elf32.hs.release"
                   superClass="arc.gnu.elf.toolchain.hs">
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs6x"
+            id="arc.gnu.elf.configuration.elf64.hs6x">
+         <configuration
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="arc.gnu.elf.configuration.elf64.hs6x.debug"
+               name="%configuration.debug"
+               parent="arc.gnu.elf.configuration.base">
+            <toolChain
+                  id="arc.gnu.elf.toolchain.elf64.hs6x.debug"
+                  superClass="arc.gnu.elf.toolchain.hs6x">
+            </toolChain>
+         </configuration>
+         <configuration
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="arc.gnu.elf.configuration.elf64.hs6x.release"
+               name="%configuration.release"
+               parent="arc.gnu.elf.configuration.base">
+            <toolChain
+                  id="arc.gnu.elf.toolchain.elf64.hs6x.release"
+                  superClass="arc.gnu.elf.toolchain.hs6x">
             </toolChain>
          </configuration>
       </projectType>
@@ -2556,6 +2763,31 @@
             <toolChain
                   id="arc.gnu.elf.toolchain.hsdk.release"
                   superClass="arc.gnu.elf.toolchain.hs">
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="arc.gnu.elf.property.buildArtifactType.application"
+            buildProperties="arc.gnu.elf.property.cpu=arc.gnu.elf.property.cpu.hs6x"
+            id="arc.gnu.elf.configuration.hs6x">
+         <configuration
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="arc.gnu.elf.configuration.hs6x.debug"
+               name="%configuration.debug"
+               parent="arc.gnu.elf.configuration.base">
+            <toolChain
+                  id="arc.gnu.elf.toolchain.hs6x.debug"
+                  superClass="arc.gnu.elf.toolchain.hs6x">
+            </toolChain>
+         </configuration>
+         <configuration
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="arc.gnu.elf.configuration.hs6x.release"
+               name="%configuration.release"
+               parent="arc.gnu.elf.configuration.base">
+            <toolChain
+                  id="arc.gnu.elf.toolchain.hs6x.release"
+                  superClass="arc.gnu.elf.toolchain.hs6x">
             </toolChain>
          </configuration>
       </projectType>
