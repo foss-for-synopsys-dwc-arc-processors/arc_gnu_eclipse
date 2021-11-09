@@ -1,4 +1,4 @@
-/* Print a greeting on UART output and exit. *//
+/* Print a greeting on UART output and exit. */
 
 #include <stdio.h>
 
