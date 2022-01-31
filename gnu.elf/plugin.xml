@@ -1597,6 +1597,11 @@
                      name="%linker.option.specsem.emsk_em11d">
                </enumeratedOptionValue>
                <enumeratedOptionValue
+                     command="--specs=emsdp.specs"
+                     id="arc.gnu.elf.c.linker.option.specsem.emsdp"
+                     name="%linker.option.specsem.emsdp">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
                      command="--specs=nosys.specs"
                      id="arc.gnu.elf.c.linker.option.specsem.nosys"
                      name="%linker.option.specs.nosys">
