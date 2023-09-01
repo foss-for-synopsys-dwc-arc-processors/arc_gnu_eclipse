@@ -14,7 +14,32 @@
 
   <process type="org.eclipse.cdt.core.CreateSourceFolder">
     <simple name="projectName" value="$(projectName)" />
-    <simple name="path" value="src" />
+    <simple name="path" value="$(sourceDir)" />
+  </process>
+
+  <process type="org.eclipse.cdt.core.AddFiles">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="files">
+      <element>
+        <simple name="source" value="src/main.c" />
+        <simple name="target" value="$(sourceDir)/main.c" />
+        <simple name="replaceable" value="true" />
+      </element>
+      <element>
+        <simple name="source" value="arcem9d.tcf" />
+        <simple name="target" value="arcem9d.tcf" />
+        <simple name="replaceable" value="true" />
+      </element>
+    </complex-array>
+  </process>
+
+  <process type="org.eclipse.cdt.ui.OpenFiles">
+    <simple name="projectName" value="$(projectName)" />
+    <complex-array name="files">
+      <element>
+        <simple name="target" value="$(sourceDir)/main.c" />
+      </element>
+    </complex-array>
   </process>
 
   <process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
@@ -36,8 +61,13 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="arc.gnu.elf.c.linker.option.specsem" />
-        <simple name="value" value="arc.gnu.elf.c.linker.option.specsem.emsk_em9d" />
+        <simple name="id" value="arc.gnu.elf.c.linker.option.specs.arcv2" />
+        <simple name="value" value="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em9d" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_path" />
+        <simple name="value" value="${workspace_loc:/$(projectName)/arcem9d.tcf}" />
         <simple name="path" value="" />
       </element>
     </complex-array>
@@ -68,6 +98,21 @@
       </element>
       <element>
         <simple name="id" value="arc.gnu.elf.option.target.code_density" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="arc.gnu.elf.option.target.use_tcf" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_map" />
+        <simple name="value" value="false" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="arc.gnu.elf.option.target.tcf_cinclude" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

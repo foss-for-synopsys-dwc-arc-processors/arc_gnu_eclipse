@@ -10,10 +10,20 @@
     <simple name="artifactExtension" value="elf" />
     <simple name="isCProject" value="true" />
   </process>
+  
+  <process type="org.eclipse.cdt.core.CreateSourceFolder">
+    <simple name="projectName" value="$(projectName)" />
+    <simple name="path" value="$(sourceDir)" />
+  </process>
 
   <process type="org.eclipse.cdt.core.AddFiles">
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="files">
+      <element>
+        <simple name="source" value="src/main.c" />
+        <simple name="target" value="$(sourceDir)/main.c" />
+        <simple name="replaceable" value="true" />
+      </element>
       <element>
         <simple name="source" value="archs38_c1.tcf" />
         <simple name="target" value="archs38_c1.tcf" />
@@ -22,9 +32,13 @@
     </complex-array>
   </process>
 
-  <process type="org.eclipse.cdt.core.CreateSourceFolder">
+  <process type="org.eclipse.cdt.ui.OpenFiles">
     <simple name="projectName" value="$(projectName)" />
-    <simple name="path" value="src" />
+    <complex-array name="files">
+      <element>
+        <simple name="target" value="$(sourceDir)/main.c" />
+      </element>
+    </complex-array>
   </process>
 
   <process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
@@ -46,26 +60,13 @@
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="arc.gnu.elf.c.linker.option.specs" />
-        <simple name="value" value="arc.gnu.elf.c.linker.option.specs.nosys" />
+        <simple name="id" value="arc.gnu.elf.c.linker.option.specs.arcv2" />
+        <simple name="value" value="arc.gnu.elf.c.linker.option.specs.arcv2.hsdk" />
         <simple name="path" value="" />
       </element>
       <element>
         <simple name="id" value="arc.gnu.elf.option.target.tcf_path" />
         <simple name="value" value="${workspace_loc:/$(projectName)/archs38_c1.tcf}" />
-        <simple name="path" value="" />
-      </element>
-    </complex-array>
-  </process>
-
-  <process type="org.eclipse.cdt.managedbuilder.core.AppendToMBSStringListOptionValues">
-    <simple name="projectName" value="$(projectName)" />
-    <complex-array name="resourcePaths">
-      <element>
-        <simple name="id" value="arc.gnu.elf.c.linker.option.ldflags" />
-        <simple-array name="values">
-          <element value="--defsym=ivtbase_addr=0x0" />
-        </simple-array>
         <simple name="path" value="" />
       </element>
     </complex-array>
@@ -91,7 +92,7 @@
       </element>
       <element>
         <simple name="id" value="arc.gnu.elf.option.target.tcf_map" />
-        <simple name="value" value="true" />
+        <simple name="value" value="false" />
         <simple name="path" value="" />
       </element>
       <element>
