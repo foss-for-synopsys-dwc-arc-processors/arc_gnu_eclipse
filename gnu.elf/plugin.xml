@@ -1541,7 +1541,7 @@
             </option>
             <option
                   category="arc.gnu.elf.c.linker.category.general"
-                  command="--specs=nano.specs"
+                  command="-specs=nano.specs"
                   defaultValue="false"
                   id="arc.gnu.elf.c.linker.option.nano"
                   name="%linker.option.nano"
@@ -1577,81 +1577,101 @@
             </option>
             <option
                   category="arc.gnu.elf.c.linker.category.general"
-                  id="arc.gnu.elf.c.linker.option.specsem"
+                  id="arc.gnu.elf.c.linker.option.specs.arcv2"
                   name="%linker.option.specs"
                   valueType="enumerated">
                <enumeratedOptionValue
-                     command="--specs=nsim.specs"
-                     id="arc.gnu.elf.c.linker.option.specsem.nsim"
+                     command="-specs=nsim.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.nsim"
                      isDefault="true"
-                     name="%linker.option.specs.nsim">
+                     name="%linker.option.specs.arcv2.nsim">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     command="--specs=emsk_em9d.specs"
-                     id="arc.gnu.elf.c.linker.option.specsem.emsk_em9d"
-                     name="%linker.option.specsem.emsk_em9d">
+                     command="-specs=hl.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.hl"
+                     name="%linker.option.specs.arcv2.hl">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     command="--specs=emsk_em11d.specs"
-                     id="arc.gnu.elf.c.linker.option.specsem.emsk_em11d"
-                     name="%linker.option.specsem.emsk_em11d">
+                     command="-specs=hsdk.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.hsdk"
+                     name="%linker.option.specs.arcv2.hsdk">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     command="--specs=emsdp.specs"
-                     id="arc.gnu.elf.c.linker.option.specsem.emsdp"
-                     name="%linker.option.specsem.emsdp">
+                     command="-specs=emsdp1.2.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsdp12"
+                     name="%linker.option.specs.arcv2.emsdp12">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     command="--specs=nosys.specs"
-                     id="arc.gnu.elf.c.linker.option.specsem.nosys"
-                     name="%linker.option.specs.nosys">
+                     command="-specs=emsdp1.2_ram.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsdp12_ram"
+                     name="%linker.option.specs.arcv2.emsdp12_ram">
                </enumeratedOptionValue>
                <enumeratedOptionValue
-                     id="arc.gnu.elf.c.linker.option.specsem.none"
-                     name="%linker.option.specs.none">
+                     command="-specs=emsdp1.1.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsdp11"
+                     name="%linker.option.specs.arcv2.emsdp11">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsdp1.1_ram.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsdp11_ram"
+                     name="%linker.option.specs.arcv2.emsdp11_ram">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=iotdk.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.iotdk"
+                     name="%linker.option.specs.arcv2.iotdk">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsk2.2_em11d.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em11d"
+                     name="%linker.option.specs.arcv2.emsk22_em11d">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsk2.2_em11d_ram.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em11d_ram"
+                     name="%linker.option.specs.arcv2.emsk22_em11d_ram">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsk2.2_em9d.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em9d"
+                     name="%linker.option.specs.arcv2.emsk22_em9d">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsk2.2_em9d_ram.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em9d_ram"
+                     name="%linker.option.specs.arcv2.emsk22_em9d_ram">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsk2.2_em7d.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em7d"
+                     name="%linker.option.specs.arcv2.emsk22_em7d">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=emsk2.2_em7d_ram.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.emsk22_em7d_ram"
+                     name="%linker.option.specs.arcv2.emsk22_em7d_ram">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     command="-specs=nosys.specs"
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.nosys"
+                     name="%linker.option.specs.arcv2.nosys">
+               </enumeratedOptionValue>
+               <enumeratedOptionValue
+                     id="arc.gnu.elf.c.linker.option.specs.arcv2.none"
+                     name="%linker.option.specs.arcv2.none">
                </enumeratedOptionValue>
                <enablement
                      type="ALL">
-                  <checkBuildProperty
-                        property="arc.gnu.elf.property.cpu"
-                        value="arc.gnu.elf.property.cpu.em">
-                  </checkBuildProperty>
-               </enablement>
-            </option>
-            <option
-                  category="arc.gnu.elf.c.linker.category.general"
-                  id="arc.gnu.elf.c.linker.option.specs"
-                  name="%linker.option.specs"
-                  valueType="enumerated">
-               <enumeratedOptionValue
-                     command="--specs=nsim.specs"
-                     id="arc.gnu.elf.c.linker.option.specs.nsim"
-                     isDefault="true"
-                     name="%linker.option.specs.nsim">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     command="--specs=nosys.specs"
-                     id="arc.gnu.elf.c.linker.option.specs.nosys"
-                     name="%linker.option.specs.nosys">
-               </enumeratedOptionValue>
-               <enumeratedOptionValue
-                     id="arc.gnu.elf.c.linker.option.specs.none"
-                     name="%linker.option.specs.none">
-               </enumeratedOptionValue>
-               <enablement
-                     type="ALL">
-                  <not>
-                  	<or>
+                  <or>
                         <checkBuildProperty
                               property="arc.gnu.elf.property.cpu"
                               value="arc.gnu.elf.property.cpu.em">
                         </checkBuildProperty>
                         <checkBuildProperty
                               property="arc.gnu.elf.property.cpu"
-                              value="arc.gnu.elf.property.cpu.hs6x">
+                              value="arc.gnu.elf.property.cpu.hs">
                         </checkBuildProperty>
-                     </or>
-                  </not>
+                  </or>
                </enablement>
             </option>
             <option
@@ -3031,11 +3051,11 @@
             projectType="arc.gnu.elf.property.buildArtifactType.application">
       </template>
 
-      <!-- EM Starter Kit C projects -->
+      <!-- EM Software Development Platform C projects -->
       <template
             filterPattern=".*gcc"
-            id="arc.gnu.elf.template.emsdp_empty_c"
-            location="templates/emsdp_empty_c/template.xml"
+            id="arc.gnu.elf.template.emsdp11_empty_c"
+            location="templates/emsdp11_empty_c/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
@@ -3043,13 +3063,33 @@
       </template>
       <template
             filterPattern=".*g\+\+"
-            id="arc.gnu.elf.template.emsdp_empty_cpp"
-            location="templates/emsdp_empty_cpp/template.xml"
+            id="arc.gnu.elf.template.emsdp11_empty_cpp"
+            location="templates/emsdp11_empty_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
          <toolChain
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.emsdp11_hello_world_c"
+            location="templates/emsdp11_hello_world_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.emsdp11_hello_world_cpp"
+            location="templates/emsdp11_hello_world_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.emsdp">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+
+      <!-- EM Starter Kit C projects -->
       <template
             filterPattern=".*gcc"
             id="arc.gnu.elf.template.emsk_em7d_empty_c"
@@ -3171,6 +3211,24 @@
             filterPattern=".*g\+\+"
             id="arc.gnu.elf.template.hsdk_empty_cpp"
             location="templates/hsdk_empty_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.hs">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.hsdk_hello_world_c"
+            location="templates/hsdk_hello_world_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.hs">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.hsdk_hello_world_cpp"
+            location="templates/hsdk_hello_world_cpp/template.xml"
             projectType="arc.gnu.elf.property.buildArtifactType.hsdk">
          <toolChain
                id="arc.gnu.elf.toolchain.hs">
