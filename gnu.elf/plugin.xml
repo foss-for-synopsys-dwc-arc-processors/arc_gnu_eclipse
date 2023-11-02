@@ -3252,7 +3252,24 @@
                id="arc.gnu.elf.toolchain.em">
          </toolChain>
       </template>
-
+      <template
+            filterPattern=".*gcc"
+            id="arc.gnu.elf.template.iotdk_hello_world_c"
+            location="templates/iotdk_hello_world_c/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
+      <template
+            filterPattern=".*g\+\+"
+            id="arc.gnu.elf.template.iotdk_hello_world_cpp"
+            location="templates/iotdk_hello_world_cpp/template.xml"
+            projectType="arc.gnu.elf.property.buildArtifactType.iotdk">
+         <toolChain
+               id="arc.gnu.elf.toolchain.em">
+         </toolChain>
+      </template>
 
       <template
             filterPattern=".*gcc"

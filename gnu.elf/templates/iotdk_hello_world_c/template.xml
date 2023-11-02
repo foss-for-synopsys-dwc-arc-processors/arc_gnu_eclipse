@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <template type="ProjTempl"
-  id="hsdk_empty_cpp_project"
+  id="iotdk_hello_world_c_project"
   label="%template.label"
   description="%template.description"
   version="1" revision="2" supplier="Synopsys">
@@ -10,7 +10,7 @@
     <simple name="artifactExtension" value="elf" />
     <simple name="isCProject" value="true" />
   </process>
-  
+
   <process type="org.eclipse.cdt.core.CreateSourceFolder">
     <simple name="projectName" value="$(projectName)" />
     <simple name="path" value="src" />
@@ -20,13 +20,13 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="files">
       <element>
-        <simple name="source" value="src/main.cpp" />
-        <simple name="target" value="src/main.cpp" />
+        <simple name="source" value="src/main.c" />
+        <simple name="target" value="src/main.c" />
         <simple name="replaceable" value="true" />
       </element>
       <element>
-        <simple name="source" value="archs38_c1.tcf" />
-        <simple name="target" value="archs38_c1.tcf" />
+        <simple name="source" value="arcem9d.tcf" />
+        <simple name="target" value="arcem9d.tcf" />
         <simple name="replaceable" value="true" />
       </element>
     </complex-array>
@@ -36,7 +36,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="files">
       <element>
-        <simple name="target" value="src/main.cpp" />
+        <simple name="target" value="src/main.c" />
       </element>
     </complex-array>
   </process>
@@ -45,28 +45,28 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
-        <simple name="id" value="arc.gnu.elf.option.target.cpuhs" />
-        <simple name="value" value="arc.gnu.elf.option.target.cpuhs.hs38_linux" />
+        <simple name="id" value="arc.gnu.elf.option.target.cpuem" />
+        <simple name="value" value="arc.gnu.elf.option.target.cpuem.em4_fpuda" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="arc.gnu.elf.option.target.mpyhs" />
-        <simple name="value" value="arc.gnu.elf.option.target.mpyhs.plus_qmacw" />
+        <simple name="id" value="arc.gnu.elf.option.target.mpyem" />
+        <simple name="value" value="arc.gnu.elf.option.target.mpyem.wlh1" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="arc.gnu.elf.option.target.fpuhss" />
-        <simple name="value" value="arc.gnu.elf.option.target.fpuhs.fpud_all" />
+        <simple name="id" value="arc.gnu.elf.option.target.fpuem" />
+        <simple name="value" value="arc.gnu.elf.option.target.fpuem.fpuda_all" />
         <simple name="path" value="" />
       </element>
       <element>
         <simple name="id" value="arc.gnu.elf.c.linker.option.specs.arcv2" />
-        <simple name="value" value="arc.gnu.elf.c.linker.option.specs.arcv2.hsdk" />
+        <simple name="value" value="arc.gnu.elf.c.linker.option.specs.arcv2.iotdk" />
         <simple name="path" value="" />
       </element>
       <element>
         <simple name="id" value="arc.gnu.elf.option.target.tcf_path" />
-        <simple name="value" value="${workspace_loc:/$(projectName)/archs38_c1.tcf}" />
+        <simple name="value" value="${workspace_loc:/$(projectName)/arcem9d.tcf}" />
         <simple name="path" value="" />
       </element>
     </complex-array>
@@ -76,12 +76,27 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="resourcePaths">
       <element>
+        <simple name="id" value="arc.gnu.elf.option.target.barrel_shifter" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
         <simple name="id" value="arc.gnu.elf.option.target.divrem" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>
       <element>
-        <simple name="id" value="arc.gnu.elf.option.target.ll64" />
+        <simple name="id" value="arc.gnu.elf.option.target.norm" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="arc.gnu.elf.option.target.swap" />
+        <simple name="value" value="true" />
+        <simple name="path" value="" />
+      </element>
+      <element>
+        <simple name="id" value="arc.gnu.elf.option.target.code_density" />
         <simple name="value" value="true" />
         <simple name="path" value="" />
       </element>

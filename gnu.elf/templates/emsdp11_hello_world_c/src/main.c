@@ -4,6 +4,6 @@
 
 int main(int argc, char *argv[])
 {
-	printf("$(messagearc)\n\r");
+	printf("Hello, World!\n\r");
 	return 0;
 }

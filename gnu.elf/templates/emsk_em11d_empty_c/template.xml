@@ -14,7 +14,7 @@
 
   <process type="org.eclipse.cdt.core.CreateSourceFolder">
     <simple name="projectName" value="$(projectName)" />
-    <simple name="path" value="$(sourceDir)" />
+    <simple name="path" value="src" />
   </process>
   
   <process type="org.eclipse.cdt.core.AddFiles">
@@ -22,7 +22,7 @@
     <complex-array name="files">
       <element>
         <simple name="source" value="src/main.c" />
-        <simple name="target" value="$(sourceDir)/main.c" />
+        <simple name="target" value="src/main.c" />
         <simple name="replaceable" value="true" />
       </element>
       <element>
@@ -37,7 +37,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="files">
       <element>
-        <simple name="target" value="$(sourceDir)/main.c" />
+        <simple name="target" value="src/main.c" />
       </element>
     </complex-array>
   </process>

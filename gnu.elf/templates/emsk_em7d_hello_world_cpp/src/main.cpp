@@ -6,6 +6,6 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	cout << "$(messagearc)\n\r" << endl;
+	cout << "Hello, World!\n\r" << endl;
 	return 0;
 }

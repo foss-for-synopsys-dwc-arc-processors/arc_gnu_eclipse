@@ -1,9 +1,11 @@
-/* Print a greeting on stdout and exit. */
+/* Print a greeting on UART output and exit. */
 
 #include <iostream>
 
+using namespace std;
+
 int main(int argc, char *argv[])
 {
-	std::cout << "$(messagearc)" << std::endl;
+	cout << "Hello, World\n\r" << endl;
 	return 0;
 }

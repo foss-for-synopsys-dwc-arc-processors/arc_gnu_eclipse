@@ -6,49 +6,6 @@
   description="%template.description"
   version="1" revision="2" supplier="Synopsys">
 
-  <property-group
-    id="basics"
-    label="%basics.label"
-    description="%basics.description"
-    type="PAGES-ONLY">
-    <property
-      id="author"
-      label="%author.label"
-      description="%author.description"
-      type="input"
-      pattern=".*"
-      default=""
-      hidden="false"
-      persist="true" />
-    <property
-      id="copyright"
-      label="%copyright.label"
-      description="%copyright.description"
-      type="input"
-      pattern=".*"
-      default="%copyright.default"
-      hidden="false"
-      persist="true" />
-    <property
-      id="messagearc"
-      label="%message.label"
-      description="%message.description"
-      type="input"
-      pattern=".*"
-      default="%message.default"
-      hidden="false"
-      persist="true" />
-    <property
-      id="sourceDir"
-      label="%sourceDir.label"
-      description="%sourceDir.description"
-      type="input"
-      default="%sourceDir.default"
-      pattern="[a-zA-Z0-9]+"
-      mandatory="false"
-      persist="true" />
-  </property-group>
-
   <process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
     <simple name="name" value="$(projectName)" />
     <simple name="artifactExtension" value="elf" />
@@ -57,7 +14,7 @@
 
   <process type="org.eclipse.cdt.core.CreateSourceFolder">
     <simple name="projectName" value="$(projectName)" />
-    <simple name="path" value="$(sourceDir)" />
+    <simple name="path" value="src" />
   </process>
 
   <process type="org.eclipse.cdt.core.AddFiles">
@@ -65,7 +22,7 @@
     <complex-array name="files">
       <element>
         <simple name="source" value="src/main.c" />
-        <simple name="target" value="$(sourceDir)/main.c" />
+        <simple name="target" value="src/main.c" />
         <simple name="replaceable" value="true" />
       </element>
     </complex-array>
@@ -75,7 +32,7 @@
     <simple name="projectName" value="$(projectName)" />
     <complex-array name="files">
       <element>
-        <simple name="target" value="$(sourceDir)/main.c" />
+        <simple name="target" value="src/main.c" />
       </element>
     </complex-array>
   </process>
