@@ -30,6 +30,7 @@ public enum FtdiDevice {
     HSDK("HS Development Kit",
          Arrays.asList(FtdiCore.HS38_1, FtdiCore.HS38_2, FtdiCore.HS38_3, FtdiCore.HS38_4)),
     IOTDK("IoT Development Kit"),
+    EMSDP("EM Software Development Platform"),
     CUSTOM("Custom configuration file");
 
     private final String text;
